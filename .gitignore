@@ -1,0 +1,7 @@
+# ignore everything
+/*
+# ...except these folders and files:
+!/.gitignore
+!/.gitconfig
+!/_*vimrc
+!/_vundle
