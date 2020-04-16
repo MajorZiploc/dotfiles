@@ -1,6 +1,8 @@
 # ignore everything
 /*
 # ...except these folders and files:
+!/.ahk/
+
 !/.gitignore
 !/.gitconfig
 !/_*vimrc
