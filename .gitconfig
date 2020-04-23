@@ -6,6 +6,7 @@
 	autocrlf = true
 	excludesfile =
 	mergeoptions = --no-edit
+	longpaths = true
 [alias]
 	sweep = !git branch --merged | egrep -v \"(^\\*|^\\s*(master|develop|test)$)\" | xargs git branch -d
 [pull]
