@@ -1,6 +1,3 @@
-# install chocolatey
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-
 # install apps
 cinst googlechrome
 cinst vim-tux
@@ -17,7 +14,6 @@ cinst slack
 #cinst logitechgaming
 
 # install dev tools
-cinst git
 cinst gitkraken
 cinst vscode
 cinst linqpad5
