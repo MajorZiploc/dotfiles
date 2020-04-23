@@ -1,7 +1,7 @@
 # install apps
 cinst googlechrome
 cinst vim-tux
-cinst clipx
+cinst arsclip
 cinst katmouse
 cinst autohotkey
 cinst nircmd
