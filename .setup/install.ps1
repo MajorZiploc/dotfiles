@@ -38,5 +38,7 @@ shimgen -p "C:\Program Files\Git\git-bash.exe" -o "$env:ChocolateyInstall\bin\gi
 # system settings
 & "$env:userprofile\.ahk\hotkeys.ahk"
 nircmd shortcut "$env:userprofile\.ahk\hotkeys.ahk" '~$folder.startup$' "Hotkeys"
+$startMenu = "$env:userprofile\AppData\Roaming\Microsoft\Windows\Start Menu\Programs"
+copy "$startMenu\ArsClip.lnk" "$startMenu\Startup"
 
 REGEDIT /S CapsToControl-ScrollToCaps.reg
