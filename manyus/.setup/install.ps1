@@ -7,14 +7,15 @@ cinst winrar
 cinst swi-prolog
 cinst install python3 --version=3.8.6
 cinst 7zip
-# cinst slack
+cinst vscode
 cinst gimp
-#cinst screentogif
-#cinst logitechgaming
+cinst katmouse
+# cinst slack
 
 # look into these
+# cinst screentogif
+# cinst logitechgaming
 # cinst vim-tux
-# cinst katmouse
 # cinst autohotkey
 # cinst nircmd
 # cinst vlc
