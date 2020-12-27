@@ -14,6 +14,7 @@ cinst -y winrar
 cinst -y 7zip
 cinst -y katmouse
 cinst -y vscode
+cinst -y lightshot
 
 if ("Full" -eq $type) {
     cinst -y gimp
