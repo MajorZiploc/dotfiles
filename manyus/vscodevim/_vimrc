@@ -66,10 +66,6 @@ set tabstop=4
 set shiftwidth=4
 set autoindent
 
-" wrap settings
-set textwidth=120
-" set colorcolumn=+1 "TODO: add this back once you find out why it gives visual studio an error
-
 " find settings
 set ignorecase
 set smartcase
