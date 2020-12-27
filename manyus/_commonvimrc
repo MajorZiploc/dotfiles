@@ -68,7 +68,7 @@ set autoindent
 
 " wrap settings
 set textwidth=120
-set colorcolumn=+1
+" set colorcolumn=+1
 
 " find settings
 set ignorecase
@@ -80,3 +80,26 @@ nnoremap <silent> <bs> :noh<cr><bs>
 " max time between key presses to trigger a multi-key binding
 set timeoutlen=400
 
+" Split window
+nmap ss :split <Return><C-w>w
+nmap sv :vsplit <Return><C-w>w
+
+" Move window
+nmap <Space> <C-w>w
+map s<left> <C-w>h
+map s<up> <C-w>k
+map s<down> <C-w>j
+map s<right> <C-w>l
+map sh <C-w>h
+map sk <C-w>k
+map sj <C-w>j
+map sl <C-w>l
+
+" Resize window
+nmap <C-w><left> <C-w><
+nmap <C-w><right> <C-w>>
+nmap <C-w><up> <C-w>+
+nmap <C-w><down> <C-w>-
+
+" Set shell to bash
+set shell=/bin/bash.exe
