@@ -1,0 +1,20 @@
+# ignore everything
+/*
+# ...except these folders and files:
+!/matts
+!/.ahk/
+!/.setup/
+
+!/.gitignore
+!/.gitconfig
+!/_*vimrc
+!/_vundle
+
+!/AppData
+/AppData/*
+!/AppData/Roaming
+/AppData/Roaming/*
+!/AppData/Roaming/Arsclip
+/AppData/Roaming/Arsclip/*
+!/AppData/Roaming/Arsclip/arsclip.ini
+!/AppData/Roaming/Arsclip/exepaste.ini
