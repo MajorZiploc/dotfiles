@@ -1,4 +1,4 @@
-so ~/_vundle
+" so ~/_vundle
 so ~/_commonvimrc
 
 " write swap files here instead of beside each file
