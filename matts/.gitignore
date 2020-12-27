@@ -1,6 +1,7 @@
 # ignore everything
 /*
 # ...except these folders and files:
+!/matts
 !/.ahk/
 !/.setup/
 
