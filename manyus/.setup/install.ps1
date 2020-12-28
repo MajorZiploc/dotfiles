@@ -15,6 +15,7 @@ cinst -y 7zip
 cinst -y katmouse
 cinst -y vscode
 cinst -y lightshot
+cinst -y screentogif
 
 if ("Full" -eq $type) {
     cinst -y gimp
@@ -27,7 +28,6 @@ if ("Full" -eq $type) {
 }
 
 # look into these
-# cinst -y screentogif
 # cinst -y logitechgaming
 # cinst -y vim-tux
 # cinst -y autohotkey
