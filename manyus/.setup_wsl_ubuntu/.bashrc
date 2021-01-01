@@ -120,5 +120,5 @@ export EDITOR='/usr/bin/vim'
 export VISUAL='/usr/bin/vim'
 
 
-alias tmux-as="tmux attach-session"
-alias tmux-ks="tmux kill-session"
+alias tmuxas="tmux attach-session"
+alias tmuxks="tmux kill-session"
