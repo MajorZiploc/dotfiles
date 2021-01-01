@@ -1,3 +1,6 @@
+" leader key
+let mapleader = "<space>"
+
 inoremap kj <esc>
 nnoremap U <c-r>
 nnoremap Y y$
@@ -32,19 +35,25 @@ vnoremap <c-k> <c-u>
 " control-keys for select all, undo, save, cut, copy, paste, quit
 nnoremap <c-a> ggVG
 nnoremap <c-s> :w<cr>
+nnoremap <leader>ws :w<cr>
 inoremap <c-s> <esc>:w<cr>a
 nnoremap <c-z> u
+nnoremap <leader>wz u
 vnoremap <c-x> "+d
 vnoremap <c-c> "+y
+vnoremap <leader>wx "+d
+vnoremap <leader>wy "+y
 nnoremap <c-v> "+p
 vnoremap <c-v> "+p
+nnoremap <leader>wp "+p
+vnoremap <leader>wp "+p
 inoremap <c-v> <esc>"+pa
 nnoremap <c-w> :q<cr>
 inoremap <c-w> <esc>:q<cr>
 vnoremap <c-w> <esc>:q<cr>
+nnoremap <leader>wq :q<cr>
+vnoremap <leader>wq <esc>:q<cr>
 
-" leader key
-let mapleader=" "
 " swap word under cursor with yank register
 nnoremap <silent> <leader>s viwp
 " swap word under cursor with system clipboard
