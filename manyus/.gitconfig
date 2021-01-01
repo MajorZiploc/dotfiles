@@ -1,6 +1,6 @@
 [user]
-	name = Matt Miller
-	email = miller.mattster@gmail.com
+	name = Manyu Lakhotia
+	email = lakemonyew@gmail.com
 	signingKey = ""
 [core]
 	autocrlf = true
@@ -15,20 +15,6 @@
 	default = simple
 [remote "origin"]
 	prune = true
-[diff]
-	tool = tortoise
-[difftool]
-	prompt = false
-[merge]
-	tool = tortoise
-[mergetool]
-	prompt = false
-	keepBackup = false
-[difftool "tortoise"]
-	cmd = 'C:/Program Files/TortoiseSVN/bin/TortoiseMerge.exe' \"$LOCAL\" \"$REMOTE\"
-[mergetool "tortoise"]
-	cmd = 'C:/Program Files/TortoiseSVN/bin/TortoiseMerge.exe'  -base:\"$BASE\" -mine:\"$LOCAL\" -theirs:\"$REMOTE\" -merged:\"$MERGED\"
-	trustExitCode = true
 [gpg]
 	program = gpg
 [commit]
