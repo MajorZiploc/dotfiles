@@ -122,3 +122,5 @@ export VISUAL='/usr/bin/vim'
 
 alias tmuxas="tmux attach-session"
 alias tmuxks="tmux kill-session"
+alias tmuxksvr="tmux kill-server"
+alias tmuxls="tmux ls"
