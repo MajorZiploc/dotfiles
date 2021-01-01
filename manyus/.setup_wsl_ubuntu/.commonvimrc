@@ -48,11 +48,6 @@ vnoremap <c-v> "+p
 nnoremap <leader>wp "+p
 vnoremap <leader>wp "+p
 inoremap <c-v> <esc>"+pa
-nnoremap <c-w> :q<cr>
-inoremap <c-w> <esc>:q<cr>
-vnoremap <c-w> <esc>:q<cr>
-nnoremap <leader>wq :q<cr>
-vnoremap <leader>wq <esc>:q<cr>
 
 " swap word under cursor with yank register
 nnoremap <silent> <leader>s viwp
