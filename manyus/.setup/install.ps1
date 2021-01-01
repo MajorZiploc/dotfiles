@@ -7,27 +7,48 @@ param (
 )
 
 # install apps
+
+# web browser
 cinst -y googlechrome
+# clipboard tool
 cinst -y ditto
+# version control and git bash
 cinst -y git
+# upzipping tool
 cinst -y winrar
+# upzipping tool
 cinst -y 7zip
+# scroll wheels works on window mouse is over
 cinst -y katmouse
+# code editor
 cinst -y vscode
+# screenshot tool
 cinst -y lightshot
+# create gifs from screen
+cinst -y screentogif
 
 if ("Full" -eq $type) {
+    # photo editing tool
     cinst -y gimp
+    # prolog language
     cinst -y swi-prolog
+    # javascript runtime
     cinst -y nodejs
+    # javascript package manager
+    cinst -y yarn
+    # python language
     cinst -y python3 --version=3.8.6
-    cinst -y vscode
+    # local testing of sending emails
     cinst -y smtp4dev
-    # cinst -y slack
+    # windows linux subsystem -- NOTE: requires download of a linux distro aswell
+    cinst -y wsl
+    # jre + jdk 11
+    cinst -y openjdk12
+    # communcations app
+    cinst -y slack
 }
 
 # look into these
-# cinst -y screentogif
 # cinst -y logitechgaming
 # cinst -y vim-tux
 # cinst -y autohotkey
@@ -41,7 +62,6 @@ if ("Full" -eq $type) {
 # cinst -y dotnetcore-sdk
 # cinst -y fake
 #cinst -y visualstudio2019-workload-manageddesktopbuildtools
-#cinst -y yarn
 #cinst -y postman
 
 # generate shims
