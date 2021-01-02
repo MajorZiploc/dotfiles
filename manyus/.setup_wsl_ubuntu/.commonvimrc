@@ -39,24 +39,23 @@ nnoremap <leader>ws :w<cr>
 inoremap <c-s> <esc>:w<cr>a
 nnoremap <c-z> u
 nnoremap <leader>wz u
-vnoremap <c-x> "+d
-vnoremap <c-c> "+y
-" vnoremap <leader>wx "+d
-" vnoremap <leader>wy "+y
-nnoremap <c-v> "+p
-vnoremap <c-v> "+p
-" nnoremap <leader>wp "+p
-" vnoremap <leader>wp "+p
 inoremap <c-v> <esc>"+pa
 nnoremap <leader>wq :q<cr>
 vnoremap <leader>wq <esc>:q<cr>
 
+" cut to clipboard
+vnoremap <c-x> :!pbcopy<cr>
+vnoremap <leader>wx :!pbcopy<cr>
+
 " copy to clipboard
 vnoremap <leader>wy :!pbcopy<cr>u
+vnoremap <c-c> :!pbcopy<cr>u
 " paste from clipboard
-nnoremap <leader>wp V:!pbpaste<cr>
+nnoremap <leader>wp v:!pbpaste<cr>
 vnoremap <leader>wp :!pbpaste<cr>
-
+nnoremap <c-v> v:!pbpaste<cr>
+vnoremap <c-v> :!pbpaste<cr>
+" inoremap <c-v> <esc>:!pbpaste<cr>a
 
 " copy to clipboard, maybe not working
 " nnoremap <silent> <leader>y :call system('/mnt/c/Windows/System32/clip.exe', @0)<CR>
@@ -130,6 +129,7 @@ nmap <C-w><down> <C-w>-
 set shell=/usr/bin/bash
 " Sets bash shell in interactive mode. Some people warn that this can cause bugs
 " set shellcmdflag=-ic
+" Sets bash aliases for use in vim
 let $BASH_ENV = "~/.vim_bash_aliases"
 
 set clipboard=unnamed
