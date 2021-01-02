@@ -41,15 +41,25 @@ nnoremap <c-z> u
 nnoremap <leader>wz u
 vnoremap <c-x> "+d
 vnoremap <c-c> "+y
-vnoremap <leader>wx "+d
-vnoremap <leader>wy "+y
+" vnoremap <leader>wx "+d
+" vnoremap <leader>wy "+y
 nnoremap <c-v> "+p
 vnoremap <c-v> "+p
-nnoremap <leader>wp "+p
-vnoremap <leader>wp "+p
+" nnoremap <leader>wp "+p
+" vnoremap <leader>wp "+p
 inoremap <c-v> <esc>"+pa
 nnoremap <leader>wq :q<cr>
 vnoremap <leader>wq <esc>:q<cr>
+
+
+" copy to clipboard, maybe not working
+" nnoremap <silent> <leader>y :call system('/mnt/c/Windows/System32/clip.exe', @0)<CR>
+" vnoremap <silent> <leader>y :call system('/mnt/c/Windows/System32/clip.exe', @0)<CR>
+" paste from clipboard, NOT WORKING
+" noremap <leader>p :exe 'norm a'.system('/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard')<CR>
+" vnoremap <leader>p :exe 'norm a'.system('/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard')<CR>
+" nnoremap <silent> <leader>p :r !powershell.exe -Command Get-Clipboard<CR>
+" vnoremap <silent> <leader>p :r !powershell.exe -Command Get-Clipboard<CR>
 
 " swap word under cursor with yank register
 nnoremap <silent> <leader>s viwp
@@ -111,4 +121,9 @@ nmap <C-w><up> <C-w>+
 nmap <C-w><down> <C-w>-
 
 " Set shell to bash
-set shell=/bin/bash
+set shell=/usr/bin/bash
+" Sets shell to interactive mode. allows for use of bash aliases
+set shellcmdflag=-ic
+
+set clipboard=unnamed
+
