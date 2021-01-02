@@ -6,4 +6,6 @@ sudo apt-get -y install tmux
 sudo apt-get -y install dos2unix
 # for clipboard support, note, that the clipboard support doesnt seem to work within wsl using this
 # check vim clipboard with: vim --version | grep clipboard
-sudo apt-get -y install vim-gtk
+# sudo apt-get -y install vim-gtk
+# clipboard tool, NOT WORKING IN WSL
+# sudo apt-get install xclip
