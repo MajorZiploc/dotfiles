@@ -130,6 +130,6 @@ set shell=/usr/bin/bash
 " Sets bash shell in interactive mode. Some people warn that this can cause bugs
 " set shellcmdflag=-ic
 " Sets bash aliases for use in vim
-let $BASH_ENV = "~/.vim_bash_aliases"
+let $BASH_ENV = "~/.bash_aliases"
 
 set clipboard=unnamed
