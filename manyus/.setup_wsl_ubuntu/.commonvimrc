@@ -122,8 +122,8 @@ nmap <C-w><down> <C-w>-
 
 " Set shell to bash
 set shell=/usr/bin/bash
-" Sets shell to interactive mode. allows for use of bash aliases
-set shellcmdflag=-ic
+" Sets bash shell in interactive mode. Some people warn that this can cause bugs
+" set shellcmdflag=-ic
+let $BASH_ENV = "~/.vim_bash_aliases"
 
 set clipboard=unnamed
-
