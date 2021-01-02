@@ -51,6 +51,12 @@ inoremap <c-v> <esc>"+pa
 nnoremap <leader>wq :q<cr>
 vnoremap <leader>wq <esc>:q<cr>
 
+" copy to clipboard
+vnoremap <leader>wy :!pbcopy<cr>u
+" paste from clipboard
+nnoremap <leader>wp V:!pbpaste<cr>
+vnoremap <leader>wp :!pbpaste<cr>
+
 
 " copy to clipboard, maybe not working
 " nnoremap <silent> <leader>y :call system('/mnt/c/Windows/System32/clip.exe', @0)<CR>
