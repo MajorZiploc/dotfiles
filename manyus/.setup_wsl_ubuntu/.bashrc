@@ -116,7 +116,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export EDITOR='/usr/bin/vim'
-export VISUAL='/usr/bin/vim'
-
+if [ -f ~/.bash_env_vars ]; then
+    . ~/.bash_env_vars
+fi
 
