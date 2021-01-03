@@ -1,3 +1,5 @@
+# original rights are 755
+sudo chmod +777 /usr/local/bin
 ln -s /mnt/c/Program\ Files/nodejs/node.exe /usr/local/bin/nodejs
 # Have to change python version based on what you want an alias for
 ln -s /mnt/c/Python38/python.exe /usr/local/bin/python
