@@ -5,4 +5,5 @@ alias tmuxksvr="tmux kill-server"
 alias tmuxls="tmux ls"
 alias pbcopy="clip.exe"
 alias pbpaste="powershell.exe -command 'Get-Clipboard' | head -n -1"
+alias show_path='echo $PATH | tr ":" "\n"'
 
