@@ -11,3 +11,6 @@ sudo apt-get -y install tree
 # clipboard tool, NOT WORKING IN WSL
 # sudo apt-get install xclip
 sudo apt -y upgrade
+
+# copy contents of source to existing dir dest, including hidden stuff
+# cp -a /source/. /dest/
