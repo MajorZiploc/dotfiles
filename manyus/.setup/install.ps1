@@ -46,6 +46,10 @@ if ("Full" -eq $type) {
     cinst -y openjdk12
     # communcations app
     cinst -y slack
+    # compact image viewer and converter
+    cinst -y irfanview
+    # runtime and cli tools for creating .NET core applications
+    choco install dotnetcore-sdk
 }
 
 # look into these
@@ -54,15 +58,13 @@ if ("Full" -eq $type) {
 # cinst -y autohotkey
 # cinst -y nircmd
 # cinst -y vlc
-# cinst -y irfanview
 
 # install dev tools
 # cinst -y gitkraken
 # cinst -y linqpad5
-# cinst -y dotnetcore-sdk
 # cinst -y fake
-#cinst -y visualstudio2019-workload-manageddesktopbuildtools
-#cinst -y postman
+# cinst -y visualstudio2019-workload-manageddesktopbuildtools
+# cinst -y postman
 
 # generate shims
 # & "$env:ChocolateyInstall\tools\shimgen.exe" -p "$env:ChocolateyInstall\tools\shimgen.exe" -o "$env:ChocolateyInstall\bin\shimgen.exe"
