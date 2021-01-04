@@ -42,7 +42,7 @@ if ("Full" -eq $type) {
     cinst -y smtp4dev
     # windows linux subsystem -- NOTE: requires download of a linux distro aswell
     cinst -y wsl
-    # jre + jdk 11
+    # jre + jdk 12
     cinst -y openjdk12
     # communcations app
     cinst -y slack
