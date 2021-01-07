@@ -50,8 +50,10 @@ if ("Full" -eq $type) {
     cinst -y irfanview
     # runtime and cli tools for creating .NET core applications
     cinst -y dotnetcore-sdk
-    # adds windows terminal manager
-    cinst -y microsoft-windows-terminal
+    # adds windows terminal manager, didnt seem to work
+    # cinst -y microsoft-windows-terminal
+    # example of installing something (atom) for all users
+    # choco install atom -y --force --params "'ALLUSERS=1"
 }
 
 # look into these
