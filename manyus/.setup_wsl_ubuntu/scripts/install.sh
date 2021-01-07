@@ -6,11 +6,11 @@ sudo apt-get -y install dos2unix
 # view directories in tree format
 sudo apt-get -y install tree
 # creates a 'python' and makes it point to python3 that is installed
-sudo apt-get install python-is-python3
+sudo apt-get -y install python-is-python3
 # installs python package manager
-sudo apt install pipenv
+sudo apt-get -y install pipenv
 # installs nodejs
-sudo apt install nodejs
+sudo apt-get -y install nodejs
 # for clipboard support, note, that the clipboard support doesnt seem to work within wsl using this
 # check vim clipboard with: vim --version | grep clipboard
 # sudo apt-get -y install vim-gtk
