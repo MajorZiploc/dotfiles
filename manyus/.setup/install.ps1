@@ -42,8 +42,10 @@ if ("Full" -eq $type) {
     cinst -y smtp4dev
     # windows linux subsystem -- NOTE: requires download of a linux distro aswell
     cinst -y wsl
-    # jre + jdk 12
-    cinst -y openjdk12
+    # java runtime 8
+    cinst -y jre8
+    # java development kit 8
+    cinst -y jdk8
     # communcations app
     cinst -y slack
     # compact image viewer and converter
@@ -57,6 +59,8 @@ if ("Full" -eq $type) {
     # cinst -y microsoft-windows-terminal
     # example of installing something (atom) for all users
     # choco install atom -y --force --params "'ALLUSERS=1"
+    # jre + jdk 12
+    # cinst -y openjdk12
 }
 
 # look into these
