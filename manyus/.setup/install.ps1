@@ -50,6 +50,9 @@ if ("Full" -eq $type) {
     cinst -y irfanview
     # runtime and cli tools for creating .NET core applications
     cinst -y dotnetcore-sdk
+    # installs cross platform powershel 7
+    cinst -y powershell-core
+
     # adds windows terminal manager, didnt seem to work
     # cinst -y microsoft-windows-terminal
     # example of installing something (atom) for all users
