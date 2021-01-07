@@ -49,7 +49,9 @@ if ("Full" -eq $type) {
     # compact image viewer and converter
     cinst -y irfanview
     # runtime and cli tools for creating .NET core applications
-    choco install dotnetcore-sdk
+    cinst -y dotnetcore-sdk
+    # adds windows terminal manager
+    cinst -y microsoft-windows-terminal
 }
 
 # look into these
