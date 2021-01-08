@@ -19,7 +19,9 @@ cinst -y winrar
 # upzipping tool
 cinst -y 7zip
 # scroll wheels works on window mouse is over
-cinst -y katmouse
+cinst -y wizmouse
+# scroll wheels works on window mouse is over
+# cinst -y katmouse # doesnt work at work, it doesnt follow proper choco package protocol
 # code editor
 cinst -y vscode
 # screenshot tool
