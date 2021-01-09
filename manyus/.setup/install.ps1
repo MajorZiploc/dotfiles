@@ -30,6 +30,10 @@ cinst -y lightshot
 cinst -y screentogif
 
 if ("Full" -eq $type) {
+    # a windows bash with package manager pacman
+    # can use to download linux packages and reference in git bash
+    # or just use this bash instead of git bash
+    cinst -y msys2
     # photo editing tool
     cinst -y gimp
     # prolog language
