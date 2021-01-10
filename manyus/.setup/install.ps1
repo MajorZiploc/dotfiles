@@ -69,7 +69,7 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     # a windows bash with package manager pacman
     # can use to download linux packages and reference in git bash
     # or just use this bash instead of git bash
-    cinst -y msys2
+    # cinst -y msys2
     # prolog language
     cinst -y swi-prolog
     # javascript runtime

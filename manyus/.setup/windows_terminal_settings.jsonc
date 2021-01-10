@@ -72,13 +72,13 @@
         //"useAcrylic": true
       },
 
-      {
-        "guid": "{00000000-0000-0000-ba54-000000000003}",
-        "commandline": "C:/tools/msys64/msys2_shell.cmd -defterm -here -no-start -msys",
-        "icon": "C:/tools/msys64/msys2.ico",
-        "name": "Msys2",
-        "startingDirectory": "C:/projects"
-      },
+      // {
+      //   "guid": "{00000000-0000-0000-ba54-000000000003}",
+      //   "commandline": "C:/tools/msys64/msys2_shell.cmd -defterm -here -no-start -msys",
+      //   "icon": "C:/tools/msys64/msys2.ico",
+      //   "name": "Msys2",
+      //   "startingDirectory": "C:/projects"
+      // },
 
       {
         "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
