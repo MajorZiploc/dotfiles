@@ -6,5 +6,5 @@ alias tmuxls="tmux ls"
 alias pbcopy="clip.exe"
 alias pbpaste="powershell.exe -command 'Get-Clipboard' | head -n -1"
 alias show_path='echo $PATH | tr ":" "\n"'
-alias rev_chars='perl -F"" -anle "print reverse @F" | perl -ple "s/\r//g"'
+alias rev_chars='perl -F"" -anle "print reverse @F" | perl -ple "s/^\r//"'
 alias rev_lines='tac'
