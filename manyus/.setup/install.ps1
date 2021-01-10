@@ -41,6 +41,8 @@ if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
     cinst -y lightshot
     # create gifs from screen
     cinst -y screentogif
+    # scripting language for workflow automations
+    cinst -y autohotkey
 }
 
 if (($optionsAsInt -band $GamingAsInt) -eq $GamingAsInt) {
