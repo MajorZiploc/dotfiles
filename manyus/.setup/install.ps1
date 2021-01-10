@@ -1,41 +1,75 @@
 [CmdletBinding()]
 param (
     [Parameter()]
-    [ValidateSet("Full", "Minimal")]
     [string]
-    $type="Full"
+    $options="0001"
 )
+$base = 2
+$optionsAsBinaryString = $options
+$optionsAsInt = [convert]::ToInt32($optionsAsBinaryString, $base)
+
+$Minimal = "00001"
+$MinimalAsInt = [convert]::ToInt32($Minimal, $base)
+$Creative = "00010" # -- Art/Photo
+$CreativeAsInt = [convert]::ToInt32($Creative, $base)
+$Work = "00100"
+$WorkAsInt = [convert]::ToInt32($Work, $base)
+$Gaming = "01000"
+$GamingAsInt = [convert]::ToInt32($Gaming, $base)
+$Tech = "10000"
+$TechAsInt = [convert]::ToInt32($Tech, $base)
 
 # install apps
+if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
+    Write-Host("Installing Minimal packages")
+    # Minimal packages
+    # web browser
+    cinst -y googlechrome
+    # clipboard tool
+    cinst -y ditto
+    # version control and git bash
+    cinst -y git
+    # upzipping tool
+    cinst -y 7zip
+    # scroll wheels works on window mouse is over
+    cinst -y wizmouse
+    # scroll wheels works on window mouse is over
+    # cinst -y katmouse # doesnt work at work, it doesnt follow proper choco package protocol
+    # code editor
+    cinst -y vscode
+    # screenshot tool
+    cinst -y lightshot
+    # create gifs from screen
+    cinst -y screentogif
+}
 
-# web browser
-cinst -y googlechrome
-# clipboard tool
-cinst -y ditto
-# version control and git bash
-cinst -y git
-# upzipping tool
-cinst -y winrar
-# upzipping tool
-cinst -y 7zip
-# scroll wheels works on window mouse is over
-cinst -y wizmouse
-# scroll wheels works on window mouse is over
-# cinst -y katmouse # doesnt work at work, it doesnt follow proper choco package protocol
-# code editor
-cinst -y vscode
-# screenshot tool
-cinst -y lightshot
-# create gifs from screen
-cinst -y screentogif
+if (($optionsAsInt -band $GamingAsInt) -eq $GamingAsInt) {
+    Write-Host("Installing Gaming packages")
+    # Gaming Packages
+    # upzipping tool
+    cinst -y winrar
+    # java runtime 8
+    cinst -y jre8
+    # java development kit 8
+    cinst -y jdk8
+}
 
-if ("Full" -eq $type) {
+if (($optionsAsInt -band $CreativeAsInt) -eq $CreativeAsInt) {
+    Write-Host("Installing Creative packages")
+    # Creative Packages
+    # photo editing tool
+    cinst -y gimp
+    # compact image viewer and converter
+    cinst -y irfanview
+}
+
+if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
+    Write-Host("Installing Tech packages")
+    # Tech Packages
     # a windows bash with package manager pacman
     # can use to download linux packages and reference in git bash
     # or just use this bash instead of git bash
     cinst -y msys2
-    # photo editing tool
-    cinst -y gimp
     # prolog language
     cinst -y swi-prolog
     # javascript runtime
@@ -48,26 +82,25 @@ if ("Full" -eq $type) {
     cinst -y smtp4dev
     # windows linux subsystem -- NOTE: requires download of a linux distro aswell
     cinst -y wsl
-    # java runtime 8
-    cinst -y jre8
-    # java development kit 8
-    cinst -y jdk8
-    # communcations app
-    cinst -y slack
-    # compact image viewer and converter
-    cinst -y irfanview
-    # runtime and cli tools for creating .NET core applications
-    cinst -y dotnetcore-sdk
     # installs cross platform powershel 7
     cinst -y powershell-core
-
-    # adds windows terminal manager, didnt seem to work
-    # cinst -y microsoft-windows-terminal
-    # example of installing something (atom) for all users
-    # choco install atom -y --force --params "'ALLUSERS=1"
-    # jre + jdk 12
-    # cinst -y openjdk12
 }
+
+if (($optionsAsInt -band $WorkAsInt) -eq $WorkAsInt) {
+    Write-Host("Installing Work packages")
+    # Work Packages
+    # communcations app
+    cinst -y slack
+    # runtime and cli tools for creating .NET core applications
+    cinst -y dotnetcore-sdk
+}
+
+# adds windows terminal manager, didnt seem to work
+# cinst -y microsoft-windows-terminal
+# example of installing something (atom) for all users
+# choco install atom -y --force --params "'ALLUSERS=1"
+# jre + jdk 12
+# cinst -y openjdk12
 
 # look into these
 # cinst -y logitechgaming
