@@ -63,6 +63,8 @@ if (($optionsAsInt -band $CreativeAsInt) -eq $CreativeAsInt) {
     cinst -y gimp
     # compact image viewer and converter
     cinst -y irfanview
+    # photo editing tool - easier than gimp
+    cinst -y paint.net
 }
 
 if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
