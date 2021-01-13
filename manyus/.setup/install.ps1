@@ -50,12 +50,8 @@ if (($optionsAsInt -band $GamingAsInt) -eq $GamingAsInt) {
     # Gaming Packages
     # upzipping tool
     cinst -y winrar
-    # java development kit 12
-    cinst -y openjdk.portable
     # java runtime 8
-    # cinst -y jre8
-    # java development kit 8
-    # cinst -y jdk8
+    cinst -y jre8
 }
 
 if (($optionsAsInt -band $CreativeAsInt) -eq $CreativeAsInt) {
@@ -90,6 +86,8 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     cinst -y wsl
     # installs cross platform powershel 7
     cinst -y powershell-core
+    # java development kit 12
+    cinst -y openjdk.portable
 }
 
 if (($optionsAsInt -band $WorkAsInt) -eq $WorkAsInt) {
