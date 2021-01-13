@@ -50,10 +50,12 @@ if (($optionsAsInt -band $GamingAsInt) -eq $GamingAsInt) {
     # Gaming Packages
     # upzipping tool
     cinst -y winrar
+    # java development kit 12
+    cinst -y openjdk.portable
     # java runtime 8
-    cinst -y jre8
+    # cinst -y jre8
     # java development kit 8
-    cinst -y jdk8
+    # cinst -y jdk8
 }
 
 if (($optionsAsInt -band $CreativeAsInt) -eq $CreativeAsInt) {
