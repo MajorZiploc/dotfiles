@@ -56,6 +56,7 @@ do
     [[ "$valM" == "right" ]] && { str+="$valC"; }
     [[ "$valM" == "left" ]] && { str="$valC$str"; }
   done
+  str=$(echo "$str" | sed 's/\r//')
   arr=( "${arr[@]}" "$str" )
 done
 
