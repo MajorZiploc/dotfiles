@@ -2,9 +2,7 @@
 
 # Default values
 directory='*'
-from="space"
-to="underscore"
-to_from_choices=("space", "underscore")
+by="s/ /_/g"
 verbose=false
 preview=false
 
@@ -17,13 +15,8 @@ do
       shift
       ;;
 
-    -f|--from)
-      from="$2"
-      shift
-      ;;
-
-    -t|--to)
-      to="$2"
+    -b|--by)
+      by=$2
       shift
       ;;
 
@@ -40,27 +33,29 @@ do
 
     -h|--help)
       echo "Usage:"
+
       echo "    -d|--directory
       The directory to rename folders and files in. Non-recursive. Default is: '$directory'
       For all nonhidden files/folders, use -d '*'
       For all hidden files/folders, use -d '* .[^.]*'
       For all files/folders, use -d '.[^.]*'
       "
-      echo "    -f|--from
-      The format to convert from. Default is: $from. Choices: $(printf '%s\n' ${to_from_choices[@]})
+
+      echo "    -b|--by
+      Program executed by 'sed -e' on each file to derive new file name. Default is: $by.
       "
-      echo "    -t|--to
-      The format to convert to. Default is: $to. Choices: $(printf '%s\n' ${to_from_choices[@]})
-      "
+
       echo "    -v|--verbose
       Display the renames happening. Default is: $verbose.
       "
+
       echo "    --preview
       When true, it does not preform the renames.
       When true, it also changes -v to true.
       For debugging and 'previewing' the change before performing it.
       Default is: $preview.
       "
+
       echo "    -h|--help"
       exit 1
       ;;
@@ -70,9 +65,7 @@ do
 done
 
 echo "directory: $directory"
-echo "from: $from"
-echo "to: $to"
-echo "to_from_choices: $to_from_choices"
+echo "by: $by"
 echo "verbose: $verbose"
 echo "preview: $preview"
 
@@ -83,7 +76,7 @@ echo "preview: $preview"
 
 for f in $directory
 do
-  echo "$f"
-  # camel to snake
-  echo "mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/\([A-Z]\)/_\L\1/g' -e 's/^_//')\""
+  new_name=$(echo $f | sed -e "$by")
+  [[ $f == $new_name ]] && { echo "No name change for file/folder $f"; }
+  [[ $f != $new_name ]] && { echo "mv \"$f\" \"$new_name\""; }
 done
