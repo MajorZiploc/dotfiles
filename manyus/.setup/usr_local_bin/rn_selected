@@ -43,7 +43,7 @@ do
       "
 
       echo "    -b|--by
-      Program executed by 'sed -e' on each file to derive new file name. Default is: $by.
+      Program executed by 'sed -e' on each file name to derive new file name. Default is: $by.
       "
 
       echo "    -v|--verbose
