@@ -79,6 +79,17 @@ echo "preview: $preview"
 for f in $directory
 do
   new_name=$(echo $f | sed -e "$by")
-  [[ $f == $new_name ]] && { echo "No name change for file/folder $f"; }
-  [[ $f != $new_name ]] && { echo "mv \"$f\" \"$new_name\""; }
+  [[ $f == $new_name ]] && {
+    [[ $verbose == true ]] && {
+      echo "No name change for file/folder $f";
+      }
+    }
+  [[ $f != $new_name ]] && {
+    [[ $verbose == true ]] && {
+      echo "mv \"$f\" \"$new_name\"";
+      }
+    [[ $preview == false ]] && {
+      echo "TODO: actually move file: mv \"$f\" \"$new_name\"";
+      }
+    }
 done
