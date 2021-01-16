@@ -84,4 +84,5 @@ echo "preview: $preview"
 for f in $directory
 do
   echo "$f"
+  echo "mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/\([A-Z]\)/_\L\1/g' -e 's/^_//')\""
 done
