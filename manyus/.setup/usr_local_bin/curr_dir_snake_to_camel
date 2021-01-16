@@ -1,3 +1,0 @@
-#!/bin/bash
-
-for f in *; do mv "$f" "$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/_\([a-zA-Z]\)/\U\1/g' -e 's/^_//')"; done

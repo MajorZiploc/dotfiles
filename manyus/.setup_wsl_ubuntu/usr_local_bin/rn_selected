@@ -1,0 +1,102 @@
+#!/bin/bash
+
+# Default values
+directory='*'
+by="s/ / /"
+verbose=false
+preview=false
+
+[[ $# == 0 ]] && {
+  echo "rn_selected called with no arguments!"
+  echo "rn_selected must be called with at least 1 argument"
+  echo "use 'rn_selected -h' to see possible arguments"
+  exit 1
+}
+
+while [[ $# > 0 ]]
+do
+  case "$1" in
+
+    -d|--directory)
+      directory="$2"
+      shift
+      ;;
+
+    -b|--by)
+      by="$2"
+      shift
+      ;;
+
+    -v|--verbose)
+      verbose=true
+      shift
+      ;;
+
+    -p|--preview)
+      verbose=true
+      preview=true
+      shift
+      ;;
+
+    -h|--help)
+      echo "Command rn_selected (rename_selected):"
+      echo "Utility for renaming folders and files"
+      echo "Usage:"
+
+      echo "    -d|--directory
+      The directory to rename folders and files in. Non-recursive. Default is: '$directory'
+      For all nonhidden files/folders in current directory non-recursive, use -d '*'
+      For all hidden files/folders in current directory non-recursive, use -d '* .[^.]*'
+      For all files/folders in current directory non-recursive, use -d '.[^.]*'
+      "
+
+      echo "    -b|--by
+      Program executed by 'sed -e' on each file name to derive new file name. Default is: $by.
+      You can do multiple s/// by doing: --by 's///;s///;s///;'
+      "
+
+      echo "    -v|--verbose
+      Display the renames happening. Default is: $verbose.
+      Takes no value, must be after flags that take values.
+      Use case: rn_selected -v
+      "
+
+      echo "    -p|--preview
+      When true, it does not preform the renames.
+      When true, it also changes -v to true.
+      For debugging and 'previewing' the change before performing it.
+      Takes no value, must be after flags that take values.
+      Use case: rn_selected -p
+      Default is: $preview.
+      "
+
+      echo "    -h|--help"
+      exit 1
+      ;;
+
+  esac
+  shift
+done
+
+echo "directory: $directory"
+echo "by: $by"
+echo "verbose: $verbose"
+echo "preview: $preview"
+
+for f in $directory
+do
+  new_name=$(echo $f | sed -e "$by")
+  [[ $f == $new_name ]] && {
+    [[ $verbose == true ]] && {
+      echo "No name change for file/folder $f";
+      }
+    }
+  [[ $f != $new_name ]] && {
+    [[ $verbose == true ]] && {
+      echo "mv \"$f\" \"$new_name\"";
+      }
+    [[ $preview == false ]] && {
+      mv "$f" "$new_name";
+      }
+    }
+done
