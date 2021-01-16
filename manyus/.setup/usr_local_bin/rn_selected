@@ -16,7 +16,7 @@ do
       ;;
 
     -b|--by)
-      by=$2
+      by="$2"
       shift
       ;;
 
@@ -75,11 +75,6 @@ echo "directory: $directory"
 echo "by: $by"
 echo "verbose: $verbose"
 echo "preview: $preview"
-
-# rn_selected --directory . --from camel --to snake
-# rn_selected --directory . --from kebab --to snake
-# rn_selected --directory . --from space --to snake
-# rn_selected --directory . --from space (--to empty_string)
 
 for f in $directory
 do
