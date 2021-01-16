@@ -49,12 +49,16 @@ do
 
       echo "    -v|--verbose
       Display the renames happening. Default is: $verbose.
+      Takes no value, must be after flags that take values.
+      Use case: rn_selected -v
       "
 
       echo "    -p|--preview
       When true, it does not preform the renames.
       When true, it also changes -v to true.
       For debugging and 'previewing' the change before performing it.
+      Takes no value, must be after flags that take values.
+      Use case: rn_selected -p
       Default is: $preview.
       "
 
