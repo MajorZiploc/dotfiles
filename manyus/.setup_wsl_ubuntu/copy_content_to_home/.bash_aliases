@@ -31,9 +31,9 @@ alias curr_dir_space_to_underscore_with_hidden='for f in * .[^.]*; do mv "$f" "$
 # example: .HiddenBoy -> ._hidden_boy . The leading uppercase after the . causes this
 alias curr_dir_camel_to_snake_with_hidden="for f in * .[^.]* ; do mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/\([A-Z]\)/_\L\1/g' -e 's/^_//')\"; done"
 alias curr_dir_snake_to_camel_with_hidden="for f in * .[^.]* ; do mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/_\([a-zA-Z]\)/\U\1/g' -e 's/^_//')\"; done"
-alias curr_dir_snake_to_kebab_with_hidden="for f in * .[^.]* ; do mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/-\([a-zA-Z]\)/\U\1/g' -e 's/^-//')\"; done"
+alias curr_dir_snake_to_kebab_with_hidden="for f in * .[^.]* ; do mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/_\([a-zA-Z]\)/-\L\1/g' -e 's/^-//')\"; done"
 # non hidden file and folder renames
 alias curr_dir_space_to_underscore='for f in *; do mv "$f" "${f// /_}"; done'
 alias curr_dir_camel_to_snake="for f in *; do mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/\([A-Z]\)/_\L\1/g' -e 's/^_//')\"; done"
 alias curr_dir_snake_to_camel="for f in *; do mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/_\([a-zA-Z]\)/\U\1/g' -e 's/^_//')\"; done"
-alias curr_dir_snake_to_kebab="for f in *; do mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/-\([a-zA-Z]\)/\U\1/g' -e 's/^-//')\"; done"
+alias curr_dir_snake_to_kebab="for f in *; do mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/_\([a-zA-Z]\)/-\L\1/g' -e 's/^-//')\"; done"
