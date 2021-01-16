@@ -23,20 +23,8 @@ alias camel_to_space="sed -E 's/([A-Z])/ \1/g' | sed 's/^ //'"
 alias space_to_snake="sed -E 's/ ([a-zA-Z])/_\L\1/g' | sed -E 's/^_//' | sed -E 's/^([A-Z])/\L\1/'"
 alias space_to_camel="sed -E 's/ ([a-zA-Z])/\U\1/g' | sed -E 's/^([A-Z])/\L\1/'"
 
-# move all of these to their own bash scripts and place in usr_local_bin
-# the $f gets evaluated right when the aliases are included. so it replaces the first thing right away and thats it
-# File and Folder aliases
-# NOTE: these include hidden folders and files - the * .[^.]* pattern does this
-# to change this to only nonhidden folders and files - change the pattern to: *
-# alias curr_dir_space_to_underscore_with_hidden='for f in * .[^.]*; do mv "$f" "${f// /_}"; done'
-# # hidden files may look a little weird after this. 
-# # example: .HiddenBoy -> ._hidden_boy . The leading uppercase after the . causes this
-# alias curr_dir_camel_to_snake_with_hidden="for f in * .[^.]* ; do mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/\([A-Z]\)/_\L\1/g' -e 's/^_//')\"; done"
-# alias curr_dir_snake_to_camel_with_hidden="for f in * .[^.]* ; do mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/_\([a-zA-Z]\)/\U\1/g' -e 's/^_//')\"; done"
-# alias curr_dir_snake_to_kebab_with_hidden="for f in * .[^.]* ; do mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/_\([a-zA-Z]\)/-\L\1/g' -e 's/^-//')\"; done"
 # # non hidden file and folder renames
 # alias curr_dir_space_to_underscore='for f in *; do mv "$f" "${f// /_}"; done'
-# alias junk_thing="for f in *; do mv \"$f\" \"${f// /_}\"; done"
 # alias curr_dir_camel_to_snake="for f in *; do mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/\([A-Z]\)/_\L\1/g' -e 's/^_//')\"; done"
 # alias curr_dir_snake_to_camel="for f in *; do mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/_\([a-zA-Z]\)/\U\1/g' -e 's/^_//')\"; done"
 # alias curr_dir_snake_to_kebab="for f in *; do mv \"$f\" \"$(echo $f | sed -e 's/^\([A-Z]\)/\L\1/' -e 's/_\([a-zA-Z]\)/-\L\1/g' -e 's/^-//')\"; done"
