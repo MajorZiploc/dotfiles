@@ -51,7 +51,7 @@ do
       "
 
       echo "    -b|--by
-      Program executed by 'sed -e' on each file name to derive new file name. Default is: $by.
+      Program executed by 'sed -E' on each file name to derive new file name. Default is: $by.
       You can do multiple s/// by doing: --by 's///;s///;s///;'
       "
 
@@ -85,7 +85,7 @@ echo "preview: $preview"
 
 for f in $directory
 do
-  new_name=$(echo $f | sed -e "$by")
+  new_name=$(echo $f | sed -E "$by")
   [[ $f == $new_name ]] && {
     [[ $verbose == true ]] && {
       echo "No name change for file/folder $f";
