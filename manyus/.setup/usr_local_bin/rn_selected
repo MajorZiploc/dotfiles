@@ -33,6 +33,7 @@ do
 
     -h|--help)
       echo "Command rn_selected (rename_selected):"
+      echo "Utility for renaming folders and files"
       echo "Usage:"
 
       echo "    -d|--directory
