@@ -25,20 +25,21 @@ do
       shift
       ;;
 
-    --preview)
+    -p|--preview)
       verbose=true
       preview=true
       shift
       ;;
 
     -h|--help)
+      echo "Command rn_selected (rename_selected):"
       echo "Usage:"
 
       echo "    -d|--directory
       The directory to rename folders and files in. Non-recursive. Default is: '$directory'
-      For all nonhidden files/folders, use -d '*'
-      For all hidden files/folders, use -d '* .[^.]*'
-      For all files/folders, use -d '.[^.]*'
+      For all nonhidden files/folders in current directory non-recursive, use -d '*'
+      For all hidden files/folders in current directory non-recursive, use -d '* .[^.]*'
+      For all files/folders in current directory non-recursive, use -d '.[^.]*'
       "
 
       echo "    -b|--by
@@ -49,7 +50,7 @@ do
       Display the renames happening. Default is: $verbose.
       "
 
-      echo "    --preview
+      echo "    -p|--preview
       When true, it does not preform the renames.
       When true, it also changes -v to true.
       For debugging and 'previewing' the change before performing it.
