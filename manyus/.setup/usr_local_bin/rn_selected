@@ -6,6 +6,13 @@ by="s/ / /"
 verbose=false
 preview=false
 
+[[ $# == 0 ]] && {
+  echo "rn_selected called with no arguments!"
+  echo "rn_selected must be called with at least 1 argument"
+  echo "use 'rn_selected -h' to see possible arguments"
+  exit 1
+}
+
 while [[ $# > 0 ]]
 do
   case "$1" in
