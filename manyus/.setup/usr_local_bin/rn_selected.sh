@@ -1,19 +1,5 @@
 #!/bin/bash
 
-# TODO: add the following flags:
-# -v|--verbose)
-# shows the renames that occur
-# --preview)
-# does not do the renaming. For debugging and seeing if you are doing the right renames
-
-# defaults:
-# -d|--directory) 
-#   .
-# -f|--from)
-#   space
-# -t|--to
-#   underscore
-
 # Default values
 directory=*
 from="space"
