@@ -89,7 +89,7 @@ do
       echo "mv \"$f\" \"$new_name\"";
       }
     [[ $preview == false ]] && {
-      echo "TODO: actually move file: mv \"$f\" \"$new_name\"";
+      mv "$f" "$new_name";
       }
     }
 done
