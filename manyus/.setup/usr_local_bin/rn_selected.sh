@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Default values
-directory=*
+directory='*'
 from="space"
 to="underscore"
 to_from_choices=("space", "underscore")
@@ -69,6 +69,12 @@ do
   shift
 done
 
+echo "directory: $directory"
+echo "from: $from"
+echo "to: $to"
+echo "to_from_choices: $to_from_choices"
+echo "verbose: $verbose"
+echo "preview: $preview"
 
 # rn_selected --directory . --from camel --to snake
 # rn_selected --directory . --from kebab --to snake
