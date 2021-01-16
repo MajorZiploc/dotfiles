@@ -24,6 +24,7 @@ alias space_to_snake="sed -E 's/ ([a-zA-Z])/_\L\1/g' | sed -E 's/^_//' | sed -E 
 alias space_to_camel="sed -E 's/ ([a-zA-Z])/\U\1/g' | sed -E 's/^([A-Z])/\L\1/'"
 
 # move all of these to their own bash scripts and place in usr_local_bin
+# the $f gets evaluated right when the aliases are included. so it replaces the first thing right away and thats it
 # File and Folder aliases
 # NOTE: these include hidden folders and files - the * .[^.]* pattern does this
 # to change this to only nonhidden folders and files - change the pattern to: *
