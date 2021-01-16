@@ -78,10 +78,12 @@ do
   shift
 done
 
-echo "directory: $directory"
-echo "by: $by"
-echo "verbose: $verbose"
-echo "preview: $preview"
+[[ $verbose == true ]] && {
+  echo "directory: $directory"
+  echo "by: $by"
+  echo "verbose: $verbose"
+  echo "preview: $preview"
+}
 
 for f in $directory
 do
