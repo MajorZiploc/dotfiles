@@ -2,7 +2,7 @@
 
 # Default values
 directory='*'
-by="s/ /_/g"
+by="s/ / /"
 verbose=false
 preview=false
 
@@ -44,6 +44,7 @@ do
 
       echo "    -b|--by
       Program executed by 'sed -e' on each file name to derive new file name. Default is: $by.
+      You can do multiple s/// by doing: --by 's///;s///;s///;'
       "
 
       echo "    -v|--verbose
