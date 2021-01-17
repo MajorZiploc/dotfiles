@@ -46,8 +46,8 @@ do
       echo "    -d|--directory
       The directory to rename folders and files in. Non-recursive. Default is: '$directory'
       For all nonhidden files/folders in current directory non-recursive, use -d '*'
-      For all hidden files/folders in current directory non-recursive, use -d '* .[^.]*'
-      For all files/folders in current directory non-recursive, use -d '.[^.]*'
+      For all hidden files/folders in current directory non-recursive, use -d '.[^.]*'
+      For all hidden and nonhidden files/folders in current directory non-recursive, use -d '* .[^.]*'
       "
 
       echo "    -b|--by
