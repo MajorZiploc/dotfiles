@@ -43,6 +43,10 @@ if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
     cinst -y screentogif
     # scripting language for workflow automations
     cinst -y autohotkey
+    # for calling urls from cli
+    cinst -y curl
+    # display keystrokes on screen
+    cinst -y keypose
 }
 
 if (($optionsAsInt -band $GamingAsInt) -eq $GamingAsInt) {
