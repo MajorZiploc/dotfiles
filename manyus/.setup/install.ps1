@@ -45,8 +45,10 @@ if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
     cinst -y autohotkey
     # for calling urls from cli
     cinst -y curl
-    # display keystrokes on screen
-    cinst -y keypose
+    # display keystrokes on screen, one key at a time
+    # cinst -y keypose
+    # display keystrokes on screen, shows multiple keys at a time
+    cinst -y keycastow
 }
 
 if (($optionsAsInt -band $GamingAsInt) -eq $GamingAsInt) {
