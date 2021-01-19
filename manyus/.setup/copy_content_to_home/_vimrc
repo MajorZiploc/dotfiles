@@ -1,6 +1,25 @@
 " so ~/_vundle
 so ~/_commonvimrc
 
+" Show file stats
+set ruler
+
+" Blink cursor on error instead of beeping (grr)
+set visualbell
+
+" Status bar
+set laststatus=2
+
+" Last line
+set showmode
+set showcmd
+
+" Rendering
+set ttyfast
+
+" Don't try to be vi compatible
+set nocompatible
+
 " write swap files here instead of beside each file
 set directory=$HOME/.vim/swap//
 
