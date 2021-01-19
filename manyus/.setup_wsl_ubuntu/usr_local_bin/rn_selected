@@ -27,15 +27,17 @@ do
       shift
       ;;
 
+    -a|--all)
+      directory='* .[^.]*'
+      ;;
+
     -v|--verbose)
       verbose=true
-      shift
       ;;
 
     -p|--preview)
       verbose=true
       preview=true
-      shift
       ;;
 
     -h|--help)
@@ -55,22 +57,28 @@ do
       You can do multiple s/// by doing: --by 's///;s///;s///;'
       "
 
+      echo "    -a|--all
+      Short hand to iterate over all hidden and non hidden files in the directory non recursively.
+      The same as specifying -d '* .[^.]*'
+      "
+
       echo "    -v|--verbose
-      Display the renames happening. Default is: $verbose.
-      Takes no value, must be after flags that take values.
-      Use case: rn_selected -v
+      Display the renames happening.
       "
 
       echo "    -p|--preview
-      When true, it does not preform the renames.
-      When true, it also changes -v to true.
+      When specified, it does not preform the renames.
+      When specified, it also toggles -v on.
       For debugging and 'previewing' the change before performing it.
-      Takes no value, must be after flags that take values.
-      Use case: rn_selected -p
-      Default is: $preview.
       "
 
       echo "    -h|--help"
+      exit 1
+      ;;
+  
+    *)
+      echo "command called with non valid flags!"
+      echo "use 'rn_selected -h' to see options"
       exit 1
       ;;
 
