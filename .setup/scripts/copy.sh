@@ -7,3 +7,5 @@ cp -a "$SCRIPTPATH/../copy_content_to_home/." ~/
 cp -a "$SCRIPTPATH/../usr_local_bin/." /usr/local/bin/
 
 cp -a "$SCRIPTPATH/../Tasks/." /c/Tasks/
+
+cp -a "$SCRIPTPATH/../vscodevim/." /c/vscodevim/
