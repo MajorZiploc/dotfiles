@@ -20,3 +20,6 @@ find . -type f -name 'file*' -execdir mv {} {}_renamed ';'
 find . -type f -name 'file*' -okdir mv {} {}_renamed ';'
 for i in $(find . -name '*'); do echo $i $i.bak; done
 
+# bash one liner to find directories that match a list of patterns
+l=('.setup*' 'delete*'); for p in ${l[@]}; do find . -type d -name "$p" -print0 | xargs --null -I{} echo {}; done
+
