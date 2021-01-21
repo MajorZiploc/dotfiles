@@ -1,4 +1,4 @@
-function Program {
+function Copy-Snippets {
   [CmdletBinding()]
   param ()
   [string[]]$snippets = Get-Content -Path "~/clipboard/snippets.txt"
@@ -9,15 +9,29 @@ function Program {
   }
 }
 
-try {
-  $msg = "Starting copying"
+function Program {
+  param ()
+begin {
+  $msg = "Started process"
   Write-EventLog -LogName 'clipboard' -Source 'copy' -EntryType Information -EventId 1 -Message $msg
-  Program -ErrorAction Stop
-  $msg = "Finished running"
+}
+
+process {
+try {
+  Copy-Snippets -ErrorAction Stop
+  $msg = "Successful copy"
   Write-EventLog -LogName 'clipboard' -Source 'copy' -EntryType SuccessAudit -EventId 1 -Message $msg
 }
 catch {
   $msg = $_.ToString()
   Write-EventLog -LogName 'clipboard' -Source 'copy' -EntryType FailureAudit -EventId 1 -Message $msg
 }
+}
 
+end {
+  $msg = "Finished process"
+  Write-EventLog -LogName 'clipboard' -Source 'copy' -EntryType Information -EventId 1 -Message $msg
+}
+}
+
+Program
