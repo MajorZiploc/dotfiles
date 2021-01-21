@@ -12,7 +12,7 @@ begin {
 process {
 try {
   Upgrade-Choco -ErrorAction SilentlyContinue -ErrorVariable ProcessError
-  If ($ProcessError) {
+  if ($ProcessError) {
     $msg = "Something went wrong. $ProcessError"
     Write-EventLog -LogName 'choco' -Source 'upgrade' -EntryType FailureAudit -EventId 1 -Message $msg
   } else {
