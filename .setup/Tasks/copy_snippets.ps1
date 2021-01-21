@@ -1,7 +1,6 @@
-
 function Program {
-    [CmdletBinding()]
-    param ()
+  [CmdletBinding()]
+  param ()
   [string[]]$snippets = Get-Content -Path "~/clipboard/snippets.txt"
   foreach ($snippet in $snippets) {
     Write-Host $snippet
@@ -12,13 +11,13 @@ function Program {
 
 try {
   $msg = "Starting copying"
-  Write-EventLog -LogName 'Copy_Snippets' -Source 'Copy_Snippets' -EntryType Information -EventId 1 -Message $msg
+  Write-EventLog -LogName 'clipboard' -Source 'copy' -EntryType Information -EventId 1 -Message $msg
   Program -ErrorAction Stop
   $msg = "Finished running"
-  Write-EventLog -LogName 'Copy_Snippets' -Source 'Copy_Snippets' -EntryType SuccessAudit -EventId 1 -Message $msg
+  Write-EventLog -LogName 'clipboard' -Source 'copy' -EntryType SuccessAudit -EventId 1 -Message $msg
 }
 catch {
   $msg = $_.ToString()
-  Write-EventLog -LogName 'Copy_Snippets' -Source 'Copy_Snippets' -EntryType FailureAudit -EventId 1 -Message $msg
+  Write-EventLog -LogName 'clipboard' -Source 'copy' -EntryType FailureAudit -EventId 1 -Message $msg
 }
 
