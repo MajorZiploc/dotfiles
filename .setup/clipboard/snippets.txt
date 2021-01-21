@@ -1,0 +1,2 @@
+find . -maxdepth 5 -regextype egrep -iregex '.*pattern.*' -type d -print0 | xargs --null -I{} echo {}
+l=(); for ele in ${l[@]}; do echo $ele; done
