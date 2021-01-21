@@ -3,6 +3,7 @@ l=(); for ele in ${l[@]}; do echo $ele; done
 git log --oneline ; # show each commit on 1 line
 git log --author="<pattern>"
 git log --grep="<commit_msg_pattern>"
-git rebase <rebase_curr_branch_onto_this_branch>
-git merge <merge_this_branch_onto_curr_branch>
+git rebase -i <rebase_curr_branch_onto_this_branch>
+git merge --squash (--continue | --abort | --quit) <merge_this_branch_onto_curr_branch>
 git reflog --relative-date
+git reset [--soft | --mixed [-N] | --hard | --merge | --keep] [-q] [<commit>]
