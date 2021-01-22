@@ -1,11 +1,11 @@
 find . -maxdepth 5 -regextype egrep -iregex '.*pattern.*' -type d -print0 | xargs --null -I{} echo {}
 l=(); for ele in ${l[@]}; do echo $ele; done
 git log --oneline ; # show each commit on 1 line
-git log --author="<pattern>"
-git log --grep="<commit_msg_pattern>"
+git log -p --author="<pattern>"
+git log -p --grep="<commit_msg_pattern>"
 git rebase -i <rebase_curr_branch_onto_this_branch>
 git merge --squash (--continue | --abort | --quit) <merge_this_branch_onto_curr_branch>
 git reflog --relative-date
-git reset [--soft | --mixed [-N] | --hard | --merge | --keep] [-q] [<commit>]
+git reset [--soft | --mixed [-N] | --hard | --merge | --keep] [--quiet] [--no-quiet] [<commit>]
 powershell.exe -ExecutionPolicy Restricted -Command "& {Write-Host 'hi'}"
 powershell.exe -ExecutionPolicy Restricted -File '/path/to/script.ps1 -Flag arg'
