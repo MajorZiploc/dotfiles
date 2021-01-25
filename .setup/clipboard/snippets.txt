@@ -11,4 +11,4 @@ git stash list ; # show all stashes
 git stash pop --index <n> ; # pop/apply the nth stash
 powershell.exe -ExecutionPolicy Restricted -Command "& {Write-Host 'hi'}"
 powershell.exe -ExecutionPolicy Restricted -File '/path/to/script.ps1 -Flag arg'
-perl -ne 'print unless $seen{$_}++' ; # unique without sorting
+perl -ne 'print unless $seen{$_}++' ;# unique without sorting
