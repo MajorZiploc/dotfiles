@@ -1,5 +1,0 @@
-#!/bin/bash
-
-x=$(printf "%s\n" "$@" | awk '!x[$0]++')
-printf "%s\n" "$x"
-
