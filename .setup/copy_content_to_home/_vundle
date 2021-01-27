@@ -8,7 +8,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'bling/vim-airline' " status bar
 Plugin 'tpope/vim-surround' " manipulate surround chars
 Plugin 'chaoren/vim-wordmotion'
-Plugin 'scrooloose/nerdtree' " filesystem explorer
+" Plugin 'scrooloose/nerdtree' " filesystem explorer
 Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file finder
 Plugin 'OrangeT/vim-csharp'
 
