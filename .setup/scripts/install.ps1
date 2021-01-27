@@ -94,6 +94,8 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     cinst -y powershell-core
     # java development kit 12
     cinst -y openjdk.portable
+    # vim gui
+    cinst -y vim-tux
 }
 
 if (($optionsAsInt -band $WorkAsInt) -eq $WorkAsInt) {
