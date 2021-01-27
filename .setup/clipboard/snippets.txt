@@ -1,5 +1,6 @@
 find . -maxdepth 5 -regextype egrep -iregex '.*pattern.*' -type d -print0 | xargs --null -I{} echo {}
 l=(); for ele in ${l[@]}; do echo $ele; done
+egrep -sirn --exclude-dir=obj --exclude-dir=bin "pattern" .
 git log --oneline ; # show each commit on 1 line
 git log -p --author="<pattern>"
 git log -p --grep="<commit_msg_pattern>"
@@ -9,6 +10,7 @@ git reflog --relative-date
 git reset [--soft | --mixed [-N] | --hard | --merge | --keep] [--quiet] [--no-quiet] [<commit>]
 git stash list ; # show all stashes
 git stash pop --index <n> ; # pop/apply the nth stash
+git stash drop stash@{n} ; delete nth stash
 powershell.exe -ExecutionPolicy Restricted -Command "& {Write-Host 'hi'}"
 powershell.exe -ExecutionPolicy Restricted -File '/path/to/script.ps1 -Flag arg'
 perl -ne 'print unless $seen{$_}++' ;# unique without sorting
