@@ -2,6 +2,9 @@
 
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
+mkdir -p ~/.vim/bundle
+mkdir -p ~/.vim/swap
+
 cp -a "$SCRIPTPATH/../copy_content_to_home/." ~/
 
 cp -a "$SCRIPTPATH/../.ahk" ~/
