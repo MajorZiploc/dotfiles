@@ -1,0 +1,7 @@
+
+# diff of current file between local and 3 commits ago on current branch
+:Gdiff !~3
+
+# use :cnext and :cprevious to move between commits
+:Glog
+
