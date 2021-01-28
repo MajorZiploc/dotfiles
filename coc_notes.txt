@@ -1,1 +1,7 @@
 :CocInstall coc-json coc-tsserver coc-pyright
+
+| | | coc-json/
+| | | coc-pyright/
+| | | coc-sh/
+| | | coc-sql/
+| | | coc-tsserver/
