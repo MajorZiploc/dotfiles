@@ -9,10 +9,13 @@ Plugin 'bling/vim-airline' " status bar
 Plugin 'tpope/vim-surround' " manipulate surround chars
 " Plugin 'chaoren/vim-wordmotion'
 " Plugin 'scrooloose/nerdtree' " filesystem explorer
-Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file finder
+" Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file finder
 Plugin 'OrangeT/vim-csharp'
 Plugin 'tpope/vim-fugitive'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+" Plugin 'jremmen/vim-ripgrep'
 
 call vundle#end()
 filetype plugin indent on
@@ -24,3 +27,10 @@ filetype plugin indent on
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
 " see :h vundle for more details or wiki for FAQ
+
+" Fzf
+nnoremap <slient> <C-p> :Files<Cr>
+nnoremap <slient> <C-g> :GFiles<Cr>
+nnoremap <slient> <C-o> :Buffers<Cr>
+nnoremap <C-f> :Rg!<Space>
+
