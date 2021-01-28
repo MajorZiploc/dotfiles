@@ -49,6 +49,8 @@ if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
     # cinst -y keypose
     # display keystrokes on screen, shows multiple keys at a time
     cinst -y keycastow
+    # for vim grep plugin
+    cinst -y ripgrep
 }
 
 if (($optionsAsInt -band $GamingAsInt) -eq $GamingAsInt) {
