@@ -1,0 +1,1 @@
+:CocInstall coc-json coc-tsserver coc-pyright

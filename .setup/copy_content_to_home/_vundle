@@ -12,6 +12,7 @@ Plugin 'tpope/vim-surround' " manipulate surround chars
 Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file finder
 Plugin 'OrangeT/vim-csharp'
 Plugin 'tpope/vim-fugitive'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 call vundle#end()
 filetype plugin indent on
