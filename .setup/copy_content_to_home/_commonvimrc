@@ -6,8 +6,8 @@ nnoremap U <c-r>
 nnoremap Y y$
 
 " normal mode whitespace
-nnoremap <cr> o<esc>
-nnoremap <s-cr> O<esc>
+" nnoremap <cr> o<esc>
+" nnoremap <s-cr> O<esc>
 
 " indenting
 nnoremap <tab> >>
