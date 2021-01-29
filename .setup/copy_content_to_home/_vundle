@@ -19,8 +19,6 @@ Plugin 'edkolev/tmuxline.vim' " prettier tmux
 " Plugin 'OrangeT/vim-csharp'
 " Plugin 'chaoren/vim-wordmotion'
 " Plugin 'scrooloose/nerdtree' " filesystem explorer
-" Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } } " need to figure out how to make work
-" Plugin 'junegunn/fzf.vim' " replaces ctrlp and ripgrep
 
 call vundle#end()
 filetype plugin indent on
@@ -35,12 +33,6 @@ filetype plugin indent on
 
 " leader key
 let mapleader = ","
-
-" Fzf
-" nnoremap <slient> <C-p> :Files<Cr>
-" nnoremap <slient> <C-g> :GFiles<Cr>
-" nnoremap <slient> <C-o> :Buffers<Cr>
-" nnoremap <C-f> :Rg!<Space>
 
 " vundle vim-fugitive remaps
 nmap <leader>gj :diffget //3<CR>
