@@ -46,6 +46,7 @@ let mapleader = ","
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 nmap <leader>gp :diffput<CR>
+vmap <leader>gp :diffput<CR>
 nmap <leader>gs :G<CR>
 
 " vundle coc
