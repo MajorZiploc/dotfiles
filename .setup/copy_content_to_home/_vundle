@@ -13,6 +13,7 @@ Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file finder
 Plugin 'jremmen/vim-ripgrep' " grepper
 Plugin 'tpope/vim-fugitive' " git plugin
 Plugin 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
+Plugin 'edkolev/tmuxline.vim' " prettier tmux
 
 " Plugin 'airblade/vim-gitgutter' " git supporting plugin
 " Plugin 'OrangeT/vim-csharp'
@@ -44,6 +45,7 @@ let mapleader = ","
 " vundle vim-fugitive remaps
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
+nmap <leader>gp :diffput<CR>
 nmap <leader>gs :G<CR>
 
 " vundle coc
@@ -55,4 +57,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 " vim-gitgutter settings
 " let g:gitgutter_git_executable = 'C:/Program Files/Git/bin/git.exe'
+
+" vim-airline/vim-airline-themes settings
+let g:airline_theme='base16'
 
