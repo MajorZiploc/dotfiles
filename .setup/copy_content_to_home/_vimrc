@@ -1,4 +1,4 @@
-so ~/_vundle
+" so ~/_vundle
 so ~/_commonvimrc
 
 " Show file stats
