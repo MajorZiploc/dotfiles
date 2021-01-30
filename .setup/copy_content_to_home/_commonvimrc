@@ -5,6 +5,7 @@ inoremap kj <esc>
 nnoremap U <c-r>
 nnoremap Y y$
 
+" Conflicts with ripgrep plugin
 " normal mode whitespace
 " nnoremap <cr> o<esc>
 " nnoremap <s-cr> O<esc>
@@ -35,33 +36,24 @@ vnoremap <c-k> <c-u>
 " control-keys for select all, undo, save, cut, copy, paste, quit
 nnoremap <c-a> ggVG
 nnoremap <c-s> :w<cr>
-nnoremap <leader>ws :w<cr>
 inoremap <c-s> <esc>:w<cr>a
 nnoremap <c-z> u
-nnoremap <leader>wz u
 vnoremap <c-x> "+d
 vnoremap <c-c> "+y
-vnoremap <leader>wx "+d
-vnoremap <leader>wy "+y
 nnoremap <c-v> "+p
 vnoremap <c-v> "+p
-nnoremap <leader>wp "+p
-vnoremap <leader>wp "+p
 inoremap <c-v> <esc>"+pa
-nnoremap <leader>wq :q<cr>
-vnoremap <leader>wq <esc>:q<cr>
 
 " swap word under cursor with yank register
-nnoremap <silent> <leader>s viwp
+" nnoremap <silent> <leader>s viwp
 " swap word under cursor with system clipboard
-nnoremap <silent> <leader>S viw"+p
+" nnoremap <silent> <leader>S viw"+p
 " trim trailing spaces in file
 nnoremap <silent> <leader>t :%s/[ \t]\+$/<cr>
 
 " auto-close F# quotations and attributes
-inoremap <@ <@ @><Left><Left><Left>
-inoremap [< [<lt>>]<Left><Left>
-
+" inoremap <@ <@ @><Left><Left><Left>
+" inoremap [< [<lt>>]<Left><Left>
 
 " enable backspace
 set backspace=indent,eol,start
@@ -86,31 +78,3 @@ nnoremap <silent> <bs> :noh<cr><bs>
 " max time between key presses to trigger a multi-key binding
 set timeoutlen=400
 
-" Split window
-nmap ss :split <Return><C-w>w
-nmap sv :vsplit <Return><C-w>w
-
-" Move window
-nmap sw <C-w>w
-map s<left> <C-w>h
-map s<up> <C-w>k
-map s<down> <C-w>j
-map s<right> <C-w>l
-map sh <C-w>h
-map sk <C-w>k
-map sj <C-w>j
-map sl <C-w>l
-
-" Kill window
-nmap sq <C-w>q
-
-" Resize window
-nmap <C-w><left> <C-w><
-nmap <C-w><right> <C-w>>
-nmap <C-w><up> <C-w>+
-nmap <C-w><down> <C-w>-
-
-" Set shell to bash
-set shell=/bin/bash.exe
-" Sets bash aliases for use in vim
-let $BASH_ENV = "~/.bash_aliases"
