@@ -13,8 +13,9 @@ Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file finder
 Plugin 'jremmen/vim-ripgrep' " grepper
 Plugin 'tpope/vim-fugitive' " git plugin
 Plugin 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
-Plugin 'edkolev/tmuxline.vim' " prettier tmux
 
+" Plugin 'edkolev/tmuxline.vim' " prettier tmux
+" Plugin 'itchyny/lightline.vim' " status bar
 " Plugin 'airblade/vim-gitgutter' " git supporting plugin
 " Plugin 'OrangeT/vim-csharp'
 " Plugin 'chaoren/vim-wordmotion'
@@ -53,4 +54,10 @@ nmap <silent> gr <Plug>(coc-references)
 
 " vim-airline/vim-airline-themes settings
 let g:airline_theme='base16'
+
+" ctrlp
+" Ignore files in .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" show hidden files in search results
+let g:ctrlp_show_hidden = 1
 
