@@ -64,5 +64,7 @@ let g:ctrlp_show_hidden = 1
 " wordmotion
 " let g:wordmotion_prefix = ','
 
-" TODO ripgrep -- make it look at hidden files/folders
+" ripgrep
+nmap <leader>fi :Rg 
+nmap <leader>fa :Rg --hidden
 
