@@ -35,5 +35,6 @@ alias l='ls -CF'
 alias h='history'
 
 alias vimi='/usr/bin/vim -u NONE'
-alias vimc='/usr/bin/vim -u ~/_vimrccli'
+alias vimc='/usr/bin/vim -u ~/_commonvimrc'
+alias vimt='/usr/bin/vim -u ~/_vimrcterm'
 
