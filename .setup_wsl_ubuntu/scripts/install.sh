@@ -11,11 +11,16 @@ sudo apt-get -y install python-is-python3
 sudo apt-get -y install pipenv
 # installs nodejs
 sudo apt-get -y install nodejs
+# ripgrep for vundle use or use on its own
+sudo apt-get install ripgrep
+
+
 # for clipboard support, note, that the clipboard support doesnt seem to work within wsl using this
 # check vim clipboard with: vim --version | grep clipboard
 # sudo apt-get -y install vim-gtk
 # clipboard tool, NOT WORKING IN WSL
 # sudo apt-get install xclip
+
 sudo apt -y upgrade
 
 # copy contents of source to existing dir dest, including hidden stuff
