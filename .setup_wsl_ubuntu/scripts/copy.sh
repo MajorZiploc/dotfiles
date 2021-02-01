@@ -15,6 +15,7 @@ vunDir='~/.vim/bundle/Vundle.vim'
 
 cd ~
 cp -a "$SCRIPTPATH/../copy_content_to_home/." .
+cp -a "$SCRIPTPATH/../../.shared/required/." .
 ls -A | xargs dos2unix
 
 cd /usr/local/bin

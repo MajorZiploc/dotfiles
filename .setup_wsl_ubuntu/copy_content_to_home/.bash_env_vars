@@ -1,4 +1,0 @@
-export EDITOR='/usr/bin/vim -u NONE'
-export VISUAL='/usr/bin/vim -u NONE'
-export NODE_ENV='development'
-
