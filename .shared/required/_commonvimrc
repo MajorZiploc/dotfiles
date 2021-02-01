@@ -76,5 +76,5 @@ set hlsearch
 nnoremap <silent> <bs> :noh<cr><bs>
 
 " max time between key presses to trigger a multi-key binding
-set timeoutlen=400
+set timeoutlen=300
 
