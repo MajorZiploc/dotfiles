@@ -66,5 +66,5 @@ let g:ctrlp_show_hidden = 1
 
 " ripgrep
 nmap <leader>fi :Rg 
-nmap <leader>fa :Rg --hidden
+nmap <leader>fa :Rg --hidden 
 
