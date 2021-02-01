@@ -36,9 +36,6 @@ set ruler
 " Blink cursor on error instead of beeping (grr)
 set visualbell
 
-" Status bar
-set laststatus=2
-
 " Last line
 set showmode
 set showcmd
