@@ -51,6 +51,11 @@ inoremap <c-v> <esc>"+pa
 " trim trailing spaces in file
 nnoremap <silent> <leader>t :%s/[ \t]\+$/<cr>
 
+" true delete
+vnoremap <leader>d "_d
+" true delete followed by a paste
+vnoremap <leader>p "_dP
+
 " auto-close F# quotations and attributes
 " inoremap <@ <@ @><Left><Left><Left>
 " inoremap [< [<lt>>]<Left><Left>
