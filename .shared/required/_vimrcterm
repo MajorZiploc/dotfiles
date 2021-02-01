@@ -3,6 +3,10 @@ so ~/_commonvimrc
 " write swap files here instead of beside each file
 set directory=$HOME/.vim/swap//
 
+" wrap settings
+set textwidth=120
+" set colorcolumn=+1
+
 " Split window
 nmap <leader> ss :split <Return><C-w>w
 nmap <leader> sv :vsplit <Return><C-w>w
