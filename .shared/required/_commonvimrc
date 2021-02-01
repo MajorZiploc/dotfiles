@@ -57,10 +57,6 @@ vnoremap <leader>d "_d
 " true delete followed by a paste
 vnoremap <leader>p "_dP
 
-" auto-close F# quotations and attributes
-" inoremap <@ <@ @><Left><Left><Left>
-" inoremap [< [<lt>>]<Left><Left>
-
 " enable backspace
 set backspace=indent,eol,start
 
@@ -69,6 +65,10 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 set autoindent
+
+" wrap settings
+set textwidth=120
+" set colorcolumn=+1
 
 " find settings
 set ignorecase

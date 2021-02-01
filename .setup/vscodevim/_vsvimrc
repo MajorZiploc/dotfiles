@@ -2,17 +2,19 @@
 nnoremap U <c-r>
 nnoremap Y y$
 
+" Conflicts with ripgrep plugin
 " normal mode whitespace
-nnoremap <cr> o<esc>
-nnoremap <s-cr> O<esc>
+" nnoremap <cr> o<esc>
+" nnoremap <s-cr> O<esc>
 
+" Conflicts with <c-i> which is jump forward. <c-i> is considered the same as <tab>
 " indenting
-nnoremap <tab> >>
-nnoremap <s-tab> <<
-vnoremap <tab> >
-vnoremap <s-tab> <
-inoremap <tab> <c-t>
-inoremap <s-tab> <c-d>
+" nnoremap <tab> >>
+" nnoremap <s-tab> <<
+" vnoremap <tab> >
+" vnoremap <s-tab> <
+" inoremap <tab> <c-t>
+" inoremap <s-tab> <c-d>
 
 " split line (compliment of <s-j> to join)
 nnoremap <s-k> hr<cr>^
@@ -52,10 +54,10 @@ nnoremap <silent> <leader>S viw"+p
 " trim trailing spaces in file
 nnoremap <silent> <leader>t :%s/[ \t]\+$//<cr>
 
-" auto-close F# quotations and attributes
-inoremap <@ <@ @><Left><Left><Left>
-inoremap [< [<lt>>]<Left><Left>
-
+" true delete
+vnoremap <leader>d "_d
+" true delete followed by a paste
+vnoremap <leader>p "_dP
 
 " enable backspace
 set backspace=indent,eol,start
