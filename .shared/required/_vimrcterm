@@ -1,3 +1,5 @@
+so ~/_commonvimrc
+
 " write swap files here instead of beside each file
 set directory=$HOME/.vim/swap//
 
