@@ -1,5 +1,5 @@
 " leader key
-let mapleader = ","
+let mapleader = " "
 
 inoremap kj <esc>
 nnoremap U <c-r>

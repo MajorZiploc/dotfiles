@@ -46,7 +46,7 @@ inoremap <c-w> <esc>:q<cr>
 vnoremap <c-w> <esc>:q<cr>
 
 " leader key
-let mapleader=","
+let mapleader=" "
 " swap word under cursor with yank register
 nnoremap <silent> <leader>s viwp
 " swap word under cursor with system clipboard
