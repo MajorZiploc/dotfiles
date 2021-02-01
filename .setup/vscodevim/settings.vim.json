@@ -1,0 +1,74 @@
+
+{"vim.hlsearch": true,
+  "vim.easymotion": true,
+  "vim.timeout": 400,
+  "vim.visualstar": true,
+  "vim.useCtrlKeys": false,
+  "vim.handleKeys": {
+    "<C-j>": true,
+    "<C-k>": true,
+    "<C-a>": true
+  },
+  "vim.leader": "<space>",
+  "vim.insertModeKeyBindings": [{ "before": ["k", "j"], "after": ["<Esc>"] }],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    { "before": ["H"], "after": ["^"] },
+    { "before": ["L"], "after": ["$"] },
+    { "before": ["U"], "after": ["<C-r>"] },
+    { "before": ["Y"], "after": ["y", "$"] },
+    { "before": ["<C-j>"], "after": ["<C-d>"] },
+    { "before": ["<C-k>"], "after": ["<C-u>"] },
+    { "before": ["<C-a>"], "after": ["g", "g", "V", "G"] },
+    { "before": ["K"], "after": ["h", "s", "<CR>", "<Esc>", "l"] },
+    { "before": ["<BS>"], "after": [":", "n", "o", "h", "<CR>", "<BS>"] },
+    { "before": ["<leader>", "s"], "after": ["v", "i", "w", "p"] },
+    {
+      "before": ["<leader>", "h"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.navigateBack", "args": [] }]
+    },
+    {
+      "before": ["<leader>", "l"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.navigateForward", "args": [] }]
+    },
+    { "before": ["<leader>", "q"], "after": [], "commands": [{ "command": "editor.action.showHover", "args": [] }] },
+    {
+      "before": ["<leader>", "u"],
+      "after": [],
+      "commands": [{ "command": "editor.action.goToReferences", "args": [] }]
+    },
+    {
+      "before": ["<leader>", "w", "s"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.splitEditor", "args": [] }]
+    },
+    {
+      "before": ["<leader>", "w", "h"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.focusPreviousGroup", "args": [] }]
+    },
+    {
+      "before": ["<leader>", "w", "l"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.focusNextGroup", "args": [] }]
+    },
+    {
+      "before": ["<leader>", "w", "H"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.moveEditorToPreviousGroup", "args": [] }]
+    },
+    {
+      "before": ["<leader>", "w", "L"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.moveEditorToNextGroup", "args": [] }]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    { "before": ["H"], "after": ["^"] },
+    { "before": ["L"], "after": ["$"] },
+    { "before": ["U"], "after": ["<C-r>"] },
+    { "before": ["<C-j>"], "after": ["<C-d>"] },
+    { "before": ["<C-k>"], "after": ["<C-u>"] }
+  ]
+}

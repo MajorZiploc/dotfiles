@@ -1,0 +1,54 @@
+{
+  "window.zoomLevel": 0,
+  "editor.fontSize": 24,
+  "editor.rulers": [120],
+  "explorer.confirmDragAndDrop": false,
+  "[typescriptreact]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascriptreact]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[jsonc]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "sync.gist": "d8d53d73f684e2d5fe79da4afa2abac6",
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.tabSize": 2,
+  "powershell.powerShellDefaultVersion": "Windows PowerShell (x64)",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "FSharp.useSdkScripts": true,
+  "workbench.editorAssociations": [
+    {
+      "viewType": "jupyter.notebook.ipynb",
+      "filenamePattern": "*.ipynb"
+    }
+  ],
+  "vim.vimrc.enable": true,
+  "vim.vimrc.path": "C:\\vscodevim\\_vsvimrc",
+  "vim.leader": " ",
+  "vim.insertModeKeyBindings": [{ "before": ["k", "j"], "after": ["<Esc>"] }],
+  "vim.timeout": 300,
+  "AREPL.whenToExecute": "onSave",
+  "editor.minimap.enabled": false,
+  "[powershell]": {
+    "files.encoding": "utf8"
+  }
+}
