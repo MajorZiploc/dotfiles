@@ -19,5 +19,5 @@ cp -a "$SCRIPTPATH/../../.shared/required/." .
 ls -A | xargs dos2unix
 
 cd /usr/local/bin
-sudo cp -a "$SCRIPTPATH/../usr_local_bin/." .
+sudo cp -a "$SCRIPTPATH/../../.shared/usr_local_bin/." .
 sudo ls -A | xargs sudo dos2unix
