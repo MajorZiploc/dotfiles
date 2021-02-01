@@ -11,6 +11,7 @@ Plugin 'tpope/vim-surround' " manipulate surround chars
 Plugin 'frazrepo/vim-rainbow' " color pairing brakets and such
 Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file finder
 Plugin 'jremmen/vim-ripgrep' " grepper
+Plugin 'stefandtw/quickfix-reflector.vim' " editable quickfix list for ripgrep
 Plugin 'tpope/vim-fugitive' " git plugin
 Plugin 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
 
@@ -66,6 +67,10 @@ let g:ctrlp_show_hidden = 1
 " let g:wordmotion_prefix = ','
 
 " ripgrep
-nmap <leader>fi :Rg 
-nmap <leader>fa :Rg --hidden 
+nmap <leader>fi :Rg -i 
+nmap <leader>fa :Rg -i --hidden 
+
+" quickfix-reflector
+" makes quick fix list editable
+let g:qf_modifiable = 1
 
