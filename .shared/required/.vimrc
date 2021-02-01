@@ -1,3 +1,3 @@
 so ~/_vundle
-so ~/vimrcterm
+so ~/_vimrcterm
 
