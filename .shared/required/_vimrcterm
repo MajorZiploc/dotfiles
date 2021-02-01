@@ -2,22 +2,22 @@
 set directory=$HOME/.vim/swap//
 
 " Split window
-nmap ss :split <Return><C-w>w
-nmap sv :vsplit <Return><C-w>w
+nmap <leader> ss :split <Return><C-w>w
+nmap <leader> sv :vsplit <Return><C-w>w
 
 " Move window
-nmap sw <C-w>w
-map s<left> <C-w>h
-map s<up> <C-w>k
-map s<down> <C-w>j
-map s<right> <C-w>l
-map sh <C-w>h
-map sk <C-w>k
-map sj <C-w>j
-map sl <C-w>l
+nmap <leader> sw <C-w>w
+map <leader> s<left> <C-w>h
+map <leader> s<up> <C-w>k
+map <leader> s<down> <C-w>j
+map <leader> s<right> <C-w>l
+map <leader> sh <C-w>h
+map <leader> sk <C-w>k
+map <leader> sj <C-w>j
+map <leader> sl <C-w>l
 
 " Kill window
-nmap sq <C-w>q
+nmap <leader> sq <C-w>q
 
 " Resize window
 nmap <C-w><left> <C-w><
