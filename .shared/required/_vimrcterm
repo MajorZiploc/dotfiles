@@ -57,7 +57,7 @@ command! Sorc so $MYVIMRC
 command! Sorcvs so ~\_vsvimrc
 
 " window/appearance
-colorscheme slate
+colorscheme elflord
 set guifont=Consolas:h12
 set nu " line numbers
 set scrolloff=8
