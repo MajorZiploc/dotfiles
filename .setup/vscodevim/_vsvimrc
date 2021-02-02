@@ -55,9 +55,9 @@ nnoremap <silent> <leader>S viw"+p
 nnoremap <silent> <leader>t :%s/[ \t]\+$//<cr>
 
 " true delete
-vnoremap <leader>d "_d
+vnoremap <leader>cd "_d
 " true delete followed by a paste
-vnoremap <leader>p "_dP
+vnoremap <leader>cp "_dP
 
 " enable backspace
 set backspace=indent,eol,start
