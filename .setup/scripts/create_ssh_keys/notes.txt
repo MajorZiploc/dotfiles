@@ -1,0 +1,9 @@
+may be required for git to use windows ssh service
+git config --global core.sshCommand C:/Windows/System32/OpenSSH/ssh.exe
+
+guides:
+https://richardballard.co.uk/ssh-keys-on-windows-10/
+https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse
+
+NOTE:
+The ssh services may need to be manually turned on after the admin script in the Optional Features menu of windows
