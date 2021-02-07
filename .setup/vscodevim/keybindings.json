@@ -59,5 +59,42 @@
     "key": "ctrl+k ctrl+r",
     "command": "-git.revertSelectedRanges",
     "when": "isInDiffEditor"
+  },
+  {
+    "key": "ctrl+shift+w ctrl+shift+q",
+    "command": "workbench.action.closeWindow"
+  },
+  {
+    "key": "ctrl+shift+w",
+    "command": "-workbench.action.closeWindow"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "-workbench.action.closeWindow",
+    "when": "!editorIsOpen && !multipleEditorGroups"
+  },
+  {
+    "key": "ctrl+w ctrl+s",
+    "command": "workbench.action.splitEditorDown"
+  },
+  {
+    "key": "ctrl+w ctrl+q",
+    "command": "workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "ctrl+f4",
+    "command": "-workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "ctrl+shift+alt+n",
+    "command": "workbench.action.toggleActivityBarVisibility"
+  },
+  {
+    "key": "shift+alt+n",
+    "command": "workbench.action.focusActivityBar"
+  },
+  {
+    "key": "ctrl+w ctrl+v",
+    "command": "workbench.action.splitEditorRight"
   }
 ]
