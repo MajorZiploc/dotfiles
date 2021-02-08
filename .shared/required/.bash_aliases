@@ -32,6 +32,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias uniq_files_from_grep="sed -E 's/(.\S*?):[0-9]+:(.*?)/\1/g' | sort | uniq"
+
 alias h='history'
 
 alias vimi='/usr/bin/vim -u NONE'
