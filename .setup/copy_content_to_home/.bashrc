@@ -17,15 +17,15 @@ unset winpath
 
 ################################# Constructed PATH variable #################################
 
+if [ -f ~/.bash_fns ]; then
+        . ~/.bash_fns
+fi
+
 if [ -f ~/.bash_aliases ]; then
         . ~/.bash_aliases
 fi
 
 if [ -f ~/.bash_env_vars ]; then
         . ~/.bash_env_vars
-fi
-
-if [ -f ~/.bash_fns ]; then
-        . ~/.bash_fns
 fi
 
