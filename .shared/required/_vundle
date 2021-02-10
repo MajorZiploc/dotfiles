@@ -75,5 +75,5 @@ nmap <leader>fa :Rg -i --hidden
 " makes quick fix list editable
 let g:qf_modifiable = 1
 
-so ~/vim-plugin-settings/coc.vim
+" so ~/vim-plugin-settings/coc.vim
 
