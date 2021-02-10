@@ -8,8 +8,13 @@ nmap gq :vsc Edit.FormatDocument<cr>
 vmap gq :vsc Edit.FormatSelection<cr>
 nmap <leader>ws :vsc Window.NewVerticalTabGroup<cr>
 " switching between tab groups
-nnoremap <leader>wh <c-w>h
-nnoremap <leader>wl <c-w>l
+nnoremap <c-w><c-h> <c-w>h
+nnoremap <c-w><c-l> <c-w>l
+nnoremap <c-w><c-j> <c-w>j
+" nnoremap <c-w><c-k> <c-w>k "has problem with <c-k> when using vscode preset
+nnoremap <c-w><c-s> :split<cr>
+nnoremap <c-w><c-v> :vsplit<cr>
+nmap <c-w><c-q> :vsc Window.CloseDocumentWindow<cr>
 nmap <leader>wH :vsc Window.MovetoPreviousTabGroup<cr>
 nmap <leader>wL :vsc Window.MovetoNextTabGroup<cr>
 nmap <leader>h :vsc View.NavigateBackward<cr>
