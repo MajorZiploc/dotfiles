@@ -38,9 +38,11 @@ show_folder_details() {
   hidden_items=$(($total_items - $nonhidden_items))
   hidden_dirs=$((total_dirs - nonhidden_dirs))
   hidden_files=$((total_files - nonhidden_files))
+  git_branch=$(__git_ps1)
   echo "$PWD"
   echo "items: $nonhidden_items/$hidden_items/$total_items"
   echo "dirs: $nonhidden_dirs/$hidden_dirs/$total_dirs"
   echo "files: $nonhidden_files/$hidden_files/$total_files"
+  echo "git_branch:$git_branch"
 }
 
