@@ -31,13 +31,13 @@ show_machine_details() {
 show_folder_details() {
   total_items=$(ls -A | wc -l)
   total_dirs=$(ls -Al | egrep "^d" | wc -l)
-  total_files=$(ls -Al | egrep "^_" | wc -l)
+  total_files=$(ls -Al | egrep "^-" | wc -l)
   nonhidden_items=$(ls | wc -l)
   nonhidden_dirs=$(ls -l | egrep "^d" | wc -l)
-  nonhidden_files=$(ls -l | egrep "^_" | wc -l)
+  nonhidden_files=$(ls -l | egrep "^-" | wc -l)
   hidden_items=$(($total_items - $nonhidden_items))
-  hidden_dirs=$((total_dirs - nonhidden_dirs))
-  hidden_files=$((total_files - nonhidden_files))
+  hidden_dirs=$(($total_dirs - $nonhidden_dirs))
+  hidden_files=$(($total_files - $nonhidden_files))
   git_branch=$(__git_ps1)
   echo "$PWD"
   echo "format: nonhidden/hidden/total"
