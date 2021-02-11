@@ -3,6 +3,21 @@ tmuxns() {
   tmux new -s "$session_name"
 }
 
+ide1() {
+  tmux split-window -v -p 30
+}
+
+ide2() {
+  tmux split-window -v -p 30
+  tmux split-window -h -p 55
+}
+
+ide3() {
+  tmux split-window -v -p 30
+  tmux split-window -h -p 66
+  tmux split-window -h -p 50
+}
+
 show_machine_details() {
   user=$(whoami)
   machine_name=$(uname -n)
