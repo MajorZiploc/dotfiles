@@ -20,6 +20,6 @@ vunDir='~/.vim/bundle/Vundle.vim'
 [[ -d $DIR ]] || {
   cd ~/.vim/bundle
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-  show_find_full_paths . | xargs dos2unix
+  find . -exec readlink -f {} \; | xargs dos2unix
   cd ~
 }
