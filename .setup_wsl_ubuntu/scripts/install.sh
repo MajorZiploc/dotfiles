@@ -13,6 +13,8 @@ sudo apt-get -y install pipenv
 sudo apt-get -y install nodejs
 # ripgrep for vundle use or use on its own
 sudo apt-get install ripgrep
+# fuzzy finder
+sudo apt-get install fzf
 
 
 # for clipboard support, note, that the clipboard support doesnt seem to work within wsl using this
