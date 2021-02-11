@@ -18,6 +18,10 @@ ide3() {
   tmux split-window -h -p 50
 }
 
+show_find_full_paths() {
+  find $1 -exec readlink -f {} \;
+}
+
 show_machine_details() {
   user=$(whoami)
   machine_name=$(uname -n)
