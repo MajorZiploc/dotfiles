@@ -1,7 +1,6 @@
 find . -maxdepth 5 -regextype egrep -iregex '.*pattern.*' -type d -print0 | xargs --null -I{} echo {}
 l=(); for ele in ${l[@]}; do echo $ele; done
 egrep -sirn --exclude-dir=obj --exclude-dir=bin "pattern" .
-egrep -sirn "pattern" . | sed -E 's/(.\S*?):[0-9]+:(.*?)/\1/g' | sort | uniq
 git log --oneline # show each commit on 1 line
 git log -p --author="<pattern>"
 git log -p --grep="<commit_msg_pattern>"
