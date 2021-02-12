@@ -36,44 +36,12 @@ filetype plugin indent on
 " leader key
 let mapleader = " "
 
-" vundle vim-fugitive remaps
-nmap <leader>gj :diffget //3<CR>
-nmap <leader>gf :diffget //2<CR>
-nmap <leader>gs :diffput<CR>
-vmap <leader>gs :diffput<CR>
-" brings up git status. gi'get information'
-nmap <leader>gi :G<CR>
-
-" vundle coc
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-let g:coc_global_extensions=['coc-powershell', 'coc-json', 'coc-pyright', 'coc-sql', 'coc-tsserver', 'coc-css', 'coc-html']
-
-" vim-gitgutter settings
-" let g:gitgutter_git_executable = 'C:/Program Files/Git/bin/git.exe'
-
-" vim-airline/vim-airline-themes settings
-let g:airline_theme='zenburn'
-
-" ctrlp
-" Ignore files in .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-" show hidden files in search results
-let g:ctrlp_show_hidden = 1
-
-" wordmotion
-" let g:wordmotion_prefix = ','
-
-" ripgrep
-nmap <leader>fi :Rg -i 
-nmap <leader>fa :Rg -i --hidden 
-
-" quickfix-reflector
-" makes quick fix list editable
-let g:qf_modifiable = 1
-
-" so ~/vim-plugin-settings/coc.vim
+so ~/vimfiles/plugin-settings/coc.vim
+so ~/vimfiles/plugin-settings/ctrlp.vim
+so ~/vimfiles/plugin-settings/fugitive.vim
+so ~/vimfiles/plugin-settings/ripgrep.vim
+so ~/vimfiles/plugin-settings/quickfix-reflector.vim
+so ~/vimfiles/plugin-settings/airline-theme.vim
+" so ~/vimfiles/plugin-settings/gitgutter.vim
+" so ~/vimfiles/plugin-settings/wordmotion.vim
 

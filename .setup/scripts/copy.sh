@@ -4,6 +4,7 @@ SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 mkdir -p ~/.vim/bundle
 mkdir -p ~/.vim/swap
+mkdir -p ~/vimfiles/plugin-settings
 mkdir -p /usr/local/bin
 
 # download vundle if it does not exist
