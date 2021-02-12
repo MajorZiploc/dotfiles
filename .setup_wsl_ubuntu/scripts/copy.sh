@@ -4,6 +4,7 @@ SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 mkdir -p ~/.vim/bundle
 mkdir -p ~/.vim/swap
+mkdir -p ~/vimfiles/plugin-settings
 sudo mkdir -p /usr/local/bin
 
 cd ~
