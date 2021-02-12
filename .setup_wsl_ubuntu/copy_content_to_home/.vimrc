@@ -1,3 +1,3 @@
-" so ~/_vundle
+" so ~/_vim_plugins
 so ~/_vimrcterm
 
