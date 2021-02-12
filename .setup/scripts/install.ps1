@@ -51,6 +51,8 @@ if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
     cinst -y keycastow
     # for vim grep plugin
     cinst -y ripgrep
+    # for fuzzy file finder
+    cinst -y fzf
 }
 
 if (($optionsAsInt -band $GamingAsInt) -eq $GamingAsInt) {
