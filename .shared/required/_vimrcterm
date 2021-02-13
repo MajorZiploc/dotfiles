@@ -7,24 +7,6 @@ set directory=$HOME/.vim/swap//
 set textwidth=120
 " set colorcolumn=+1
 
-" Split window
-nmap <leader> ss :split <Return><C-w>w
-nmap <leader> sv :vsplit <Return><C-w>w
-
-" Move window
-nmap <leader> sw <C-w>w
-map <leader> s<left> <C-w>h
-map <leader> s<up> <C-w>k
-map <leader> s<down> <C-w>j
-map <leader> s<right> <C-w>l
-map <leader> sh <C-w>h
-map <leader> sk <C-w>k
-map <leader> sj <C-w>j
-map <leader> sl <C-w>l
-
-" Kill window
-nmap <leader> sq <C-w>q
-
 " Resize window
 nmap <C-w><left> <C-w><
 nmap <C-w><right> <C-w>>
