@@ -28,9 +28,25 @@ alias trim="sed -E 's/[ '$'\t'']+$//' | sed -E 's/\s*(.*)/\1/g'"
 alias keep_last='tac | awk "!x[\$0]++" | tac'
 
 # Viewing directory information aliases
+alias ls='ls -hF --color=tty'                 # classify files in colour
+alias dir='ls --color=auto --format=vertical'
+alias vdir='ls --color=auto --format=long'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
+# When changing directory small typos can be ignored by bash
+# for example, cd /vr/lgo/apaache would find /var/log/apache
+shopt -s cdspell
+
+alias less='less -r'                          # raw control characters
+alias whence='type -a'                        # where, of a sort
+alias grep='grep --color'                     # show differences in colour
+alias egrep='egrep --color=auto'              # show differences in colour
+
+# Default to human readable figures
+alias df='df -h'
+alias du='du -h'
 
 alias uniq_files_from_grep="sed -E 's/(.\S*?):[0-9]+:(.*?)/\1/g' | sort | uniq"
 

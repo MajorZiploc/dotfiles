@@ -17,6 +17,25 @@ unset winpath
 
 ################################# Constructed PATH variable #################################
 
+
+# Don't use ^D to exit
+set -o ignoreeof
+
+# Use case-insensitive filename globbing
+shopt -s nocaseglob
+
+# Make bash append rather than overwrite the history on disk
+shopt -s histappend
+
+# Don't put duplicate lines in the history.
+export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+
+# Ignore some controlling instructions
+# HISTIGNORE is a colon-delimited list of patterns which should be excluded.
+# The '&' is a special pattern which suppresses duplicate entries.
+export HISTIGNORE=$'[ \t]*:&:[fb]g:exit'
+export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
+
 if [ -f ~/.bash_fns ]; then
         . ~/.bash_fns
 fi
