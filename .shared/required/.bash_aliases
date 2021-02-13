@@ -47,6 +47,8 @@ alias du='du -h'
 alias uniq_files_from_grep="sed -E 's/(.\S*?):[0-9]+:(.*?)/\1/g' | sort | uniq"
 
 alias h='history'
+# reexecutes last command that beings with a pattern. ex: fc -s egrep
+alias reexe='fc -s'
 
 alias vimi='/usr/bin/vim -u NONE'
 alias vimc='/usr/bin/vim -u ~/_commonvimrc'
