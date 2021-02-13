@@ -16,3 +16,4 @@ export NODE_ENV='development'
 
 # minimal prompt
 export PS1="\[\033[35m\]@\h \`if [[ \$? = \"0\" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\`\W\[\033[0m\]> "
+

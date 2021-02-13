@@ -26,3 +26,4 @@ nmap <leader>d :vsc ReSharper.ReSharper_GoToDeclaration<cr>
 nmap <leader>i :vsc ReSharper.ReSharper_GotoImplementations<cr>
 nmap <leader>u :vsc ReSharper.ReSharper_FindUsages<cr>
 nmap <leader>r :vsc EditorContextMenus.CodeWindow.Refactor.RefactorRename
+
