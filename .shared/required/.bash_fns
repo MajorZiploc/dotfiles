@@ -1,3 +1,7 @@
+h() {
+  if [ -z "$1" ]; then history; else history | tail -n $1; fi
+}
+
 tmuxns() {
   session_name=$(basename $(pwd))
   tmux new -s "$session_name"
