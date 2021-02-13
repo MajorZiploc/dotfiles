@@ -5,7 +5,7 @@ SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 mkdir -p ~/.vim/bundle
 mkdir -p ~/.vim/swap
 mkdir -p ~/vimfiles/plugin-settings
-mkdir -p /usr/local/bin
+mkdir -p ~/bin
 
 # download vundle if it does not exist
 vunDir='~/.vim/bundle/Vundle.vim'
@@ -23,7 +23,7 @@ cp -a "$SCRIPTPATH/../.ahk" ~/
 
 cp -a "$SCRIPTPATH/../clipboard" ~/
 
-cp -a "$SCRIPTPATH/../../.shared/usr_local_bin/." /usr/local/bin/
+cp -a "$SCRIPTPATH/../../.shared/home_bin/." ~/bin/
 
 cp -a "$SCRIPTPATH/../Tasks/." /c/Tasks/
 

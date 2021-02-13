@@ -5,15 +5,15 @@ SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 mkdir -p ~/.vim/bundle
 mkdir -p ~/.vim/swap
 mkdir -p ~/vimfiles/plugin-settings
-sudo mkdir -p /usr/local/bin
+sudo mkdir -p ~/bin
 
 cd ~
 cp -a "$SCRIPTPATH/../../.shared/required/." .
 cp -a "$SCRIPTPATH/../copy_content_to_home/." .
 ls -A | xargs dos2unix
 
-cd /usr/local/bin
-sudo cp -a "$SCRIPTPATH/../../.shared/usr_local_bin/." .
+cd ~/bin
+sudo cp -a "$SCRIPTPATH/../../.shared/home_bin/." .
 sudo ls -A | xargs sudo dos2unix
 
 # download vundle if it does not exist
