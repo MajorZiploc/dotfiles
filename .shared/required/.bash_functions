@@ -72,7 +72,6 @@ set_elem() {
 }
 
 set_eq() {
-  # EXPERIMENTAL!
   # check if sets are equal
   # $ diff -q <(sort A | uniq) <(sort B | uniq)
   # return code 1 -- sets A and B are not equal
