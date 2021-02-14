@@ -62,6 +62,7 @@ show_folder_details() {
 
 # set operations
 set_elem() {
+  # EXPERIMENTAL!
   # membership check. ex: grep -xs 'element' set
   # returns 1 if set contains element, 0 if not
   # $ele = $1
@@ -70,6 +71,7 @@ set_elem() {
 }
 
 set_eq() {
+  # EXPERIMENTAL!
   # $ diff -q <(sort A | uniq) <(sort B | uniq)
   # return code 1 -- sets A and B are not equal
 
@@ -79,5 +81,11 @@ set_eq() {
   # $set1 = $1
   # $set2 = $2
   diff -q <(sort $1 | uniq) <(sort $2 | uniq)
+}
+
+set_cardinality() {
+  # EXPERIMENTAL!
+  # $set = $1 = $file
+  sort -u $1 | wc -l
 }
 
