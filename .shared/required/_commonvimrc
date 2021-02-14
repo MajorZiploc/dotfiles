@@ -20,7 +20,7 @@ nnoremap Y y$
 " inoremap <s-tab> <c-d>
 
 " split line (compliment of <s-j> to join)
-nnoremap <s-k> hr<cr>^
+nnoremap <s-k> h<cr>^
 
 " navigation
 nnoremap H ^
