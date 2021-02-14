@@ -104,11 +104,10 @@ set_subset() {
 }
 
 set_union () {
-  # EXPERIMENTAL!
   # returns elements that occur in either sets or both sets
   # $set1 = $1
   # $set2 = $2
-  awk '!found[$1]++' $1 $2
+  sort -u $1 $2
 }
 
 set_intersection() {
