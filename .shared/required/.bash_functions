@@ -64,12 +64,11 @@ show_folder_details() {
 
 # set operations
 set_elem() {
-  # EXPERIMENTAL!
   # membership check. ex: grep -xs 'element' set
   # returns 1 if set contains element, 0 if not
   # $ele = $1
   # $set = $2
-  grep -xc $1 $2
+  grep -xq "$1" $2
 }
 
 set_eq() {
