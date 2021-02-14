@@ -111,11 +111,10 @@ set_union () {
 }
 
 set_intersection() {
-  # EXPERIMENTAL!
   # returns elements that occur in both sets
   # $set1 = $1
   # $set2 = $2
-  grep -xF -f $1 $2
+  grep -xF -f $1 $2 | sort | uniq
 }
 
 set_complement() {
