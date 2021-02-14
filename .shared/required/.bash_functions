@@ -85,7 +85,6 @@ set_eq() {
 }
 
 set_cardinality() {
-  # EXPERIMENTAL!
   # the number of elements in the set
   # $set = $1 = $file
   sort -u $1 | wc -l
