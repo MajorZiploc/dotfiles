@@ -41,8 +41,8 @@ shopt -s nocaseglob
 shopt -s cdspell
 
 
-if [ -f ~/.bash_fns ]; then
-        . ~/.bash_fns
+if [ -f ~/.bash_functions ]; then
+        . ~/.bash_functions
 fi
 
 if [ -f ~/.bash_aliases ]; then

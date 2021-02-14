@@ -3,8 +3,13 @@ h() {
 }
 
 tmuxns() {
-  session_name=$(basename $(pwd))
-  tmux new -s "$session_name"
+  if [ -z "$1" ]; then
+    session_name=$(basename $(pwd))
+    tmux new -s "$session_name"
+    history;
+  else
+    tmux new -s "$1";
+  fi
 }
 
 ide1() {
@@ -52,5 +57,27 @@ show_folder_details() {
   echo "dirs: $nonhidden_dirs/$hidden_dirs/$total_dirs"
   echo "files: $nonhidden_files/$hidden_files/$total_files"
   echo "git_branch:$git_branch"
+}
+
+
+# set operations
+set_elem() {
+  # membership check. ex: grep -xs 'element' set
+  # returns 1 if set contains element, 0 if not
+  # $ele = $1
+  # $set = $2
+  grep -xc $1 $2
+}
+
+set_eq() {
+  # $ diff -q <(sort A | uniq) <(sort B | uniq)
+  # return code 1 -- sets A and B are not equal
+
+  # $ diff -q <(sort Aequal | uniq) <(sort Bequal | uniq)
+  # return code 0 -- sets A and B are equal
+  
+  # $set1 = $1
+  # $set2 = $2
+  diff -q <(sort $1 | uniq) <(sort $2 | uniq)
 }
 
