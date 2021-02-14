@@ -114,16 +114,16 @@ set_intersection() {
   # returns elements that occur in both sets
   # $set1 = $1
   # $set2 = $2
-  grep -xF -f $1 $2 | sort | uniq
+  comm -12 <(sort $1) <(sort $2)
 }
 
+
 set_complement() {
-  # EXPERIMENTAL!
   # returns elements that occur in $1 and not in $2
   # $1 - $2
   # $set1 = $1
   # $set2 = $2
-  grep -vxF -f $1 $2
+  comm -23 <(sort $1) <(sort $2)
 }
 
 set_symmetric_difference() {
