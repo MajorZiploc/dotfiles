@@ -128,7 +128,7 @@ set_symmetric_difference() {
   # returns elements that occur in either set, but not both sets
   # $set1 = $1
   # $set2 = $2
-  sort -n A B | uniq -u
+  sort -n $1 $2 | uniq -u
 }
 
 set_power_set() {
@@ -145,7 +145,7 @@ set_power_set() {
   chomp(my @e = <>);
   for $p (@{powset(@e)}) {
    print @$p;
-  }' set
+  }' $1
 }
 
 set_cardesian_product() {
