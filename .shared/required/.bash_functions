@@ -59,19 +59,20 @@ show_folder_details() {
   echo "git_branch:$git_branch"
 }
 
+# SET OPERATIONS BEGIN
+# Referenced https://catonmat.net/set-operations-in-unix-shell
 
 # set operations
 set_elem() {
-  # EXPERIMENTAL!
   # membership check. ex: grep -xs 'element' set
   # returns 1 if set contains element, 0 if not
   # $ele = $1
   # $set = $2
-  grep -xc $1 $2
+  grep -xq "$1" $2
 }
 
 set_eq() {
-  # EXPERIMENTAL!
+  # check if sets are equal
   # $ diff -q <(sort A | uniq) <(sort B | uniq)
   # return code 1 -- sets A and B are not equal
 
@@ -84,8 +85,105 @@ set_eq() {
 }
 
 set_cardinality() {
-  # EXPERIMENTAL!
+  # the number of elements in the set
   # $set = $1 = $file
   sort -u $1 | wc -l
 }
+
+set_subset() {
+  # test if $1 is a subset of $2
+  # $subset = $1
+  # $superset = $2
+  # comm returns no output if $subset is a subset of $superset
+  # comm outputs something if $subset is not a subset of $superset
+  [[ -z $(comm -23 <(sort $1 | uniq) <(sort $2 | uniq) | head -1) ]]
+}
+
+set_union () {
+  # returns elements that occur in either sets or both sets
+  # $set1 = $1
+  # $set2 = $2
+  sort -u $1 $2
+}
+
+set_intersection() {
+  # returns elements that occur in both sets
+  # $set1 = $1
+  # $set2 = $2
+  comm -12 <(sort $1) <(sort $2)
+}
+
+
+set_complement() {
+  # returns elements that occur in $1 and not in $2
+  # $1 - $2
+  # $set1 = $1
+  # $set2 = $2
+  comm -23 <(sort $1) <(sort $2)
+}
+
+set_symmetric_difference() {
+  # returns elements that occur in either set, but not both sets
+  # $set1 = $1
+  # $set2 = $2
+  sort $1 $2 | uniq -u
+}
+
+set_power_set_experimental() {
+  # EXPERIMENTAL!
+  # returns a set that contains all subsets of the set
+  # $set1 = $1
+  perl -le '
+  sub powset {
+   return [[]] unless @_;
+   my $head = shift;
+   my $list = &powset;
+   [@$list, map { [$head, @$_] } @$list]
+  }
+  chomp(my @e = <>);
+  for $p (@{powset(@e)}) {
+   print @$p;
+  }' $1
+}
+
+set_cardesian_product_experimental() {
+  # EXPERIMENTAL!
+  # returns a set that contains all possible pairs of elements from one set and the other
+  # $1 x $2
+  # $set1 = $1
+  # $set2 = $2
+  while read a; do while read b; do echo "$a, $b"; done < $1; done < $2
+}
+
+set_disjoint_experimental() {
+  # EXPERIMENTAL!
+  # The disjoint set test operation finds if two sets are disjoint, i.e., they do not contain common elements.
+  # $set1 = $1
+  # $set2 = $2
+  # returns 0 if sets are disjoint
+  # returns 1 if sets are not disjoint
+  awk '{ if (++seen[$0]==2) exit 1 }' $1 $2
+}
+
+set_minimum() {
+  # $set1 = $1
+  head -1 <(sort $1)
+}
+
+set_minimum_num() {
+  # $set1 = $1
+  head -1 <(sort -n $1)
+}
+
+set_maximum() {
+  # $set1 = $1
+  tail -1 <(sort $1)
+}
+
+set_maximum_num() {
+  # $set1 = $1
+  tail -1 <(sort -n $1)
+}
+
+# SET OPERATIONS END
 
