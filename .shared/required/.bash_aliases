@@ -29,7 +29,7 @@ alias keep_last='tac | awk "!x[\$0]++" | tac'
 alias keep_first='cat | awk "!x[\$0]++" | cat'
 
 # Viewing directory information aliases
-alias ls_hf_color='ls -hF --color=tty'                 # classify files in colour
+alias ls_c='ls -hF --color=tty'                 # classify files in colour
 alias dir='ls --color=auto --format=vertical'
 alias vdir='ls --color=auto --format=long'
 alias ll='ls -alF'
