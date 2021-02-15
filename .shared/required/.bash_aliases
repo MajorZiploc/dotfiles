@@ -26,6 +26,7 @@ alias rtrim="sed -E 's/[ '$'\t'']+$//'"
 alias ltrim="sed -E 's/\s*(.*)/\1/g'"
 alias trim="sed -E 's/[ '$'\t'']+$//' | sed -E 's/\s*(.*)/\1/g'"
 alias keep_last='tac | awk "!x[\$0]++" | tac'
+alias keep_first='cat | awk "!x[\$0]++" | cat'
 
 # Viewing directory information aliases
 alias ls_hf_color='ls -hF --color=tty'                 # classify files in colour
