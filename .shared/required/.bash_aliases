@@ -39,7 +39,7 @@ alias l='ls -CF'
 alias less_r='less -r'                          # raw control characters
 alias whence='type -a'                        # where, of a sort
 alias grep_c='grep --color'                     # show differences in colour
-alias egrep='egrep --color=auto'              # show differences in colour
+alias egrep_c='egrep --color=auto'              # show differences in colour
 
 # Default to human readable figures
 alias df_h='df -h'
