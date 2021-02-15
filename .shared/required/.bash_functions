@@ -124,11 +124,10 @@ set_complement() {
 }
 
 set_symmetric_difference() {
-  # EXPERIMENTAL!
   # returns elements that occur in either set, but not both sets
   # $set1 = $1
   # $set2 = $2
-  sort -n $1 $2 | uniq -u
+  sort $1 $2 | uniq -u
 }
 
 set_power_set() {
