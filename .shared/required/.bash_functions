@@ -91,13 +91,12 @@ set_cardinality() {
 }
 
 set_subset() {
-  # EXPERIMENTAL!
-  # test if $1 is a subset of $1
+  # test if $1 is a subset of $2
   # $subset = $1
   # $superset = $2
   # comm returns no output if $subset is a subset of $superset
   # comm outputs something if $subset is not a subset of $superset
-  comm -23 <(sort $1 | uniq) <(sort $2 | uniq) | head -1
+  [[ -z $(comm -23 <(sort $1 | uniq) <(sort $2 | uniq) | head -1) ]]
 }
 
 set_union () {
@@ -130,7 +129,7 @@ set_symmetric_difference() {
   sort $1 $2 | uniq -u
 }
 
-set_power_set() {
+set_power_set_experimental() {
   # EXPERIMENTAL!
   # returns a set that contains all subsets of the set
   # $set1 = $1
@@ -147,7 +146,7 @@ set_power_set() {
   }' $1
 }
 
-set_cardesian_product() {
+set_cardesian_product_experimental() {
   # EXPERIMENTAL!
   # returns a set that contains all possible pairs of elements from one set and the other
   # $1 x $2
@@ -156,7 +155,7 @@ set_cardesian_product() {
   while read a; do while read b; do echo "$a, $b"; done < $1; done < $2
 }
 
-set_disjoint() {
+set_disjoint_experimental() {
   # EXPERIMENTAL!
   # The disjoint set test operation finds if two sets are disjoint, i.e., they do not contain common elements.
   # $set1 = $1
