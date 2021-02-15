@@ -167,25 +167,21 @@ set_disjoint() {
 }
 
 set_minimum() {
-  # EXPERIMENTAL!
   # $set1 = $1
   head -1 <(sort $1)
 }
 
 set_minimum_num() {
-  # EXPERIMENTAL!
   # $set1 = $1
   head -1 <(sort -n $1)
 }
 
 set_maximum() {
-  # EXPERIMENTAL!
   # $set1 = $1
   tail -1 <(sort $1)
 }
 
 set_maximum_num() {
-  # EXPERIMENTAL!
   # $set1 = $1
   tail -1 <(sort -n $1)
 }
