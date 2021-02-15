@@ -58,8 +58,6 @@ if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
 if (($optionsAsInt -band $GamingAsInt) -eq $GamingAsInt) {
     Write-Host("Installing Gaming packages")
     # Gaming Packages
-    # upzipping tool
-    cinst -y winrar
     # java runtime 8
     cinst -y jre8
 }
