@@ -55,3 +55,6 @@ alias vimc='/usr/bin/vim -u ~/_commonvimrc'
 alias vimt='/usr/bin/vim -u ~/_vimrcterm'
 alias vimnp='/usr/bin/vim --noplugin'
 
+alias curl_follow_redirects='curl -Lks'
+alias curl_follow_redirects_ignore_security_exceptions='curl -0Lks'
+
