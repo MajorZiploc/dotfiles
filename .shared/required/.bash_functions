@@ -211,3 +211,11 @@ function first {
   cut -d' ' -f1-$n
 }
 
+function sample {
+  # get a random sample of lines from a file or std out
+  # Note: the lines retain order relative to each other
+  local n="$1"
+  local content="$2"
+  shuf -n "$n" $content
+}
+
