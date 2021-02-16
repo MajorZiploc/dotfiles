@@ -205,3 +205,9 @@ function skip {
   cut -d' ' -f$n-
 }
 
+function first {
+  # Keep first x words in line
+  local n=$1
+  cut -d' ' -f1-$n
+}
+
