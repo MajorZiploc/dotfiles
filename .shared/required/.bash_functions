@@ -1,8 +1,14 @@
 h() {
-  if [ -z "$1" ]; then history; else history | tail -n $1; fi
+  # show history
+  # $1: optional pos num to show last n entries in the history
+  local n=$1
+  if [ -z "$n" ]; then history; else history | tail -n $n; fi
 }
 
 tmuxns() {
+  # creates a tmux session
+  # $1: optional string to represent name of the tmux session
+  # If $1 not given, then use the base name of the path as the session name
   if [ -z "$1" ]; then
     session_name=$(basename $(pwd))
     tmux new -s "$session_name"
@@ -13,21 +19,26 @@ tmuxns() {
 }
 
 ide1() {
+  # splits the window into 2 panes
   tmux split-window -v -p 30
 }
 
 ide2() {
+  # splits the window into 3 panes
   tmux split-window -v -p 30
   tmux split-window -h -p 55
 }
 
 ide3() {
+  # splits the window into 4 panes
   tmux split-window -v -p 30
   tmux split-window -h -p 66
   tmux split-window -h -p 50
 }
 
 show_find_full_paths() {
+  # displays the full path names of $1 (the directory)
+  # $1: optional directory. Defaults to .
   find $1 -exec readlink -f {} \;
 }
 
@@ -188,6 +199,9 @@ set_maximum_num() {
 # SET OPERATIONS END
 
 prefix_file() {
+  # add a line to the beginning of a file
+  # $1: string to add
+  # $2: file
   local text=$1
   local file=$2
   sed -i "1s/^/$text/" "$file"
@@ -195,18 +209,21 @@ prefix_file() {
 
 function col {
   # Extract the nths column from a tabular output
+  # $1: pos num
   local n=$1
   awk -v col=$n '{print $col}'
 }
 
 function skip {
-  # Skip first x words in line
+  # Skip first n words in line
+  # $1: pos num
   local n=$(($1 + 1))
   cut -d' ' -f$n-
 }
 
 function first {
-  # Keep first x words in line
+  # Keep first n words in line
+  # $1: pos num
   local n=$1
   cut -d' ' -f1-$n
 }
@@ -214,6 +231,8 @@ function first {
 function sample {
   # get a random sample of lines from a file or std out
   # Note: the lines retain order relative to each other
+  # $1: pos num
+  # $2: file/stdout
   local n="$1"
   local content="$2"
   shuf -n "$n" $content
