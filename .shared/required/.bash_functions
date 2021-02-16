@@ -43,8 +43,8 @@ show_find_full_paths() {
 }
 
 show_machine_details() {
-  user=$(whoami)
-  machine_name=$(uname -n)
+  local user=$(whoami)
+  local machine_name=$(uname -n)
   long_info=$(uname -a)
   echo "user: $user"
   echo "machine_name: $machine_name"
@@ -52,16 +52,16 @@ show_machine_details() {
 }
 
 show_folder_details() {
-  total_items=$(ls -A | wc -l)
-  total_dirs=$(ls -Al | egrep "^d" | wc -l)
-  total_files=$(ls -Al | egrep "^-" | wc -l)
-  nonhidden_items=$(ls | wc -l)
-  nonhidden_dirs=$(ls -l | egrep "^d" | wc -l)
-  nonhidden_files=$(ls -l | egrep "^-" | wc -l)
-  hidden_items=$(($total_items - $nonhidden_items))
-  hidden_dirs=$(($total_dirs - $nonhidden_dirs))
-  hidden_files=$(($total_files - $nonhidden_files))
-  git_branch=$(__git_ps1)
+  local total_items=$(ls -A | wc -l)
+  local total_dirs=$(ls -Al | egrep "^d" | wc -l)
+  local total_files=$(ls -Al | egrep "^-" | wc -l)
+  local nonhidden_items=$(ls | wc -l)
+  local nonhidden_dirs=$(ls -l | egrep "^d" | wc -l)
+  local nonhidden_files=$(ls -l | egrep "^-" | wc -l)
+  local hidden_items=$(($total_items - $nonhidden_items))
+  local hidden_dirs=$(($total_dirs - $nonhidden_dirs))
+  local hidden_files=$(($total_files - $nonhidden_files))
+  local git_branch=$(__git_ps1)
   echo "$PWD"
   echo "format: nonhidden/hidden/total"
   echo "items: $nonhidden_items/$hidden_items/$total_items"
