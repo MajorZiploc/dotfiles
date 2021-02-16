@@ -35,6 +35,7 @@ alias vdir='ls --color=auto --format=long'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias lst='ls --human-readable --size -1 -S --classify'
 
 alias less_r='less -r'                          # raw control characters
 alias whence='type -a'                        # where, of a sort
@@ -54,4 +55,7 @@ alias vimi='/usr/bin/vim -u NONE'
 alias vimc='/usr/bin/vim -u ~/_commonvimrc'
 alias vimt='/usr/bin/vim -u ~/_vimrcterm'
 alias vimnp='/usr/bin/vim --noplugin'
+
+alias curl_follow_redirects='curl -Lks'
+alias curl_follow_redirects_ignore_security_exceptions='curl -0Lks'
 
