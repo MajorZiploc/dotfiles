@@ -187,3 +187,21 @@ set_maximum_num() {
 
 # SET OPERATIONS END
 
+prefix_file() {
+  local text=$1
+  local file=$2
+  sed -i "1s/^/$text/" "$file"
+}
+
+function col {
+  # Extract the nths column from a tabular output
+  local n=$1
+  awk -v col=$n '{print $col}'
+}
+
+function skip {
+  # Skip first x words in line
+  local n=$(($1 + 1))
+  cut -d' ' -f$n-
+}
+
