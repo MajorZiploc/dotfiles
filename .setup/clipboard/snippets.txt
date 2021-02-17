@@ -1,5 +1,6 @@
-find . -maxdepth 5 -regextype egrep -iregex '.*pattern.*' -type f -print0 | xargs --null -I{} echo {}
-find . -maxdepth 5 -regextype egrep -iregex '.*pattern.*' -type f -exec egrep -i "pandas|enum" {} + -exec echo {} +
+find . -maxdepth 5 -regextype egrep -iregex '.*pattern.*' -type f 2>/dev/null -print0 | xargs --null -I{} echo {}
+find . -regextype egrep -iregex '.*pattern.*' -maxdepth 5 -type f 2>/dev/null -exec egrep -sin "pattern1|pattern2" {} + | uniq_files_from_grep
+find . -name '*pattern*' -exec egrep -sin "pattern1|pattern2" {} + -exec echo {} + # multi command execute example
 l=(); for ele in ${l[@]}; do echo $ele; done
 egrep -sirn --exclude-dir=obj --exclude-dir=bin "pattern" .
 git log --oneline # show each commit on 1 line
