@@ -2,7 +2,8 @@ h() {
   # show history
   # $1: optional pos num to show last n entries in the history
   local n=$1
-  if [ -z "$n" ]; then history; else history | tail -n $n; fi
+  [[ -z "$n" ]] && { n=25; }
+  history | tail -n $n;
 }
 
 tmuxns() {
