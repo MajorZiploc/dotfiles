@@ -59,6 +59,9 @@ alias vimnp='/usr/bin/vim --noplugin'
 alias curl_follow_redirects='curl -Lks'
 alias curl_follow_redirects_ignore_security_exceptions='curl -0Lks'
 
-# requires <npm i gnomon -g> for the current user
-alias time_js='gnomon'
+
+if [ -d ~/AppData/Roaming/npm ]; then
+  # requires <npm i gnomon -g> for the current user
+  alias time_js='gnomon'
+fi
 
