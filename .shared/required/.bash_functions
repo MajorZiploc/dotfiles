@@ -239,3 +239,8 @@ function sample {
   shuf -n "$n" $content
 }
 
+function show_file_content {
+  #echo $@
+  tail -n +1 $@
+}
+
