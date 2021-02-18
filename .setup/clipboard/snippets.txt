@@ -1,6 +1,7 @@
 perl -ne 'print unless $seen{$_}++' # unique without sorting
 find . -maxdepth 5 -regextype egrep -iregex '.*pattern.*' -type f 2>/dev/null -print0 | xargs --null -I{} echo {}
 find . -name '*pattern*' -exec egrep -sin "pattern1|pattern2" {} + -exec echo {} + # multi command execute example
+powershell.exe -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -Command "& {Write-Host 'hi'}"
 git log -p --grep="<commit_msg_pattern>"
 git log -p --author="<pattern>"
 git stash drop stash@{n} # delete nth stash
@@ -12,7 +13,6 @@ git rebase -i <rebase_curr_branch_onto_this_branch>
 git reflog --relative-date
 git log --oneline # show each commit on 1 line
 l=(); for ele in ${l[@]}; do echo $ele; done
-powershell.exe -ExecutionPolicy Restricted -File '/path/to/script.ps1 -Flag arg'
-powershell.exe -ExecutionPolicy Restricted -Command "& {Write-Host 'hi'}"
+powershell.exe -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'
 tail -n +1 file1.txt file2.txt file3.txt # show contents of all files lead by the file name
 find . -regextype egrep -iregex '.*pattern.*' -maxdepth 5 -type f 2>/dev/null -not -path '*/node_modules/*' -exec egrep -sin "pattern1|pattern2" {} + | uniq_files_from_grep
