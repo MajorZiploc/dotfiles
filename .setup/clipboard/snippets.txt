@@ -14,5 +14,4 @@ git reflog --relative-date
 git log --oneline # show each commit on 1 line
 l=(); for ele in ${l[@]}; do echo $ele; done
 powershell.exe -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'
-tail -n +1 file1.txt file2.txt file3.txt # show contents of all files lead by the file name
 find . -regextype egrep -iregex '.*pattern.*' -maxdepth 5 -type f 2>/dev/null -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/node_modules/*' -exec egrep -sin "pattern1|pattern2" {} + | uniq_files_from_grep
