@@ -240,7 +240,8 @@ function sample {
 }
 
 function show_file_content {
-  #echo $@
+  # displays file contents lead by the name of the file
+  # files=$@
   tail -n +1 $@
 }
 
