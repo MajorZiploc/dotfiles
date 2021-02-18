@@ -53,6 +53,11 @@ if [ -f ~/.bash_env_vars ]; then
         . ~/.bash_env_vars
 fi
 
+if [ -d ~/AppData/Roaming/npm ]; then
+  # Adds npm packages to path
+  export PATH="$PATH:$(echo ~/AppData/Roaming/npm)"
+fi
+
 # Remove duplicate entries from PATH. Keeping first occurence
 export PATH=$(echo -n $PATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')
 
