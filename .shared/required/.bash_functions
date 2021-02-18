@@ -245,3 +245,10 @@ function show_file_content {
   tail -n +1 $@
 }
 
+function sample_csv {
+  # grab a random sample of n size from a csv
+  local n=$1
+  local file="$2"
+  cat <(head -n 1 "$file") <(sample $n <(tail -n +2 "$file"))
+}
+
