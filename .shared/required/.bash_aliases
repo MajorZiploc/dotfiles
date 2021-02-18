@@ -60,7 +60,7 @@ alias curl_follow_redirects='curl -Lks'
 alias curl_follow_redirects_ignore_security_exceptions='curl -0Lks'
 
 alias show_fn_names='declare -F'
-alias show_fn_impls='declare -F'
+alias show_fn_impls='declare -f'
 
 
 if [ -d ~/AppData/Roaming/npm ]; then
