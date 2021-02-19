@@ -26,7 +26,7 @@ export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # Ignore some controlling instructions
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
 # The '&' is a special pattern which suppresses duplicate entries.
-export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls:l:h:ll:la:show_*'
+export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls:l:h:ll:la'
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
@@ -51,6 +51,11 @@ fi
 
 if [ -f ~/.bash_env_vars ]; then
         . ~/.bash_env_vars
+fi
+
+if [ -d ~/AppData/Roaming/npm ]; then
+  # Adds npm packages to path
+  export PATH="$PATH:$(echo ~/AppData/Roaming/npm)"
 fi
 
 # Remove duplicate entries from PATH. Keeping first occurence

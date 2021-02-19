@@ -2,7 +2,8 @@ h() {
   # show history
   # $1: optional pos num to show last n entries in the history
   local n=$1
-  if [ -z "$n" ]; then history; else history | tail -n $n; fi
+  [[ -z "$n" ]] && { n=25; }
+  history | tail -n $n;
 }
 
 tmuxns() {
@@ -236,5 +237,18 @@ function sample {
   local n="$1"
   local content="$2"
   shuf -n "$n" $content
+}
+
+function show_file_content {
+  # displays file contents lead by the name of the file
+  # files=$@
+  tail -n +1 $@
+}
+
+function sample_csv {
+  # grab a random sample of n size from a csv
+  local n=$1
+  local file="$2"
+  cat <(head -n 1 "$file") <(sample $n <(tail -n +2 "$file"))
 }
 
