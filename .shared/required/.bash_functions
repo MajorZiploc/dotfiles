@@ -252,3 +252,10 @@ function sample_csv {
   cat <(head -n 1 "$file") <(sample $n <(tail -n +2 "$file"))
 }
 
+function search_env_for {
+  # searches through bash env and user defined bash tools
+  local search_regex="";
+  [[ -z "$1" ]] && { search_regex=".*"; } || { search_regex="$1"; }
+  cat <(ls -A ~/bin 2> /dev/null) <(ls -A /usr/local/bin 2> /dev/null) <(alias) <(env) <(declare -F) <(shopt) | egrep -i "$search_regex"
+}
+
