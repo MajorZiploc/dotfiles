@@ -118,7 +118,7 @@ og_file=$(readlink -f "$og_file")
 }
 
 
-function make_copies {
+function main {
   # args
   # required file
   local og_file="$1"
@@ -135,6 +135,7 @@ function make_copies {
   # while loop allows for files with spaces in name
   while IFS="" read -r p || [ -n "$p" ]
   do
+    # if line is not empty, then make copy
     [[ -z "$p" ]] || {
       local new_file_name="$p";
       local new_file_path="$copy_location/$new_file_name";
@@ -149,5 +150,5 @@ function make_copies {
   done < "$new_file_names"
 }
 
-make_copies "$og_file" "$new_file_names" "$copy_location"
+main "$og_file" "$new_file_names" "$copy_location"
 
