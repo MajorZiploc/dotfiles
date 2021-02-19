@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Default values
+verbose=false
+preview=false
+
 [[ $# == 0 ]] && {
   echo "make_copies called with no arguments!"
   echo "use 'make_copies -h' to see possible arguments"
@@ -90,10 +94,6 @@ done
 # check if required params were given
 [[ -z "$og_file" ]] && { echo "--file is required!"; exit 1; }
 [[ -z "$new_file_names" ]] && { echo "--new_file_names is required!"; exit 1; }
-
-# Default values
-verbose=false
-preview=false
 
 # location of the original file
 file_path=$(readlink -f $og_file)
