@@ -133,18 +133,17 @@ function make_copies {
   }
 
   # while loop allows for files with spaces in name
-  # if line is blank, it will still make a copy based on that line
   while IFS="" read -r p || [ -n "$p" ]
   do
     [[ -z "$p" ]] || {
-      local new_file_name="$p"
+      local new_file_name="$p";
       local new_file_path="$copy_location/$new_file_name";
       [[ $verbose == true ]] && {
         echo "cp \"$og_file\" \"$new_file_path\"";
         }
       # perform the copy only if preview is false
       [[ $preview == false ]] && {
-        cp "$og_file" "$new_file_path"
+        cp "$og_file" "$new_file_path";
         }
     }
   done < "$new_file_names"
