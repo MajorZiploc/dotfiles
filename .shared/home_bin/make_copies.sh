@@ -26,7 +26,7 @@ do
       ;;
 
     -l|--copy_location)
-      new_file_names="$2"
+      copy_location="$2"
       shift
       ;;
 
@@ -90,6 +90,12 @@ do
   shift
 done
 
+# check if required params were given
+[[ -z "$og_file" ]] && { echo "--file is required!"; exit 1; }
+[[ -z "$new_file_names" ]] && { echo "--new_file_names is required!"; exit 1; }
+
+# location of the original file
+file_path=$(readlink -f $og_file)
 # set copy_location
 [[ -z "$copy_location" ]] && {
   # set copy_location based on og file path
@@ -98,6 +104,9 @@ done
   # set copy_location based on optional copy_location param
   copy_location=$(readlink -f "$copy_location")
 }
+
+# get full path of original file
+og_file=$(readlink -f "$og_file")
 
 [[ $verbose == true ]] && {
   echo "file: $og_file"
@@ -117,29 +126,28 @@ function make_copies {
   # optional folder path
   local copy_location="$3"
 
-  # location of the original file
-  local file_path=$(readlink -f $og_file)
   # ensures that copy_location exists
-  mkdir -p "$copy_location"
-  # get base file name of the og file
-  local base_og_file=$(basename $file_path)
+  [[ $preview == false ]] && {
+    mkdir -p "$copy_location"
+  }
 
   # while loop allows for files with spaces in name
   # if line is blank, it will still make a copy based on that line
   while IFS="" read -r p || [ -n "$p" ]
   do
-    local new_file_name="$p"
-    local new_file_path="$copy_location/$new_file_name-$base_og_file";
-    [[ $verbose == true ]] && {
-      echo "cp \"$file_path\" \"$new_file_path\"";
-      echo "cp \"$f\" \"$new_name\"";
-      }
-    # perform the copy only if preview is false
-    [[ $preview == false ]] && {
-      cp "$file_path" "$new_file_path"
-      }
+    [[ -z "$p" ]] || {
+      local new_file_name="$p"
+      local new_file_path="$copy_location/$new_file_name";
+      [[ $verbose == true ]] && {
+        echo "cp \"$og_file\" \"$new_file_path\"";
+        }
+      # perform the copy only if preview is false
+      [[ $preview == false ]] && {
+        cp "$og_file" "$new_file_path"
+        }
+    }
   done < "$new_file_names"
 }
 
-make_copies "$file" "$new_file_names" "$copy_location"
+make_copies "$og_file" "$new_file_names" "$copy_location"
 
