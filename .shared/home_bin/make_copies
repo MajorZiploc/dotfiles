@@ -67,10 +67,12 @@ do
       "
 
       echo "    -v|--verbose
+      Optional
       Display the copies happening.
       "
 
       echo "    -p|--preview
+      Optional
       When specified, it does not preform the copies.
       When specified, it also toggles -v on.
       For debugging and 'previewing' the change before performing it.
