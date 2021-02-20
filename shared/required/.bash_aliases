@@ -47,6 +47,7 @@ alias df_h='df -h'
 alias du_h='du -h'
 
 alias uniq_files_from_grep="sed -E 's/(.\S*?):[0-9]+:(.*?)/\1/g' | sort | uniq"
+alias show_hidden_items_from_find="sed -e 's/\.\///g' | egrep \"\/\.\""
 
 # reexecutes last command that beings with a pattern. ex: fc -s egrep
 alias reexe='fc -s'
