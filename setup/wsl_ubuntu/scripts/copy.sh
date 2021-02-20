@@ -8,7 +8,7 @@ mkdir -p ~/vimfiles/plugin-settings
 sudo mkdir -p ~/bin
 
 cd ~
-cp -a "$SCRIPTPATH/../../.shared/required/." .
+cp -a "$SCRIPTPATH/../../../shared/required/." .
 cp -a "$SCRIPTPATH/../copy_content_to_home/." .
 ls -A | xargs dos2unix
 
