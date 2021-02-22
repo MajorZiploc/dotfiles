@@ -7,9 +7,9 @@ verbose=false
 preview=false
 
 [[ $# == 0 ]] && {
-  echo "rn_selected called with no arguments!"
-  echo "rn_selected must be called with at least 1 argument"
-  echo "use 'rn_selected -h' to see possible arguments"
+  echo "rename_selected called with no arguments!"
+  echo "rename_selected must be called with at least 1 argument"
+  echo "use 'rename_selected -h' to see possible arguments"
   exit 1
 }
 
@@ -41,32 +41,45 @@ do
       ;;
 
     -h|--help)
-      echo "Command rn_selected (rename_selected):"
+      echo "Command rename_selected:"
       echo "Utility for renaming folders and files"
+      echo "Short flag stacking is NOT supported!"
       echo "Usage:"
 
       echo "    -d|--directory
-      The directory to rename folders and files in. Non-recursive. Default is: '$directory'
+      Optional
+      Type: String of directory glob
+      Default is: '$directory'
+      The directory to rename folders and files in. Non-recursive.
       For all nonhidden files/folders in current directory non-recursive, use -d '*'
       For all hidden files/folders in current directory non-recursive, use -d '.[^.]*'
       For all hidden and nonhidden files/folders in current directory non-recursive, use -d '* .[^.]*'
       "
 
       echo "    -b|--by
-      Program executed by 'sed -E' on each file name to derive new file name. Default is: $by.
+      Optional but recommended. Nothing will happen without this.:w
+      Type: String executed by sed -E
+      Default is: $by
+      Program executed by 'sed -E' on each file name to derive new file name.
       You can do multiple s/// by doing: --by 's///;s///;s///;'
       "
 
       echo "    -a|--all
+      Optional
+      Type: Takes no argument
       Short hand to iterate over all hidden and non hidden files in the directory non recursively.
       The same as specifying -d '* .[^.]*'
       "
 
       echo "    -v|--verbose
+      Optional
+      Type: Takes no argument
       Display the renames happening.
       "
 
       echo "    -p|--preview
+      Optional
+      Type: Takes no argument
       When specified, it does not preform the renames.
       When specified, it also toggles -v on.
       For debugging and 'previewing' the change before performing it.
@@ -78,7 +91,7 @@ do
   
     *)
       echo "command called with non valid flags!"
-      echo "use 'rn_selected -h' to see options"
+      echo "use 'rename_selected -h' to see options"
       exit 1
       ;;
 
@@ -110,3 +123,4 @@ do
       }
     }
 done
+
