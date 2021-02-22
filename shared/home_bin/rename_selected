@@ -7,9 +7,9 @@ verbose=false
 preview=false
 
 [[ $# == 0 ]] && {
-  echo "rn_selected called with no arguments!"
-  echo "rn_selected must be called with at least 1 argument"
-  echo "use 'rn_selected -h' to see possible arguments"
+  echo "rename_selected called with no arguments!"
+  echo "rename_selected must be called with at least 1 argument"
+  echo "use 'rename_selected -h' to see possible arguments"
   exit 1
 }
 
@@ -41,7 +41,7 @@ do
       ;;
 
     -h|--help)
-      echo "Command rn_selected (rename_selected):"
+      echo "Command rename_selected:"
       echo "Utility for renaming folders and files"
       echo "Usage:"
 
@@ -78,7 +78,7 @@ do
   
     *)
       echo "command called with non valid flags!"
-      echo "use 'rn_selected -h' to see options"
+      echo "use 'rename_selected -h' to see options"
       exit 1
       ;;
 
