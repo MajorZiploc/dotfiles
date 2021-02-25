@@ -1,4 +1,4 @@
-h() {
+function h() {
   # show history
   # $1: optional pos num to show last n entries in the history
   local n=$1
@@ -6,7 +6,7 @@ h() {
   history | tail -n $n;
 }
 
-tmuxns() {
+function tmuxns() {
   # creates a tmux session
   # $1: optional string to represent name of the tmux session
   # If $1 not given, then use the base name of the path as the session name
@@ -19,31 +19,31 @@ tmuxns() {
   fi
 }
 
-ide1() {
+function ide1() {
   # splits the window into 2 panes
   tmux split-window -v -p 30
 }
 
-ide2() {
+function ide2() {
   # splits the window into 3 panes
   tmux split-window -v -p 30
   tmux split-window -h -p 55
 }
 
-ide3() {
+function ide3() {
   # splits the window into 4 panes
   tmux split-window -v -p 30
   tmux split-window -h -p 66
   tmux split-window -h -p 50
 }
 
-show_find_full_paths() {
+function show_find_full_paths() {
   # displays the full path names of $1 (the directory)
   # $1: optional directory. Defaults to .
   find $1 -exec readlink -f {} \;
 }
 
-show_machine_details() {
+function show_machine_details() {
   local user=$(whoami)
   local machine_name=$(uname -n)
   long_info=$(uname -a)
@@ -52,7 +52,7 @@ show_machine_details() {
   echo "long_info: $long_info"
 }
 
-show_folder_details() {
+function show_folder_details() {
   local total_items=$(ls -A | wc -l)
   local total_dirs=$(ls -Al | egrep "^d" | wc -l)
   local total_files=$(ls -Al | egrep "^-" | wc -l)
@@ -75,7 +75,7 @@ show_folder_details() {
 # Referenced https://catonmat.net/set-operations-in-unix-shell
 
 # set operations
-set_elem() {
+function set_elem() {
   # membership check. ex: grep -xs 'element' set
   # returns 1 if set contains element, 0 if not
   local ele=$1
@@ -83,7 +83,7 @@ set_elem() {
   grep -xq "$ele" $set
 }
 
-set_eq() {
+function set_eq() {
   # check if sets are equal
   # $ diff -q <(sort A | uniq) <(sort B | uniq)
   # return code 1 -- sets A and B are not equal
@@ -96,13 +96,13 @@ set_eq() {
   diff -q <(sort $set1 | uniq) <(sort $set2 | uniq)
 }
 
-set_cardinality() {
+function set_cardinality() {
   # the number of elements in the set
   local set=$1
   sort -u $set | wc -l
 }
 
-set_subset() {
+function set_subset() {
   # test if $1 is a subset of $2
   local subset=$1
   local superset=$2
@@ -111,22 +111,21 @@ set_subset() {
   [[ -z $(comm -23 <(sort $1 | uniq) <(sort $2 | uniq) | head -1) ]]
 }
 
-set_union () {
+function set_union () {
   # returns elements that occur in either sets or both sets
   local set1=$1
   local set2=$2
   sort -u $set1 $set2
 }
 
-set_intersection() {
+function set_intersection() {
   # returns elements that occur in both sets
   local set1=$1
   local set2=$2
   comm -12 <(sort $set1) <(sort $set2)
 }
 
-
-set_complement() {
+function set_complement() {
   # returns elements that occur in $1 and not in $2
   # $1 - $2
   local set1=$1
@@ -134,14 +133,14 @@ set_complement() {
   comm -23 <(sort $set1) <(sort $set2)
 }
 
-set_symmetric_difference() {
+function set_symmetric_difference() {
   # returns elements that occur in either set, but not both sets
   local set1=$1
   local set2=$2
   sort $set1 $set2 | uniq -u
 }
 
-set_power_set_experimental() {
+function set_power_set_experimental() {
   # EXPERIMENTAL!
   # returns a set that contains all subsets of the set
   local set=$1
@@ -158,7 +157,7 @@ set_power_set_experimental() {
   }' $set
 }
 
-set_cardesian_product_experimental() {
+function set_cardesian_product_experimental() {
   # EXPERIMENTAL!
   # returns a set that contains all possible pairs of elements from one set and the other
   # $1 x $2
@@ -167,7 +166,7 @@ set_cardesian_product_experimental() {
   while read a; do while read b; do echo "$a, $b"; done < $set1; done < $set2
 }
 
-set_disjoint_experimental() {
+function set_disjoint_experimental() {
   # EXPERIMENTAL!
   # The disjoint set test operation finds if two sets are disjoint, i.e., they do not contain common elements.
   local set1=$1
@@ -177,29 +176,29 @@ set_disjoint_experimental() {
   awk '{ if (++seen[$0]==2) exit 1 }' $set1 $set2
 }
 
-set_minimum() {
+function set_minimum() {
   local set=$1
   head -1 <(sort $set)
 }
 
-set_minimum_num() {
+function set_minimum_num() {
   local set=$1
   head -1 <(sort -n $set)
 }
 
-set_maximum() {
+function set_maximum() {
   local set=$1
   tail -1 <(sort $se1)
 }
 
-set_maximum_num() {
+function set_maximum_num() {
   local set=$1
   tail -1 <(sort -n $set)
 }
 
 # SET OPERATIONS END
 
-prefix_file() {
+function prefix_file() {
   # add a line to the beginning of a file
   # $1: string to add
   # $2: file
