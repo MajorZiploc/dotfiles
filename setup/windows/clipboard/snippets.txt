@@ -12,6 +12,6 @@ git merge --squash (--continue | --abort | --quit) <merge_this_branch_onto_curr_
 git rebase -i <rebase_curr_branch_onto_this_branch>
 git reflog --relative-date
 git log --oneline # show each commit on 1 line
-l=(); for ele in ${l[@]}; do echo $ele; done
+IFS= ;l=(); for ele in ${l[@]}; do echo $ele; done; unset IFS; # IFS= is for null character delimited for/while loop
 powershell.exe -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'
 find . -regextype egrep -iregex '.*pattern.*' -maxdepth 5 -type f 2>/dev/null -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/node_modules/*' -exec egrep -sin "pattern1|pattern2" {} + | uniq_files_from_grep
