@@ -29,18 +29,25 @@ alias keep_last='tac | awk "!x[\$0]++" | tac'
 alias keep_first='cat | awk "!x[\$0]++" | cat'
 
 # Viewing directory information aliases
+alias dir='ls --format=vertical'
+alias vdir='ls --format=long'
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  alias dir='ls --color=auto --format=vertical'
+  alias vdir='ls --color=auto --format=long'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+fi
 alias ls_c='ls -hF --color=tty'                 # classify files in colour
-alias dir='ls --color=auto --format=vertical'
-alias vdir='ls --color=auto --format=long'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias lst='ls --human-readable --size -1 -S --classify'
-
 alias less_r='less -r'                          # raw control characters
 alias whence='type -a'                        # where, of a sort
-alias grep_c='grep --color'                     # show differences in colour
-alias egrep_c='egrep --color=auto'              # show differences in colour
 
 # Default to human readable figures
 alias df_h='df -h'
