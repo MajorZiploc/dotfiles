@@ -6,6 +6,9 @@ by="s/ / /"
 verbose=false
 preview=false
 
+# allows for the use of ** for recursive globbing
+shopt -s globstar
+
 [[ $# == 0 ]] && {
   echo "rename_selected called with no arguments!"
   echo "rename_selected must be called with at least 1 argument"
