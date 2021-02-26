@@ -78,8 +78,8 @@ alias show_fn_names='declare -F'
 alias show_fn_impls='declare -f'
 
 
-if [ -d ~/AppData/Roaming/npm ]; then
+[[ ! -z $(which gnomon 2>/dev/null) ]] && {
   # requires <npm i gnomon -g> for the current user
   alias time_js='gnomon'
-fi
+}
 
