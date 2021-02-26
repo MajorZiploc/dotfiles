@@ -6,35 +6,38 @@ function h() {
   history | tail -n $n;
 }
 
-function tmuxns() {
-  # creates a tmux session
-  # $1: optional string to represent name of the tmux session
-  # If $1 not given, then use the base name of the path as the session name
-  if [ -z "$1" ]; then
-    session_name=$(basename $(pwd));
-    tmux new -s "$session_name";
-    history;
-  else
-    tmux new -s "$1";
-  fi
-}
+[[ ! -z $(which tmux 2>/dev/null) ]] && {
+  function tmuxns() {
+    # creates a tmux session
+    # $1: optional string to represent name of the tmux session
+    # If $1 not given, then use the base name of the path as the session name
+    if [ -z "$1" ]; then
+      session_name=$(basename $(pwd));
+      tmux new -s "$session_name";
+      history;
+    else
+      tmux new -s "$1";
+    fi
+  }
 
-function ide1() {
-  # splits the window into 2 panes
-  tmux split-window -v -p 30;
-}
+  function ide1() {
+    # splits the window into 2 panes
+    tmux split-window -v -p 30;
+  }
 
-function ide2() {
-  # splits the window into 3 panes
-  tmux split-window -v -p 30;
-  tmux split-window -h -p 55;
-}
+  function ide2() {
+    # splits the window into 3 panes
+    tmux split-window -v -p 30;
+    tmux split-window -h -p 55;
+  }
 
-function ide3() {
-  # splits the window into 4 panes
-  tmux split-window -v -p 30;
-  tmux split-window -h -p 66;
-  tmux split-window -h -p 50;
+  function ide3() {
+    # splits the window into 4 panes
+    tmux split-window -v -p 30;
+    tmux split-window -h -p 66;
+    tmux split-window -h -p 50;
+  }
+
 }
 
 function show_find_full_paths() {
