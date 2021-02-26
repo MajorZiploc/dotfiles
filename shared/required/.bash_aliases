@@ -27,8 +27,10 @@ alias ltrim="sed -E 's/\s*(.*)/\1/g'"
 alias trim="rtrim | ltrim"
 alias keep_last='tac | awk "!x[\$0]++" | tac'
 alias keep_first='cat | awk "!x[\$0]++" | cat'
-alias join_lines='tr "\n" " "'
-alias split_lines="sed -E 's/([;|])/\1\n/g' | ltrim"
+alias fcjl='tr "\n" " "'
+alias fcsl="sed -E 's/([;|])/\1\n/g' | ltrim"
+alias join_lines='fcjl'
+alias split_lines="fcsl"
 
 # Viewing directory information aliases
 alias dir='ls --format=vertical'
