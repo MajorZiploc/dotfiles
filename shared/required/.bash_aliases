@@ -31,7 +31,7 @@ alias trim="rtrim | ltrim"
 alias keep_last='tac | awk "!x[\$0]++" | tac'
 alias keep_first='cat | awk "!x[\$0]++" | cat'
 alias fcjl='tr -d "\n"'
-alias fcsl="sed -E 's/([;|])/\1\n/g' | ltrim"
+alias fcsl="sed -E 's/([;|])/\1\n/g'"
 alias join_lines='fcjl'
 alias split_lines="fcsl"
 
