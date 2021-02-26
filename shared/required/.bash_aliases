@@ -24,9 +24,13 @@ alias space_to_snake="sed -E 's/ ([a-zA-Z])/_\L\1/g' | sed -E 's/^_//' | sed -E 
 alias space_to_camel="sed -E 's/ ([a-zA-Z])/\U\1/g' | sed -E 's/^([A-Z])/\L\1/'"
 alias rtrim="sed -E 's/[ '$'\t'']+$//'"
 alias ltrim="sed -E 's/\s*(.*)/\1/g'"
-alias trim="sed -E 's/[ '$'\t'']+$//' | sed -E 's/\s*(.*)/\1/g'"
+alias trim="rtrim | ltrim"
 alias keep_last='tac | awk "!x[\$0]++" | tac'
 alias keep_first='cat | awk "!x[\$0]++" | cat'
+alias fcjl='tr "\n" " "'
+alias fcsl="sed -E 's/([;|])/\1\n/g' | ltrim"
+alias join_lines='fcjl'
+alias split_lines="fcsl"
 
 # Viewing directory information aliases
 alias dir='ls --format=vertical'
