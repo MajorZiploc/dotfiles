@@ -28,7 +28,7 @@ alias trim="sed -E 's/[ '$'\t'']+$//' | sed -E 's/\s*(.*)/\1/g'"
 alias keep_last='tac | awk "!x[\$0]++" | tac'
 alias keep_first='cat | awk "!x[\$0]++" | cat'
 alias join_lines="xargs"
-alias split_lines="sed -E 's/(;)/\1\n/g'"
+alias split_lines='tr "\n" " "'
 
 # Viewing directory information aliases
 alias dir='ls --format=vertical'
