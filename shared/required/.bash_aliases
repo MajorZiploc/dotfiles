@@ -1,9 +1,12 @@
 shopt -s expand_aliases
-# tmux aliases
-alias tmuxas="tmux attach-session"
-alias tmuxks="tmux kill-session"
-alias tmuxksvr="tmux kill-server"
-alias tmuxls="tmux ls"
+
+[[ ! -z $(which tmux 2>/dev/null) ]] && {
+  # tmux aliases
+  alias tmuxas="tmux attach-session"
+  alias tmuxks="tmux kill-session"
+  alias tmuxksvr="tmux kill-server"
+  alias tmuxls="tmux ls"
+}
 
 # copy / paste aliases
 alias pbcopy="clip.exe"
@@ -27,7 +30,7 @@ alias ltrim="sed -E 's/\s*(.*)/\1/g'"
 alias trim="rtrim | ltrim"
 alias keep_last='tac | awk "!x[\$0]++" | tac'
 alias keep_first='cat | awk "!x[\$0]++" | cat'
-alias fcjl='tr "\n" " "'
+alias fcjl='tr -d "\n"'
 alias fcsl="sed -E 's/([;|])/\1\n/g' | ltrim"
 alias join_lines='fcjl'
 alias split_lines="fcsl"
@@ -75,8 +78,8 @@ alias show_fn_names='declare -F'
 alias show_fn_impls='declare -f'
 
 
-if [ -d ~/AppData/Roaming/npm ]; then
+[[ ! -z $(which gnomon 2>/dev/null) ]] && {
   # requires <npm i gnomon -g> for the current user
   alias time_js='gnomon'
-fi
+}
 
