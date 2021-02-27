@@ -48,7 +48,6 @@ if [ -x /usr/bin/dircolors ]; then
   alias fgrep='fgrep --color=auto'
   alias egrep='egrep --color=auto'
 fi
-alias ls_c='ls -hF --color=tty'                 # classify files in colour
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
