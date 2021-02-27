@@ -51,7 +51,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias lst='ls --human-readable --size -1 -S --classify'
+alias ls_human='ls --human-readable --size -1 -S --classify'
 alias less_r='less -r'                          # raw control characters
 alias whence='type -a'                        # where, of a sort
 
