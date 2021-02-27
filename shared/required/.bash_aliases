@@ -60,8 +60,11 @@ alias whence='type -a'                        # where, of a sort
 alias df_h='df -h'
 alias du_h='du -h'
 
-alias uniq_files_from_grep="sed -E 's/(.\S*?):[0-9]+:(.*?)/\1/g' | sort | uniq"
-alias show_hidden_items_from_find="sed -e 's/\.\///g' | egrep \"\/\.\""
+alias show_files_from_grep_n="sed -E 's/(.\S*?):[0-9]+:(.*?)/\1/g'"
+alias show_files_from_grep_n_freq="files_from_grep_n | sort | uniq -c"
+alias show_files_from_grep_n_uniq="files_from_grep_n | sort | uniq"
+alias show_items_from_find_hidden="sed -e 's/\.\///g' | egrep \"\/\.\""
+alias show_items_from_find_nonhidden="sed -e 's/\.\///g' | egrep -v \"\/\.\""
 
 # reexecutes last command that beings with a pattern. ex: fc -s egrep
 alias reexe='fc -s'
