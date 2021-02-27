@@ -39,7 +39,7 @@ do
           Optional
           Which way to pad the string
           Default is: $valM
-          Choices: $(printf '%s\n' ${method_choices[@]})"
+          Choices: $(printf '%s' ${method_choices[@]})"
             echo "    -h|--help"
             exit 1
             ;;
@@ -60,6 +60,7 @@ done
 iN="$(printf '%d' $valN 2>/dev/null)"
 
 declare -a arr
+IFS="\n"
 for str in ${strs[@]}
 do
   while ((${#str} < $iN)); do 
@@ -69,6 +70,7 @@ do
   str=$(echo "$str" | sed 's/\r//')
   arr=( "${arr[@]}" "$str" )
 done
+unset IFS
 
 printf '%s\n' "${arr[@]}"
 
