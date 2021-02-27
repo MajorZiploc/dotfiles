@@ -10,7 +10,9 @@ shopt -s expand_aliases
 
 # copy / paste aliases
 alias pbcopy="clip.exe"
-alias pbpaste="powershell.exe -command 'Get-Clipboard' | head -n -1"
+[[ ! -z $(which pwsh 2>/dev/null) ]] && {
+  alias pbpaste="pwsh -command 'Get-Clipboard' | head -n -1"
+}
 
 # View path directories alias
 alias show_path='echo $PATH | tr ":" "\n"'
