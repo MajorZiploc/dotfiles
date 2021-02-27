@@ -8,10 +8,11 @@ shopt -s expand_aliases
   alias tmuxls="tmux ls"
 }
 
-# copy / paste aliases
-alias pbcopy="clip.exe"
+# copy to clipboard
+alias clipc="clip.exe"
 [[ ! -z $(which pwsh 2>/dev/null) ]] && {
-  alias pbpaste="pwsh -command 'Get-Clipboard' | head -n -1"
+  # paste from clipboard
+  alias clipp="pwsh -command 'Get-Clipboard' | head -n -1"
 }
 
 # View path directories alias
