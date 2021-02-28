@@ -259,3 +259,15 @@ function search_env_for {
   cat <(ls -A ~/bin 2> /dev/null) <(ls -A /usr/local/bin 2> /dev/null) <(alias) <(env) <(declare -F) <(shopt) | egrep -i "$search_regex";
 }
 
+function show_block {
+  # NOTE: The chunk is greedy
+  # It does not stop at first occurrence of the to_pattern
+  # $1: regex string
+  # $2: regex string
+  # $3: file | stdin
+  from_pattern="$1";
+  to_pattern="$2";
+  content="$3";
+  sed -n "/$from_pattern/,/$to_pattern/p" "$content";
+}
+
