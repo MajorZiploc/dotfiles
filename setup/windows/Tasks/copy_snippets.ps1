@@ -1,10 +1,12 @@
 [CmdletBinding()]
 param (
     [Parameter(Mandatory=$false)]
-    [ValidateSet("bash", "sql")]
+    [ValidateSet("bash", "sql", "all")]
     [string]
     $type = "bash"
 )
+
+Write-Host "type: $type"
 
 $choices = @{
   'bash' = @{
@@ -17,13 +19,13 @@ $choices = @{
   }
 }
 
-$choice = $choices[$type]
-
 function Copy-Snippets {
   [CmdletBinding()]
   param ()
   $snippets_file = $choice['snippets_file']
   $delimiter = $choice['delimiter']
+  Write-Host "snippets_file: $snippets_file"
+  Write-Host "delimiter: $delimiter"
   [string[]]$snippets = Get-Content -Path $snippets_file -Delimiter $delimiter
   foreach ($snippet in $snippets) {
     Write-Host $snippet
@@ -32,4 +34,13 @@ function Copy-Snippets {
   }
 }
 
-Copy-Snippets
+if ($type -eq "all") {
+  $choices.Keys | ForEach-Object {
+    $choice = $choices[$_]
+    Copy-Snippets
+  }
+}
+else {
+  $choice = $choices[$type]
+  Copy-Snippets
+}
