@@ -30,9 +30,11 @@ function Copy-Snippets {
   Write-Host "------------------------"
   [string[]]$snippets = Get-Content -Path $snippets_file -Delimiter $delimiter
   foreach ($snippet in $snippets) {
-    Write-Host $snippet
-    "$snippet" | clip.exe
-    Start-Sleep -Milliseconds 500
+    if (![string]::IsNullOrWhiteSpace("$snippet")) {
+      Write-Host "$snippet"
+      "$snippet" | clip.exe
+      Start-Sleep -Milliseconds 500
+    }
   }
 }
 
