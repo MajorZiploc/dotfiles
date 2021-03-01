@@ -11,10 +11,10 @@ mkdir -p /c/Tasks
 mkdir -p /c/vscodevim
 
 # download vundle if it does not exist
-vunDir='~/.vim/bundle/Vundle.vim'
-[[ -d $DIR ]] || {
+vunDir="$HOME/.vim/bundle/Vundle.vim"
+[[ -d $vunDir ]] || {
   cd ~/.vim/bundle
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  git clone https://github.com/VundleVim/Vundle.vim.git "$vunDir"
   cd ~
 }
 

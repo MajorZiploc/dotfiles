@@ -33,10 +33,10 @@ cp -a "$SCRIPTPATH/../../../shared/vscodevim/." ~/vscodevim/
 ls -A | xargs dos2unix
 
 # download vundle if it does not exist
-vunDir='~/.vim/bundle/Vundle.vim'
-[[ -d $DIR ]] || {
+vunDir="$HOME/.vim/bundle/Vundle.vim"
+[[ -d $vunDir ]] || {
   cd ~/.vim/bundle
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  git clone https://github.com/VundleVim/Vundle.vim.git "$vunDir"
   find . -exec readlink -f {} \; | xargs dos2unix
   cd ~
 }
