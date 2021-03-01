@@ -17,7 +17,7 @@ vunDir='~/.vim/bundle/Vundle.vim'
 
 cp -a "$SCRIPTPATH/../../../shared/required/." ~/
 
-cp -a "$SCRIPTPATH/../copy_content_to_home/." ~/
+cp -a "$SCRIPTPATH/../home/." ~/
 
 cp -a "$SCRIPTPATH/../.ahk" ~/
 
