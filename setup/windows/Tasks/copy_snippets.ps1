@@ -3,7 +3,7 @@ param (
     [Parameter(Mandatory=$false)]
     [ValidateSet("bash", "sql", "all")]
     [string]
-    $type = "bash"
+    $type = "all"
 )
 
 Write-Host "type: $type"
