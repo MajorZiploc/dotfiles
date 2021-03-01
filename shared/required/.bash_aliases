@@ -63,7 +63,7 @@ alias df_h='df -h'
 alias du_h='du -h'
 
 alias grepn_files="sed -E 's/(.\S*?):[0-9]+:(.*?)/\1/g'"
-alias grepn_files_freq="grepn_files | sort | uniq -c | sort -rn"
+alias grepn_files_freq="grepn_files | sort | uniq -c | sort -n"
 alias grepn_files_uniq="grepn_files | sort | uniq"
 alias find_items_hidden="sed -e 's/\.\///g' | egrep \"\/\.\""
 alias find_items_nonhidden="sed -e 's/\.\///g' | egrep -v \"\/\.\""
