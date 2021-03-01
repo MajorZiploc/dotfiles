@@ -18,10 +18,10 @@ vunDir="$HOME/.vim/bundle/Vundle.vim"
   cd ~
 }
 
-cp -a "$SCRIPTPATH/../../../shared/required/." ~/
+cp -a "$SCRIPTPATH/../../../shared/required/home/." ~/
 cp -a "$SCRIPTPATH/../home/." ~/
 cp -a "$SCRIPTPATH/../.ahk" ~/
-cp -a "$SCRIPTPATH/../../../shared/clipboard/" ~/clipboard/
-cp -a "$SCRIPTPATH/../../../shared/home_bin/." ~/bin/
-cp -a "$SCRIPTPATH/../../../shared/Tasks/." /c/Tasks/
-cp -a "$SCRIPTPATH/../../../shared/vscodevim/." /c/vscodevim/
+cp -a "$SCRIPTPATH/../../../shared/required/clipboard/." ~/clipboard/
+cp -a "$SCRIPTPATH/../../../shared/required/home_bin/." ~/bin/
+cp -a "$SCRIPTPATH/../../../shared/required/Tasks/." /c/Tasks/
+cp -a "$SCRIPTPATH/../../../shared/required/vscodevim/." /c/vscodevim/

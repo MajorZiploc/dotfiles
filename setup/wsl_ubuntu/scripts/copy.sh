@@ -12,24 +12,24 @@ mkdir -p ~/Tasks
 mkdir -p ~/vscodevim
 
 cd ~
-cp -a "$SCRIPTPATH/../../../shared/required/." .
+cp -a "$SCRIPTPATH/../../../shared/required/home/." .
 cp -a "$SCRIPTPATH/../home/." .
 ls -A | xargs dos2unix
 
 cd ~/bin
-cp -a "$SCRIPTPATH/../../.shared/home_bin/." .
+cp -a "$SCRIPTPATH/../../.shared/required/home_bin/." .
 ls -A | xargs dos2unix
 
 cd ~/clipboard
-cp -a "$SCRIPTPATH/../../../shared/clipboard/" ~/clipboard/
+cp -a "$SCRIPTPATH/../../../shared/required/clipboard/." ~/clipboard/
 ls -A | xargs dos2unix
 
 cd ~/Tasks
-cp -a "$SCRIPTPATH/../../../shared/Tasks/." ~/Tasks/
+cp -a "$SCRIPTPATH/../../../shared/required/Tasks/." ~/Tasks/
 ls -A | xargs dos2unix
 
 cd ~/vscodevim
-cp -a "$SCRIPTPATH/../../../shared/vscodevim/." ~/vscodevim/
+cp -a "$SCRIPTPATH/../../../shared/required/vscodevim/." ~/vscodevim/
 ls -A | xargs dos2unix
 
 # download vundle if it does not exist
