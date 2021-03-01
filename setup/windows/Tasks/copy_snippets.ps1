@@ -6,8 +6,6 @@ param (
     $type = "all"
 )
 
-Write-Host "type: $type"
-
 $choices = @{
   'bash' = @{
     'snippets_file' = "~/clipboard/snippets_bash.txt"
@@ -24,6 +22,7 @@ function Copy-Snippets {
   param ()
   $snippets_file = $choice['snippets_file']
   $delimiter = $choice['delimiter']
+  Write-Host "type: $key"
   Write-Host "snippets_file: $snippets_file"
   Write-Host "delimiter: $delimiter"
   [string[]]$snippets = Get-Content -Path $snippets_file -Delimiter $delimiter
@@ -37,10 +36,12 @@ function Copy-Snippets {
 if ($type -eq "all") {
   $choices.Keys | ForEach-Object {
     $choice = $choices[$_]
+    $key = $_
     Copy-Snippets
   }
 }
 else {
   $choice = $choices[$type]
+  $key = $type
   Copy-Snippets
 }
