@@ -27,9 +27,19 @@ do
 
     -h|--help)
             echo "Usage:"
-            echo "    -c|--character \"Character to pad string with. Default is: $valC\""
-            echo "    -n|--number \"Number of characters the string should be. Default is: $valN\""
-            echo "    -m|--method \"Which way to pad the string. Default is: $valM. Choices: $(printf '%s\n' ${method_choices[@]})\""
+            echo "    -c|--character
+          Optional
+          Character to pad string with
+          Default is: $valC"
+            echo "    -n|--number
+          Optional
+          Number of characters the string should be
+          Default is: $valN"
+            echo "    -m|--method
+          Optional
+          Which way to pad the string
+          Default is: $valM
+          Choices: $(printf '%s' ${method_choices[@]})"
             echo "    -h|--help"
             exit 1
             ;;
@@ -61,3 +71,4 @@ do
 done
 
 printf '%s\n' "${arr[@]}"
+

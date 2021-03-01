@@ -1,9 +1,17 @@
 function h() {
   # show history
   # $1: optional pos num to show last n entries in the history
-  local n=$1;
+  local n="$1";
   [[ -z "$n" ]] && { n=25; }
-  history | tail -n $n;
+  history | tail -n "$n";
+}
+
+function hf() {
+  # show most commonly used commands based on frequency
+  # $1: optional pos num to show last n entries
+  local n="$1";
+  [[ -z "$n" ]] && { n=25; }
+  history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -n | tail -n "$n";
 }
 
 [[ ! -z $(which tmux 2>/dev/null) ]] && {
@@ -257,5 +265,15 @@ function search_env_for {
   local search_regex="";
   [[ -z "$1" ]] && { search_regex=".*"; } || { search_regex="$1"; }
   cat <(ls -A ~/bin 2> /dev/null) <(ls -A /usr/local/bin 2> /dev/null) <(alias) <(env) <(declare -F) <(shopt) | egrep -i "$search_regex";
+}
+
+function show_block {
+  # $1: regex string
+  # $2: regex string
+  # $3: file | stdin
+  local from_pattern="$1";
+  local to_pattern="$2";
+  local content="$3";
+  sed -n "/$from_pattern/,/$to_pattern/p; /$to_pattern/q;" "$content";
 }
 

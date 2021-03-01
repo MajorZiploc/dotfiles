@@ -8,9 +8,12 @@ shopt -s expand_aliases
   alias tmuxls="tmux ls"
 }
 
-# copy / paste aliases
-alias pbcopy="clip.exe"
-alias pbpaste="powershell.exe -command 'Get-Clipboard' | head -n -1"
+# copy to clipboard
+alias clipc="clip.exe"
+[[ ! -z $(which pwsh 2>/dev/null) ]] && {
+  # paste from clipboard
+  alias clipp="pwsh -command 'Get-Clipboard' | head -n -1"
+}
 
 # View path directories alias
 alias show_path='echo $PATH | tr ":" "\n"'
@@ -48,11 +51,10 @@ if [ -x /usr/bin/dircolors ]; then
   alias fgrep='fgrep --color=auto'
   alias egrep='egrep --color=auto'
 fi
-alias ls_c='ls -hF --color=tty'                 # classify files in colour
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias lst='ls --human-readable --size -1 -S --classify'
+alias ls_human='ls --human-readable --size -1 -S --classify'
 alias less_r='less -r'                          # raw control characters
 alias whence='type -a'                        # where, of a sort
 
@@ -60,8 +62,11 @@ alias whence='type -a'                        # where, of a sort
 alias df_h='df -h'
 alias du_h='du -h'
 
-alias uniq_files_from_grep="sed -E 's/(.\S*?):[0-9]+:(.*?)/\1/g' | sort | uniq"
-alias show_hidden_items_from_find="sed -e 's/\.\///g' | egrep \"\/\.\""
+alias grepn_files="sed -E 's/(.\S*?):[0-9]+:(.*?)/\1/g'"
+alias grepn_files_freq="grepn_files | sort | uniq -c | sort -n"
+alias grepn_files_uniq="grepn_files | sort | uniq"
+alias find_items_hidden="sed -e 's/\.\///g' | egrep \"\/\.\""
+alias find_items_nonhidden="sed -e 's/\.\///g' | egrep -v \"\/\.\""
 
 # reexecutes last command that beings with a pattern. ex: fc -s egrep
 alias reexe='fc -s'

@@ -1,10 +1,34 @@
-$logName = 'clipboard'
-$logSource = 'copy'
+[CmdletBinding()]
+param (
+    [Parameter(Mandatory=$false)]
+    [ValidateSet("bash", "sql", "all")]
+    [string]
+    $type = "all"
+)
+
+$choices = @{
+  'bash' = @{
+    'snippets_file' = "~/clipboard/snippets_bash.txt"
+    'delimiter'= "`n"
+  }
+  'sql' = @{
+    'snippets_file' = "~/clipboard/snippets_sql.txt"
+    'delimiter'= "<:>"
+  }
+}
 
 function Copy-Snippets {
   [CmdletBinding()]
   param ()
-  [string[]]$snippets = Get-Content -Path "~/clipboard/snippets.txt"
+  $snippets_file = $choice['snippets_file']
+  $delimiter = $choice['delimiter']
+  Write-Host "`n"
+  Write-Host "------------------------"
+  Write-Host "type: $key"
+  Write-Host "snippets_file: $snippets_file"
+  Write-Host "delimiter: $delimiter"
+  Write-Host "------------------------"
+  [string[]]$snippets = Get-Content -Path $snippets_file -Delimiter $delimiter
   foreach ($snippet in $snippets) {
     Write-Host $snippet
     "$snippet" | clip.exe
@@ -12,23 +36,15 @@ function Copy-Snippets {
   }
 }
 
-function Program {
-  param ()
-
-process {
-try {
-  $msg = "Started process"
-  Copy-Snippets -ErrorAction Stop
-  $msg = "Successful copy"
+if ($type -eq "all") {
+  $choices.Keys | ForEach-Object {
+    $choice = $choices[$_]
+    $key = $_
+    Copy-Snippets
+  }
 }
-catch {
-  $msg = $_.ToString()
+else {
+  $choice = $choices[$type]
+  $key = $type
+  Copy-Snippets
 }
-}
-
-end {
-  $msg = "Finished process"
-}
-}
-
-Program

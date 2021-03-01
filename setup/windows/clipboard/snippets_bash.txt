@@ -1,7 +1,7 @@
 perl -ne 'print unless $seen{$_}++' # unique without sorting
 find . -maxdepth 5 -regextype egrep -iregex '.*pattern.*' -type f 2>/dev/null -print0 | xargs --null -I{} echo {}
 find . -name '*pattern*' -exec egrep -sin "pattern1|pattern2" {} + -exec echo {} + # multi command execute example
-powershell.exe -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -Command "& {Write-Host 'hi'}"
+pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -Command "& {Write-Host 'hi'}"
 git log -p --grep="<commit_msg_pattern>"
 git log -p --author="<pattern>"
 git stash drop stash@{n} # delete nth stash
@@ -13,5 +13,5 @@ git rebase -i <rebase_curr_branch_onto_this_branch>
 git reflog --relative-date
 git log --oneline # show each commit on 1 line
 IFS= ;l=(1 2 3 '4'); for ele in ${l[@]}; do echo $ele hi; done; unset IFS; # IFS= is for null character delimited for/while loop
-powershell.exe -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'
-find . -regextype egrep -iregex '.*pattern.*' -maxdepth 5 -type f 2>/dev/null -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/node_modules/*' -exec egrep -sin "pattern1|pattern2" {} + | uniq_files_from_grep
+pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'
+find . -regextype egrep -iregex '.*pattern.*' -maxdepth 5 -type f 2>/dev/null -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*'  -not -path '*/node_modules/*' -exec egrep -sin "pattern1|pattern2" {} + | grepn_files_freq
