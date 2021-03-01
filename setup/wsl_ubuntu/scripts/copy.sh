@@ -9,7 +9,7 @@ sudo mkdir -p ~/bin
 
 cd ~
 cp -a "$SCRIPTPATH/../../../shared/required/." .
-cp -a "$SCRIPTPATH/../copy_content_to_home/." .
+cp -a "$SCRIPTPATH/../home/." .
 ls -A | xargs dos2unix
 
 cd ~/bin

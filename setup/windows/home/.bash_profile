@@ -4,6 +4,14 @@ case $- in
 *) return;;
 esac
 
+# Check for missing dependencies
+export ENV_NOTES=""
+[[ -d ~/AppData/Roaming/npm ]] || { ENV_NOTES="$ENV_NOTES\nMissing ~/AppData/Roaming/npm"; }
+[[ -z $(which tmux 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES\nMissing tmux (terminal multiplexier)"; }
+[[ -z $(which pwsh 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES\nMissing pwsh (cross platform powershell)"; }
+[[ -z $(which gnomon 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES\nMissing gnomon (npm package)"; }
+[[ -z "$ENV_NOTES" ]] && { ENV_NOTES="No missing dependencies! Setup is complete!"; } || { ENV_NOTES=$(printf "$ENV_NOTES"); }
+
 test -f ~/.profile && . ~/.profile
 test -f ~/.bashrc && . ~/.bashrc
 
