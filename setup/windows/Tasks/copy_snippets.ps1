@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param (
     [Parameter(Mandatory=$false)]
+    [ValidateSet("bash", "sql")]
     [string]
     $type = "bash"
 )
