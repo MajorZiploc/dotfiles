@@ -22,9 +22,12 @@ function Copy-Snippets {
   param ()
   $snippets_file = $choice['snippets_file']
   $delimiter = $choice['delimiter']
+  Write-Host "`n"
+  Write-Host "------------------------"
   Write-Host "type: $key"
   Write-Host "snippets_file: $snippets_file"
   Write-Host "delimiter: $delimiter"
+  Write-Host "------------------------"
   [string[]]$snippets = Get-Content -Path $snippets_file -Delimiter $delimiter
   foreach ($snippet in $snippets) {
     Write-Host $snippet
