@@ -9,7 +9,13 @@ shopt -s expand_aliases
 }
 
 # copy to clipboard
-alias clipc="clip.exe"
+[[ ! -z $(which clip.exe 2>/dev/null) ]] && {
+  alias clip="clip.exe"
+} || {
+  [[ ! -z $(which xclip 2>/dev/null) ]] && {
+    alias clip="xclip"
+  }
+}
 [[ ! -z $(which pwsh 2>/dev/null) ]] && {
   # paste from clipboard
   alias clipp="pwsh -command 'Get-Clipboard' | head -n -1"
@@ -17,6 +23,7 @@ alias clipc="clip.exe"
 
 # View path directories alias
 alias show_path='echo $PATH | tr ":" "\n"'
+alias show_env_notes='echo $ENV_NOTES | tr ":" "\n" | egrep -v "^\\s*$"'
 
 # text manipulation aliaes
 alias rev_chars='perl -F"" -anle "print reverse @F" | perl -ple "s/^\r//"'
@@ -82,6 +89,7 @@ alias curl_follow_redirects_ignore_security_exceptions='curl -0Lks'
 alias show_fn_names='declare -F'
 alias show_fn_impls='declare -f'
 
+alias back='cd ~-'
 
 [[ ! -z $(which gnomon 2>/dev/null) ]] && {
   # requires <npm i gnomon -g> for the current user
