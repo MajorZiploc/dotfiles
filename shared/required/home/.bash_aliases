@@ -9,7 +9,13 @@ shopt -s expand_aliases
 }
 
 # copy to clipboard
-alias clipc="clip.exe"
+[[ ! -z $(which clip.exe 2>/dev/null) ]] && {
+  alias clip="clip.exe"
+} || {
+  [[ ! -z $(which xclip 2>/dev/null) ]] && {
+    alias clip="xclip"
+  }
+}
 [[ ! -z $(which pwsh 2>/dev/null) ]] && {
   # paste from clipboard
   alias clipp="pwsh -command 'Get-Clipboard' | head -n -1"
