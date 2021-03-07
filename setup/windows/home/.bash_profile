@@ -10,6 +10,7 @@ export ENV_NOTES=""
 [[ -z $(which tmux 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES\nMissing tmux (terminal multiplexier)"; }
 [[ -z $(which pwsh 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES\nMissing pwsh (cross platform powershell)"; }
 [[ -z $(which gnomon 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES\nMissing gnomon (npm package)"; }
+[[ -z $(which rg 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES\nMissing rg (ripgrep). Important for the ripgrep plugin in vim"; }
 [[ -z "$ENV_NOTES" ]] && { ENV_NOTES="No missing dependencies! Setup is complete!"; } || { ENV_NOTES=$(printf "$ENV_NOTES"); }
 
 test -f ~/.profile && . ~/.profile
