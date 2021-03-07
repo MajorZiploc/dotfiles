@@ -119,3 +119,21 @@ if [ -f ~/.bash_env_vars ]; then
     . ~/.bash_env_vars
 fi
 
+# _ext bash files are for user specific edits to the bash environment
+
+if [ -f ~/.bashrc_ext ]; then
+    . ~/.bashrc_ext
+fi
+
+if [ -f ~/.bash_env_vars_ext ]; then
+    . ~/.bash_env_vars_ext
+fi
+
+if [ -f ~/.bash_functions_ext ]; then
+        . ~/.bash_functions_ext
+fi
+
+if [ -f ~/.bash_aliases_ext ]; then
+    . ~/.bash_aliases_ext
+fi
+
