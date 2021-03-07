@@ -16,7 +16,7 @@ cp -a "$SCRIPTPATH/../../../shared/required/home/." .
 cp -a "$SCRIPTPATH/../home/." .
 
 cd ~/bin
-cp -a "$SCRIPTPATH/../../.shared/required/home_bin/." .
+cp -a "$SCRIPTPATH/../../../shared/required/home_bin/." .
 
 cd ~/clipboard
 cp -a "$SCRIPTPATH/../../../shared/required/clipboard/." ~/clipboard/

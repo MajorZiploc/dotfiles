@@ -17,7 +17,7 @@ cp -a "$SCRIPTPATH/../home/." .
 ls -A | xargs dos2unix
 
 cd ~/bin
-cp -a "$SCRIPTPATH/../../.shared/required/home_bin/." .
+cp -a "$SCRIPTPATH/../../../shared/required/home_bin/." .
 ls -A | xargs dos2unix
 
 cd ~/clipboard
