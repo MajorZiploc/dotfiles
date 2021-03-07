@@ -27,6 +27,22 @@ cp -a "$SCRIPTPATH/../../../shared/required/Tasks/." ~/Tasks/
 cd ~/vscodevim
 cp -a "$SCRIPTPATH/../../../shared/required/vscodevim/." ~/vscodevim/
 
+# temp _vimrcterm
+cp "$SCRIPTPATH/../../../required/home/_vimrcterm" "$SCRIPTPATH/_vimrcterm"
+# replace .exe with nothing
+sed -i 's/bash\.exe/bash/g' "$SCRIPTPATH/_vimrcterm"
+# override _vimrcterm
+cp -a "$SCRIPTPATH/_vimrcterm" ~/_vimrcterm
+rm "$SCRIPTPATH/_vimrcterm"
+
+# temp _vsvimrc 
+cp "$SCRIPTPATH/../../../required/vscodevim/_vsvimrc" "$SCRIPTPATH/_vsvimrc"
+# replace .exe with nothing
+sed -i 's/bash\.exe/bash/g' "$SCRIPTPATH/_vsvimrc"
+# override _vsvimrc 
+cp -a  "$SCRIPTPATH/_vsvimrc" ~/_vsvimrc
+rm "$SCRIPTPATH/_vsvimrc"
+
 # download vundle if it does not exist
 vunDir="$HOME/.vim/bundle/Vundle.vim"
 [[ -d $vunDir ]] || {
