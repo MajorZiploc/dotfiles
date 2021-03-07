@@ -11,21 +11,12 @@ mkdir -p ~/bin
 mkdir -p ~/Tasks
 mkdir -p ~/vscodevim
 
-cd ~
-cp -a "$SCRIPTPATH/../../../shared/required/home/." .
-cp -a "$SCRIPTPATH/../home/." .
-
-cd ~/bin
-cp -a "$SCRIPTPATH/../../../shared/required/home_bin/." .
-
-cd ~/clipboard
+cp -a "$SCRIPTPATH/../../../shared/required/home/." ~/
+cp -a "$SCRIPTPATH/../../../shared/required/home_bin/." ~/bin/
 cp -a "$SCRIPTPATH/../../../shared/required/clipboard/." ~/clipboard/
-
-cd ~/Tasks
 cp -a "$SCRIPTPATH/../../../shared/required/Tasks/." ~/Tasks/
-
-cd ~/vscodevim
 cp -a "$SCRIPTPATH/../../../shared/required/vscodevim/." ~/vscodevim/
+cp -a "$SCRIPTPATH/../home/." ~/
 
 # temp _vimrcterm
 cp "$SCRIPTPATH/../../../required/home/_vimrcterm" "$SCRIPTPATH/_vimrcterm"
@@ -50,3 +41,4 @@ vunDir="$HOME/.vim/bundle/Vundle.vim"
   git clone https://github.com/VundleVim/Vundle.vim.git "$vunDir"
   cd ~
 }
+
