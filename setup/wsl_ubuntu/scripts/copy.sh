@@ -23,6 +23,11 @@ mkdir -p ~/bin
 mkdir -p ~/Tasks
 mkdir -p ~/vscodevim
 
+# extend the shared bashrc
+echo "--------- Below is content extended from the shared bashrc ---------" >> "$tempShared/required/home/.bashrc"
+cat "$tempThis/home/.bashrc_extras" >> "$tempShared/required/home/.bashrc"
+rm "$tempThis/home/.bashrc_extras"
+
 # Replace occurrences of bash.exe with bash in shared content
 find "$tempShared" -type f -exec sed -i.bak 's/bash\.exe/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
