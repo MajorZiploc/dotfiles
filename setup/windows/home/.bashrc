@@ -27,17 +27,9 @@ shopt -s nocaseglob
 shopt -s cdspell
 
 
-if [ -f ~/.bash_functions ]; then
-        . ~/.bash_functions
-fi
-
-if [ -f ~/.bash_aliases ]; then
-        . ~/.bash_aliases
-fi
-
-if [ -f ~/.bash_env_vars ]; then
-        . ~/.bash_env_vars
-fi
+test -f ~/.bash_functions && . ~/.bash_functions
+test -f ~/.bash_aliases && . ~/.bash_aliases
+test -f ~/.bash_env_vars && . ~/.bash_env_vars
 
 if [ -d ~/AppData/Roaming/npm ]; then
   # Adds npm packages to path
@@ -45,7 +37,5 @@ if [ -d ~/AppData/Roaming/npm ]; then
 fi
 
 # _ext bash files are for user specific edits to the bash environment
-if [ -f ~/.bashrc_ext ]; then
-    . ~/.bashrc_ext
-fi
+test -f ~/.bashrc_ext && . ~/.bashrc_ext
 
