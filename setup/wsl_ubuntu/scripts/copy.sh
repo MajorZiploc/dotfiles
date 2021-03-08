@@ -56,9 +56,6 @@ vunDir="$HOME/.vim/bundle/Vundle.vim"
   cd ~
 }
 
-find "$tempShared/" -type f -exec unix2dos {} \;
-find "$tempThis/" -type f -exec unix2dos {} \;
-
 rm -r "$tempShared/"
 rm -r "$tempThis/"
 
