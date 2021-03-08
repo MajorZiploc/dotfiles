@@ -6,14 +6,13 @@ esac
 
 # Check for missing dependencies
 export ENV_NOTES=""
-[[ -d ~/AppData/Roaming/npm ]] || { ENV_NOTES="$ENV_NOTES:Missing ~/AppData/Roaming/npm"; }
+[[ -z $(which npm 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing npm (node package manager)"; }
 [[ -z $(which tmux 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing tmux (terminal multiplexier)"; }
 [[ -z $(which pwsh 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing pwsh (cross platform powershell)"; }
 [[ -z $(which gnomon 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing gnomon (npm package)"; }
 [[ -z $(which rg 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing rg (ripgrep). Important for the ripgrep plugin in vim"; }
-[[ -z "$ENV_NOTES" ]] && { ENV_NOTES="No missing dependencies! Setup is complete!"; } || { ENV_NOTES=$(printf "$ENV_NOTES"); }
+[[ -z "$ENV_NOTES" ]] && { ENV_NOTES="No missing dependencies! Setup is complete!"; }
 
-test -f ~/.profile && . ~/.profile
 test -f ~/.bashrc && . ~/.bashrc
 
 # Set PATH so it includes user's private bin if it exists
