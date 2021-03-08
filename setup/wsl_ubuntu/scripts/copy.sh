@@ -24,7 +24,7 @@ mkdir -p ~/Tasks
 mkdir -p ~/vscodevim
 
 # extend the shared bashrc
-echo "--------- Below is content extended from the shared bashrc ---------" >> "$tempShared/required/home/.bashrc"
+echo "# --------- Below is content extended from the shared bashrc ---------" >> "$tempShared/required/home/.bashrc"
 cat "$tempThis/home/.bashrc_extras" >> "$tempShared/required/home/.bashrc"
 rm "$tempThis/home/.bashrc_extras"
 
