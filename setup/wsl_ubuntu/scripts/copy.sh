@@ -32,18 +32,20 @@ cp -a "$tempShared/required/vscodevim/." ~/vscodevim/
 cp -a "$tempThis/home/." ~/
 
 IFS= ;
-l=("_vimrcterm" "_vsvimrc");
+l=("home/_vimrcterm" "vscodevim/_vsvimrc");
 for ele in ${l[@]};
   do
+    b=$(basename "$ele")
     # temp file
-    cp "$tempShared/required/home/$ele" "$SCRIPTPATH/$ele"
+    cp "$tempShared/required/$ele" "$SCRIPTPATH/$b"
     # replace .exe with nothing
-    sed -i.bak 's/bash\.exe/bash/g' "$SCRIPTPATH/$ele"
+    sed -i.bak 's/bash\.exe/bash/g' "$SCRIPTPATH/$b"
     # override file
-    cp -a "$SCRIPTPATH/$ele" "$HOME/$ele"
+    [[ "$ele" == *"home"* ]] && { cp "$SCRIPTPATH/$b" "$HOME/$b"; } || { cp "$SCRIPTPATH/$b" "$HOME/$ele"; }
     # cleanup
-    rm "$SCRIPTPATH/$ele"
-    rm "$SCRIPTPATH/$ele.bak"
+    rm "$SCRIPTPATH/$b"
+    rm "$SCRIPTPATH/$b.bak"
+    unset b
 done;
 unset IFS;
 
