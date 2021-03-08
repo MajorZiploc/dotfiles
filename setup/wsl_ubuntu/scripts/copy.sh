@@ -26,11 +26,8 @@ mkdir -p ~/vscodevim
 # Replace occurrences of bash.exe with bash in shared content
 find "$tempShared" -type f -exec sed -i.bak 's/bash\.exe/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
-<<<<<<< HEAD
-=======
 find "$tempShared" -regextype egrep -iregex '.*\.json$' -type f -exec sed -i.bak 's/C:\\\\Program Files\\\\Git\\\\bin\\\\bash/\/bin\/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
->>>>>>> develop
 
 cp -a "$tempShared/required/home/." ~/
 cp -a "$tempShared/required/home_bin/." ~/bin/
