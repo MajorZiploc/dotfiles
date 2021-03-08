@@ -2,6 +2,18 @@
 
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
+temp="$SCRIPTPATH/../../temp"
+tempShared="$temp/shared"
+tempThis="$SCRIPTPATH/../../temp/this"
+
+mkdir -p "$tempShared/"
+cp -r "$SCRIPTPATH/../../../shared/" "$temp/"
+mkdir -p "$tempThis/"
+cp -r "$SCRIPTPATH/../" "$tempThis/"
+
+find "$tempShared/" -type f -exec dos2unix {} \;
+find "$tempThis/" -type f -exec dos2unix {} \;
+
 mkdir -p ~/.vim/bundle
 mkdir -p ~/.vim/swap
 mkdir -p ~/vimfiles/plugin-settings
@@ -11,29 +23,16 @@ mkdir -p ~/bin
 mkdir -p ~/Tasks
 mkdir -p ~/vscodevim
 
-cd ~
-cp -a "$SCRIPTPATH/../../../shared/required/home/." .
-cp -a "$SCRIPTPATH/../home/." .
-ls -A | xargs dos2unix
+cp -a "$tempShared/required/home/." ~/
+cp -a "$tempShared/required/home_bin/." ~/bin/
+cp -a "$tempShared/required/clipboard/." ~/clipboard/
+cp -a "$tempShared/required/Tasks/." ~/Tasks/
+cp -a "$tempShared/required/vscodevim/." ~/vscodevim/
 
-cd ~/bin
-cp -a "$SCRIPTPATH/../../../shared/required/home_bin/." .
-ls -A | xargs dos2unix
-
-cd ~/clipboard
-cp -a "$SCRIPTPATH/../../../shared/required/clipboard/." ~/clipboard/
-ls -A | xargs dos2unix
-
-cd ~/Tasks
-cp -a "$SCRIPTPATH/../../../shared/required/Tasks/." ~/Tasks/
-ls -A | xargs dos2unix
-
-cd ~/vscodevim
-cp -a "$SCRIPTPATH/../../../shared/required/vscodevim/." ~/vscodevim/
-ls -A | xargs dos2unix
+cp -a "$tempThis/home/." ~/
 
 # temp _vimrcterm
-cp "$SCRIPTPATH/../../../shared/required/home/_vimrcterm" "$SCRIPTPATH/_vimrcterm"
+cp "$tempShared/required/home/_vimrcterm" "$SCRIPTPATH/_vimrcterm"
 # replace .exe with nothing
 sed -i.bak 's/bash\.exe/bash/g' "$SCRIPTPATH/_vimrcterm"
 # override _vimrcterm
@@ -42,7 +41,7 @@ rm "$SCRIPTPATH/_vimrcterm"
 rm "$SCRIPTPATH/_vimrcterm.bak"
 
 # temp _vsvimrc 
-cp "$SCRIPTPATH/../../../shared/required/vscodevim/_vsvimrc" "$SCRIPTPATH/_vsvimrc"
+cp "$tempShared/required/vscodevim/_vsvimrc" "$SCRIPTPATH/_vsvimrc"
 # replace .exe with nothing
 sed -i.bak 's/bash\.exe/bash/g' "$SCRIPTPATH/_vsvimrc"
 # override _vsvimrc 
@@ -55,6 +54,13 @@ vunDir="$HOME/.vim/bundle/Vundle.vim"
 [[ -d $vunDir ]] || {
   cd ~/.vim/bundle
   git clone https://github.com/VundleVim/Vundle.vim.git "$vunDir"
-  find . -exec readlink -f {} \; | xargs dos2unix
+  find ~/.vim/bundle -type f -exec dos2unix {} \;
   cd ~
 }
+
+rm -r "$tempShared/"
+rm -r "$tempThis/"
+
+unset tempShared
+unset tempThis
+

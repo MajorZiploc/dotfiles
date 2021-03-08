@@ -4,3 +4,23 @@ ex: ls -a - ~
 --	Unset positional parameters. If arguments given (-- arg1 arg2), positional parameters set to arguments.
 
 IMPORTANT FOR CUSTOM SET OPERATION: sort can take standard in aswell as files
+
+
+FROM WINDOWS GIT BASH: 
+################################## Construct PATH variable ##################################
+
+#winpath=$(echo $MSYS2_WINPATH | tr ";" "\n" | sed -e 's/\\/\\\\/g' | xargs -I {} cygpath -u {})
+#unixpath=''
+
+# Set delimiter to new line
+#IFS=$'\n'
+
+#for pth in $winpath; do unixpath+=$(echo $pth)":"; done
+
+#export PATH=$(echo $PATH:$unixpath | sed -e 's/:$//g')
+#unset IFS
+#unset unixpath
+#unset winpath
+
+################################# Constructed PATH variable #################################
+

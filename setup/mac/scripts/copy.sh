@@ -2,6 +2,18 @@
 
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
+temp="$SCRIPTPATH/../../temp"
+tempShared="$temp/shared"
+tempThis="$SCRIPTPATH/../../temp/this"
+
+mkdir -p "$tempShared/"
+cp -r "$SCRIPTPATH/../../../shared/" "$temp/"
+mkdir -p "$tempThis/"
+cp -r "$SCRIPTPATH/../" "$tempThis/"
+
+find "$tempShared/" -type f -exec dos2unix {} \;
+find "$tempThis/" -type f -exec dos2unix {} \;
+
 mkdir -p ~/.vim/bundle
 mkdir -p ~/.vim/swap
 mkdir -p ~/vimfiles/plugin-settings
@@ -11,12 +23,13 @@ mkdir -p ~/bin
 mkdir -p ~/Tasks
 mkdir -p ~/vscodevim
 
-cp -a "$SCRIPTPATH/../../../shared/required/home/." ~/
-cp -a "$SCRIPTPATH/../../../shared/required/home_bin/." ~/bin/
-cp -a "$SCRIPTPATH/../../../shared/required/clipboard/." ~/clipboard/
-cp -a "$SCRIPTPATH/../../../shared/required/Tasks/." ~/Tasks/
-cp -a "$SCRIPTPATH/../../../shared/required/vscodevim/." ~/vscodevim/
-cp -a "$SCRIPTPATH/../home/." ~/
+cp -a "$tempShared/required/home/." ~/
+cp -a "$tempShared/required/home_bin/." ~/bin/
+cp -a "$tempShared/required/clipboard/." ~/clipboard/
+cp -a "$tempShared/required/Tasks/." ~/Tasks/
+cp -a "$tempShared/required/vscodevim/." ~/vscodevim/
+
+cp -a "$tempThis/home/." ~/
 
 # temp _vimrcterm
 cp "$SCRIPTPATH/../../../shared/required/home/_vimrcterm" "$SCRIPTPATH/_vimrcterm"
@@ -43,4 +56,10 @@ vunDir="$HOME/.vim/bundle/Vundle.vim"
   git clone https://github.com/VundleVim/Vundle.vim.git "$vunDir"
   cd ~
 }
+
+rm -r "$tempShared/"
+rm -r "$tempThis/"
+
+unset tempShared
+unset tempThis
 
