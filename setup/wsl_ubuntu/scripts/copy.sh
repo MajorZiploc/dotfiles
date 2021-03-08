@@ -24,11 +24,12 @@ mkdir -p ~/Tasks
 mkdir -p ~/vscodevim
 
 cp -a "$tempShared/required/home/." ~/
-cp -a "$tempThis/home/." ~/
 cp -a "$tempShared/required/home_bin/." ~/bin/
 cp -a "$tempShared/required/clipboard/." ~/clipboard/
 cp -a "$tempShared/required/Tasks/." ~/Tasks/
 cp -a "$tempShared/required/vscodevim/." ~/vscodevim/
+
+cp -a "$tempThis/home/." ~/
 
 # temp _vimrcterm
 cp "$tempShared/required/home/_vimrcterm" "$SCRIPTPATH/_vimrcterm"
