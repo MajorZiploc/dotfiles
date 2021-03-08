@@ -2,11 +2,12 @@
 
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
-tempShared="$SCRIPTPATH/temp/shared"
-tempThis="$SCRIPTPATH/temp/this"
+temp="$SCRIPTPATH/../../temp"
+tempShared="$temp/shared"
+tempThis="$SCRIPTPATH/../../temp/this"
 
 mkdir -p "$tempShared/"
-cp -r "$SCRIPTPATH/../../../shared/" "$tempShared/"
+cp -r "$SCRIPTPATH/../../../shared/" "$temp/"
 mkdir -p "$tempThis/"
 cp -r "$SCRIPTPATH/../" "$tempThis/"
 
