@@ -23,6 +23,10 @@ mkdir -p ~/bin
 mkdir -p ~/Tasks
 mkdir -p ~/vscodevim
 
+# Replace occurrences of bash.exe with bash in shared content
+find "$tempShared" -type f -exec sed -i.bak 's/bash\.exe/bash/g' {} \;
+find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
+
 cp -a "$tempShared/required/home/." ~/
 cp -a "$tempShared/required/home_bin/." ~/bin/
 cp -a "$tempShared/required/clipboard/." ~/clipboard/
@@ -30,24 +34,6 @@ cp -a "$tempShared/required/Tasks/." ~/Tasks/
 cp -a "$tempShared/required/vscodevim/." ~/vscodevim/
 
 cp -a "$tempThis/home/." ~/
-
-IFS= ;
-l=("home/_vimrcterm" "vscodevim/_vsvimrc");
-for ele in ${l[@]};
-  do
-    b=$(basename "$ele")
-    # temp file
-    cp "$tempShared/required/$ele" "$SCRIPTPATH/$b"
-    # replace .exe with nothing
-    sed -i.bak 's/bash\.exe/bash/g' "$SCRIPTPATH/$b"
-    # override file
-    [[ "$ele" == *"home"* ]] && { cp "$SCRIPTPATH/$b" "$HOME/$b"; } || { cp "$SCRIPTPATH/$b" "$HOME/$ele"; }
-    # cleanup
-    rm "$SCRIPTPATH/$b"
-    rm "$SCRIPTPATH/$b.bak"
-    unset b
-done;
-unset IFS;
 
 # download vundle if it does not exist
 vunDir="$HOME/.vim/bundle/Vundle.vim"
