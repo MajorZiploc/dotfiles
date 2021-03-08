@@ -2,8 +2,13 @@
 
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
-find "$SCRIPTPATH/../../../shared/" -type f -exec dos2unix {} \;
-find "$SCRIPTPATH/../" -type f -exec dos2unix {} \;
+mkdir -p "$SCRIPTPATH/temp/shared/"
+cp -r "$SCRIPTPATH/../../../shared/" "$SCRIPTPATH/temp/shared/"
+mkdir -p "$SCRIPTPATH/temp/this/"
+cp -r "$SCRIPTPATH/../" "$SCRIPTPATH/temp/this/"
+
+find "$SCRIPTPATH/temp/shared/" -type f -exec dos2unix {} \;
+find "$SCRIPTPATH/temp/this/" -type f -exec dos2unix {} \;
 
 mkdir -p ~/.vim/bundle
 mkdir -p ~/.vim/swap
@@ -14,15 +19,15 @@ mkdir -p ~/bin
 mkdir -p ~/Tasks
 mkdir -p ~/vscodevim
 
-cp -a "$SCRIPTPATH/../../../shared/required/home/." ~/
-cp -a "$SCRIPTPATH/../home/." ~/
-cp -a "$SCRIPTPATH/../../../shared/required/home_bin/." ~/
-cp -a "$SCRIPTPATH/../../../shared/required/clipboard/." ~/clipboard/
-cp -a "$SCRIPTPATH/../../../shared/required/Tasks/." ~/Tasks/
-cp -a "$SCRIPTPATH/../../../shared/required/vscodevim/." ~/vscodevim/
+cp -a "$SCRIPTPATH/temp/shared/required/home/." ~/
+cp -a "$SCRIPTPATH/temp/this/home/." ~/
+cp -a "$SCRIPTPATH/temp/shared/required/home_bin/." ~/bin/
+cp -a "$SCRIPTPATH/temp/shared/required/clipboard/." ~/clipboard/
+cp -a "$SCRIPTPATH/temp/shared/required/Tasks/." ~/Tasks/
+cp -a "$SCRIPTPATH/temp/shared/required/vscodevim/." ~/vscodevim/
 
 # temp _vimrcterm
-cp "$SCRIPTPATH/../../../shared/required/home/_vimrcterm" "$SCRIPTPATH/_vimrcterm"
+cp "$SCRIPTPATH/temp/shared/required/home/_vimrcterm" "$SCRIPTPATH/_vimrcterm"
 # replace .exe with nothing
 sed -i.bak 's/bash\.exe/bash/g' "$SCRIPTPATH/_vimrcterm"
 # override _vimrcterm
@@ -31,7 +36,7 @@ rm "$SCRIPTPATH/_vimrcterm"
 rm "$SCRIPTPATH/_vimrcterm.bak"
 
 # temp _vsvimrc 
-cp "$SCRIPTPATH/../../../shared/required/vscodevim/_vsvimrc" "$SCRIPTPATH/_vsvimrc"
+cp "$SCRIPTPATH/temp/shared/required/vscodevim/_vsvimrc" "$SCRIPTPATH/_vsvimrc"
 # replace .exe with nothing
 sed -i.bak 's/bash\.exe/bash/g' "$SCRIPTPATH/_vsvimrc"
 # override _vsvimrc 
@@ -48,6 +53,9 @@ vunDir="$HOME/.vim/bundle/Vundle.vim"
   cd ~
 }
 
-find "$SCRIPTPATH/../../../shared/" -type f -exec unix2dos {} \;
-find "$SCRIPTPATH/../" -type f -exec unix2dos {} \;
+find "$SCRIPTPATH/temp/shared/" -type f -exec unix2dos {} \;
+find "$SCRIPTPATH/temp/this/" -type f -exec unix2dos {} \;
+
+rm -rf "$SCRIPTPATH/temp/shared/"
+rm -rf "$SCRIPTPATH/temp/this/"
 
