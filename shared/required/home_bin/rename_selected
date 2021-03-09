@@ -8,6 +8,8 @@ preview=false
 
 # allows for the use of ** for recursive globbing
 shopt -s globstar
+# includes hidden items by default
+shopt -s dotglob
 
 [[ $# == 0 ]] && {
   echo "rename_selected called with no arguments!"
