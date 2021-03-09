@@ -23,24 +23,22 @@ mkdir -p ~/bin
 mkdir -p ~/Tasks
 mkdir -p ~/vscodevim
 
-# extend the shared bashrc
-echo "# --------- Below is content extended from the shared bashrc ---------" >> "$tempShared/required/home/.bashrc"
-cat "$tempThis/home/.bashrc_extras" >> "$tempShared/required/home/.bashrc"
-rm "$tempThis/home/.bashrc_extras"
-
+# shared file content substitution - needs to come before append, prepend, and override
 # Replace occurrences of bash.exe with bash in shared content
 find "$tempShared" -type f -exec sed -i.bak 's/bash\.exe/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.json$' -type f -exec sed -i.bak 's/C:\\\\Program Files\\\\Git\\\\bin\\\\bash/\/bin\/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 
+$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append"
+$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "prepend"
+$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "override"
+
 cp -a "$tempShared/required/home/." ~/
 cp -a "$tempShared/required/home_bin/." ~/bin/
 cp -a "$tempShared/required/clipboard/." ~/clipboard/
 cp -a "$tempShared/required/Tasks/." ~/Tasks/
 cp -a "$tempShared/required/vscodevim/." ~/vscodevim/
-
-cp -a "$tempThis/home/." ~/
 
 # download vundle if it does not exist
 vunDir="$HOME/.vim/bundle/Vundle.vim"
@@ -51,10 +49,9 @@ vunDir="$HOME/.vim/bundle/Vundle.vim"
   cd ~
 }
 
-rm -r "$tempShared/"
-rm -r "$tempThis/"
 rm -r "$temp/"
 
 unset tempShared
 unset tempThis
+unset temp
 
