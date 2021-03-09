@@ -23,15 +23,16 @@ mkdir -p ~/bin
 mkdir -p ~/Tasks
 mkdir -p ~/vscodevim
 
-$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append"
-$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "prepend"
-$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "override"
-
+# shared file content substitution - needs to come before append, prepend, and override
 # Replace occurrences of bash.exe with bash in shared content
 find "$tempShared" -type f -exec sed -i.bak 's/bash\.exe/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.json$' -type f -exec sed -i.bak 's/C:\\\\Program Files\\\\Git\\\\bin\\\\bash/\/bin\/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
+
+$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append"
+$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "prepend"
+$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "override"
 
 cp -a "$tempShared/required/home/." ~/
 cp -a "$tempShared/required/home_bin/." ~/bin/
