@@ -24,22 +24,22 @@ function edit_files_helper {
     [[ -f "$i" ]] && {
       local b=$(basename "$i");
       [[ $estyle == "append" ]] && {
-        echo "cat \"$i\" >> \"$destDir/$b"
-        echo "rm \"$i\""
-        #cat "$i" >> "$destDir/$b"
-        #rm "$i"
+        # echo "cat \"$i\" >> \"$destDir/$b"
+        # echo "rm \"$i\""
+        cat "$i" >> "$destDir/$b"
+        rm "$i"
       }
       [[ $estyle == "prepend" ]] && {
-        echo "cat <(cat \"$i\") <(cat \"$destDir/$b\") > \"$destDir/$b\""
-        echo "rm \"$i\""
-        #cat <(cat "$i") <(cat "$destDir/$b") >> "$destDir/$b"
-        #rm "$i"
+        # echo "cat <(cat \"$i\") <(cat \"$destDir/$b\") > \"$destDir/$b\""
+        # echo "rm \"$i\""
+        cat <(cat "$i") <(cat "$destDir/$b") >> "$destDir/$b"
+        rm "$i"
       }
       [[ $estyle == "override" ]] && {
-        echo "cat \"$i\" > \"$destDir/$b\""
-        echo "rm \"$i\""
-        #cat "$i" > "$destDir/$b"
-        #rm "$i"
+        # echo "cat \"$i\" > \"$destDir/$b\""
+        # echo "rm \"$i\""
+        cat "$i" > "$destDir/$b"
+        rm "$i"
       }
     }
   done;
