@@ -29,6 +29,8 @@ find "$tempShared" -type f -exec sed -i.bak 's/bash\.exe/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.json$' -type f -exec sed -i.bak 's/C:\\\\Program Files\\\\Git\\\\bin\\\\bash/\/bin\/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
+find "$tempShared" -regextype egrep -iregex '.*\.vimrc$' -type f -exec sed -i.bak 's/so ~\/_vim_plugins/" so ~\/_vim_plugins/g' {} \;
+find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 
 $tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append"
 $tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "prepend"
