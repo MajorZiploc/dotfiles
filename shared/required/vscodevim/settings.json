@@ -45,5 +45,7 @@
   "editor.minimap.enabled": false,
   "[powershell]": {
     "files.encoding": "utf8"
-  }
+  },
+  "explorer.openEditors.sortOrder": "alphabetical",
+  "diffEditor.wordWrap": "on"
 }
