@@ -23,10 +23,9 @@ mkdir -p ~/bin
 mkdir -p ~/Tasks
 mkdir -p ~/vscodevim
 
-# extend the shared bashrc
-echo "# --------- Below is content extended from the shared bashrc ---------" >> "$tempShared/required/home/.bashrc"
-cat "$tempThis/home/.bashrc_extras" >> "$tempShared/required/home/.bashrc"
-rm "$tempThis/home/.bashrc_extras"
+$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append"
+$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "prepend"
+$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "override"
 
 # Replace occurrences of bash.exe with bash in shared content
 find "$tempShared" -type f -exec sed -i.bak 's/bash\.exe/bash/g' {} \;
@@ -39,8 +38,6 @@ cp -a "$tempShared/required/home_bin/." ~/bin/
 cp -a "$tempShared/required/clipboard/." ~/clipboard/
 cp -a "$tempShared/required/Tasks/." ~/Tasks/
 cp -a "$tempShared/required/vscodevim/." ~/vscodevim/
-
-cp -a "$tempThis/home/." ~/
 
 # download vundle if it does not exist
 vunDir="$HOME/.vim/bundle/Vundle.vim"
