@@ -8,17 +8,25 @@ function append {
   shopt -s globstar
   shopt -s dotglob
   
-  local directory="$tempThis/append/home/*"
-  for f in $directory ; do
-    [[ -f "$f" ]] && {
-      echo "$f";
-      local b=$(basename "$f")
-      echo "$b"
-      # cat "$f" >> "$tempShared/required/home/$b"
-      # rm "$f"
+  appendHelper "$tempThis/append/home/*" "$tempShared/required/home"
+  appendHelper "$tempThis/append/Tasks/*" "$tempShared/required/Tasks"
+  appendHelper "$tempThis/append/clipboard/*" "$tempShared/required/clipboard"
+  appendHelper "$tempThis/append/vscodevim/*" "$tempShared/required/vscodevim"
+}
+
+function appendHelper {
+  dirGlob="$1"
+  destDir="$2"
+  for i in $dirGlob ; do
+    [[ -f "$i" ]] && {
+      local b=$(basename "$i")
+      echo "cat \"$i\" >> \"$destDir/$b"
+      echo "rm \"$i\""
+      #cat "$i" >> "$destDir/$b"
+      #rm "$i"
     }
   done;
 }
 
-append 1 2 "$1"
+append "$1" "$2" "$3"
 
