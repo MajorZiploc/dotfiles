@@ -96,5 +96,21 @@
   {
     "key": "ctrl+w ctrl+v",
     "command": "workbench.action.splitEditorRight"
+  },
+  {
+    "key": "ctrl+shift+w ctrl+shift+o",
+    "command": "workbench.action.closeEditorsInGroup"
+  },
+  {
+    "key": "ctrl+k w",
+    "command": "-workbench.action.closeEditorsInGroup"
+  },
+  {
+    "key": "ctrl+w ctrl+o",
+    "command": "workbench.action.closeUnmodifiedEditors"
+  },
+  {
+    "key": "ctrl+k u",
+    "command": "-workbench.action.closeUnmodifiedEditors"
   }
 ]
