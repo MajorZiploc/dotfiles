@@ -14,14 +14,13 @@ cp -r "$SCRIPTPATH/../" "$tempThis/"
 find "$tempShared/" -type f -exec dos2unix {} \;
 find "$tempThis/" -type f -exec dos2unix {} \;
 
-mkdir -p ~/.vim/bundle
-mkdir -p ~/.vim/swap
-mkdir -p ~/vimfiles/plugin-settings
-mkdir -p ~/bin
-mkdir -p ~/clipboard
-mkdir -p ~/bin
-mkdir -p ~/Tasks
-mkdir -p ~/vscodevim
+mkdir -p "$HOME/.vim/bundle"
+mkdir -p "$HOME/.vim/swap"
+mkdir -p "$HOME/vimfiles/plugin-settings"
+mkdir -p "$HOME/clipboard"
+mkdir -p "$HOME/bin"
+mkdir -p "$HOME/Tasks"
+mkdir -p "$HOME/vscodevim"
 
 # shared file content substitution - needs to come before append, prepend, and override
 # Replace occurrences of bash.exe with bash in shared content
@@ -34,18 +33,19 @@ $tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append
 $tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "prepend"
 $tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "override"
 
-cp -a "$tempShared/required/home/." ~/
-cp -a "$tempShared/required/home_bin/." ~/bin/
-cp -a "$tempShared/required/clipboard/." ~/clipboard/
-cp -a "$tempShared/required/Tasks/." ~/Tasks/
-cp -a "$tempShared/required/vscodevim/." ~/vscodevim/
+cp -a "$tempShared/required/home/." "$HOME/"
+cp -a "$tempShared/required/home_bin/." "$HOME/bin/"
+cp -a "$tempShared/required/clipboard/." "$HOME/clipboard/"
+cp -a "$tempShared/required/Tasks/." "$HOME/Tasks/"
+cp -a "$tempShared/required/vscodevim/." "$HOME/vscodevim/"
+
 
 # download vundle if it does not exist
 vunDir="$HOME/.vim/bundle/Vundle.vim"
 [[ -d $vunDir ]] || {
-  cd ~/.vim/bundle
+  cd "$HOME/.vim/bundle"
   git clone https://github.com/VundleVim/Vundle.vim.git "$vunDir"
-  cd ~
+  cd "$HOME"
 }
 
 rm -r "$temp/"
