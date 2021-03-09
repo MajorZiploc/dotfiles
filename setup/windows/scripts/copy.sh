@@ -11,33 +11,33 @@ cp -r "$SCRIPTPATH/../../../shared/" "$temp/"
 mkdir -p "$tempThis/"
 cp -r "$SCRIPTPATH/../" "$tempThis/"
 
-mkdir -p ~/.vim/bundle
-mkdir -p ~/.vim/swap
-mkdir -p ~/vimfiles/plugin-settings
-mkdir -p ~/clipboard
-mkdir -p ~/bin
-mkdir -p /c/Tasks
-mkdir -p /c/vscodevim
+mkdir -p "$HOME/.vim/bundle"
+mkdir -p "$HOME/.vim/swap"
+mkdir -p "$HOME/vimfiles/plugin-settings"
+mkdir -p "$HOME/clipboard"
+mkdir -p "$HOME/bin"
+mkdir -p "/c/Tasks"
+mkdir -p "/c/vscodevim"
 
 $tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append"
 $tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "prepend"
 $tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "override"
 
+cp -a "$SCRIPTPATH/../.ahk" "$HOME/"
+
+cp -a "$tempShared/required/home/." "$HOME/"
+cp -a "$tempShared/required/home_bin/." "$HOME/bin/"
+cp -a "$tempShared/required/clipboard/." "$HOME/clipboard/"
+cp -a "$tempShared/required/Tasks/." "/c/Tasks/"
+cp -a "$tempShared/required/vscodevim/." "/c/vscodevim/"
+
 # download vundle if it does not exist
 vunDir="$HOME/.vim/bundle/Vundle.vim"
 [[ -d $vunDir ]] || {
-  cd ~/.vim/bundle
+  cd "$HOME/.vim/bundle"
   git clone https://github.com/VundleVim/Vundle.vim.git "$vunDir"
-  cd ~
+  cd "$HOME"
 }
-
-cp -a "$SCRIPTPATH/../.ahk" ~/
-
-cp -a "$tempShared/required/home/." ~/
-cp -a "$tempShared/required/home_bin/." ~/bin/
-cp -a "$tempShared/required/clipboard/." ~/clipboard/
-cp -a "$tempShared/required/Tasks/." /c/Tasks/
-cp -a "$tempShared/required/vscodevim/." /c/vscodevim/
 
 rm -r "$temp/"
 
