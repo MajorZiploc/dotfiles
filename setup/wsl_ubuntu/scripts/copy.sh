@@ -49,10 +49,9 @@ vunDir="$HOME/.vim/bundle/Vundle.vim"
   cd ~
 }
 
-rm -r "$tempShared/"
-rm -r "$tempThis/"
 rm -r "$temp/"
 
 unset tempShared
 unset tempThis
+unset temp
 
