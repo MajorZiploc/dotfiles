@@ -40,8 +40,6 @@ cp -a "$tempShared/required/clipboard/." ~/clipboard/
 cp -a "$tempShared/required/Tasks/." ~/Tasks/
 cp -a "$tempShared/required/vscodevim/." ~/vscodevim/
 
-cp -a "$tempThis/home/." ~/
-
 # download vundle if it does not exist
 vunDir="$HOME/.vim/bundle/Vundle.vim"
 [[ -d $vunDir ]] || {
