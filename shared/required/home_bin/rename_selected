@@ -6,7 +6,8 @@ by="s/ / /"
 verbose=false
 preview=false
 
-GLOBIGNORE=".git";
+# ignore files/folders in globs
+GLOBIGNORE=".git:.svn";
 
 # allows for the use of ** for recursive globbing
 shopt -s globstar
@@ -109,6 +110,7 @@ done
   echo "by: $by"
   echo "verbose: $verbose"
   echo "preview: $preview"
+  echo "GLOBIGNORE: $GLOBIGNORE"
 }
 
 IFS= ;
