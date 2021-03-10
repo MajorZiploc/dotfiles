@@ -24,3 +24,8 @@ FROM WINDOWS GIT BASH:
 
 ################################# Constructed PATH variable #################################
 
+glob notes:
+      For all nonhidden files/folders in current directory non-recursive, use -d '*'
+      For all hidden files/folders in current directory non-recursive, use -d '.[^.]*'
+      For all hidden and nonhidden files/folders in current directory non-recursive, use -d '* .[^.]*'
+
