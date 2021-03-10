@@ -6,12 +6,16 @@ by="s/ / /"
 verbose=false
 preview=false
 
+GLOBIGNORE=".git";
+
 # allows for the use of ** for recursive globbing
 shopt -s globstar
 # Use case-insensitive filename globbing
 shopt -s nocaseglob
 # includes hidden items by default
 shopt -s dotglob
+# extends glob
+shopt -s extglob
 
 [[ $# == 0 ]] && {
   echo "rename_selected called with no arguments!"
@@ -48,10 +52,12 @@ do
       echo "Utility for renaming folders and files"
       echo "Short flag stacking is NOT supported!"
       echo "
-      Sets the follow shopt at script level:
+Sets the follow shopt at script level:
       shopt -s globstar
       shopt -s nocaseglob
       shopt -s dotglob
+      shopt -s extglob
+      GLOBIGNORE=$GLOBIGNORE
       "
       echo "Usage:"
 
@@ -124,4 +130,5 @@ do
     }
 done
 unset IFS;
+unset GLOBIGNORE
 
