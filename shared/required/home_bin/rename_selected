@@ -8,6 +8,8 @@ preview=false
 
 # allows for the use of ** for recursive globbing
 shopt -s globstar
+# Use case-insensitive filename globbing
+shopt -s nocaseglob
 # includes hidden items by default
 shopt -s dotglob
 
@@ -49,6 +51,12 @@ do
       echo "Command rename_selected:"
       echo "Utility for renaming folders and files"
       echo "Short flag stacking is NOT supported!"
+      echo "
+      Sets the follow shopt at script level:
+      shopt -s globstar
+      shopt -s nocaseglob
+      shopt -s dotglob
+      "
       echo "Usage:"
 
       echo "    -d|--directory
