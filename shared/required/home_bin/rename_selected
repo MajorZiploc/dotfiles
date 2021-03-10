@@ -34,10 +34,6 @@ do
       shift
       ;;
 
-    -a|--all)
-      directory='* .[^.]*'
-      ;;
-
     -v|--verbose)
       verbose=true
       ;;
@@ -63,10 +59,7 @@ do
       Optional
       Type: String of directory glob
       Default is: '$directory'
-      The directory to rename folders and files in. Non-recursive.
-      For all nonhidden files/folders in current directory non-recursive, use -d '*'
-      For all hidden files/folders in current directory non-recursive, use -d '.[^.]*'
-      For all hidden and nonhidden files/folders in current directory non-recursive, use -d '* .[^.]*'
+      The directory glob to rename folders and files in.
       "
 
       echo "    -b|--by
@@ -75,13 +68,6 @@ do
       Default is: $by
       Program executed by 'sed -E' on each file name to derive new file name.
       You can do multiple s/// by doing: --by 's///;s///;s///;'
-      "
-
-      echo "    -a|--all
-      Optional
-      Type: Takes no argument
-      Short hand to iterate over all hidden and non hidden files in the directory non recursively.
-      The same as specifying -d '* .[^.]*'
       "
 
       echo "    -v|--verbose
