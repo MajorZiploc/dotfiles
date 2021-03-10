@@ -23,6 +23,8 @@ shopt -s globstar
 shopt -s nocaseglob
 # includes hidden items by default
 shopt -s dotglob
+# extends glob
+shopt -s extglob
 
 # When changing directory small typos can be ignored by bash
 # for example, cd /vr/lgo/apaache would find /var/log/apache
