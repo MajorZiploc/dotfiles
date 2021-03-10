@@ -9,6 +9,7 @@ function edit_files {
   shopt -s globstar
   shopt -s dotglob
   shopt -s nocasematch
+  shopt -s extglob
   
   edit_files_helper "$tempThis/$edit_style/home/*" "$tempShared/required/home" "$edit_style"
   edit_files_helper "$tempThis/$edit_style/Tasks/*" "$tempShared/required/Tasks" "$edit_style"
