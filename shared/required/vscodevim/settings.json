@@ -35,7 +35,6 @@
   "powershell.powerShellDefaultVersion": "Windows PowerShell (x64)",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "FSharp.useSdkScripts": true,
-  "workbench.editorAssociations": [],
   "vim.vimrc.enable": true,
   "vim.vimrc.path": "C:\\vscodevim\\_vsvimrc",
   "vim.leader": " ",
