@@ -14,9 +14,9 @@ git rebase -i <rebase_curr_branch_onto_this_branch>
 git reflog --relative-date
 git log --oneline # show each commit on 1 line
 
-powershell -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Script -Path ./ -ScriptName test -ShouldUseAdvLogging $false}'
+powershell -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Script -Path ./ -ScriptName "test" -ShouldUseAdvLogging $false}'
 
-powershell -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Module -Path ./ -ModuleName test -Author "Manyu Lakhotia" -Description "Test powershell module" -ModuleVersion "5.1" -CompanyName "N/A" -CopyRight "N/A";}'
+powershell -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Module -Path ./ -ModuleName "test" -Author "Manyu Lakhotia" -Description "Test powershell module" -ModuleVersion "5.1" -CompanyName "N/A" -CopyRight "N/A";}'
 
 IFS= ;l=(1 2 3 '4'); for ele in ${l[@]}; do echo $ele hi; done; unset IFS; # IFS= is for null character delimited for/while loop
 pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'
