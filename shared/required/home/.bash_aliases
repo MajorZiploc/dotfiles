@@ -96,3 +96,5 @@ alias back='cd ~-'
   alias time_js='gnomon'
 }
 
+alias git_merge_keep_theirs="git merge -X theirs"
+
