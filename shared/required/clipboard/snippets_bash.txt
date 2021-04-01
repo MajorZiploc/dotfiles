@@ -1,5 +1,5 @@
 perl -ne 'print unless $seen{$_}++' # unique without sorting
-find . -maxdepth 9 -regextype egrep -iregex '.*pattern.*' -type f 2>/dev/null -print0 | xargs --null -I{} echo {}
+find . -maxdepth 8 -regextype egrep -iregex '.*pattern.*' -type f 2>/dev/null -print0 | xargs --null -I{} echo {}
 find . -name '*pattern*' -exec egrep -sin "pattern1|pattern2" {} + -exec echo {} + # multi command execute example
 pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -Command "& {Write-Host 'hi'}"
 
