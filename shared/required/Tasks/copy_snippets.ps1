@@ -1,18 +1,18 @@
 [CmdletBinding()]
 param (
     [Parameter(Mandatory=$false)]
-    [ValidateSet("bash", "sql", "all")]
+    [ValidateSet("bash_oneline", "sql_block", "all")]
     [string]
     $type = "all"
 )
 
 $choices = @{
-  'bash' = @{
-    'snippets_file' = "~/clipboard/snippets_bash.txt"
+  'bash_oneline' = @{
+    'snippets_file' = "~/clipboard/bash/oneline.txt"
     'delimiter'= "`n"
   }
-  'sql' = @{
-    'snippets_file' = "~/clipboard/snippets_sql.txt"
+  'sql_block' = @{
+    'snippets_file' = "~/clipboard/sql/block.txt"
     'delimiter'= "<:>"
   }
 }
