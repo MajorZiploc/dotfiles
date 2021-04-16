@@ -46,7 +46,7 @@ alias fcjl='tr -d "\n"'
 alias fcsl="sed -E 's/([;|])/\1\n/g'"
 alias join_lines='fcjl'
 alias split_lines="fcsl"
-alias to_fuzz="sed -E 's/(\w)/.*\1.*/g' | sed -E 's/(\.\*){2,}/.*/g'"
+alias to_fuzz='sed -E "s/(\\w)/\\\\w{0,3}?\\1\\\\w{0,3}?/g" | sed -E "s/(\\\\w\\{0,3}\\?){2,}/\\\\w{0,3}?/g"'
 
 # Viewing directory information aliases
 alias dir='ls --format=vertical'
