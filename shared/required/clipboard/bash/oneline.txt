@@ -1,6 +1,6 @@
 perl -ne 'print unless $seen{$_}++' # unique without sorting
 find . -maxdepth 8 -regextype egrep -iregex '.*pattern.*' -type f 2>/dev/null -print0 | xargs --null -I{} echo {}
-find . -name '*pattern*' -exec egrep -sin "pattern1|pattern2" {} + -exec echo {} + # multi command execute example
+find . -name '*pattern*' -exec egrep --color -sin "pattern1|pattern2" {} + -exec echo {} + # multi command execute example
 pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -Command "& {Write-Host 'hi'}"
 
 git log -p --grep="<commit_msg_pattern>"
@@ -20,4 +20,4 @@ powershell -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaf
 
 IFS= ;l=(1 2 3 '4'); for ele in ${l[@]}; do echo $ele hi; done; unset IFS; # IFS= is for null character delimited for/while loop
 pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'
-find . -maxdepth 9 -regextype egrep -iregex '.*\.txt' -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep -in "pattern1|pattern2" {} +
+find . -maxdepth 9 -regextype egrep -iregex '.*\.txt' -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep --color -in "pattern1|pattern2" {} +
