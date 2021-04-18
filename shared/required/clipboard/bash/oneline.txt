@@ -20,4 +20,3 @@ powershell -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaf
 
 IFS= ;l=(1 2 3 '4'); for ele in ${l[@]}; do echo $ele hi; done; unset IFS; # IFS= is for null character delimited for/while loop
 pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'
-grep_search_phrase=$(printf "pattern1|pattern2" | to_fuzz); find_search_phrase=".*"; find . -maxdepth 9 -regextype egrep -iregex "$find_search_phrase" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep --color -in "$grep_search_phrase" {} +; unset grep_search_phrase; unset find_search_phrase;

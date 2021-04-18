@@ -13,6 +13,9 @@ $choices = @{
       'oneline' = @{
         'delimiter'     = "`n"
       }
+      'block' = @{
+        'delimiter'     = "<:>"
+      }
     }
   }
   'sql'  = @{
