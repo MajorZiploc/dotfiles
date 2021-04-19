@@ -1,5 +1,5 @@
 # Search files for phrase find/egrep
-grep_search_phrase=$(printf "pattern1|pattern2" | to_fuzz);
+grep_search_phrase=$(echo "pattern1|pattern2" | to_fuzz);
 find_search_phrase=".*";
 find . -maxdepth 9 -regextype egrep -iregex "$find_search_phrase" -type f
 -not -path '*/__pycache__/*'
