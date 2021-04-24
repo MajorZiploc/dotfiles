@@ -6,5 +6,5 @@ find . -maxdepth 9 -regextype egrep -iregex ".*" -type f
 -not -path '*/.git/*'
 -not -path '*/node_modules/*'
 -not -path '*/.ionide/*'
--exec egrep --color -in "$(echo "pattern1|pattern2" | to_fuzz)" {} +;
+-exec egrep --color -in "$(echo "pattern1|pattern2" | to_fuzz)" {} +
 <:>
