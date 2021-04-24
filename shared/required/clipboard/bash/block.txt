@@ -1,14 +1,10 @@
 # Search files for phrase find/egrep
-grep_search_phrase=$(echo "pattern1|pattern2" | to_fuzz);
-find_search_phrase=".*";
-find . -maxdepth 9 -regextype egrep -iregex "$find_search_phrase" -type f
+find . -maxdepth 9 -regextype egrep -iregex ".*" -type f
 -not -path '*/__pycache__/*'
 -not -path '*/bin/*'
 -not -path '*/obj/*'
 -not -path '*/.git/*'
 -not -path '*/node_modules/*'
 -not -path '*/.ionide/*'
--exec egrep --color -in "$grep_search_phrase" {} +;
-unset grep_search_phrase;
-unset find_search_phrase;
+-exec egrep --color -in "$(echo "pattern1|pattern2" | to_fuzz)" {} +
 <:>
