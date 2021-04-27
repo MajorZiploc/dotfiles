@@ -18,7 +18,6 @@ powershell -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaf
 
 powershell -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Module -Path ./ -ModuleName "test" -Author "Manyu Lakhotia" -Description "Test powershell module" -ModuleVersion "5.1" -CompanyName "N/A" -CopyRight "N/A";}'
 
-IFS= ;l=(1 2 3 '4'); for ele in ${l[@]}; do echo $ele hi; done; unset IFS; # IFS= is for null character delimited for/while loop
 git log --oneline --all --first-parent --remotes --reflog --author-date-order -- filename # search all branches git commits for commits that change a file
 git log --follow -- filename # search current branch git commits for commits that change a file
 pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'

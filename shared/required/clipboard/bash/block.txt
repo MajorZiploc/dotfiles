@@ -8,3 +8,12 @@ find . -maxdepth 9 -regextype egrep -iregex ".*" -type f
 -not -path '*/.ionide/*'
 -exec egrep --color -in "$(echo "pattern1|pattern2" | to_fuzz)" {} +
 <:>
+# for loop
+IFS= ;
+l=(1 2 3 '4');
+for ele in ${l[@]};
+  do echo $ele hi;
+done;
+unset IFS;
+# IFS= is for null character delimited
+<:>
