@@ -101,3 +101,5 @@ alias back='cd ~-'
 
 alias git_merge_keep_theirs="git merge -X theirs"
 
+alias to_winpath='sed s,^/c,c:,g | sed s,/,\\\\,g'
+
