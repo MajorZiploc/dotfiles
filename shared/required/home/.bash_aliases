@@ -63,6 +63,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 alias ll='ls -alF'
 alias la='ls -A'
+alias ld='ls -d */'
 alias l='ls -CF'
 alias ls_human='ls --human-readable --size -1 -S --classify'
 alias less_r='less -r'                          # raw control characters
