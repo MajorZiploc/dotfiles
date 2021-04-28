@@ -283,6 +283,6 @@ function num_lines {
 }
 
 function git_deploy {
-  git checkout master && git merge develop --commit --no-edit && git push && git checkout develop
+ git push && git checkout master && git merge develop --commit --no-edit && git push && git checkout develop
 }
 
