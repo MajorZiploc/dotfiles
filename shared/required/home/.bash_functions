@@ -282,3 +282,7 @@ function num_lines {
   perl -nle 'print "$. $_"' "$content"
 }
 
+function git_deploy {
+  git checkout master && git merge develop --commit --no-edit && git push && git checkout develop
+}
+
