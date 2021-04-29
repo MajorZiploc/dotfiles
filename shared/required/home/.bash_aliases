@@ -104,4 +104,5 @@ alias git_merge_keep_theirs="git merge -X theirs"
 alias git_deploy='git push && git checkout master && git merge develop --commit --no-edit && git push && git checkout develop'
 
 alias to_winpath='sed s,^/c,c:,g | sed s,/,\\\\,g'
+alias to_unixpath='sed s,^c:,/c,g | sed s,\\\\,/,g'
 
