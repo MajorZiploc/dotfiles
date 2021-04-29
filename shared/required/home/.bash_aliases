@@ -106,3 +106,5 @@ alias git_deploy='git push && git checkout master && git merge develop --commit 
 alias to_winpath='sed s,^/c,c:,g | sed s,/,\\\\,g'
 alias to_unixpath='sed s,^c:,/c,g | sed s,\\\\,/,g'
 
+alias refresh_settings="/c/projects/home-settings/setup/windows/scripts/copy.sh && source ~/.bash_profile && echo 'Refreshed settings!'"
+
