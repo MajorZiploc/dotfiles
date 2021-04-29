@@ -30,7 +30,7 @@ find "$tempShared" -regextype egrep -iregex '.*\.json$' -type f -exec sed -i.bak
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.vimrc$' -type f -exec sed -i.bak 's/so ~\/_vim_plugins/" so ~\/_vim_plugins/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
-find "$tempShared" -regextype egrep -iregex '.*bash_aliases.*' -type f -exec sed -i.bak 's,(alias refresh_settings=)"cd /c/projects/home-settings && git checkout master && git pull && cd $OLDPWD && /c/projects/home-settings/setup/windows/scripts/copy.sh(.*),\1"cd ~/projects/home-settings && git checkout master && git pull && cd $OLDPWD && ~/projects/home-settings/setup/windows/scripts/copy.sh\2,' {} \;
+find "$tempShared" -regextype egrep -iregex '.*bash_aliases.*' -type f -exec sed -i.bak 's,(alias refresh_settings=)"cd /c/projects/home-settings && git checkout master && git pull && cd ~- && /c/projects/home-settings/setup/windows/scripts/copy.sh(.*),\1"cd ~/projects/home-settings && git checkout master && git pull && cd ~- && ~/projects/home-settings/setup/windows/scripts/copy.sh\2,' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 
 $tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append"
