@@ -30,6 +30,7 @@ cp -a "$tempShared/required/home_bin/." "$HOME/bin/"
 cp -a "$tempShared/required/clipboard/." "$HOME/clipboard/"
 cp -a "$tempShared/required/Tasks/." "/c/Tasks/"
 cp -a "$tempShared/required/vscodevim/." "/c/vscodevim/"
+cp -a "$tempShared/required/AppData/Roaming/Code/User/." "$HOME/AppData/Roaming/Code/User/"
 
 # download vundle if it does not exist
 vunDir="$HOME/.vim/bundle/Vundle.vim"
