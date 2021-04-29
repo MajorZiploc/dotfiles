@@ -29,9 +29,9 @@ find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.json$' -type f -exec sed -i.bak 's/C:\\\\Program Files\\\\Git\\\\bin\\\\bash/\/bin\/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 
-$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append"
-$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "prepend"
-$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "override"
+$tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append"
+$tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "prepend"
+$tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "override"
 
 cp -a "$tempShared/required/home/." "$HOME/"
 cp -a "$tempShared/required/home_bin/." "$HOME/bin/"
