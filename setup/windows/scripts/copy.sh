@@ -19,9 +19,9 @@ mkdir -p "$HOME/bin"
 mkdir -p "/c/Tasks"
 mkdir -p "/c/vscodevim"
 
-$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append"
-$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "prepend"
-$tempShared/copy_scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "override"
+$tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append"
+$tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "prepend"
+$tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "override"
 
 cp -a "$SCRIPTPATH/../.ahk" "$HOME/"
 
