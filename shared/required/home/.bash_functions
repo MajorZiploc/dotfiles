@@ -279,11 +279,11 @@ function show_block {
 
 function num_lines {
   local content="$1";
-  perl -nle 'print "$. $_"' "$content"
+  perl -nle 'print "$. $_"' "$content";
 }
 
 function refresh_settings {
-  local project_root_path="/c/projects/home-settings"
+  local project_root_path="/c/projects/home-settings";
   cd "$project_root_path" &&
   git checkout master &&
   git pull &&
@@ -291,6 +291,40 @@ function refresh_settings {
   "$project_root_path"/setup/windows/scripts/copy.sh &&
   source ~/.bash_profile &&
   echo 'Refreshed settings!' &&
-  show_env_notes
+  show_env_notes;
+}
+
+function find_files {
+  local file_pattern="$1";
+  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*';
+}
+
+function find_files_fuzz {
+  local file_pattern="$1";
+  find . -maxdepth 9 -regextype egrep -iregex "$(echo "$file_pattern" | to_fuzz)" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*';
+}
+
+function find_in_files {
+  local grep_pattern="$1";
+  local file_pattern="$2";
+  [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
+  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep --color -in "$grep_pattern" {} +;
+}
+
+function find_in_files_fuzz {
+  local grep_pattern="$1"
+  local file_pattern="$2"
+  [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
+  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep --color -in "$(echo "$grep_pattern" | to_fuzz)" {} +
+}
+
+function for_loop {
+  echo "copy to clipboard to use it!"
+  IFS= ;
+  l=(1 2 3 '4');
+  for ele in ${l[@]};
+    do echo $ele hi;
+  done;
+  unset IFS;
 }
 
