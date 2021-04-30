@@ -282,3 +282,15 @@ function num_lines {
   perl -nle 'print "$. $_"' "$content"
 }
 
+function refresh_settings {
+  local project_root_path="/c/projects/home-settings"
+  cd "$project_root_path" &&
+  git checkout master &&
+  git pull &&
+  cd ~- &&
+  "$project_root_path"/setup/windows/scripts/copy.sh &&
+  source ~/.bash_profile &&
+  echo 'Refreshed settings!' &&
+  show_env_notes
+}
+

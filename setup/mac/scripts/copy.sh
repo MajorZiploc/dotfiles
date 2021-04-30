@@ -28,7 +28,7 @@ find "$tempShared" -type f -exec sed -i.bak 's/bash\.exe/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.json$' -type f -exec sed -i.bak 's/C:\\\\Program Files\\\\Git\\\\bin\\\\bash/\/bin\/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
-find "$tempShared" -regextype egrep -iregex '.*bash_aliases.*' -type f -exec sed -i.bak 's,(alias refresh_settings=)"cd /c/projects/home-settings && git checkout master && git pull && cd ~- && /c/projects/home-settings/setup/windows/scripts/copy.sh(.*),\1"cd ~/projects/home-settings && git checkout master && git pull && cd ~- && ~/projects/home-settings/setup/windows/scripts/copy.sh\2,' {} \;
+find "$tempShared" -regextype egrep -iregex '.*bash_functions.*' -type f -exec sed -i.bak 's,(local project_root_path=)"/c/projects/home-settings",\1"~/projects/home-settings",' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 
 $tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append"
