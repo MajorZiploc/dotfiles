@@ -9,7 +9,7 @@ temp="$setupRoot/../temp"
 tempShared="$temp/shared"
 tempThis="$temp/this"
 
-$tempShared/scripts/create_temps.sh "$setupRoot" "$temp" "$tempShared" "$tempThis"
+$SCRIPTPATH/create_temps.sh "$setupRoot" "$temp" "$tempShared" "$tempThis"
 
 # call os specific substition flow script
 test -f "$tempThis/scripts/substition.sh" && { $tempThis/scripts/substition.sh "$setupRoot" "$temp" "$tempShared" "$tempThis"; }
