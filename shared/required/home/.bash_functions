@@ -328,3 +328,20 @@ function for_loop {
   unset IFS;
 }
 
+function show_cmds_like {
+  local pattern="$1";
+  local search_res=$(search_env_for "$pattern");
+  local alias=$(echo "$search_res" | egrep -i "\s*alias");
+  [[ -z "$alias" ]] || { echo "$alias"; }
+  local fn_names=$(echo "$search_res" | egrep -i "\s*declare -f" | sed -E "s/declare -f (.*)/\1/" | xargs);
+  for fn_name in ${fn_names[@]};
+    do
+      echo "$(declare -f $fn_name)";
+  done;
+}
+
+function show_cmds_like_fuzz {
+  local pattern="$(echo "$1" | to_fuzz)";
+  show_cmds_like "$pattern";
+}
+
