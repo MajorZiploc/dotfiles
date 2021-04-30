@@ -1,0 +1,12 @@
+Extra snippets:
+
+git log --oneline --all --first-parent --remotes --reflog --author-date-order -- filename # search all branches git commits for commits that change a file
+git rebase -i <rebase_curr_branch_onto_this_branch>
+git reflog --relative-date
+git log --oneline # show each commit on 1 line
+git log -p --author="<pattern>"
+git stash drop stash@{n} # delete nth stash
+git stash pop --index <n> # pop/apply the nth stash
+git stash list # show all stashes
+git reset [--soft | --mixed [-N] | --hard | --merge | --keep] [--quiet] [--no-quiet] [<commit>]
+git merge --squash (--continue | --abort | --quit) <merge_this_branch_onto_curr_branch>

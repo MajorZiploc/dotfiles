@@ -1,23 +1,10 @@
-perl -ne 'print unless $seen{$_}++' # unique without sorting
 find . -maxdepth 8 -regextype egrep -iregex '.*pattern.*' -type f 2>/dev/null -print0 | xargs --null -I{} echo {}
 find . -name '*pattern*' -exec egrep --color -sin "pattern1|pattern2" {} + -exec echo {} + # multi command execute example
-pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -Command "& {Write-Host 'hi'}"
 
 git log -p --grep="<commit_msg_pattern>"
-git log -p --author="<pattern>"
-git stash drop stash@{n} # delete nth stash
-git stash pop --index <n> # pop/apply the nth stash
-git stash list # show all stashes
-git reset [--soft | --mixed [-N] | --hard | --merge | --keep] [--quiet] [--no-quiet] [<commit>]
-git merge --squash (--continue | --abort | --quit) <merge_this_branch_onto_curr_branch>
-git rebase -i <rebase_curr_branch_onto_this_branch>
-git reflog --relative-date
-git log --oneline # show each commit on 1 line
 
 powershell -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Script -Path ./ -ScriptName "test" -ShouldUseAdvLogging $false}'
 
 powershell -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Module -Path ./ -ModuleName "test" -Author "Manyu Lakhotia" -Description "Test powershell module" -ModuleVersion "5.1" -CompanyName "N/A" -CopyRight "N/A";}'
 
-git log --oneline --all --first-parent --remotes --reflog --author-date-order -- filename # search all branches git commits for commits that change a file
 git log --follow -- filename # search current branch git commits for commits that change a file
-pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'

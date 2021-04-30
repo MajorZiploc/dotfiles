@@ -1,3 +1,8 @@
+Extra snippets:
+pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'
+pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -Command "& {Write-Host 'hi'}"
+perl -ne 'print unless $seen{$_}++' # unique without sorting
+
 ex: ls -a - ~
 -	End of options flag. All other arguments are positional parameters.
 

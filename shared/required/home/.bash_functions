@@ -282,7 +282,15 @@ function num_lines {
   perl -nle 'print "$. $_"' "$content"
 }
 
-function git_deploy {
- git push && git checkout master && git merge develop --commit --no-edit && git push && git checkout develop
+function refresh_settings {
+  local project_root_path="/c/projects/home-settings"
+  cd "$project_root_path" &&
+  git checkout master &&
+  git pull &&
+  cd ~- &&
+  "$project_root_path"/setup/windows/scripts/copy.sh &&
+  source ~/.bash_profile &&
+  echo 'Refreshed settings!' &&
+  show_env_notes
 }
 
