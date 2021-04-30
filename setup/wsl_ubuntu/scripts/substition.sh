@@ -19,7 +19,7 @@ find "$tempShared" -regextype egrep -iregex '.*\.json$' -type f -exec sed -i.bak
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.vimrc$' -type f -exec sed -i.bak 's/so ~\/_vim_plugins/" so ~\/_vim_plugins/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
-find "$tempShared" -regextype egrep -iregex '.*bash_functions.*' -type f -exec sed -i.bak 's,(local project_root_path=)"/c/projects/home-settings",\1"~/projects/home-settings",' {} \;
+find "$tempShared" -regextype egrep -iregex '.*bash_functions.*' -type f -exec sed -Ei.bak 's,(local project_root_path=)"/c/projects/home-settings",\1"~/projects/home-settings",' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 
 unset setupRoot

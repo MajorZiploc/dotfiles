@@ -12,7 +12,7 @@ tempThis="$temp/this"
 $SCRIPTPATH/create_temps.sh "$setupRoot" "$temp" "$tempShared" "$tempThis"
 
 # call os specific substition flow script
-test -f "$tempThis/scripts/substition.sh" && { $tempThis/scripts/substition.sh "$setupRoot" "$temp" "$tempShared" "$tempThis"; }
+test -f "$setupRoot/scripts/substition.sh" && { $setupRoot/scripts/substition.sh "$setupRoot" "$temp" "$tempShared" "$tempThis"; }
 
 $tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append"
 $tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "prepend"
