@@ -16,7 +16,6 @@ find "$tempThis/" -type f -exec dos2unix {} \;
 find "$tempShared" -type f -exec sed -i'' 's/bash\.exe/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.json$' -type f -exec sed -i'' 's/C:\\\\Program Files\\\\Git\\\\bin\\\\bash/\/bin\/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.vimrc$' -type f -exec sed -i'' 's/so ~\/_vim_plugins/" so ~\/_vim_plugins/g' {} \;
-find "$tempShared" -regextype egrep -iregex '.*bash_functions.*' -type f -exec sed -E -i'' 's,(local project_root_path=)"/c/projects/home-settings",\1"~/projects/home-settings",' {} \;
 
 unset setupRoot
 unset tempShared
