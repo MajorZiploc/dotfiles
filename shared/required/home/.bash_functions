@@ -420,6 +420,12 @@ function git_checkout_branch_in_path {
   unset IFS;
 }
 
+function git_log_follow {
+  # search current branch git commits for commits that change a file
+  local filename="$1";
+  git log --follow -- "$filename";
+}
+
 function show_cmds_like {
   local pattern="$1";
   local search_res=$(search_env_for "$pattern");
@@ -476,6 +482,18 @@ modify_date
 FROM sys.objects
 WHERE name LIKE '%Pattern%'
 AND type ='u';
+  "
+}
+
+function pwsh_snip_init_module {
+  echo "
+pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Module -Path ./ -ModuleName "test" -Author "Manyu Lakhotia" -Description "Test powershell module" -ModuleVersion "5.1" -CompanyName "N/A" -CopyRight "N/A";}'
+  "
+}
+
+function pwsh_snip_init_script {
+  echo "
+pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Script -Path ./ -ScriptName "test" -ShouldUseAdvLogging $false}'
   "
 }
 
