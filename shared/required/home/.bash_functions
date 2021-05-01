@@ -328,14 +328,17 @@ function find_in_files_replace {
   find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec sed -E -i'' "s/$from_pattern/$to_pattern/$regex_flags" {} \;
 }
 
-function git_checkout_dev_in_path {
-  local path="$1";
-  [[ -z "$path" ]] || { path='*'; }
+function git_checkout_branch_in_path {
+  local branch="$1";
+  local path="$2";
+  [[ -z "$branch" ]] && { echo "Must specifiy a branch!"; return 1; }
+  [[ -z "$path" ]] && { path='*'; }
   IFS= ;
   for ele in $path;
-    do echo "$ele";
+    do
+      echo "$ele";
       cd $ele;
-      git fetch origin && git checkout develop && git pull;
+      git fetch origin && git checkout "$branch" && git pull;
       cd ..;
   done;
   unset IFS;
