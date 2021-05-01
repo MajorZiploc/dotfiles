@@ -328,7 +328,6 @@ function find_items_rename_experimental {
   local file_pattern="$1";
   local by="$2";
   local renames=$(find_items_rename_print_experimental "$file_pattern" "$by");
-  echo "$renames";
   IFS="\n";
   for ele in "$renames";
     do
@@ -341,6 +340,33 @@ function find_items {
   local file_pattern="$1";
   find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*'
 }
+
+function find_files_rename_print {
+  local file_pattern="$1";
+  local by="$2";
+  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -print0  | while read -d $'\0' file
+  do
+    local b=$(basename "$file");
+    local nb="$(echo "$b" | sed -e "$by")";
+    local new_name="$(dirname "$file")/$nb"
+    [[ $f != $new_name ]] && {
+      echo mv "$file" "$new_name" ";";
+    }
+  done;
+}
+
+function find_files_rename {
+  local file_pattern="$1";
+  local by="$2";
+  local renames=$(find_files_rename_print "$file_pattern" "$by");
+  IFS="\n";
+  for ele in "$renames";
+    do
+      eval "$renames";
+  done;
+  unset IFS;
+}
+
 
 function find_files {
   local file_pattern="$1";
