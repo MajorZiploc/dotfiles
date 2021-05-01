@@ -356,3 +356,34 @@ unset IFS;
   '
 }
 
+function sql_search_column {
+  echo "
+/* SQL column search */
+SELECT 
+c.name  AS 'ColumnName'
+,t.name AS 'TableName'
+,TYPE_NAME(c.user_type_id) AS 'ColumnType'
+,c.max_length AS 'ColumnTypeLength'
+,c.is_nullable AS 'ColumnIsNullable'
+FROM sys.columns c
+JOIN sys.tables  t ON c.object_id = t.object_id
+WHERE c.name LIKE '%ColumnPattern%'
+ORDER BY TableName, ColumnName;
+  "
+}
+
+function sql_general_search {
+  echo "
+/* SQL general search, NOT FOR COLUMNS */
+SELECT
+name AS [Name], 
+SCHEMA_NAME(schema_id) AS schema_name, 
+type_desc, 
+create_date, 
+modify_date
+FROM sys.objects
+WHERE name LIKE '%Pattern%'
+AND type ='u';
+  "
+}
+
