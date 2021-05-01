@@ -305,14 +305,31 @@ function refresh_settings {
   show_env_notes;
 }
 
-function find_rename_items {
+function find_items_rename_print_experimental {
   local file_pattern="$1";
   local by="$2";
-  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec readlink -f {} \; -print0 | while read -d $'\0' item
+  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -print0 | tac | while read -d $'\0' item
   do
-    mv $item "$(echo $item | sed "$by")";
+    local new_name="$(echo "$item" | sed -E "$by")";
+    [[ $f != $new_name ]] && {
+      [[ -d "$item" ]] && { echo mkdir -p "$new_name"; }
+      echo mv "$item" "$new_name";
+    }
   done;
+}
 
+function find_items_rename_experimental {
+  local file_pattern="$1";
+  local by="$2";
+  echo hi there
+  local renames=$(find_items_rename_print "$file_pattern" "$by" | tac);
+  echo "$renames";
+  eval "$renames";
+}
+
+function find_items {
+  local file_pattern="$1";
+  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*'
 }
 
 function find_files {
