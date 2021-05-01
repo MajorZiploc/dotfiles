@@ -318,6 +318,16 @@ function find_in_files_fuzz {
   find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep --color -in "$(echo "$grep_pattern" | to_fuzz)" {} +
 }
 
+function find_in_files_replace {
+  local from_pattern="$1";
+  local to_pattern="$2";
+  local regex_flags="$3";
+  local file_pattern="$4";
+  [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
+  [[ -z "$regex_flags" ]] && { regex_flags=""; }
+  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec sed -E -i'' "s/$from_pattern/$to_pattern/$regex_flags" {} \;
+}
+
 function for_loop {
   echo "copy to clipboard to use it!"
   IFS= ;
