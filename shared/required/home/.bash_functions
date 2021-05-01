@@ -349,7 +349,9 @@ function git_checkout_branch_in_path {
     do
       echo "$ele";
       cd $ele;
-      git fetch origin && git checkout "$branch" && git pull;
+      # the first git pull to to ensure that if there is working dir changes
+      #  that it will not continue to switching the branch
+      git pull && git fetch origin && git checkout "$branch" && git pull;
       cd ..;
   done;
   unset IFS;
