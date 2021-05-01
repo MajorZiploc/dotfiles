@@ -1,4 +1,4 @@
-shopt -u expand_aliases
+shopt -s expand_aliases
 
 [[ ! -z $(which tmux 2>/dev/null) ]] && {
   # tmux aliases
