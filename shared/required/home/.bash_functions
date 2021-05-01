@@ -365,7 +365,7 @@ function show_cmds_like_fuzz {
   show_cmds_like "$pattern";
 }
 
-function bash_for_loop {
+function bash_snip_for_loop {
   echo '
 IFS= ;
 l=(1 2 3 "4");
@@ -376,7 +376,7 @@ unset IFS;
   '
 }
 
-function sql_search_column {
+function sql_snip_search_column {
   echo "
 /* SQL column search */
 SELECT 
@@ -392,7 +392,7 @@ ORDER BY TableName, ColumnName;
   "
 }
 
-function sql_general_search {
+function sql_snip_general_search {
   echo "
 /* SQL general search, NOT FOR COLUMNS */
 SELECT
