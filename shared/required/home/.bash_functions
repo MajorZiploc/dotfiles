@@ -267,6 +267,13 @@ function search_env_for {
   cat <(ls -A ~/bin 2> /dev/null) <(ls -A /usr/local/bin 2> /dev/null) <(alias) <(env) <(declare -F) <(shopt) | egrep -i "$search_regex";
 }
 
+function search_env_for_fuzz {
+  # fuzzy searches through bash env and user defined bash tools
+  local search_regex="";
+  [[ -z "$1" ]] && { search_regex=".*"; } || { search_regex="$(echo "$1" | to_fuzz)"; }
+  search_env_for "$search_regex";
+}
+
 function show_block {
   # $1: regex string
   # $2: regex string
