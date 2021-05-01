@@ -328,16 +328,6 @@ function find_in_files_replace {
   find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec sed -E -i'' "s/$from_pattern/$to_pattern/$regex_flags" {} \;
 }
 
-function for_loop {
-  echo "copy to clipboard to use it!"
-  IFS= ;
-  l=(1 2 3 '4');
-  for ele in ${l[@]};
-    do echo $ele hi;
-  done;
-  unset IFS;
-}
-
 function show_cmds_like {
   local pattern="$1";
   local search_res=$(search_env_for "$pattern");
@@ -353,5 +343,16 @@ function show_cmds_like {
 function show_cmds_like_fuzz {
   local pattern="$(echo "$1" | to_fuzz)";
   show_cmds_like "$pattern";
+}
+
+function bash_for_loop {
+  echo '
+IFS= ;
+l=(1 2 3 "4");
+for ele in ${l[@]};
+  do echo $ele hi;
+done;
+unset IFS;
+  '
 }
 
