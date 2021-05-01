@@ -287,10 +287,12 @@ function refresh_settings {
   cd "$project_root_path" &&
   git checkout master &&
   git pull &&
-  cd ~- &&
   "$project_root_path"/setup/windows/scripts/copy.sh &&
   source ~/.bash_profile &&
   echo 'Refreshed settings!' &&
+  echo 'Current commit information:' &&
+  echo git log | head -n 1;
+  cd ~-;
   show_env_notes;
 }
 
