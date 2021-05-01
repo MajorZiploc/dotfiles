@@ -291,7 +291,7 @@ function refresh_settings {
   source ~/.bash_profile &&
   echo 'Refreshed settings!' &&
   echo 'Current commit information:' &&
-  echo "$(git log | head -n 1)";
+  echo "$(git show --summary)";
   cd ~-;
   show_env_notes;
 }
