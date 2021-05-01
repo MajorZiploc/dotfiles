@@ -290,8 +290,10 @@ function refresh_settings {
   "$project_root_path"/setup/windows/scripts/copy.sh &&
   source ~/.bash_profile &&
   echo 'Refreshed settings!' &&
+  echo '' &&
   echo 'Current commit information:' &&
   echo "$(git show --summary)";
+  echo '';
   cd ~-;
   show_env_notes;
 }
