@@ -305,6 +305,16 @@ function refresh_settings {
   show_env_notes;
 }
 
+function find_rename_items {
+  local file_pattern="$1";
+  local by="$2";
+  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec readlink -f {} \; -print0 | while read -d $'\0' item
+  do
+    mv $item "$(echo $item | sed "$by")";
+  done;
+
+}
+
 function find_files {
   local file_pattern="$1";
   find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*';
