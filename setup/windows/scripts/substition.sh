@@ -8,8 +8,7 @@ temp="$2"
 tempShared="$3"
 tempThis="$4"
 
-find "$tempShared/scripts"  -maxdepth 9 -regextype egrep -iregex ".*" -type f -exec sed -Ei.bak 's,\$HOME/(Tasks|vscodevim),/c/\1,g' {} \;
-find "$tempShared/scripts" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
+find "$tempShared/scripts"  -maxdepth 9 -regextype egrep -iregex ".*" -type f -exec sed -E -i'' 's,\$HOME/(Tasks|vscodevim),/c/\1,g' {} \;
 
 unset setupRoot
 unset tempShared
