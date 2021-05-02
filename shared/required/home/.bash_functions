@@ -361,7 +361,7 @@ function find_files_rename_helper {
   find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -print0  | while read -d $'\0' file
   do
     local b=$(basename "$file");
-    local nb="$(echo "$b" | sed -e "$by")";
+    local nb="$(echo "$b" | sed -E "$by")";
     local new_name="$(dirname "$file")/$nb"
     [[ $f != $new_name ]] && {
       [[ $preview == false ]] && {
