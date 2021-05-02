@@ -16,10 +16,22 @@ Makes use of:
 - bash configs
 - vim configs
 
-## Install scripts
+## Install scripts - ALWAYS read scripts you are going to execute!!!!
 
 ### Warning - The following script with override any files in the destination. It copys to locations such as the home directory!!
-Use the copy.sh scripts found in ./setup/[windows|wsl_ubuntu|mac]/scripts/copy.sh to copy over vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, Vundle.
+### It is highly recommended to back up your current settings!!!!
+
+Use the copy.sh scripts found in ./setup/[windows|wsl_ubuntu|mac]/scripts/copy.sh to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, Vundle.
+
+Paths with content that will be affected include but are not limited to:
+- "$HOME/.vim/bundle"
+- "$HOME/.vim/swap"
+- "$HOME/vimfiles/plugin-settings"
+- "$HOME/clipboard"
+- "$HOME/bin"
+- "$HOME/Tasks" (C:\Tasks on Windows)
+- "$HOME/vscodevim" (C:\vscodevim on Windows)
+- "$HOME/AppData/Roaming/Code/User/"
 
 ### Windows
 To install chocolatey and clone this repo:
