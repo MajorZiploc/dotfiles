@@ -54,6 +54,36 @@ Use whence to view the implementations of any of them to get an understanding of
 
 For more bash aliases and functions, use search_env_for(_fuzz)?, or look at ~/.bash_aliases and ~/.bash_functions
 
+## Extending and Staying Up to date with these bash settings
+
+### Staying up to date (Important notes for extending aswell)
+If you want to stay up to date with this repo, then use the refresh_settings bash function.
+
+refresh_settings will pull master on this repo (/c/projects/home-settings for windows else ~/projects/home-settings) and call the copy script.
+
+Remember that the copy script will copy over any files that exist in the destination path that have the same name as files being copied from the source.
+
+This means that if you edit the files in the destination and then call copy, it will overwrite them.
+
+Example: you edit ~/.bash_aliases to add an alias, then call refresh_settings. This will replace ~/.bash_aliases and you will lose your local edits
+
+### Extending
+The ~/.bashrc from this repo sources a file ~/.bash_ext if it exists
+
+The copy script does not have a .bash_ext that it copies down, so the ~/.bash_ext file is a safe place to add your own customizations of these bash settings.
+
+The ~/.bash_ext is sourced after all other bash files. So you can change the implementation of aliases and functions and shopt flags that you do not like with your own flavor.
+
+Example: you do not like the fact that cdspell is turned on (shopt -s cdspell)
+
+In ~/.bash_ext, you can add the following line:
+
+> shopt -u cdspell
+
+This will turn that feature off!
+
+This way you can have all the other great features you love from this repo, keep up to date with the repo, and make any changes that make these settings more you!
+
 ## TODO
 - Windows: Upgrade wsl 1.0 to wsl 2.0 (package is managed with chocolatey)
 
