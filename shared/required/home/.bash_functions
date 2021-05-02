@@ -336,7 +336,7 @@ function find_items_rename_experimental_helper {
   done;
 }
 
-function find_items_rename_print_experimental {
+function find_items_rename_preview_experimental {
   local file_pattern="$1";
   local by="$2";
   local preview=true
@@ -375,7 +375,7 @@ function find_files_rename_helper {
   done;
 }
 
-function find_files_rename_print {
+function find_files_rename_preview {
   local file_pattern="$1";
   local by="$2";
   local preview=true;
