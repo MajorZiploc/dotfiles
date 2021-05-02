@@ -18,6 +18,7 @@ find "$tempShared" -regextype egrep -iregex '.*\.json$' -type f -exec sed -i'' '
 find "$tempShared" -regextype egrep -iregex '.*\.vimrc$' -type f -exec sed -i'' 's/so ~\/_vim_plugins/" so ~\/_vim_plugins/g' {} \;
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find "$tempShared" -regextype egrep -iregex ".*settings.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath," {} \;
+find "$tempShared" -regextype egrep -iregex ".*bash_functions.*" -type f -exec sed -E -i'' "s,windows,wsl_ubuntu," {} \;
 
 unset setupRoot
 unset tempShared
