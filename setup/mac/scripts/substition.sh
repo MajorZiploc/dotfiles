@@ -16,9 +16,9 @@ find "$tempThis/" -type f -exec dos2unix {} \;
 find "$tempShared" -type f -exec sed -i'' 's/bash\.exe/bash/g' {} \;
 # example of deleting bak files
 # find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
-find "$tempShared" -regextype egrep -iregex '.*\.json$' -type f -exec sed -i'' 's/C:\\\\Program Files\\\\Git\\\\bin\\\\bash/\/bin\/bash/g' {} \;
+find "$tempShared" -regextype egrep -iregex '.*settings\.json$' -type f -exec sed -i'' 's/VS_INTEGRATED_SHELL_PLACEHOLDER/\/bin\/bash/' {} \;
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
-find "$tempShared" -regextype egrep -iregex ".*settings.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath," {} \;
+find "$tempShared" -regextype egrep -iregex ".*settings\.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath," {} \;
 find "$tempShared" -regextype egrep -iregex ".*bash_functions.*" -type f -exec sed -E -i'' "s,OS_PLACE_HOLDER,mac," {} \;
 
 unset setupRoot

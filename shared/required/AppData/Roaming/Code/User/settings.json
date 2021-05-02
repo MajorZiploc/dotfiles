@@ -34,7 +34,7 @@
     "editor.formatOnSave": true
   },
   "sync.gist": "d8d53d73f684e2d5fe79da4afa2abac6",
-  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "terminal.integrated.shell.windows": "VS_INTEGRATED_SHELL_PLACEHOLDER",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "editor.tabSize": 2,
   "powershell.powerShellDefaultVersion": "Windows PowerShell (x64)",
