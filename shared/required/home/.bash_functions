@@ -308,7 +308,7 @@ function refresh_settings {
 function refresh_pwsh {
   echo "Refreshing powershell modules..."
   echo ''
-  pwsh -file ~/Tasks/pwsh_update_modules.ps1
+  pwsh -file $HOME/Tasks/pwsh_update_modules.ps1
   echo ''
   echo "Refresh completed."
 }
