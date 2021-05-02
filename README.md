@@ -33,7 +33,7 @@ Paths with content that will be affected include but are not limited to:
 - "$HOME/vimfiles/plugin-settings"
 - "$HOME/clipboard"
 - "$HOME/bin"
-- "$HOME/Tasks" (C:\Tasks on Windows)
+- "$HOME/Tasks"
 - "$HOME/vscodevim" (C:\vscodevim on Windows)
 - "$HOME/AppData/Roaming/Code/User/"
 
