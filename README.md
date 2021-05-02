@@ -34,7 +34,7 @@ Paths with content that will be affected include but are not limited to:
 - "$HOME/clipboard"
 - "$HOME/bin"
 - "$HOME/Tasks"
-- "$HOME/vscodevim" (C:\vscodevim on Windows)
+- "$HOME/vscodevim"
 - "$HOME/AppData/Roaming/Code/User/"
 
 ### Windows
