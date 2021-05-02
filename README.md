@@ -23,7 +23,7 @@ Makes use of:
 
 ### Warning - The following script will override any files in the destination. It copies to locations such as the home directory!!
 ### It is highly recommended to back up your current settings!!!!
-### The copy process makes use of sed substitutions that can affect the configs and the currently running scripts. See the substitutions for your os in ./setup/<os>/scripts/substitution.sh
+### The copy process makes use of sed substitutions that can affect the configs and the currently running copy scripts. See the substitutions for your os in ./setup/\<os\>/scripts/substitution.sh
 
 Use the copy.sh scripts found in ./setup/[windows|wsl_ubuntu|mac]/scripts/copy.sh to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, Vundle.
 
