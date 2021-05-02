@@ -363,6 +363,11 @@ function find_items {
   find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*'
 }
 
+function find_items_fuzz {
+  local file_pattern="$(echo "$1" | to_fuzz)";
+  find_items "$file_pattern";
+}
+
 function find_files_rename_helper {
   local file_pattern="$1";
   local by="$2";
