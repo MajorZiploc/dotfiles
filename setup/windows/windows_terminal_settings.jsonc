@@ -77,7 +77,7 @@
       //   "commandline": "C:/tools/msys64/msys2_shell.cmd -defterm -here -no-start -msys",
       //   "icon": "C:/tools/msys64/msys2.ico",
       //   "name": "Msys2",
-      //   "startingDirectory": "C:/projects"
+      //   "startingDirectory": "~/projects"
       // },
 
       {

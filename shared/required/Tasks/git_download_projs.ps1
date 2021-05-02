@@ -1,7 +1,7 @@
 ﻿
 $records = Import-Csv -Path "$PSScriptRoot/projs/github_repos_clone.csv"
 # Write-Host $records
-$root_path="C:\projects"
+$root_path="~/projects"
 cd "$root_path"
 $records `
 | % {
