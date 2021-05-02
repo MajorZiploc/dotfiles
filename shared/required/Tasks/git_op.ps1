@@ -1,5 +1,5 @@
 ﻿
-cd "C:\projects"
+cd "~/projects"
 ls -Directory `
 | % {
   Write-Host $_.Name

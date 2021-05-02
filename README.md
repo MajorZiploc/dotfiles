@@ -74,7 +74,7 @@ For more bash aliases and functions, use search_env_for(_fuzz)?, or look at ~/.b
 ### Staying up to date (Important notes for extending aswell)
 If you want to stay up to date with this repo, then use the refresh_settings bash function.
 
-refresh_settings will pull master on this repo (/c/projects/home-settings for windows else ~/projects/home-settings) and call the copy script.
+refresh_settings will pull master on this repo (~/projects/home-settings) and call the copy script.
 
 ### Remember that the copy script will copy over any files that exist in the destination path that have the same name as files being copied from the source. See the Install Scripts section for more detail on this!!!
 
