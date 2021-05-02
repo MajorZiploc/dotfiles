@@ -294,7 +294,7 @@ function refresh_settings {
   cd "$project_root_path" &&
   git checkout master &&
   git pull &&
-  "$project_root_path"/setup/windows/scripts/copy.sh &&
+  "$project_root_path"/setup/OS_PLACE_HOLDER/scripts/copy.sh &&
   source ~/.bash_profile &&
   echo 'Refreshed settings!' &&
   echo '' &&
