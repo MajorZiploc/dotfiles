@@ -290,7 +290,7 @@ function num_lines {
 }
 
 function refresh_settings {
-  local project_root_path="~/projects/home-settings";
+  local project_root_path="$HOME/projects/home-settings";
   cd "$project_root_path" &&
   git checkout master &&
   git pull &&
