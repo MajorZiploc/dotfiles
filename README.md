@@ -2,24 +2,28 @@
 
 ## Purpose
 For automating the setup of a developer machine
-Currently only tested and in use on a Windows 10 machine.
 
 ## Tools
 Makes use of:
-- chocolatey
+- chocolatey package manager
 - vim
-- git bash
+- bash
+- apt package manager
+- tmux
+- pwsh (cross platform powershell)
 
 ## Installs
 - chocolatey packages
-- wsl ubuntu packages
+- apt packages
 - bash configs
 - vim configs
+- vscode configs
 
 ## Install scripts - ALWAYS read scripts you are going to execute!!!!
 
-### Warning - The following script with override any files in the destination. It copys to locations such as the home directory!!
+### Warning - The following script will override any files in the destination. It copies to locations such as the home directory!!
 ### It is highly recommended to back up your current settings!!!!
+### The copy process makes use of sed substitutions that can affect the configs and the currently running scripts. See the substitutions for your os in ./setup/<os>/scripts/substitution.sh
 
 Use the copy.sh scripts found in ./setup/[windows|wsl_ubuntu|mac]/scripts/copy.sh to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, Vundle.
 
@@ -48,8 +52,7 @@ To setup ssh keys for git:
 - search_env_for(_fuzz)? "egrep|string|here" # searches the bash env for the given string (a fuzzy variant is available
 - show_cmds_like "egrep|string|here" # sends impls of aliases and bash fns that match the regex to stdout (useful when
   piped to clip)
-- grepn_files_freq # useful chained after find_in_files(_fuzz)?
-- grepn_files_uniq # useful chained after find_in_files(_fuzz)?
+- grepn_files(_freq|_uniq)? # useful chained after find_in_files(_fuzz)?
 - find_files(_fuzz)?
 - find_files_rename(_preview)?
 - find_in_files(_fuzz)?
@@ -66,14 +69,14 @@ Use whence to view the implementations of any of them to get an understanding of
 
 For more bash aliases and functions, use search_env_for(_fuzz)?, or look at ~/.bash_aliases and ~/.bash_functions
 
-## Extending and Staying Up to date with these bash settings
+## Extending and Staying Up to date with these settings
 
 ### Staying up to date (Important notes for extending aswell)
 If you want to stay up to date with this repo, then use the refresh_settings bash function.
 
 refresh_settings will pull master on this repo (/c/projects/home-settings for windows else ~/projects/home-settings) and call the copy script.
 
-Remember that the copy script will copy over any files that exist in the destination path that have the same name as files being copied from the source.
+### Remember that the copy script will copy over any files that exist in the destination path that have the same name as files being copied from the source. See the Install Scripts section for more detail on this!!!
 
 This means that if you edit the files in the destination and then call copy, it will overwrite them.
 
