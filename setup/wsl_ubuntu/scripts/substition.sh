@@ -11,7 +11,6 @@ tempThis="$4"
 find "$tempShared/" -type f -exec dos2unix {} \;
 find "$tempThis/" -type f -exec dos2unix {} \;
 
-find "$tempShared" -type f -exec sed -i'' 's/bash\.exe/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*settings.json' -type f -exec sed -i'' 's/VS_INTEGRATED_SHELL_PLACEHOLDER/\/bin\/bash/' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.vimrc$' -type f -exec sed -i'' 's/so ~\/_vim_plugins/" so ~\/_vim_plugins/g' {} \;
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"

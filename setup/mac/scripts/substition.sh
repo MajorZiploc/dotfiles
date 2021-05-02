@@ -11,7 +11,6 @@ tempThis="$4"
 find "$tempShared/" -type f -exec dos2unix {} \;
 find "$tempThis/" -type f -exec dos2unix {} \;
 
-find "$tempShared" -type f -exec sed -i'' 's/bash\.exe/bash/g' {} \;
 # example of deleting bak files
 # find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 find "$tempShared" -regextype egrep -iregex '.*settings.json' -type f -exec sed -i'' 's/VS_INTEGRATED_SHELL_PLACEHOLDER/\/bin\/bash/' {} \;
