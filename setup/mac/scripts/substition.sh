@@ -15,7 +15,7 @@ find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -i'' 's/VIM_P
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -i'' 's/VSC_INTEGRATED_SHELL_PLACEHOLDER/\/bin\/bash/g' {} \;
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" {} \;
-find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACE_HOLDER,mac,g" {} \;
+find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,mac,g" {} \;
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,/bin/bash,g' {} \;
 # example of deleting bak files
 # find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;

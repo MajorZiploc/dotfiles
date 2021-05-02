@@ -15,7 +15,7 @@ find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -i'' 's/VSC_I
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -i'' 's/VIM_PLUGIN_IMPORT_PLACEHOLDER/" so ~\/_vim_plugins/g' {} \;
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" {} \;
-find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACE_HOLDER,wsl_ubuntu,g" {} \;
+find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,wsl_ubuntu,g" {} \;
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,/bin/bash,g' {} \;
 
 unset setupRoot
