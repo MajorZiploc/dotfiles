@@ -78,9 +78,7 @@ nnoremap <silent> <bs> :noh<cr><bs>
 " max time between key presses to trigger a multi-key binding
 set timeoutlen=300
 
-set shell=/bin/bash.exe
-
-
+set shell=VIM_SHELL_PLACEHOLDER
 
 nmap <leader><leader>s :vsc Tools.InvokeAceJumpCommand<cr>
 nmap gi :vsc Edit.GoToImplementation<cr>

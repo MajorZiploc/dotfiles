@@ -14,7 +14,7 @@ nmap <C-w><up> <C-w>+
 nmap <C-w><down> <C-w>-
 
 " Set shell to bash
-set shell=/bin/bash.exe
+set shell=VIM_SHELL_PLACEHOLDER
 " Sets bash aliases for use in vim
 let $BASH_ENV = "~/.bash_aliases"
 
