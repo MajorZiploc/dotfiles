@@ -14,7 +14,7 @@ find "$tempThis/" -type f -exec dos2unix {} \;
 # shared file content substitution - needs to come before append, prepend, and override
 # Replace occurrences of bash.exe with bash in shared content
 find "$tempShared" -type f -exec sed -i'' 's/bash\.exe/bash/g' {} \;
-find "$tempShared" -regextype egrep -iregex '.*settings\.json$' -type f -exec sed -i'' 's/VS_INTEGRATED_SHELL_PLACEHOLDER/\/bin\/bash/' {} \;
+find "$tempShared" -regextype egrep -iregex '.*settings.json' -type f -exec sed -i'' 's/VS_INTEGRATED_SHELL_PLACEHOLDER/\/bin\/bash/' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.vimrc$' -type f -exec sed -i'' 's/so ~\/_vim_plugins/" so ~\/_vim_plugins/g' {} \;
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find "$tempShared" -regextype egrep -iregex ".*settings.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath," {} \;

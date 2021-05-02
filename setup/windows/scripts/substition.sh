@@ -9,9 +9,9 @@ tempShared="$3"
 tempThis="$4"
 
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc" | sed 's,^/c,c:,g' | sed -E 's,/,\\\\\\\\,g')"
-find "$tempShared" -regextype egrep -iregex ".*settings/.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath," {} \;
+find "$tempShared" -regextype egrep -iregex ".*settings.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath," {} \;
 find "$tempShared" -regextype egrep -iregex ".*bash_functions.*" -type f -exec sed -E -i'' "s,OS_PLACE_HOLDER,windows," {} \;
-find "$tempShared" -regextype egrep -iregex '.*settings/.json' -type f -exec sed -i'' 's/VS_INTEGRATED_SHELL_PLACEHOLDER/C:\\\\Program Files\\\\Git\\\\bin\\\\bash/g' {} \;
+find "$tempShared" -regextype egrep -iregex '.*settings.json' -type f -exec sed -i'' 's/VS_INTEGRATED_SHELL_PLACEHOLDER/C:\\\\Program Files\\\\Git\\\\bin\\\\bash.exe/g' {} \;
 
 unset setupRoot
 unset tempShared
