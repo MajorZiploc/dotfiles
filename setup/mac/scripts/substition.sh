@@ -19,7 +19,7 @@ find "$tempShared" -type f -exec sed -i'' 's/bash\.exe/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.json$' -type f -exec sed -i'' 's/C:\\\\Program Files\\\\Git\\\\bin\\\\bash/\/bin\/bash/g' {} \;
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find "$tempShared" -regextype egrep -iregex ".*settings.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath," {} \;
-find "$tempShared" -regextype egrep -iregex ".*bash_functions.*" -type f -exec sed -E -i'' "s,windows,mac," {} \;
+find "$tempShared" -regextype egrep -iregex ".*bash_functions.*" -type f -exec sed -E -i'' "s,OS_PLACE_HOLDER,mac," {} \;
 
 unset setupRoot
 unset tempShared
