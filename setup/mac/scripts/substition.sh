@@ -17,6 +17,8 @@ find "$tempShared" -type f -exec sed -i'' 's/bash\.exe/bash/g' {} \;
 # example of deleting bak files
 # find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 find "$tempShared" -regextype egrep -iregex '.*\.json$' -type f -exec sed -i'' 's/C:\\\\Program Files\\\\Git\\\\bin\\\\bash/\/bin\/bash/g' {} \;
+vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
+find "$tempShared" -regextype egrep -iregex ".*settings.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath," {} \;
 
 unset setupRoot
 unset tempShared
