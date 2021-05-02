@@ -1,4 +1,4 @@
-so ~/_vim_plugins
+VIM_PLUGIN_IMPORT_PLACEHOLDER
 so ~/_vimrcterm
 inoremap kj <esc>
 
