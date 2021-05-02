@@ -41,7 +41,7 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "FSharp.useSdkScripts": true,
   "vim.vimrc.enable": true,
-  "vim.vimrc.path": "C:\\vscodevim\\_vsvimrc",
+  "vim.vimrc.path": "$HOME\\_vsvimrc",
   "vim.leader": " ",
   "vim.insertModeKeyBindings": [{ "before": ["k", "j"], "after": ["<Esc>"] }],
   "vim.timeout": 300,
