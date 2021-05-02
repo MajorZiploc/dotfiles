@@ -305,6 +305,14 @@ function refresh_settings {
   show_env_notes;
 }
 
+function refresh_pwsh {
+  echo "Refreshing powershell modules..."
+  echo ''
+  pwsh -file ~/Tasks/pwsh_update_modules.ps1
+  echo ''
+  echo "Refresh completed."
+}
+
 function find_items_rename_experimental_helper {
   local file_pattern="$1";
   local by="$2";

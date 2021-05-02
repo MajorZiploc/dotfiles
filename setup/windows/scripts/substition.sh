@@ -8,7 +8,7 @@ temp="$2"
 tempShared="$3"
 tempThis="$4"
 
-find "$tempShared/scripts" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' 's,\$HOME/(Tasks|vscodevim),/c/\1,g' {} \;
+find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' 's,\$HOME/(Tasks|vscodevim),/c/\1,g' {} \;
 find "$tempShared" -regextype egrep -iregex '.*bash_functions.*' -type f -exec sed -E -i'' 's,(local project_root_path=)"~/projects/home-settings",\1"/c/projects/home-settings",' {} \;
 
 unset setupRoot
