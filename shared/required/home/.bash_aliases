@@ -47,6 +47,11 @@ alias fcsl="sed -E 's/([;|])/\1\n/g'"
 alias join_lines='fcjl'
 alias split_lines="fcsl"
 alias to_fuzz='sed -E "s/(\\w)/\\1\\\\S{0,3}/g" | sed "s/\\\\S{0,3}$//g"'
+alias to_newline='sed "s/ /\n/g"'
+alias bash_surround_expression='sed -E "s,(.+),\"\$(\1)\","'
+alias bash_surround_stream='sed -E "s,(.+),<(\1),"'
+alias bse='bash_surround_expression'
+alias bss='bash_surround_stream'
 
 # Viewing directory information aliases
 alias dir='ls --format=vertical'
