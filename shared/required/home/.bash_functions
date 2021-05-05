@@ -317,6 +317,7 @@ function find_items_rename_experimental_helper {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specifiy a file pattern!"; return 1; }
   local by="$2";
+  [[ -z "$by" ]] && { echo "Must specifiy a by substitution!"; return 1; }
   local preview=$3;
   [[ -z "$preview" ]] && { echo "Must specifiy the preview flag!"; return 1; }
   find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -print0  | while read -d $'\0' item
@@ -349,13 +350,6 @@ function find_items_rename_preview_experimental {
   local file_pattern="$1";
   local by="$2";
   local preview=true
-  find_items_rename_experimental_helper "$file_pattern" "$by" $preview;
-}
-
-function find_items_rename_experimental {
-  local file_pattern="$1";
-  local by="$2";
-  local preview=false
   find_items_rename_experimental_helper "$file_pattern" "$by" $preview;
 }
 
