@@ -560,13 +560,13 @@ AND type ='u';
 
 function pwsh_snip_init_module {
   echo "
-pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Module -Path ./ -ModuleName "test" -Author "Manyu Lakhotia" -Description "Test powershell module" -ModuleVersion "5.1" -CompanyName "N/A" -CopyRight "N/A";}'
+pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Module -Path ./ -ModuleName \"test\" -Author \"Manyu Lakhotia\" -Description \"Test powershell module\" -ModuleVersion \"5.1\" -CompanyName \"N/A\" -CopyRight \"N/A\";}'
   "
 }
 
 function pwsh_snip_init_script {
   echo "
-pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Script -Path ./ -ScriptName "test" -ShouldUseAdvLogging $false}'
+pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Script -Path ./ -ScriptName \"test\" -ShouldUseAdvLogging $false}'
   "
 }
 
