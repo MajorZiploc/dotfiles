@@ -1,5 +1,6 @@
 ﻿
 $records = Import-Csv -Path "$PSScriptRoot/projs/github_repos_clone.csv"
+$records = Import-Csv -Path "$PSScriptRoot/projs/bitbucket_clone.csv"
 # Write-Host $records
 $root_path="~/projects"
 cd "$root_path"
@@ -7,8 +8,10 @@ $records `
 | % {
   if (! (Test-Path -Path "$root_path\$($_.repo_name -replace " ", "-")")) {
     # Write-Host "Cloning the Project $($_.repo_name)"
+    # bitbucket
     git clone $_.clone
 
+    # github
     # Invoke-Expression -Command $_.clone
   }
   else {
