@@ -500,8 +500,8 @@ function git_checkout_branch_in_path {
 
 function git_log_follow {
   # search current branch git commits for commits that change a file
-  local filename="$1";
-  git log --follow -- "$filename";
+  local item_name="$1";
+  git log --date-order --follow -- "$item_name";
 }
 
 function show_cmds_like {
