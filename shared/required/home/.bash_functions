@@ -444,7 +444,12 @@ function find_files_rename {
 function find_files {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specifiy a file pattern!"; return 1; }
-  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*';
+  local with_content="$2";
+  [[ -z "$with_content" ]] && {
+    find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*';
+  } || {
+    find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep -in "$with_content" "{}" \; -exec echo "{}" \; | egrep -v "\s*^[[:digit:]]+:"
+  }
 }
 
 function find_files_fuzz {
