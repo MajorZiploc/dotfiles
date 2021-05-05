@@ -51,7 +51,7 @@ function hf() {
 function show_find_full_paths() {
   # displays the full path names of $1 (the directory)
   # $1: optional directory. Defaults to .
-  find $1 -exec readlink -f {} \;
+  find $1 -exec readlink -f "{}" \;
 }
 
 function show_machine_details() {
@@ -426,21 +426,21 @@ function find_in_files {
   local grep_pattern="$1";
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
-  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep --color -in "$grep_pattern" {} +;
+  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep --color -in "$grep_pattern" "{}" +;
 }
 
 function find_in_files_fuzz {
   local grep_pattern="$1"
   local file_pattern="$2"
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
-  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep --color -in "$(echo "$grep_pattern" | to_fuzz)" {} +
+  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep --color -in "$(echo "$grep_pattern" | to_fuzz)" "{}" +
 }
 
 function find_in_files_replace {
   local by="$1"
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
-  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec sed -E -i'' "$by" {} \;
+  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec sed -E -i'' "$by" "{}" \;
 }
 
 function git_checkout_branch_in_path {
