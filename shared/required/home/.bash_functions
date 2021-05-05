@@ -398,7 +398,7 @@ function find_files_rename_helper {
   local by="$2";
   [[ -z "$by" ]] && { echo "Must specifiy a by substitution!"; return 1; }
   local with_content="$3";
-  local preview=$3
+  local preview=$4
   [[ -z "$preview" ]] && { echo "Must specifiy the preview flag!"; return 1; }
 
   find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -print0  | while read -d $'\0' file
