@@ -388,6 +388,16 @@ function find_files_rename_helper {
   done;
 }
 
+function find_files_delete_preview {
+  local file_pattern="$1";
+  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec echo rm "{}" \;
+}
+
+function find_files_delete {
+  local file_pattern="$1";
+  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec rm "{}" \;
+}
+
 function find_files_rename_preview {
   local file_pattern="$1";
   local by="$2";
