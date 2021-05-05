@@ -407,7 +407,7 @@ function find_files_rename_helper {
     [[ -z "$with_content" ]] && {
       should_rename=true;
     } || {
-      file_content_matches=egrep -in "$with_content" "$file"
+      file_content_matches="$(egrep -in "$with_content" "$file")"
       [[ -z "$file_content_matches" ]] || { should_rename=true; }
     }
     [[ $should_rename == true ]] && {
