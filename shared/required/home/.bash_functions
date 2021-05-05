@@ -438,8 +438,8 @@ function find_files {
 }
 
 function find_files_fuzz {
-  local file_pattern="$1";
-  find . -maxdepth 9 -regextype egrep -iregex "$(echo "$file_pattern" | to_fuzz)" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*';
+  local file_pattern="$(echo "$1" | to_fuzz)";
+  find_files "$file_pattern";
 }
 
 function find_in_files {
@@ -451,10 +451,10 @@ function find_in_files {
 }
 
 function find_in_files_fuzz {
-  local grep_pattern="$1"
-  local file_pattern="$2"
+  local grep_pattern="$(echo "$1" | to_fuzz)";
+  local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
-  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep --color -in "$(echo "$grep_pattern" | to_fuzz)" "{}" +
+  find_in_files "$grep_pattern" "$file_pattern";
 }
 
 function find_in_files_replace {
