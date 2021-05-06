@@ -1,3 +1,16 @@
 # diff the split screen files you have open in vim
 :windo :diffthis
 
+
+
+# search history of commands run in vim with one of the following:
+
+## in normal mode
+q:
+## brings up a list of the commands in normal mode and then press enter on the one you want
+
+:his[tory]
+## shows history of commands
+
+:<start typing how a prev cmd started> # press up arrow to get last command that matches it
+
