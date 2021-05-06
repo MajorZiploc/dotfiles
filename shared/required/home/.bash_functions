@@ -250,6 +250,8 @@ function sample {
 function show_file_content {
   # displays file contents lead by the name of the file
   # files=$@
+  echo "Files: $@";
+  echo "";
   tail -n +1 $@;
 }
 
