@@ -57,6 +57,7 @@ alias bse='bash_surround_expression'
 alias bss='bash_surround_stream'
 alias blj='bash_line_join'
 alias bls='bash_line_split'
+alias bln='to_newlines'
 
 # Viewing directory information aliases
 alias dir='ls --format=vertical'
