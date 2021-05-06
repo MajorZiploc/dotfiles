@@ -42,18 +42,21 @@ alias ltrim="sed -E 's/\s*(.*)/\1/g'"
 alias trim="rtrim | ltrim"
 alias keep_last='tac | awk "!x[\$0]++" | tac'
 alias keep_first='cat | awk "!x[\$0]++" | cat'
-alias fcjl='tr -d "\n" | tr -d "\r"'
-# Line break on ; or | if it is not followed by |
-alias fcsl="perl -ne 's/(;|\|)(?:(?!;|\|))/\$1\\n/g; print;'"
-alias join_lines='fcjl'
-alias split_lines="fcsl"
+
 # Converts a string to a fuzzy search pattern
 alias to_fuzz='sed -E "s/(\\w)/\\1\\\\S{0,3}/g" | sed "s/\\\\S{0,3}$//g"'
 alias to_newlines='sed "s/ /\n/g"'
+
 alias bash_surround_expression='sed -E "s,(.+),\"\$(\1)\","'
 alias bash_surround_stream='sed -E "s,(.+),<(\1),"'
+alias bash_line_join='tr -d "\n" | tr -d "\r"'
+# Line break on ; or | if it is not followed by |
+alias bash_line_split="perl -ne 's/(;|\|)(?:(?!;|\|))/\$1\\n/g; print;'"
+
 alias bse='bash_surround_expression'
 alias bss='bash_surround_stream'
+alias blj='bash_line_join'
+alias bls='bash_line_split'
 
 # Viewing directory information aliases
 alias dir='ls --format=vertical'
