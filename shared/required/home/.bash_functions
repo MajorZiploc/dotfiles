@@ -448,7 +448,8 @@ function find_files {
 
 function find_files_fuzz {
   local file_pattern="$(echo "$1" | to_fuzz)";
-  find_files "$file_pattern";
+  local with_content="$2";
+  find_files "$file_pattern" "$with_content";
 }
 
 function find_in_files {
