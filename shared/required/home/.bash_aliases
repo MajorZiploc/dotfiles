@@ -43,11 +43,13 @@ alias trim="rtrim | ltrim"
 alias keep_last='tac | awk "!x[\$0]++" | tac'
 alias keep_first='cat | awk "!x[\$0]++" | cat'
 alias fcjl='tr -d "\n" | tr -d "\r"'
-alias fcsl="sed -E 's/([;|])/\1\n/g'"
+# Line break on ; or | if it is not followed by |
+alias fcsl="perl -ne 's/(;|\|)(?:(?!;|\|))/\$1\\n/g; print;'"
 alias join_lines='fcjl'
 alias split_lines="fcsl"
+# Converts a string to a fuzzy search pattern
 alias to_fuzz='sed -E "s/(\\w)/\\1\\\\S{0,3}/g" | sed "s/\\\\S{0,3}$//g"'
-alias to_newline='sed "s/ /\n/g"'
+alias to_newlines='sed "s/ /\n/g"'
 alias bash_surround_expression='sed -E "s,(.+),\"\$(\1)\","'
 alias bash_surround_stream='sed -E "s,(.+),<(\1),"'
 alias bse='bash_surround_expression'
