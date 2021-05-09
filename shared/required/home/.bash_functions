@@ -310,7 +310,7 @@ function refresh_settings {
 function refresh_pwsh {
   echo "Refreshing powershell modules..."
   echo ''
-  pwsh -file $HOME/Tasks/pwsh_update_modules.ps1
+  pwsh -Command '& {@("powershell_scaffolder", "PSLogFileReporter") | ForEach-Object { Install-Module -Name "$_" -Scope CurrentUser -Force;}}'
   echo ''
   echo "Refresh completed."
 }
