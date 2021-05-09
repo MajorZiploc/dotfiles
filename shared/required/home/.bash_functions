@@ -295,6 +295,8 @@ function refresh_settings {
   local project_root_path="$HOME/projects/home-settings";
   cd "$project_root_path" &&
   git checkout master &&
+  echo 'Previous commit information:' &&
+  echo "$(git show --summary)" &&
   git pull &&
   "$project_root_path"/setup/OS_PLACEHOLDER/scripts/copy.sh &&
   source ~/.bash_profile &&
