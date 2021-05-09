@@ -10,6 +10,9 @@ ex: ls -a - ~
 
 IMPORTANT FOR CUSTOM SET OPERATION: sort can take standard in aswell as files
 
+less:
+while in less. use shift+F to auto refresh the file. To toggle it off, use Ctrl+C
+
 
 FROM WINDOWS GIT BASH: 
 ################################## Construct PATH variable ##################################
