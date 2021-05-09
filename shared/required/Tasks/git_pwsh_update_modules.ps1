@@ -1,5 +1,3 @@
-#!/bin/bash
-
 $dirs = @(
   "~/Documents/WindowsPowerShell/Modules"
   "~/Documents/PowerShell/Modules"
