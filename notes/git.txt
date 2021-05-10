@@ -10,3 +10,12 @@ git stash pop --index <n> # pop/apply the nth stash
 git stash list # show all stashes
 git reset [--soft | --mixed [-N] | --hard | --merge | --keep] [--quiet] [--no-quiet] [<commit>]
 git merge --squash (--continue | --abort | --quit) <merge_this_branch_onto_curr_branch>
+
+git diff note:
+A=commit_or_branch_1
+B=commit_or_branch_2
+
+git diff A B
+  means
+  Changes from A to B.
+
