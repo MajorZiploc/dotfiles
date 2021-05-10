@@ -503,6 +503,15 @@ function git_log_follow {
   git log --date-order --follow -- "$item_name";
 }
 
+function git_diff_range {
+  local first=$(($1 + 1));
+  local last=$(($2 + 1));
+  local commits="$(git --no-pager log --oneline -n "$last" | col_n 1 | xargs )";
+  local first_commit="$(echo "$commits" | col_n "$first")";
+  local last_commit="$(echo "$commits" | col_n "$last")";
+  git diff "$first_commit" "$last_commit";
+}
+
 function show_cmds_like {
   local pattern="$1";
   [[ -z "$pattern" ]] && { echo "Must specifiy a command pattern!"; return 1; }
