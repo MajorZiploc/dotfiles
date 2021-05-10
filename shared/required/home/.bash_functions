@@ -504,6 +504,7 @@ function git_log_follow {
 }
 
 function git_diff_range {
+  # assumption from commit is older than to commit
   local from=$(($1 + 1));
   local to=$(($2 + 1));
   local commits="$(git --no-pager log --oneline -n "$from" | col_n 1 | xargs )";
