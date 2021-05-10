@@ -216,21 +216,21 @@ function prefix_file() {
   sed -i "1s/^/$text/" "$file";
 }
 
-function col {
+function col_n {
   # Extract the nths column from a tabular output
   # $1: pos num
   local n=$1;
   awk -v col=$n '{print $col}';
 }
 
-function skip {
+function skip_n {
   # Skip first n words in line
   # $1: pos num
   local n=$(($1 + 1));
   cut -d' ' -f$n-;
 }
 
-function first {
+function take_n {
   # Keep first n words in line
   # $1: pos num
   local n=$1;
