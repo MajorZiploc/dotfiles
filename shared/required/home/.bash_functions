@@ -504,12 +504,12 @@ function git_log_follow {
 }
 
 function git_diff_range {
-  local first=$(($1 + 1));
-  local last=$(($2 + 1));
-  local commits="$(git --no-pager log --oneline -n "$last" | col_n 1 | xargs )";
-  local first_commit="$(echo "$commits" | col_n "$first")";
-  local last_commit="$(echo "$commits" | col_n "$last")";
-  git diff "$first_commit" "$last_commit";
+  local from=$(($1 + 1));
+  local to=$(($2 + 1));
+  local commits="$(git --no-pager log --oneline -n "$from" | col_n 1 | xargs )";
+  local from_commit="$(echo "$commits" | col_n "$from")";
+  local to_commit="$(echo "$commits" | col_n "$to")";
+  git diff "$from_commit" "$to_commit";
 }
 
 function git_log_show_last_n {
