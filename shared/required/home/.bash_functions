@@ -513,7 +513,7 @@ function git_diff_range {
 }
 
 function git_log_show_last_n {
-  local $n="$1";
+  local n="$1";
   git --no-pager log --oneline -n "$n" | perl -nle '$i=$.-1; print "$i $_"';
 }
 
