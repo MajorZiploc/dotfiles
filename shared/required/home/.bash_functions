@@ -512,6 +512,11 @@ function git_diff_range {
   git diff "$first_commit" "$last_commit";
 }
 
+function git_log_show_last_n {
+  local $n="$1";
+  git --no-pager log --oneline -n "$n" | perl -nle '$i=$.-1; print "$i $_"';
+}
+
 function show_cmds_like {
   local pattern="$1";
   [[ -z "$pattern" ]] && { echo "Must specifiy a command pattern!"; return 1; }
