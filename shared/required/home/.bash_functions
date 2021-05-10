@@ -286,7 +286,7 @@ function show_block {
   sed -n "/$from_pattern/,/$to_pattern/p; /$to_pattern/q;" "$content";
 }
 
-function num_lines {
+function show_line_nums {
   local content="$1";
   perl -nle 'print "$. $_"' "$content";
 }
