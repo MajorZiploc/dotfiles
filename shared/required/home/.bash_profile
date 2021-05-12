@@ -10,9 +10,10 @@ export ENV_NOTES=""
 [[ -z $(which tmux 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing tmux (terminal multiplexier)"; }
 [[ -z $(which pwsh 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing pwsh (cross platform powershell)"; }
 [[ -z $(which gnomon 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing gnomon (npm package)"; }
-[[ -z $(which rg 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing rg (ripgrep). Important for the ripgrep plugin in vim"; }
-[[ -z $(dotnet --version 2>/dev/null | egrep "^5") ]] && { ENV_NOTES="$ENV_NOTES:Missing dotnet v5. (cross platform dotnet cli tooling)"; }
-[[ -z $(type -a python 2>/dev/null | egrep "[[:alpha:]]3") ]] && { ENV_NOTES="$ENV_NOTES:Missing python3."; }
+[[ -z $(which rg 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing rg (ripgrep) Important for the ripgrep plugin in vim"; }
+[[ -z $(dotnet --version 2>/dev/null | egrep "^5") ]] && { ENV_NOTES="$ENV_NOTES:Missing dotnet v5 (cross platform dotnet cli tooling)"; }
+[[ -z $(type -a python 2>/dev/null | egrep "[[:alpha:]]3") ]] && { ENV_NOTES="$ENV_NOTES:Missing python3"; }
+[[ -z $(which fzy 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing fzy (stdin fuzzy finder)"; }
 
 test -f ~/.bashrc && . ~/.bashrc
 
