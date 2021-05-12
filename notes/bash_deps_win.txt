@@ -1,0 +1,7 @@
+msys2 pacman packages:
+copy them from msys2 locations to where git bash will see them in the PATH. ~/bin is recommended. If you have
+permissions, then use /usr/local/bin
+
+tmux (terminal multiplexier). Requires msys-event-2-x-x.dll to be copied over aswell. It is located where tmux is
+installed for msys2
+fzy (stdin fuzzy finder)
