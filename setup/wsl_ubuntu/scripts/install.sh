@@ -16,6 +16,10 @@ sudo apt-get install ripgrep
 # fuzzy finder
 sudo apt-get install fzf
 
+sudo pip install --upgrade pyscaffold
+sudo pip install pyscaffoldext-django
+sudo pip install tox
+sudo python -m pip install --upgrade pip
 
 # for clipboard support, note, that the clipboard support doesnt seem to work within wsl using this
 # check vim clipboard with: vim --version | grep clipboard

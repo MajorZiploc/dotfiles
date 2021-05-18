@@ -33,7 +33,8 @@ function edit_files_helper {
       [[ $estyle == "prepend" ]] && {
         # echo "cat <(cat \"$i\") <(cat \"$destDir/$b\") > \"$destDir/$b\""
         # echo "rm \"$i\""
-        cat <(cat "$i") <(cat "$destDir/$b") >> "$destDir/$b"
+        local content="$(cat <(cat "$i") <(cat "$destDir/$b"))"
+        echo "$content" > "$destDir/$b"
         rm "$i"
       }
       [[ $estyle == "override" ]] && {
