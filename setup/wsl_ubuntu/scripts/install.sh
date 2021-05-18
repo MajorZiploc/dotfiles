@@ -26,10 +26,10 @@ sudo apt-get install -y dotnet-sdk-5.0
 # update pip
 python -m pip install --upgrade pip
 # install python project scaffolder
-pip install testresources
 pip install pyscaffold
 pip install pyscaffoldext-django
-# Should be installed in the projects virtual env
+# Should be installed in the projects virtual env for tox support
+# pip install testresources
 # pip install tox
 
 # for clipboard support, note, that the clipboard support doesnt seem to work within wsl using this
