@@ -23,10 +23,14 @@ sudo apt-get install -y apt-transport-https
 sudo apt-get update
 sudo apt-get install -y dotnet-sdk-5.0
 
-sudo pip install --upgrade pyscaffold
-sudo pip install pyscaffoldext-django
-sudo pip install tox
-sudo python -m pip install --upgrade pip
+# update pip
+python -m pip install --upgrade pip
+# install python project scaffolder
+pip install testresources
+pip install pyscaffold
+pip install pyscaffoldext-django
+# Should be installed in the projects virtual env
+# pip install tox
 
 # for clipboard support, note, that the clipboard support doesnt seem to work within wsl using this
 # check vim clipboard with: vim --version | grep clipboard

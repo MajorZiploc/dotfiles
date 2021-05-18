@@ -40,6 +40,10 @@ if [ -d ~/AppData/Roaming/npm ]; then
   export PATH="$PATH:$(echo ~/AppData/Roaming/npm)"
 fi
 
+if [ -d ~/.local/bin ]; then
+  export PATH="$PATH:$(echo ~/.local/bin)"
+fi
+
 # _ext bash files are for user specific edits to the bash environment
 test -f ~/.bashrc_ext && . ~/.bashrc_ext
 
