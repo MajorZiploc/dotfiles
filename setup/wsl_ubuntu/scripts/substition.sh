@@ -12,7 +12,7 @@ find "$tempShared/" -type f -exec dos2unix {} \;
 find "$tempThis/" -type f -exec dos2unix {} \;
 
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -i'' 's/VSC_INTEGRATED_SHELL_PLACEHOLDER/\/bin\/bash/g' {} \;
-find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -i'' 's/VIM_PLUGIN_IMPORT_PLACEHOLDER/" so ~\/_vim_plugins/g' {} \;
+find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -i'' 's/VIM_PLUGIN_IMPORT_PLACEHOLDER/so ~\/_vim_plugins/g' {} \;
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" {} \;
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,wsl_ubuntu,g" {} \;
