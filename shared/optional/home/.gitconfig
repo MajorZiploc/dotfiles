@@ -3,7 +3,7 @@
 	email = TODO@todo.net
 	signingKey = ""
 [core]
-	autocrlf = true
+	autocrlf = false
 	excludesfile =
 	mergeoptions = --no-edit
 	longpaths = true
