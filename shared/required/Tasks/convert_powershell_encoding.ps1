@@ -1,4 +1,4 @@
-﻿@('*.ps1', '*.psd1', '*.psm1') `
+@('*.ps1', '*.psd1', '*.psm1') `
 | % {
   Get-ChildItem $_ -Recurse | ForEach-Object {
     $content = Get-Content -Path $_
