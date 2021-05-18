@@ -6,3 +6,6 @@ eval "$(ssh-agent -s)"
 
 ssh-add ~/.ssh/id_ed25519
 
+# test ssh connection to github
+# ssh -T git@github.com
+
