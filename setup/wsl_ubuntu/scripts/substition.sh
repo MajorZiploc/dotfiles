@@ -8,9 +8,6 @@ temp="$2"
 tempShared="$3"
 tempThis="$4"
 
-find "$tempShared/" -type f -exec dos2unix {} \;
-find "$tempThis/" -type f -exec dos2unix {} \;
-
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -i'' 's/VSC_INTEGRATED_SHELL_PLACEHOLDER/\/bin\/bash/g' {} \;
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -i'' 's/VIM_PLUGIN_IMPORT_PLACEHOLDER/so ~\/_vim_plugins/g' {} \;
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
