@@ -11,6 +11,8 @@ sudo apt-get -y install python-is-python3
 sudo apt-get -y install pipenv
 # installs nodejs
 sudo apt-get -y install nodejs
+# installs npm
+sudo apt-get -y install npm
 # ripgrep for vundle use or use on its own
 sudo apt-get install ripgrep
 # fuzzy finder
