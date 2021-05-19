@@ -14,6 +14,7 @@ Plugin 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
 VIM_PLUGIN_IMPORT_CTRLP
 VIM_PLUGIN_IMPORT_RIP_GREP
 VIM_PLUGIN_IMPORT_QUICKFIX
+VIM_PLUGIN_IMPORT_FZF
 
 " Plugin 'edkolev/tmuxline.vim' " prettier tmux
 " Plugin 'itchyny/lightline.vim' " status bar
@@ -42,6 +43,7 @@ so ~/vimfiles/plugin-settings/coc.vim
 VIM_PLUGIN_SETTINGS_CTRLP
 VIM_PLUGIN_SETTINGS_RIP_GREP
 VIM_PLUGIN_SETTINGS_QUICKFIX
+VIM_PLUGIN_SETTINGS_FZF
 " so ~/vimfiles/plugin-settings/gitgutter.vim
 " so ~/vimfiles/plugin-settings/wordmotion.vim
 
