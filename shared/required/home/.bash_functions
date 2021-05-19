@@ -538,7 +538,7 @@ function git_diff_range {
   local commits="$(git --no-pager log --oneline -n "$from" | col_n 1 | xargs )";
   local from_commit="$(echo "$commits" | col_n "$from")";
   local to_commit="$(echo "$commits" | col_n "$to")";
-  git diff "$from_commit" "$to_commit";
+  git diff --ignore-space-change "$from_commit" "$to_commit";
 }
 
 function git_log_show_last_n {
