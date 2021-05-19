@@ -9,11 +9,11 @@ Plugin 'bling/vim-airline' " status bar
 Plugin 'vim-airline/vim-airline-themes' " colors for status bar
 Plugin 'tpope/vim-surround' " manipulate surround chars
 Plugin 'frazrepo/vim-rainbow' " color pairing brakets and such
+Plugin 'tpope/vim-fugitive' " git plugin
+Plugin 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
 Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file finder
 Plugin 'jremmen/vim-ripgrep' " grepper
 Plugin 'stefandtw/quickfix-reflector.vim' " editable quickfix list for ripgrep
-Plugin 'tpope/vim-fugitive' " git plugin
-Plugin 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
 
 " Plugin 'edkolev/tmuxline.vim' " prettier tmux
 " Plugin 'itchyny/lightline.vim' " status bar
@@ -36,12 +36,12 @@ filetype plugin indent on
 " leader key
 let mapleader = " "
 
+so ~/vimfiles/plugin-settings/airline-theme.vim
+so ~/vimfiles/plugin-settings/fugitive.vim
 so ~/vimfiles/plugin-settings/coc.vim
 so ~/vimfiles/plugin-settings/ctrlp.vim
-so ~/vimfiles/plugin-settings/fugitive.vim
 so ~/vimfiles/plugin-settings/ripgrep.vim
 so ~/vimfiles/plugin-settings/quickfix-reflector.vim
-so ~/vimfiles/plugin-settings/airline-theme.vim
 " so ~/vimfiles/plugin-settings/gitgutter.vim
 " so ~/vimfiles/plugin-settings/wordmotion.vim
 
