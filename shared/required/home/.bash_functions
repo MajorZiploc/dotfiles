@@ -310,11 +310,11 @@ function refresh_settings {
 }
 
 function refresh_pwsh {
-  echo "Refreshing powershell modules..."
-  echo ''
-  pwsh -Command '& {@("powershell_scaffolder", "PSLogFileReporter") | ForEach-Object { Install-Module -Name "$_" -Scope CurrentUser -Force;}}'
-  echo ''
-  echo "Refresh completed."
+  echo "Refreshing powershell modules...";
+  echo '';
+  pwsh -Command '& {@("powershell_scaffolder", "PSLogFileReporter") | ForEach-Object { Install-Module -Name "$_" -Scope CurrentUser -Force;}}';
+  echo '';
+  echo "Refresh completed.";
 }
 
 function find_items_rename_experimental_helper {
@@ -353,14 +353,14 @@ function find_items_rename_experimental_helper {
 function find_items_rename_preview_experimental {
   local file_pattern="$1";
   local by="$2";
-  local preview=true
+  local preview=true;
   find_items_rename_experimental_helper "$file_pattern" "$by" $preview;
 }
 
 function find_items {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specifiy a file pattern!"; return 1; }
-  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*'
+  find . -maxdepth 9 -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*';
 }
 
 function find_items_fuzz {
@@ -472,7 +472,7 @@ function find_in_files_fuzz {
 }
 
 function find_in_files_replace {
-  local by="$1"
+  local by="$1";
   [[ -z "$by" ]] && { echo "Must specifiy a by substitution!"; return 1; }
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
