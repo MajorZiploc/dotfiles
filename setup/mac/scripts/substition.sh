@@ -8,7 +8,6 @@ temp="$2"
 tempShared="$3"
 tempThis="$4"
 
-find "$tempShared" -regextype egrep -iregex ".*\.json" -type f -exec sed -i'' 's/VSC_INTEGRATED_SHELL_PLACEHOLDER/\/bin\/bash/g' {} \;
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find "$tempShared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" {} \;
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's/VIM_PLUGIN_IMPORT_PLACEHOLDER/so ~\/_vim_plugins/g' {} \;
