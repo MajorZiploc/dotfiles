@@ -22,6 +22,7 @@ code --install-extension ms-dotnettools.csharp
 code --install-extension almenon.arepl
 code --install-extension ms-python.python
 code --install-extension ms-toolsai.jupyter
+code --install-extension ms-python.vscode-pylance
 
 # bash wsl
 code --install-extension ms-vscode-remote.remote-wsl
