@@ -326,19 +326,6 @@ function find_items_rename_experimental_helper {
   [[ -z "$preview" ]] && { echo "Must specifiy the preview flag!"; return 1; }
   local maxdepth="$4";
   [[ -z "$maxdepth" ]] && { echo "Must specifiy a maxdepth!"; return 1; }
-  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -print0  | while read -d $'\0' item
-  do
-    local new_name="$(echo "$item" | sed -E "$by")";
-    [[ $f != $new_name ]] && {
-      [[ -d "$item" ]] && {
-        [[ $preview == false ]] && {
-          mkdir -p "$new_name";
-        } || {
-          echo mkdir -p "$new_name" ";";
-        }
-      }
-    }
-  done;
   find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -print0 | while read -d $'\0' item
   do
     local new_name="$(echo "$item" | sed -E "$by")";
@@ -358,6 +345,15 @@ function find_items_rename_preview_experimental {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=true;
+  find_items_rename_experimental_helper "$file_pattern" "$by" $preview "$maxdepth";
+}
+
+function find_items_rename_experimental {
+  local file_pattern="$1";
+  local by="$2";
+  local maxdepth="$3";
+  [[ -z "$maxdepth" ]] && { maxdepth=9; }
+  local preview=false;
   find_items_rename_experimental_helper "$file_pattern" "$by" $preview "$maxdepth";
 }
 

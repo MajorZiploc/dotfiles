@@ -11,6 +11,8 @@ code --install-extension ms-vscode.powershell
 code --install-extension streetsidesoftware.code-spell-checker
 code --install-extension msjsdiag.debugger-for-chrome
 code --install-extension vscodevim.vim
+# code --install-extension bajdzis.vscode-database
+# code --install-extension ms-azuretools.vscode-docker
 
 # dotnet
 code --install-extension Ionide.Ionide-fsharp
@@ -20,6 +22,7 @@ code --install-extension ms-dotnettools.csharp
 code --install-extension almenon.arepl
 code --install-extension ms-python.python
 code --install-extension ms-toolsai.jupyter
+code --install-extension ms-python.vscode-pylance
 
 # bash wsl
 code --install-extension ms-vscode-remote.remote-wsl
