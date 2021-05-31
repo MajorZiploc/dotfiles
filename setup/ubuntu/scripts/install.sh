@@ -14,9 +14,11 @@ sudo apt-get -y install nodejs
 # installs npm
 sudo apt-get -y install npm
 # ripgrep for vundle use or use on its own
-sudo apt-get install ripgrep
+# sudo apt-get install ripgrep
 # fuzzy finder
-sudo apt-get install fzf
+# sudo apt-get install fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 
 # nodejs nvm deps
 sudo apt install build-essential checkinstall libssl-dev
