@@ -10,13 +10,14 @@ sudo apt-get -y install python-is-python3
 # installs python package manager
 sudo apt-get -y install pipenv
 # installs nodejs
-sudo apt-get -y install nodejs
+# sudo apt-get -y install nodejs
 # installs npm
-sudo apt-get -y install npm
+# sudo apt-get -y install npm
 # ripgrep for vundle use or use on its own
-# sudo apt-get install ripgrep
+sudo add-apt-repository ppa:x4121/ripgrep
+sudo apt-get update
+sudo apt-get -y install ripgrep
 # fuzzy finder
-# sudo apt-get install fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
