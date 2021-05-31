@@ -29,6 +29,8 @@ find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,
 vim_plugin_settings_fzf="\"so ~/vimfiles/plugin-settings/fzf.vim";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_FZF,$vim_plugin_settings_fzf,g" {} \;
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,windows,g" {} \;
+vsc_settings_destination_placeholder="\$HOME/AppData/Roaming/Code/User/";
+find "$tempShared" -regextype egrep -iregex ".*\.sh" -type f -exec sed -E -i'' "s,VSC_SETTINGS_DESTINATION_PLACEHOLDER,$vsc_settings_destination_placeholder,g" {} \;
 
 unset vsvimpath
 unset vim_plugin_import_ctrlp
@@ -39,6 +41,7 @@ unset vim_plugin_settings_ctrlp
 unset vim_plugin_settings_rip_grep
 unset vim_plugin_settings_quickfix
 unset vim_plugin_settings_fzf
+unset vsc_settings_destination_placeholder
 unset setupRoot
 unset tempShared
 unset tempThis

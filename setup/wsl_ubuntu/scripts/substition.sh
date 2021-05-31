@@ -24,11 +24,13 @@ vim_plugin_settings_ctrlp="so ~/vimfiles/plugin-settings/ctrlp.vim";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_CTRLP,$vim_plugin_settings_ctrlp,g" {} \;
 vim_plugin_settings_rip_grep="so ~/vimfiles/plugin-settings/ripgrep.vim";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_RIP_GREP,$vim_plugin_settings_rip_grep,g" {} \;
-vim_plugin_settings_quickfix="so ~/vimfiles/plugin-settings/quickfix-reflector.vim"
+vim_plugin_settings_quickfix="so ~/vimfiles/plugin-settings/quickfix-reflector.vim";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_QUICKFIX,$vim_plugin_settings_quickfix,g" {} \;
 vim_plugin_settings_fzf="\"so ~/vimfiles/plugin-settings/fzf.vim";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_FZF,$vim_plugin_settings_fzf,g" {} \;
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,wsl_ubuntu,g" {} \;
+vsc_settings_destination_placeholder="\$HOME/.config/Code/User/";
+find "$tempShared" -regextype egrep -iregex ".*\.sh" -type f -exec sed -E -i'' "s,VSC_SETTINGS_DESTINATION_PLACEHOLDER,$vsc_settings_destination_placeholder,g" {} \;
 
 unset vsvimpath
 unset vim_plugin_import_ctrlp
@@ -39,6 +41,7 @@ unset vim_plugin_settings_ctrlp
 unset vim_plugin_settings_rip_grep
 unset vim_plugin_settings_quickfix
 unset vim_plugin_settings_fzf
+unset vsc_settings_destination_placeholder
 unset setupRoot
 unset tempShared
 unset tempThis

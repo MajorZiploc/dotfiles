@@ -15,7 +15,7 @@ mkdir -p "$HOME/clipboard"
 mkdir -p "$HOME/bin"
 mkdir -p "$HOME/Tasks"
 mkdir -p "$HOME/vscodevim"
-mkdir -p "$HOME/AppData/Roaming/Code/User/"
+mkdir -p VSC_SETTINGS_DESTINATION_PLACEHOLDER
 
 unset setupRoot
 unset tempShared

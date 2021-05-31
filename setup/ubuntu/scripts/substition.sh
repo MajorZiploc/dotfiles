@@ -18,7 +18,7 @@ vim_plugin_import_rip_grep="Plugin 'jremmen/vim-ripgrep' \" grepper";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_IMPORT_RIP_GREP,$vim_plugin_import_rip_grep,g" {} \;
 vim_plugin_import_quickfix="Plugin 'stefandtw/quickfix-reflector.vim' \" editable quickfix list for ripgrep";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_IMPORT_QUICKFIX,$vim_plugin_import_quickfix,g" {} \;
-vim_plugin_import_fzf="\"Plugin 'junegunn/fzf'\, \{ 'do': \{ -> fzf#install\(\) \} \}\n\"Plugin 'junegunn/fzf.vim'\n\"Plugin 'airblade/vim-rooter'\n";
+vim_plugin_import_fzf="\"Plugin 'junegunn/fzf'\, { 'do': { -> fzf#install() } }\nPlugin 'junegunn/fzf.vim'\nPlugin 'airblade/vim-rooter'\n";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_IMPORT_FZF,$vim_plugin_import_fzf,g" {} \;
 vim_plugin_settings_ctrlp="so ~/vimfiles/plugin-settings/ctrlp.vim";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_CTRLP,$vim_plugin_settings_ctrlp,g" {} \;
@@ -28,11 +28,9 @@ vim_plugin_settings_quickfix="so ~/vimfiles/plugin-settings/quickfix-reflector.v
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_QUICKFIX,$vim_plugin_settings_quickfix,g" {} \;
 vim_plugin_settings_fzf="\"so ~/vimfiles/plugin-settings/fzf.vim";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_FZF,$vim_plugin_settings_fzf,g" {} \;
-find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,mac,g" {} \;
+find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,wsl_ubuntu,g" {} \;
 vsc_settings_destination_placeholder="\$HOME/.config/Code/User/";
 find "$tempShared" -regextype egrep -iregex ".*\.sh" -type f -exec sed -E -i'' "s,VSC_SETTINGS_DESTINATION_PLACEHOLDER,$vsc_settings_destination_placeholder,g" {} \;
-# example of deleting bak files
-# find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 
 unset vsvimpath
 unset vim_plugin_import_ctrlp
