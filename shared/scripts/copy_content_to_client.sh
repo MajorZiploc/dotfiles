@@ -14,7 +14,7 @@ cp -a "$tempShared/required/home_bin/." "$HOME/bin/"
 cp -a "$tempShared/required/clipboard/." "$HOME/clipboard/"
 cp -a "$tempShared/required/Tasks/." "$HOME/Tasks/"
 cp -a "$tempShared/required/vscodevim/." "$HOME/vscodevim/"
-cp -a "$tempShared/required/AppData/Roaming/Code/User/." "$HOME/AppData/Roaming/Code/User/"
+cp -a "$tempShared/required/AppData/Roaming/Code/User/." VSC_SETTINGS_DESTINATION_PLACEHOLDER
 
 # download vundle if it does not exist
 vunDir="$HOME/.vim/bundle/Vundle.vim"
