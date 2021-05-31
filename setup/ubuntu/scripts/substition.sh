@@ -12,15 +12,15 @@ vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find "$tempShared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" {} \;
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's/VIM_PLUGIN_IMPORT_PLACEHOLDER/so ~\/_vim_plugins/g' {} \;
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,/bin/bash,g' {} \;
-vim_plugin_import_ctrlp="Plugin 'ctrlpvim/ctrlp.vim' \" fuzzy file finder";
+vim_plugin_import_ctrlp="\"Plugin 'ctrlpvim/ctrlp.vim' \" fuzzy file finder";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_IMPORT_CTRLP,$vim_plugin_import_ctrlp,g" {} \;
-vim_plugin_import_rip_grep="Plugin 'jremmen/vim-ripgrep' \" grepper";
+vim_plugin_import_rip_grep="\"Plugin 'jremmen/vim-ripgrep' \" grepper";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_IMPORT_RIP_GREP,$vim_plugin_import_rip_grep,g" {} \;
 vim_plugin_import_quickfix="Plugin 'stefandtw/quickfix-reflector.vim' \" editable quickfix list for ripgrep"
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_IMPORT_QUICKFIX,$vim_plugin_import_quickfix,g" {} \;
-vim_plugin_settings_ctrlp="so ~/vimfiles/plugin-settings/ctrlp.vim"
+vim_plugin_settings_ctrlp="\"so ~/vimfiles/plugin-settings/ctrlp.vim"
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_CTRLP,$vim_plugin_settings_ctrlp,g" {} \;
-vim_plugin_settings_rip_grep="so ~/vimfiles/plugin-settings/ripgrep.vim"
+vim_plugin_settings_rip_grep="\"so ~/vimfiles/plugin-settings/ripgrep.vim"
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_RIP_GREP,$vim_plugin_settings_rip_grep,g" {} \;
 vim_plugin_settings_quickfix="so ~/vimfiles/plugin-settings/quickfix-reflector.vim"
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_QUICKFIX,$vim_plugin_settings_quickfix,g" {} \;
