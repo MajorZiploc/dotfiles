@@ -28,7 +28,7 @@ vim_plugin_settings_quickfix="so ~/vimfiles/plugin-settings/quickfix-reflector.v
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_QUICKFIX,$vim_plugin_settings_quickfix,g" {} \;
 vim_plugin_settings_fzf="\"so ~/vimfiles/plugin-settings/fzf.vim";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_FZF,$vim_plugin_settings_fzf,g" {} \;
-find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,wsl_ubuntu,g" {} \;
+find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,ubuntu,g" {} \;
 vsc_settings_destination_placeholder="\$HOME/.config/Code/User/";
 find "$tempShared" -regextype egrep -iregex ".*\.sh" -type f -exec sed -E -i'' "s,VSC_SETTINGS_DESTINATION_PLACEHOLDER,$vsc_settings_destination_placeholder,g" {} \;
 
