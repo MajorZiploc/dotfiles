@@ -21,7 +21,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
 # nodejs nvm deps
-sudo apt install build-essential checkinstall libssl-dev
+sudo apt install -y build-essential checkinstall libssl-dev
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.35.1/install.sh | bash
 
 # Adds microsoft packages to trusted hosts
@@ -30,7 +30,7 @@ sudo dpkg -i packages-microsoft-prod.deb
 
 # dotnet cli and deps
 sudo apt-get install -y apt-transport-https
-sudo apt-get update
+sudo apt-get -y update
 sudo apt-get install -y dotnet-sdk-5.0
 
 # update pip
