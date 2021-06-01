@@ -49,6 +49,8 @@ sudo apt-get install -y --upgrade vim-common vim-runtime vim
 sudo apt-get install -y vim-gtk
 # clipboard tool
 sudo apt-get install -y xclip
+# clipboard manager, open its configs and make ctrl-` the Shortcuts -> Global -> Show the tray menu key
+sudo apt-get install -y copyq
 
 sudo apt -y upgrade
 
