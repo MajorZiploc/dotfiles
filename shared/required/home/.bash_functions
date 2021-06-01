@@ -52,7 +52,7 @@ function hf() {
   }
 
   function tmuxcd() {
-    tmuxp "$(find . -maxdepth 1 -mindepth 1 -type d | fzf)";
+    tmuxp "$(find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER)";
   }
 
   function ide1() {
