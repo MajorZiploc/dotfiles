@@ -43,9 +43,10 @@ pip install pyscaffoldext-django
 # pip install testresources
 # pip install tox
 
-# for clipboard support
-# check vim clipboard with: vim --version | grep clipboard
-# sudo apt-get install -y vim-gtk
+# vim with clipboard support
+sudo apt-get remove -y vim-common vim-runtime vim
+sudo apt-get install -y --upgrade vim-common vim-runtime vim
+sudo apt-get install -y vim-gtk
 # clipboard tool
 sudo apt-get install -y xclip
 
