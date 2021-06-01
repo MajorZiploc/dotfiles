@@ -4,8 +4,11 @@ so ~/_commonvimrc
 set directory=$HOME/.vim/swap//
 
 " wrap settings
-set textwidth=120
+" set textwidth=120
 " set colorcolumn=+1
+
+" set column ruler
+set colorcolumn=120
 
 " Resize window
 nmap <C-w><left> <C-w><
