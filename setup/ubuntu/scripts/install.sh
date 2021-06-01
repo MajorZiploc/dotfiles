@@ -15,7 +15,7 @@ sudo apt-get -y install pipenv
 # sudo apt-get -y install npm
 # ripgrep for vundle use or use on its own
 sudo add-apt-repository ppa:x4121/ripgrep
-sudo apt-get update
+sudo apt-get -y update
 sudo apt-get -y install ripgrep
 # fuzzy finder
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -30,9 +30,9 @@ wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.
 sudo dpkg -i packages-microsoft-prod.deb
 
 # dotnet cli and deps
-sudo apt-get install -y apt-transport-https
+sudo apt-get -y install apt-transport-https
 sudo apt-get -y update
-sudo apt-get install -y dotnet-sdk-5.0
+sudo apt-get -y install dotnet-sdk-5.0
 
 # update pip
 python -m pip install --upgrade pip
@@ -44,13 +44,34 @@ pip install pyscaffoldext-django
 # pip install tox
 
 # vim with clipboard support
-sudo apt-get remove -y vim-common vim-runtime vim
-sudo apt-get install -y --upgrade vim-common vim-runtime vim
-sudo apt-get install -y vim-gtk
+sudo apt-get -y remove vim-common vim-runtime vim
+sudo apt-get -y install --upgrade vim-common vim-runtime vim
+sudo apt-get -y install vim-gtk
 # clipboard tool
-sudo apt-get install -y xclip
+sudo apt-get -y install xclip
 # clipboard manager, open its configs and make ctrl-` the Shortcuts -> Global -> Show the tray menu key
-sudo apt-get install -y copyq
+sudo apt-get -y install copyq
+
+# docker
+sudo apt-get -y remove docker docker-engine docker.io containerd runc
+sudo apt-get -y update
+sudo apt-get -y install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo \
+    "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu
+\
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get -y update
+sudo apt-get -y install docker-ce docker-ce-cli containerd.io
+# docker terminal auto completion
+sudo curl \
+      -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose \
+          -o /etc/bash_completion.d/docker-compose
 
 sudo apt -y upgrade
 
