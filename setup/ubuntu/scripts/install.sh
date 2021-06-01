@@ -75,8 +75,3 @@ sudo curl \
 
 sudo apt -y upgrade
 
-# copy contents of source to existing dir dest, including hidden stuff
-# cp -a /source/. /dest/
-
-# shows full path of files in current directory recursively, -- NOTE, you can use other find flags to filter this like normal
-# find . -exec readlink -f {} \;
