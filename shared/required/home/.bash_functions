@@ -51,7 +51,7 @@ function hf() {
     tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname
   }
 
-  function tmuxcd() {
+  function tmuxd() {
     tmuxp "$(find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER)";
   }
 
