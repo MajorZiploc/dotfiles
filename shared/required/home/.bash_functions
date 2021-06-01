@@ -51,6 +51,10 @@ function hf() {
     tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname
   }
 
+  function tmuxcd() {
+    tmux2 "$(find . -maxdepth 1 -mindepth 1 -type d | fzf)";
+  }
+
   function ide1() {
     # splits the window into 2 panes
     tmux split-window -v -p 30;
