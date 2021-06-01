@@ -43,11 +43,11 @@ pip install pyscaffoldext-django
 # pip install testresources
 # pip install tox
 
-# for clipboard support, note, that the clipboard support doesnt seem to work within wsl using this
+# for clipboard support
 # check vim clipboard with: vim --version | grep clipboard
-# sudo apt-get -y install vim-gtk
-# clipboard tool, NOT WORKING IN WSL
-# sudo apt-get install xclip
+# sudo apt-get install -y vim-gtk
+# clipboard tool
+sudo apt-get install -y xclip
 
 sudo apt -y upgrade
 
