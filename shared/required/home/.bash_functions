@@ -32,11 +32,19 @@ function hf() {
     if [[ $# -eq 1 ]]; then
       selected=$1
     else
+      items=""
+      paths=TMUX2_PATHS_ARRAY_PLACEHOLDER;
+      for path in ${paths[@]};
+        do
+          [[ -d $path ]] && {
+            items+=`find $path -maxdepth 1 -mindepth 1 -type d`
+            items+="\n"
+          }
+      done;
       # items=`find ~/work -maxdepth 1 -mindepth 1 -type d`
-      items+=`find ~/projects -maxdepth 1 -mindepth 1 -type d`
-      selected=`echo "$items" | fzf`
+      selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`
     fi
-    dirname=`basename $selected`
+    dirname=`basename $selected | tr '.' '-'`
     tmux switch-client -t $dirname
     if [[ $? -eq 0 ]]; then
       exit 0
