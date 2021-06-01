@@ -28,6 +28,22 @@ function hf() {
     fi
   }
 
+  function tmux2() {
+    if [[ $# -eq 1 ]]; then
+      selected=$1
+    else
+      # items=`find ~/work -maxdepth 1 -mindepth 1 -type d`
+      items+=`find ~/projects -maxdepth 1 -mindepth 1 -type d`
+      selected=`echo "$items" | fzf`
+    fi
+    dirname=`basename $selected`
+    tmux switch-client -t $dirname
+    if [[ $? -eq 0 ]]; then
+      exit 0
+    fi
+    tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname
+  }
+
   function ide1() {
     # splits the window into 2 panes
     tmux split-window -v -p 30;
