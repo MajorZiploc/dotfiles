@@ -44,7 +44,7 @@ function hf() {
       # items=`find ~/work -maxdepth 1 -mindepth 1 -type d`
       selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`
     fi
-    dirname=`basename $selected`
+    dirname=`basename $selected | tr '.' '-'`
     tmux switch-client -t $dirname
     if [[ $? -eq 0 ]]; then
       exit 0
