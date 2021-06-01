@@ -38,10 +38,11 @@ function hf() {
         do
           [[ -d $path ]] && {
             items+=`find $path -maxdepth 1 -mindepth 1 -type d`
+            items+="\n"
           }
       done;
       # items=`find ~/work -maxdepth 1 -mindepth 1 -type d`
-      selected=`echo "$items" | FUZZY_FINDER_PLACEHOLDER`
+      selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`
     fi
     dirname=`basename $selected`
     tmux switch-client -t $dirname
