@@ -27,12 +27,12 @@ function hf() {
     fi
   }
 
-  function tmux2() {
+  function tmuxp() {
     if [[ $# -eq 1 ]]; then
       selected=$1
     else
       items=""
-      paths=TMUX2_PATHS_ARRAY_PLACEHOLDER;
+      paths=TMUXP_PATHS_ARRAY_PLACEHOLDER;
       for path in ${paths[@]};
         do
           [[ -d $path ]] && {
@@ -49,6 +49,10 @@ function hf() {
       exit 0
     fi
     tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname
+  }
+
+  function tmuxcd() {
+    tmuxp "$(find . -maxdepth 1 -mindepth 1 -type d | fzf)";
   }
 
   function ide1() {
