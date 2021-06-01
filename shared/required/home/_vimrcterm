@@ -9,6 +9,7 @@ set directory=$HOME/.vim/swap//
 
 " set column ruler
 set colorcolumn=120
+" highlight ColorColumn ctermbg=lightcyan guibg=blue
 
 " Resize window
 nmap <C-w><left> <C-w><
