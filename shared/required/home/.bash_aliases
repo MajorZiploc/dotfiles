@@ -13,7 +13,7 @@ shopt -s expand_aliases
   alias clip="clip.exe"
 } || {
   [[ ! -z $(which xclip 2>/dev/null) ]] && {
-    alias clip="xclip"
+    alias clip="xclip -sel clip"
   }
 }
 [[ ! -z $(which pwsh 2>/dev/null) ]] && {
