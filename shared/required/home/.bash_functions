@@ -41,7 +41,7 @@ function hf() {
           }
       done;
       # items=`find ~/work -maxdepth 1 -mindepth 1 -type d`
-      selected=`echo "$items" | fzf`
+      selected=`echo "$items" | FUZZY_FINDER_PLACEHOLDER`
     fi
     dirname=`basename $selected`
     tmux switch-client -t $dirname

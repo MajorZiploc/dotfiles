@@ -33,6 +33,8 @@ vsc_settings_destination_placeholder="\$HOME/.config/Code/User/";
 find "$tempShared" -regextype egrep -iregex ".*\.sh" -type f -exec sed -E -i'' "s,VSC_SETTINGS_DESTINATION_PLACEHOLDER,$vsc_settings_destination_placeholder,g" {} \;
 tmux2_paths_array_placeholder='(~/projects /mnt/c/Users/abhimanyu.lakhotia/projects /mnt/c/Users/johnc/projects)';
 find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,TMUX2_PATHS_ARRAY_PLACEHOLDER,$tmux2_paths_array_placeholder,g" {} \;
+fuzzy_finder_placeholder="fzf";
+find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,FUZZY_FINDER_PLACEHOLDER,$fuzzy_finder_placeholder,g" {} \;
 
 unset vsvimpath
 unset vim_plugin_import_ctrlp
@@ -45,6 +47,7 @@ unset vim_plugin_settings_quickfix
 unset vim_plugin_settings_fzf
 unset vsc_settings_destination_placeholder
 unset tmux2_paths_array_placeholder
+unset fuzzy_finder_placeholder
 unset setupRoot
 unset tempShared
 unset tempThis
