@@ -22,7 +22,6 @@ function hf() {
     if [ -z "$1" ]; then
       session_name=$(basename $(pwd));
       tmux new -s "$session_name";
-      history;
     else
       tmux new -s "$1";
     fi
