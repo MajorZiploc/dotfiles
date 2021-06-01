@@ -33,12 +33,13 @@ function hf() {
       selected=$1
     else
       items=""
-      paths=(~/projects);
+      paths=TMUX2_PATHS_ARRAY_PLACEHOLDER;
       for path in ${paths[@]};
         do
-          items+=`find $path -maxdepth 1 -mindepth 1 -type d`
+          [[ -d $path ]] && {
+            items+=`find $path -maxdepth 1 -mindepth 1 -type d`
+          }
       done;
-      # MORE_TMUX2_PATHS
       # items=`find ~/work -maxdepth 1 -mindepth 1 -type d`
       selected=`echo "$items" | fzf`
     fi

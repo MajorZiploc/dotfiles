@@ -31,6 +31,8 @@ find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,windows,g" {} \;
 vsc_settings_destination_placeholder="\$HOME/AppData/Roaming/Code/User/";
 find "$tempShared" -regextype egrep -iregex ".*\.sh" -type f -exec sed -E -i'' "s,VSC_SETTINGS_DESTINATION_PLACEHOLDER,$vsc_settings_destination_placeholder,g" {} \;
+tmux2_paths_array_placeholder='(~/projects)';
+find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,TMUX2_PATHS_ARRAY_PLACEHOLDER,$tmux2_paths_array_placeholder,g" {} \;
 
 unset vsvimpath
 unset vim_plugin_import_ctrlp
@@ -42,6 +44,7 @@ unset vim_plugin_settings_rip_grep
 unset vim_plugin_settings_quickfix
 unset vim_plugin_settings_fzf
 unset vsc_settings_destination_placeholder
+unset tmux2_paths_array_placeholder
 unset setupRoot
 unset tempShared
 unset tempThis
