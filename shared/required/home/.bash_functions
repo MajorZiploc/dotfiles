@@ -20,35 +20,34 @@ function hf() {
     # $1: optional string to represent name of the tmux session
     # If $1 not given, then use the base name of the path as the session name
     if [ -z "$1" ]; then
-      session_name=$(basename $(pwd));
-      tmux new -s "$session_name";
+      session_name="$(basename $(pwd))";
     else
-      tmux new -s "$1";
+      session_name="$1";
     fi
+    tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
   }
 
   function tmuxp() {
     if [[ $# -eq 1 ]]; then
-      selected=$1
+      selected=$1;
     else
-      items=""
+      items="";
       paths=TMUXP_PATHS_ARRAY_PLACEHOLDER;
       for path in ${paths[@]};
         do
           [[ -d $path ]] && {
-            items+=`find $path -maxdepth 1 -mindepth 1 -type d`
-            items+="\n"
+            items+=`find $path -maxdepth 1 -mindepth 1 -type d`;
+            items+="\n";
           }
       done;
-      # items=`find ~/work -maxdepth 1 -mindepth 1 -type d`
-      selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`
+      selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
     fi
-    dirname=`basename $selected | tr '.' '-'`
-    tmux switch-client -t $dirname
+    dirname=`basename $selected | tr '.' '-'`;
+    tmux switch-client -t $dirname;
     if [[ $? -eq 0 ]]; then
-      exit 0
+      exit 0;
     fi
-    tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname
+    tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname;
   }
 
   function tmuxd() {
