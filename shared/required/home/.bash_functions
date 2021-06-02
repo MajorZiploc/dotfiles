@@ -29,26 +29,25 @@ function hf() {
 
   function tmuxp() {
     if [[ $# -eq 1 ]]; then
-      selected=$1
+      selected=$1;
     else
-      items=""
+      items="";
       paths=TMUXP_PATHS_ARRAY_PLACEHOLDER;
       for path in ${paths[@]};
         do
           [[ -d $path ]] && {
-            items+=`find $path -maxdepth 1 -mindepth 1 -type d`
-            items+="\n"
+            items+=`find $path -maxdepth 1 -mindepth 1 -type d`;
+            items+="\n";
           }
       done;
-      # items=`find ~/work -maxdepth 1 -mindepth 1 -type d`
-      selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`
+      selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
     fi
-    dirname=`basename $selected | tr '.' '-'`
-    tmux switch-client -t $dirname
+    dirname=`basename $selected | tr '.' '-'`;
+    tmux switch-client -t $dirname;
     if [[ $? -eq 0 ]]; then
-      exit 0
+      exit 0;
     fi
-    tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname
+    tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname;
   }
 
   function tmuxd() {
