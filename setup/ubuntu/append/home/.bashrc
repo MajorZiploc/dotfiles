@@ -1,4 +1,4 @@
-# ----- Appended content from shared ------------
+# ----- APPENDED CONTENT FROM SHARED BEGIN ------------
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -42,5 +42,5 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# ----- Appended content from shared ------------
+# ----- APPENDED CONTENT FROM SHARED END ------------
 
