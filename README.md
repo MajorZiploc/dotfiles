@@ -58,7 +58,7 @@ To setup ssh keys for git:
 - find_in_files(_fuzz)?
 - find_in_files_replace
 - find_items
-- tmuxns <optional_session_name> # Creates a tmux session based on the current path if the session name is not given
+- tmuxcs <optional_session_name> # Creates a tmux session based on the current path if the session name is not given
 - tmuxks -t <session_name> # kill a tmux session
 - tmuxas -t <session_name> # attach to a tmux session
 - tmuxksvr # kills the tmux server

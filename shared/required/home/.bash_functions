@@ -15,7 +15,7 @@ function hf() {
 }
 
 [[ ! -z $(which tmux 2>/dev/null) ]] && {
-  function tmuxns() {
+  function tmuxcs() {
     # creates a tmux session
     # $1: optional string to represent name of the tmux session
     # If $1 not given, then use the base name of the path as the session name
