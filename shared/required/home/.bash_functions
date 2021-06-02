@@ -24,7 +24,7 @@ function hf() {
     else
       session_name="$1";
     fi
-    tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
+    tmux new -s "$session_name" || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
   }
 
   function tmuxps() {
