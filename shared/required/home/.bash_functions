@@ -16,6 +16,7 @@ function hf() {
 
 [[ ! -z $(which tmux 2>/dev/null) ]] && {
   function tmuxcs() {
+    # tmux create session
     # creates a tmux session
     # $1: optional string to represent name of the tmux session
     # If $1 not given, then use the base name of the path as the session name
@@ -28,6 +29,10 @@ function hf() {
   }
 
   function tmuxps() {
+    # tmux project session
+    # creates a tmux session
+    # $1: optional relative dir to start the tmux session in
+    # If $1 not given, then display a fuzzy finder of various project dirs to select a project for creation of a session
     if [[ $# -eq 1 ]]; then
       selected=$1;
     else
@@ -51,6 +56,8 @@ function hf() {
   }
 
   function tmuxds() {
+    # tmux directory session
+    # displays a fuzzy finder listing of directories at the current directory to choose from for a tmux session
     tmuxps "$(find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER)";
   }
 
