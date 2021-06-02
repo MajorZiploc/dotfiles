@@ -27,12 +27,12 @@ function hf() {
     tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
   }
 
-  function tmuxp() {
+  function tmuxps() {
     if [[ $# -eq 1 ]]; then
       selected=$1;
     else
       items="";
-      paths=TMUXP_PATHS_ARRAY_PLACEHOLDER;
+      paths=TMUXPS_PATHS_ARRAY_PLACEHOLDER;
       for path in ${paths[@]};
         do
           [[ -d $path ]] && {
@@ -51,7 +51,7 @@ function hf() {
   }
 
   function tmuxds() {
-    tmuxp "$(find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER)";
+    tmuxps "$(find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER)";
   }
 
   function ide1() {

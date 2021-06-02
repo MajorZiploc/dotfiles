@@ -31,8 +31,8 @@ find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,windows,g" {} \;
 vsc_settings_destination_placeholder="\$HOME/AppData/Roaming/Code/User/";
 find "$tempShared" -regextype egrep -iregex ".*\.sh" -type f -exec sed -E -i'' "s,VSC_SETTINGS_DESTINATION_PLACEHOLDER,$vsc_settings_destination_placeholder,g" {} \;
-tmuxp_paths_array_placeholder='(~/projects)';
-find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,TMUXP_PATHS_ARRAY_PLACEHOLDER,$tmuxp_paths_array_placeholder,g" {} \;
+tmuxps_paths_array_placeholder='(~/projects)';
+find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,TMUXPS_PATHS_ARRAY_PLACEHOLDER,$tmuxps_paths_array_placeholder,g" {} \;
 fuzzy_finder_placeholder="fzy";
 find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,FUZZY_FINDER_PLACEHOLDER,$fuzzy_finder_placeholder,g" {} \;
 
@@ -46,7 +46,7 @@ unset vim_plugin_settings_rip_grep
 unset vim_plugin_settings_quickfix
 unset vim_plugin_settings_fzf
 unset vsc_settings_destination_placeholder
-unset tmuxp_paths_array_placeholder
+unset tmuxps_paths_array_placeholder
 unset fuzzy_finder_placeholder
 unset setupRoot
 unset tempShared
