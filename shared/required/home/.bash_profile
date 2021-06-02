@@ -12,7 +12,6 @@ export ENV_NOTES=""
 [[ -z $(which gnomon 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing gnomon (npm package)"; }
 [[ -z $(which rg 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing rg (ripgrep) Important for the ripgrep plugin in vim"; }
 [[ -z $(dotnet --version 2>/dev/null | egrep "^5") ]] && { ENV_NOTES="$ENV_NOTES:Missing dotnet v5 (cross platform dotnet cli tooling)"; }
-# [[ ! -z $(which python3 2>/dev/null) || ! -z $(python -V | egrep "\b3") ]] || { ENV_NOTES="$ENV_NOTES:Missing python v3 "; }
 
 test -f ~/.bashrc && . ~/.bashrc
 
