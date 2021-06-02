@@ -1,4 +1,4 @@
-# ----- APPENDED CONTENT FROM SHARED BEGIN ------------
+# ----- APPENDED CONTENT BEGIN ------------
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -36,5 +36,5 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# ----- APPENDED CONTENT FROM SHARED END ------------
+# ----- APPENDED CONTENT END ------------
 
