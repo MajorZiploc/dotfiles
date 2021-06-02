@@ -20,11 +20,11 @@ function hf() {
     # $1: optional string to represent name of the tmux session
     # If $1 not given, then use the base name of the path as the session name
     if [ -z "$1" ]; then
-      session_name=$(basename $(pwd));
-      tmux new -s "$session_name";
+      session_name="$(basename $(pwd))";
     else
-      tmux new -s "$1";
+      session_name="$1";
     fi
+    tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
   }
 
   function tmuxp() {
