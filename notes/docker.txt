@@ -1,0 +1,44 @@
+# list images
+docker images / docker image ls
+
+# list all images
+docker images -a / docker image ls -a
+
+# list running containers
+docker ps / docker container ls
+
+# list all containers
+docker ps -a / docker container ls -a
+
+# start a running container detached(-d) with name sleep_stonebraker from image running on local host port 6001 and docker container port 6379
+docker run -d -p6001:6379 --name sleep_stonebraker <image_(?:name|id|image:tag)>
+
+# start a running container
+docker start <container_(?:name|id|image:tag)>
+
+# restart a running container
+docker restart <container_(?:name|id|image:tag)>
+
+# stop a running container
+docker stop <container_(?:name|id|image:tag)>
+
+# remove stopped containers
+docker container prune
+
+# get logs on the specified container
+docker logs <container_(?:name|id|image:tag)> 
+
+# run a bash session on a running container
+docker exec -it <container_(?:name|id|image:tag)> /bin/bash
+
+## A docker network is a way to organizate docker containers in a way where they can talk directly to each other through name instead of through ports
+
+# show all networks
+docker network ls
+
+# create a new network
+docker network create <network_name>
+
+# create a container and connect it to a network
+docker run -d -p27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password --name mongodb --network mongo-network mongo
+
