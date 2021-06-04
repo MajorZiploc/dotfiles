@@ -21,9 +21,9 @@ function hf() {
     # $1: optional string to represent name of the tmux session
     # If $1 not given, then use the base name of the path as the session name
     if [ -z "$1" ]; then
-      session_name="$(basename $(pwd))";
+      local session_name="$(basename $(pwd))";
     else
-      session_name="$1";
+      local session_name="$1";
     fi
     session_name="$(echo "$session_name" | tr '.' '-')";
     tmux new -s "$session_name" || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
@@ -35,10 +35,10 @@ function hf() {
     # $1: optional relative dir to start the tmux session in
     # If $1 not given, then display a fuzzy finder of various project dirs to select a project for creation of a session
     if [[ $# -eq 1 ]]; then
-      selected=$1;
+      local selected=$1;
     else
-      items="";
-      paths=TMUXPS_PATHS_ARRAY_PLACEHOLDER;
+      local items="";
+      local paths=TMUXPS_PATHS_ARRAY_PLACEHOLDER;
       for path in ${paths[@]};
         do
           [[ -d $path ]] && {
@@ -48,7 +48,7 @@ function hf() {
       done;
       selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
     fi
-    dirname=`basename $selected | tr '.' '-'`;
+    local dirname=`basename $selected | tr '.' '-'`;
     tmux switch-client -t $dirname;
     if [[ $? -eq 0 ]]; then
       exit 0;
