@@ -31,3 +31,14 @@ docker logs <container_(?:name|id|image:tag)>
 # run a bash session on a running container
 docker exec -it <container_(?:name|id|image:tag)> /bin/bash
 
+## A docker network is a way to organizate docker containers in a way where they can talk directly to each other through name instead of through ports
+
+# show all networks
+docker network ls
+
+# create a new network
+docker network create <network_name>
+
+# create a container and connect it to a network
+docker run -d -p27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password --name mongodb --network mongo-network mongo
+
