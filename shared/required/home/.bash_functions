@@ -25,7 +25,7 @@ function hf() {
     else
       local session_name="$1";
     fi
-    session_name="$(echo "$session_name" | tr '.' '-')";
+    local session_name="$(echo "$session_name" | tr '.' '-')";
     tmux new -s "$session_name" || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
   }
 
@@ -46,7 +46,7 @@ function hf() {
             items+="\n";
           }
       done;
-      selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
+      local selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
     fi
     local dirname=`basename $selected | tr '.' '-'`;
     tmux switch-client -t $dirname;
