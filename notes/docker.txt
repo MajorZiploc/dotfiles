@@ -25,6 +25,12 @@ docker stop <container_(?:name|id|image:tag)>
 # remove stopped containers
 docker container prune
 
+# remove / delete an image
+docker rmi <image_(?:name|id|image:tag)>
+
+# remove / delete a container
+docker rm <container_(?:name|id|image:tag)>
+
 # get logs on the specified container
 docker logs <container_(?:name|id|image:tag)> 
 # to stream the logs from a container
