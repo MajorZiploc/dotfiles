@@ -27,6 +27,8 @@ docker container prune
 
 # get logs on the specified container
 docker logs <container_(?:name|id|image:tag)> 
+# to stream the logs from a container
+docker logs <container_(?:name|id|image:tag)> -f
 
 # run a bash session on a running container
 docker exec -it <container_(?:name|id|image:tag)> /bin/bash
@@ -41,4 +43,12 @@ docker network create <network_name>
 
 # create a container and connect it to a network
 docker run -d -p27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password --name mongodb --network mongo-network mongo
+
+## Docker Compose
+
+# start all containers and a network
+docker-compose -f <file_name>.yaml up
+
+# stop and tear down all containers and a network
+docker-compose -f <file_name>.yaml down
 
