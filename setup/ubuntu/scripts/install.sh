@@ -6,9 +6,9 @@ sudo apt-get -y install dos2unix
 # view directories in tree format
 sudo apt-get -y install tree
 # creates a 'python' and makes it point to python3 that is installed
-sudo apt-get -y install python-is-python3
+# sudo apt-get -y install python-is-python3
 # installs python package manager
-sudo apt-get -y install pipenv
+# sudo apt-get -y install pipenv
 # installs nodejs
 # sudo apt-get -y install nodejs
 # installs npm
@@ -53,21 +53,31 @@ sudo apt-get -y install xclip
 sudo apt-get -y install copyq
 
 # docker
+# from: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
 sudo apt-get -y remove docker docker-engine docker.io containerd runc
 sudo apt-get -y update
-sudo apt-get -y install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo \
-    "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu
-\
-    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get -y update
+sudo apt -y install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+sudo apt -y update
+apt-cache policy docker-ce
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io
+
+# another way to install docker
+# sudo apt-get -y install \
+    # apt-transport-https \
+    # ca-certificates \
+    # curl \
+    # gnupg \
+    # lsb-release
+# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+# echo \
+    # "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu
+# \
+    # $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+# sudo apt-get -y update
+# sudo apt-get -y install docker-ce docker-ce-cli containerd.io
+
 # docker terminal auto completion
 sudo curl \
       -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose \
