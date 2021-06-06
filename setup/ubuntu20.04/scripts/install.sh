@@ -6,7 +6,9 @@ sudo apt-get -y install dos2unix
 # view directories in tree format
 sudo apt-get -y install tree
 # creates a 'python' and makes it point to python3 that is installed
-# sudo apt-get -y install python-is-python3
+sudo apt-get -y install python-is-python3
+# for creating python virtual environments
+sudo apt-get -y install python3-venv
 # installs python package manager
 # sudo apt-get -y install pipenv
 # installs nodejs

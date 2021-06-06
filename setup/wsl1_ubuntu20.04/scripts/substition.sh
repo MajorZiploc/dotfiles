@@ -8,10 +8,10 @@ temp="$2"
 tempShared="$3"
 tempThis="$4"
 
-vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc" | sed 's,^/c,c:,g' | sed -E 's,/,\\\\\\\\,g')"
+vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find "$tempShared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" {} \;
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's/VIM_PLUGIN_IMPORT_PLACEHOLDER/so ~\/_vim_plugins/g' {} \;
-find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,/bin/bash.exe,g' {} \;
+find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,/bin/bash,g' {} \;
 vim_plugin_import_ctrlp="Plugin 'ctrlpvim/ctrlp.vim' \" fuzzy file finder";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_IMPORT_CTRLP,$vim_plugin_import_ctrlp,g" {} \;
 vim_plugin_import_rip_grep="Plugin 'jremmen/vim-ripgrep' \" grepper";
@@ -28,12 +28,12 @@ vim_plugin_settings_quickfix="so ~/vimfiles/plugin-settings/quickfix-reflector.v
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_QUICKFIX,$vim_plugin_settings_quickfix,g" {} \;
 vim_plugin_settings_fzf="\"so ~/vimfiles/plugin-settings/fzf.vim";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_FZF,$vim_plugin_settings_fzf,g" {} \;
-find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,windows,g" {} \;
-vsc_settings_destination_placeholder="\$HOME/AppData/Roaming/Code/User/";
+find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,wsl1_ubuntu20.04,g" {} \;
+vsc_settings_destination_placeholder="\$HOME/.config/Code/User/";
 find "$tempShared" -regextype egrep -iregex ".*\.sh" -type f -exec sed -E -i'' "s,VSC_SETTINGS_DESTINATION_PLACEHOLDER,$vsc_settings_destination_placeholder,g" {} \;
-tmuxps_paths_array_placeholder='(~/projects)';
+tmuxps_paths_array_placeholder="(~/projects \"\$(find /mnt/c/Users -maxdepth 2 -regextype egrep -iregex \".*projects\" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' 2>/dev/null)\")";
 find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,TMUXPS_PATHS_ARRAY_PLACEHOLDER,$tmuxps_paths_array_placeholder,g" {} \;
-fuzzy_finder_placeholder="fzy";
+fuzzy_finder_placeholder="fzf";
 find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,FUZZY_FINDER_PLACEHOLDER,$fuzzy_finder_placeholder,g" {} \;
 
 unset vsvimpath
