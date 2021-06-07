@@ -26,7 +26,7 @@ function hf() {
       local session_name="$1";
     fi
     local session_name="$(echo "$session_name" | tr '.' '-')";
-    tmux new -s "$session_name" || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
+    tmux new -s "$session_name" 2>/dev/null || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
   }
 
   function tmuxps() {

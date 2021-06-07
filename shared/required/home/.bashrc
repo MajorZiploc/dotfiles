@@ -43,11 +43,6 @@ test -f ~/.bash_env_vars && . ~/.bash_env_vars
 test -f ~/.bash_aliases && . ~/.bash_aliases
 test -f ~/.bash_functions && . ~/.bash_functions
 
-if [ -d ~/AppData/Roaming/npm ]; then
-  # Adds npm packages to path
-  export PATH="$PATH:$(echo ~/AppData/Roaming/npm)"
-fi
-
 if [ -d ~/.local/bin ]; then
   export PATH="$PATH:$(echo ~/.local/bin)"
 fi
