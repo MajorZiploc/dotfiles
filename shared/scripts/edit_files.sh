@@ -37,7 +37,7 @@ function edit_files_helper {
         echo "$content" > "$destDir/$b"
         rm "$i"
       }
-      [[ $estyle == "override" ]] && {
+      [[ $estyle == "override" || $estyle == "new" ]] && {
         # echo "cat \"$i\" > \"$destDir/$b\""
         # echo "rm \"$i\""
         cat "$i" > "$destDir/$b"
