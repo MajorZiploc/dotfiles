@@ -31,6 +31,9 @@ docker rmi <image_(?:name|id|image:tag)>
 # remove / delete a container
 docker rm <container_(?:name|id|image:tag)>
 
+# stop all running containers
+docker ps -q
+
 # get logs on the specified container
 docker logs <container_(?:name|id|image:tag)> 
 # to stream the logs from a container
