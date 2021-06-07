@@ -48,12 +48,14 @@ function hf() {
       done;
       local selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
     fi
-    local dirname=`basename $selected | tr '.' '-'`;
-    tmux switch-client -t $dirname;
-    if [[ $? -eq 0 ]]; then
-      exit 0;
-    fi
-    tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname;
+    [[ -z "$selected" ]] || {
+      local dirname=`basename $selected | tr '.' '-'`;
+      tmux switch-client -t $dirname;
+      if [[ $? -eq 0 ]]; then
+        exit 0;
+      fi
+      tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname;
+    }
   }
 
   function tmuxds() {
