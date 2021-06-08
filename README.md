@@ -5,19 +5,35 @@ For automating the setup of a developer machine
 
 ## Tools
 Makes use of:
-- chocolatey package manager
+All:
 - vim
 - bash
-- apt package manager
 - tmux
 - pwsh (cross platform powershell)
 
+Windows:
+- chocolatey package manager
+
+Ubuntu:
+- apt package manager
+
+WSL Ubuntu:
+- apt package manager
+
+
+
 ## Installs
-- chocolatey packages
-- apt packages
+All:
 - bash configs
 - vim configs
 - vscode configs
+
+Windows:
+- chocolatey packages
+
+Ubuntu:
+- apt packages
+
 
 ## Install scripts - ALWAYS read scripts you are going to execute!!!!
 
