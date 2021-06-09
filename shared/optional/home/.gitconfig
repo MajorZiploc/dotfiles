@@ -8,6 +8,7 @@
 	mergeoptions = --no-edit
 	longpaths = true
   editor = 'C:/Program Files/Git/usr/bin/vim.exe'
+  symlinks = true
 [merge]
   ff = false
 [alias]
