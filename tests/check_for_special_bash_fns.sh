@@ -1,9 +1,9 @@
 #!/usr/bin/env ./libs/bats/bin/bats
 load 'libs/bats-support/load'
 load 'libs/bats-assert/load'
+source ~/.bashrc;
 
 function typea_check(){
-  source ~/.bashrc;
   type -a "$1";
 }
 
