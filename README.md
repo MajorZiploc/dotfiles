@@ -115,6 +115,3 @@ This will turn that feature off!
 
 This way you can have all the other great features you love from this repo, keep up to date with the repo, and make any changes that make these settings more you!
 
-## TODO
-- Windows: Upgrade wsl 1.0 to wsl 2.0 (package is managed with chocolatey)
-

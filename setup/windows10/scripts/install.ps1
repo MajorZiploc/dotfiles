@@ -94,6 +94,7 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     cinst -y smtp4dev
     # windows linux subsystem -- NOTE: requires download of a linux distro aswell
     cinst -y wsl
+    cinst -y wsl2
     # installs cross platform powershel 7
     cinst -y powershell-core
     # java development kit 12
