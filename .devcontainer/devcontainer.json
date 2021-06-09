@@ -3,13 +3,18 @@
 {
 	"name": "Ubuntu",
 	"build": {
-		"dockerfile": "Dockerfile",
+    "dockerComposeFile": "docker-compose.yaml",
 		// Update 'VARIANT' to pick an Ubuntu version: focal, bionic
-		"args": { "VARIANT": "focal" }
+		"args": {
+			"VARIANT": "focal"
+		},
+    "service": "app",
+	"workspaceFolder": "/workspace",
+	"dockerfile": "Dockerfile"
 	},
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": { 
+	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
