@@ -1,4 +1,4 @@
 #!/bin/bash
 
-./first_test.sh
+./check_for_special_bash_fns.sh
 
