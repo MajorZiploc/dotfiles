@@ -2,24 +2,33 @@
 load 'libs/bats-support/load'
 load 'libs/bats-assert/load'
 
-@test "check that sourcing bash files does not place output into terminal" {
+@test "check that sourcing ~/.bash_aliases does not place output into terminal" {
+  run source ~/.bash_aliases
+  assert_success
+  assert_output ''
+}
 
-IFS= ;
-l=(
-~/.bash_aliases
-~/.bash_env_vars
-~/.bash_functions
-~/.bashrc
-~/.bash_profile
-);
-for file in ${l[@]};
-  do
-    run source "$file"
-    assert_success
-    assert_output ''
-  done;
-unset IFS;
-      
+@test "check that sourcing ~/.bash_env_vars does not place output into terminal" {
+  run source ~/.bash_env_vars
+  assert_success
+  assert_output ''
+}
 
+@test "check that sourcing ~/.bash_functions does not place output into terminal" {
+  run source ~/.bash_functions
+  assert_success
+  assert_output ''
+}
+
+@test "check that sourcing ~/.bashrc does not place output into terminal" {
+  run source ~/.bashrc
+  assert_success
+  assert_output ''
+}
+
+@test "check that sourcing ~/.bash_profile does not place output into terminal" {
+  run source ~/.bash_profile
+  assert_success
+  assert_output ''
 }
 
