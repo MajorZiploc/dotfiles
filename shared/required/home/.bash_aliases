@@ -118,3 +118,5 @@ alias git_deploy='git checkout develop && git push && git checkout master && git
 alias to_winpath='sed -E "s,^/(\w),\U\1:,g" | sed s,/,\\\\,g'
 alias to_unixpath='sed -E "s,^(\w):,/\L\1,g" | sed s,\\\\,/,g'
 
+alias kill_port='npx kill-port'
+
