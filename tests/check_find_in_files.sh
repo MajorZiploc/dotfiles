@@ -65,3 +65,19 @@ EOF
   assert_output "$expected"
   cd ..
 }
+
+@test "check find_in_files_fuzz 'cans' '.*\.py|.*\.fs' '3' for proper listing of occurrences with a file pattern filter and a max depth search of 3" {
+  cd ./mock_content
+  run find_in_files_fuzz 'cans' '.*\.py|.*\.fs' '3'
+  assert_success
+expected="$(cat << EOF
+./pandas_data_analytics/src/pandas_notes.py:44:# filtering df using a series, contains check. is in list .in() .contains()
+./pandas_data_analytics/src/pandas_notes.py:122:# df['city'] = df['location'].str.split(', ', expand=True)[0]
+./FslabDataAnalytics/utils/index.fs:6:let setFullPaths (fileLocations: Dictionary<string,string>) (dir: string) =
+./FslabDataAnalytics/utils/index.fs:7:  for entry in fileLocations do
+./FslabDataAnalytics/utils/index.fs:8:    fileLocations.[entry.Key] <- Path.Combine(dir, entry.Value)
+EOF
+)"
+  assert_output "$expected"
+  cd ..
+}
