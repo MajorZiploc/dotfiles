@@ -1,0 +1,2 @@
+file_locations.data = "data/edi.pdf"
+file_locations.parser_settings = "parser_settings/edi.toml"

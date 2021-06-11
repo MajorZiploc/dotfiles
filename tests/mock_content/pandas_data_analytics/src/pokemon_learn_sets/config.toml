@@ -1,0 +1,3 @@
+file_locations.data = "data/pokemondb_75_100_2.csv"
+file_locations.cleaned_data = "data/cleaned.csv"
+data_notes = "data webscraped from pokemondb: https://pokemondb.net/pokedex/all"

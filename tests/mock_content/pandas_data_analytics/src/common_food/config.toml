@@ -1,0 +1,3 @@
+file_locations.data = "data/data.csv"
+file_locations.clean_data = "data/clean_data.csv"
+data_found = "https://www.kaggle.com/niharika41298/nutrition-details-for-most-common-foods"
