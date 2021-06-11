@@ -1,0 +1,5 @@
+[[fields]]
+name = "edi"
+pattern = "(EDI\\w+)"
+flags = "im"
+ordered_groups = [1]

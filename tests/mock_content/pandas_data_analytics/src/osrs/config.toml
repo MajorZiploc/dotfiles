@@ -1,0 +1,2 @@
+file_locations.training_data = "data/osrs.csv"
+data_notes = "data webscraped from old school runescape highscores"

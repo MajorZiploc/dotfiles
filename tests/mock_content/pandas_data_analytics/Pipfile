@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pandas_data_analytics = {editable = true, path = "."}
+toml = "*"
+numpy = "==1.19.3"
+pandas = "*"
+seaborn = "*"
+py-linq = "*"
+pdfplumber = "*"
+openpyxl = "*"
+pyodbc = "*"
+qtconsole = "*"
+jupyter = "*"
+jupyter-contrib-nbextensions = "*"
+pyqt5 = "*"
+
+[dev-packages]
+pylint = "*"
+autopep8 = "*"
+
+[requires]
+python_version = "3.8"

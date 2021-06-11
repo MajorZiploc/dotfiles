@@ -1,0 +1,2 @@
+file_locations.data = "data/data.csv"
+data_notes = "data from kaggle: https://www.kaggle.com/shivamb/netflix-shows"

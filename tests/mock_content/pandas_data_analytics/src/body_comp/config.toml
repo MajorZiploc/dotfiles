@@ -1,0 +1,3 @@
+file_locations.data = "data/dailyCalories.csv"
+file_locations.monthly_summaries = "data/monthly_summaries.csv"
+data_notes = "data from personal google sheets"
