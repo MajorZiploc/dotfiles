@@ -39,3 +39,29 @@ EOF
   cd ..
 }
 
+@test "check find_in_files '\bfor\b' '.*\.py|.*README.*' '3' for proper listing of occurrences with a file pattern filter" {
+  cd ./mock_content
+  run find_in_files '\bfor\b' '.*\.py|.*README.*' '3'
+  assert_success
+expected="$(cat << EOF
+./pandas_data_analytics/src/pandas_notes.py:2:# model_library = [k for k, v in _all_models.items() if v.is_turbo]
+./pandas_data_analytics/src/pandas_notes.py:4:# https://www.kaggle.com/herozerp/viz-rule-mining-for-groceries-dataset
+./pandas_data_analytics/src/pandas_notes.py:24:# number of unique entries for the itemDescription column
+./pandas_data_analytics/src/pandas_notes.py:30:# convert date like field to a date type. 's' is for unix time stamp to date
+./pandas_data_analytics/src/pandas_notes.py:64:# for 1 column
+./pandas_data_analytics/src/pandas_notes.py:66:# for all columns and fills NaN with 0
+./pandas_data_analytics/src/pandas_notes.py:87:# pd.concat((pd.read_csv(file) for file in files), ignore_index=True)
+./pandas_data_analytics/src/pandas_notes.py:92:# pd.concat((pd.read_csv(file) for file in files), axis='columns')
+./pandas_data_analytics/src/pandas_notes.py:231:# allows more space for column contents
+./pandas_data_analytics/README.md:2:An area for exploratory data science; to clean, analyze, and visualize data. 
+./pandas_data_analytics/README.md:11:Some of the data is personally scrapped using webscrapper.io. See my web_scraper_io_scripts repo for how to scrap this
+./pandas_data_analytics/README.md:25:### To Create a new virtual environment for this project
+./pandas_data_analytics/README.md:50:setup.py with the follow line of code is required for references project files in other project files for import statements
+./pandas_data_analytics/README.md:72:    <td>chunks pandas dataframes for scaling. async utils aswell</td>
+./pandas_data_analytics/README.md:160:## Interactive (all required for launching an interactive shell)
+./FslabDataAnalytics/README.md:9:- ionide-fsharp extension for vscode
+EOF
+)"
+  assert_output "$expected"
+  cd ..
+}
