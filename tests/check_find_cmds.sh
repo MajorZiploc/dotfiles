@@ -24,4 +24,18 @@ EOF
   cd ..
 }
 
+@test "check find_in_files '\bdf\.Columns' '.*(osrs|common).*\.py' for proper listing of occurrences with a file pattern filter" {
+  cd ./mock_content
+  run find_in_files '\bdf\.Columns' '.*(osrs|common).*\.py'
+  assert_success
+expected="$(cat << EOF
+./pandas_data_analytics/src/osrs/run.py:29:exps = Enumerable(df.columns).where(lambda c: re.match('.*_exp', c, re.I)).to_list()
+./pandas_data_analytics/src/osrs/run.py:94:exp_df: pd.DataFrame = df.loc[:, df.columns.isin(Enumerable(
+./pandas_data_analytics/src/osrs/run.py:95:  df.columns).where(lambda c: re.match('.*exp', c)).to_list())]
+./pandas_data_analytics/src/common_food/run.py:19:df.columns = df.columns.str.lower()
+EOF
+)"
+  assert_output "$expected"
+  cd ..
+}
 
