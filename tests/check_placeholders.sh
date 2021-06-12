@@ -22,9 +22,11 @@ for file in ${files[@]};
   files=`find ~ -maxdepth 1 -regextype egrep -iregex ".*vim.*" -type f`;
   for file in ${files[@]};
     do
-      run grep "_PLACEHOLDER" "$file";
-      assert_failure
-      assert_output ""
+      [[ $file =~ .*\.viminfo ]] || {
+        run grep "_PLACEHOLDER" "$file";
+        assert_failure
+        assert_output ""
+      }
     done;
 }
 
