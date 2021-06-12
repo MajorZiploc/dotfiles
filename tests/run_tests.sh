@@ -5,6 +5,7 @@ tests=(
 "check_for_special_bash_fns.sh"
 "check_find_in_files.sh"
 "check_find_files.sh"
+"check_placeholders.sh"
 )
 
 for test in ${tests[@]};
