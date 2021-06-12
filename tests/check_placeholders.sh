@@ -13,7 +13,6 @@ files=(
 )
 for file in ${files[@]};
   do
-
     run grep "_PLACEHOLDER" "$file";
     assert_failure
     assert_output ""
@@ -30,7 +29,6 @@ for file in ${files[@]};
   )
   for file in ${files[@]};
     do
-
       run grep "_PLACEHOLDER" "$file";
       assert_failure
       assert_output ""
@@ -41,7 +39,6 @@ for file in ${files[@]};
   files=`find ~/vimfiles/plugin-settings -maxdepth 1 -type f`;
   for file in ${files[@]};
     do
-
       run grep "_PLACEHOLDER" "$file";
       assert_failure
       assert_output ""
@@ -52,7 +49,16 @@ for file in ${files[@]};
   files=`find ~/Tasks -maxdepth 1 -type f`;
   for file in ${files[@]};
     do
+      run grep "_PLACEHOLDER" "$file";
+      assert_failure
+      assert_output ""
+    done;
+}
 
+@test "check clipboard files to make sure _PLACEHOLDER doesnt exist" {
+  files=`find ~/clipboard -type f`;
+  for file in ${files[@]};
+    do
       run grep "_PLACEHOLDER" "$file";
       assert_failure
       assert_output ""
