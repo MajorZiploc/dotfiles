@@ -65,3 +65,13 @@ for file in ${files[@]};
     done;
 }
 
+@test "check vscode files to make sure _PLACEHOLDER doesnt exist" {
+  files=`find ~/.config/Code/User -type f`;
+  for file in ${files[@]};
+    do
+      run grep "_PLACEHOLDER" "$file";
+      assert_failure
+      assert_output ""
+    done;
+}
+
