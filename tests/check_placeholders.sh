@@ -4,7 +4,11 @@ load 'libs/bats-assert/load'
 
 source ~/.bashrc || true;
 
-@test "check bash content to make sure _PLACEHOLDER doesnt exist in the files" {
+check="check";
+placeholder="_PLACEHOLDER"
+phdoesntexist="files to make sure $placeholder doesnt exist"
+
+@test "$check bash $phdoesntexist" {
 files=`find ~ -maxdepth 1 -regextype egrep -iregex ".*bash.*" -type f`;
 for file in ${files[@]};
   do
@@ -12,10 +16,9 @@ for file in ${files[@]};
     assert_failure
     assert_output ""
   done;
-
 }
 
-@test "check home vim content to make sure _PLACEHOLDER doesnt exist in the files" {
+@test "$check home vim $phdoesntexist" {
   files=`find ~ -maxdepth 1 -regextype egrep -iregex ".*vim.*" -type f`;
   for file in ${files[@]};
     do
@@ -25,7 +28,7 @@ for file in ${files[@]};
     done;
 }
 
-@test "check vim plugin config content to make sure _PLACEHOLDER doesnt exist in the files" {
+@test "$check vim plugin $phdoesntexist" {
   files=`find ~/vimfiles/plugin-settings -maxdepth 1 -type f`;
   for file in ${files[@]};
     do
@@ -35,7 +38,7 @@ for file in ${files[@]};
     done;
 }
 
-@test "check tasks to make sure _PLACEHOLDER doesnt exist in the files" {
+@test "$check tasks $phdoesntexist" {
   files=`find ~/Tasks -maxdepth 1 -type f`;
   for file in ${files[@]};
     do
@@ -45,7 +48,7 @@ for file in ${files[@]};
     done;
 }
 
-@test "check clipboard files to make sure _PLACEHOLDER doesnt exist" {
+@test "$check clipboard $phdoesntexist" {
   files=`find ~/clipboard -type f`;
   for file in ${files[@]};
     do
@@ -55,7 +58,7 @@ for file in ${files[@]};
     done;
 }
 
-@test "check vscode files to make sure _PLACEHOLDER doesnt exist" {
+@test "$check vscode $phdoesntexist" {
   files=`find ~/.config/Code/User -type f`;
   for file in ${files[@]};
     do
@@ -65,7 +68,7 @@ for file in ${files[@]};
     done;
 }
 
-@test "check home bin files to make sure _PLACEHOLDER doesnt exist" {
+@test "$check home bin $phdoesntexist" {
   files=`find ~/bin -type f`;
   for file in ${files[@]};
     do
