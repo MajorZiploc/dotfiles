@@ -48,3 +48,14 @@ for file in ${files[@]};
     done;
 }
 
+@test "check tasks to make sure _PLACEHOLDER doesnt exist in the files" {
+  files=`find ~/Tasks -maxdepth 1 -type f`;
+  for file in ${files[@]};
+    do
+
+      run grep "_PLACEHOLDER" "$file";
+      assert_failure
+      assert_output ""
+    done;
+}
+
