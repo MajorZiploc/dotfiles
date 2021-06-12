@@ -5,12 +5,7 @@ load 'libs/bats-assert/load'
 source ~/.bashrc || true;
 
 @test "check bash content to make sure _PLACEHOLDER doesnt exist in the files" {
-files=(
-  "$HOME/.bash_profile"
-  "$HOME/.bashrc"
-  "$HOME/.bash_env_vars"
-  "$HOME/.bash_functions"
-)
+files=`find ~ -maxdepth 1 -regextype egrep -iregex ".*bash.*" -type f`;
 for file in ${files[@]};
   do
     run grep "_PLACEHOLDER" "$file";
@@ -21,12 +16,7 @@ for file in ${files[@]};
 }
 
 @test "check home vim content to make sure _PLACEHOLDER doesnt exist in the files" {
-  files=(
-  "$HOME/_commonvimrc"
-  "$HOME/_vimrcterm"
-  "$HOME/_vim_plugins"
-  "$HOME/.vimrc"
-  )
+  files=`find ~ -maxdepth 1 -regextype egrep -iregex ".*vim.*" -type f`;
   for file in ${files[@]};
     do
       run grep "_PLACEHOLDER" "$file";
