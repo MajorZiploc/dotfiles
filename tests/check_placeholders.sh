@@ -61,7 +61,11 @@ for file in ${files[@]};
 }
 
 @test "$check vscode $phdoesntexist" {
-  files=`find ~/.config/Code/User -type f`;
+  vscode_dir="$HOME/AppData/Roaming/Code/User"
+  [[ -f vscode_dir ]] || {
+    vscode_dir="$HOME/.config/Code/User"
+  }
+  files=`find "$vscode_dir" -type f`;
   for file in ${files[@]};
     do
       run grep "_PLACEHOLDER" "$file";
