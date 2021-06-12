@@ -11,7 +11,7 @@ tests=(
 for test in ${tests[@]};
   do
     echo "---------------"
-    echo "Running $test"
+    echo "## Running Test Cases: $test"
     echo ""
     ./"$test";
     echo "---------------"
