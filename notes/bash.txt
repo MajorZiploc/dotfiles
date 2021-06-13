@@ -1,3 +1,6 @@
+( ) can be used to basically join stdout and the pipe will redirect all the output of all commands in the ( )
+( ls ; ls ) | less # content of directory listed twice in list
+
 Extra snippets:
 pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'
 pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -Command "& {Write-Host 'hi'}"
