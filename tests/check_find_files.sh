@@ -47,12 +47,12 @@ EOF
 @test "check find_files_delete '.*\.py' 'df' '3' deletes the proper files" {
   git restore ./mock_content/.
   cd ./mock_content
-  function f(){
-    find_files_delete '.*\.py' 'df' '3'
-  }
-  run f
+  run git --no-pager status
+  refute_output --regexp "deleted:\s*pandas_data_analytics/setup\.py"
+  refute_output --regexp "deleted:\s*pandas_data_analytics/src/pandas_notes\.py"
+  run find_files_delete '.*\.py' 'df' '3'
   assert_success
-  run git status
+  run git --no-pager status
   assert_output --regexp "deleted:\s*pandas_data_analytics/setup\.py"
   assert_output --regexp "deleted:\s*pandas_data_analytics/src/pandas_notes\.py"
   git restore .
@@ -71,12 +71,6 @@ EOF
   run cat ./pandas_data_analytics/src/pandaz_notez_squad_goals.py
   assert_failure
   run find_files_rename '.*\.py' 's/s/z/g;s/(.*?)(\.py)/\1_squad_goals\2/' 'df' '3';
-  run git status
-  assert_output --regexp "deleted:\s*pandas_data_analytics/setup\.py"
-  assert_output --regexp "deleted:\s*pandas_data_analytics/src/pandas_notes\.py"
-  assert_output --regexp "Untracked files:"
-  assert_output --regexp "pandas_data_analytics/zetup_squad_goals\.py"
-  assert_output --regexp "pandas_data_analytics/src/pandaz_notez_squad_goals\.py"
   run cat ./pandas_data_analytics/setup.py
   assert_failure
   run cat ./pandas_data_analytics/src/pandas_notes.py
@@ -86,12 +80,6 @@ EOF
   run cat ./pandas_data_analytics/src/pandaz_notez_squad_goals.py
   assert_success
   run find_files_rename ".*_squad_goals\.py" "s/z/s/g;s/(.*)_squad_goals(.*)/\1\2/" "df" "3";
-  run git status
-  refute_output --regexp "deleted:\s*pandas_data_analytics/setup\.py"
-  refute_output --regexp "deleted:\s*pandas_data_analytics/src/pandas_notes\.py"
-  refute_output --regexp "Untracked files:"
-  refute_output --regexp "pandas_data_analytics/zetup_squad_goals\.py"
-  refute_output --regexp "pandas_data_analytics/src/pandaz_notez_squad_goals\.py"
   run cat ./pandas_data_analytics/setup.py
   assert_success
   run cat ./pandas_data_analytics/src/pandas_notes.py
