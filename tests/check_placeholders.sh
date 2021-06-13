@@ -8,19 +8,8 @@ check="check";
 placeholder="_PLACEHOLDER"
 phdoesntexist="files to make sure $placeholder doesnt exist"
 
-@test "$check bash $phdoesntexist" {
-files=`find ~ -maxdepth 1 -regextype egrep -iregex ".*bash.*" -type f`;
-for file in ${files[@]};
-  do
-    run grep "_PLACEHOLDER" "$file";
-    assert_failure
-    assert_output ""
-  done;
-}
-
-@test "$check home vim $phdoesntexist" {
-  files=`find ~ -maxdepth 1 -regextype egrep -iregex ".*vim.*" -type f`;
-  for file in ${files[@]};
+function check_for_placeholder {
+  for file in $@;
     do
       [[ $file =~ .*\.viminfo ]] || {
         run grep "_PLACEHOLDER" "$file";
@@ -30,34 +19,29 @@ for file in ${files[@]};
     done;
 }
 
+@test "$check bash $phdoesntexist" {
+  files=`find ~ -maxdepth 1 -regextype egrep -iregex ".*bash.*" -type f`;
+  check_for_placeholder $files;
+}
+
+@test "$check home vim $phdoesntexist" {
+  files=`find ~ -maxdepth 1 -regextype egrep -iregex ".*vim.*" -type f`;
+  check_for_placeholder $files;
+}
+
 @test "$check vim plugin $phdoesntexist" {
   files=`find ~/vimfiles/plugin-settings -maxdepth 1 -type f`;
-  for file in ${files[@]};
-    do
-      run grep "_PLACEHOLDER" "$file";
-      assert_failure
-      assert_output ""
-    done;
+  check_for_placeholder $files;
 }
 
 @test "$check tasks $phdoesntexist" {
   files=`find ~/Tasks -maxdepth 1 -type f`;
-  for file in ${files[@]};
-    do
-      run grep "_PLACEHOLDER" "$file";
-      assert_failure
-      assert_output ""
-    done;
+  check_for_placeholder $files;
 }
 
 @test "$check clipboard $phdoesntexist" {
   files=`find ~/clipboard -type f`;
-  for file in ${files[@]};
-    do
-      run grep "_PLACEHOLDER" "$file";
-      assert_failure
-      assert_output ""
-    done;
+  check_for_placeholder $files;
 }
 
 @test "$check vscode $phdoesntexist" {
@@ -66,21 +50,11 @@ for file in ${files[@]};
     vscode_dir="$HOME/.config/Code/User"
   }
   files=`find "$vscode_dir" -type f`;
-  for file in ${files[@]};
-    do
-      run grep "_PLACEHOLDER" "$file";
-      assert_failure
-      assert_output ""
-    done;
+  check_for_placeholder $files;
 }
 
 @test "$check home bin $phdoesntexist" {
   files=`find ~/bin -type f`;
-  for file in ${files[@]};
-    do
-      run grep "_PLACEHOLDER" "$file";
-      assert_failure
-      assert_output ""
-    done;
+  check_for_placeholder $files;
 }
 
