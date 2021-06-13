@@ -7,7 +7,7 @@ source ~/.bashrc || true;
 @test "check find_in_files '\bdf\.Columns' for proper listing of occurrences" {
   cd ./mock_content
   function f(){
-    find_in_files '\bdf\.Columns' | sort
+    find_in_files '\bdf\.Columns' | sort -f
   }
   run f
   assert_success
@@ -30,7 +30,7 @@ EOF
 @test "check find_in_files '\bdf\.Columns' '.*(osrs|common).*\.py' for proper listing of occurrences with a file pattern filter" {
   cd ./mock_content
   function f(){
-    find_in_files '\bdf\.Columns' '.*(osrs|common).*\.py' | sort
+    find_in_files '\bdf\.Columns' '.*(osrs|common).*\.py' | sort -f
   }
   run f
   assert_success
@@ -48,7 +48,7 @@ EOF
 @test "check find_in_files '\bfor\b' '.*\.py|.*README.*' '3' for proper listing of occurrences with a file pattern filter" {
   cd ./mock_content
   function f(){
-    find_in_files '\bfor\b' '.*\.py|.*README.*' '3' | sort
+    find_in_files '\bfor\b' '.*\.py|.*README.*' '3' | sort -f
   }
   run f
   assert_success
@@ -78,7 +78,7 @@ EOF
 @test "check find_in_files_fuzz 'cans' '.*\.py|.*\.fs' '3' for proper listing of occurrences with a file pattern filter and a max depth search of 3" {
   cd ./mock_content
   function f(){
-    find_in_files_fuzz 'cans' '.*\.py|.*\.fs' '3' | sort
+    find_in_files_fuzz 'cans' '.*\.py|.*\.fs' '3' | sort -f
   }
   run f
   assert_success
