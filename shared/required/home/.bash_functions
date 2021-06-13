@@ -29,6 +29,10 @@ function hf() {
     tmux new -s "$session_name" 2>/dev/null || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
   }
 
+  function tmuxps_get_project_dirs(){
+    export TMUXPS_PROJECT_DIRS=TMUXPS_PATHS_ARRAY_PLACEHOLDER;
+  }
+
   function tmuxps() {
     # tmux project session
     # creates a tmux session
@@ -38,7 +42,8 @@ function hf() {
       local selected=$1;
     else
       local items="";
-      local paths=TMUXPS_PATHS_ARRAY_PLACEHOLDER;
+      tmuxps_get_project_dirs;
+      local paths=$TMUXPS_PROJECT_DIRS;
       for path in ${paths[@]};
         do
           [[ -d $path ]] && {
