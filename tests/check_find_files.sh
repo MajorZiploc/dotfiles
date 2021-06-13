@@ -4,6 +4,8 @@ load 'libs/bats-assert/load'
 
 source ~/.bashrc || true;
 
+git restore ./mock_content/.
+
 @test "check find_files '.*\.py|.*\.fs' 'for' '3' for proper listing of occurrences with a file pattern filter and a max depth search of 3" {
   cd ./mock_content
   function f(){
@@ -41,4 +43,21 @@ EOF
   assert_output "$expected"
   cd ..
 }
+
+@test "check find_files_delete '.*\.py' 'df' '3' deletes the proper files" {
+  git restore ./mock_content/.
+  cd ./mock_content
+  function f(){
+    find_files_delete '.*\.py' 'df' '3'
+  }
+  run f
+  assert_success
+  run git status
+  assert_output --regexp "deleted:\s*pandas_data_analytics/setup\.py"
+  assert_output --regexp "deleted:\s*pandas_data_analytics/src/pandas_notes\.py"
+  git restore .
+  cd ..
+}
+
+git restore ./mock_content/.
 
