@@ -62,6 +62,14 @@ EOF
 @test "check find_files_rename '.*\.py' 's/s/z/g;s/(.*?)(\.py)/\1_squad_goals\2/' 'df' '3' renames the proper files" {
   git restore ./mock_content/.
   cd ./mock_content
+  run cat ./pandas_data_analytics/setup.py
+  assert_success
+  run cat ./pandas_data_analytics/src/pandas_notes.py
+  assert_success
+  run cat ./pandas_data_analytics/zetup_squad_goals.py
+  assert_failure
+  run cat ./pandas_data_analytics/src/pandaz_notez_squad_goals.py
+  assert_failure
   run find_files_rename '.*\.py' 's/s/z/g;s/(.*?)(\.py)/\1_squad_goals\2/' 'df' '3';
   run git status
   assert_output --regexp "deleted:\s*pandas_data_analytics/setup\.py"
@@ -69,6 +77,14 @@ EOF
   assert_output --regexp "Untracked files:"
   assert_output --regexp "pandas_data_analytics/zetup_squad_goals\.py"
   assert_output --regexp "pandas_data_analytics/src/pandaz_notez_squad_goals\.py"
+  run cat ./pandas_data_analytics/setup.py
+  assert_failure
+  run cat ./pandas_data_analytics/src/pandas_notes.py
+  assert_failure
+  run cat ./pandas_data_analytics/zetup_squad_goals.py
+  assert_success
+  run cat ./pandas_data_analytics/src/pandaz_notez_squad_goals.py
+  assert_success
   run find_files_rename ".*_squad_goals\.py" "s/z/s/g;s/(.*)_squad_goals(.*)/\1\2/" "df" "3";
   run git status
   refute_output --regexp "deleted:\s*pandas_data_analytics/setup\.py"
@@ -76,8 +92,17 @@ EOF
   refute_output --regexp "Untracked files:"
   refute_output --regexp "pandas_data_analytics/zetup_squad_goals\.py"
   refute_output --regexp "pandas_data_analytics/src/pandaz_notez_squad_goals\.py"
+  run cat ./pandas_data_analytics/setup.py
+  assert_success
+  run cat ./pandas_data_analytics/src/pandas_notes.py
+  assert_success
+  run cat ./pandas_data_analytics/zetup_squad_goals.py
+  assert_failure
+  run cat ./pandas_data_analytics/src/pandaz_notez_squad_goals.py
+  assert_failure
   cd ..
 }
 
 git restore ./mock_content/.
+
 
