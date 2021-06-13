@@ -41,7 +41,7 @@ Ubuntu:
 ### It is highly recommended to back up your current settings!!!!
 ### The copy process makes use of sed substitutions that can affect the configs and the currently running copy scripts. See the substitutions for your os in ./setup/\<os\>/scripts/substitution.sh
 
-Use the copy.sh scripts found in ./setup/[windows10|wsl1\_ubuntu20.04|ubuntu20.04|mac]/scripts/copy.sh to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, Vundle.
+Use the copy.sh scripts found in ./setup/[windows10|wsl\_ubuntu20.04|ubuntu20.04|mac]/scripts/copy.sh to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, Vundle.
 
 Paths with content that will be affected include but are not limited to:
 - "$HOME/.vim/bundle"
