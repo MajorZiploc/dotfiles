@@ -94,3 +94,28 @@ EOF
   cd ..
 }
 
+
+
+
+@test "check find_in_files_replace 's/(df\.Columns)/so much \1 change here/' '.*\.fs' for proper listing of occurrences with a file pattern filter and a max depth search of 3" {
+  cd ./mock_content
+  git restore .
+  run git --no-pager diff .
+  refute_output --partial "df.Columns.Keys"
+  refute_output --partial "so much df.Columns change here.Keys"
+  refute_output --partial "printfn \"%A\" <| df.Columns.Keys"
+  refute_output --partial "printfn \"%A\" <| so much df.Columns change here.Keys"
+  refute_output --partial "// printfn \"%A\" mdf.Columns.Keys"
+  refute_output --partial "// printfn \"%A\" mso much df.Columns change here.Keys"
+  run find_in_files_replace "s/(df\.Columns)/so much \1 change here/" ".*\.fs"
+  run git --no-pager diff .
+  assert_output --partial "df.Columns.Keys"
+  assert_output --partial "so much df.Columns change here.Keys"
+  assert_output --partial "printfn \"%A\" <| df.Columns.Keys"
+  assert_output --partial "printfn \"%A\" <| so much df.Columns change here.Keys"
+  assert_output --partial "// printfn \"%A\" mdf.Columns.Keys"
+  assert_output --partial "// printfn \"%A\" mso much df.Columns change here.Keys"
+  git restore .
+  cd ..
+}
+
