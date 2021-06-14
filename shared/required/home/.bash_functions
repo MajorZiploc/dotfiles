@@ -43,8 +43,7 @@ function hf() {
     else
       local items="";
       tmuxps_get_project_dirs;
-      local paths=$TMUXPS_PROJECT_DIRS;
-      for path in ${paths[@]};
+      for path in ${TMUXPS_PROJECT_DIRS[@]};
         do
           [[ -d $path ]] && {
             items+=`find $path -maxdepth 1 -mindepth 1 -type d`;
