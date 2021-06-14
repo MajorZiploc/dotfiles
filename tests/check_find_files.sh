@@ -7,6 +7,7 @@ source ~/.bashrc || true;
 git restore ./mock_content/.
 
 @test "check find_files '.*\.py|.*\.fs' 'for' '3' for proper listing of occurrences with a file pattern filter and a max depth search of 3" {
+  git restore ./mock_content/.
   cd ./mock_content
   function f(){
     find_files '.*\.py|.*\.fs' 'for' '3' | sort -f
@@ -23,6 +24,7 @@ assert_output "$expected"
 }
 
 @test "check find_files_fuzz '.*pa.*' '' '2' for proper listing of occurrences with a file pattern filter and a max depth search of 2" {
+  git restore ./mock_content/.
   cd ./mock_content
   function f(){
     find_files_fuzz '.*pa.*' '' '2' | sort -f

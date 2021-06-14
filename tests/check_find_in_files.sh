@@ -5,6 +5,7 @@ load 'libs/bats-assert/load'
 source ~/.bashrc || true;
 
 @test "check find_in_files '\bdf\.Columns' for proper listing of occurrences" {
+  git restore ./mock_content/.
   cd ./mock_content
   function f(){
     find_in_files '\bdf\.Columns' | sort -f
@@ -28,6 +29,7 @@ EOF
 }
 
 @test "check find_in_files '\bdf\.Columns' '.*(osrs|common).*\.py' for proper listing of occurrences with a file pattern filter" {
+  git restore ./mock_content/.
   cd ./mock_content
   function f(){
     find_in_files '\bdf\.Columns' '.*(osrs|common).*\.py' | sort -f
@@ -46,6 +48,7 @@ EOF
 }
 
 @test "check find_in_files '\bfor\b' '.*\.py|.*README.*' '3' for proper listing of occurrences with a file pattern filter" {
+  git restore ./mock_content/.
   cd ./mock_content
   function f(){
     find_in_files '\bfor\b' '.*\.py|.*README.*' '3' | sort -f
@@ -76,6 +79,7 @@ EOF
 }
 
 @test "check find_in_files_fuzz 'cans' '.*\.py|.*\.fs' '3' for proper listing of occurrences with a file pattern filter and a max depth search of 3" {
+  git restore ./mock_content/.
   cd ./mock_content
   function f(){
     find_in_files_fuzz 'cans' '.*\.py|.*\.fs' '3' | sort -f
@@ -98,8 +102,8 @@ EOF
 
 
 @test "check find_in_files_replace 's/(df\.Columns)/so much \1 change here/' '.*\.fs' for proper listing of occurrences with a file pattern filter and a max depth search of 3" {
+  git restore ./mock_content/.
   cd ./mock_content
-  git restore .
   run git --no-pager diff .
   refute_output --partial "df.Columns.Keys"
   refute_output --partial "so much df.Columns change here.Keys"
