@@ -1,0 +1,13 @@
+# when working with wsl commands
+# OPEN POWERSHELL AS THE USER THAT HAS INSTALLED THE DISTROS
+# for me, this isnt with the admin shell
+
+# list distros - includes docker
+wsl -l -v
+
+# makes wsl2 the default
+wsl --set-default-version 2
+
+# makes ubuntu use wsl 2
+wsl --set-version Ubuntu 2
+
