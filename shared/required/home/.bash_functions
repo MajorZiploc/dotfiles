@@ -331,14 +331,20 @@ function show_line_nums {
   perl -nle 'print "$. $_"' "$content";
 }
 
+function refresh_settings_with_vscode {
+  refresh_settings "01";
+}
+
 function refresh_settings {
+  local flags="$1";
+  [[ -z "$flags" ]] && { flags="00"; }
   local project_root_path="$HOME/projects/home-settings";
   cd "$project_root_path" &&
   git checkout master &&
   echo 'Previous commit information:' &&
   echo "$(git show --summary)" &&
   git pull &&
-  "$project_root_path"/setup/OS_PLACEHOLDER/scripts/copy.sh &&
+  "$project_root_path"/setup/OS_PLACEHOLDER/scripts/copy.sh "$flags" &&
   source ~/.bash_profile &&
   echo 'Refreshed settings!' &&
   echo '' &&
