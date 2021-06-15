@@ -1,0 +1,7 @@
+// in cmd to add johnc to the docker-users group
+net localgroup docker-users johnc /add
+// list all groups
+net localgroup
+// list users in the docker-users group
+net localgroup docker-users
+
