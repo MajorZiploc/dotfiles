@@ -120,3 +120,8 @@ alias to_unixpath='sed -E "s,^(\w):,/\L\1,g" | sed s,\\\\,/,g'
 
 alias kill_port='npx kill-port'
 
+# for opening a gui file explorer
+[[ ! -z $(which explorer.exe 2>/dev/null) ]] && {
+  alias explorer="explorer.exe"
+}
+
