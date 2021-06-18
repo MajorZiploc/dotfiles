@@ -1,4 +1,3 @@
-working changes here!
 /* SQL column search */
 SELECT 
 c.name  AS 'ColumnName'
