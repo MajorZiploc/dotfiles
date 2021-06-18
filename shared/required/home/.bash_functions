@@ -375,18 +375,19 @@ function refresh_settings {
   [[ -z "$flags" ]] && { flags="00"; }
   local project_root_path="$HOME/projects/home-settings";
   cd "$project_root_path";
+  echo 'Previous commit information:';
+  echo "$(git show --summary)";
   local is_not_clean=`git status | grep "nothing to commit, working tree clean"`
   [[ -z is_not_clean ]] && {
     git stash push &&
     git checkout master &&
+    git pull &&
     git stash pop
   } || {
-    git checkout master
+    git checkout master &&
+    git pull
   }
-  echo 'Previous commit information:' &&
-  echo "$(git show --summary)" &&
-  git pull &&
-  "$project_root_path"/setup/OS_PLACEHOLDER/scripts/copy.sh "$flags" &&
+  "$project_root_path"/setup/OS_PLACEHOLDER/scripts/copy.s "$flags" &&
   source ~/.bash_profile &&
   echo 'Refreshed settings!' &&
   echo '' &&
