@@ -331,6 +331,31 @@ function show_line_nums {
   perl -nle 'print "$. $_"' "$content";
 }
 
+function refresh_settings_help {
+local docs="$(cat << EOF
+Purpose:
+Refresh your bash, vim, clipboard, Tasks, and/or vscode settings
+Can toggle some refreshes on and off with use of binary flag system
+
+refresh_settings() = refresh_settings_with_flags "00"
+refresh_settings_all() = refresh_settings_with_flags "11"
+
+Togglable Copies:
+- vscode
+- clipboard
+
+Binary Flags to pass to refresh_settings_with_flags: (leading zeros can be omitted)
+Use to copy the given settings
+"01" -- vscode
+"10" -- clipboard
+These flags are stackable:
+Ex:
+refresh_settings_with_flags "11" -- copy vscode and clipboard aswell
+EOF
+)"
+  echo "$docs"
+}
+
 function refresh_settings_all {
   refresh_settings "11";
 }
