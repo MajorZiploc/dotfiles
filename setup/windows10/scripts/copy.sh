@@ -6,6 +6,7 @@ SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 setupRoot="$SCRIPTPATH/.."
 
 # 01 to include vscode
+# 10 to include clipboard
 flags="$1"
 [[ -z flags ]] && { flags='00'; }
 

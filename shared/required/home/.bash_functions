@@ -335,6 +335,16 @@ function refresh_settings_with_vscode {
   refresh_settings "01";
 }
 
+function refresh_settings_all {
+  refresh_settings "11";
+}
+
+function refresh_settings_with_flags {
+  local flags="$1";
+  [[ -z flags ]] && { echo "flags must be specified"; return 1; }
+  refresh_settings "$flags";
+}
+
 function refresh_settings {
   local flags="$1";
   [[ -z "$flags" ]] && { flags="00"; }

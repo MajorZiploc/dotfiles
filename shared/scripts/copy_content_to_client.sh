@@ -10,11 +10,14 @@ tempThis="$4"
 flags="$5"
 flags_as_int="$((2#$flags))"
 vscode_flag_as_int="$((2#01))"
+clipboard_flag_as_int="$((2#10))"
 
 test -f "$tempThis/.ahk" && { cp -a "$tempThis/.ahk" "$HOME/"; }
 cp -a "$tempShared/required/home/." "$HOME/"
 cp -a "$tempShared/required/home_bin/." "$HOME/bin/"
-cp -a "$tempShared/required/clipboard/." "$HOME/clipboard/"
+[[ $(($clipboard_flag_as_int & $flags_as_int)) == $clipboard_flag_as_int ]] && {
+  cp -a "$tempShared/required/clipboard/." "$HOME/clipboard/"
+}
 cp -a "$tempShared/required/Tasks/." "$HOME/Tasks/"
 [[ $(($vscode_flag_as_int & $flags_as_int)) == $vscode_flag_as_int ]] && {
   cp -a "$tempShared/required/vscodevim/." "$HOME/vscodevim/"
@@ -36,4 +39,5 @@ unset temp
 unset flags
 unset flags_as_int
 unset vscode_flag_as_int
+unset clipboard_flag_as_int
 
