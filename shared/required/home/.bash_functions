@@ -374,10 +374,15 @@ function refresh_settings {
   local flags="$1";
   [[ -z "$flags" ]] && { flags="00"; }
   local project_root_path="$HOME/projects/home-settings";
-  cd "$project_root_path" &&
-  git stash push &&
-  git checkout master &&
-  git stash pop &&
+  cd "$project_root_path";
+  local is_not_clean=`git status | grep "nothing to commit, working tree clean"`
+  [[ -z is_not_clean ]] && {
+    git stash push &&
+    git checkout master &&
+    git stash pop
+  } || {
+    git checkout master
+  }
   echo 'Previous commit information:' &&
   echo "$(git show --summary)" &&
   git pull &&
