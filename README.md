@@ -2,6 +2,7 @@
 
 ## Purpose
 For automating the setup of a developer machine
+NOTE: mac is least tested!
 
 ## Tools
 Makes use of:
@@ -41,17 +42,19 @@ Ubuntu:
 ### It is highly recommended to back up your current settings!!!!
 ### The copy process makes use of sed substitutions that can affect the configs and the currently running copy scripts. See the substitutions for your os in ./setup/\<os\>/scripts/substitution.sh
 
-Use the copy.sh scripts found in ./setup/[windows10|wsl\_ubuntu20.04|ubuntu20.04|mac]/scripts/copy.sh to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, Vundle.
+Use the copy.sh scripts found in ./setup/[windows10|wsl\_ubuntu20.04|ubuntu20.04|mac]/scripts/copy.sh "$flags" to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, Vundle.
+
+copy.sh : binary\_flags? -> unit
 
 Paths with content that will be affected include but are not limited to:
 - "$HOME/.vim/bundle"
 - "$HOME/.vim/swap"
 - "$HOME/vimfiles/plugin-settings"
-- "$HOME/clipboard"
+- "$HOME/clipboard" when flags contain "10"
 - "$HOME/bin"
 - "$HOME/Tasks"
-- "$HOME/vscodevim"
-- "$HOME/AppData/Roaming/Code/User/" (windows) else "$HOME/.config/Code/User/"
+- "$HOME/vscodevim" when flags contain "01"
+- "$HOME/AppData/Roaming/Code/User/" (windows) else "$HOME/.config/Code/User/" when flags contain "01"
 
 ### Windows
 To install chocolatey and clone this repo:
@@ -75,9 +78,12 @@ To setup ssh keys for git:
 - find\_in\_files\_replace
 - find\_items
 - tmuxcs <optional\_session\_name> # Creates a tmux session based on the current path if the session name is not given
+- tmuxps # Creates a tmux session based the selected fzf/fzy folders specified by tmuxps\_get\_project\_dirs
+- tmuxds # Creates a tmux session based the selected fzf/fzy folder from the users current path
 - tmuxks -t <session\_name> # kill a tmux session
 - tmuxas -t <session\_name> # attach to a tmux session
 - tmuxksvr # kills the tmux server
+- refresh\_settings(\_help|\_all|\_with\_flags)?
 ### Note on Notable bash functions/aliases
 All of the find\_ are wrappers around find to make certain common operations easy to perform.
 
