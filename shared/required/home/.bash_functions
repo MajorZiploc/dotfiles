@@ -331,10 +331,6 @@ function show_line_nums {
   perl -nle 'print "$. $_"' "$content";
 }
 
-function refresh_settings_with_vscode {
-  refresh_settings "01";
-}
-
 function refresh_settings_all {
   refresh_settings "11";
 }
