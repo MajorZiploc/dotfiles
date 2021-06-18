@@ -372,7 +372,7 @@ function find_items_rename_experimental_helper {
   [[ -z "$preview" ]] && { echo "Must specifiy the preview flag!"; return 1; }
   local maxdepth="$4";
   [[ -z "$maxdepth" ]] && { echo "Must specifiy a maxdepth!"; return 1; }
-  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -print0 | while read -d $'\0' item
+  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0 | while read -d $'\0' item
   do
     local new_name="$(echo "$item" | sed -E "$by")";
     [[ $f != $new_name ]] && {
@@ -408,7 +408,7 @@ function find_items {
   [[ -z "$file_pattern" ]] && { echo "Must specifiy a file pattern!"; return 1; }
   local maxdepth="$2";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
-  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*';
+  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*';
 }
 
 function find_items_fuzz {
@@ -425,9 +425,9 @@ function find_files_delete_preview {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   [[ -z "$with_content" ]] && {
-    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec echo rm "{}" \;
+    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec echo rm "{}" \;
   } || {
-    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep -in "$with_content" "{}" \; -exec echo rm "{}" \; | egrep "^rm"
+    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in "$with_content" "{}" \; -exec echo rm "{}" \; | egrep "^rm"
   }
 }
 
@@ -438,9 +438,9 @@ function find_files_delete {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   [[ -z "$with_content" ]] && {
-    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec rm "{}" \;
+    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec rm "{}" \;
   } || {
-    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep -in "$with_content" "{}" \; -exec rm "{}" \; > /dev/null
+    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in "$with_content" "{}" \; -exec rm "{}" \; > /dev/null
   }
 }
 
@@ -455,7 +455,7 @@ function find_files_rename_helper {
   local maxdepth="$5";
   [[ -z "$maxdepth" ]] && { echo "Must specifiy a maxdepth!"; return 1; }
 
-  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -print0  | while read -d $'\0' file
+  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0  | while read -d $'\0' file
   do
     local should_rename=false;
     [[ -z "$with_content" ]] && {
@@ -506,9 +506,9 @@ function find_files {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   [[ -z "$with_content" ]] && {
-    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*';
+    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*';
   } || {
-    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep -in "$with_content" "{}" \; -exec echo "{}" \; | egrep -v "\s*^[[:digit:]]+:"
+    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in "$with_content" "{}" \; -exec echo "{}" \; | egrep -v "\s*^[[:digit:]]+:"
   }
 }
 
@@ -527,7 +527,7 @@ function find_in_files {
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
-  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec egrep --color -in "$grep_pattern" "{}" +;
+  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep --color -in "$grep_pattern" "{}" +;
 }
 
 function find_in_files_fuzz {
@@ -546,7 +546,7 @@ function find_in_files_replace {
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
-  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -exec sed -E -i'' "$by" "{}" \;
+  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec sed -E -i'' "$by" "{}" \;
 }
 
 function git_checkout_branch_in_path {
