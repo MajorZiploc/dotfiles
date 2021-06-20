@@ -626,6 +626,12 @@ function git_log_show_last_n {
   git --no-pager log --oneline -n "$n" | perl -nle '$i=$.-1; print "$i $_"';
 }
 
+function git_diff_of_commit {
+  local commit="$1";
+  [[ -z "$commit" ]] && { echo "Must specifiy a commit!"; return 1; }
+  git diff "$commit"^!;
+}
+
 function show_cmds_like {
   local pattern="$1";
   [[ -z "$pattern" ]] && { echo "Must specifiy a command pattern!"; return 1; }
