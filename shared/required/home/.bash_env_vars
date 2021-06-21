@@ -4,7 +4,7 @@ export FCEDIT='/usr/bin/vim -u ~/_vimrcterm'
 export VISUAL='/usr/bin/vim -u ~/_vimrcterm'
 
 # the fall back to fc and <c-x> <c-e> 
-export EDITOR='/usr/bin/vim -u ~/_vimrcterm'
+export EDITOR='/usr/bin/vim'
 
 export NODE_ENV='development'
 
