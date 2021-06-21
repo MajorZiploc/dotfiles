@@ -11,10 +11,7 @@ Plugin 'tpope/vim-surround' " manipulate surround chars
 Plugin 'frazrepo/vim-rainbow' " color pairing brakets and such
 Plugin 'tpope/vim-fugitive' " git plugin
 Plugin 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
-VIM_PLUGIN_IMPORT_CTRLP_PLACEHOLDER
-VIM_PLUGIN_IMPORT_RIP_GREP_PLACEHOLDER
-VIM_PLUGIN_IMPORT_QUICKFIX_PLACEHOLDER
-VIM_PLUGIN_IMPORT_FZF_PLACEHOLDER
+VIM_PLUGIN_INCLUDE_PLACEHOLDER
 
 " Plugin 'edkolev/tmuxline.vim' " prettier tmux
 " Plugin 'itchyny/lightline.vim' " status bar
@@ -40,10 +37,7 @@ let mapleader = " "
 so ~/vimfiles/plugin-settings/airline-theme.vim
 so ~/vimfiles/plugin-settings/fugitive.vim
 so ~/vimfiles/plugin-settings/coc.vim
-VIM_PLUGIN_SETTINGS_CTRLP_PLACEHOLDER
-VIM_PLUGIN_SETTINGS_RIP_GREP_PLACEHOLDER
-VIM_PLUGIN_SETTINGS_QUICKFIX_PLACEHOLDER
-VIM_PLUGIN_SETTINGS_FZF_PLACEHOLDER
+VIM_PLUGIN_SETTINGS_PLACEHOLDER
 " so ~/vimfiles/plugin-settings/gitgutter.vim
 " so ~/vimfiles/plugin-settings/wordmotion.vim
 
