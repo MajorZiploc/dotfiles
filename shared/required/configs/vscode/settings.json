@@ -102,6 +102,9 @@
   "vim.leader": " ",
   "vim.insertModeKeyBindings": [{ "before": ["k", "j"], "after": ["<Esc>"] }],
   "vim.timeout": 300,
+  "vim.handleKeys": {
+    "<C-f>": false
+  },
   "AREPL.whenToExecute": "onSave",
   "editor.minimap.enabled": false,
   "[powershell]": {
