@@ -47,6 +47,11 @@ if [ -d ~/.local/bin ]; then
   export PATH="$PATH:$(echo ~/.local/bin)"
 fi
 
+if [ -d $HOME/.asdf ]; then
+  source $HOME/.asdf/asdf.sh
+  source $HOME/.asdf/completions/asdf.bash
+fi
+
 # _ext bash files are for user specific edits to the bash environment
 test -f ~/.bashrc_ext && . ~/.bashrc_ext
 
