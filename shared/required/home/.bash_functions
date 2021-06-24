@@ -632,6 +632,10 @@ function git_diff_of_commit {
   git diff "$commit"^!;
 }
 
+function git_log_pretty {
+  git log --oneline --decorate --all --graph;
+}
+
 function show_cmds_like {
   local pattern="$1";
   [[ -z "$pattern" ]] && { echo "Must specifiy a command pattern!"; return 1; }
