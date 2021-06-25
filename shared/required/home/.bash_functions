@@ -632,7 +632,7 @@ function git_diff_of_commit {
   git diff "$commit"^!;
 }
 
-function git_log_pretty {
+function git_graph {
   git log --oneline --decorate --all --graph;
 }
 
