@@ -144,7 +144,7 @@ The container is a based on a ubuntu image. So when you make changes to the shar
 
 ### Unit tests in the docker container
 
-- Run the ubuntu setup script after making any changes to the content you want to test.
+- Run the ubuntu setup script after making any changes to the content you want to test WITHIN the docker container.
 > ./tests/setup_ubuntu20.04.sh
 
 - Run all the tests
