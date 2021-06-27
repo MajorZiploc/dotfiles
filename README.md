@@ -130,3 +130,22 @@ This way you can have all the other great features you love from this repo, keep
 - bash v5.0.17
 - vim v8.1
 
+## Developing in the docker container
+To contribute without mudding up your own environment from the copy scripts. The copy scripts can be used within a docker container and all testing can happen there.
+
+- Running docker container
+> docker-compose -f .devcontainer/docker-compose.yaml up
+
+The container is a based on a ubuntu image. So when you make changes to the shared content or ubuntu specific content and want to test them manually, then you need to run the copy down WITHIN the docker container
+> ./setup/ubuntu20.04/scripts/copy.sh && source ~/.bash_profile
+
+## Unit tests in the docker container
+
+- Run the ubuntu setup script after making any changes to the content you want to test.
+> ./tests/setup_ubuntu20.04.sh
+
+- Run all the tests
+> ./tests/run_tests.sh
+
+NOTE: you can also run a specific test file instead of all tests
+
