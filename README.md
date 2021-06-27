@@ -134,12 +134,15 @@ This way you can have all the other great features you love from this repo, keep
 To contribute without mudding up your own environment from the copy scripts. The copy scripts can be used within a docker container and all testing can happen there.
 
 - Running docker container
-> docker-compose -f .devcontainer/docker-compose.yaml up
+> docker-compose -f .devcontainer/docker-compose.yaml up -d
+
+- Attaching to the docker container (Run the rest of the development commands in the docker container)
+> docker exec -it devcontainer_app_1 /bin/bash
 
 The container is a based on a ubuntu image. So when you make changes to the shared content or ubuntu specific content and want to test them manually, then you need to run the copy down WITHIN the docker container
 > ./setup/ubuntu20.04/scripts/copy.sh && source ~/.bash_profile
 
-## Unit tests in the docker container
+### Unit tests in the docker container
 
 - Run the ubuntu setup script after making any changes to the content you want to test.
 > ./tests/setup_ubuntu20.04.sh
