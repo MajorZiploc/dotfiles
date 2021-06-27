@@ -369,7 +369,7 @@ function refresh_settings_all {
 
 function refresh_settings_with_flags {
   local flags="$1";
-  [[ -z flags ]] && { echo "flags must be specified"; return 1; }
+  [[ -z "$flags" ]] && { echo "flags must be specified"; return 1; }
   refresh_settings "$flags";
 }
 
