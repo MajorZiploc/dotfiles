@@ -125,3 +125,8 @@ This will turn that feature off!
 
 This way you can have all the other great features you love from this repo, keep up to date with the repo, and make any changes that make these settings more you!
 
+## Development tools for contribution
+- docker v20.10.7
+- bash v5.0.17
+- vim v8.1
+
