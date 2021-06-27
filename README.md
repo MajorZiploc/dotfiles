@@ -5,12 +5,17 @@ For automating the setup of a developer machine
 NOTE: mac is least tested!
 
 ## Tools
-Makes use of:
+
 All:
-- vim
-- bash
-- tmux
+- vim (text editor)
+- bash (shell)
+- tmux (terminal multiplexier)
 - pwsh (cross platform powershell)
+- just (a command runner for Justfiles)
+- asdf (a general programming language version manager)
+- npm (node package manager)
+- rg (ripgrep)
+- dotnet (cross platform dotnet cli tooling)
 
 Windows:
 - chocolatey package manager
@@ -21,9 +26,8 @@ Ubuntu:
 WSL Ubuntu:
 - apt package manager
 
-
-
 ## Installs
+
 All:
 - bash configs
 - vim configs
