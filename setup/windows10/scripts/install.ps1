@@ -81,7 +81,7 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     # a windows bash with package manager pacman
     # can use to download linux packages and reference in git bash
     # or just use this bash instead of git bash
-    # cinst -y msys2
+    cinst -y msys2
     # prolog language
     cinst -y swi-prolog
     # javascript runtime
@@ -89,18 +89,20 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     # javascript package manager
     cinst -y yarn
     # python language
-    cinst -y python3 --version=3.8.6
+    cinst -y python3
     # local testing of sending emails
     cinst -y smtp4dev
     # windows linux subsystem -- NOTE: requires download of a linux distro aswell
-    cinst -y wsl
-    cinst -y wsl2
+    # cinst -y wsl
+    # cinst -y wsl2
     # installs cross platform powershel 7
     cinst -y powershell-core
     # java development kit 12
     cinst -y openjdk.portable
     # vim gui
     cinst -y vim-tux
+    # api manual testing
+    cinst -y postman
 }
 
 if (($optionsAsInt -band $WorkAsInt) -eq $WorkAsInt) {
@@ -109,7 +111,7 @@ if (($optionsAsInt -band $WorkAsInt) -eq $WorkAsInt) {
     # communcations app
     cinst -y slack
     # runtime and cli tools for creating .NET core applications
-    cinst -y dotnetcore-sdk
+    # cinst -y dotnetcore-sdk
 }
 
 # adds windows terminal manager, didnt seem to work
@@ -131,7 +133,6 @@ if (($optionsAsInt -band $WorkAsInt) -eq $WorkAsInt) {
 # cinst -y linqpad5
 # cinst -y fake
 # cinst -y visualstudio2019-workload-manageddesktopbuildtools
-# cinst -y postman
 
 # generate shims
 # & "$env:ChocolateyInstall\tools\shimgen.exe" -p "$env:ChocolateyInstall\tools\shimgen.exe" -o "$env:ChocolateyInstall\bin\shimgen.exe"
