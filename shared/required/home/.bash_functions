@@ -379,9 +379,9 @@ function refresh_settings {
   local project_root_path="$HOME/projects/home-settings";
   cd "$project_root_path" &&
   git checkout master &&
-  git pull &&
   echo 'Previous commit information:' &&
   echo "$(git show --summary)" &&
+  git pull &&
   "$project_root_path"/setup/OS_PLACEHOLDER/scripts/copy.sh "$flags" &&
   source ~/.bash_profile &&
   echo 'Refreshed settings!' &&
