@@ -20,7 +20,13 @@ function check_for_placeholder {
 }
 
 @test "$check bash $phdoesntexist" {
-  files=`find ~ -maxdepth 1 -regextype egrep -iregex ".*bash.*" -type f`;
+  files=(
+    ~/.bash_aliases
+    ~/.bash_env_vars
+    ~/.bash_functions
+    ~/.bash_profile
+    ~/.bashrc
+  )
   check_for_placeholder $files;
 }
 
