@@ -416,6 +416,7 @@ function find_items_rename_experimental_helper {
     [[ $f != $new_name ]] && {
       [[ $preview == false ]] && {
         mv "$item" "$new_name";
+        true;
       } || {
         echo mv "$item" "$new_name" ";";
       }
@@ -464,6 +465,7 @@ function find_files_delete_preview {
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   [[ -z "$with_content" ]] && {
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec echo rm "{}" \;
+    true;
   } || {
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in "$with_content" "{}" \; -exec echo rm "{}" \; | egrep "^rm"
   }
@@ -477,6 +479,7 @@ function find_files_delete {
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   [[ -z "$with_content" ]] && {
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec rm "{}" \;
+    true;
   } || {
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in "$with_content" "{}" \; -exec rm "{}" \; > /dev/null
   }
@@ -509,6 +512,7 @@ function find_files_rename_helper {
       [[ $f != $new_name ]] && {
         [[ $preview == false ]] && {
           mv "$file" "$new_name";
+          true;
         } || {
           echo mv "$file" "$new_name" ";";
         }
@@ -543,12 +547,12 @@ function find_files {
   local with_content="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
-  if [[ -z "$with_content" ]]
-  then
+  [[ -z "$with_content" ]] && {
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*';
-  else
+    true;
+  } || {
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in "$with_content" "{}" \; -exec echo "{}" \; | egrep -v "\s*^[[:digit:]]+:"
-  fi
+  }
 }
 
 function find_files_fuzz {
