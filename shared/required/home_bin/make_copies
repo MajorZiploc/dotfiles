@@ -101,6 +101,7 @@ file_path=$(readlink -f $og_file)
 [[ -z "$copy_location" ]] && {
   # set copy_location based on og file path
   copy_location=${file_path%/*}
+  true;
 } || {
   # set copy_location based on optional copy_location param
   copy_location=$(readlink -f "$copy_location")
