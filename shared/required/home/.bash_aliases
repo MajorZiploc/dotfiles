@@ -107,10 +107,8 @@ alias show_fn_impls='declare -f'
 
 alias back='cd ~-'
 
-[[ ! -z $(which gnomon 2>/dev/null) ]] && {
-  # requires <npm i gnomon -g> for the current user
-  alias time_js='gnomon'
-}
+# requires <npm i gnomon -g> for the current user
+alias time_js='gnomon'
 
 alias git_merge_keep_theirs="git merge -X theirs"
 alias git_deploy='git checkout develop && git pull && git push && git checkout master && git pull && git merge develop --commit --no-edit && git push && git checkout develop'
