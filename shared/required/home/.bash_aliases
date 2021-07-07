@@ -1,12 +1,10 @@
 shopt -s expand_aliases
 
-[[ ! -z $(which tmux 2>/dev/null) ]] && {
-  # tmux aliases
-  alias tmuxas="tmux attach-session"
-  alias tmuxks="tmux kill-session"
-  alias tmuxksvr="tmux kill-server"
-  alias tmuxls="tmux ls"
-}
+# tmux aliases
+alias tmuxas="tmux attach-session"
+alias tmuxks="tmux kill-session"
+alias tmuxksvr="tmux kill-server"
+alias tmuxls="tmux ls"
 
 # copy to clipboard
 [[ ! -z $(which clip.exe 2>/dev/null) ]] && {
