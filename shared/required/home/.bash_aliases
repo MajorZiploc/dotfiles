@@ -123,5 +123,9 @@ alias kill_port='npx kill-port'
 # for opening a gui file explorer
 [[ ! -z $(which explorer.exe 2>/dev/null) ]] && {
   alias explorer="explorer.exe"
+} || {
+  [[ ! -z $(which xdg-open 2>/dev/null) ]] && {
+    alias explorer="xdg-open"
+  }
 }
 
