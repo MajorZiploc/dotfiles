@@ -14,78 +14,75 @@ function hf() {
   history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -n | tail -n "$n";
 }
 
-[[ ! -z $(which tmux 2>/dev/null) ]] && {
-  function tmuxcs() {
-    # tmux create session
-    # creates a tmux session
-    # $1: optional string to represent name of the tmux session
-    # If $1 not given, then use the base name of the path as the session name
-    if [ -z "$1" ]; then
-      local session_name="$(basename $(pwd))";
-    else
-      local session_name="$1";
+function tmuxcs() {
+  # tmux create session
+  # creates a tmux session
+  # $1: optional string to represent name of the tmux session
+  # If $1 not given, then use the base name of the path as the session name
+  if [ -z "$1" ]; then
+    local session_name="$(basename $(pwd))";
+  else
+    local session_name="$1";
+  fi
+  local session_name="$(echo "$session_name" | tr '.' '-')";
+  tmux new -s "$session_name" 2>/dev/null || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
+}
+
+function tmuxps_get_project_dirs(){
+  export TMUXPS_PROJECT_DIRS=TMUXPS_PATHS_ARRAY_PLACEHOLDER;
+}
+
+function tmuxps() {
+  # tmux project session
+  # creates a tmux session
+  # $1: optional relative dir to start the tmux session in
+  # If $1 not given, then display a fuzzy finder of various project dirs to select a project for creation of a session
+  if [[ $# -eq 1 ]]; then
+    local selected=$1;
+  else
+    local items="";
+    tmuxps_get_project_dirs;
+    for path in ${TMUXPS_PROJECT_DIRS[@]};
+      do
+        [[ -d $path ]] && {
+          items+=`find $path -maxdepth 1 -mindepth 1 -type d`;
+          items+="\n";
+        }
+    done;
+    local selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
+  fi
+  [[ -z "$selected" ]] || {
+    local dirname=`basename $selected | tr '.' '-'`;
+    tmux switch-client -t $dirname;
+    if [[ $? -eq 0 ]]; then
+      exit 0;
     fi
-    local session_name="$(echo "$session_name" | tr '.' '-')";
-    tmux new -s "$session_name" 2>/dev/null || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
+    tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname;
   }
+}
 
-  function tmuxps_get_project_dirs(){
-    export TMUXPS_PROJECT_DIRS=TMUXPS_PATHS_ARRAY_PLACEHOLDER;
-  }
+function tmuxds() {
+  # tmux directory session
+  # displays a fuzzy finder listing of directories at the current directory to choose from for a tmux session
+  tmuxps "$(find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER)";
+}
 
-  function tmuxps() {
-    # tmux project session
-    # creates a tmux session
-    # $1: optional relative dir to start the tmux session in
-    # If $1 not given, then display a fuzzy finder of various project dirs to select a project for creation of a session
-    if [[ $# -eq 1 ]]; then
-      local selected=$1;
-    else
-      local items="";
-      tmuxps_get_project_dirs;
-      for path in ${TMUXPS_PROJECT_DIRS[@]};
-        do
-          [[ -d $path ]] && {
-            items+=`find $path -maxdepth 1 -mindepth 1 -type d`;
-            items+="\n";
-          }
-      done;
-      local selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
-    fi
-    [[ -z "$selected" ]] || {
-      local dirname=`basename $selected | tr '.' '-'`;
-      tmux switch-client -t $dirname;
-      if [[ $? -eq 0 ]]; then
-        exit 0;
-      fi
-      tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname;
-    }
-  }
+function ide1() {
+  # splits the window into 2 panes
+  tmux split-window -v -p 30;
+}
 
-  function tmuxds() {
-    # tmux directory session
-    # displays a fuzzy finder listing of directories at the current directory to choose from for a tmux session
-    tmuxps "$(find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER)";
-  }
+function ide2() {
+  # splits the window into 3 panes
+  tmux split-window -v -p 30;
+  tmux split-window -h -p 55;
+}
 
-  function ide1() {
-    # splits the window into 2 panes
-    tmux split-window -v -p 30;
-  }
-
-  function ide2() {
-    # splits the window into 3 panes
-    tmux split-window -v -p 30;
-    tmux split-window -h -p 55;
-  }
-
-  function ide3() {
-    # splits the window into 4 panes
-    tmux split-window -v -p 30;
-    tmux split-window -h -p 66;
-    tmux split-window -h -p 50;
-  }
-
+function ide3() {
+  # splits the window into 4 panes
+  tmux split-window -v -p 30;
+  tmux split-window -h -p 66;
+  tmux split-window -h -p 50;
 }
 
 function show_find_full_paths() {
