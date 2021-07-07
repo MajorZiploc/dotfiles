@@ -103,6 +103,9 @@ alias to_unixpath='sed -E "s,^(\w):,/\L\1,g" | sed s,\\\\,/,g'
 
 alias kill_port='npx kill-port'
 
+# paste from clipboard
+alias clipp="pwsh -command 'Get-Clipboard' | head -n -1"
+
 # for opening a gui file explorer
 [[ ! -z $(which explorer.exe 2>/dev/null) ]] && {
   alias explorer="explorer.exe"
@@ -119,9 +122,5 @@ alias kill_port='npx kill-port'
   [[ ! -z $(which xclip 2>/dev/null) ]] && {
     alias clip="xclip -sel clip"
   }
-}
-[[ ! -z $(which pwsh 2>/dev/null) ]] && {
-  # paste from clipboard
-  alias clipp="pwsh -command 'Get-Clipboard' | head -n -1"
 }
 
