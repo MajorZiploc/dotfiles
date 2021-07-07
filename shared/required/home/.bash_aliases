@@ -6,19 +6,6 @@ alias tmuxks="tmux kill-session"
 alias tmuxksvr="tmux kill-server"
 alias tmuxls="tmux ls"
 
-# copy to clipboard
-[[ ! -z $(which clip.exe 2>/dev/null) ]] && {
-  alias clip="clip.exe"
-} || {
-  [[ ! -z $(which xclip 2>/dev/null) ]] && {
-    alias clip="xclip -sel clip"
-  }
-}
-[[ ! -z $(which pwsh 2>/dev/null) ]] && {
-  # paste from clipboard
-  alias clipp="pwsh -command 'Get-Clipboard' | head -n -1"
-}
-
 # View path directories alias
 alias show_path='echo $PATH | tr ":" "\n"'
 alias show_env_notes='echo $ENV_NOTES | tr ":" "\n" | egrep -v "^\\s*$"'
@@ -123,5 +110,18 @@ alias kill_port='npx kill-port'
   [[ ! -z $(which xdg-open 2>/dev/null) ]] && {
     alias explorer="xdg-open"
   }
+}
+
+# copy to clipboard
+[[ ! -z $(which clip.exe 2>/dev/null) ]] && {
+  alias clip="clip.exe"
+} || {
+  [[ ! -z $(which xclip 2>/dev/null) ]] && {
+    alias clip="xclip -sel clip"
+  }
+}
+[[ ! -z $(which pwsh 2>/dev/null) ]] && {
+  # paste from clipboard
+  alias clipp="pwsh -command 'Get-Clipboard' | head -n -1"
 }
 
