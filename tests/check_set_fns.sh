@@ -3,7 +3,6 @@ load 'libs/bats-support/load'
 load 'libs/bats-assert/load'
 
 source ~/.bashrc || true;
-source ~/.bash_set_functions || true;
 
 @test "check set_is_subset function" {
   cd ./mock_content
