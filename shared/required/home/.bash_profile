@@ -4,9 +4,6 @@ case $- in
 *) return;;
 esac
 
-# Init missing dependencies notes check
-export ENV_NOTES=""
-
 test -f ~/.bashrc && . ~/.bashrc
 
 # Set PATH so it includes user's private bin if it exists
@@ -23,7 +20,4 @@ fi
 if [ -d "${HOME}/info" ]; then
   INFOPATH="${HOME}/info:${INFOPATH}"
 fi
-
-# final check on environment
-[[ -z "$ENV_NOTES" ]] && { ENV_NOTES="No missing dependencies! Setup is complete!"; }
 
