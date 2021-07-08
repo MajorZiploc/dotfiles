@@ -52,7 +52,7 @@ function check_for_placeholder {
 
 @test "$check vscode $phdoesntexist" {
   vscode_dir="$HOME/AppData/Roaming/Code/User"
-  [[ -f vscode_dir ]] || {
+  [[ -f "$vscode_dir" ]] || {
     vscode_dir="$HOME/.config/Code/User"
   }
   files=`find "$vscode_dir" -type f`;
