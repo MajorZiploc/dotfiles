@@ -19,3 +19,25 @@ source ~/.bash_set_functions || true;
   assert_output ''
 }
 
+@test "check set_complement function" {
+  cd ./mock_content
+  all=`find_files ".*\.py"`;
+  df=`find_files ".*\.py" "df"`;
+  run set_complement <(echo "$all") <(echo "$df")
+expected="$(cat << EOF
+./pandas_data_analytics/src/__init__.py
+./pandas_data_analytics/src/text_parser/__init__.py
+./pandas_data_analytics/src/text_parser/parser.py
+./pandas_data_analytics/src/utils/__init__.py
+EOF
+)"
+  assert_success
+  assert_output "$expected"
+  run set_complement <(echo "$all") <(echo "$all")
+  assert_success
+  assert_output ''
+  run set_complement <(echo "$df") <(echo "$all")
+  assert_success
+  assert_output ''
+}
+
