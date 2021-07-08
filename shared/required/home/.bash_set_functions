@@ -50,7 +50,7 @@ function set_intersection() {
   comm -12 <(sort $set1) <(sort $set2);
 }
 
-function set_complement() {
+function set_difference() {
   # returns elements that occur in $1 and not in $2
   # $1 - $2
   local set1=$1;
