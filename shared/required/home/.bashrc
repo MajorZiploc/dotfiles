@@ -34,6 +34,7 @@ shopt -s cdspell
 test -f ~/.bash_env_vars && . ~/.bash_env_vars
 test -f ~/.bash_aliases && . ~/.bash_aliases
 test -f ~/.bash_functions && . ~/.bash_functions
+test -f ~/.bash_snippets && . ~/.bash_snippets
 
 if [ -d ~/.local/bin ]; then
   export PATH="$PATH:$(echo ~/.local/bin)"
