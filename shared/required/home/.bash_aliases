@@ -106,21 +106,5 @@ alias kill_port='npx kill-port'
 # paste from clipboard
 alias clipp="pwsh -command 'Get-Clipboard' | head -n -1"
 
-# for opening a gui file explorer
-[[ ! -z $(which explorer.exe 2>/dev/null) ]] && {
-  alias explorer="explorer.exe"
-} || {
-  [[ ! -z $(which xdg-open 2>/dev/null) ]] && {
-    alias explorer="xdg-open"
-  }
-}
-
-# copy to clipboard
-[[ ! -z $(which clip.exe 2>/dev/null) ]] && {
-  alias clip="clip.exe"
-} || {
-  [[ ! -z $(which xclip 2>/dev/null) ]] && {
-    alias clip="xclip -sel clip"
-  }
-}
+BASH_ALIASES_PLACEHOLDER
 
