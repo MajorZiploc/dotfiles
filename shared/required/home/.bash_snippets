@@ -1,4 +1,4 @@
-function bash_snip_for_loop {
+function snip_bash_for_loop {
   echo '
 IFS= ;
 l=(1 2 3 "4");
@@ -9,7 +9,7 @@ unset IFS;
   '
 }
 
-function sql_snip_search_column {
+function snip_sql_search_column {
   echo "
 /* SQL column search */
 SELECT 
@@ -25,7 +25,7 @@ ORDER BY TableName, ColumnName;
   "
 }
 
-function sql_snip_general_search {
+function snip_sql_general_search {
   echo "
 /* SQL general search, NOT FOR COLUMNS */
 SELECT
@@ -40,13 +40,13 @@ AND type ='u';
   "
 }
 
-function pwsh_snip_init_module {
+function snip_pwsh_init_module {
   echo "
 pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Module -Path ./ -ModuleName \"test\" -Author \"Manyu Lakhotia\" -Description \"Test powershell module\" -ModuleVersion \"0.0.1\" -PowershellVersion \"5.1\" -CompanyName \"N/A\" -CopyRight \"N/A\";}'
   "
 }
 
-function pwsh_snip_init_script {
+function snip_pwsh_init_script {
   echo "
 pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Script -Path ./ -ScriptName \"test\" -ShouldUseAdvLogging $false}'
   "

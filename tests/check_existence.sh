@@ -58,11 +58,11 @@ function typea_check(){
   "git_log_show_last_n"
   "show_cmds_like"
   "show_cmds_like_fuzz"
-  "bash_snip_for_loop"
-  "sql_snip_search_column"
-  "sql_snip_general_search"
-  "pwsh_snip_init_module"
-  "pwsh_snip_init_script"
+  "snip_bash_for_loop"
+  "snip_sql_search_column"
+  "snip_sql_general_search"
+  "snip_pwsh_init_module"
+  "snip_pwsh_init_script"
   )
   for funct in ${l[@]};
     do
