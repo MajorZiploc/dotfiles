@@ -8,7 +8,6 @@ alias tmuxls="tmux ls"
 
 # View path directories alias
 alias show_path='echo $PATH | tr ":" "\n"'
-alias show_env_notes='echo $ENV_NOTES | tr ":" "\n" | egrep -v "^\\s*$"'
 
 # text manipulation aliaes
 alias rev_chars='perl -F"" -anle "print reverse @F" | perl -ple "s/^\r//"'
