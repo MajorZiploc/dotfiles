@@ -1,25 +1,10 @@
 shopt -s expand_aliases
 
-[[ ! -z $(which tmux 2>/dev/null) ]] && {
-  # tmux aliases
-  alias tmuxas="tmux attach-session"
-  alias tmuxks="tmux kill-session"
-  alias tmuxksvr="tmux kill-server"
-  alias tmuxls="tmux ls"
-}
-
-# copy to clipboard
-[[ ! -z $(which clip.exe 2>/dev/null) ]] && {
-  alias clip="clip.exe"
-} || {
-  [[ ! -z $(which xclip 2>/dev/null) ]] && {
-    alias clip="xclip -sel clip"
-  }
-}
-[[ ! -z $(which pwsh 2>/dev/null) ]] && {
-  # paste from clipboard
-  alias clipp="pwsh -command 'Get-Clipboard' | head -n -1"
-}
+# tmux aliases
+alias tmuxas="tmux attach-session"
+alias tmuxks="tmux kill-session"
+alias tmuxksvr="tmux kill-server"
+alias tmuxls="tmux ls"
 
 # View path directories alias
 alias show_path='echo $PATH | tr ":" "\n"'
@@ -107,10 +92,8 @@ alias show_fn_impls='declare -f'
 
 alias back='cd ~-'
 
-[[ ! -z $(which gnomon 2>/dev/null) ]] && {
-  # requires <npm i gnomon -g> for the current user
-  alias time_js='gnomon'
-}
+# requires <npm i gnomon -g> for the current user
+alias time_js='gnomon'
 
 alias git_merge_keep_theirs="git merge -X theirs"
 alias git_deploy='git checkout develop && git pull && git push && git checkout master && git pull && git merge develop --commit --no-edit && git push && git checkout develop'
@@ -120,12 +103,8 @@ alias to_unixpath='sed -E "s,^(\w):,/\L\1,g" | sed s,\\\\,/,g'
 
 alias kill_port='npx kill-port'
 
-# for opening a gui file explorer
-[[ ! -z $(which explorer.exe 2>/dev/null) ]] && {
-  alias explorer="explorer.exe"
-} || {
-  [[ ! -z $(which xdg-open 2>/dev/null) ]] && {
-    alias explorer="xdg-open"
-  }
-}
+# paste from clipboard
+alias clipp="pwsh -command 'Get-Clipboard' | head -n -1"
+
+BASH_ALIASES_PLACEHOLDER
 

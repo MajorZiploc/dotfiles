@@ -23,6 +23,9 @@ tmuxps_paths_array_placeholder="(\"\$(find ~ -mindepth 1 -maxdepth 1 -regextype 
 find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,TMUXPS_PATHS_ARRAY_PLACEHOLDER,$tmuxps_paths_array_placeholder,g" {} \;
 fuzzy_finder_placeholder="fzf";
 find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,FUZZY_FINDER_PLACEHOLDER,$fuzzy_finder_placeholder,g" {} \;
+# TODO: these aliases may not be correct. Based on Ubuntu
+bash_aliases_placeholder="# for opening a gui file explorer\nalias explorer=\"xdg-open\"\n# copy to clipboard\nalias clip=\"xclip -sel clip\"";
+find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,BASH_ALIASES_PLACEHOLDER,$bash_aliases_placeholder,g" {} \;
 # example of deleting bak files
 # find "$tempShared" -regextype egrep -iregex '.*\.bak$' -type f -exec rm {} \;
 
@@ -31,6 +34,7 @@ unset vim_plugin_include
 unset vim_plugin_settings
 unset tmuxps_paths_array_placeholder
 unset fuzzy_finder_placeholder
+unset bash_aliases_placeholder
 unset vsc_settings_destination_placeholder
 unset setupRoot
 unset tempShared
