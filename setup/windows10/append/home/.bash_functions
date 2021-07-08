@@ -10,5 +10,13 @@ function show_env_notes() {
   [[ -z "$ENV_NOTES" ]] && { ENV_NOTES="No missing dependencies! Setup is complete!"; }
   echo $ENV_NOTES | tr ":" "\n" | egrep -v "^\\s*$"
 }
+
+function cmd_exec {
+  # executes command prompt commands or file
+  local command="$1";
+  [[ -z "$command" ]] && { echo "Missing command parameter!"; return 1; }
+  cmd.exe "/c $1";
+}
+
 # APPENDED CONTENT END
 
