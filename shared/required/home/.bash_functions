@@ -296,13 +296,13 @@ function refresh_pwsh {
 
 function find_items_rename_experimental_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specifiy a file pattern!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local by="$2";
-  [[ -z "$by" ]] && { echo "Must specifiy a by substitution!" >&2; return 1; }
+  [[ -z "$by" ]] && { echo "Must specify a by substitution!" >&2; return 1; }
   local preview=$3;
-  [[ -z "$preview" ]] && { echo "Must specifiy the preview flag!" >&2; return 1; }
+  [[ -z "$preview" ]] && { echo "Must specify the preview flag!" >&2; return 1; }
   local maxdepth="$4";
-  [[ -z "$maxdepth" ]] && { echo "Must specifiy a maxdepth!" >&2; return 1; }
+  [[ -z "$maxdepth" ]] && { echo "Must specify a maxdepth!" >&2; return 1; }
   find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0 | while read -d $'\0' item
   do
     local new_name="$(echo "$item" | sed -E "$by")";
@@ -337,7 +337,7 @@ function find_items_rename_experimental {
 
 function find_items {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specifiy a file pattern!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local maxdepth="$2";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*';
@@ -352,7 +352,7 @@ function find_items_fuzz {
 
 function find_files_delete_preview {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specifiy a file pattern!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local with_content="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
@@ -366,7 +366,7 @@ function find_files_delete_preview {
 
 function find_files_delete {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specifiy a file pattern!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local with_content="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
@@ -380,14 +380,14 @@ function find_files_delete {
 
 function find_files_rename_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specifiy a file pattern!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local by="$2";
-  [[ -z "$by" ]] && { echo "Must specifiy a by substitution!" >&2; return 1; }
+  [[ -z "$by" ]] && { echo "Must specify a by substitution!" >&2; return 1; }
   local with_content="$3";
   local preview=$4
-  [[ -z "$preview" ]] && { echo "Must specifiy the preview flag!" >&2; return 1; }
+  [[ -z "$preview" ]] && { echo "Must specify the preview flag!" >&2; return 1; }
   local maxdepth="$5";
-  [[ -z "$maxdepth" ]] && { echo "Must specifiy a maxdepth!" >&2; return 1; }
+  [[ -z "$maxdepth" ]] && { echo "Must specify a maxdepth!" >&2; return 1; }
 
   find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0  | while read -d $'\0' file
   do
@@ -436,7 +436,7 @@ function find_files_rename {
 
 function find_files {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specifiy a file pattern!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local with_content="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
@@ -458,7 +458,7 @@ function find_files_fuzz {
 
 function find_in_files {
   local grep_pattern="$1";
-  [[ -z "$grep_pattern" ]] && { echo "Must specifiy a grep pattern!" >&2; return 1; }
+  [[ -z "$grep_pattern" ]] && { echo "Must specify a grep pattern!" >&2; return 1; }
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
   local maxdepth="$3";
@@ -477,7 +477,7 @@ function find_in_files_fuzz {
 
 function find_in_files_replace {
   local by="$1";
-  [[ -z "$by" ]] && { echo "Must specifiy a by substitution!" >&2; return 1; }
+  [[ -z "$by" ]] && { echo "Must specify a by substitution!" >&2; return 1; }
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
   local maxdepth="$3";
@@ -488,7 +488,7 @@ function find_in_files_replace {
 function git_checkout_branch_in_path {
   local branch="$1";
   local path="$2";
-  [[ -z "$branch" ]] && { echo "Must specifiy a branch!" >&2; return 1; }
+  [[ -z "$branch" ]] && { echo "Must specify a branch!" >&2; return 1; }
   [[ -z "$path" ]] && { path='*'; }
   IFS= ;
   for ele in $path;
@@ -526,7 +526,7 @@ function git_log_show_last_n {
 
 function git_diff_of_commit {
   local commit="$1";
-  [[ -z "$commit" ]] && { echo "Must specifiy a commit!" >&2; return 1; }
+  [[ -z "$commit" ]] && { echo "Must specify a commit!" >&2; return 1; }
   git diff "$commit"^!;
 }
 
@@ -536,7 +536,7 @@ function git_graph {
 
 function show_cmds_like {
   local pattern="$1";
-  [[ -z "$pattern" ]] && { echo "Must specifiy a command pattern!" >&2; return 1; }
+  [[ -z "$pattern" ]] && { echo "Must specify a command pattern!" >&2; return 1; }
   local search_res=$(search_env_for "$pattern");
   local alias=$(echo "$search_res" | egrep -i "\s*alias");
   [[ -z "$alias" ]] || { echo "$alias"; }
