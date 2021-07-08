@@ -278,7 +278,7 @@ function refresh_settings {
   echo "$(git show --summary)" &&
   git pull &&
   "$project_root_path"/setup/OS_PLACEHOLDER/scripts/copy.sh "$flags" &&
-  source ~/.bash_profile &&
+  . ~/.bash_profile &&
   echo 'Refreshed settings!' &&
   echo '' &&
   echo 'Current commit information:' &&
