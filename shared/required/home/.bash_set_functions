@@ -27,7 +27,7 @@ function set_cardinality() {
   sort -u $set | wc -l;
 }
 
-function set_subset() {
+function set_is_subset() {
   # test if $1 is a subset of $2
   local subset=$1;
   local superset=$2;
