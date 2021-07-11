@@ -1,0 +1,3 @@
+# searchs for package and lets you know info, like if its installed
+apt search <package_name>
+
