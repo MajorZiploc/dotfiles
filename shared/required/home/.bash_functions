@@ -550,3 +550,8 @@ function show_cmds_like_fuzz {
   show_cmds_like "$pattern";
 }
 
+function show_script_path {
+  local scriptpath="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
+  echo "$scriptpath";
+}
+
