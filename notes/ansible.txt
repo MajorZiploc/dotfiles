@@ -1,0 +1,34 @@
+the 'all' hosts can be filtered down to other choices
+
+-m = module
+-a = argument to a module
+
+# test the connection to all servers with ansible using the ssh keys
+# NOTE: can remove --key-file and -i info if you have it configured in your ansible.cfg (most local ansible.cfg wins)
+ansible all --key-file ~/.ssh/<private_key_file> -i <file_on_new_line_delimited_servers> -m ping
+
+# most of these commands will assume you have the ansible.cfg setup
+
+# show the hosts that ansible will run against
+ansible all --list-hosts
+
+# show info of the servers with optional --limit
+ansible all -m gather_facts --limit <ip_address>
+
+# asks for the sudo password when ran and runs apt-get update on servers (requires all servers to have the same sudo password)
+ansible all -m apt -a update_cache=true --become --ask-become-pass
+
+# when ansible goes to make changes defined in a playbook, it only performs the changes if the state of the machine doesnt match the desired change state
+# asks for the sudo password when ran and runs apt-get install vim-nox on servers (requires all servers to have the same sudo password)
+ansible all -m apt -a name=vim-nox --become --ask-become-pass
+ansible all -m apt -a name=snapd --become --ask-become-pass
+
+# updates snapd on all servers
+ansible all -m apt -a "name=snapd state=latest" --become --ask-become-pass
+
+# upgrades all updates on each server
+ansible all -m apt -a "update=dist" --become --ask-become-pass
+
+# use a yaml file instead of giving all details in the terminal
+ansible-playbook --ask-become-pass install_apache.yml
+
