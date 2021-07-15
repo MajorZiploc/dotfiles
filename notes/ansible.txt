@@ -32,3 +32,12 @@ ansible all -m apt -a "update=dist" --become --ask-become-pass
 # use a yaml file instead of giving all details in the terminal
 ansible-playbook --ask-become-pass install_apache.yml
 
+# list available tags for a playbook
+ansible-playbook --list-tags <playbook>.yml
+
+# RUNNING TAGGED TASKS
+# target tag 1
+ansible-playbook --tags tag1 --ask-become-pass <playbook>.yml
+# target tags 1 and 2
+ansible-playbook --tags "tag1,tag2" --ask-become-pass <playbook>.yml
+
