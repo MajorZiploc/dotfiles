@@ -152,3 +152,6 @@ The container is a based on a ubuntu image. So when you make changes to the shar
 
 NOTE: you can also run a specific test file instead of all tests
 
+## TODO
+- consider switching find_ commands to use `rg --no-heading`
+
