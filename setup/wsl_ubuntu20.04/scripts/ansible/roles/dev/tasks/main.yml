@@ -1,0 +1,25 @@
+- name: update repo cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Install APT requirements
+  become: yes
+  apt:
+    name: [
+      'build-essential',
+      'unzip',
+      'ripgrep',
+      'fzf',
+      'tmux',
+      'dos2unix',
+      'tree',
+      'checkinstall',
+      'libssl-dev',
+      'apt-transport-https',
+      'dotnet-sdk-5.0'
+    ]
+
+# TODO: install nvm
+# curl -o- HTTPS://raw.githubusercontent.com/creationix/nvm/v0.35.1/install.sh | bash
+

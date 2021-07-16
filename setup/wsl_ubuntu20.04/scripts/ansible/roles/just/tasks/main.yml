@@ -1,0 +1,29 @@
+- name: Check if just is present and correct version
+  command: just --version
+  register: check_just
+  ignore_errors: true
+
+- name: Check that just is in location we expect
+  block:
+    - stat:
+        path: /usr/local/bin/just
+      register: just_file
+    - fail:
+        msg: >-
+          An old `just` binary is present and not at the expected
+          location of `/usr/local/bin/just`. Cowardly refusing to proceed.
+      when: not just_file.stat.exists
+  # Only worry about file location when we have an old just binary
+  # We don't care where the just binary is if it's current.
+  when: check_just.rc == 0
+
+- name: Install just
+  block:
+
+    - name: Install just | Transfer the install script
+      copy: src=just_installer.sh dest=/tmp/just_installer.sh mode=0777
+
+    - name: Install just | Execute the install script
+      command: sh /tmp/just_installer.sh
+
+  when: check_just.rc != 0

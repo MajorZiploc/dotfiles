@@ -14,9 +14,9 @@ sudo apt-get -y install pipenv
 # installs npm
 # sudo apt-get -y install npm
 # ripgrep for vundle use or use on its own
-sudo apt-get install ripgrep
+sudo apt-get -y install ripgrep
 # fuzzy finder
-sudo apt-get install fzf
+sudo apt-get -y install fzf
 
 # install nvm for nodejs
 sudo apt install -y build-essential checkinstall libssl-dev

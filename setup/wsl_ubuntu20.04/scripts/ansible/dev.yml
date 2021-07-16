@@ -1,0 +1,8 @@
+---
+- name: Bootstrap Local Dev Machine
+  hosts: localhost
+  tasks:
+    - include_role:
+        name: base
+    - include_role:
+        name: dev
