@@ -20,6 +20,9 @@
       'dotnet-sdk-5.0'
     ]
 
-# TODO: install nvm
-# curl -o- HTTPS://raw.githubusercontent.com/creationix/nvm/v0.35.1/install.sh | bash
+- include_role:
+    name: asdf
+
+- include_role:
+    name: nvm
 
