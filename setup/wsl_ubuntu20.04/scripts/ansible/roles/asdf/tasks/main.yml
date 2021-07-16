@@ -1,0 +1,12 @@
+- name: Check if asdf is present
+  command: asdf --version
+  register: check_asdf
+  ignore_errors: true
+
+- name: Install asdf
+  ansible.builtin.git:
+    repo: "{{ asdf_git_url }}"
+    dest: ~/.asdf
+    version: "{{ asdf_branch }}"
+
+  when: check_asdf.rc != 0
