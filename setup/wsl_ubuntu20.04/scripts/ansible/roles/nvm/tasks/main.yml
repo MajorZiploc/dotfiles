@@ -1,0 +1,20 @@
+- name: Check if nvm is present
+  command: nvm --version
+  register: check_nvm
+  ignore_errors: true
+
+- name: Check that nvm is in location we expect
+  block:
+    - fail:
+        msg: >-
+          An old `nvm` version is present.
+          Cowardly refusing to proceed.
+  # Only worry about file location when we have an old nvm folder
+  # We don't care where the nvm binary is if it's current.
+  when: check_nvm.rc == 0 and check_nvm.stdout != nvm_version
+
+- name: Install nvm
+  ansible.builtin.shell: |
+    curl -o- HTTPS://raw.githubusercontent.com/creationix/nvm/v0.35.1/install.sh | bash
+  when: check_nvm.rc != 0
+
