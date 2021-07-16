@@ -15,7 +15,7 @@
       when: not just_file.stat.exists
   # Only worry about file location when we have an old just binary
   # We don't care where the just binary is if it's current.
-  when: check_just.rc == 0
+  when: check_just.rc == 0 and check_just.stdout != just_version
 
 - name: Install just
   block:
@@ -25,5 +25,6 @@
 
     - name: Install just | Execute the install script
       command: sh /tmp/just_installer.sh
+      become: yes
 
   when: check_just.rc != 0
