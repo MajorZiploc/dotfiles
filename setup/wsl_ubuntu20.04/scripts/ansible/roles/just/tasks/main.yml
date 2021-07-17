@@ -2,6 +2,7 @@
   tags: just
   command: just --version
   register: check_just
+  changed_when: False
   ignore_errors: true
 
 - name: Check that just is in location we expect
@@ -23,11 +24,24 @@
   tags: just
   block:
 
-    - name: Install just | Transfer the install script
-      copy: src=just_installer.sh dest=/tmp/just_installer.sh mode=0777
-
     - name: Install just | Execute the install script
-      command: sh /tmp/just_installer.sh
+      shell: |
+        dest="/usr/local/bin"
+        td=$(mktemp -d || mktemp -d -t tmp)
+        curl -0Lks "{{just_url}}" | tar -C $td -xz
+
+        for f in $(ls $td); do
+          test -x $td/$f || continue
+
+          if [ -e "$dest/$f" ] && [ $force = false ]; then
+            err "$f already exists in $dest"
+          else
+            mkdir -p $dest
+            install -m 755 $td/$f $dest
+          fi
+        done
+        rm -rf $td
+
       become: yes
 
   when: check_just.rc != 0
