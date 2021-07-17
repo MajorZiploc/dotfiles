@@ -1,4 +1,5 @@
 - name: update repo cache
+  tags: apt,base
   become: yes
   apt:
     update_cache: yes

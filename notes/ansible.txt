@@ -41,3 +41,6 @@ ansible-playbook --tags tag1 --ask-become-pass <playbook>.yml
 # target tags 1 and 2
 ansible-playbook --tags "tag1,tag2" --ask-become-pass <playbook>.yml
 
+
+--ask-become-pass and sudo are NOT the same. Use --ask-become-pass for non become tasks to work properly
+
