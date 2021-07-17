@@ -1,9 +1,11 @@
 - name: Check if asdf is present
+  tags: asdf
   command: asdf --version
   register: check_asdf
   ignore_errors: true
 
 - name: Check that asdf is in location we expect
+  tags: asdf
   block:
     - stat:
         path: ~/.asdf
@@ -18,6 +20,7 @@
   when: check_asdf.rc == 0 and check_asdf.stdout != asdf_version
 
 - name: Install asdf
+  tags: asdf
   ansible.builtin.git:
     repo: "{{ asdf_git_url }}"
     dest: ~/.asdf

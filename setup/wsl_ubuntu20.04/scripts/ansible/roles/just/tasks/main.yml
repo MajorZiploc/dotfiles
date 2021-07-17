@@ -1,9 +1,11 @@
 - name: Check if just is present and correct version
+  tags: just
   command: just --version
   register: check_just
   ignore_errors: true
 
 - name: Check that just is in location we expect
+  tags: just
   block:
     - stat:
         path: /usr/local/bin/just
@@ -18,6 +20,7 @@
   when: check_just.rc == 0 and check_just.stdout != just_version
 
 - name: Install just
+  tags: just
   block:
 
     - name: Install just | Transfer the install script

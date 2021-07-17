@@ -1,10 +1,12 @@
 - name: update repo cache
   become: yes
+  tags: apt,dev
   apt:
     update_cache: yes
 
 - name: Install APT requirements
   become: yes
+  tags: apt,dev
   apt:
     name: [
       'build-essential',

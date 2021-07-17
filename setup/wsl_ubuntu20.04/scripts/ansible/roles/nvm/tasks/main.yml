@@ -1,9 +1,11 @@
 - name: Check if nvm is present
+  tags: nvm
   command: nvm --version
   register: check_nvm
   ignore_errors: true
 
 - name: Check that nvm is in location we expect
+  tags: nvm
   block:
     - fail:
         msg: >-
@@ -14,6 +16,7 @@
   when: check_nvm.rc == 0 and check_nvm.stdout != nvm_version
 
 - name: Install nvm
+  tags: nvm
   ansible.builtin.shell: |
     curl -o- HTTPS://raw.githubusercontent.com/creationix/nvm/v0.35.1/install.sh | bash
   when: check_nvm.rc != 0
