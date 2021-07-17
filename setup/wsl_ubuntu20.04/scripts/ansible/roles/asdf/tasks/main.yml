@@ -1,7 +1,7 @@
 - name: Check if asdf is present
   tags: asdf
   command: asdf --version
-  change_when: False
+  changed_when: False
   register: check_asdf
   ignore_errors: true
 
