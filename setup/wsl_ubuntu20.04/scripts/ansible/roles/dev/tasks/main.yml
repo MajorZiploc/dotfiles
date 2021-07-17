@@ -20,7 +20,8 @@
       'checkinstall',
       'libssl-dev',
       'apt-transport-https',
-      'dotnet-sdk-5.0'
+      'dotnet-sdk-5.0',
+      'python-is-python3'
     ]
 
 - include_role:
