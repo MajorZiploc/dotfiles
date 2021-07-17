@@ -1,7 +1,7 @@
 - name: update repo cache
   become: yes
   tags: apt,dev
-  change_when: False
+  changed_when: False
   apt:
     update_cache: yes
 
