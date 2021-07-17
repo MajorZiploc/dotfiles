@@ -6,7 +6,7 @@
 
 - name: Install asdf
   tags: asdf
-  ansible.builtin.git:
+  git:
     repo: "{{ asdf_git_url }}"
     dest: ~/.asdf
     version: "{{ asdf_branch }}"

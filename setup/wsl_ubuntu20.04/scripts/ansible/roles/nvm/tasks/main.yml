@@ -6,7 +6,7 @@
 
 - name: Install nvm
   tags: nvm
-  ansible.builtin.shell: |
+  shell: |
     curl -o- HTTPS://raw.githubusercontent.com/creationix/nvm/v0.35.1/install.sh | bash
   when: not asdf_folder.stat.exists
 
