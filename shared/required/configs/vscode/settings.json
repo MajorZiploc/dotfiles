@@ -111,5 +111,6 @@
     "files.encoding": "utf8"
   },
   "explorer.openEditors.sortOrder": "alphabetical",
-  "diffEditor.wordWrap": "on"
+  "diffEditor.wordWrap": "on",
+  "security.workspace.trust.banner": "never"
 }
