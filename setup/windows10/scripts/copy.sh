@@ -9,8 +9,25 @@ setupRoot="$SCRIPTPATH/.."
 # 10 to include clipboard
 flags="$1"
 [[ -z flags ]] && { flags='00'; }
+flags_as_int="$((2#$flags))"
+all="$((2#11))"
 
 $SCRIPTPATH/../../../shared/scripts/copy.sh "$setupRoot" "$flags"
+
+[[ $(($all & $flags_as_int)) == $all ]] && {
+  home_wallpapers="$HOME/Pictures/Wallpapers"
+  mkdir -p "$home_wallpapers";
+  cp "$SCRIPTPATH/../pictures/my-hero-toko-01.jpg" "$home_wallpapers";
+  winterm_ubuntu_background_image_path_placeholder='"%USERPROFILE%\\Pictures\\Wallpapers\\my-hero-toko-01.jpg"';
+  win_term_settings="$SCRIPTPATH/tmp_windows_terminal_settings.jsonc";
+  cp "$SCRIPTPATH/../windows_terminal_settings.jsonc" "$win_term_settings";
+  sed -E -i'' "s/WINTERM_UBUNTU_BACKGROUND_IMAGE_PATH_PLACEHOLDER//g" "$win_term_settings";
+  cp "$win_term_settings" "$HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json";
+  rm "$win_term_settings";
+  unset winterm_ubuntu_background_image_path_placeholder
+  unset home_wallpapers
+  unset win_term_settings
+}
 
 unset setupRoot
 
