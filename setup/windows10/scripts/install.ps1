@@ -95,6 +95,8 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     # windows linux subsystem -- NOTE: requires download of a linux distro aswell
     # cinst -y wsl
     # cinst -y wsl2
+    # docker containerization platform
+    cinst -y docker-desktop
     # installs cross platform powershel 7
     cinst -y powershell-core
     # java development kit 12
