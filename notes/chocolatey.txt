@@ -5,3 +5,6 @@ Shows installed packages
 # sometimes required to install for all users
 choco install <package_name> -y --force --params "ALLUSERS=1"
 
+# find location of install
+choco list --local-only --exact <package_name> --trace`
+
