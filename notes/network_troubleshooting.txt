@@ -1,0 +1,19 @@
+NETWORK LAYER ----------------------
+
+test connection to other machines
+ping <ip_address/dns_name> - uses ICMP packets - sends echo requests (hey are you there?)
+
+shows all hops between 2 machines
+traceroute <ip_address/dns_name> - makes use of the TTL field to find this info
+traceroute(linux)/tracert(win)
+
+Similar to traceroute (a long running traceroute):
+mtr(linux, display data in realtime)/pathping(win, 50 seconds and then displays the agg data)
+
+TRANSPORT LAYER -------------------------------
+req host and port info
+nc <host_name> <port_name> - netcat (linux)/ Test-NetConnection <host_name> -port <port_name> (win)
+
+DNS ------------------------------
+nslookup <hostname> # gives the A-record by default
+
