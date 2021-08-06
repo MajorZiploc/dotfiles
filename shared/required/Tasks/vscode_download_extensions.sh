@@ -31,3 +31,7 @@ code --install-extension ms-python.vscode-pylance
 # bash wsl
 code --install-extension ms-vscode-remote.remote-wsl
 code --install-extension rogalmic.bash-debug
+
+# mssql
+code --install-extension ms-mssql.mssql
+
