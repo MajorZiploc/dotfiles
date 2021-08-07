@@ -112,5 +112,9 @@
   },
   "explorer.openEditors.sortOrder": "alphabetical",
   "diffEditor.wordWrap": "on",
-  "security.workspace.trust.banner": "never"
+  "security.workspace.trust.banner": "never",
+  "mssql.splitPaneSelection": "current",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  }
 }
