@@ -301,17 +301,19 @@ function find_items_rename_experimental_helper {
   [[ -z "$preview" ]] && { echo "Must specify the preview flag!" >&2; return 1; }
   local maxdepth="$4";
   [[ -z "$maxdepth" ]] && { echo "Must specify a maxdepth!" >&2; return 1; }
-  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0 | while read -d $'\0' item
-  do
-    local new_name="$(echo "$item" | sed -E "$by")";
-    [[ $f != $new_name ]] && {
-      [[ $preview == false ]] && {
-        mv "$item" "$new_name";
-        true;
-      } || {
-        echo mv "$item" "$new_name" ";";
+  for mdepth in `seq 1 $maxdepth`; do
+    find . -mindepth "$mdepth" -maxdepth "$mdepth" -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0 | while read -d $'\0' item
+    do
+      local new_name="$(echo "$item" | sed -E "$by")";
+      [[ $f != $new_name ]] && {
+        [[ $preview == false ]] && {
+          mv "$item" "$new_name";
+          true;
+        } || {
+          echo mv "$item" "$new_name" ";";
+        }
       }
-    }
+    done;
   done;
 }
 
@@ -321,7 +323,8 @@ function find_items_rename_preview_experimental {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=true;
-  find_items_rename_experimental_helper "$file_pattern" "$by" $preview "$maxdepth";
+  echo "NOTE: This behavior may not be the exact behavior when running the command out of preview mode";
+  find_items_rename_experimental_helper "$file_pattern" "$by" "$preview" "$maxdepth";
 }
 
 function find_items_rename_experimental {
@@ -330,48 +333,44 @@ function find_items_rename_experimental {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=false;
-  find_items_rename_experimental_helper "$file_pattern" "$by" $preview "$maxdepth";
+  find_items_rename_experimental_helper "$file_pattern" "$by" "$preview" "$maxdepth";
 }
 
 function find_items_delete_experimental_helper {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
-  local by="$2";
-  [[ -z "$by" ]] && { echo "Must specify a by substitution!" >&2; return 1; }
-  local preview=$3;
+  local preview=$2;
   [[ -z "$preview" ]] && { echo "Must specify the preview flag!" >&2; return 1; }
-  local maxdepth="$4";
+  local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { echo "Must specify a maxdepth!" >&2; return 1; }
-  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0 | while read -d $'\0' item
-  do
-    local new_name="$(echo "$item" | sed -E "$by")";
-    [[ $f != $new_name ]] && {
+  for mdepth in `seq 1 $maxdepth`; do
+    find . -mindepth "$mdepth" -maxdepth "$mdepth" -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0 | while read -d $'\0' item
+    do
       [[ $preview == false ]] && {
         rm -rf "$item";
         true;
       } || {
-        echo "rm -rf" "$item" "$new_name" ";";
+        echo "rm -rf" "$item" ";";
       }
-    }
+    done;
   done;
 }
 
 function find_items_delete_preview_experimental {
   local file_pattern="$1";
-  local by="$2";
-  local maxdepth="$3";
+  local maxdepth="$2";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=true;
-  find_items_delete_experimental_helper "$file_pattern" "$by" $preview "$maxdepth";
+  echo "NOTE: This behavior may not be the exact behavior when running the command out of preview mode";
+  find_items_delete_experimental_helper "$file_pattern" "$preview" "$maxdepth";
 }
 
 function find_items_delete_experimental {
   local file_pattern="$1";
-  local by="$2";
-  local maxdepth="$3";
+  local maxdepth="$2";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=false;
-  find_items_delete_experimental_helper "$file_pattern" "$by" $preview "$maxdepth";
+  find_items_delete_experimental_helper "$file_pattern" "$preview" "$maxdepth";
 }
 
 function find_items {
