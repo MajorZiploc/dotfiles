@@ -324,6 +324,7 @@ function find_items_rename_preview_experimental {
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=true;
   echo "NOTE: This behavior may not be the exact behavior when running the command out of preview mode";
+  find_items_rename_experimental_helper "$file_pattern" "$by" "$preview" "$maxdepth";
 }
 
 function find_items_rename_experimental {
@@ -332,7 +333,7 @@ function find_items_rename_experimental {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=false;
-  find_items_rename_experimental_helper "$file_pattern" "$by" $preview "$maxdepth";
+  find_items_rename_experimental_helper "$file_pattern" "$by" "$preview" "$maxdepth";
 }
 
 function find_items_delete_experimental_helper {
@@ -375,7 +376,7 @@ function find_items_delete_experimental {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=false;
-  find_items_delete_experimental_helper "$file_pattern" "$by" $preview "$maxdepth";
+  find_items_delete_experimental_helper "$file_pattern" "$preview" "$maxdepth";
 }
 
 function find_items {
