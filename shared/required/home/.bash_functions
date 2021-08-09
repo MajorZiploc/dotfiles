@@ -292,7 +292,7 @@ function refresh_pwsh {
   echo "Refresh completed.";
 }
 
-function find_items_rename_experimental_helper {
+function find_items_rename_helper {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local by="$2";
@@ -317,26 +317,26 @@ function find_items_rename_experimental_helper {
   done;
 }
 
-function find_items_rename_preview_experimental {
+function find_items_rename_preview {
   local file_pattern="$1";
   local by="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=true;
   echo "NOTE: This behavior may not be the exact behavior when running the command out of preview mode";
-  find_items_rename_experimental_helper "$file_pattern" "$by" "$preview" "$maxdepth";
+  find_items_rename_helper "$file_pattern" "$by" "$preview" "$maxdepth";
 }
 
-function find_items_rename_experimental {
+function find_items_rename {
   local file_pattern="$1";
   local by="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=false;
-  find_items_rename_experimental_helper "$file_pattern" "$by" "$preview" "$maxdepth";
+  find_items_rename_helper "$file_pattern" "$by" "$preview" "$maxdepth";
 }
 
-function find_items_delete_experimental_helper {
+function find_items_delete_helper {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local preview=$2;
@@ -356,21 +356,21 @@ function find_items_delete_experimental_helper {
   done;
 }
 
-function find_items_delete_preview_experimental {
+function find_items_delete_preview {
   local file_pattern="$1";
   local maxdepth="$2";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=true;
   echo "NOTE: This behavior may not be the exact behavior when running the command out of preview mode";
-  find_items_delete_experimental_helper "$file_pattern" "$preview" "$maxdepth";
+  find_items_delete_helper "$file_pattern" "$preview" "$maxdepth";
 }
 
-function find_items_delete_experimental {
+function find_items_delete {
   local file_pattern="$1";
   local maxdepth="$2";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=false;
-  find_items_delete_experimental_helper "$file_pattern" "$preview" "$maxdepth";
+  find_items_delete_helper "$file_pattern" "$preview" "$maxdepth";
 }
 
 function find_items {
