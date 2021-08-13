@@ -1,5 +1,8 @@
 so ~/_commonvimrc
 
+" Allow mouse interactions
+set mouse=a
+
 " Allow opening of other files without saving current file
 set hidden
 
