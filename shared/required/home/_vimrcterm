@@ -1,7 +1,13 @@
 so ~/_commonvimrc
 
+" Allow opening of other files without saving current file
+set hidden
+
 " write swap files here instead of beside each file
 set directory=$HOME/.vim/swap//
+" disable backups and swapfiles
+set nobackup
+set noswapfile
 
 " wrap settings
 " set textwidth=120
