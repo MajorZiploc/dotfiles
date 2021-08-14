@@ -3,7 +3,7 @@ function snip_bash_for_loop {
 IFS= ;
 l=(1 2 3 "4");
 for ele in ${l[@]};
-  do echo $ele hi;
+  do echo "$ele" hi;
 done;
 unset IFS;
   '
