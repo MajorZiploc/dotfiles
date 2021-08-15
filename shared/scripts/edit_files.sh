@@ -27,13 +27,15 @@ function edit_files_helper {
       [[ $estyle == "append" ]] && {
         # echo "cat \"$i\" >> \"$destDir/$b"
         # echo "rm \"$i\""
+        printf "\n# ------- APPEND CONTENT BEGIN -------\n" >> "$destDir/$b"
         cat "$i" >> "$destDir/$b"
+        printf "\n# ------- APPEND CONTENT END -------\n" >> "$destDir/$b"
         rm "$i"
       }
       [[ $estyle == "prepend" ]] && {
         # echo "cat <(cat \"$i\") <(cat \"$destDir/$b\") > \"$destDir/$b\""
         # echo "rm \"$i\""
-        local content="$(cat <(cat "$i") <(cat "$destDir/$b"))"
+        local content="$(cat <((printf "\n# ------- PREPEND CONTENT BEGIN -------\n"; cat "$i"; printf "\n# ------- PREPEND CONTENT END -------\n")) <(cat "$destDir/$b"))"
         echo "$content" > "$destDir/$b"
         rm "$i"
       }
