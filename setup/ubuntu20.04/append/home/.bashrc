@@ -1,5 +1,3 @@
-# ----- APPENDED CONTENT BEGIN ------------
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -41,6 +39,3 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.bash ] && . ~/.fzf.bash
-
-# ----- APPENDED CONTENT END ------------
-
