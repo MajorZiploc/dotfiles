@@ -278,3 +278,79 @@ EOF
   assert_success
   assert_output "$expected"
 }
+
+@test "check set_intersection function" {
+  cd ./mock_content
+  set1=`cat << EOF
+zoo
+eggs
+leg
+1
+2
+3 4 5 6
+eggs
+leg
+EOF
+  `;
+  set2=`cat << EOF
+zoo
+zoo
+eggs
+leg
+1
+2
+3 4 5 6
+eggs
+leg
+EOF
+  `;
+  expected=`cat << EOF
+1
+2
+3 4 5 6
+eggs
+leg
+zoo
+EOF
+`
+  run set_intersection <(echo "$set1") <(echo "$set2")
+  assert_success
+  assert_output "$expected"
+  run set_intersection <(echo "$set1") <(echo "$set1")
+  assert_success
+  assert_output "$expected"
+  set1=`cat << EOF
+eggs
+leg
+1
+2
+3 4 5 6
+eggs
+leg
+EOF
+  `;
+  set2=`cat << EOF
+boo
+zoo
+eggs
+true
+1
+2
+3 4 5 6
+eggs
+leg
+EOF
+  `;
+  expected=`cat << EOF
+1
+2
+3 4 5 6
+eggs
+leg
+EOF
+`
+  run set_intersection <(echo "$set1") <(echo "$set2")
+  assert_success
+  assert_output "$expected"
+}
+
