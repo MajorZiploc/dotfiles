@@ -424,3 +424,57 @@ EOF
   assert_output "$expected"
 }
 
+@test "check set_minimum function" {
+  cd ./mock_content
+  set1=`cat << EOF
+zoo
+eggs
+leg
+1
+2
+3 4 5 6
+eggs
+leg
+EOF
+  `;
+  expected=`cat << EOF
+1
+EOF
+`
+  run set_minimum <(echo "$set1")
+  assert_success
+  assert_output "$expected"
+  set1=`cat << EOF
+eggs
+leg
+eggs
+leg
+goo
+EOF
+  `;
+  expected=`cat << EOF
+eggs
+EOF
+`
+  run set_minimum <(echo "$set1")
+  assert_success
+  assert_output "$expected"
+}
+
+@test "check set_minimum_num function" {
+  cd ./mock_content
+  set1=`cat << EOF
+2
+1
+3 4 5 6
+EOF
+  `;
+  expected=`cat << EOF
+1
+EOF
+`
+  run set_minimum_num <(echo "$set1")
+  assert_success
+  assert_output "$expected"
+}
+
