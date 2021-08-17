@@ -47,7 +47,7 @@ function set_intersection() {
   # returns elements that occur in both sets
   local set1=$1;
   local set2=$2;
-  comm -12 <(sort $set1) <(sort $set2);
+  comm -12 <(sort $set1) <(sort $set2) | sort -u;
 }
 
 function set_difference() {
