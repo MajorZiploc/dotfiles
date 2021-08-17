@@ -6,13 +6,48 @@ source ~/.bashrc || true;
 
 @test "check set_is_subset function" {
   cd ./mock_content
-  all=`find_files ".*\.py"`;
-  df=`find_files ".*\.py" "df"`;
+  all=`cat << EOF
+./pandas_data_analytics/src/pokemon_learn_sets/run.py
+./pandas_data_analytics/src/pandas_notes.py
+./pandas_data_analytics/src/text_parser/utils.py
+./pandas_data_analytics/src/text_parser/run.py
+./pandas_data_analytics/src/text_parser/parser.py
+./pandas_data_analytics/src/text_parser/__init__.py
+./pandas_data_analytics/src/outliers/run.py
+./pandas_data_analytics/src/utils/utils.py
+./pandas_data_analytics/src/utils/__init__.py
+./pandas_data_analytics/src/netflix/run.py
+./pandas_data_analytics/src/osrs/run.py
+./pandas_data_analytics/src/__init__.py
+./pandas_data_analytics/src/common_food/run.py
+./pandas_data_analytics/src/body_comp/run.py
+./pandas_data_analytics/setup.py
+EOF
+`
+  df=`cat << EOF
+./pandas_data_analytics/src/pokemon_learn_sets/run.py
+./pandas_data_analytics/src/pandas_notes.py
+./pandas_data_analytics/src/text_parser/utils.py
+./pandas_data_analytics/src/text_parser/run.py
+./pandas_data_analytics/src/outliers/run.py
+./pandas_data_analytics/src/utils/utils.py
+./pandas_data_analytics/src/netflix/run.py
+./pandas_data_analytics/src/osrs/run.py
+./pandas_data_analytics/src/common_food/run.py
+./pandas_data_analytics/src/body_comp/run.py
+./pandas_data_analytics/setup.py
+EOF
+`
   run set_is_subset <(echo "$df") <(echo "$all")
   assert_success
   assert_output ''
-  all=`find_files ".*\.py"`;
-  fs=`find_files ".*\.fs"`;
+  fs=`cat << EOF
+./FslabDataAnalytics/utils/index.fs
+./FslabDataAnalytics/Program.fs
+./FslabDataAnalytics/FslabDataAnalytics/tut/run.fs
+./FslabDataAnalytics/FslabDataAnalytics/osrs/run.fs
+EOF
+`
   run set_is_subset <(echo "$fs") <(echo "$all")
   assert_failure
   assert_output ''
@@ -20,8 +55,38 @@ source ~/.bashrc || true;
 
 @test "check set_difference function" {
   cd ./mock_content
-  all=`find_files ".*\.py"`;
-  df=`find_files ".*\.py" "df"`;
+  all=`cat << EOF
+./pandas_data_analytics/src/pokemon_learn_sets/run.py
+./pandas_data_analytics/src/pandas_notes.py
+./pandas_data_analytics/src/text_parser/utils.py
+./pandas_data_analytics/src/text_parser/run.py
+./pandas_data_analytics/src/text_parser/parser.py
+./pandas_data_analytics/src/text_parser/__init__.py
+./pandas_data_analytics/src/outliers/run.py
+./pandas_data_analytics/src/utils/utils.py
+./pandas_data_analytics/src/utils/__init__.py
+./pandas_data_analytics/src/netflix/run.py
+./pandas_data_analytics/src/osrs/run.py
+./pandas_data_analytics/src/__init__.py
+./pandas_data_analytics/src/common_food/run.py
+./pandas_data_analytics/src/body_comp/run.py
+./pandas_data_analytics/setup.py
+EOF
+`
+  df=`cat << EOF
+./pandas_data_analytics/src/pokemon_learn_sets/run.py
+./pandas_data_analytics/src/pandas_notes.py
+./pandas_data_analytics/src/text_parser/utils.py
+./pandas_data_analytics/src/text_parser/run.py
+./pandas_data_analytics/src/outliers/run.py
+./pandas_data_analytics/src/utils/utils.py
+./pandas_data_analytics/src/netflix/run.py
+./pandas_data_analytics/src/osrs/run.py
+./pandas_data_analytics/src/common_food/run.py
+./pandas_data_analytics/src/body_comp/run.py
+./pandas_data_analytics/setup.py
+EOF
+`
   run set_difference <(echo "$all") <(echo "$df")
 expected="$(cat << EOF
 ./pandas_data_analytics/src/__init__.py
