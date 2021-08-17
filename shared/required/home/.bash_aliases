@@ -74,6 +74,7 @@ alias grepn_files_freq="grepn_files | sort | uniq -c | sort -n"
 alias grepn_files_uniq="grepn_files | sort | uniq"
 alias find_items_hidden="sed -e 's/\.\///g' | egrep \"\/\.\""
 alias find_items_nonhidden="sed -e 's/\.\///g' | egrep -v \"\/\.\""
+alias show_root_folder="sed -E 's,^\./([^/]*?)/.*,\1,'"
 
 # reexecutes last command that beings with a pattern. ex: fc -s egrep
 alias reexe='fc -s'
