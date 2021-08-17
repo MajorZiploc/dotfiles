@@ -157,3 +157,45 @@ EOF
   assert_output "$expected"
 }
 
+@test "check set_eq function" {
+  cd ./mock_content
+  set1=`cat << EOF
+zoo
+eggs
+leg
+1
+2
+3 4 5 6
+eggs
+leg
+EOF
+  `;
+  set2=`cat << EOF
+zoo
+zoo
+eggs
+leg
+1
+2
+3 4 5 6
+eggs
+leg
+EOF
+  `;
+  set3=`cat << EOF
+eggs
+leg
+1
+2
+3 4 5 6
+eggs
+leg
+EOF
+  `;
+  run set_eq <(echo "$set1") <(echo "$set1")
+  assert_success
+  run set_eq <(echo "$set1") <(echo "$set2")
+  assert_success
+  run set_eq <(echo "$set1") <(echo "$set3")
+  assert_failure
+}
