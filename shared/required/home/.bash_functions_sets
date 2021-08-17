@@ -113,7 +113,7 @@ function set_minimum_num() {
 
 function set_maximum() {
   local set=$1;
-  tail -1 <(sort $se1);
+  tail -1 <(sort $set);
 }
 
 function set_maximum_num() {
