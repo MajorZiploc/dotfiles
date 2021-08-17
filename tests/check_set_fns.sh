@@ -354,3 +354,73 @@ EOF
   assert_output "$expected"
 }
 
+
+@test "check set_symmetric_difference function" {
+  cd ./mock_content
+  set1=`cat << EOF
+zoo
+eggs
+leg
+1
+2
+3 4 5 6
+eggs
+leg
+EOF
+  `;
+  set2=`cat << EOF
+zoo
+zoo
+eggs
+leg
+1
+2
+3 4 5 6
+eggs
+leg
+EOF
+  `;
+  expected=`cat << EOF
+EOF
+`
+  run set_symmetric_difference <(echo "$set1") <(echo "$set2")
+  assert_success
+  assert_output "$expected"
+  run set_symmetric_difference <(echo "$set1") <(echo "$set1")
+  assert_success
+  assert_output "$expected"
+  set1=`cat << EOF
+eggs
+leg
+1
+2
+3 4 5 6
+eggs
+leg
+goo
+EOF
+  `;
+  set2=`cat << EOF
+boo
+zoo
+eggs
+true
+1
+2
+3 4 5 6
+eggs
+leg
+EOF
+  `;
+  expected=`cat << EOF
+boo
+goo
+true
+zoo
+EOF
+`
+  run set_symmetric_difference <(echo "$set1") <(echo "$set2")
+  assert_success
+  assert_output "$expected"
+}
+
