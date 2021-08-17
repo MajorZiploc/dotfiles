@@ -40,3 +40,36 @@ EOF
   assert_output ''
 }
 
+@test "check set_elem function" {
+  cd ./mock_content
+  all=`cat << EOF
+eggs
+pancakes
+waffles
+EOF
+  `
+  ele="pancakes";
+  run set_elem "$ele" <(echo "$all")
+  assert_success
+  assert_output ''
+  all=`cat << EOF
+eggs
+waffles
+EOF
+  `
+  ele="pancakes";
+  run set_elem "$ele" <(echo "$all")
+  assert_failure
+  assert_output ''
+  all=`cat << EOF
+eggs
+pancakes
+waffles
+EOF
+  `
+  ele="pancake";
+  run set_elem "$ele" <(echo "$all")
+  assert_failure
+  assert_output ''
+}
+
