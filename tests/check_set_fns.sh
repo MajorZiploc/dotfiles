@@ -73,3 +73,22 @@ EOF
   assert_output ''
 }
 
+@test "check set_cardinality function" {
+  cd ./mock_content
+  all=`cat << EOF
+zoo
+eggs
+leg
+1
+2
+3 4 5 6
+eggs
+leg
+EOF
+  `;
+  expected=6;
+  run set_cardinality <(echo "$all")
+  assert_success
+  assert_output "$expected"
+}
+
