@@ -219,12 +219,12 @@ EOF
   function f(){
     echo "$1" | space_to_snake;
   }
-  chars=`cat << EOF
+  lines=`cat << EOF
 my var
 your var
 EOF
 `
-  run f "$chars"
+  run f "$lines"
   assert_success
   expected=`cat << EOF
 my_var
@@ -232,8 +232,8 @@ your_var
 EOF
 `
   assert_output "$expected"
-  chars=''
-  run f "$chars"
+  lines=''
+  run f "$lines"
   assert_success
   expected=''
   assert_output "$expected"
@@ -243,12 +243,12 @@ EOF
   function f(){
     echo "$1" | space_to_camel;
   }
-  chars=`cat << EOF
+  lines=`cat << EOF
 my var
 your var
 EOF
 `
-  run f "$chars"
+  run f "$lines"
   assert_success
   expected=`cat << EOF
 myVar
@@ -256,8 +256,8 @@ yourVar
 EOF
 `
   assert_output "$expected"
-  chars=''
-  run f "$chars"
+  lines=''
+  run f "$lines"
   assert_success
   expected=''
   assert_output "$expected"
@@ -267,12 +267,12 @@ EOF
   function f(){
     echo "$1" | to_lower;
   }
-  chars=`cat << EOF
+  lines=`cat << EOF
 MY VAR1
 your var
 EOF
 `
-  run f "$chars"
+  run f "$lines"
   assert_success
   expected=`cat << EOF
 my var1
@@ -280,8 +280,8 @@ your var
 EOF
 `
   assert_output "$expected"
-  chars=''
-  run f "$chars"
+  lines=''
+  run f "$lines"
   assert_success
   expected=''
   assert_output "$expected"
@@ -291,12 +291,12 @@ EOF
   function f(){
     echo "$1" | to_upper;
   }
-  chars=`cat << EOF
+  lines=`cat << EOF
 MY VAR1
 your var
 EOF
 `
-  run f "$chars"
+  run f "$lines"
   assert_success
   expected=`cat << EOF
 MY VAR1
@@ -304,10 +304,67 @@ YOUR VAR
 EOF
 `
   assert_output "$expected"
-  chars=''
-  run f "$chars"
+  lines=''
+  run f "$lines"
   assert_success
   expected=''
   assert_output "$expected"
 }
 
+@test "check keep_last" {
+  function f(){
+    echo "$1" | keep_last;
+  }
+  lines=`cat << EOF
+MY VAR1
+a
+your var
+your var
+MY VAR1
+a
+EOF
+`
+  run f "$lines"
+  assert_success
+  expected=`cat << EOF
+your var
+MY VAR1
+a
+EOF
+`
+  assert_output "$expected"
+  lines=''
+  run f "$lines"
+  assert_success
+  expected=''
+  assert_output "$expected"
+}
+
+@test "check keep_first" {
+  function f(){
+    echo "$1" | keep_first;
+  }
+  lines=`cat << EOF
+MY VAR1
+a
+your var
+your var
+MY VAR1
+a
+EOF
+`
+  run f "$lines"
+  assert_success
+  expected=`cat << EOF
+MY VAR1
+a
+your var
+EOF
+`
+  assert_output "$expected"
+  lines=''
+  run f "$lines"
+  assert_success
+  expected=''
+  assert_output "$expected"
+}
