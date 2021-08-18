@@ -148,6 +148,7 @@ function typea_check(){
   "to_winpath"
   "to_unixpath"
   "kill_port"
+  "show_root_folder"
   )
   for funct in ${l[@]};
     do

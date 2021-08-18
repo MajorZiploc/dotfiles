@@ -4,7 +4,8 @@ load 'libs/bats-assert/load'
 
 source ~/.bashrc || true;
 
-@test "check that to_winpath" { function f(){
+@test "check to_winpath" {
+  function f(){
     echo "$1" | to_winpath;
   }
   path='/c/mnt/Users/someone/stuff.txt'
@@ -24,7 +25,8 @@ source ~/.bashrc || true;
   assert_output "$expected"
 }
 
-@test "check that to_unixpath" { function f(){
+@test "check to_unixpath" {
+  function f(){
     echo "$1" | to_unixpath;
   }
   path='C:\mnt\Users\someone\stuff.txt'
@@ -46,5 +48,42 @@ source ~/.bashrc || true;
   run f "$path"
   assert_success
   expected='Jo:/mnt/Users/someone/stuff.txt'
+  assert_output "$expected"
+}
+
+@test "check show_root_folder" {
+  function f(){
+    echo "$1" | show_root_folder;
+  }
+  pathes=`cat << EOF
+./pandas_data_analytics/src/pokemon_learn_sets/run.py
+./pandas_data_analytics/src/pandas_notes.py
+./data_analytics/src/text_parser/utils.py
+./_data_analytics/src/text_parser/run.py
+./.data_analytics/src/text_parser/parser.py
+./stuff/src/text_parser/__init__.py
+./.ya.ya.ya/src/outliers/run.py
+./pandas_data_analytics/src/utils/utils.py
+pandas_data_analytics/src/utils/utils.py
+/c/src/utils/utils.py
+C:/src/utils/utils.py
+EOF
+  `
+  run f "$pathes"
+  assert_success
+  expected=`cat << EOF
+pandas_data_analytics
+pandas_data_analytics
+data_analytics
+_data_analytics
+.data_analytics
+stuff
+.ya.ya.ya
+pandas_data_analytics
+pandas_data_analytics/src/utils/utils.py
+/c/src/utils/utils.py
+C:/src/utils/utils.py
+EOF
+  `
   assert_output "$expected"
 }
