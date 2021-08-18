@@ -368,3 +368,54 @@ EOF
   expected=''
   assert_output "$expected"
 }
+
+@test "check bash_surround_expression" {
+  function f(){
+    echo "$1" | bse;
+  }
+  lines=`cat << EOF
+echo "\$eles"
+a phrase is here
+EOF
+`
+  run f "$lines"
+  assert_success
+  expected=`cat << EOF
+"\$\(echo "\$eles"\)"
+"\$\(a phrase is here\)"
+EOF
+`
+  expected=`echo "$expected" | tr -d '\'`
+  assert_output "$expected"
+  lines=''
+  run f "$lines"
+  assert_success
+  expected=''
+  assert_output "$expected"
+}
+
+@test "check bash_surround_stream" {
+  function f(){
+    echo "$1" | bss;
+  }
+  lines=`cat << EOF
+echo "\$eles"
+a phrase is here
+EOF
+`
+  run f "$lines"
+  assert_success
+  expected=`cat << EOF
+<\(echo "\$eles"\)
+<\(a phrase is here\)
+EOF
+`
+  expected=`echo "$expected" | tr -d '\'`
+  assert_output "$expected"
+  lines=''
+  run f "$lines"
+  assert_success
+  expected=''
+  assert_output "$expected"
+}
+
