@@ -62,7 +62,7 @@ function set_symmetric_difference() {
   # returns elements that occur in either set, but not both sets
   local set1=$1;
   local set2=$2;
-  sort $set1 $set2 | uniq -u;
+  sort <(sort -u $set1) <(sort -u $set2) | uniq -u;
 }
 
 function set_power_set_experimental() {
