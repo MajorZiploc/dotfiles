@@ -237,14 +237,16 @@ refresh_settings_all() = refresh_settings_with_flags "11"
 Togglable Copies:
 - vscode
 - clipboard
+- Tasks
 
 Binary Flags to pass to refresh_settings_with_flags: (leading zeros can be omitted)
 Use to copy the given settings
-"01" -- vscode
-"10" -- clipboard
+"001" -- vscode
+"010" -- clipboard
+"100" -- Tasks
 These flags are stackable:
 Ex:
-refresh_settings_with_flags "11" -- copy vscode and clipboard aswell
+refresh_settings_with_flags "011" -- copy vscode and clipboard aswell but not the Tasks
 
 How:
 type -a refresh_settings to see implementation
@@ -255,7 +257,7 @@ EOF
 }
 
 function refresh_settings_all {
-  refresh_settings "11";
+  refresh_settings "111";
 }
 
 function refresh_settings_with_flags {
@@ -266,7 +268,7 @@ function refresh_settings_with_flags {
 
 function refresh_settings {
   local flags="$1";
-  [[ -z "$flags" ]] && { flags="00"; }
+  [[ -z "$flags" ]] && { flags="000"; }
   local project_root_path="$HOME/projects/home-settings";
   cd "$project_root_path" &&
   git checkout master &&
