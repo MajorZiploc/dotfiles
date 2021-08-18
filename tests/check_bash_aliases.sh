@@ -87,3 +87,66 @@ EOF
   `
   assert_output "$expected"
 }
+
+@test "check rev_chars" {
+  function f(){
+    echo "$1" | rev_chars;
+  }
+  chars='asdf fdsa'
+  run f "$chars"
+  assert_success
+  expected='asdf fdsa'
+  assert_output "$expected"
+  chars=''
+  run f "$chars"
+  assert_success
+  expected=''
+  assert_output "$expected"
+}
+
+@test "check rev_lines" {
+  function f(){
+    echo "$1" | rev_lines;
+  }
+  lines=`cat << EOF
+1
+2
+3
+
+4
+
+EOF
+  `
+  run f "$lines"
+  assert_success
+  expected=`cat << EOF
+4
+
+3
+2
+1
+EOF
+`
+  assert_output "$expected"
+  lines=''
+  run f "$lines"
+  assert_success
+  expected=''
+  assert_output "$expected"
+}
+
+@test "check toggle_case" {
+  function f(){
+    echo "$1" | toggle_case;
+  }
+  chars='asdf FDS1A 2a'
+  run f "$chars"
+  assert_success
+  expected='ASDF fds1a 2A'
+  assert_output "$expected"
+  chars=''
+  run f "$chars"
+  assert_success
+  expected=''
+  assert_output "$expected"
+}
