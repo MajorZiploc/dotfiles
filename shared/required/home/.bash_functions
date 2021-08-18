@@ -284,14 +284,6 @@ function refresh_settings {
   show_env_notes;
 }
 
-function refresh_pwsh {
-  echo "Refreshing powershell modules...";
-  echo '';
-  pwsh -Command '& {@("powershell_scaffolder", "PSLogFileReporter") | ForEach-Object { Install-Module -Name "$_" -Scope CurrentUser -Force;}}';
-  echo '';
-  echo "Refresh completed.";
-}
-
 function find_items_rename_helper {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
