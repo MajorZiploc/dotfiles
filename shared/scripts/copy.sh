@@ -5,7 +5,6 @@ SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 # root of the os style configs being downloaded
 setupRoot="$1"
 
-# 01 for include vscode
 flags="$2"
 
 temp="$setupRoot/../temp"

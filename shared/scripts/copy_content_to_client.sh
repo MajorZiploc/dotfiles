@@ -11,6 +11,7 @@ flags="$5"
 flags_as_int="$((2#$flags))"
 vscode_flag_as_int="$((2#01))"
 clipboard_flag_as_int="$((2#10))"
+tasks_flag_as_int="$((2#100))"
 
 test -f "$tempThis/.ahk" && { cp -a "$tempThis/.ahk" "$HOME/"; }
 cp -a "$tempShared/required/home/." "$HOME/"
@@ -18,7 +19,9 @@ cp -a "$tempShared/required/home_bin/." "$HOME/bin/"
 [[ $(($clipboard_flag_as_int & $flags_as_int)) == $clipboard_flag_as_int ]] && {
   cp -a "$tempShared/required/clipboard/." "$HOME/clipboard/"
 }
-cp -a "$tempShared/required/Tasks/." "$HOME/Tasks/"
+[[ $(($tasks_flag_as_int & $flags_as_int)) == $tasks_flag_as_int ]] && {
+  cp -a "$tempShared/required/Tasks/." "$HOME/Tasks/"
+}
 [[ $(($vscode_flag_as_int & $flags_as_int)) == $vscode_flag_as_int ]] && {
   cp -a "$tempShared/required/vscodevim/." "$HOME/vscodevim/"
   cp -a "$tempShared/required/configs/vscode/." VSC_SETTINGS_DESTINATION_PLACEHOLDER
@@ -40,4 +43,5 @@ unset flags
 unset flags_as_int
 unset vscode_flag_as_int
 unset clipboard_flag_as_int
+unset tasks_flag_as_int
 
