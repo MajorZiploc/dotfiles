@@ -33,12 +33,14 @@ alias to_newlines='sed "s/ /\n/g"'
 
 alias bash_surround_expression='sed -E "s,(.+),\"\$(\1)\","'
 alias bash_surround_stream='sed -E "s,(.+),<(\1),"'
+alias bash_surround_stream_echo='sed -E "s,(.+),<(echo \"\1\"),"'
 alias bash_line_join='tr -d "\n" | tr -d "\r"'
 # Line break on ; or | if it is not followed by |
 alias bash_line_split="perl -ne 's/(;|\|)(?:(?!;|\|))/\$1\\n/g; print;'"
 
 alias bse='bash_surround_expression'
 alias bss='bash_surround_stream'
+alias bsse='bash_surround_stream_echo'
 alias blj='bash_line_join'
 alias bls='bash_line_split'
 alias bln='to_newlines'
