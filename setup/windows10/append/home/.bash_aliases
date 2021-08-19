@@ -1,1 +1,1 @@
-alias ifconfig='cmd_exec "ipconfig"'
+alias ifconfig='cmd_exec "ipconfig /all"'
