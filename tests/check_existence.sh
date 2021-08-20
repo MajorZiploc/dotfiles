@@ -145,6 +145,7 @@ function typea_check(){
   #"time_js"
   "git_merge_keep_theirs"
   "git_deploy"
+  "git_log_break_down"
   "to_winpath"
   "to_unixpath"
   "kill_port"
