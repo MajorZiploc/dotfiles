@@ -1,0 +1,33 @@
+# update repo caches
+sudo apt update
+
+# fix “Release file is not yet valid” for apt update
+sudo hwclock --hctosys
+
+# show packages that can be upgraded
+sudo apt list --upgradable
+
+# mark a package as excluded from apt upgrade
+sudo apt-mark hold <package_name>
+
+# unmark a package to reinclude it for apt upgrade
+sudo apt-mark unhold <package_name>
+
+# show apt-mark commands
+sudo apt-mark
+
+# show packages excluded from apt upgrades
+sudo apt-mark showhold
+
+# upgrade packages
+sudo apt upgrade
+
+# list packages installed
+apt list
+
+# list avaiable versions of a package
+apt-cache policy <package_name>
+
+# install a specific version of a package
+sudo apt-get install <package name>=<version>
+
