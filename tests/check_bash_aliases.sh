@@ -444,7 +444,6 @@ EOF
   assert_output "$expected"
 }
 
-
 @test "check bash_surround_var_multiline" {
   function f(){
     echo "$1" | bsvm;
@@ -467,6 +466,7 @@ EOFZ
   expected=`echo "$expected" | tr -d '\'`
   assert_output --partial "$expected"
   assert_output --partial "$v"
+  assert_output --partial ";"
   lines=''
   run f "$lines"
   assert_success
@@ -478,6 +478,7 @@ EOFZ
 `
   assert_output --partial "$expected"
   assert_output --partial "$v"
+  assert_output --partial ";"
 }
 
 
@@ -492,6 +493,7 @@ EOFZ
   expected='I want to put this expression in a var'
   assert_output --partial "$expected"
   assert_output --partial "$v"
+  assert_output --partial ";"
   lines=''
   run f "$lines"
   assert_success
