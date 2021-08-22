@@ -480,3 +480,21 @@ EOFZ
   assert_output --partial "$v"
 }
 
+
+@test "check bash_surround_var_singleline" {
+  function f(){
+    echo "$1" | bsvs;
+  }
+  v='var_name='
+  lines='I want to put this expression in a var'
+  run f "$lines"
+  assert_success
+  expected='I want to put this expression in a var'
+  assert_output --partial "$expected"
+  assert_output --partial "$v"
+  lines=''
+  run f "$lines"
+  assert_success
+  assert_output ""
+}
+
