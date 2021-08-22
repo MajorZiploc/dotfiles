@@ -444,3 +444,39 @@ EOF
   assert_output "$expected"
 }
 
+
+@test "check bash_surround_var_multiline" {
+  function f(){
+    echo "$1" | bsvm;
+  }
+  v='var_name='
+  lines=`cat << EOF
+eles
+a phrase is here
+EOF
+`
+  run f "$lines"
+  assert_success
+  expected=`cat << EOFZ
+cat << EOF
+eles
+a phrase is here
+EOF
+EOFZ
+`
+  expected=`echo "$expected" | tr -d '\'`
+  assert_output --partial "$expected"
+  assert_output --partial "$v"
+  lines=''
+  run f "$lines"
+  assert_success
+  expected=`cat << EOFZ
+cat << EOF
+
+EOF
+EOFZ
+`
+  assert_output --partial "$expected"
+  assert_output --partial "$v"
+}
+
