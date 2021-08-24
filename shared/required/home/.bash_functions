@@ -43,7 +43,7 @@ function tmuxcs() {
   else
     local session_name="$1";
   fi
-  local session_name="$(echo "$session_name" | tr '.' '-')";
+  local session_name="$(echo "$session_name" | tr '.[[:blank:]]' '-')";
   tmux new -s "$session_name" 2>/dev/null || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
 }
 
@@ -71,7 +71,7 @@ function tmuxps() {
     local selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
   fi
   [[ -z "$selected" ]] || {
-    local dirname=`basename $selected | tr '.' '-'`;
+    local dirname=`basename $selected | tr '.[[:blank:]]' '-'`;
     tmux switch-client -t $dirname;
     if [[ $? -eq 0 ]]; then
       exit 0;
