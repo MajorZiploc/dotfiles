@@ -26,6 +26,7 @@ alias ltrim="sed -E 's/\s*(.*)/\1/g'"
 alias trim="rtrim | ltrim"
 alias keep_last='tac | awk "!x[\$0]++" | tac'
 alias keep_first='cat | awk "!x[\$0]++" | cat'
+alias add_semicolons='sed -E "s/(.+)/\1;/" | sed -E "s/;;$/;/"'
 
 # Converts a string to a fuzzy search pattern
 alias to_fuzz='sed -E "s/(\\w)/\\1\\\\S{0,3}/g" | sed "s/\\\\S{0,3}$//g"'

@@ -500,3 +500,31 @@ EOFZ
   assert_output ""
 }
 
+@test "check add_semicolons" {
+  function f(){
+    echo "$1" | add_semicolons;
+  }
+  lines=`cat << EOF
+eles
+a phrase is here;
+dont remove extra semicolons if they already exist;;
+
+EOF
+`
+  run f "$lines"
+  assert_success
+  expected=`cat << EOF
+eles;
+a phrase is here;
+dont remove extra semicolons if they already exist;;
+
+EOF
+`
+  assert_output "$expected"
+  lines=''
+  run f "$lines"
+  assert_success
+  expected=''
+  assert_output "$expected"
+}
+
