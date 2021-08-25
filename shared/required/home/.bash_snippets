@@ -40,6 +40,14 @@ AND type ='u';
   "
 }
 
+function snip_sql_table_info {
+  echo "
+/* SQL get table information */
+SELECT *
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME='table_name'
+  "
+
 function snip_pwsh_init_module {
   echo "
 pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Module -Path ./ -ModuleName \"test\" -Author \"Manyu Lakhotia\" -Description \"Test powershell module\" -ModuleVersion \"0.0.1\" -PowershellVersion \"5.1\" -CompanyName \"N/A\" -CopyRight \"N/A\";}'
