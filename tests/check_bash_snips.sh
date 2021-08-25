@@ -47,9 +47,9 @@ EOF
   assert_output "$expected"
 }
 
-@test "check snip_sql_general_search" {
+@test "check snip_sql_search_general" {
   function f(){
-    snip_sql_general_search;
+    snip_sql_search_general;
   }
   expected=`cat << EOF
 /* SQL general search, NOT FOR COLUMNS */
@@ -70,15 +70,42 @@ EOF
   assert_output "$expected"
 }
 
-@test "check snip_sql_table_info" {
+@test "check snip_sql_show_table_info" {
   function f(){
-    snip_sql_table_info;
+    snip_sql_show_table_info;
   }
   expected=`cat << EOF
 /* SQL get table information */
-SELECT *
-FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_NAME='table_name'
+SELECT c.TABLE_NAME
+, c.COLUMN_NAME
+, c.IS_NULLABLE
+, c.DATA_TYPE
+, c.CHARACTER_MAXIMUM_LENGTH
+, c.NUMERIC_PRECISION
+, c.DATETIME_PRECISION
+, c.COLUMN_DEFAULT
+FROM INFORMATION_SCHEMA.COLUMNS as c
+WHERE c.TABLE_NAME = 'table_name';
+EOF
+`
+  expected=`echo "$expected" | tr -d '\'`
+  run f
+  assert_success
+  assert_output "$expected"
+}
+
+@test "check snip_sql_show_function_info" {
+  function f(){
+    snip_sql_show_function_info;
+  }
+  expected=`cat << EOF
+/* SQL get function information */
+SELECT p.SPECIFIC_NAME
+, p.PARAMETER_NAME
+, p.DATA_TYPE
+, p.CHARACTER_MAXIMUM_LENGTH
+FROM INFORMATION_SCHEMA.PARAMETERS as p
+WHERE p.SPECIFIC_NAME='function_name';
 EOF
 `
   expected=`echo "$expected" | tr -d '\'`

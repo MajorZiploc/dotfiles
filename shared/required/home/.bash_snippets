@@ -29,7 +29,7 @@ EOF
   echo "$snip";
 }
 
-function snip_sql_general_search {
+function snip_sql_search_general {
   local snip=`cat << EOF
 /* SQL general search, NOT FOR COLUMNS */
 SELECT
@@ -46,12 +46,46 @@ EOF
   echo "$snip";
 }
 
-function snip_sql_table_info {
+function snip_sql_show_table_info {
   local snip=`cat << EOF
 /* SQL get table information */
-SELECT *
-FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_NAME='table_name'
+SELECT c.TABLE_NAME
+, c.COLUMN_NAME
+, c.IS_NULLABLE
+, c.DATA_TYPE
+, c.CHARACTER_MAXIMUM_LENGTH
+, c.NUMERIC_PRECISION
+, c.DATETIME_PRECISION
+, c.COLUMN_DEFAULT
+FROM INFORMATION_SCHEMA.COLUMNS as c
+WHERE c.TABLE_NAME = 'table_name';
+EOF
+`;
+  echo "$snip";
+}
+
+function snip_sql_show_function_info {
+  local snip=`cat << EOF
+/* SQL get function information */
+SELECT p.SPECIFIC_NAME
+, p.PARAMETER_NAME
+, p.DATA_TYPE
+, p.CHARACTER_MAXIMUM_LENGTH
+FROM INFORMATION_SCHEMA.PARAMETERS as p
+WHERE p.SPECIFIC_NAME='function_name';
+EOF
+`;
+  echo "$snip";
+}
+
+function snip_sql_show_table_constraints {
+  local snip=`cat << EOF
+/* SQL get table constraints information */
+SELECT tc.TABLE_NAME
+, tc.CONSTRAINT_NAME
+, tc.CONSTRAINT_TYPE
+FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS as tc
+WHERE c.TABLE_NAME = 'table_name';
 EOF
 `;
   echo "$snip";
