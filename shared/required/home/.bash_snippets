@@ -47,6 +47,7 @@ SELECT *
 FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_NAME='table_name'
   "
+}
 
 function snip_pwsh_init_module {
   echo "
