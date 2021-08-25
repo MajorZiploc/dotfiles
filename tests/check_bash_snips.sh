@@ -118,6 +118,26 @@ EOF
   assert_output "$expected"
 }
 
+@test "check snip_sql_show_table_constraints" {
+  function f(){
+    snip_sql_show_table_constraints;
+  }
+  expected=`cat << EOF
+/* SQL get table constraints information */
+SELECT tc.TABLE_NAME
+, tc.CONSTRAINT_NAME
+, tc.CONSTRAINT_TYPE
+FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS as tc
+WHERE tc.TABLE_NAME = 'table_name'
+;
+EOF
+`
+  expected=`echo "$expected" | tr -d '\'`
+  run f
+  assert_success
+  assert_output "$expected"
+}
+
 @test "check snip_pwsh_init_module" {
   function f(){
     snip_pwsh_init_module;
