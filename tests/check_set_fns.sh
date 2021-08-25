@@ -58,6 +58,9 @@ EOF
   all=`cat << EOF
 ./pandas_data_analytics/src/pokemon_learn_sets/run.py
 ./pandas_data_analytics/src/pandas_notes.py
+./pandas_data_analytics/src/pandas_notes.py
+./pandas_data_analytics/src/pandas_notes.py
+./pandas_data_analytics/src/pandas_notes.py
 ./pandas_data_analytics/src/text_parser/utils.py
 ./pandas_data_analytics/src/text_parser/run.py
 ./pandas_data_analytics/src/text_parser/parser.py
@@ -80,6 +83,9 @@ EOF
 ./pandas_data_analytics/src/text_parser/run.py
 ./pandas_data_analytics/src/outliers/run.py
 ./pandas_data_analytics/src/utils/utils.py
+./pandas_data_analytics/src/netflix/run.py
+./pandas_data_analytics/src/netflix/run.py
+./pandas_data_analytics/src/netflix/run.py
 ./pandas_data_analytics/src/netflix/run.py
 ./pandas_data_analytics/src/osrs/run.py
 ./pandas_data_analytics/src/common_food/run.py
@@ -286,6 +292,9 @@ zoo
 eggs
 leg
 1
+1
+1
+1
 2
 3 4 5 6
 eggs
@@ -299,6 +308,9 @@ eggs
 leg
 1
 2
+3 4 5 6
+3 4 5 6
+3 4 5 6
 3 4 5 6
 eggs
 leg

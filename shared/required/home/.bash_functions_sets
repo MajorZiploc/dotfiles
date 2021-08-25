@@ -18,7 +18,7 @@ function set_eq() {
   # return code 0 -- sets A and B are equal
   local set1=$1;
   local set2=$2;
-  diff -q <(sort $set1 | uniq) <(sort $set2 | uniq);
+  diff -q <(sort -u $set1) <(sort -u $set2);
 }
 
 function set_cardinality() {
@@ -33,7 +33,7 @@ function set_is_subset() {
   local superset=$2;
   # comm returns no output if $subset is a subset of $superset
   # comm outputs something if $subset is not a subset of $superset
-  [[ -z $(comm -23 <(sort $1 | uniq) <(sort $2 | uniq) | head -1) ]]
+  [[ -z $(comm -23 <(sort -u $1) <(sort -u $2) | head -1) ]]
 }
 
 function set_union () {
@@ -47,7 +47,7 @@ function set_intersection() {
   # returns elements that occur in both sets
   local set1=$1;
   local set2=$2;
-  comm -12 <(sort $set1) <(sort $set2) | sort -u;
+  comm -12 <(sort -u $set1) <(sort -u $set2) | sort -u;
 }
 
 function set_difference() {
@@ -55,7 +55,7 @@ function set_difference() {
   # $1 - $2
   local set1=$1;
   local set2=$2;
-  comm -23 <(sort $set1) <(sort $set2);
+  comm -23 <(sort -u $set1) <(sort -u $set2);
 }
 
 function set_symmetric_difference() {
