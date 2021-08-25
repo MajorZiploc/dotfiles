@@ -1,16 +1,18 @@
 function snip_bash_for_loop {
-  echo '
+  local snip=`cat << EOF
 IFS= ;
 l=(1 2 3 "4");
 for ele in ${l[@]};
   do echo "$ele" hi;
 done;
 unset IFS;
-  '
+EOF
+`;
+  echo "$snip";
 }
 
 function snip_sql_search_column {
-  echo "
+  local snip=`cat << EOF
 /* SQL column search */
 SELECT 
 c.name  AS 'ColumnName'
@@ -22,11 +24,13 @@ FROM sys.columns c
 JOIN sys.tables  t ON c.object_id = t.object_id
 WHERE c.name LIKE '%ColumnPattern%'
 ORDER BY TableName, ColumnName;
-  "
+EOF
+`;
+  echo "$snip";
 }
 
 function snip_sql_general_search {
-  echo "
+  local snip=`cat << EOF
 /* SQL general search, NOT FOR COLUMNS */
 SELECT
 name AS [Name], 
@@ -37,27 +41,35 @@ modify_date
 FROM sys.objects
 WHERE name LIKE '%Pattern%'
 AND type ='u';
-  "
+EOF
+`;
+  echo "$snip";
 }
 
 function snip_sql_table_info {
-  echo "
+  local snip=`cat << EOF
 /* SQL get table information */
 SELECT *
 FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_NAME='table_name'
-  "
+EOF
+`;
+  echo "$snip";
 }
 
 function snip_pwsh_init_module {
-  echo "
-pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Module -Path ./ -ModuleName \"test\" -Author \"Manyu Lakhotia\" -Description \"Test powershell module\" -ModuleVersion \"0.0.1\" -PowershellVersion \"5.1\" -CompanyName \"N/A\" -CopyRight \"N/A\";}'
-  "
+  local snip=`cat << EOF
+pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Module -Path ./ -ModuleName "test" -Author "Manyu Lakhotia" -Description "Test powershell module" -ModuleVersion "0.0.1" -PowershellVersion "5.1" -CompanyName "N/A" -CopyRight "N/A";}'
+EOF
+`;
+  echo "$snip";
 }
 
 function snip_pwsh_init_script {
-  echo "
-pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Script -Path ./ -ScriptName \"test\" -ShouldUseAdvLogging $false}'
-  "
+  local snip=`cat << EOF
+pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Script -Path ./ -ScriptName "test" -ShouldUseAdvLogging $false}'
+EOF
+`;
+  echo "$snip";
 }
 
