@@ -38,7 +38,8 @@ c.name  AS 'ColumnName'
 FROM sys.columns c
 JOIN sys.tables  t ON c.object_id = t.object_id
 WHERE c.name LIKE '%ColumnPattern%'
-ORDER BY TableName, ColumnName;
+ORDER BY TableName, ColumnName
+;
 EOF
 `
   expected=`echo "$expected" | tr -d '\'`
@@ -61,7 +62,8 @@ create_date,
 modify_date
 FROM sys.objects
 WHERE name LIKE '%Pattern%'
-AND type ='u';
+AND type ='u'
+;
 EOF
 `
   expected=`echo "$expected" | tr -d '\'`
@@ -85,7 +87,8 @@ SELECT c.TABLE_NAME
 , c.DATETIME_PRECISION
 , c.COLUMN_DEFAULT
 FROM INFORMATION_SCHEMA.COLUMNS as c
-WHERE c.TABLE_NAME = 'table_name';
+WHERE c.TABLE_NAME = 'table_name'
+;
 EOF
 `
   expected=`echo "$expected" | tr -d '\'`
@@ -105,7 +108,8 @@ SELECT p.SPECIFIC_NAME
 , p.DATA_TYPE
 , p.CHARACTER_MAXIMUM_LENGTH
 FROM INFORMATION_SCHEMA.PARAMETERS as p
-WHERE p.SPECIFIC_NAME='function_name';
+WHERE p.SPECIFIC_NAME='function_name'
+;
 EOF
 `
   expected=`echo "$expected" | tr -d '\'`
