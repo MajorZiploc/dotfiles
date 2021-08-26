@@ -1,14 +1,12 @@
 function snip_bash_for_loop {
-  local snip=`cat << EOF
+echo '
 IFS= ;
 l=(1 2 3 "4");
 for ele in ${l[@]};
   do echo "$ele" hi;
 done;
 unset IFS;
-EOF
-`;
-  echo "$snip";
+';
 }
 
 function snip_sql_search_column {

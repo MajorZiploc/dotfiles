@@ -8,14 +8,15 @@ source ~/.bashrc || true;
   function f(){
     snip_bash_for_loop;
   }
-  expected=`cat << EOF
+  expected=`echo '
 IFS= ;
 l=(1 2 3 "4");
 for ele in \${l[@]};
   do echo "\$ele" hi;
 done;
 unset IFS;
-EOF
+
+'
 `
   expected=`echo "$expected" | tr -d '\'`
   run f
