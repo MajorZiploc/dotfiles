@@ -68,7 +68,7 @@ EOF
   echo "$snip";
 }
 
-function snip_sql_show_function {
+function snip_sql_show_function_info {
   local snip=`cat << EOF
 /* SQL get function information */
 /* Includes functions, sprocs, and those with/without params */

@@ -98,9 +98,9 @@ EOF
   assert_output "$expected"
 }
 
-@test "check snip_sql_show_function" {
+@test "check snip_sql_show_function_info" {
   function f(){
-    snip_sql_show_function;
+    snip_sql_show_function_info;
   }
   expected=`cat << EOF
 /* SQL get function information */
