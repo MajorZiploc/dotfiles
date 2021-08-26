@@ -97,12 +97,13 @@ EOF
   assert_output "$expected"
 }
 
-@test "check snip_sql_show_function_info" {
+@test "check snip_sql_show_function_with_params" {
   function f(){
-    snip_sql_show_function_info;
+    snip_sql_show_function_with_params;
   }
   expected=`cat << EOF
-/* SQL get function information */
+/* SQL get sproc/function information that have parameters */
+/* NOTE: sproc/function without parameters will not be shown */
 SELECT p.SPECIFIC_NAME
 , p.PARAMETER_NAME
 , p.DATA_TYPE

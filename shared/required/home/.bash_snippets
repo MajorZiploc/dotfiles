@@ -67,9 +67,10 @@ EOF
   echo "$snip";
 }
 
-function snip_sql_show_function_info {
+function snip_sql_show_function_with_params {
   local snip=`cat << EOF
-/* SQL get function information */
+/* SQL get sproc/function information that have parameters */
+/* NOTE: sproc/function without parameters will not be shown */
 SELECT p.SPECIFIC_NAME
 , p.PARAMETER_NAME
 , p.DATA_TYPE
