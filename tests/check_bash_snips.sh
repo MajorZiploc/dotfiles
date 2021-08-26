@@ -29,7 +29,7 @@ EOF
   }
   expected=`cat << EOF
 /* SQL column search */
-SELECT 
+SELECT
 c.name  AS 'ColumnName'
 ,t.name AS 'TableName'
 ,TYPE_NAME(c.user_type_id) AS 'ColumnType'
@@ -55,10 +55,10 @@ EOF
   expected=`cat << EOF
 /* SQL general search, NOT FOR COLUMNS */
 SELECT
-name AS [Name], 
-SCHEMA_NAME(schema_id) AS schema_name, 
-type_desc, 
-create_date, 
+name AS [Name],
+SCHEMA_NAME(schema_id) AS schema_name,
+type_desc,
+create_date,
 modify_date
 FROM sys.objects
 WHERE name LIKE '%Pattern%'
@@ -97,19 +97,28 @@ EOF
   assert_output "$expected"
 }
 
-@test "check snip_sql_show_function_with_params" {
+@test "check snip_sql_show_function" {
   function f(){
-    snip_sql_show_function_with_params;
+    snip_sql_show_function;
   }
   expected=`cat << EOF
-/* SQL get sproc/function information that have parameters */
-/* NOTE: sproc/function without parameters will not be shown */
-SELECT p.SPECIFIC_NAME
+/* SQL get function information */
+/* Includes functions, sprocs, and those with/without params */
+SELECT
+r.SPECIFIC_NAME
+, r.ROUTINE_TYPE
 , p.PARAMETER_NAME
 , p.DATA_TYPE
 , p.CHARACTER_MAXIMUM_LENGTH
-FROM INFORMATION_SCHEMA.PARAMETERS AS p
-WHERE p.SPECIFIC_NAME='function_name'
+, r.ROUTINE_CATALOG
+, r.SQL_DATA_ACCESS
+, r.CREATED
+, r.LAST_ALTERED
+FROM INFORMATION_SCHEMA.ROUTINES AS r
+FULL OUTER JOIN INFORMATION_SCHEMA.PARAMETERS AS p
+ON p.SPECIFIC_NAME = r.SPECIFIC_NAME
+-- WHERE r.SPECIFIC_NAME LIKE '%function_name%'
+ORDER by r.SPECIFIC_NAME, p.PARAMETER_NAME, p.DATA_TYPE
 ;
 EOF
 `
@@ -128,8 +137,10 @@ EOF
 SELECT tc.TABLE_NAME
 , tc.CONSTRAINT_NAME
 , tc.CONSTRAINT_TYPE
+, tc.TABLE_CATALOG
 FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc
-WHERE tc.TABLE_NAME = 'table_name'
+-- WHERE tc.TABLE_NAME = 'table_name'
+ORDER BY tc.TABLE_NAME, tc.CONSTRAINT_NAME
 ;
 EOF
 `
