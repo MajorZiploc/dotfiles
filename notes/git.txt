@@ -19,3 +19,7 @@ git diff A B
   means
   Changes from A to B.
 
+# to clean up/reduce the size git takes up, can be dangerous
+git reflog expire --all --expire=now
+git gc --prune=now --aggressive
+
