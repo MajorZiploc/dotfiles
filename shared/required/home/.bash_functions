@@ -210,11 +210,24 @@ function search_env_for_fuzz {
 function show_block {
   # $1: regex string
   # $2: regex string
-  # $3: file | stdin
+  # $3: file | stream
   local from_pattern="$1";
   local to_pattern="$2";
   local content="$3";
-  sed -n "/$from_pattern/,/$to_pattern/p; /$to_pattern/q;" "$content";
+  local should_print="false";
+  [[ -z "$from_pattern" ]] && { echo "from_pattern must be specified" >&2; return 1; }
+  [[ -z "$to_pattern" ]] && { echo "to_pattern must be specified" >&2; return 1; }
+  [[ -z "$content" ]] && { echo "content must be specified" >&2; return 1; }
+  while IFS="" read -r p || [ -n "$p" ]
+    do
+    if [[ "$should_print" == "true" ]]
+    then
+      echo "$p";
+      [[ "$p" =~ $to_pattern ]] && { break; }
+    else
+      [[ "$p" =~ $from_pattern ]] && { echo "$p"; should_print="true"; }
+    fi
+  done < "$content";
 }
 
 function show_line_nums {
