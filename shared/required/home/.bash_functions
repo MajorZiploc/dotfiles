@@ -54,36 +54,46 @@ function tmuxps_get_project_dirs(){
 function tmuxps() {
   # tmux project session
   # creates a tmux session
-  # $1: optional relative dir to start the tmux session in
-  # If $1 not given, then display a fuzzy finder of various project dirs to select a project for creation of a session
-  if [[ $# -eq 1 ]]; then
-    local selected=$1;
-  else
-    local items="";
-    tmuxps_get_project_dirs;
-    for path in ${TMUXPS_PROJECT_DIRS[@]};
-      do
-        [[ -d $path ]] && {
-          items+=`find $path -maxdepth 1 -mindepth 1 -type d`;
-          items+="\n";
-        }
-    done;
-    local selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
-  fi
+  # $1: optional session name
+  local session_name="$1";
+  local items="";
+  tmuxps_get_project_dirs;
+  for path in ${TMUXPS_PROJECT_DIRS[@]};
+    do
+      [[ -d $path ]] && {
+        items+=`find $path -maxdepth 1 -mindepth 1 -type d`;
+        items+="\n";
+      }
+  done;
+  local selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
   [[ -z "$selected" ]] || {
-    local dirname=`basename $selected | tr '.[[:blank:]]' '-'`;
-    tmux switch-client -t $dirname;
+    [[ -z "$session_name" ]] && {
+      session_name=`basename $selected | tr '.[[:blank:]]' '-'`;
+    }
+    tmux switch-client -t $session_name;
     if [[ $? -eq 0 ]]; then
       exit 0;
     fi
-    tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname;
+    tmux new-session -c $selected -d -s $session_name && tmux switch-client -t $session_name || tmux new -c $selected -A -s $session_name;
   }
 }
 
 function tmuxds() {
   # tmux directory session
   # displays a fuzzy finder listing of directories at the current directory to choose from for a tmux session
-  tmuxps "$(find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER)";
+  # $1: optional session name
+  local session_name="$1";
+  local selected="$(find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER)";
+  [[ -z "$selected" ]] || {
+    [[ -z "$session_name" ]] && {
+      session_name=`basename $selected | tr '.[[:blank:]]' '-'`;
+    }
+    tmux switch-client -t $session_name;
+    if [[ $? -eq 0 ]]; then
+      exit 0;
+    fi
+    tmux new-session -c $selected -d -s $session_name && tmux switch-client -t $session_name || tmux new -c $selected -A -s $session_name;
+  }
 }
 
 function ide1() {
