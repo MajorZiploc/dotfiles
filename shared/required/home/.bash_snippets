@@ -21,7 +21,7 @@ function snip_bash_while_stream {
 echo '
 while read -d $'"'\n'"' ele;
   do echo "$ele hi";
-done < "$stream";
+done < <(echo "$eles");
 ';
 }
 
