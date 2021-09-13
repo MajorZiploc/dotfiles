@@ -28,7 +28,7 @@ find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i''
 extra_env_checks_placeholder="[[ -z \$(which fzy 2>/dev/null) ]] \&\& { ENV_NOTES=\"\$ENV_NOTES:Missing fzy (stdin fuzzy finder)\"; }\n[[ -z \$(python -V 2>/dev/null | egrep \"\\\b3\") ]] \&\& { ENV_NOTES=\"\$ENV_NOTES:Missing python v3 \"; }\n";
 find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,EXTRA_ENV_CHECKS_PLACEHOLDER,$extra_env_checks_placeholder,g" {} \;
 coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright', 'coc-sql', 'coc-tsserver', 'coc-css', 'coc-html']";
-find "$tempShared" -regextype egrep -iregex ".*coc.*" -type f -exec sed -E -i'' "s,COC_PLUGINS_PLACEHOLDER,$coc_plugins_placeholder,g" {} \;
+find "$tempShared" -regextype egrep -iregex ".*coc.*" -type f -exec sed -E -i'' "s/COC_PLUGINS_PLACEHOLDER/$coc_plugins_placeholder/g" {} \;
 
 unset vsvimpath
 unset vim_plugin_include
