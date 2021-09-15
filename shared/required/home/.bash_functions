@@ -415,7 +415,7 @@ function find_files_delete_preview {
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec echo rm "{}" \;
     true;
   } || {
-    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in "$with_content" "{}" \; -exec echo rm "{}" \; | egrep "^rm"
+    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in -e "$with_content" "{}" \; -exec echo rm "{}" \; | egrep "^rm"
   }
 }
 
@@ -429,7 +429,7 @@ function find_files_delete {
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec rm "{}" \;
     true;
   } || {
-    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in "$with_content" "{}" \; -exec rm "{}" \; > /dev/null
+    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in -e "$with_content" "{}" \; -exec rm "{}" \; > /dev/null
   }
 }
 
@@ -499,7 +499,7 @@ function find_files {
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*';
     true;
   } || {
-    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in "$with_content" "{}" \; -exec echo "{}" \; | egrep -v "\s*^[[:digit:]]+:"
+    find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in -e "$with_content" "{}" \; -exec echo "{}" \; | egrep -v "\s*^[[:digit:]]+:"
   }
 }
 
@@ -518,7 +518,7 @@ function find_in_files {
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
-  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep --color -in "$grep_pattern" "{}" +;
+  find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep --color -in -e "$grep_pattern" "{}" +;
 }
 
 function find_in_files_fuzz {

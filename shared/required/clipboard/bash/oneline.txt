@@ -1,5 +1,5 @@
 find . -maxdepth 8 -regextype egrep -iregex '.*pattern.*' -type f 2>/dev/null -print0 | xargs --null -I{} echo {}
-find . -name '*pattern*' -exec egrep --color -sin "pattern1|pattern2" {} + -exec echo {} + # multi command execute example
+find . -name '*pattern*' -exec egrep --color -in -e "pattern1|pattern2" "{}" + -exec echo "{}" + # multi command execute example
 
 git log -p --grep="<commit_msg_pattern>"
 
