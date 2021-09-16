@@ -14,8 +14,8 @@ find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's/
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,/bin/bash,g' {} \;
 vim_plugin_include="Plugin 'ctrlpvim/ctrlp.vim' \" fuzzy file finder\nPlugin 'jremmen/vim-ripgrep' \" grepper\nPlugin 'stefandtw/quickfix-reflector.vim' \" editable quickfix list for ripgrep\n\"Plugin 'junegunn/fzf'\, { 'do': { -> fzf#install() } }\n\"Plugin 'junegunn/fzf.vim'\nPlugin 'airblade/vim-rooter'\nPlugin 'mechatroner/rainbow_csv' \" csv highlighter and query engine\nPlugin 'frazrepo/vim-rainbow' \" color pairing brakets and such\nPlugin 'tpope/vim-fugitive' \" git plugin\nPlugin 'bling/vim-airline' \" status bar\nPlugin 'vim-airline/vim-airline-themes' \" colors for status bar";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_INCLUDE_PLACEHOLDER,$vim_plugin_include,g" {} \;
-vim_plugin_settings_path_prefix="so ~/vimfiles/plugin-settings/"
-vim_plugin_settings="${vim_plugin_settings_path_prefix}ctrlp.vim\n${vim_plugin_settings_path_prefix}ripgrep.vim\n${vim_plugin_settings_path_prefix}quickfix-reflector.vim\n\"${vim_plugin_settings_path_prefix}fzf.vim\n${vim_plugin_settings_path_prefix}rainbow_csv.vim\n${vim_plugin_settings_path_prefix}airline-theme.vim\n${vim_plugin_settings_path_prefix}fugitive.vim";
+vim_plugset_path="so ~/vimfiles/plugin-settings/"
+vim_plugin_settings="${vim_plugset_path}ctrlp.vim\n${vim_plugset_path}ripgrep.vim\n${vim_plugset_path}quickfix-reflector.vim\n\"${vim_plugset_path}fzf.vim\n${vim_plugset_path}rainbow_csv.vim\n${vim_plugset_path}airline-theme.vim\n${vim_plugset_path}fugitive.vim";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_PLACEHOLDER,$vim_plugin_settings,g" {} \;
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,mac,g" {} \;
 vsc_settings_destination_placeholder="\$HOME/.config/Code/User/";
@@ -36,7 +36,7 @@ find "$tempShared" -regextype egrep -iregex ".*coc.*" -type f -exec sed -E -i'' 
 
 unset vsvimpath
 unset vim_plugin_include
-unset vim_plugin_settings_path_prefix
+unset vim_plugset_path
 unset vim_plugin_settings
 unset tmuxps_paths_array_placeholder
 unset fuzzy_finder_placeholder

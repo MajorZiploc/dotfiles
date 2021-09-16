@@ -14,8 +14,8 @@ find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's/
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,/bin/bash.exe,g' {} \;
 vim_plugin_include="Plugin 'ctrlpvim/ctrlp.vim' \" fuzzy file finder";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_INCLUDE_PLACEHOLDER,$vim_plugin_include,g" {} \;
-vim_plugin_settings_path_prefix="so ~/vimfiles/plugin-settings/"
-vim_plugin_settings="${vim_plugin_settings_path_prefix}ctrlp.vim";
+vim_plugset_path="so ~/vimfiles/plugin-settings/"
+vim_plugin_settings="${vim_plugset_path}ctrlp.vim";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_PLACEHOLDER,$vim_plugin_settings,g" {} \;
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,windows10,g" {} \;
 vsc_settings_destination_placeholder="\$HOME/AppData/Roaming/Code/User/";
@@ -33,7 +33,7 @@ find "$tempShared" -regextype egrep -iregex ".*coc.*" -type f -exec sed -E -i'' 
 
 unset vsvimpath
 unset vim_plugin_include
-unset vim_plugin_settings_path_prefix
+unset vim_plugset_path
 unset vim_plugin_settings
 unset vsc_settings_destination_placeholder
 unset tmuxps_paths_array_placeholder
