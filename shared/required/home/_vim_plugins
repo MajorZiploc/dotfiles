@@ -5,11 +5,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim' " package manager
-Plugin 'bling/vim-airline' " status bar
-Plugin 'vim-airline/vim-airline-themes' " colors for status bar
 Plugin 'tpope/vim-surround' " manipulate surround chars
-Plugin 'frazrepo/vim-rainbow' " color pairing brakets and such
-Plugin 'tpope/vim-fugitive' " git plugin
 Plugin 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
 VIM_PLUGIN_INCLUDE_PLACEHOLDER
 
@@ -34,10 +30,9 @@ filetype plugin indent on
 " leader key
 let mapleader = " "
 
-so ~/vimfiles/plugin-settings/airline-theme.vim
-so ~/vimfiles/plugin-settings/fugitive.vim
 so ~/vimfiles/plugin-settings/coc.vim
 VIM_PLUGIN_SETTINGS_PLACEHOLDER
+
 " so ~/vimfiles/plugin-settings/gitgutter.vim
 " so ~/vimfiles/plugin-settings/wordmotion.vim
 
