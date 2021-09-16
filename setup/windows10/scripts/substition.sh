@@ -12,10 +12,10 @@ vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc" | sed -E 's,^/(\w),\U\1:,g' | sed -
 find "$tempShared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" {} \;
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's/VIM_PLUGIN_IMPORT_PLACEHOLDER/so ~\/_vim_plugins/g' {} \;
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,/bin/bash.exe,g' {} \;
-vim_plugin_include="Plugin 'ctrlpvim/ctrlp.vim' \" fuzzy file finder\nPlugin 'jremmen/vim-ripgrep' \" grepper\nPlugin 'stefandtw/quickfix-reflector.vim' \" editable quickfix list for ripgrep\n\"Plugin 'junegunn/fzf'\, { 'do': { -> fzf#install() } }\n\"Plugin 'junegunn/fzf.vim'\nPlugin 'airblade/vim-rooter'";
+vim_plugin_include="Plugin 'ctrlpvim/ctrlp.vim' \" fuzzy file finder";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_INCLUDE_PLACEHOLDER,$vim_plugin_include,g" {} \;
 vim_plugin_settings_path_prefix="so ~/vimfiles/plugin-settings/"
-vim_plugin_settings="${vim_plugin_settings_path_prefix}ctrlp.vim\n${vim_plugin_settings_path_prefix}ripgrep.vim\n${vim_plugin_settings_path_prefix}quickfix-reflector.vim\n\"${vim_plugin_settings_path_prefix}fzf.vim";
+vim_plugin_settings="${vim_plugin_settings_path_prefix}ctrlp.vim";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_PLACEHOLDER,$vim_plugin_settings,g" {} \;
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,windows10,g" {} \;
 vsc_settings_destination_placeholder="\$HOME/AppData/Roaming/Code/User/";
