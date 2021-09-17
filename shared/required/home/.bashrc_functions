@@ -1,4 +1,4 @@
-. ~/.bash_functions_sets
+. ~/.bashrc_functions_sets
 
 function h() {
   # show history

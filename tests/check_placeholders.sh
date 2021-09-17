@@ -23,7 +23,7 @@ function check_for_placeholder {
   files=(
     ~/.bash_aliases
     ~/.bash_env_vars
-    ~/.bash_functions
+    ~/.bashrc_functions
     ~/.bash_profile
     ~/.bashrc
   )

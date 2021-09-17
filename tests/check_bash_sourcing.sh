@@ -14,8 +14,8 @@ load 'libs/bats-assert/load'
   assert_output ''
 }
 
-@test "check that sourcing ~/.bash_functions does not place output into terminal" {
-  run source ~/.bash_functions
+@test "check that sourcing ~/.bashrc_functions does not place output into terminal" {
+  run source ~/.bashrc_functions
   assert_success
   assert_output ''
 }
