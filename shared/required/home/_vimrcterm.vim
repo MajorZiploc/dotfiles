@@ -49,7 +49,7 @@ set nocompatible
 
 " command aliases
 command! Sorc so $MYVIMRC
-command! Sorcvs so ~\_vsvimrc.vim
+command! Sorcvs so ~\_vsvimrc
 
 " window/appearance
 colorscheme elflord
