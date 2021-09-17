@@ -1,7 +1,7 @@
 # fc uses $FCEDIT, then $EDITOR, then vi
-export FCEDIT='/usr/bin/vim -u ~/_vimrcterm'
+export FCEDIT='/usr/bin/vim -u ~/_vimrcterm.vim'
 # <c-x> <c-e> tries to use $VISUAL, then $EDITOR, and then emacs
-export VISUAL='/usr/bin/vim -u ~/_vimrcterm'
+export VISUAL='/usr/bin/vim -u ~/_vimrcterm.vim'
 
 # the fall back to fc and <c-x> <c-e> 
 export EDITOR='/usr/bin/vim'

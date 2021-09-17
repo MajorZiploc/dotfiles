@@ -1,4 +1,4 @@
-so ~/_commonvimrc
+so ~/_commonvimrc.vim
 
 set scrolloff=3
 

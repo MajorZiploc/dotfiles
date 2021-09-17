@@ -1,4 +1,4 @@
-so ~/_commonvimrc
+so ~/_commonvimrc.vim
 
 " Allow mouse interactions
 set mouse=a
@@ -49,7 +49,7 @@ set nocompatible
 
 " command aliases
 command! Sorc so $MYVIMRC
-command! Sorcvs so ~\_vsvimrc
+command! Sorcvs so ~\_vsvimrc.vim
 
 " window/appearance
 colorscheme elflord
