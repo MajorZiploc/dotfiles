@@ -5,16 +5,19 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim' " package manager
-Plugin 'tpope/vim-surround' " manipulate surround chars
 Plugin 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
+Plugin 'tpope/vim-surround' " manipulate surround chars
 VIM_PLUGIN_INCLUDE_PLACEHOLDER
 
+" Plugin 'airblade/vim-rooter'
 " Plugin 'edkolev/tmuxline.vim' " prettier tmux
 " Plugin 'itchyny/lightline.vim' " status bar
 " Plugin 'airblade/vim-gitgutter' " git supporting plugin
 " Plugin 'OrangeT/vim-csharp'
 " Plugin 'chaoren/vim-wordmotion'
 " Plugin 'scrooloose/nerdtree' " filesystem explorer
+" Plugin 'junegunn/fzf'\, { 'do': { -> fzf#install() } }
+" Plugin 'junegunn/fzf.vim'
 
 call vundle#end()
 filetype plugin indent on
