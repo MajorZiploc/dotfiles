@@ -614,20 +614,36 @@ function show_script_path {
 
 function show_cheat_sheet {
   local query="$1";
-  selected=`cat "$HOME/.cht-languages" "$HOME/.cht-command" "$HOME/.cht-languages-ext" "$HOME/.cht-command-ext" 2>/dev/null | egrep -v "^\s*$" | FUZZY_FINDER_PLACEHOLDER`
-  if [[ -z "$selected" ]]; then
+  local tool="$2";
+  [[ -z "$tool" ]];
+  local tool_was_param="$?";
+  [[ -z "$tool" ]] && {
+    tool=`cat "$HOME/.cht-languages" "$HOME/.cht-command" "$HOME/.cht-languages-ext" "$HOME/.cht-command-ext" 2>/dev/null | egrep -v "^\s*$" | FUZZY_FINDER_PLACEHOLDER`;
+    true;
+  } || {
+    if [[ ! "$tool" =~ ~$ && ! "$tool" =~ /$ ]]; then
+      echo "if tool is specified, you must end it with the character / (for language) or ~ (for command)" >&2;
+      return 1;
+    fi
+  }
+  if [[ -z "$tool" ]]; then
     return 1;
   fi
   [[ -z "$query" ]] && {
-    curl cht.sh/$selected/;
+    tool=${tool/%\~$/}
+    tool=${tool/%\/$/}
+    curl cht.sh/$tool/;
     true;
   } || {
-    if grep -qs "$selected" "$HOME/.cht-languages"; then
-      query=`echo "$query" | tr ' ' '+'`;
-      curl "cht.sh/$selected/$query";
-    else
-      curl "cht.sh/$selected~$query";
-    fi
+    query=`echo "$query" | tr ' ' '+'`;
+    [[ ! $tool_was_param ]] && {
+      if grep -qs "$tool" "$HOME/.cht-languages"; then
+        tool="$tool/";
+      else
+        tool="$tool~";
+      fi
+    }
+    curl "cht.sh/$tool/$query";
   }
 }
 
