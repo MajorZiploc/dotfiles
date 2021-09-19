@@ -614,7 +614,7 @@ function show_script_path {
 
 function show_cheat_sheet {
   local query="$1";
-  selected=`cat "$HOME/.cht-languages" "$HOME/.cht-command" | egrep -v "^\s*$" | FUZZY_FINDER_PLACEHOLDER`
+  selected=`cat "$HOME/.cht-languages" "$HOME/.cht-command" "$HOME/.cht-languages-ext" "$HOME/.cht-command-ext" 2>/dev/null | egrep -v "^\s*$" | FUZZY_FINDER_PLACEHOLDER`
   if [[ -z "$selected" ]]; then
     return 1;
   fi
