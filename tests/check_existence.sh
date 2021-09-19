@@ -65,6 +65,7 @@ function typea_check(){
   "snip_sql_show_table_constraints"
   "snip_pwsh_init_module"
   "snip_pwsh_init_script"
+  "show_cheat_sheet"
   )
   for funct in ${l[@]};
     do
