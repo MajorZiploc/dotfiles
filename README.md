@@ -39,7 +39,6 @@ Windows:
 Ubuntu:
 - apt packages
 
-
 ## Install scripts - ALWAYS read scripts you are going to execute!!!!
 
 ### Warning - The following script will override any files in the destination. It copies to locations such as the home directory!!
@@ -88,6 +87,9 @@ To setup ssh keys for git:
 - tmuxas -t <session\_name> # attach to a tmux session
 - tmuxksvr # kills the tmux server
 - refresh\_settings(\_help|\_all|\_with\_flags)?
+- show\_script\_path # useful when writing bash scripts to get the local of the script being written
+- show\_cheat\_sheet # uses cht.sh to search for language or command functionality
+- set\_\S+ # use search\_env\_for "set\_" to see all set functions available
 ### Note on Notable bash functions/aliases
 All of the find\_ are wrappers around find to make certain common operations easy to perform.
 
@@ -151,7 +153,4 @@ The container is a based on a ubuntu image. So when you make changes to the shar
 > ./tests/run_tests.sh
 
 NOTE: you can also run a specific test file instead of all tests
-
-## TODO
-- consider switching find_ commands to use `rg --no-heading`
 
