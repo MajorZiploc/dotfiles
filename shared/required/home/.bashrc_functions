@@ -612,7 +612,7 @@ function show_script_path {
   echo "$scriptpath";
 }
 
-function show_man {
+function ask_question {
   local query="$1";
   selected=`cat "$HOME/.cht-languages" "$HOME/.cht-command" | egrep -v "^\s*$" | FUZZY_FINDER_PLACEHOLDER`
   if [[ -z "$selected" ]]; then
