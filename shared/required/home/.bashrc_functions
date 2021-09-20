@@ -647,3 +647,9 @@ function show_cheat_sheet {
   }
 }
 
+function parse_json_field {
+  local json="$1";
+  local field="$2";
+  pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$json'; \$js | % { Write-Host \$_.$field; } }";
+}
+
