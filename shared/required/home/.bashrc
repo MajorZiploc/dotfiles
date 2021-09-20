@@ -35,6 +35,7 @@ test -f ~/.bash_env_vars && . ~/.bash_env_vars
 test -f ~/.bash_aliases && . ~/.bash_aliases
 test -f ~/.bashrc_functions && . ~/.bashrc_functions
 test -f ~/.bash_snippets && . ~/.bash_snippets
+test -f ~/.bash_completion && . ~/.bash_completion
 
 if [ -d ~/.local/bin ]; then
   export PATH="$PATH:$(echo ~/.local/bin)"
