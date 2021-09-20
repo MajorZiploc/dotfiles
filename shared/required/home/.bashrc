@@ -30,7 +30,6 @@ shopt -s extglob
 # for example, cd /vr/lgo/apaache would find /var/log/apache
 shopt -s cdspell
 
-
 test -f ~/.bash_env_vars && . ~/.bash_env_vars
 test -f ~/.bash_aliases && . ~/.bash_aliases
 test -f ~/.bashrc_functions && . ~/.bashrc_functions
@@ -39,11 +38,6 @@ test -f ~/.bash_completion && . ~/.bash_completion
 
 if [ -d ~/.local/bin ]; then
   export PATH="$PATH:$(echo ~/.local/bin)"
-fi
-
-if [ -d $HOME/.asdf ]; then
-  . $HOME/.asdf/asdf.sh
-  . $HOME/.asdf/completions/asdf.bash
 fi
 
 # _ext bash files are for user specific edits to the bash environment
