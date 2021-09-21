@@ -66,7 +66,8 @@ function typea_check(){
   "snip_pwsh_init_module"
   "snip_pwsh_init_script"
   "show_cheat_sheet"
-  "parse_json_field"
+  "parse_json_fields"
+  "parse_csv_fields"
   )
   for funct in ${l[@]};
     do
