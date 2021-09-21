@@ -309,7 +309,7 @@ function refresh_settings {
   show_env_notes;
 }
 
-function find_items_rename_helper {
+function _find_items_rename_helper {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local by="$2";
@@ -341,7 +341,7 @@ function find_items_rename_preview {
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=true;
   echo "NOTE: This behavior may not be the exact behavior when running the command out of preview mode";
-  find_items_rename_helper "$file_pattern" "$by" "$preview" "$maxdepth";
+  _find_items_rename_helper "$file_pattern" "$by" "$preview" "$maxdepth";
 }
 
 function find_items_rename {
@@ -350,10 +350,10 @@ function find_items_rename {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=false;
-  find_items_rename_helper "$file_pattern" "$by" "$preview" "$maxdepth";
+  _find_items_rename_helper "$file_pattern" "$by" "$preview" "$maxdepth";
 }
 
-function find_items_delete_helper {
+function _find_items_delete_helper {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local preview=$2;
@@ -379,7 +379,7 @@ function find_items_delete_preview {
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=true;
   echo "NOTE: This behavior may not be the exact behavior when running the command out of preview mode";
-  find_items_delete_helper "$file_pattern" "$preview" "$maxdepth";
+  _find_items_delete_helper "$file_pattern" "$preview" "$maxdepth";
 }
 
 function find_items_delete {
@@ -387,7 +387,7 @@ function find_items_delete {
   local maxdepth="$2";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=false;
-  find_items_delete_helper "$file_pattern" "$preview" "$maxdepth";
+  _find_items_delete_helper "$file_pattern" "$preview" "$maxdepth";
 }
 
 function find_items {
@@ -433,7 +433,7 @@ function find_files_delete {
   }
 }
 
-function find_files_rename_helper {
+function _find_files_rename_helper {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local by="$2";
@@ -476,7 +476,7 @@ function find_files_rename_preview {
   local maxdepth="$4";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=true;
-  find_files_rename_helper "$file_pattern" "$by" "$with_content" "$preview" "$maxdepth";
+  _find_files_rename_helper "$file_pattern" "$by" "$with_content" "$preview" "$maxdepth";
 }
 
 function find_files_rename {
@@ -486,7 +486,7 @@ function find_files_rename {
   local maxdepth="$4";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local preview=false;
-  find_files_rename_helper "$file_pattern" "$by" "$with_content" "$preview" "$maxdepth";
+  _find_files_rename_helper "$file_pattern" "$by" "$with_content" "$preview" "$maxdepth";
 }
 
 function find_files {
@@ -650,10 +650,10 @@ function show_cheat_sheet {
 function _parse_fields_helper {
   local fields="$1";
   local field_separator="$2";
-  function parse_fields_helper_inner {
+  function _parse_fields_helper_inner {
     echo "$fields" | tr ":," "\n" | while read -d $'\n' field; do echo "\$(\$_.${field})${field_separator}"; done;
   }
-  parse_fields_helper_inner | perl -0777 -ple "s/(${field_separator})\$//" | tr -d "\n";
+  _parse_fields_helper_inner | perl -0777 -ple "s/(${field_separator})\$//" | tr -d "\n";
 }
 
 function _parse_fields_header_helper {
@@ -684,7 +684,7 @@ function parse_csv_fields {
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
   _parse_fields_header_helper "$fields" "$field_separator";
   local pwsh_fields=`_parse_fields_helper "$fields" "$field_separator"`;
-  rows=`echo "$csv_str" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
+  _rows=`echo "$csv_str" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
   rows=`echo "$rows" | perl -0777 -ple "s/,\$//"`;
   rows=`echo "(" "$rows" ")"`;
   pwsh -command "&{ \$cs=$rows | ConvertFrom-Csv; \$cs | % { Write-Host \"$pwsh_fields\" } }";
