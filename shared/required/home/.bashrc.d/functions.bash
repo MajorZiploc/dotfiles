@@ -1,5 +1,3 @@
-. ~/.bashrc_functions_sets
-
 function h() {
   # show history
   # $1: optional pos num to show last n entries in the history
