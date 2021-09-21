@@ -38,6 +38,9 @@ expected="$(cat << EOF
 ./pandas_data_analytics/pyproject.toml
 ./pandas_data_analytics/README.md
 ./pandas_data_analytics/setup.py
+./parser_files/basic.json
+./parser_files/el_pollo_loco.csv
+./parser_files/list.json
 ./prolog_prac/hello_world.pl
 ./prolog_prac/README.md
 EOF
