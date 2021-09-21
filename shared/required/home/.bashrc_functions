@@ -650,9 +650,16 @@ function show_cheat_sheet {
 function parse_json_fields {
   local json_str="$1";
   local fields="$2";
+  local field_separator="$3";
+  field_separator="${field_separator:=","}";
   [[ -z "$json_str" ]] && { echo "Must specify a json_str!" >&2; return 1; }
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
-  pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$json_str'; \$js | % { Write-Host \$_.$fields; } }";
+  echo "$fields" | sed -E "s/[:,]/${field_separator}/g";
+  function parse_fields {
+    echo "$1" | tr ":," "\n" | while read -d $'\n' field; do echo "\$(\$_.${field})${field_separator}"; done;
+  }
+  local pwsh_fields=`parse_fields "$fields" | perl -0777 -ple "s/(${field_separator})\$//" | tr -d "\n"`;
+  pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$json_str'; \$js | % { Write-Host \"$pwsh_fields\"; } }";
 }
 
 function parse_csv_fields {
