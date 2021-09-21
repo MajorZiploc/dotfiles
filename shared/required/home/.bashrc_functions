@@ -647,6 +647,21 @@ function show_cheat_sheet {
   }
 }
 
+function _parse_fields_helper {
+  local fields="$1";
+  local field_separator="$2";
+  function parse_fields_helper_inner {
+    echo "$fields" | tr ":," "\n" | while read -d $'\n' field; do echo "\$(\$_.${field})${field_separator}"; done;
+  }
+  parse_fields_helper_inner | perl -0777 -ple "s/(${field_separator})\$//" | tr -d "\n";
+}
+
+function _parse_fields_header_helper {
+  local fields="$1";
+  local field_separator="$2";
+  echo "$fields" | sed -E "s/[:,]/${field_separator}/g";
+}
+
 function parse_json_fields {
   local json_str="$1";
   local fields="$2";
@@ -655,11 +670,8 @@ function parse_json_fields {
   [[ -z "$json_str" ]] && { echo "Must specify a json_str!" >&2; return 1; }
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
   json_str=`echo "$json_str" | tr -d "\n"`;
-  echo "$fields" | sed -E "s/[:,]/${field_separator}/g";
-  function parse_fields {
-    echo "$1" | tr ":," "\n" | while read -d $'\n' field; do echo "\$(\$_.${field})${field_separator}"; done;
-  }
-  local pwsh_fields=`parse_fields "$fields" | perl -0777 -ple "s/(${field_separator})\$//" | tr -d "\n"`;
+  _parse_fields_header_helper "$fields" "$field_separator";
+  local pwsh_fields=`_parse_fields_helper "$fields" "$field_separator" | tr -d "\n"`;
   pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$json_str'; \$js | % { Write-Host \"$pwsh_fields\"; } }";
 }
 
@@ -670,11 +682,8 @@ function parse_csv_fields {
   field_separator="${field_separator:=","}";
   [[ -z "$csv_str" ]] && { echo "Must specify a csv_str!" >&2; return 1; }
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
-  echo "$fields" | sed -E "s/[:,]/${field_separator}/g";
-  function parse_fields {
-    echo "$1" | tr ":," "\n" | while read -d $'\n' field; do echo "\$(\$_.${field})${field_separator}"; done;
-  }
-  local pwsh_fields=`parse_fields "$fields" | perl -0777 -ple "s/(${field_separator})\$//" | tr -d "\n"`;
+  _parse_fields_header_helper "$fields" "$field_separator";
+  local pwsh_fields=`_parse_fields_helper "$fields" "$field_separator"`;
   rows=`echo "$csv_str" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
   rows=`echo "$rows" | perl -0777 -ple "s/,\$//"`;
   rows=`echo "(" "$rows" ")"`;
