@@ -662,6 +662,7 @@ function parse_csv_fields {
   field_separator="${field_separator:=","}";
   [[ -z "$csv_str" ]] && { echo "Must specify a csv_str!" >&2; return 1; }
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
+  echo "$fields" | sed -E "s/[:,]/${field_separator}/g";
   function parse_fields {
     echo "$1" | tr ":," "\n" | while read -d $'\n' field; do echo "\$(\$_.${field})${field_separator}"; done;
   }
