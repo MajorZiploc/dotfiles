@@ -648,8 +648,19 @@ function show_cheat_sheet {
 }
 
 function parse_json_field {
-  local json="$1";
+  local jsonStr="$1";
   local field="$2";
-  pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$json'; \$js | % { Write-Host \$_.$field; } }";
+  [[ -z "$jsonStr" ]] && { echo "Must specify a jsonStr!" >&2; return 1; }
+  [[ -z "$field" ]] && { echo "Must specify a field!" >&2; return 1; }
+  pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$jsonStr'; \$js | % { Write-Host \$_.$field; } }";
+}
+
+function parse_csv_field {
+  local csvStr="$1";
+  local field="$2";
+  rows=`echo "$csvStr" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
+  rows=`echo "$rows" | perl -0777 -ple 's/,$//'`;
+  rows=`echo "(" "$rows" ")"`;
+  pwsh -command "&{ \$cs=$rows | ConvertFrom-Csv; \$cs | % { Write-Host \$_.$field; } }";
 }
 
