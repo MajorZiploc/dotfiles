@@ -30,10 +30,11 @@ shopt -s extglob
 # for example, cd /vr/lgo/apaache would find /var/log/apache
 shopt -s cdspell
 
-test -f ~/.bash_env_vars && . ~/.bash_env_vars
-test -f ~/.bash_aliases && . ~/.bash_aliases
-test -f ~/.bashrc_functions && . ~/.bashrc_functions
-test -f ~/.bash_snippets && . ~/.bash_snippets
+test -f ~/.bashrc.d/env_vars.bash && . ~/.bashrc.d/env_vars.bash
+test -f ~/.bashrc.d/aliases.bash && . ~/.bashrc.d/aliases.bash
+test -f ~/.bashrc.d/functions_sets.bash && . ~/.bashrc.d/functions_sets.bash
+test -f ~/.bashrc.d/functions.bash && . ~/.bashrc.d/functions.bash
+test -f ~/.bashrc.d/snippets.bash && . ~/.bashrc.d/snippets.bash
 test -f ~/.bash_completion && . ~/.bash_completion
 
 if [ -d ~/.local/bin ]; then

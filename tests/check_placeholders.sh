@@ -21,9 +21,9 @@ function check_for_placeholder {
 
 @test "$check bash $phdoesntexist" {
   files=(
-    ~/.bash_aliases
-    ~/.bash_env_vars
-    ~/.bashrc_functions
+    ~/.bashrc.d/aliases.bash
+    ~/.bashrc.d/env_vars.bash
+    ~/.bashrc.d/functions.bash
     ~/.bash_profile
     ~/.bashrc
   )
