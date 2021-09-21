@@ -630,8 +630,8 @@ function show_cheat_sheet {
     return 1;
   fi
   [[ -z "$query" ]] && {
-    tool=${tool/%\~$/}
-    tool=${tool/%\/$/}
+    tool=${tool/%\~$/};
+    tool=${tool/%\/$/};
     curl cht.sh/$tool/;
     true;
   } || {
@@ -647,20 +647,28 @@ function show_cheat_sheet {
   }
 }
 
-function parse_json_field {
-  local jsonStr="$1";
-  local field="$2";
-  [[ -z "$jsonStr" ]] && { echo "Must specify a jsonStr!" >&2; return 1; }
-  [[ -z "$field" ]] && { echo "Must specify a field!" >&2; return 1; }
-  pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$jsonStr'; \$js | % { Write-Host \$_.$field; } }";
+function parse_json_fields {
+  local json_str="$1";
+  local fields="$2";
+  [[ -z "$json_str" ]] && { echo "Must specify a json_str!" >&2; return 1; }
+  [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
+  pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$json_str'; \$js | % { Write-Host \$_.$fields; } }";
 }
 
-function parse_csv_field {
-  local csvStr="$1";
-  local field="$2";
-  rows=`echo "$csvStr" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
-  rows=`echo "$rows" | perl -0777 -ple 's/,$//'`;
+function parse_csv_fields {
+  local csv_str="$1";
+  local fields="$2";
+  local field_separator="$3";
+  field_separator="${field_separator:=","}";
+  [[ -z "$csv_str" ]] && { echo "Must specify a csv_str!" >&2; return 1; }
+  [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
+  function parse_fields {
+    echo "$1" | tr ":," "\n" | while read -d $'\n' field; do echo "\$(\$_.${field})${field_separator}"; done;
+  }
+  local pwsh_fields=`parse_fields "$fields" | perl -0777 -ple "s/(${field_separator})\$//" | tr -d "\n"`;
+  rows=`echo "$csv_str" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
+  rows=`echo "$rows" | perl -0777 -ple "s/,\$//"`;
   rows=`echo "(" "$rows" ")"`;
-  pwsh -command "&{ \$cs=$rows | ConvertFrom-Csv; \$cs | % { Write-Host \$_.$field; } }";
+  pwsh -command "&{ \$cs=$rows | ConvertFrom-Csv; \$cs | % { Write-Host \"$pwsh_fields\" } }";
 }
 
