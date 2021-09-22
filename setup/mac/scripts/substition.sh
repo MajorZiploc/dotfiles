@@ -10,7 +10,6 @@ tempThis="$4"
 
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find "$tempShared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" {} \;
-find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's/VIM_PLUGIN_IMPORT_PLACEHOLDER/so ~\/_vim_plugins.vim/g' {} \;
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,/bin/bash,g' {} \;
 vim_plugin_include="Plugin 'ctrlpvim/ctrlp.vim' \" fuzzy file finder\nPlugin 'mechatroner/rainbow_csv' \" csv highlighter and query engine\nPlugin 'frazrepo/vim-rainbow' \" color pairing brakets and such\nPlugin 'bling/vim-airline' \" status bar\nPlugin 'vim-airline/vim-airline-themes' \" colors for status bar\nPlugin 'jremmen/vim-ripgrep' \" grepper\nPlugin 'stefandtw/quickfix-reflector.vim' \" editable quickfix list for ripgrep\nPlugin 'tpope/vim-fugitive' \" git plugin";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_INCLUDE_PLACEHOLDER,$vim_plugin_include,g" {} \;
