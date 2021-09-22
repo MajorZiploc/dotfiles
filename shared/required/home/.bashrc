@@ -30,7 +30,7 @@ shopt -s extglob
 # for example, cd /vr/lgo/apaache would find /var/log/apache
 shopt -s cdspell
 
-for file in `find "$HOME/.bashrc.d/" -maxdepth 1 -mindepth 1 -regextype egrep -iregex ".*\.bash"`;
+for file in `find "$HOME/.bashrc.d/" -maxdepth 1 -mindepth 1 -regextype egrep -iregex ".*\.bash" -type f`;
 do
   . "$file";
 done;

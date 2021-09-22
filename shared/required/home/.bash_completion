@@ -1,4 +1,4 @@
-for file in `find "$HOME/.bash_completion.d/" -maxdepth 1 -mindepth 1 -regextype egrep -iregex ".*\.bash"`;
+for file in `find "$HOME/.bash_completion.d/" -maxdepth 1 -mindepth 1 -regextype egrep -iregex ".*\.bash" -type f`;
 do
   . "$file";
 done;
