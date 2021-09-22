@@ -613,7 +613,7 @@ function show_script_path {
 function show_cheat_sheet {
   local query="$1";
   local tool="$2";
-  [[ -z "$tool" ]];
+  [[ -n "$tool" ]];
   local tool_was_param="$?";
   [[ -z "$tool" ]] && {
     tool=`cat "$HOME/.cheat_sheet/languages" "$HOME/.cheat_sheet/command" "$HOME/.cheat_sheet/languages-ext" "$HOME/.cheat_sheet/command-ext" 2>/dev/null | egrep -v "^\s*$" | FUZZY_FINDER_PLACEHOLDER`;
@@ -634,8 +634,8 @@ function show_cheat_sheet {
     true;
   } || {
     query=`echo "$query" | tr ' ' '+'`;
-    [[ ! $tool_was_param ]] && {
-      if grep -qs "$tool" "$HOME/.cht-languages"; then
+    [[ ! "$tool_was_param" == "0" ]] && {
+      if cat "$HOME/.cheat_sheet/languages" "$HOME/.cheat_sheet/languages-ext" 2>/dev/null | grep -xq "$tool"; then
         tool="$tool/";
       else
         tool="$tool~";
