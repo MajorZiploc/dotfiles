@@ -16,7 +16,7 @@ VIM_PLUGIN_INCLUDE_PLACEHOLDER
 " Plugin 'OrangeT/vim-csharp'
 " Plugin 'chaoren/vim-wordmotion'
 " Plugin 'scrooloose/nerdtree' " filesystem explorer
-" Plugin 'junegunn/fzf'\, { 'do': { -> fzf#install() } }
+" Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plugin 'junegunn/fzf.vim'
 
 call vundle#end()

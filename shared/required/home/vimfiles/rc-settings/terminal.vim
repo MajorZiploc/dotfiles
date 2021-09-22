@@ -1,4 +1,4 @@
-so ~/_commonvimrc.vim
+so ~/vimfiles/rc-settings/common.vim
 
 " Allow mouse interactions
 set mouse=a

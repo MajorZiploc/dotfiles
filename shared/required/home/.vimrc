@@ -1,4 +1,4 @@
-so ~/_vim_plugins.vim
-so ~/_vimrcterm.vim
+so ~/vimfiles/rc-settings/plugins.vim
+so ~/vimfiles/rc-settings/terminal.vim
 inoremap kj <esc>
 
