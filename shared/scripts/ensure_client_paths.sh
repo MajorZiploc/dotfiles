@@ -16,6 +16,7 @@ tasks_flag_as_int="$((2#100))"
 mkdir -p "$HOME/.vim/bundle"
 mkdir -p "$HOME/.vim/swap"
 mkdir -p "$HOME/vimfiles/plugin-settings"
+mkdir -p "$HOME/vimfiles/rc-settings"
 [[ $(($clipboard_flag_as_int & $flags_as_int)) == $clipboard_flag_as_int ]] && {
   mkdir -p "$HOME/clipboard"
 }
