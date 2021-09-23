@@ -106,11 +106,3 @@ let g:netrw_list_hide='^\./$,^\.\./$'
 " let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\(^\|\s\s\)ntuser\.\S\+'
 autocmd FileType netrw set nolist
 
-" Makes Justfile use Makefile syntax highlighting
-if exists("did_load_filetypes")
-  finish
-endif
-augroup filetypedetect
-  au BufNewFile,BufRead justfile setf make
-augroup END
-
