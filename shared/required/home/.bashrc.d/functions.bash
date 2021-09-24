@@ -223,9 +223,9 @@ function show_block {
   local to_pattern="$2";
   local content="$3";
   local should_print="false";
-  [[ -z "$from_pattern" ]] && { echo "from_pattern must be specified" >&2; return 1; }
-  [[ -z "$to_pattern" ]] && { echo "to_pattern must be specified" >&2; return 1; }
-  [[ -z "$content" ]] && { echo "content must be specified" >&2; return 1; }
+  [[ -z "$from_pattern" ]] && { echo "Must specify from_pattern" >&2; return 1; }
+  [[ -z "$to_pattern" ]] && { echo "Must specify to_pattern" >&2; return 1; }
+  [[ -z "$content" ]] && { echo "Must specify content" >&2; return 1; }
   while IFS="" read -r p || [ -n "$p" ]
     do
     if [[ "$should_print" == "true" ]]
@@ -283,7 +283,7 @@ function refresh_settings_all {
 
 function refresh_settings_with_flags {
   local flags="$1";
-  [[ -z "$flags" ]] && { echo "flags must be specified" >&2; return 1; }
+  [[ -z "$flags" ]] && { echo "Must specify flags" >&2; return 1; }
   refresh_settings "$flags";
 }
 
