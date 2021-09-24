@@ -661,30 +661,40 @@ function _parse_fields_header_helper {
 }
 
 function parse_json_fields {
-  local json_str="$1";
+  local json="$1";
   local fields="$2";
   local field_separator="$3";
   field_separator="${field_separator:=","}";
-  [[ -z "$json_str" ]] && { echo "Must specify a json_str!" >&2; return 1; }
+  [[ -z "$json" ]] && { echo "Must specify a json file or string!" >&2; return 1; }
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
-  json_str=`echo "$json_str" | tr -d "\n"`;
   _parse_fields_header_helper "$fields" "$field_separator";
   local pwsh_fields=`_parse_fields_helper "$fields" "$field_separator" | tr -d "\n"`;
-  pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$json_str'; \$js | % { Write-Host \"$pwsh_fields\"; } }";
+  [[ -f "$json" ]] && {
+    pwsh -command "&{ \$js=Get-Content '$json' | ConvertFrom-Json; \$js | % { Write-Host \"$pwsh_fields\"; } }";
+    true;
+  } || {
+    json=`echo "$json" | tr -d "\n"`;
+    pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$json'; \$js | % { Write-Host \"$pwsh_fields\"; } }";
+  }
 }
 
 function parse_csv_fields {
-  local csv_str="$1";
+  local csv="$1";
   local fields="$2";
   local field_separator="$3";
   field_separator="${field_separator:=","}";
-  [[ -z "$csv_str" ]] && { echo "Must specify a csv_str!" >&2; return 1; }
+  [[ -z "$csv" ]] && { echo "Must specify a csv file or string!" >&2; return 1; }
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
   _parse_fields_header_helper "$fields" "$field_separator";
   local pwsh_fields=`_parse_fields_helper "$fields" "$field_separator"`;
-  rows=`echo "$csv_str" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
-  rows=`echo "$rows" | perl -0777 -ple "s/,\$//"`;
-  rows=`echo "(" "$rows" ")"`;
-  pwsh -command "&{ \$cs=$rows | ConvertFrom-Csv; \$cs | % { Write-Host \"$pwsh_fields\" } }";
+  [[ -f "$csv" ]] && {
+    pwsh -command "&{ \$cs=Get-Content $csv | ConvertFrom-Csv; \$cs | % { Write-Host \"$pwsh_fields\" } }";
+    true;
+  } || {
+    rows=`echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
+    rows=`echo "$rows" | perl -0777 -ple "s/,\$//"`;
+    rows=`echo "(" "$rows" ")"`;
+    pwsh -command "&{ \$cs=$rows | ConvertFrom-Csv; \$cs | % { Write-Host \"$pwsh_fields\" } }";
+  }
 }
 
