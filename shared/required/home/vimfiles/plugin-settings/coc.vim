@@ -21,8 +21,8 @@ endfunction
 nmap <leader>irn <Plug>(coc-rename)
 "
 " Formatting selected code.
-xmap <leader>ifs  <Plug>(coc-format-selected)
-nmap <leader>ifs  <Plug>(coc-format-selected)
+xmap <leader>ifs  <Plug>(coc-format-selected)<CR>
+nmap <leader>ifs  <Plug>(coc-format-selected)<CR>
 "
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
