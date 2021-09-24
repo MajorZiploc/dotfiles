@@ -542,7 +542,7 @@ function git_checkout_branch_in_path {
   local branch="$1";
   local path="$2";
   [[ -z "$branch" ]] && { echo "Must specify a branch!" >&2; return 1; }
-  [[ -z "$path" ]] && { path='*'; }
+  [[ -z "$path" ]] && { path='*/'; }
   IFS= ;
   for ele in $path;
     do
