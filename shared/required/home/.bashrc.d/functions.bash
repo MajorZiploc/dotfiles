@@ -682,7 +682,7 @@ function parse_csv_fields {
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
   _parse_fields_header_helper "$fields" "$field_separator";
   local pwsh_fields=`_parse_fields_helper "$fields" "$field_separator"`;
-  _rows=`echo "$csv_str" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
+  rows=`echo "$csv_str" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
   rows=`echo "$rows" | perl -0777 -ple "s/,\$//"`;
   rows=`echo "(" "$rows" ")"`;
   pwsh -command "&{ \$cs=$rows | ConvertFrom-Csv; \$cs | % { Write-Host \"$pwsh_fields\" } }";
