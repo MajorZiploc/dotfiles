@@ -698,3 +698,18 @@ function parse_csv_fields {
   }
 }
 
+function convert_csv_to_json {
+  local csv="$1";
+  local field_separator="$2";
+  field_separator="${field_separator:=","}";
+  [[ -f "$csv" ]] && {
+    pwsh -command "&{ Get-Content $csv | ConvertFrom-Csv | ConvertTo-Json; }";
+    true;
+  } || {
+    rows=`echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
+    rows=`echo "$rows" | perl -0777 -ple "s/(${field_separator})$//"`;
+    rows=`echo "(" "$rows" ")"`;
+    pwsh -command "&{ $rows | ConvertFrom-Csv | ConvertTo-Json }";
+  }
+}
+
