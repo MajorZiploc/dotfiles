@@ -48,7 +48,7 @@ EOF
   cd ..
 }
 
-@test "check find_items_delete '.*\.py' 'df' '3' deletes the proper files" {
+@test "check find_items_delete '(.*utils.*|.*utils\.py)' '5' deletes the proper files" {
   git restore ./mock_content/.
   cd ./mock_content
   run git --no-pager status
@@ -56,8 +56,9 @@ EOF
   refute_output --regexp "deleted:\s*pandas_data_analytics/src/text_parser/utils.py"
   refute_output --regexp "deleted:\s*pandas_data_analytics/src/utils/__init__.py"
   refute_output --regexp "deleted:\s*pandas_data_analytics/src/utils/utils.py"
-  run find_items_delete '.*utils|.*utils\.py' '5'
+  run find_items_delete '(.*utils.*|.*utils\.py)' '5'
   assert_success
+  assert_output ''
   run git --no-pager status
   assert_output --regexp "deleted:\s*FslabDataAnalytics/utils/index.fs"
   assert_output --regexp "deleted:\s*pandas_data_analytics/src/text_parser/utils.py"
