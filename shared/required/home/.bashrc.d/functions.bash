@@ -651,7 +651,7 @@ function _parse_fields_helper {
   function _parse_fields_helper_inner {
     echo "$fields" | tr ":," "\n" | while read -d $'\n' field; do echo "\$(\$_.${field})${field_separator}"; done;
   }
-  _parse_fields_helper_inner | perl -0777 -ple "s/(${field_separator})\$//" | tr -d "\n";
+  _parse_fields_helper_inner | perl -0777 -ple "s/(${field_separator})$//" | tr -d "\n";
 }
 
 function _parse_fields_header_helper {
@@ -692,9 +692,24 @@ function parse_csv_fields {
     true;
   } || {
     rows=`echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
-    rows=`echo "$rows" | perl -0777 -ple "s/,\$//"`;
+    rows=`echo "$rows" | perl -0777 -ple "s/,$//"`;
     rows=`echo "(" "$rows" ")"`;
     pwsh -command "&{ \$cs=$rows | ConvertFrom-Csv; \$cs | % { Write-Host \"$pwsh_fields\" } }";
+  }
+}
+
+function convert_csv_to_json {
+  local csv="$1";
+  local field_separator="$2";
+  field_separator="${field_separator:=","}";
+  [[ -f "$csv" ]] && {
+    pwsh -command "&{ Get-Content $csv | ConvertFrom-Csv | ConvertTo-Json; }";
+    true;
+  } || {
+    rows=`echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
+    rows=`echo "$rows" | perl -0777 -ple "s/(${field_separator})$//"`;
+    rows=`echo "(" "$rows" ")"`;
+    pwsh -command "&{ $rows | ConvertFrom-Csv | ConvertTo-Json }";
   }
 }
 
