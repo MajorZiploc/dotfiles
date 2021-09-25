@@ -4,9 +4,16 @@
 ARG VARIANT="focal"
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
+# Install just command runner
+COPY ./utils/install-just.sh install-just.sh
+RUN bash ./install-just.sh
+
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-     && apt-get -y install --no-install-recommends vim tmux npm wget apt-transport-https software-properties-common \
+     && apt-get -y install --no-install-recommends vim tmux npm wget
+
+# Install powershell core
+RUN apt-get -y install --no-install-recommends apt-transport-https software-properties-common \
      && wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb \
      && dpkg -i packages-microsoft-prod.deb \
      && apt-get update \
