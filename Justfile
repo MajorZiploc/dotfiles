@@ -30,3 +30,6 @@ run-tests FILE_GLOB='' OS='ubuntu20.04':
     ./{{FILE_GLOB}};
   }
 
+get-all-permissions-to-test-content:
+  find ./tests/mock_content -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec sudo chmod +777 "{}" \;
+
