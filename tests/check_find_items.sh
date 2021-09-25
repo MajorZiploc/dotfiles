@@ -58,6 +58,7 @@ EOF
   refute_output --regexp "deleted:\s*pandas_data_analytics/src/utils/utils.py"
   run find_items_delete '(.*utils.*|.*utils\.py)' '5'
   assert_success
+  assert_output ''
   run git --no-pager status
   assert_output --regexp "deleted:\s*FslabDataAnalytics/utils/index.fs"
   assert_output --regexp "deleted:\s*pandas_data_analytics/src/text_parser/utils.py"
