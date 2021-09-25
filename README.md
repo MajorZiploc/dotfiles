@@ -50,13 +50,17 @@ Use the copy.sh scripts found in ./setup/[windows10|wsl\_ubuntu20.04|ubuntu20.04
 copy.sh : binary\_flags? -> unit
 
 Paths with content that will be affected include but are not limited to:
-- "$HOME/.vim/bundle"
-- "$HOME/.vim/swap"
-- "$HOME/vimfiles/plugin-settings"
-- "$HOME/clipboard" when flags contain "10"
-- "$HOME/bin"
-- "$HOME/Tasks"
-- "$HOME/vscodevim" when flags contain "01"
+- "$HOME/.bashrc"
+- "$HOME/.bash_profile"
+- "$HOME/.bashrc.d/"
+- "$HOME/.vim/bundle/"
+- "$HOME/.vim/swap/"
+- "$HOME/vimfiles/plugin-settings/"
+- "$HOME/vimfiles/rc-settings/"
+- "$HOME/clipboard/" when flags contain "10"
+- "$HOME/bin/"
+- "$HOME/Tasks/"
+- "$HOME/vscodevim/" when flags contain "01"
 - "$HOME/AppData/Roaming/Code/User/" (windows) else "$HOME/.config/Code/User/" when flags contain "01"
 
 ### Windows
@@ -108,18 +112,18 @@ refresh\_settings will pull master on this repo (~/projects/home-settings) and c
 
 This means that if you edit the files in the destination and then call copy, it will overwrite them.
 
-Example: you edit ~/.bash\_aliases to add an alias, then call refresh\_settings. This will replace ~/.bash\_aliases and you will lose your local edits
+Example: you edit ~/.bashrc.d/aliases.bash to add an alias, then call refresh\_settings. This will replace ~/.bashrc.d/aliases.bash and you will lose your local edits
 
 ### Extending
-The ~/.bashrc from this repo sources a file ~/.bash\_ext if it exists
+The ~/.bashrc from this repo sources a file ~/.bashrc\_ext if it exists
 
-The copy script does not have a .bash\_ext that it copies down, so the ~/.bash\_ext file is a safe place to add your own customizations of these bash settings.
+The copy script does not have a .bashrc\_ext that it copies down, so the ~/.bashrc\_ext file is a safe place to add your own customizations of these bash settings.
 
-The ~/.bash\_ext is sourced after all other bash files. So you can change the implementation of aliases and functions and shopt flags that you do not like with your own flavor.
+The ~/.bashrc\_ext is sourced after all other bash files. So you can change the implementation of aliases and functions and shopt flags that you do not like with your own flavor.
 
 Example: you do not like the fact that cdspell is turned on (shopt -s cdspell)
 
-In ~/.bash\_ext, you can add the following line:
+In ~/.bashrc\_ext, you can add the following line:
 
 > shopt -u cdspell
 
