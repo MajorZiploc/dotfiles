@@ -66,6 +66,7 @@ function typea_check(){
   "show_cheat_sheet"
   "parse_json_fields"
   "parse_csv_fields"
+  "convert_csv_to_json"
   )
   for funct in ${l[@]};
     do
