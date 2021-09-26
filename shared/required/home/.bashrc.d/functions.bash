@@ -670,11 +670,11 @@ function parse_json_fields {
   _parse_fields_header_helper "$fields" "$field_separator";
   local pwsh_fields=`_parse_fields_helper "$fields" "$field_separator" | tr -d "\n"`;
   [[ -f "$json" ]] && {
-    pwsh -command "&{ \$js=Get-Content '$json' | ConvertFrom-Json; \$js | % { Write-Host \"$pwsh_fields\"; } }";
+    pwsh -command "&{ \$js=Get-Content '$json' | ConvertFrom-Json; \$js | % { Write-Host \"$pwsh_fields\"; }; }";
     true;
   } || {
     json=`echo "$json" | tr -d "\n"`;
-    pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$json'; \$js | % { Write-Host \"$pwsh_fields\"; } }";
+    pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$json'; \$js | % { Write-Host \"$pwsh_fields\"; }; }";
   }
 }
 
@@ -688,28 +688,26 @@ function parse_csv_fields {
   _parse_fields_header_helper "$fields" "$field_separator";
   local pwsh_fields=`_parse_fields_helper "$fields" "$field_separator"`;
   [[ -f "$csv" ]] && {
-    pwsh -command "&{ \$cs=Get-Content $csv | ConvertFrom-Csv; \$cs | % { Write-Host \"$pwsh_fields\" } }";
+    pwsh -command "&{ \$cs=Get-Content $csv | ConvertFrom-Csv; \$cs | % { Write-Host \"$pwsh_fields\"; }; }";
     true;
   } || {
     rows=`echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
     rows=`echo "$rows" | perl -0777 -ple "s/,\$//"`;
     rows=`echo "(" "$rows" ")"`;
-    pwsh -command "&{ \$cs=$rows | ConvertFrom-Csv; \$cs | % { Write-Host \"$pwsh_fields\" } }";
+    pwsh -command "&{ \$cs=$rows | ConvertFrom-Csv; \$cs | % { Write-Host \"$pwsh_fields\"; }; }";
   }
 }
 
 function convert_csv_to_json {
   local csv="$1";
-  local field_separator="$2";
-  field_separator="${field_separator:=","}";
   [[ -f "$csv" ]] && {
     pwsh -command "&{ Get-Content $csv | ConvertFrom-Csv | ConvertTo-Json; }";
     true;
   } || {
     rows=`echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
-    rows=`echo "$rows" | perl -0777 -ple "s/(${field_separator})\$//"`;
+    rows=`echo "$rows" | perl -0777 -ple "s/,\$//"`;
     rows=`echo "(" "$rows" ")"`;
-    pwsh -command "&{ $rows | ConvertFrom-Csv | ConvertTo-Json }";
+    pwsh -command "&{ $rows | ConvertFrom-Csv | ConvertTo-Json; }";
   }
 }
 
