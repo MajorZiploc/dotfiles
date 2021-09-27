@@ -75,6 +75,14 @@ EOF
 @test "check find_files_rename '.*\.py' 's/s/z/g;s/(.*?)(\.py)/\1_squad_goals\2/' 'df' '3' renames the proper files" {
   git restore ./mock_content/.
   cd ./mock_content
+  run find_files_rename_preview '.*\.py' 's/s/z/g;s/(.*?)(\.py)/\1_squad_goals\2/' 'df' '3';
+  expected=`cat << EOF
+mv ./pandas_data_analytics/src/pandas_notes.py ./pandas_data_analytics/src/pandaz_notez_squad_goals.py ;
+mv ./pandas_data_analytics/setup.py ./pandas_data_analytics/zetup_squad_goals.py ;
+EOF
+`;
+  assert_success
+  assert_output "$expected"
   run cat ./pandas_data_analytics/setup.py
   assert_success
   run cat ./pandas_data_analytics/src/pandas_notes.py
