@@ -1,6 +1,6 @@
 version: '3'
 services:
-  app:
+  home_settings_app:
     build: 
       context: .
       dockerfile: Dockerfile.app
