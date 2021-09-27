@@ -115,7 +115,9 @@ function ide3() {
 function show_find_full_paths() {
   # displays the full path names of $1 (the directory)
   # $1: optional directory. Defaults to .
-  find $1 -exec readlink -f "{}" \;
+  local dir="$1";
+  dir=${dir:="."};
+  find "$1" -exec readlink -f "{}" \;
 }
 
 function show_machine_details() {
@@ -152,6 +154,8 @@ function prefix_file() {
   # $2: file
   local text=$1;
   local file=$2;
+  [[ -z "$text" ]] && { echo "Must specify text!" >&2; return 1; }
+  [[ -z "$file" ]] && { echo "Must specify file!" >&2; return 1; }
   sed -i "1s/^/$text/" "$file";
 }
 
@@ -159,6 +163,7 @@ function col_n {
   # Extract the nths column from a tabular output
   # $1: pos num
   local n=$1;
+  [[ -z "$n" ]] && { echo "Must specify n!" >&2; return 1; }
   awk -v col=$n '{print $col}';
 }
 
@@ -166,6 +171,7 @@ function skip_n {
   # Skip first n words in line
   # $1: pos num
   local n=$(($1 + 1));
+  [[ -z "$n" ]] && { echo "Must specify n!" >&2; return 1; }
   cut -d' ' -f$n-;
 }
 
@@ -173,6 +179,7 @@ function take_n {
   # Keep first n words in line
   # $1: pos num
   local n=$1;
+  [[ -z "$n" ]] && { echo "Must specify n!" >&2; return 1; }
   cut -d' ' -f1-$n;
 }
 
@@ -183,6 +190,8 @@ function sample {
   # $2: file/stdout
   local n="$1";
   local content="$2";
+  [[ -z "$n" ]] && { echo "Must specify n!" >&2; return 1; }
+  [[ -z "$content" ]] && { echo "Must specify content!" >&2; return 1; }
   shuf -n "$n" $content;
 }
 
@@ -240,6 +249,7 @@ function show_block {
 
 function show_line_nums {
   local content="$1";
+  [[ -z "$content" ]] && { echo "Must specify content!" >&2; return 1; }
   perl -nle 'print "$. $_"' "$content";
 }
 
