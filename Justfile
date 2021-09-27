@@ -12,8 +12,8 @@ start-container:
 stop-container:
   docker-compose -f .devcontainer/docker-compose.yaml stop;
 
-connect-to-container:
-  docker exec -it devcontainer_app_1 /bin/bash;
+connect-to-container CONTAINER_NAME='devcontainer_home_settings_app_1':
+  docker exec -it "{{CONTAINER_NAME}}" /bin/bash;
 
 setup OS='ubuntu20.04':
   ./"setup/{{OS}}/scripts/copy.sh" "111" && . ~/.bash_profile;
