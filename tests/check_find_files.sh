@@ -52,6 +52,14 @@ EOF
 @test "check find_files_delete '.*\.py' 'df' '3' deletes the proper files" {
   git restore ./mock_content/.
   cd ./mock_content
+  run find_files_delete_preview '.*\.py' 'df' '3'
+  expected=`cat << EOF
+rm ./pandas_data_analytics/src/pandas_notes.py
+rm ./pandas_data_analytics/setup.py
+EOF
+`;
+  assert_success
+  assert_output "$expected"
   run git --no-pager status
   refute_output --regexp "deleted:\s*pandas_data_analytics/setup\.py"
   refute_output --regexp "deleted:\s*pandas_data_analytics/src/pandas_notes\.py"

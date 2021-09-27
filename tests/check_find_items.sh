@@ -51,6 +51,19 @@ EOF
 @test "check find_items_delete '(.*utils.*|.*utils\.py)' '5' deletes the proper files" {
   git restore ./mock_content/.
   cd ./mock_content
+  run find_items_delete_preview '(.*utils.*|.*utils\.py)' '5'
+  expected=`cat << EOF
+NOTE: This behavior may not be the exact behavior when running the command out of preview mode
+rm -rf ./FslabDataAnalytics/utils ;
+rm -rf ./pandas_data_analytics/src/utils ;
+rm -rf ./FslabDataAnalytics/utils/index.fs ;
+rm -rf ./pandas_data_analytics/src/text_parser/utils.py ;
+rm -rf ./pandas_data_analytics/src/utils/utils.py ;
+rm -rf ./pandas_data_analytics/src/utils/__init__.py ;
+EOF
+`;
+  assert_success
+  assert_output "$expected"
   run git --no-pager status
   refute_output --regexp "deleted:\s*FslabDataAnalytics/utils/index.fs"
   refute_output --regexp "deleted:\s*pandas_data_analytics/src/text_parser/utils.py"
