@@ -1,0 +1,19 @@
+# vim: set filetype=bash :
+
+get-commits-for-today PROJECT_DIRECTORY_GLOB="$HOME/projects/*/":
+  #!/usr/bin/env bash
+  after_day=`pwsh -command '& {$today=Get-Date; $month=(Get-Culture).DateTimeFormat.GetAbbreviatedMonthName($today.Month); "$month$($today.Day-1)"}'`;
+  before_day=`pwsh -command '& {$today=Get-Date; $month=(Get-Culture).DateTimeFormat.GetAbbreviatedMonthName($today.Month); "$month$($today.Day+1)"}'`;
+  for project in {{PROJECT_DIRECTORY_GLOB}};
+   do
+    cd "$project";
+    git pull;
+    echo "";
+    echo "------------ BEGIN PROJECT --------------";
+    pwd;
+    git --no-pager log --all --after="$after_day" --before="$before_day" --stat;
+    echo "------------ END PROJECT --------------";
+    echo "";
+    cd ..;
+  done;
+
