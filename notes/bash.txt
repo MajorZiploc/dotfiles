@@ -16,6 +16,65 @@ IMPORTANT FOR CUSTOM SET OPERATION: sort can take standard in aswell as files
 less:
 while in less. use shift+F to auto refresh the file. To toggle it off, use Ctrl+C
 
+Parameter expansion:
+: means to count empty string as unset
+using param@/param* or param[@]/param[*] can change the param expansion behavior
+
+# Conditionals:
+# assign param to default if its null
+${param:=default}
+# use default if param null
+${param:-default}
+# returns non zero and uses error expression if param is null
+${param:?error}
+# use alternate if param is nonnull
+${param:+alternate}
+
+# Extraction:
+# returns the rest of param after the offset
+${param:offset}
+# returns chars of length size after the offset for param
+${param:offset:length}
+
+# Removal from left edge:
+${param#glob_pattern} # non greedy
+${param##glob_pattern} # greedy
+# Removal from right edge:
+${param%glob_pattern} # non greedy
+${param%%glob_pattern} # greedy
+
+# Indirect Expansion: like pointers
+${!param}
+# List variables that match a glob pattern
+${!pa@}
+# List keys in an array (usually indices)
+${!name[@]}
+# get length of variable or array
+${#param} || ${#param[@]}
+
+# Substition:
+${param/search_glob_pattern/replacement_text} # non greedy
+${param//search_glob_pattern/replacement_text} # greedy
+# Substition at left edge:
+${param/#search_glob_pattern/replacement_text} # non greedy
+# Substition at right edge:
+${param/%search_glob_pattern/replacement_text} # non greedy
+
+# Arrays:
+# init array with elements
+array=(zero one "two three")
+# add an element to an array
+array+=("four and beyound")
+# replace space with underscore in array elements
+array=("${array[@]// /_}")
+# recreate array with elements from index 2 to 4
+array=("${array[@]:2:3}")
+
+glob notes:
+      For all nonhidden files/folders in current directory non-recursive, use -d '*'
+      For all hidden files/folders in current directory non-recursive, use -d '.[^.]*'
+      For all hidden and nonhidden files/folders in current directory non-recursive, use -d '* .[^.]*'
+
 
 FROM WINDOWS GIT BASH: 
 ################################## Construct PATH variable ##################################
@@ -34,9 +93,4 @@ FROM WINDOWS GIT BASH:
 #unset winpath
 
 ################################# Constructed PATH variable #################################
-
-glob notes:
-      For all nonhidden files/folders in current directory non-recursive, use -d '*'
-      For all hidden files/folders in current directory non-recursive, use -d '.[^.]*'
-      For all hidden and nonhidden files/folders in current directory non-recursive, use -d '* .[^.]*'
 
