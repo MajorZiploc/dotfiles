@@ -150,6 +150,7 @@ function typea_check(){
   "git_merge_keep_theirs"
   "git_deploy"
   "git_log_break_down"
+  "git_graph"
   "to_winpath"
   "to_unixpath"
   "kill_port"
