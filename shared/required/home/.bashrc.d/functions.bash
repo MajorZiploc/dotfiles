@@ -597,10 +597,6 @@ function git_diff_of_commit {
   git diff "$commit"^;
 }
 
-function git_graph {
-  git log --oneline --decorate --all --graph;
-}
-
 function show_cmds_like {
   local pattern="$1";
   [[ -z "$pattern" ]] && { echo "Must specify a command pattern!" >&2; return 1; }
