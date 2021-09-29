@@ -569,14 +569,17 @@ function git_checkout_branch_in_path {
 function git_log_follow {
   # search current branch git commits for commits that change a file
   local item_name="$1";
+  [[ -z "$item_name" ]] && { echo "Must specify item_name!" >&2; return 1; }
   git log --date-order --follow -- "$item_name";
 }
 
 function git_diff_range {
   # assumption from commit is older than to commit
+  [[ -z "$1" ]] && { echo "Must specify from!" >&2; return 1; }
+  [[ -z "$2" ]] && { echo "Must specify to!" >&2; return 1; }
   local from=$(($1 + 1));
   local to=$(($2 + 1));
-  local commits="$(git --no-pager log --oneline -n "$from" | col_n 1 | xargs )";
+  local commits="$(git --no-pager log --oneline -n "$from" | col_n 1 | xargs)";
   local from_commit="$(echo "$commits" | col_n "$from")";
   local to_commit="$(echo "$commits" | col_n "$to")";
   git diff --ignore-space-change "$from_commit" "$to_commit";
@@ -584,6 +587,7 @@ function git_diff_range {
 
 function git_log_show_last_n {
   local n="$1";
+  [[ -z "$n" ]] && { echo "Must specify n!" >&2; return 1; }
   git --no-pager log --oneline -n "$n" | perl -nle '$i=$.-1; print "$i $_"';
 }
 
@@ -611,7 +615,9 @@ function show_cmds_like {
 }
 
 function show_cmds_like_fuzz {
-  local pattern="$(echo "$1" | to_fuzz)";
+  local pattern="$1";
+  [[ -z "$pattern" ]] && { echo "Must specify a command pattern!" >&2; return 1; }
+  pattern="$(echo "$pattern" | to_fuzz)";
   show_cmds_like "$pattern";
 }
 
