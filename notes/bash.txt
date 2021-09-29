@@ -1,17 +1,12 @@
-( ) can be used to basically join stdout and the pipe will redirect all the output of all commands in the ( )
-( ls ; ls ) | less # content of directory listed twice in list
-
-Extra snippets:
-pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'
-pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -Command "& {Write-Host 'hi'}"
-perl -ne 'print unless $seen{$_}++' # unique without sorting
+( ) (for subshell) can be used to basically join stdout and the pipe will redirect all the output of all commands in the ( )
+{ } (for current shell)
+(ls; ls) | less # content of directory listed twice in list
+{ ls ; ls; } | less # content of directory listed twice in list -- SPACES AND SEMI COLONS ARE IMPORTANT IN THIS!
 
 ex: ls -a - ~
 -	End of options flag. All other arguments are positional parameters.
 
 --	Unset positional parameters. If arguments given (-- arg1 arg2), positional parameters set to arguments.
-
-IMPORTANT FOR CUSTOM SET OPERATION: sort can take standard in aswell as files
 
 less:
 while in less. use shift+F to auto refresh the file. To toggle it off, use Ctrl+C
@@ -70,11 +65,37 @@ array=("${array[@]// /_}")
 # recreate array with elements from index 2 to 4
 array=("${array[@]:2:3}")
 
-glob notes:
-      For all nonhidden files/folders in current directory non-recursive, use -d '*'
-      For all hidden files/folders in current directory non-recursive, use -d '.[^.]*'
-      For all hidden and nonhidden files/folders in current directory non-recursive, use -d '* .[^.]*'
+# Interactive search up history for command
+<CTRL>-R
+# Run last command in history that starts with string
+!string
+# Puts last command in history that starts with string as last entry in history
+!string:p
 
+# Special parameters
+
+# argument list
+$@ or $* -- act different when in quotes. $* uses first IFS char for separation
+# number of elements in argument list
+$#
+# shell interactive flags
+$-
+# shell that is currently being used
+$0
+# process id
+$$
+# process id of most recent job that occurred
+$!
+
+glob notes:
+  For all nonhidden files/folders in current directory non-recursive, use -d '*'
+  For all hidden files/folders in current directory non-recursive, use -d '.[^.]*'
+  For all hidden and nonhidden files/folders in current directory non-recursive, use -d '* .[^.]*'
+
+Extra snippets:
+pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'
+pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -Command "& {Write-Host 'hi'}"
+perl -ne 'print unless $seen{$_}++' # unique without sorting
 
 FROM WINDOWS GIT BASH: 
 ################################## Construct PATH variable ##################################
