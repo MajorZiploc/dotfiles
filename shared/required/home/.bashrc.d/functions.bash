@@ -15,7 +15,7 @@ function hf() {
 }
 
 function _extra_env_checks {
-  EXTRA_ENV_CHECKS_PLACEHOLDER
+EXTRA_ENV_CHECKS_PLACEHOLDER
 }
 
 function show_env_notes() {
