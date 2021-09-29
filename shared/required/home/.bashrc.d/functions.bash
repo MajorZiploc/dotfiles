@@ -14,6 +14,11 @@ function hf() {
   history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -n | tail -n "$n";
 }
 
+function _extra_env_checks {
+  # NOTE: this function is usually overridden by an each OS. Look later in this file for the override to this function
+  return 0;
+}
+
 function show_env_notes() {
   export ENV_NOTES="";
   # Dependency checks
@@ -25,7 +30,7 @@ function show_env_notes() {
   [[ -z $(dotnet --version 2>/dev/null | egrep "^5") ]] && { ENV_NOTES="$ENV_NOTES:Missing dotnet v5 (cross platform dotnet cli tooling)"; }
   [[ -z $(which just 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing just (a command runner for Justfiles)"; }
   [[ -z $(which asdf 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing asdf (a general programming language version manager)"; }
-  EXTRA_ENV_CHECKS_PLACEHOLDER
+  _extra_env_checks;
   # final check on environment
   [[ -z "$ENV_NOTES" ]] && { ENV_NOTES="No missing dependencies! Setup is complete!"; }
   echo $ENV_NOTES | tr ":" "\n" | egrep -v "^\\s*$"

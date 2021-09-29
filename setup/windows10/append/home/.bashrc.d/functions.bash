@@ -21,3 +21,8 @@ function sql_exec {
   fi
 }
 
+function _extra_env_checks {
+  [[ -z $(which fzy 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing fzy (stdin fuzzy finder)"; }
+  [[ -z $(python -V 2>/dev/null | egrep "\b3") ]] && { ENV_NOTES="$ENV_NOTES:Missing python v3 "; }
+}
+
