@@ -8,7 +8,7 @@ source ~/.bashrc || true;
   file="./mock_content/parser_files/basic.json";
   function f(){
     json=`cat "$1"`;
-    parse_json_fields "$json" "$2" "$3";
+    parse_json_fields "$json" "$2" "$3" "$4";
   }
   run f "$file" "x" ","
   expected=`cat << EOF
@@ -40,12 +40,11 @@ EOF
   file="./mock_content/parser_files/list.json";
   function f(){
     json=`cat "$1"`;
-    parse_json_fields "$json" "$2" "$3";
+    parse_json_fields "$json" "$2" "$3" "$4";
   }
-  run f "$file" "x" ","
+  run f "$file" "x" "," "| ? { \$_.x -gt 1; }"
   expected=`cat << EOF
 x
-1
 2
 EOF
 `
@@ -75,7 +74,7 @@ EOF
   file="./mock_content/parser_files/el_pollo_loco.csv";
   function f(){
     csv=`cat "$1"`;
-    parse_csv_fields "$csv" "$2" "$3";
+    parse_csv_fields "$csv" "$2" "$3" "$4";
   }
   run f "$file" "fat" ","
   expected=`cat << EOF
@@ -131,7 +130,7 @@ EOF
   file="./mock_content/parser_files/basic.json";
   function f(){
     json="$1";
-    parse_json_fields "$json" "$2" "$3";
+    parse_json_fields "$json" "$2" "$3" "$4";
   }
   run f "$file" "x" ","
   expected=`cat << EOF
@@ -163,7 +162,7 @@ EOF
   file="./mock_content/parser_files/list.json";
   function f(){
     json="$1";
-    parse_json_fields "$json" "$2" "$3";
+    parse_json_fields "$json" "$2" "$3" "$4";
   }
   run f "$file" "x" ","
   expected=`cat << EOF
@@ -198,7 +197,7 @@ EOF
   file="./mock_content/parser_files/el_pollo_loco.csv";
   function f(){
     csv="$1";
-    parse_csv_fields "$csv" "$2" "$3";
+    parse_csv_fields "$csv" "$2" "$3" "$4";
   }
   run f "$file" "fat" ","
   expected=`cat << EOF
@@ -216,18 +215,14 @@ EOF
 `
   assert_success
   assert_output "$expected"
-  run f "$file" "fat,calories" ","
+  run f "$file" "fat,calories" "," "| ? { \$_.fat }"
   expected=`cat << EOF
 fat,calories
-,
 15g,210
 3.5g,140
-,
-,
 42g,910
 17g,290
 27g,850
-,
 EOF
 `
   assert_success
