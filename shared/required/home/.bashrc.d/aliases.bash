@@ -36,7 +36,7 @@ alias bash_surround_expression='sed -E "s,(.+),\"\$(\1)\","'
 alias bash_surround_stream='sed -E "s,(.+),<(\1),"'
 alias bash_surround_stream_echo='sed -E "s,(.+),<(echo \"\1\"),"'
 alias bash_surround_var_multiline='perl -0777 -ple "BEGIN{print \"var_name=\`cat << EOF\n\";};END{print \"EOF\n\`;\";};"'
-alias bash_surround_var_singleline='sed -E "s,(.+),var_name=\`\1\`;,"'
+alias bash_surround_var_singleline='trim | sed -E "s,(.+),var_name=\`\1\`;,"'
 alias bash_line_join='tr -d "\n" | tr -d "\r"'
 # Line break on ; or | if it is not followed by |
 alias bash_line_split="perl -ne 's/(;|\|)(?:(?!;|\|))/\$1\\n/g; print;'"
