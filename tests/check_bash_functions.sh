@@ -76,7 +76,7 @@ id,name,descr
 3,plane,yellow
 EOF
 `
-  run f "$content" ","
+  run f "$content"
   assert_success
   expected="2"
   assert_output "$expected"
@@ -87,7 +87,7 @@ id~name~descr
 3~plane~yellow~
 EOF
 `
-  run f "$content"
+  run f "$content" "~"
   assert_success
   expected=`cat << EOF
 2

@@ -735,7 +735,7 @@ function csv_delimiter_check_single_line {
   local sql_query="$1";
   local delimiter="$2";
   [[ -z "$sql_query" ]] && { echo "Must specify a sql_query file or string!" >&2; return 1; }
-  echo "${delimiter:="~"}" >/dev/null;
+  echo "${delimiter:=","}" >/dev/null;
   [[ -f "$sql_query" ]] && { sql_query=`cat "$sql_query"`; }
   echo "$sql_query" | egrep -on "$delimiter" | sort -n | uniq -c | col_n 1 | sort -u;
 }
