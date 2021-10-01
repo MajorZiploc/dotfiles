@@ -21,8 +21,8 @@ function sql_exec {
   fi
 }
 
-function sql_exec_delimiter_count {
+function sql_exec_delimiter_count_single_line {
   local sql_result=`sql_exec "$@"`;
-  csv_delimiter_check_single_line `echo "$sql_result"` "$4";
+  csv_delimiter_check_single_line "$sql_result" "$4";
 }
 
