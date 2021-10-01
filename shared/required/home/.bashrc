@@ -7,6 +7,8 @@ set -o ignoreeof
 
 # Make bash append rather than overwrite the history on disk
 shopt -s histappend
+# reedit history ! cmds that fail quicker
+shopt -s histreedit
 # Don't put duplicate lines in the history.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # Ignore some controlling instructions
