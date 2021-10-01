@@ -66,7 +66,9 @@ EOF
 function snip_sql_show_table_info {
   local snip=`cat << EOF
 /* SQL get table information */
-SELECT c.TABLE_NAME
+SELECT
+c.TABLE_CATALOG
+, c.TABLE_NAME
 , c.COLUMN_NAME
 , c.IS_NULLABLE
 , c.DATA_TYPE
@@ -119,6 +121,21 @@ SELECT tc.TABLE_NAME
 FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc WITH(NOLOCK)
 -- WHERE tc.TABLE_NAME LIKE '%table_name%'
 ORDER BY tc.TABLE_NAME, tc.CONSTRAINT_NAME
+;
+EOF
+`;
+  echo "$snip";
+}
+
+function snip_sql_show_view_info {
+  local snip=`cat << EOF
+/* SQL get view information */
+SELECT
+v.TABLE_CATALOG
+, v.TABLE_NAME
+, v.VIEW_DEFINITION
+FROM INFORMATION_SCHEMA.VIEWS AS v WITH(NOLOCK)
+-- WHERE v.TABLE_NAME LIKE '%table_name%'
 ;
 EOF
 `;
