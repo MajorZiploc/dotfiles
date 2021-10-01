@@ -67,6 +67,7 @@ function typea_check(){
   "parse_json_fields"
   "parse_csv_fields"
   "convert_csv_to_json"
+  "csv_delimiter_check_single_line"
   )
   for funct in ${l[@]};
     do

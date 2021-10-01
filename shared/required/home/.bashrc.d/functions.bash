@@ -731,7 +731,7 @@ function convert_csv_to_json {
   }
 }
 
-function sql_delimiter_check_single_line {
+function csv_delimiter_check_single_line {
   local sql_query="$1";
   local delimiter="$2";
   [[ -z "$sql_query" ]] && { echo "Must specify a sql_query file or string!" >&2; return 1; }

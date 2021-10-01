@@ -65,9 +65,9 @@ EOF
   assert_output "$expected"
 }
 
-@test "check sql_delimiter_check_single_line" {
+@test "check csv_delimiter_check_single_line" {
   function f(){
-    sql_delimiter_check_single_line "$1" "$2"
+    csv_delimiter_check_single_line "$1" "$2"
   }
   content=`cat << EOF
 id,name,descr
