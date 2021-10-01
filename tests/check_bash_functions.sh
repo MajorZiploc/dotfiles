@@ -78,7 +78,10 @@ EOF
 `
   run f "$content"
   assert_success
-  expected="2"
+  expected=`cat << EOF
+      4 2
+EOF
+`
   assert_output "$expected"
   content=`cat << EOF
 id*name*descr
@@ -90,9 +93,9 @@ EOF
   run f "$content" "*"
   assert_success
   expected=`cat << EOF
-2
-3
-4
+      2 2
+      1 3
+      1 4
 EOF
 `;
   assert_output "$expected"
