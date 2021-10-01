@@ -65,3 +65,36 @@ EOF
   assert_output "$expected"
 }
 
+@test "check sql_delimiter_check_single_line" {
+  function f(){
+    sql_delimiter_check_single_line "$1" "$2"
+  }
+  content=`cat << EOF
+id,name,descr
+1,bike,blue
+2,car,red
+3,plane,yellow
+EOF
+`
+  run f "$content" ","
+  assert_success
+  expected="2"
+  assert_output "$expected"
+  content=`cat << EOF
+id~name~descr
+1~bike~blue~~
+2~car~red
+3~plane~yellow~
+EOF
+`
+  run f "$content"
+  assert_success
+  expected=`cat << EOF
+2
+3
+4
+EOF
+`;
+  assert_output "$expected"
+}
+
