@@ -81,13 +81,13 @@ EOF
   expected="2"
   assert_output "$expected"
   content=`cat << EOF
-id~name~descr
-1~bike~blue~~
-2~car~red
-3~plane~yellow~
+id*name*descr
+1*bike*blue**
+2*car*red
+3*plane*yellow*
 EOF
 `
-  run f "$content" "~"
+  run f "$content" "*"
   assert_success
   expected=`cat << EOF
 2
