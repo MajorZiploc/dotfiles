@@ -63,9 +63,9 @@ EOF
   echo "$snip";
 }
 
-function snip_sql_show_table_info {
+function snip_sql_show_column_info {
   local snip=`cat << EOF
-/* SQL get table information */
+/* SQL get column information */
 SELECT
 c.TABLE_CATALOG
 , c.TABLE_NAME
@@ -127,15 +127,23 @@ EOF
   echo "$snip";
 }
 
-function snip_sql_show_view_info {
+function snip_sql_show_table_and_view_info {
   local snip=`cat << EOF
-/* SQL get view information */
+/* SQL get table and view information */
+SELECT
+t.TABLE_CATALOG
+, t.TABLE_NAME
+, NULL AS VIEW_DEFINITION
+FROM INFORMATION_SCHEMA.TABLES AS t WITH(NOLOCK)
+-- WHERE t.TABLE_NAME LIKE '%table_name%'
+UNION
 SELECT
 v.TABLE_CATALOG
 , v.TABLE_NAME
 , v.VIEW_DEFINITION
 FROM INFORMATION_SCHEMA.VIEWS AS v WITH(NOLOCK)
 -- WHERE v.TABLE_NAME LIKE '%table_name%'
+ORDER BY TABLE_NAME
 ;
 EOF
 `;

@@ -74,13 +74,15 @@ EOF
   assert_output "$expected"
 }
 
-@test "check snip_sql_show_table_info" {
+@test "check snip_sql_show_column_info" {
   function f(){
-    snip_sql_show_table_info;
+    snip_sql_show_column_info;
   }
   expected=`cat << EOF
-/* SQL get table information */
-SELECT c.TABLE_NAME
+/* SQL get column information */
+SELECT
+c.TABLE_CATALOG
+, c.TABLE_NAME
 , c.COLUMN_NAME
 , c.IS_NULLABLE
 , c.DATA_TYPE
