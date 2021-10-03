@@ -106,3 +106,8 @@ do
   . "$file";
 done;
 
+for file in `find "$HOME/.zshrc.d" -regextype egrep -iregex ".*\.zsh" -type f`;
+do
+  . "$file";
+done;
+

@@ -13,7 +13,3 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-# PROMPT='[$FG[228]%~%{$reset_color%}]'
-# PROMPT+=' $(git_prompt_info)'
-# PROMPT+=' %(?.$FG[154].$FG[009])€%{$reset_color%} '
-
