@@ -1,5 +1,5 @@
 # only source this file if the shell is bash
-[[ "$0" != *"bash"* ]] && { return ; }
+[[ "$0" == *"bash"* || "$0" == *"bats"* ]] || { return ; }
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -34,6 +34,8 @@ shopt -s extglob
 # When changing directory small typos can be ignored by bash
 # for example, cd /vr/lgo/apaache would find /var/log/apache
 shopt -s cdspell
+
+shopt -s expand_aliases
 
 for file in `find "$HOME/.bashrc.d/" -maxdepth 1 -mindepth 1 -regextype egrep -iregex ".*\.bash" -type f`;
 do
