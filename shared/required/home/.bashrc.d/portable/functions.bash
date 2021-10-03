@@ -61,10 +61,10 @@ function tmuxps() {
   local session_name="$1";
   local items="";
   tmuxps_get_project_dirs;
-  for path in ${TMUXPS_PROJECT_DIRS[@]};
+  for path in `echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"`;
     do
-      [[ -d $path ]] && {
-        items+=`find $path -maxdepth 1 -mindepth 1 -type d`;
+      [[ -d "$path" ]] && {
+        items+=`find "$path" -maxdepth 1 -mindepth 1 -type d`;
         items+="\n";
       }
   done;
