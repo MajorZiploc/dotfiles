@@ -61,10 +61,10 @@ function tmuxps() {
   local session_name="$1";
   local items="";
   tmuxps_get_project_dirs;
-  for path in `echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"`;
+  for _path in `echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"`;
     do
-      [[ -d "$path" ]] && {
-        items+=`find "$path" -maxdepth 1 -mindepth 1 -type d`;
+      [[ -d "$_path" ]] && {
+        items+=`find "$_path" -maxdepth 1 -mindepth 1 -type d`;
         items+="\n";
       }
   done;
@@ -555,11 +555,11 @@ function find_in_files_replace {
 
 function git_checkout_branch_in_path {
   local branch="$1";
-  local path="$2";
+  local _path="$2";
   [[ -z "$branch" ]] && { echo "Must specify a branch!" >&2; return 1; }
-  [[ -z "$path" ]] && { path='*/'; }
+  [[ -z "$_path" ]] && { _path='*/'; }
   IFS= ;
-  for ele in $path;
+  for ele in $_path;
     do
       echo "$ele";
       cd $ele;
