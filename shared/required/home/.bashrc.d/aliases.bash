@@ -1,5 +1,3 @@
-shopt -s expand_aliases
-
 # tmux aliases
 alias tmuxas="tmux attach-session"
 alias tmuxks="tmux kill-session"
