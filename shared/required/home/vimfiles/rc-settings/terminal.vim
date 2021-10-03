@@ -106,3 +106,5 @@ let g:netrw_list_hide='^\./$,^\.\./$'
 " let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\(^\|\s\s\)ntuser\.\S\+'
 autocmd FileType netrw set nolist
 
+set wildmode=longest,list
+
