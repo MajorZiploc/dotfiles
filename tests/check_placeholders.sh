@@ -21,12 +21,11 @@ function check_for_placeholder {
 
 @test "$check bash $phdoesntexist" {
   files=(
-    ~/.bashrc.d/aliases.bash
-    ~/.bashrc.d/env_vars.bash
-    ~/.bashrc.d/functions.bash
     ~/.bash_profile
     ~/.bashrc
   )
+  check_for_placeholder $files;
+  files=`find ~/.bashrc.d -maxdepth 1 -regextype egrep -iregex ".*vim.*" -type f`;
   check_for_placeholder $files;
 }
 
