@@ -37,7 +37,7 @@ shopt -s cdspell
 
 shopt -s expand_aliases
 
-for file in `find "$HOME/.bashrc.d/" -maxdepth 1 -mindepth 1 -regextype egrep -iregex ".*\.bash" -type f`;
+for file in `find "$HOME/.bashrc.d/" -regextype egrep -iregex ".*\.bash" -type f`;
 do
   . "$file";
 done;

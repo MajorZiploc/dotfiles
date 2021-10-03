@@ -100,3 +100,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+for file in `find "$HOME/.bashrc.d/portable" -regextype egrep -iregex ".*\.bash" -type f`;
+do
+  . "$file";
+done;
+
