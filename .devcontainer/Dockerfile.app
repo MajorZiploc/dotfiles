@@ -10,7 +10,7 @@ RUN bash ./install-just.sh
 
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-     && apt-get -y install --no-install-recommends vim tmux npm wget
+     && apt-get -y install --no-install-recommends vim tmux npm wget zsh
 
 # Install powershell core
 RUN apt-get -y install --no-install-recommends apt-transport-https software-properties-common \
