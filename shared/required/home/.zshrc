@@ -111,3 +111,11 @@ do
   . "$file";
 done;
 
+export FPATH="$FPATH:$(echo ~/.zsh_completion.d/)"
+# The following lines were added by compinstall
+zstyle :compinstall ~/.zsh_completion.d/ "$HOME/.zshrc"
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
