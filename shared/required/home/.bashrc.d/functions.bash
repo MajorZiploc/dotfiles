@@ -24,7 +24,8 @@ function show_env_notes() {
   [[ -z $(which npm 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing npm (node package manager)"; }
   [[ -z $(which tmux 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing tmux (terminal multiplexier)"; }
   [[ -z $(which pwsh 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing pwsh (cross platform powershell)"; }
-  [[ -z $(which gnomon 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing gnomon (npm package)"; }
+  [[ -z $(which gnomon 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing gnomon (npm package) for calculating time taking for commands"; }
+  [[ -z $(which prettier 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing prettier (npm package) for formatting various file formats"; }
   [[ -z $(which rg 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing rg (ripgrep) Important for the ripgrep plugin in vim"; }
   [[ -z $(dotnet --version 2>/dev/null | egrep "^5") ]] && { ENV_NOTES="$ENV_NOTES:Missing dotnet v5 (cross platform dotnet cli tooling)"; }
   [[ -z $(which just 2>/dev/null) ]] && { ENV_NOTES="$ENV_NOTES:Missing just (a command runner for Justfiles)"; }
@@ -738,5 +739,73 @@ function csv_delimiter_check_single_line {
   echo "${delimiter:=","}" >/dev/null;
   [[ -f "$sql_query" ]] && { sql_query=`cat "$sql_query"`; }
   echo "$sql_query" | grep -Fon -- "$delimiter" | sort -n | uniq -c | col_n 1 | sort | uniq -c;
+}
+
+function _rest_temp_response_loc {
+  echo "/tmp/responses/";
+}
+
+function _rest_get_query_params {
+  local url="$1";
+  local query_params=`echo "$url" | sed -E "s/([^?]*?)\??(.*?)/\2/g"`;
+  [[ -n "$query_params" ]] && { rest_encode_url "$query_params"; }
+}
+
+function _rest_get_base_url_with_endpoint {
+  local url="$1";
+  echo "$url" | sed -E "s/([^?]*?)\??(.*?)/\1/g";
+}
+
+function _rest_format_and_print_response {
+  local _file="$1";
+  prettier --write "$_file";
+  cat "$_file";
+}
+
+function rest_encode_url {
+  local url="$1";
+  [[ -z "$url" ]] && { echo "Must specify url!" >&2; return 1; }
+  echo "$url" | sed 's, ,%20,g;s,\!,%21,g;s,",%22,g;s,#,%23,g;s,\$,%24,g;s,'"'"',%27,g;';
+}
+
+function rest_get {
+  local url="$1";
+  local curl_flags="$2";
+  local response_file_type="$3";
+  [[ -z "$url" ]] && { echo "Must specify url!" >&2; return 1; }
+  echo "${curl_flags:="Lk"}" >/dev/null;
+  echo "${response_file_type:="json"}" >/dev/null;
+  temp_response_loc=`_rest_temp_response_loc`;
+  mkdir -p "$temp_response_loc";
+  local base_url_with_endpoint=`_rest_get_base_url_with_endpoint "$url"`;
+  local _file="${temp_response_loc}$(basename "$base_url_with_endpoint").${response_file_type}";
+  local query_params=`_rest_get_query_params "$url"`;
+  [[ ! "$query_params" == "?"* ]] && { query_params=`echo "${query_params:+"?$query_params"}"`; }
+  url="${base_url_with_endpoint}${query_params}";
+  curl -"$curl_flags" "$url" > "$_file";
+  _rest_format_and_print_response "$_file";
+}
+
+function rest_post {
+  local url="$1";
+  local curl_flags="$2";
+  local response_file_type="$3";
+  local request_body="$4";
+  local content_type="$5";
+  [[ -z "$url" ]] && { echo "Must specify url!" >&2; return 1; }
+  [[ -z "$request_body" ]] && { echo "Must specify request_body!" >&2; return 1; }
+  echo "${content_type:="application/json"}" >/dev/null;
+  echo "${curl_flags:="Lk"}" >/dev/null;
+  echo "${response_file_type:="json"}" >/dev/null;
+  temp_response_loc=`_rest_temp_response_loc`;
+  mkdir -p "$temp_response_loc";
+  local base_url_with_endpoint=`_rest_get_base_url_with_endpoint "$url"`;
+  local _file="${temp_response_loc}$(basename "$base_url_with_endpoint").${response_file_type}";
+  local query_params=`_rest_get_query_params "$url"`;
+  [[ -f "$request_body" ]] && { request_body=`cat "$request_body"`; }
+  [[ ! "$query_params" == "?"* ]] && { query_params=`echo "${query_params:+"?$query_params"}"`; }
+  url="${base_url_with_endpoint}${query_params}";
+  curl -"$curl_flags" -H "Content-Type: $content_type" -X POST -d "$request_body" "$url" > "$_file";
+  _rest_format_and_print_response "$_file";
 }
 
