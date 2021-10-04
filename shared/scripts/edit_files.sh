@@ -16,7 +16,6 @@ function edit_files {
   edit_files_helper "$tempThis/$edit_style/home/.bashrc.d/portable/*" "$tempShared/required/home/.bashrc.d/portable" "$edit_style"
   edit_files_helper "$tempThis/$edit_style/home/*" "$tempShared/required/home" "$edit_style"
   edit_files_helper "$tempThis/$edit_style/Tasks/*" "$tempShared/required/Tasks" "$edit_style"
-  edit_files_helper "$tempThis/$edit_style/clipboard/*" "$tempShared/required/clipboard" "$edit_style"
   edit_files_helper "$tempThis/$edit_style/vscodevim/*" "$tempShared/required/vscodevim" "$edit_style"
 }
 
