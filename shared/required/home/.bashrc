@@ -42,7 +42,15 @@ do
   . "$file";
 done;
 
-test -f ~/.bash_completion && . ~/.bash_completion
+for file in `find "$HOME/.bash_completion.d/" -maxdepth 1 -mindepth 1 -regextype egrep -iregex ".*\.bash" -type f`;
+do
+  . "$file";
+done;
+
+if [ -d $HOME/.asdf ]; then
+  . $HOME/.asdf/asdf.sh
+  . $HOME/.asdf/completions/asdf.bash
+fi
 
 if [ -d ~/.local/bin ]; then
   export PATH="$PATH:$(echo ~/.local/bin)"
