@@ -122,3 +122,5 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+test -f ~/.zshrc_ext && . ~/.zshrc_ext
+
