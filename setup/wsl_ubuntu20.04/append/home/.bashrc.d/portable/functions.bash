@@ -5,7 +5,7 @@ function cmd_exec {
   cmd.exe "/c $command";
 }
 
-function sql_exec {
+function mssql_exec {
   local server="$1";
   local database="$2";
   local sql_cmd="$3";
@@ -21,8 +21,8 @@ function sql_exec {
   fi
 }
 
-function sql_exec_delimiter_count_single_line {
-  local sql_result=`sql_exec "$@"`;
+function mssql_exec_delimiter_count_single_line {
+  local sql_result=`mssql_exec "$@"`;
   csv_delimiter_check_single_line "$sql_result" "$4";
 }
 
