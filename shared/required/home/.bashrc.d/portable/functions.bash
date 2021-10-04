@@ -268,7 +268,7 @@ Assumption:
 the ~/projects/home-settings repo has no working changes
 
 refresh_settings() = refresh_settings_with_flags "00"
-refresh_settings_all() = refresh_settings_with_flags "11"
+refresh_settings_all() = refresh_settings_with_flags "111"
 
 Togglable Copies:
 - vscode

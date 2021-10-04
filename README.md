@@ -85,8 +85,8 @@ To setup ssh keys for git:
 - find\_in\_files\_replace
 - find\_items
 - tmuxcs <optional\_session\_name> # Creates a tmux session based on the current path if the session name is not given
-- tmuxps # Creates a tmux session based the selected fzf/fzy folders specified by tmuxps\_get\_project\_dirs
-- tmuxds # Creates a tmux session based the selected fzf/fzy folder from the users current path
+- tmuxps <optional\_session\_name> # Creates a tmux session based the selected fzf/fzy folders specified by tmuxps\_get\_project\_dirs
+- tmuxds <optional\_session\_name> # Creates a tmux session based the selected fzf/fzy folder from the users current path
 - tmuxks -t <session\_name> # kill a tmux session
 - tmuxas -t <session\_name> # attach to a tmux session
 - tmuxksvr # kills the tmux server
@@ -94,12 +94,16 @@ To setup ssh keys for git:
 - show\_script\_path # useful when writing bash scripts to get the local of the script being written
 - show\_cheat\_sheet # uses cht.sh to search for language or command functionality
 - set\_\S+ # use search\_env\_for "set\_" to see all set functions available
+- mssql\_exec # use to execute a sql command a database
+- rest\_get # use to call a get rest request
+- rest\_post # use to call a post rest request
+
 ### Note on Notable bash functions/aliases
 All of the find\_ are wrappers around find to make certain common operations easy to perform.
 
 Use whence to view the implementations of any of them to get an understanding of how they work
 
-For more bash aliases and functions, use search\_env\_for(\_fuzz)?, or look at ~/.bash\_aliases and ~/.bash\_functions
+For more bash aliases and functions, use search\_env\_for(\_fuzz)?, or look at ~/.bashrc.d/portable/\*
 
 ## Extending and Staying Up to date with these settings
 
@@ -140,21 +144,24 @@ This way you can have all the other great features you love from this repo, keep
 To contribute without mudding up your own environment from the copy scripts. The copy scripts can be used within a docker container and all testing can happen there.
 
 - Running docker container
-> docker-compose -f .devcontainer/docker-compose.yaml up -d
+> just start-container
 
 - Attaching to the docker container (Run the rest of the development commands in the docker container)
-> docker exec -it devcontainer_app_1 /bin/bash
+> just connect-to-container
 
-The container is a based on a ubuntu image. So when you make changes to the shared content or ubuntu specific content and want to test them manually, then you need to run the copy down WITHIN the docker container
-> ./setup/ubuntu20.04/scripts/copy.sh && source ~/.bash_profile
+- The container is a based on a ubuntu image. So when you make changes to the shared content or ubuntu specific content and want to test them manually, then you need to run the copy down WITHIN the docker container
+> just setup
 
 ### Unit tests in the docker container
 
 - Run the ubuntu setup script after making any changes to the content you want to test WITHIN the docker container.
-> ./tests/setup_ubuntu20.04.sh
+> just setup
 
 - Run all the tests
-> ./tests/run_tests.sh
+> just run-tests
 
 NOTE: you can also run a specific test file instead of all tests
+
+View the Justfile for more commands and details on each command or use:
+> just -l
 
