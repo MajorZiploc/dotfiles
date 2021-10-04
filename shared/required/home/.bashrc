@@ -56,6 +56,9 @@ if [ -d ~/.local/bin ]; then
   export PATH="$PATH:$(echo ~/.local/bin)"
 fi
 
+# minimal prompt
+export PS1="\[\033[34m\]@\h \`if [[ \$? = \"0\" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\`\W\[\033[0m\]> "
+
 # _ext bash files are for user specific edits to the bash environment
 test -f ~/.bashrc_ext && . ~/.bashrc_ext
 
