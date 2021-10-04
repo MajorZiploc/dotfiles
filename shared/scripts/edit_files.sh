@@ -12,6 +12,8 @@ function edit_files {
   shopt -s extglob
   
   edit_files_helper "$tempThis/$edit_style/home/.bashrc.d/*" "$tempShared/required/home/.bashrc.d" "$edit_style"
+  edit_files_helper "$tempThis/$edit_style/home/.zshrc.d/*" "$tempShared/required/home/.zshrc.d" "$edit_style"
+  edit_files_helper "$tempThis/$edit_style/home/.bashrc.d/portable/*" "$tempShared/required/home/.bashrc.d/portable" "$edit_style"
   edit_files_helper "$tempThis/$edit_style/home/*" "$tempShared/required/home" "$edit_style"
   edit_files_helper "$tempThis/$edit_style/Tasks/*" "$tempShared/required/Tasks" "$edit_style"
   edit_files_helper "$tempThis/$edit_style/clipboard/*" "$tempShared/required/clipboard" "$edit_style"
