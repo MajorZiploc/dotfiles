@@ -1,3 +1,6 @@
+# only source this file if the shell is bash
+[[ "$0" == *"zsh"* ]] || { return ; }
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
