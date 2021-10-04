@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # run in swipl interative, this is for coc-vim language server support
 # pack_install(lsp_server).

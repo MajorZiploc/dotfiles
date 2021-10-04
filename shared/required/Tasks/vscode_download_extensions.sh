@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # General plugings
 code --install-extension CoenraadS.bracket-pair-colorizer
