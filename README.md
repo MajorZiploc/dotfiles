@@ -154,9 +154,6 @@ To contribute without mudding up your own environment from the copy scripts. The
 
 ### Unit tests in the docker container
 
-- Run the ubuntu setup script after making any changes to the content you want to test WITHIN the docker container.
-> just setup
-
 - Run all the tests
 > just run-tests
 
