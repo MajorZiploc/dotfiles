@@ -74,9 +74,9 @@ EOF
   assert_output "$expected"
 }
 
-@test "check snip_sql_show_column_info" {
+@test "check snip_sql_column_info" {
   function f(){
-    snip_sql_show_column_info;
+    snip_sql_column_info;
   }
   expected=`cat << EOF
 /* SQL get column information */
@@ -102,9 +102,9 @@ EOF
   assert_output "$expected"
 }
 
-@test "check snip_sql_show_function_info" {
+@test "check snip_sql_function_info" {
   function f(){
-    snip_sql_show_function_info;
+    snip_sql_function_info;
   }
   expected=`cat << EOF
 /* SQL get function information */
@@ -134,9 +134,9 @@ EOF
   assert_output "$expected"
 }
 
-@test "check snip_sql_show_table_constraints" {
+@test "check snip_sql_table_constraints" {
   function f(){
-    snip_sql_show_table_constraints;
+    snip_sql_table_constraints;
   }
   expected=`cat << EOF
 /* SQL get table constraints information */
