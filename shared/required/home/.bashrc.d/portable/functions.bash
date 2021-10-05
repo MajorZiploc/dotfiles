@@ -602,6 +602,12 @@ function git_diff_of_commit {
   git diff "$commit"^!;
 }
 
+function git_diff_from_commit_to_current {
+  local commit="$1";
+  [[ -z "$commit" ]] && { echo "Must specify a commit!" >&2; return 1; }
+  git diff "$commit"^;
+}
+
 function show_cmds_like {
   local pattern="$1";
   [[ -z "$pattern" ]] && { echo "Must specify a command pattern!" >&2; return 1; }
