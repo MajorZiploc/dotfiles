@@ -12,6 +12,8 @@ code --install-extension streetsidesoftware.code-spell-checker
 code --install-extension vscodevim.vim
 # See through glass feel
 code --install-extension s-nlf-fh.glassit
+# Simple tmux key binds for the vscode terminal
+code --install-extension stephlin.vscode-tmux-keybinding
 
 # code --install-extension bajdzis.vscode-database
 # code --install-extension ms-azuretools.vscode-docker
