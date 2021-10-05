@@ -41,11 +41,8 @@ function tmuxcs() {
   # creates a tmux session
   # $1: optional string to represent name of the tmux session
   # If $1 not given, then use the base name of the path as the session name
-  if [ -z "$1" ]; then
-    local session_name="$(basename $(pwd))";
-  else
-    local session_name="$1";
-  fi
+  local session_name="$1";
+  session_name="${session_name:-"$(basename `pwd`)"}"
   local session_name="$(echo "$session_name" | tr '.[[:blank:]]' '-')";
   tmux new -s "$session_name" 2>/dev/null || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
 }
@@ -86,7 +83,7 @@ function tmuxds() {
   # displays a fuzzy finder listing of directories at the current directory to choose from for a tmux session
   # $1: optional session name
   local session_name="$1";
-  local selected="$(find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER)";
+  local selected=`find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER`;
   [[ -z "$selected" ]] || {
     [[ -z "$session_name" ]] && {
       session_name=`basename $selected | tr '.[[:blank:]]' '-'`;
@@ -122,13 +119,13 @@ function show_find_full_paths() {
   # $1: optional directory. Defaults to .
   local dir="$1";
   dir=${dir:="."};
-  find "$1" -exec readlink -f "{}" \;
+  find "$dir" -exec readlink -f "{}" \;
 }
 
 function show_machine_details() {
   local user=$(whoami);
   local machine_name=$(uname -n);
-  long_info=$(uname -a);
+  local long_info=$(uname -a);
   echo "user: $user";
   echo "machine_name: $machine_name";
   echo "long_info: $long_info";
@@ -157,8 +154,8 @@ function prefix_file() {
   # add a line to the beginning of a file
   # $1: string to add
   # $2: file
-  local text=$1;
-  local file=$2;
+  local text="$1";
+  local file="$2";
   [[ -z "$text" ]] && { echo "Must specify text!" >&2; return 1; }
   [[ -z "$file" ]] && { echo "Must specify file!" >&2; return 1; }
   sed -i "1s/^/$text/" "$file";
@@ -167,7 +164,7 @@ function prefix_file() {
 function col_n {
   # Extract the nths column from a tabular output
   # $1: pos num
-  local n=$1;
+  local n="$1";
   [[ -z "$n" ]] && { echo "Must specify n!" >&2; return 1; }
   awk -v col=$n '{print $col}';
 }
@@ -183,7 +180,7 @@ function skip_n {
 function take_n {
   # Keep first n words in line
   # $1: pos num
-  local n=$1;
+  local n="$1";
   [[ -z "$n" ]] && { echo "Must specify n!" >&2; return 1; }
   cut -d' ' -f1-$n;
 }
@@ -210,22 +207,22 @@ function show_file_content {
 
 function sample_csv {
   # grab a random sample of n size from a csv
-  local n=$1;
+  local n="$1";
   local file="$2";
   cat <(head -n 1 "$file") <(sample $n <(tail -n +2 "$file"));
 }
 
 function search_env_for {
   # searches through bash env and user defined bash tools
-  local search_regex="";
-  [[ -z "$1" ]] && { search_regex=".*"; } || { search_regex="$1"; }
+  local search_regex="$1";
+  search_regex=${search_regex:-".*"};
   cat <(ls -A ~/bin 2> /dev/null) <(ls -A /usr/local/bin 2> /dev/null) <(alias) <(env) <(declare -F) <(shopt) | egrep -i "$search_regex";
 }
 
 function search_env_for_fuzz {
   # fuzzy searches through bash env and user defined bash tools
-  local search_regex="";
-  [[ -z "$1" ]] && { search_regex=".*"; } || { search_regex="$(echo "$1" | to_fuzz)"; }
+  local search_regex="$1";
+  search_regex=${search_regex:+"$(echo "$search_regex" | to_fuzz)"};
   search_env_for "$search_regex";
 }
 
@@ -336,12 +333,11 @@ function _find_items_rename_helper {
     do
       local new_name="$(echo "$item" | sed -E "$by")";
       [[ $f != $new_name ]] && {
-        [[ $preview == false ]] && {
+        if [[ $preview == false ]]; then
           mv "$item" "$new_name";
-          true;
-        } || {
+        else
           echo mv "$item" "$new_name" ";";
-        }
+        fi
       }
     done;
   done;
@@ -376,12 +372,11 @@ function _find_items_delete_helper {
   for mdepth in `seq 1 $maxdepth`; do
     find . -mindepth "$mdepth" -maxdepth "$mdepth" -regextype egrep -iregex "$file_pattern" -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0 | while read -d $'\0' item
     do
-      [[ $preview == false ]] && {
+      if [[ $preview == false ]]; then
         rm -rf "$item";
-        true;
-      } || {
+      else
         echo "rm -rf" "$item" ";";
-      }
+      fi
     done;
   done;
 }
@@ -424,12 +419,11 @@ function find_files_delete_preview {
   local with_content="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
-  [[ -z "$with_content" ]] && {
+  if [[ -z "$with_content" ]]; then
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec echo rm "{}" \;
-    true;
-  } || {
+  else
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in -e "$with_content" "{}" \; -exec echo rm "{}" \; | egrep "^rm"
-  }
+  fi
 }
 
 function find_files_delete {
@@ -438,12 +432,11 @@ function find_files_delete {
   local with_content="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
-  [[ -z "$with_content" ]] && {
+  if [[ -z "$with_content" ]]; then
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec rm "{}" \;
-    true;
-  } || {
+  else
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in -e "$with_content" "{}" \; -exec rm "{}" \; > /dev/null
-  }
+  fi
 }
 
 function _find_files_rename_helper {
@@ -471,12 +464,11 @@ function _find_files_rename_helper {
       local nb="$(echo "$b" | sed -E "$by")";
       local new_name="$(dirname "$file")/$nb"
       [[ $f != $new_name ]] && {
-        [[ $preview == false ]] && {
+        if [[ $preview == false ]]; then
           mv "$file" "$new_name";
-          true;
-        } || {
+        else
           echo mv "$file" "$new_name" ";";
-        }
+        fi
       }
     }
   done;
@@ -508,12 +500,11 @@ function find_files {
   local with_content="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
-  [[ -z "$with_content" ]] && {
+  if [[ -z "$with_content" ]]; then
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*';
-    true;
-  } || {
+  else
     find . -maxdepth "$maxdepth" -regextype egrep -iregex "$file_pattern" -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec egrep -in -e "$with_content" "{}" \; -exec echo "{}" \; | egrep -v "\s*^[[:digit:]]+:"
-  }
+  fi
 }
 
 function find_files_fuzz {
@@ -650,12 +641,11 @@ function show_cheat_sheet {
   if [[ -z "$tool" ]]; then
     return 1;
   fi
-  [[ -z "$query" ]] && {
+  if [[ -z "$query" ]]; then
     tool=${tool/%\~$/};
     tool=${tool/%\/$/};
     curl cht.sh/$tool/;
-    true;
-  } || {
+  else
     query=`echo "$query" | tr ' ' '+'`;
     [[ ! "$tool_was_param" == "0" ]] && {
       if cat "$HOME/.cheat_sheet/languages" "$HOME/.cheat_sheet/languages-ext" 2>/dev/null | grep -xq "$tool"; then
@@ -665,7 +655,7 @@ function show_cheat_sheet {
       fi
     }
     curl "cht.sh/$tool/$query";
-  }
+  fi
 }
 
 function _parse_fields_helper {
@@ -694,13 +684,12 @@ function parse_json_fields {
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
   _parse_fields_header_helper "$fields" "$field_separator";
   local pwsh_fields=`_parse_fields_helper "$fields" "$field_separator" | tr -d "\n"`;
-  [[ -f "$json" ]] && {
+  if [[ -f "$json" ]]; then
     pwsh -command "&{ \$js=Get-Content '$json' | ConvertFrom-Json; \$js $preprocessing_pwsh | % { Write-Host \"$pwsh_fields\"; }; }";
-    true;
-  } || {
+  else
     json=`echo "$json" | tr -d "\n"`;
     pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$json'; \$js $preprocessing_pwsh | % { Write-Host \"$pwsh_fields\"; }; }";
-  }
+  fi
 }
 
 function parse_csv_fields {
@@ -714,28 +703,26 @@ function parse_csv_fields {
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
   _parse_fields_header_helper "$fields" "$field_separator";
   local pwsh_fields=`_parse_fields_helper "$fields" "$field_separator"`;
-  [[ -f "$csv" ]] && {
+  if [[ -f "$csv" ]]; then
     pwsh -command "&{ \$cs=Get-Content $csv | ConvertFrom-Csv; \$cs $preprocessing_pwsh | % { Write-Host \"$pwsh_fields\"; }; }";
-    true;
-  } || {
+  else
     rows=`echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
     rows=`echo "$rows" | perl -0777 -ple "s/,\$//"`;
     rows=`echo "(" "$rows" ")"`;
     pwsh -command "&{ \$cs=$rows | ConvertFrom-Csv; \$cs $preprocessing_pwsh | % { Write-Host \"$pwsh_fields\"; }; }";
-  }
+  fi
 }
 
 function convert_csv_to_json {
   local csv="$1";
-  [[ -f "$csv" ]] && {
+  if [[ -f "$csv" ]]; then
     pwsh -command "&{ Get-Content $csv | ConvertFrom-Csv | ConvertTo-Json; }";
-    true;
-  } || {
+  else
     rows=`echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
     rows=`echo "$rows" | perl -0777 -ple "s/,\$//"`;
     rows=`echo "(" "$rows" ")"`;
     pwsh -command "&{ $rows | ConvertFrom-Csv | ConvertTo-Json; }";
-  }
+  fi
 }
 
 function csv_delimiter_check_single_line {
