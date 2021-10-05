@@ -5,8 +5,11 @@ set scrolloff=3
 nmap <leader><leader>s :vsc Tools.InvokeAceJumpCommand<cr>
 nmap gi :vsc Edit.GoToImplementation<cr>
 nmap gq :vsc Edit.QuickInfo<cr>
+nmap <c-w><c-i> :vsc Edit.QuickInfo<cr>
 vmap gf :vsc Edit.FormatSelection<cr>
 nmap gf :vsc Edit.FormatDocument<cr>
+vmap <leader>ifs :vsc Edit.FormatSelection<cr>
+nmap <leader>ifd :vsc Edit.FormatDocument<cr>
 nmap <leader>ws :vsc Window.NewVerticalTabGroup<cr>
 " switching between tab groups
 nnoremap <c-w><c-h> <c-w>h
