@@ -771,7 +771,7 @@ function rest_get {
   temp_response_loc=`_rest_temp_response_loc`;
   mkdir -p "$temp_response_loc";
   local base_url_with_endpoint=`_rest_get_base_url_with_endpoint "$url"`;
-  local _file="${temp_response_loc}$(basename "$base_url_with_endpoint").${response_file_type}";
+  local _file="${temp_response_loc}$(basename "$base_url_with_endpoint" | tr "/" "_").${response_file_type}";
   local query_params=`_rest_get_query_params "$url"`;
   [[ ! "$query_params" == "?"* ]] && { query_params=`echo "${query_params:+"?$query_params"}"`; }
   url="${base_url_with_endpoint}${query_params}";
@@ -793,7 +793,7 @@ function rest_post {
   temp_response_loc=`_rest_temp_response_loc`;
   mkdir -p "$temp_response_loc";
   local base_url_with_endpoint=`_rest_get_base_url_with_endpoint "$url"`;
-  local _file="${temp_response_loc}$(basename "$base_url_with_endpoint").${response_file_type}";
+  local _file="${temp_response_loc}$(basename "$base_url_with_endpoint" | tr "/" "_").${response_file_type}";
   local query_params=`_rest_get_query_params "$url"`;
   [[ -f "$request_body" ]] && { request_body=`cat "$request_body"`; }
   [[ ! "$query_params" == "?"* ]] && { query_params=`echo "${query_params:+"?$query_params"}"`; }
