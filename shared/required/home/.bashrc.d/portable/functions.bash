@@ -119,7 +119,7 @@ function show_find_full_paths() {
   # $1: optional directory. Defaults to .
   local dir="$1";
   dir=${dir:="."};
-  find "$1" -exec readlink -f "{}" \;
+  find "$dir" -exec readlink -f "{}" \;
 }
 
 function show_machine_details() {
