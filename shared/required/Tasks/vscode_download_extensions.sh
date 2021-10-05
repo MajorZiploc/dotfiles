@@ -10,6 +10,9 @@ code --install-extension mhutchie.git-graph
 code --install-extension ms-vscode.powershell
 code --install-extension streetsidesoftware.code-spell-checker
 code --install-extension vscodevim.vim
+# See through glass feel
+code --install-extension s-nlf-fh.glassit
+
 # code --install-extension bajdzis.vscode-database
 # code --install-extension ms-azuretools.vscode-docker
 

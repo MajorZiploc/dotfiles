@@ -116,5 +116,7 @@
   "mssql.splitPaneSelection": "current",
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
-  }
+  },
+  "glassit.alpha": 220,
+  "glassit.step": 5
 }
