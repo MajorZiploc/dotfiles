@@ -599,7 +599,7 @@ function git_log_show_last_n {
 function git_diff_of_commit {
   local commit="$1";
   [[ -z "$commit" ]] && { echo "Must specify a commit!" >&2; return 1; }
-  git diff "$commit"^;
+  git diff "$commit"^!;
 }
 
 function show_cmds_like {
