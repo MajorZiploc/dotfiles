@@ -63,7 +63,7 @@ EOF
   echo "$snip";
 }
 
-function snip_sql_show_column_info {
+function snip_sql_column_info {
   local snip=`cat << EOF
 /* SQL get column information */
 SELECT
@@ -85,7 +85,7 @@ EOF
   echo "$snip";
 }
 
-function snip_sql_show_function_info {
+function snip_sql_function_info {
   local snip=`cat << EOF
 /* SQL get function information */
 /* Includes functions, sprocs, and those with/without params */
@@ -111,7 +111,7 @@ EOF
   echo "$snip";
 }
 
-function snip_sql_show_table_constraints {
+function snip_sql_table_constraints {
   local snip=`cat << EOF
 /* SQL get table constraints information */
 SELECT tc.TABLE_NAME
@@ -127,7 +127,7 @@ EOF
   echo "$snip";
 }
 
-function snip_sql_show_table_and_view_info {
+function snip_sql_table_and_view_info {
   local snip=`cat << EOF
 /* SQL get table and view information */
 SELECT
