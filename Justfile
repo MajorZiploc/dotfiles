@@ -23,12 +23,11 @@ run-tests FILE_GLOB='' OS='ubuntu20.04':
   file_glob="{{FILE_GLOB}}";
   cd tests;
   just setup "{{OS}}";
-  [[ -z "$file_glob" ]] && {
+  if [[ -z "$file_glob" ]]; then
     ./run_tests.sh;
-    true;
-  } || {
+  else
     ./{{FILE_GLOB}};
-  }
+  fi
 
 get-all-permissions-to-test-content:
   find ./tests/mock_content -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -exec sudo chmod +777 "{}" \;
