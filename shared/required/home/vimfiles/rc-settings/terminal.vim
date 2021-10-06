@@ -106,5 +106,9 @@ let g:netrw_list_hide='^\./$,^\.\./$'
 " let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\(^\|\s\s\)ntuser\.\S\+'
 autocmd FileType netrw set nolist
 
-set wildmode=longest,list
+" longest,list for bash like tab completion.
+" Add ,full for more zsh style on third tab
+set wildmode=longest,list ",full
+" Added an extra select menu that shows what choice you are on for ,full
+" set wildmenu
 
