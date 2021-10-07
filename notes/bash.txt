@@ -92,6 +92,9 @@ glob notes:
   For all hidden files/folders in current directory non-recursive, use -d '.[^.]*'
   For all hidden and nonhidden files/folders in current directory non-recursive, use -d '* .[^.]*'
 
+# copy contents of source to existing dir dest, including hidden stuff
+# cp -a /source/. /dest/
+
 Extra snippets:
 pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -File '/path/to/script.ps1 -Flag arg'
 pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -Command "& {Write-Host 'hi'}"

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 sudo apt -y update
 # session manager
 sudo apt-get -y install tmux
@@ -9,12 +11,6 @@ sudo apt-get -y install tree
 sudo apt-get -y install python-is-python3
 # for creating python virtual environments
 sudo apt-get -y install python3-venv
-# installs python package manager
-# sudo apt-get -y install pipenv
-# installs nodejs
-# sudo apt-get -y install nodejs
-# installs npm
-# sudo apt-get -y install npm
 # ripgrep for vundle use or use on its own
 sudo add-apt-repository ppa:x4121/ripgrep
 sudo apt-get -y update
