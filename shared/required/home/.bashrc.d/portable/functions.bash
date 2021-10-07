@@ -237,8 +237,8 @@ function show_block {
   [[ -z "$from_pattern" ]] && { echo "Must specify from_pattern" >&2; return 1; }
   [[ -z "$to_pattern" ]] && { echo "Must specify to_pattern" >&2; return 1; }
   [[ -z "$content" ]] && { echo "Must specify content" >&2; return 1; }
-  while IFS="" read -r p || [ -n "$p" ]
-    do
+  [[ -f "$content" ]] && { content=`cat "$content"`; }
+  echo "$content" | while IFS="" read -r p || [ -n "$p" ]; do
     if [[ "$should_print" == "true" ]]
     then
       echo "$p";
@@ -246,7 +246,7 @@ function show_block {
     else
       [[ "$p" =~ $from_pattern ]] && { echo "$p"; should_print="true"; }
     fi
-  done < "$content";
+  done;
 }
 
 function show_block_line_num_range {

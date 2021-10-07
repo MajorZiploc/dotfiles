@@ -31,7 +31,7 @@ EOF
 
 @test "check show_block" {
   function f(){
-    show_block "Very nice content" "Oh, this section is whatever" <(echo "$1");
+    show_block "Very nice content" "Oh, this section is whatever" "$1";
   }
   content=`cat << EOF
 Pre information
@@ -67,7 +67,7 @@ EOF
 
 @test "check show_block_line_num_range" {
   function f(){
-    show_block_line_num_range 2 6 <(echo "$1");
+    show_block_line_num_range 2 6 "$1";
   }
   content=`cat << EOF
 Pre information
