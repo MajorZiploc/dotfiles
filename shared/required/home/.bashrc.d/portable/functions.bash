@@ -249,6 +249,17 @@ function show_block {
   done < "$content";
 }
 
+function show_block_line_num_range {
+  local start_n="$1";
+  local end_n="$2";
+  local content="$3";
+  [[ -z "$start_n" ]] && { echo "Must specify start_n" >&2; return 1; }
+  [[ -z "$end_n" ]] && { echo "Must specify end_n" >&2; return 1; }
+  [[ -z "$content" ]] && { echo "Must specify content" >&2; return 1; }
+  [[ -f "$content" ]] && { content=`cat "$content"`; }
+  echo "$content" | perl -nle "print if $. >= $start_n and $. <= $end_n";
+}
+
 function show_line_nums {
   local content="$1";
   [[ -z "$content" ]] && { echo "Must specify content!" >&2; return 1; }

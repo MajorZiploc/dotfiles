@@ -65,6 +65,39 @@ EOF
   assert_output "$expected"
 }
 
+@test "check show_block_line_num_range" {
+  function f(){
+    show_block_line_num_range 2 6 <(echo "$1");
+  }
+  content=`cat << EOF
+Pre information
+More stuff that does not matter
+
+Very nice content coming up
+all the lines
+go
+hey!!
+
+ohhh
+
+Oh, this section is whatever
+more stuff
+hmmmmmm
+EOF
+`
+  run f "$content"
+  assert_success
+  expected=`cat << EOF
+More stuff that does not matter
+
+Very nice content coming up
+all the lines
+go
+EOF
+`
+  assert_output "$expected"
+}
+
 @test "check csv_delimiter_check_single_line" {
   function f(){
     csv_delimiter_check_single_line "$1" "$2"
