@@ -16,15 +16,15 @@ sudo apt-get -y install fzf
 # google chrome
 sudo apt-get install -y curl unzip xvfb libxi6 libgconf-2-4
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.deb
-rm ./google-chrome-stable_current_amd64.deb
+sudo apt install -y ./google-chrome-stable_current_amd64.deb
+sudo rm ./google-chrome-stable_current_amd64.deb*
 # google driver
 wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip
 unzip chromedriver_linux64.zip
 sudo mv chromedriver /usr/bin/chromedriver
 sudo chown root:root /usr/bin/chromedriver
 sudo chmod +x /usr/bin/chromedriver
-rm -rf chromedriver_linux64.zip
+sudo rm -rf chromedriver_linux64.zip
 
 # install nvm for nodejs
 sudo apt install -y build-essential checkinstall libssl-dev
@@ -33,6 +33,7 @@ curl -o- HTTPS://raw.githubusercontent.com/creationix/nvm/v0.35.1/install.sh | b
 # Adds microsoft packages to trusted hosts
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
+sudo rm packages-microsoft-prod.deb*
 
 # dotnet cli and deps
 sudo apt-get install -y apt-transport-https
