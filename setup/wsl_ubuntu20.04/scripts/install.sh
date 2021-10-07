@@ -17,7 +17,7 @@ sudo apt-get -y install fzf
 sudo apt-get install -y curl unzip xvfb libxi6 libgconf-2-4
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install -y ./google-chrome-stable_current_amd64.deb
-sudo rm ./google-chrome-stable_current_amd64.deb*
+sudo rm ./google-chrome-stable_current_amd64.deb
 # google driver
 wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip
 unzip chromedriver_linux64.zip
@@ -33,7 +33,7 @@ curl -o- HTTPS://raw.githubusercontent.com/creationix/nvm/v0.35.1/install.sh | b
 # Adds microsoft packages to trusted hosts
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
-sudo rm packages-microsoft-prod.deb*
+sudo rm packages-microsoft-prod.deb
 
 # dotnet cli and deps
 sudo apt-get install -y apt-transport-https
@@ -51,8 +51,9 @@ sudo apt-get update \
   && sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
   && sudo apt-get update \
   && sudo apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 \
-  --no-install-recommends \
-  && sudo rm -rf /var/lib/apt/lists/*
+  --no-install-recommends #\
+      # not sure why this is recommended to do for extra packages of google chrome
+    #&& sudo rm -rf /var/lib/apt/lists/*
 
 sudo apt -y upgrade
 

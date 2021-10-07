@@ -26,6 +26,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.35.1/install.sh | b
 # Adds microsoft packages to trusted hosts
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
+sudo rm packages-microsoft-prod.deb
 
 # dotnet cli and deps
 sudo apt-get -y install apt-transport-https
