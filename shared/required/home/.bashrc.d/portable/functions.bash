@@ -775,7 +775,8 @@ function rest_encode_url {
 function rest_get {
   local url="$1";
   local curl_flags="$2";
-  local response_file_type="$3";
+  local auth="$3";
+  local response_file_type="$4";
   [[ -z "$url" ]] && { echo "Must specify url!" >&2; return 1; }
   echo "${curl_flags:="Lk"}" >/dev/null;
   echo "${response_file_type:="json"}" >/dev/null;
@@ -786,18 +787,23 @@ function rest_get {
   local query_params=`_rest_get_query_params "$url"`;
   [[ ! "$query_params" == "?"* ]] && { query_params=`echo "${query_params:+"?$query_params"}"`; }
   url="${base_url_with_endpoint}${query_params}";
-  curl -"$curl_flags" "$url" > "$_file";
+  if [[ -z "$auth" ]]; then
+    curl -"$curl_flags" "$url" > "$_file";
+  else
+    curl -"$curl_flags" "$url" -H "authorization: $auth" > "$_file";
+  fi
   _rest_format_and_print_response "$_file";
 }
 
 function rest_post {
-  local url="$1";
-  local curl_flags="$2";
-  local response_file_type="$3";
-  local request_body="$4";
-  local content_type="$5";
-  [[ -z "$url" ]] && { echo "Must specify url!" >&2; return 1; }
+  local request_body="$1";
+  local url="$2";
+  local curl_flags="$3";
+  local auth="$4";
+  local response_file_type="$5";
+  local content_type="$6";
   [[ -z "$request_body" ]] && { echo "Must specify request_body!" >&2; return 1; }
+  [[ -z "$url" ]] && { echo "Must specify url!" >&2; return 1; }
   echo "${content_type:="application/json"}" >/dev/null;
   echo "${curl_flags:="Lk"}" >/dev/null;
   echo "${response_file_type:="json"}" >/dev/null;
@@ -809,7 +815,12 @@ function rest_post {
   [[ -f "$request_body" ]] && { request_body=`cat "$request_body"`; }
   [[ ! "$query_params" == "?"* ]] && { query_params=`echo "${query_params:+"?$query_params"}"`; }
   url="${base_url_with_endpoint}${query_params}";
-  curl -"$curl_flags" -H "Content-Type: $content_type" -X POST -d "$request_body" "$url" > "$_file";
+  if [[ -z "$auth" ]]; then
+    curl -"$curl_flags" -X POST -d "$request_body" "$url" -H "Content-Type: $content_type" > "$_file";
+  else
+    curl -"$curl_flags" -X POST -d "$request_body" "$url" -H "authorization: $auth" \
+      -H "Content-Type: $content_type" > "$_file";
+  fi
   _rest_format_and_print_response "$_file";
 }
 
