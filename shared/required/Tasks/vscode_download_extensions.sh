@@ -15,8 +15,8 @@ code --install-extension s-nlf-fh.glassit
 # Simple tmux key binds for the vscode terminal
 code --install-extension stephlin.vscode-tmux-keybinding
 
+# general non mssql database connection
 # code --install-extension bajdzis.vscode-database
-# code --install-extension ms-azuretools.vscode-docker
 
 # docker
 code --install-extension ms-vscode-remote.remote-containers
@@ -38,4 +38,7 @@ code --install-extension rogalmic.bash-debug
 
 # mssql
 code --install-extension ms-mssql.mssql
+
+# prolog
+code --install-extension arthurwang.vsc-prolog
 
