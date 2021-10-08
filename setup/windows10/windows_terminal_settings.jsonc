@@ -71,7 +71,9 @@
                 "name": "Ubuntu",
                 "source": "Windows.Terminal.Wsl",
                 "useAcrylic": false,
-                "backgroundImage": WINTERM_UBUNTU_BACKGROUND_IMAGE_PATH_PLACEHOLDER
+                "backgroundImage": WINTERM_UBUNTU_BACKGROUND_IMAGE_PATH_PLACEHOLDER,
+                "backgroundImageOpacity": 0.48,
+                "colorScheme": "Campbell"
             },
             {
                 "commandline": "%PROGRAMFILES%/Git/bin/bash.exe -i -l",
