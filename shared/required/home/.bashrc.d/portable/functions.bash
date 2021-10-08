@@ -43,7 +43,7 @@ function tmuxcs() {
   # If $1 not given, then use the base name of the path as the session name
   local session_name="$1";
   session_name="${session_name:-"$(basename `pwd`)"}"
-  local session_name="$(echo "$session_name" | tr '.[[:blank:]]' '-')";
+  local session_name=`echo "$session_name" | tr '.[[:blank:]]' '-'`;
   tmux new -s "$session_name" 2>/dev/null || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
 }
 
@@ -70,11 +70,11 @@ function tmuxps() {
     [[ -z "$session_name" ]] && {
       session_name=`basename $selected | tr '.[[:blank:]]' '-'`;
     }
-    tmux switch-client -t $session_name;
+    tmux switch-client -t "$session_name";
     if [[ $? -eq 0 ]]; then
       exit 0;
     fi
-    tmux new-session -c $selected -d -s $session_name && tmux switch-client -t $session_name || tmux new -c $selected -A -s $session_name;
+    tmux new-session -c "$selected" -d -s "$session_name" && tmux switch-client -t "$session_name" || tmux new -c $selected -A -s "$session_name";
   }
 }
 
@@ -86,13 +86,13 @@ function tmuxds() {
   local selected=`find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER`;
   [[ -z "$selected" ]] || {
     [[ -z "$session_name" ]] && {
-      session_name=`basename $selected | tr '.[[:blank:]]' '-'`;
+      session_name=`basename "$selected" | tr '.[[:blank:]]' '-'`;
     }
-    tmux switch-client -t $session_name;
+    tmux switch-client -t "$session_name";
     if [[ $? -eq 0 ]]; then
       exit 0;
     fi
-    tmux new-session -c $selected -d -s $session_name && tmux switch-client -t $session_name || tmux new -c $selected -A -s $session_name;
+    tmux new-session -c "$selected" -d -s "$session_name" && tmux switch-client -t "$session_name" || tmux new -c $selected -A -s "$session_name";
   }
 }
 
@@ -123,25 +123,25 @@ function show_find_full_paths() {
 }
 
 function show_machine_details() {
-  local user=$(whoami);
-  local machine_name=$(uname -n);
-  local long_info=$(uname -a);
+  local user=`whoami`;
+  local machine_name=`uname -n`;
+  local long_info=`uname -a`;
   echo "user: $user";
   echo "machine_name: $machine_name";
   echo "long_info: $long_info";
 }
 
 function show_folder_details() {
-  local total_items=$(ls -A | wc -l);
-  local total_dirs=$(ls -Al | egrep "^d" | wc -l);
-  local total_files=$(ls -Al | egrep "^-" | wc -l);
-  local nonhidden_items=$(ls | wc -l);
-  local nonhidden_dirs=$(ls -l | egrep "^d" | wc -l);
-  local nonhidden_files=$(ls -l | egrep "^-" | wc -l);
+  local total_items=`ls -A | wc -l`;
+  local total_dirs=`ls -Al | egrep "^d" | wc -l`;
+  local total_files=`ls -Al | egrep "^-" | wc -l`;
+  local nonhidden_items=`ls | wc -l`;
+  local nonhidden_dirs=`ls -l | egrep "^d" | wc -l`;
+  local nonhidden_files=`ls -l | egrep "^-" | wc -l`;
   local hidden_items=$(($total_items - $nonhidden_items));
   local hidden_dirs=$(($total_dirs - $nonhidden_dirs));
   local hidden_files=$(($total_files - $nonhidden_files));
-  local git_branch=$(__git_ps1);
+  local git_branch=`__git_ps1`;
   echo "$PWD";
   echo "format: nonhidden/hidden/total";
   echo "items: $nonhidden_items/$hidden_items/$total_items";
@@ -209,7 +209,7 @@ function sample_csv {
   # grab a random sample of n size from a csv
   local n="$1";
   local file="$2";
-  cat <(head -n 1 "$file") <(sample $n <(tail -n +2 "$file"));
+  cat <(head -n 1 "$file") <(sample "$n" <(tail -n +2 "$file"));
 }
 
 function search_env_for {
@@ -267,7 +267,7 @@ function show_line_nums {
 }
 
 function refresh_settings_help {
-local docs="$(cat << EOF
+local docs=`cat << EOF
 Purpose:
 Refresh your bash, vim, clipboard, Tasks, and/or vscode settings
 Can toggle some refreshes on and off with use of binary flag system
@@ -296,7 +296,7 @@ How:
 type -a refresh_settings to see implementation
 This process tries to retain working changes in the git repo for home-settings for the copy down process
 EOF
-)"
+`
   echo "$docs";
 }
 
@@ -474,7 +474,7 @@ function _find_files_rename_helper {
       local b=$(basename "$file");
       local nb="$(echo "$b" | sed -E "$by")";
       local new_name="$(dirname "$file")/$nb"
-      [[ $f != $new_name ]] && {
+      [[ "$f" != "$new_name" ]] && {
         if [[ $preview == false ]]; then
           mv "$file" "$new_name";
         else
@@ -564,7 +564,7 @@ function git_checkout_branch_in_path {
   for ele in $_path;
     do
       echo "$ele";
-      cd $ele;
+      cd "$ele";
       # the first git pull to to ensure that if there is working dir changes
       #  that it will not continue to switching the branch
       git pull && git fetch origin && git checkout "$branch" && git pull;
@@ -614,7 +614,7 @@ function show_cmds_like {
   local pattern="$1";
   [[ -z "$pattern" ]] && { echo "Must specify a command pattern!" >&2; return 1; }
   local search_res=$(search_env_for "$pattern");
-  local alias=$(echo "$search_res" | egrep -i "\s*alias");
+  local alias=`echo "$search_res" | egrep -i "\s*alias"`;
   [[ -z "$alias" ]] || { echo "$alias"; }
   local fn_names=$(echo "$search_res" | egrep -i "\s*declare -f" | sed -E "s/declare -f (.*)/\1/" | xargs);
   for fn_name in ${fn_names[@]};
@@ -626,7 +626,7 @@ function show_cmds_like {
 function show_cmds_like_fuzz {
   local pattern="$1";
   [[ -z "$pattern" ]] && { echo "Must specify a command pattern!" >&2; return 1; }
-  pattern="$(echo "$pattern" | to_fuzz)";
+  pattern=`echo "$pattern" | to_fuzz`;
   show_cmds_like "$pattern";
 }
 
