@@ -26,6 +26,8 @@ nmap <C-w><right> <C-w>>
 nmap <C-w><up> <C-w>+
 nmap <C-w><down> <C-w>-
 
+nmap <leader>6 <C-^>
+
 " Set shell to bash
 set shell=VIM_SHELL_PLACEHOLDER
 " Sets bash aliases for use in vim
