@@ -31,9 +31,6 @@ find -E "$tempShared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,EXTRA_ENV
 coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright', 'coc-sql', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-sh']";
 find -E "$tempShared" -iregex ".*coc.*" -type f -exec gsed -E -i'' "s/COC_PLUGINS_PLACEHOLDER/$coc_plugins_placeholder/g" {} \;
 find -E "$tempShared" -type f -exec gsed -E -i'' "s/find(.*?)-regextype egrep/find -E\1/g" {} \;
-create_shared_temps_to_replace='cp -r "$SCRIPTPATH/../../shared/" "$temp/"'
-create_shared_temps_replace_with='cp -r "$SCRIPTPATH/../../shared/" "$tempShared/"'
-find -E "$tempShared" -iregex ".*create_temps\.sh" -type f -exec gsed -E -i'' "s/$create_shared_temps_to_replace/$create_shared_temps_replace_with/g" {} \;
 # example of deleting bak files
 # find "$tempShared" -iregex '.*\.bak$' -type f -exec rm {} \;
 
