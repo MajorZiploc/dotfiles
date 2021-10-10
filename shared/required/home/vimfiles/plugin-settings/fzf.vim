@@ -1,4 +1,4 @@
-nmap <C-p> :FZF<CR>
+nmap <C-p> :GFiles<CR>
 
 " This is the default extra key bindings
 let g:fzf_action = {
