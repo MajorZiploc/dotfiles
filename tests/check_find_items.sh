@@ -51,15 +51,18 @@ EOF
 @test "check find_items_delete '(.*utils.*|.*utils\.py)' '5' deletes the proper items" {
   git restore ./mock_content/.
   cd ./mock_content
-  run find_items_delete_preview '(.*utils.*|.*utils\.py)' '5'
+  function f () {
+    find_items_delete_preview '(.*utils.*|.*utils\.py)' '5' | sort
+  }
+  run f
   expected=`cat << EOF
 NOTE: This behavior may not be the exact behavior when running the command out of preview mode
 rm -rf ./FslabDataAnalytics/utils ;
-rm -rf ./pandas_data_analytics/src/utils ;
 rm -rf ./FslabDataAnalytics/utils/index.fs ;
 rm -rf ./pandas_data_analytics/src/text_parser/utils.py ;
-rm -rf ./pandas_data_analytics/src/utils/utils.py ;
+rm -rf ./pandas_data_analytics/src/utils ;
 rm -rf ./pandas_data_analytics/src/utils/__init__.py ;
+rm -rf ./pandas_data_analytics/src/utils/utils.py ;
 EOF
 `;
   assert_success
