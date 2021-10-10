@@ -9,7 +9,7 @@ tempShared="$3"
 tempThis="$4"
 
 mkdir -p "$tempShared/"
-cp -r "$SCRIPTPATH/../../shared/" "$temp/"
+cp -r "$SCRIPTPATH/../../shared/" "$tempShared/"
 mkdir -p "$tempThis/"
 cp -r "$setupRoot" "$tempThis/"
 
