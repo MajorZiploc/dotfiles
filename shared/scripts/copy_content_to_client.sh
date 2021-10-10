@@ -27,12 +27,11 @@ cp -a "$tempShared/required/home_bin/." "$HOME/bin/"
   cp -a "$tempShared/required/configs/vscode/." VSC_SETTINGS_DESTINATION_PLACEHOLDER
 }
 
-# download vundle if it does not exist
-vunDir="$HOME/.vim/bundle/Vundle.vim"
-[[ -d $vunDir ]] || {
-  cd "$HOME/.vim/bundle"
-  git clone https://github.com/VundleVim/Vundle.vim.git "$vunDir"
-  cd "$HOME"
+# download vimplug if it does not exist
+vim_plug_path="$HOME/.vim/autoload/plug.vim";
+[[ -f "$vim_plug_path" ]] || {
+  curl -fLo "$vim_plug_path" --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 }
 
 unset setupRoot
@@ -44,4 +43,5 @@ unset flags_as_int
 unset vscode_flag_as_int
 unset clipboard_flag_as_int
 unset tasks_flag_as_int
+unset vim_plug_path
 
