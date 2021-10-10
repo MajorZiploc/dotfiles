@@ -28,10 +28,11 @@ cp -a "$tempShared/required/home_bin/." "$HOME/bin/"
 }
 
 # download vimplug if it does not exist
-vim_plug_path="$HOME/.vim/autoload/plug.vim";
+vim_plug_dir="$HOME/.vim/autoload";
+vim_plug_path="$vim_plug_dir/plug.vim";
 [[ -f "$vim_plug_path" ]] || {
-  curl -fLo "$vim_plug_path" --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  mkdir -p "$vim_plug_dir";
+  curl -0Lk https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > "$vim_plug_path";
 }
 
 unset setupRoot
@@ -43,5 +44,6 @@ unset flags_as_int
 unset vscode_flag_as_int
 unset clipboard_flag_as_int
 unset tasks_flag_as_int
+unset vim_plug_dir
 unset vim_plug_path
 
