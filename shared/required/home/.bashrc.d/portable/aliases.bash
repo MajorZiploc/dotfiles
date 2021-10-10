@@ -11,12 +11,12 @@ alias show_path='echo $PATH | tr ":" "\n"'
 alias rev_chars='perl -F"" -anle "print reverse @F" | perl -ple "s/^\r//"'
 alias rev_lines='tac'
 alias toggle_case='tr "[a-zA-Z]" "[A-Za-z]"'
-alias camel_to_snake="sed -E 's/([A-Z])/_\L\1/g' | sed 's/^_//'"
-alias snake_to_camel="sed -E 's/_([a-zA-Z])/\U\1/gi' | sed -E 's/^([A-Z])/\l\1/'"
+alias camel_to_snake="sed -E 's/([A-Z])/_\L\1/g;s/^_//;'"
+alias snake_to_camel="sed -E 's/_([a-zA-Z])/\U\1/gi;s/^([A-Z])/\l\1/;'"
 alias snake_to_space="sed 's/_/ /g'"
-alias camel_to_space="sed -E 's/([A-Z])/ \1/g' | sed 's/^ //'"
-alias space_to_snake="sed -E 's/ ([a-zA-Z])/_\L\1/g' | sed -E 's/^_//' | sed -E 's/^([A-Z])/\L\1/'"
-alias space_to_camel="sed -E 's/ ([a-zA-Z])/\U\1/g' | sed -E 's/^([A-Z])/\L\1/'"
+alias camel_to_space="sed -E 's/([A-Z])/ \1/g;s/^ //;'"
+alias space_to_snake="sed -E 's/ ([a-zA-Z])/_\L\1/g;s/^_//;s/^([A-Z])/\L\1/;'"
+alias space_to_camel="sed -E 's/ ([a-zA-Z])/\U\1/g;s/^([A-Z])/\L\1/;'"
 alias to_lower="sed -E 's/([A-Z])/\L\1/g'"
 alias to_upper="sed -E 's/([a-z])/\U\1/g'"
 alias rtrim="sed -E 's/[ '$'\t'']+$//'"
@@ -24,11 +24,11 @@ alias ltrim="sed -E 's/\s*(.*)/\1/g'"
 alias trim="rtrim | ltrim"
 alias keep_last='tac | awk "!x[\$0]++" | tac'
 alias keep_first='cat | awk "!x[\$0]++" | cat'
-alias add_semicolons='sed -E "s/(.+)/\1;/" | sed -E "s/;;$/;/"'
+alias add_semicolons='sed -E "s/(.+)/\1;/;s/;;$/;/;"'
 
 # Converts a string to a fuzzy search pattern
 alias to_fuzz='sed -E "s/(\\w)/\\1\\\\S{0,3}/g" | sed "s/\\\\S{0,3}$//g"'
-alias to_newlines='sed "s/ /\n/g"'
+alias to_newlines='tr " " "\n"'
 
 alias bash_surround_expression='sed -E "s,(.+),\"\$(\1)\","'
 alias bash_surround_stream='sed -E "s,(.+),<(\1),"'
