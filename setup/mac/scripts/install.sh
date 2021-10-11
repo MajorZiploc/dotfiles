@@ -7,6 +7,9 @@ brew install nvm
 brew install node
 brew install fzf
 brew install ripgrep
+brew install just
+brew install docker
+brew install docker-compose
 
 # dotnet core
 brew install mono-libgdiplus
