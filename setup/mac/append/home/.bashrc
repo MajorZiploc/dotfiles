@@ -34,6 +34,16 @@ if ! shopt -oq posix; then
   fi
 fi
 
+. /opt/homebrew/etc/bash_completion.d/docker
+. /opt/homebrew/etc/bash_completion.d/just
+. /opt/homebrew/etc/bash_completion.d/brew
+. /opt/homebrew/etc/bash_completion.d/bash-builtins
+. /opt/homebrew/etc/bash_completion.d/nvm
+. /opt/homebrew/etc/bash_completion.d/tmux
+. /opt/homebrew/etc/bash_completion.d/rg.bash
+. /opt/homebrew/etc/bash_completion.d/docker-compose
+. /opt/homebrew/etc/bash_completion.d/npm
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export NVM_DIR=~/.nvm
