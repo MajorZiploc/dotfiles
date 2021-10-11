@@ -24,8 +24,7 @@ tmuxps_paths_array_placeholder="(\"\$(find ~ -mindepth 1 -maxdepth 1 -iregex \".
 find -E "$tempShared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,TMUXPS_PATHS_ARRAY_PLACEHOLDER,$tmuxps_paths_array_placeholder,g" {} \;
 fuzzy_finder_placeholder="fzf";
 find -E "$tempShared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,FUZZY_FINDER_PLACEHOLDER,$fuzzy_finder_placeholder,g" {} \;
-# TODO: these aliases may not be correct. Based on Ubuntu
-bash_aliases_placeholder="# for opening a gui file explorer\nalias explorer=\"xdg-open\"\n# copy to clipboard\nalias clip=\"xclip -sel clip\"";
+bash_aliases_placeholder="# for opening a gui file explorer\nalias explorer=\"xdg-open\"\n# copy to clipboard\nalias clip=\"pbcopy\"";
 find -E "$tempShared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,BASH_ALIASES_PLACEHOLDER,$bash_aliases_placeholder,g" {} \;
 extra_env_checks_placeholder="[[ -z \$(which fzf 2>/dev/null) ]] \&\& { ENV_NOTES=\"\$ENV_NOTES:Missing fzf (fuzzy finder)\"; }\n[[ -z \$(which python3 2>/dev/null) ]] \&\& { ENV_NOTES=\"\$ENV_NOTES:Missing python v3 \"; }\n";
 find -E "$tempShared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,EXTRA_ENV_CHECKS_PLACEHOLDER,$extra_env_checks_placeholder,g" {} \;
