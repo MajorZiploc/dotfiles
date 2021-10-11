@@ -8,8 +8,6 @@ brew install node
 brew install fzf
 brew install ripgrep
 brew install just
-brew install docker
-brew install docker-compose
 
 # dotnet core
 brew install mono-libgdiplus
@@ -23,4 +21,6 @@ brew install --cask google-chrome
 brew install --cask iterm2
 brew install --cask discord
 brew install --cask visual-studio-code
+brew install --cask slack
+brew install --cask docker
 
