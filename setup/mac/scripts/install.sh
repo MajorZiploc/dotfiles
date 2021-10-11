@@ -8,6 +8,7 @@ brew install node
 brew install fzf
 brew install ripgrep
 brew install just
+brew install bash-completion
 
 # dotnet core
 brew install mono-libgdiplus
