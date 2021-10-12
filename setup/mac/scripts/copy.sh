@@ -16,8 +16,9 @@ vscode_flag_as_int="$((2#01))"
 $SCRIPTPATH/../../../shared/scripts/copy.sh "$setupRoot" "$flags"
 
 [[ $(($vscode_flag_as_int & $flags_as_int)) == $vscode_flag_as_int ]] && {
-  rm ~/Library/Application\ Support/Code/User/settings.json;
-  ln -s ~/settings.json ~/Library/Application\ Support/Code/User/settings.json;
+  vsc_file="$HOME/Library/Application Support/Code/User/settings.json"
+  rm "$vsc_file";
+  ln -s ~/settings.json "$vsc_file";
 }
 
 git restore "$SCRIPTPATH/../../../shared/scripts/create_temps.sh"

@@ -25,12 +25,12 @@ function check_for_placeholder {
     ~/.bashrc
   )
   check_for_placeholder $files;
-  files=`find ~/.bashrc.d -maxdepth 1 -regextype egrep -iregex ".*vim.*" -type f`;
+  files=`find ~/.bashrc.d -maxdepth 1 -iname "*vim*" -type f`;
   check_for_placeholder $files;
 }
 
 @test "$check home vim $phdoesntexist" {
-  files=`find ~ -maxdepth 1 -regextype egrep -iregex ".*vim.*" -type f`;
+  files=`find ~ -maxdepth 1 -iname "*vim*" -type f`;
   check_for_placeholder $files;
 }
 

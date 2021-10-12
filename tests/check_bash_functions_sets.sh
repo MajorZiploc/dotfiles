@@ -158,7 +158,10 @@ leg
 EOF
   `;
   expected=6;
-  run set_cardinality <(echo "$all")
+  function f () {
+    set_cardinality <(echo "$all") | trim
+  }
+  run f
   assert_success
   assert_output "$expected"
 }
