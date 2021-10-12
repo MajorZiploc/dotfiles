@@ -12,7 +12,7 @@ brew install bash-completion
 
 # dotnet core
 brew install mono-libgdiplus
-brew install --cask dotnet
+brew install --cask dotnet-sdk
 brew install --cask powershell
 
 # Dont forget to prepend this bash to the /etc/shell
