@@ -100,7 +100,7 @@ EOF
 
 @test "check csv_delimiter_check_single_line" {
   function f(){
-    csv_delimiter_check_single_line "$1" "$2"
+    csv_delimiter_check_single_line "$1" "$2" | trim;
   }
   content=`cat << EOF
 id,name,descr
@@ -112,7 +112,7 @@ EOF
   run f "$content"
   assert_success
   expected=`cat << EOF
-      4 2
+4 2
 EOF
 `
   assert_output "$expected"
@@ -126,9 +126,9 @@ EOF
   run f "$content" "*"
   assert_success
   expected=`cat << EOF
-      2 2
-      1 3
-      1 4
+2 2
+1 3
+1 4
 EOF
 `;
   assert_output "$expected"

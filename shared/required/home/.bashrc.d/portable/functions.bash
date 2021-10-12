@@ -742,7 +742,7 @@ function csv_delimiter_check_single_line {
   [[ -z "$sql_query" ]] && { echo "Must specify a sql_query file or string!" >&2; return 1; }
   echo "${delimiter:=","}" >/dev/null;
   [[ -f "$sql_query" ]] && { sql_query=`cat "$sql_query"`; }
-  echo "$sql_query" | grep -Fon -- "$delimiter" | sort -n | uniq -c | col_n 1 | sort | uniq -c;
+  echo "$sql_query" | tr -d -c "${delimiter}\n" | awk '{ print length; }' | sort -n | uniq -c;
 }
 
 function _rest_temp_response_loc {
