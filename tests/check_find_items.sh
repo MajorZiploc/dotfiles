@@ -67,19 +67,33 @@ EOF
 `;
   assert_success
   assert_output "$expected"
-  run git --no-pager status
-  refute_output --regexp "deleted:\s*FslabDataAnalytics/utils/index.fs"
-  refute_output --regexp "deleted:\s*pandas_data_analytics/src/text_parser/utils.py"
-  refute_output --regexp "deleted:\s*pandas_data_analytics/src/utils/__init__.py"
-  refute_output --regexp "deleted:\s*pandas_data_analytics/src/utils/utils.py"
+  run test -d ./FslabDataAnalytics/utils
+  assert_success
+  run test -f ./FslabDataAnalytics/utils/index.fs
+  assert_success
+  run test -f ./pandas_data_analytics/src/text_parser/utils.py
+  assert_success
+  run test -d ./pandas_data_analytics/src/utils
+  assert_success
+  run test -f ./pandas_data_analytics/src/utils/__init__.py
+  assert_success
+  run test -f ./pandas_data_analytics/src/utils/utils.py
+  assert_success
   run find_items_delete '(.*utils.*|.*utils\.py)' '5'
   assert_success
   assert_output ''
-  run git --no-pager status
-  assert_output --regexp "deleted:\s*FslabDataAnalytics/utils/index.fs"
-  assert_output --regexp "deleted:\s*pandas_data_analytics/src/text_parser/utils.py"
-  assert_output --regexp "deleted:\s*pandas_data_analytics/src/utils/__init__.py"
-  assert_output --regexp "deleted:\s*pandas_data_analytics/src/utils/utils.py"
+  run test -d ./FslabDataAnalytics/utils
+  assert_failure
+  run test -f ./FslabDataAnalytics/utils/index.fs
+  assert_failure
+  run test -f ./pandas_data_analytics/src/text_parser/utils.py
+  assert_failure
+  run test -d ./pandas_data_analytics/src/utils
+  assert_failure
+  run test -f ./pandas_data_analytics/src/utils/__init__.py
+  assert_failure
+  run test -f ./pandas_data_analytics/src/utils/utils.py
+  assert_failure
   git restore .
   cd ..
 }
@@ -95,15 +109,17 @@ EOF
 `;
   assert_success
   assert_output "$expected"
-  run git --no-pager status
-  refute_output --regexp "deleted:\s*FslabDataAnalytics/utils/index.fs"
-  refute_output --regexp "FslabDataAnalytics/util_suns/"
+  run test -d ./FslabDataAnalytics/util_suns
+  assert_failure
+  run test -d ./FslabDataAnalytics/utils
+  assert_success
   run find_items_rename '(.*utils.*|.*utils\.py)' "s/(util)/\1_sun/g" '2'
   assert_success
   assert_output ''
-  run git --no-pager status
-  assert_output --regexp "deleted:\s*FslabDataAnalytics/utils/index.fs"
-  assert_output --regexp "FslabDataAnalytics/util_suns/"
+  run test -d ./FslabDataAnalytics/util_suns
+  assert_success
+  run test -d ./FslabDataAnalytics/utils
+  assert_failure
   git restore .
   rm -rf ./FslabDataAnalytics/util_suns
   cd ..
