@@ -2,8 +2,8 @@ function snip_bash_for_loop {
 echo '
 IFS= ;
 l=(1 2 3 "4");
-for ele in ${l[@]};
-  do echo "$ele" hi;
+for ele in ${l[@]}; do
+  echo "$ele" hi;
 done;
 unset IFS;
 ';
@@ -11,16 +11,16 @@ unset IFS;
 
 function snip_bash_while {
 echo '
-echo "$eles" | while read -d $'"'\n'"' ele;
-  do echo "$ele hi";
+echo "$eles" | while read -d $'"'\n'"' ele; do
+  echo "$ele hi";
 done;
 ';
 }
 
 function snip_bash_while_stream {
 echo '
-while read -d $'"'\n'"' ele;
-  do echo "$ele hi";
+while read -d $'"'\n'"' ele; do
+  echo "$ele hi";
 done < <(echo "$eles");
 ';
 }
