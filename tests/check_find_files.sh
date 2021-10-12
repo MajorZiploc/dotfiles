@@ -63,14 +63,12 @@ EOF
 `;
   assert_success
   assert_output "$expected"
-  run git --no-pager status
-  refute_output --regexp "deleted:\s*pandas_data_analytics/setup\.py"
-  refute_output --regexp "deleted:\s*pandas_data_analytics/src/pandas_notes\.py"
   run find_files_delete '.*\.py' 'df' '3'
   assert_success
-  run git --no-pager status
-  assert_output --regexp "deleted:\s*pandas_data_analytics/setup\.py"
-  assert_output --regexp "deleted:\s*pandas_data_analytics/src/pandas_notes\.py"
+  run test -f ./pandas_data_analytics/setup.py
+  assert_failure
+  run test -f ./pandas_data_analytics/src/pandas_notes.py
+  assert_failure
   git restore .
   cd ..
 }
