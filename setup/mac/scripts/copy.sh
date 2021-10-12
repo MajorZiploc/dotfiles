@@ -18,11 +18,10 @@ $SCRIPTPATH/../../../shared/scripts/copy.sh "$setupRoot" "$flags"
 [[ $(($vscode_flag_as_int & $flags_as_int)) == $vscode_flag_as_int ]] && {
   vsc_settings="$HOME/Library/Application Support/Code/User/settings.json"
   vscode_dir="$HOME/.vscoderc.d/"
-  find "$vscode_dir" -type f -print0 | while read -d $'\0' file;
-    do
-      bname=`basename "$file"`;
-      rm "$HOME/Library/Application Support/Code/User/$bname";
-      ln -s "$vscode_dir/$bname" "$HOME/Library/Application Support/Code/User/$bname";
+  find "$vscode_dir" -type f -print0 | while read -d $'\0' file; do
+    bname=`basename "$file"`;
+    rm "$HOME/Library/Application Support/Code/User/$bname";
+    ln -s "$vscode_dir/$bname" "$HOME/Library/Application Support/Code/User/$bname";
   done;
 }
 
