@@ -46,6 +46,12 @@ function edit_files_helper {
         cat "$i" > "$destDir/$b"
         rm "$i"
       }
+      [[ $estyle == "delete" ]] && {
+        # echo "cat \"$i\" > \"$destDir/$b\""
+        # echo "rm \"$i\""
+        rm "$destDir/$b"
+        rm "$i"
+      }
     }
   done;
 }
