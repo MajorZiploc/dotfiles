@@ -24,4 +24,5 @@ brew install --cask discord
 brew install --cask visual-studio-code
 brew install --cask slack
 brew install --cask docker
+brew install --cask wine-stable
 
