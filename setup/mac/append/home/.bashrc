@@ -41,7 +41,6 @@ fi
 . /opt/homebrew/etc/bash_completion.d/nvm
 . /opt/homebrew/etc/bash_completion.d/tmux
 . /opt/homebrew/etc/bash_completion.d/rg.bash
-. /opt/homebrew/etc/bash_completion.d/docker-compose
 . /opt/homebrew/etc/bash_completion.d/npm
 . /opt/homebrew/etc/bash_completion.d/asdf.bash
 
