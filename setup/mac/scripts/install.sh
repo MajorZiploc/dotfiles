@@ -10,6 +10,11 @@ brew install ripgrep
 brew install just
 brew install bash-completion
 
+# install asdf and its deps
+brew install gpg
+brew install gawk
+brew install asdf
+
 # dotnet core
 brew install mono-libgdiplus
 brew install --cask dotnet-sdk
