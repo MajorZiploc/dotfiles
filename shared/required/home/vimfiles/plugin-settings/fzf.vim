@@ -1,6 +1,6 @@
 nmap <C-p> :GFiles<CR>
-nmap <leader>fi :BLines
-nmap <leader>fa :Rg
+nmap <leader>fi :BLines<CR>
+nmap <leader>fa :Rg<CR>
 
 " This is the default extra key bindings
 let g:fzf_action = {
