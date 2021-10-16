@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+softwareupdate --all --install --force
+
 brew update
 brew install tmux
 mkdir ~/.nvm
@@ -9,6 +11,12 @@ brew install fzf
 brew install ripgrep
 brew install just
 brew install bash-completion
+
+# instal xcode
+xcode-select --install
+
+# python deps
+brew install openssl readline sqlite3 xz zlib
 
 # install asdf and its deps
 brew install gpg
