@@ -43,9 +43,11 @@ fi
 . /opt/homebrew/etc/bash_completion.d/rg.bash
 . /opt/homebrew/etc/bash_completion.d/docker-compose
 . /opt/homebrew/etc/bash_completion.d/npm
+. /opt/homebrew/etc/bash_completion.d/asdf.bash
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
+export PATH="/opt/homebrew/bin:$PATH"
 
