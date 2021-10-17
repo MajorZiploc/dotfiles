@@ -45,9 +45,7 @@ for file in `find "$HOME/.bash_completion.d/" -maxdepth 1 -mindepth 1 -regextype
   . "$file";
 done;
 
-if [ -d ~/.local/bin ]; then
-  export PATH="$PATH:$(echo ~/.local/bin)"
-fi
+export PATH="/usr/local/bin:$PATH"
 
 # minimal prompt
 export PS1="\[\033[34m\]@\h \`if [[ \$? = \"0\" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\`\W\[\033[0m\]> "
