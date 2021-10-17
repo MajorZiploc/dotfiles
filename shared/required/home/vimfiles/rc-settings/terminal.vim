@@ -28,9 +28,9 @@ nmap <C-w><down> <C-w>-
 
 nmap <leader>6 <C-^>
 
-" Set shell to bash
+" Set shell
 set shell=VIM_SHELL_PLACEHOLDER
-" Sets bash aliases for use in vim
+" Sets aliases for use in vim
 let $BASH_ENV = "~/.bashrc"
 
 " Show file stats
