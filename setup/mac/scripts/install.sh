@@ -10,6 +10,7 @@ brew install node
 brew install fzf
 brew install ripgrep
 brew install just
+brew install copyq
 brew install bash-completion
 
 # instal xcode
