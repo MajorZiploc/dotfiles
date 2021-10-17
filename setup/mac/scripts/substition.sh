@@ -32,6 +32,7 @@ coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright',
 find -E "$tempShared" -iregex ".*coc.*" -type f -exec gsed -E -i'' "s/COC_PLUGINS_PLACEHOLDER/$coc_plugins_placeholder/g" {} \;
 find -E "$tempShared" -type f -exec gsed -E -i'' "s/find(.*?)-regextype egrep/find -E\1/g" {} \;
 find -E "$tempShared" -iregex ".*functions\.bash" -type f -exec gsed -E -i'' "s/-exec sed/-exec gsed/g" {} \;
+find -E "$tempShared" -iregex ".*aliases\.bash" -type f -exec gsed -E -i'' "s/\bsed /gsed /g" {} \;
 # example of deleting bak files
 # find "$tempShared" -iregex '.*\.bak$' -type f -exec rm {} \;
 
