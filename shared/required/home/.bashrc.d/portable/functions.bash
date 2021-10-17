@@ -74,7 +74,7 @@ function tmuxps() {
     if [[ $? -eq 0 ]]; then
       exit 0;
     fi
-    tmux new-session -c "$selected" -d -s "$session_name" && tmux switch-client -t "$session_name" || tmux new -c $selected -A -s "$session_name";
+    tmux new-session -c "$selected" -d -s "$session_name" && tmux switch-client -t "$session_name" || tmux new -c "$selected" -A -s "$session_name";
   }
 }
 
@@ -92,7 +92,7 @@ function tmuxds() {
     if [[ $? -eq 0 ]]; then
       exit 0;
     fi
-    tmux new-session -c "$selected" -d -s "$session_name" && tmux switch-client -t "$session_name" || tmux new -c $selected -A -s "$session_name";
+    tmux new-session -c "$selected" -d -s "$session_name" && tmux switch-client -t "$session_name" || tmux new -c "$selected" -A -s "$session_name";
   }
 }
 
