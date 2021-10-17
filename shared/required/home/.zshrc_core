@@ -1,4 +1,4 @@
-# only source this file if the shell is bash
+# only source this file if the shell is zsh
 [[ "$0" == *"zsh"* ]] || { return ; }
 
 # If you come from bash you might have to change your $PATH.
@@ -98,14 +98,7 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+setopt aliases
 
 for file in `find "$HOME/.bashrc.d/portable" -regextype egrep -iregex ".*\.bash" -type f`; do
   . "$file";
@@ -114,6 +107,8 @@ done;
 for file in `find "$HOME/.zshrc.d" -regextype egrep -iregex ".*\.zsh" -type f`; do
   . "$file";
 done;
+
+
 
 export FPATH="$FPATH:$(echo ~/.zsh_completion.d/)"
 # The following lines were added by compinstall
