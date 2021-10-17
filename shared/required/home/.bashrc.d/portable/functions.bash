@@ -330,6 +330,15 @@ function refresh_settings {
   show_env_notes;
 }
 
+function _find_default_ignored_dirs () {
+  echo "-not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*'"
+}
+
+function _find_git_estimated_ignored_dirs () {
+  # the pattern to apply the the list in the .gitignore once we find a .gitignore
+  # cat .gitignore | trim | egrep -v '(#|\!|,|\`|\{|\}|\@|\||\^|\(|\)|^[[:blank:]]*$|\&|\$|\\|^\*\.)' | sed -E 's,^/,,g;s,/$,,g;'
+}
+
 function _find_items_rename_helper {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
