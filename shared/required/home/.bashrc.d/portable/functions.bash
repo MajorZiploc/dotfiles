@@ -550,8 +550,28 @@ function find_files {
   _find_files_helper "$1" "$2" "$3" "$not_paths";
 }
 
+function afind_files {
+  local not_paths="";
+  _find_files_helper "$1" "$2" "$3" "$not_paths";
+}
+
+function gfind_files {
+  local not_paths=`_find_git_estimator_ignored_dirs`;
+  _find_files_helper "$1" "$2" "$3" "$not_paths";
+}
+
 function find_files_fuzz {
   local not_paths=`_find_default_ignored_dirs`;
+  _find_files_helper "$(echo "$1" | to_fuzz)" "$2" "$3" "$not_paths";
+}
+
+function afind_files_fuzz {
+  local not_paths="";
+  _find_files_helper "$(echo "$1" | to_fuzz)" "$2" "$3" "$not_paths";
+}
+
+function gfind_files_fuzz {
+  local not_paths=`_find_git_estimator_ignored_dirs`;
   _find_files_helper "$(echo "$1" | to_fuzz)" "$2" "$3" "$not_paths";
 }
 
@@ -571,8 +591,28 @@ function find_in_files {
   _find_in_files_helper "$1" "$2" "$3" "$not_paths";
 }
 
+function afind_in_files {
+  local not_paths="";
+  _find_in_files_helper "$1" "$2" "$3" "$not_paths";
+}
+
+function gfind_in_files {
+  local not_paths=`_find_git_estimator_ignored_dirs`;
+  _find_in_files_helper "$1" "$2" "$3" "$not_paths";
+}
+
 function find_in_files_fuzz {
   local not_paths=`_find_default_ignored_dirs`;
+  _find_in_files_helper "$(echo "$1" | to_fuzz)" "$2" "$3" "$not_paths";
+}
+
+function afind_in_files_fuzz {
+  local not_paths="";
+  _find_in_files_helper "$(echo "$1" | to_fuzz)" "$2" "$3" "$not_paths";
+}
+
+function gfind_in_files_fuzz {
+  local not_paths=`_find_git_estimator_ignored_dirs`;
   _find_in_files_helper "$(echo "$1" | to_fuzz)" "$2" "$3" "$not_paths";
 }
 
@@ -589,6 +629,16 @@ function _find_in_files_replace_helper {
 
 function find_in_files_replace {
   local not_paths=`_find_default_ignored_dirs`;
+  _find_in_files_replace_helper "$1" "$2" "$3" "$not_paths";
+}
+
+function afind_in_files_replace {
+  local not_paths="";
+  _find_in_files_replace_helper "$1" "$2" "$3" "$not_paths";
+}
+
+function gfind_in_files_replace {
+  local not_paths=`_find_git_estimator_ignored_dirs`;
   _find_in_files_replace_helper "$1" "$2" "$3" "$not_paths";
 }
 
