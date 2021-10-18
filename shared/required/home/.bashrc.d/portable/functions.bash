@@ -358,7 +358,7 @@ function _find_git_estimator_ignored_dirs () {
     echo "$git_ignore_content" | sort -u;
   '
   local git_ignore_content=`{ bash -c "$get_git_ignore_content"; echo ".git .svn"; }`;
-  local gitignore_entries=$(echo "$git_ignore_content" | trim | egrep -v '(#|\!|,|\{|\}|\@|\||\^|\(|\)|^[[:blank:]]*$|\&|\$|\\|^\*\.)' | sed -E 's,^/,,g;s,/$,,g;' | xargs);
+  local gitignore_entries=$(echo "$git_ignore_content" | trim | egrep -v '(;|#|\!|,|\{|\}|\@|\||\^|\(|\)|^[[:blank:]]*$|\&|\$|\\|^\*\.)' | sed -E 's,^/,,g;s,/$,,g;' | xargs);
   _find_generate_not_paths "${gitignore_entries[@]}";
 }
 
