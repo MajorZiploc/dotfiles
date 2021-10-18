@@ -331,12 +331,25 @@ function refresh_settings {
 }
 
 function _find_default_ignored_dirs () {
-  echo "-not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*'"
+  echo "-not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*'";
 }
 
-function _find_git_estimated_ignored_dirs () {
-  # the pattern to apply the the list in the .gitignore once we find a .gitignore
-  # cat .gitignore | trim | egrep -v '(#|\!|,|\`|\{|\}|\@|\||\^|\(|\)|^[[:blank:]]*$|\&|\$|\\|^\*\.)' | sed -E 's,^/,,g;s,/$,,g;'
+function _find_git_estimator_ignored_dirs () {
+  get_git_ignore_content='
+    git_ignore_content="";
+    current_path=`pwd`;
+    while [[ ! "$current_path" == "/" ]] ; do
+      [[ -n "$git_ignore_content" ]] && {
+        break;
+      }
+      cd ..;
+      current_path=`pwd`;
+      git_ignore_content=`cat .gitignore 2>/dev/null`;
+    done;
+    echo "$git_ignore_content";
+  '
+  git_ignore_content=`bash -c "$get_git_ignore_content"`;
+  echo "$git_ignore_content" | trim | egrep -v '(#|\!|,|\`|\{|\}|\@|\||\^|\(|\)|^[[:blank:]]*$|\&|\$|\\|^\*\.)' | sed -E 's,^/,,g;s,/$,,g;';
 }
 
 function _find_items_rename_helper {
