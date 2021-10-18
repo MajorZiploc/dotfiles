@@ -345,7 +345,7 @@ function _find_default_ignored_dirs () {
 
 function _find_git_estimator_ignored_dirs () {
   local get_git_ignore_content='
-    git_ignore_content="";
+    git_ignore_content=`cat .gitignore 2>/dev/null`;
     current_path=`pwd`;
     while [[ ! "$current_path" == "/" ]] ; do
       [[ -n "$git_ignore_content" ]] && {
