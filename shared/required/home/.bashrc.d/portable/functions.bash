@@ -330,12 +330,21 @@ function refresh_settings {
   show_env_notes;
 }
 
+function _find_generate_not_paths () {
+  local not_paths="";
+  for gitignore_entry in $@; do
+    not_paths="$not_paths -not -path '*/$gitignore_entry/*'";
+  done;
+  echo "$not_paths";
+}
+
 function _find_default_ignored_dirs () {
-  echo "-not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*'";
+  local gitignore_entries=('__pycache__' 'bin' 'obj' '.git' '.svn' 'node_modules' '.ionide' '.venv');
+  _find_generate_not_paths $gitignore_entries;
 }
 
 function _find_git_estimator_ignored_dirs () {
-  get_git_ignore_content='
+  local get_git_ignore_content='
     git_ignore_content="";
     current_path=`pwd`;
     while [[ ! "$current_path" == "/" ]] ; do
@@ -348,13 +357,9 @@ function _find_git_estimator_ignored_dirs () {
     done;
     echo "$git_ignore_content";
   '
-  git_ignore_content=`bash -c "$get_git_ignore_content"`;
-  gitignore_entries=$(echo "$git_ignore_content" | trim | egrep -v '(#|\!|,|\{|\}|\@|\||\^|\(|\)|^[[:blank:]]*$|\&|\$|\\|^\*\.)' | sed -E 's,^/,,g;s,/$,,g;');
-  not_paths="";
-  for gitignore_entry in ${gitignore_entries[@]}; do
-    not_paths="$not_paths -not -path '*/$gitignore_entry/*'";
-  done;
-  echo "$not_paths";
+  local git_ignore_content=`bash -c "$get_git_ignore_content"`;
+  local gitignore_entries=$(echo "$git_ignore_content" | trim | egrep -v '(#|\!|,|\{|\}|\@|\||\^|\(|\)|^[[:blank:]]*$|\&|\$|\\|^\*\.)' | sed -E 's,^/,,g;s,/$,,g;' | xargs);
+  _find_generate_not_paths $gitignore_entries;
 }
 
 function _find_items_rename_helper {
@@ -367,16 +372,15 @@ function _find_items_rename_helper {
   local maxdepth="$4";
   [[ -z "$maxdepth" ]] && { echo "Must specify a maxdepth!" >&2; return 1; }
   for mdepth in `seq 1 $maxdepth`; do
-    eval "find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0" | while read -d $'\0' item
-    do
-      local new_name="$(echo "$item" | sed -E "$by")";
-      [[ $f != $new_name ]] && {
-        if [[ $preview == false ]]; then
-          mv "$item" "$new_name";
-        else
-          echo mv "$item" "$new_name" ";";
-        fi
-      }
+    eval "find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0" | while read -d $'\0' item; do
+    local new_name="$(echo "$item" | sed -E "$by")";
+    [[ $f != $new_name ]] && {
+      if [[ $preview == false ]]; then
+        mv "$item" "$new_name";
+      else
+        echo mv "$item" "$new_name" ";";
+      fi
+    }
     done;
   done;
 }
@@ -408,8 +412,7 @@ function _find_items_delete_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { echo "Must specify a maxdepth!" >&2; return 1; }
   for mdepth in `seq 1 $maxdepth`; do
-    eval "find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0" | while read -d $'\0' item
-    do
+    eval "find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0" | while read -d $'\0' item; do
       if [[ $preview == false ]]; then
         rm -rf "$item";
       else
@@ -488,27 +491,26 @@ function _find_files_rename_helper {
   local maxdepth="$5";
   [[ -z "$maxdepth" ]] && { echo "Must specify a maxdepth!" >&2; return 1; }
 
-  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0" | while read -d $'\0' file
-  do
-    local should_rename=false;
-    [[ -z "$with_content" ]] && {
-      should_rename=true;
-    } || {
-      file_content_matches="$(egrep -in "$with_content" "$file")"
-      [[ -z "$file_content_matches" ]] || { should_rename=true; }
+  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' -print0" | while read -d $'\0' file; do
+  local should_rename=false;
+  [[ -z "$with_content" ]] && {
+    should_rename=true;
+  } || {
+    file_content_matches="$(egrep -in "$with_content" "$file")"
+    [[ -z "$file_content_matches" ]] || { should_rename=true; }
+  }
+  [[ $should_rename == true ]] && {
+    local b=$(basename "$file");
+    local nb="$(echo "$b" | sed -E "$by")";
+    local new_name="$(dirname "$file")/$nb"
+    [[ "$f" != "$new_name" ]] && {
+      if [[ $preview == false ]]; then
+        mv "$file" "$new_name";
+      else
+        echo mv "$file" "$new_name" ";";
+      fi
     }
-    [[ $should_rename == true ]] && {
-      local b=$(basename "$file");
-      local nb="$(echo "$b" | sed -E "$by")";
-      local new_name="$(dirname "$file")/$nb"
-      [[ "$f" != "$new_name" ]] && {
-        if [[ $preview == false ]]; then
-          mv "$file" "$new_name";
-        else
-          echo mv "$file" "$new_name" ";";
-        fi
-      }
-    }
+  }
   done;
 }
 
