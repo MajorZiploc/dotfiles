@@ -392,8 +392,30 @@ function find_items_rename_preview {
   _find_items_rename_helper "$1" "$2" true "$3" "$not_paths";
 }
 
+function afind_items_rename_preview {
+  local not_paths="";
+  _preview_warning_message;
+  _find_items_rename_helper "$1" "$2" true "$3" "$not_paths";
+}
+
+function gfind_items_rename_preview {
+  local not_paths=`_find_git_estimator_ignored_dirs`;
+  _preview_warning_message;
+  _find_items_rename_helper "$1" "$2" true "$3" "$not_paths";
+}
+
 function find_items_rename {
   local not_paths=`_find_default_ignored_dirs`;
+  _find_items_rename_helper "$1" "$2" false "$3" "$not_paths";
+}
+
+function afind_items_rename {
+  local not_paths="";
+  _find_items_rename_helper "$1" "$2" false "$3" "$not_paths";
+}
+
+function gfind_items_rename {
+  local not_paths=`_find_git_estimator_ignored_dirs`;
   _find_items_rename_helper "$1" "$2" false "$3" "$not_paths";
 }
 
@@ -426,8 +448,30 @@ function find_items_delete_preview {
   _find_items_delete_helper "$1" true "$2" "$not_paths";
 }
 
+function afind_items_delete_preview {
+  local not_paths="";
+  _preview_warning_message;
+  _find_items_delete_helper "$1" true "$2" "$not_paths";
+}
+
+function gfind_items_delete_preview {
+  local not_paths=`_find_git_estimator_ignored_dirs`;
+  _preview_warning_message;
+  _find_items_delete_helper "$1" true "$2" "$not_paths";
+}
+
 function find_items_delete {
   local not_paths=`_find_default_ignored_dirs`;
+  _find_items_delete_helper "$1" false "$2" "$not_paths";
+}
+
+function afind_items_delete {
+  local not_paths="";
+  _find_items_delete_helper "$1" false "$2" "$not_paths";
+}
+
+function gfind_items_delete {
+  local not_paths=`_find_git_estimator_ignored_dirs`;
   _find_items_delete_helper "$1" false "$2" "$not_paths";
 }
 
@@ -445,7 +489,25 @@ function find_items {
   _find_items_helper "$1" "$2" "$not_paths";
 }
 
+function afind_items {
+  local not_paths="";
+  _find_items_helper "$1" "$2" "$not_paths";
+}
+
+function gfind_items {
+  local not_paths=`_find_git_estimator_ignored_dirs`;
+  _find_items_helper "$1" "$2" "$not_paths";
+}
+
 function find_items_fuzz {
+  find_items "$(echo "$1" | to_fuzz)" "$2";
+}
+
+function afind_items_fuzz {
+  find_items "$(echo "$1" | to_fuzz)" "$2";
+}
+
+function gfind_items_fuzz {
   find_items "$(echo "$1" | to_fuzz)" "$2";
 }
 
@@ -482,8 +544,28 @@ function find_files_delete_preview {
   _find_files_delete_preview_helper "$1" "$2" "$3" "$not_paths";
 }
 
+function afind_files_delete_preview {
+  local not_paths="";
+  _find_files_delete_preview_helper "$1" "$2" "$3" "$not_paths";
+}
+
+function gfind_files_delete_preview {
+  local not_paths=`_find_git_estimator_ignored_dirs`;
+  _find_files_delete_preview_helper "$1" "$2" "$3" "$not_paths";
+}
+
 function find_files_delete {
   local not_paths=`_find_default_ignored_dirs`;
+  _find_files_delete_helper "$1" "$2" "$3" "$not_paths";
+}
+
+function afind_files_delete {
+  local not_paths="";
+  _find_files_delete_helper "$1" "$2" "$3" "$not_paths";
+}
+
+function gfind_files_delete {
+  local not_paths=`_find_git_estimator_ignored_dirs`;
   _find_files_delete_helper "$1" "$2" "$3" "$not_paths";
 }
 
@@ -526,8 +608,28 @@ function find_files_rename_preview {
   _find_files_rename_helper "$1" "$2" "$3" true "$4" "$not_paths";
 }
 
+function afind_files_rename_preview {
+  local not_paths="";
+  _find_files_rename_helper "$1" "$2" "$3" true "$4" "$not_paths";
+}
+
+function gfind_files_rename_preview {
+  local not_paths=`_find_git_estimator_ignored_dirs`;
+  _find_files_rename_helper "$1" "$2" "$3" true "$4" "$not_paths";
+}
+
 function find_files_rename {
   local not_paths=`_find_default_ignored_dirs`;
+  _find_files_rename_helper "$1" "$2" "$3" false "$4" "$not_paths";
+}
+
+function afind_files_rename {
+  local not_paths="";
+  _find_files_rename_helper "$1" "$2" "$3" false "$4" "$not_paths";
+}
+
+function gfind_files_rename {
+  local not_paths=`_find_git_estimator_ignored_dirs`;
   _find_files_rename_helper "$1" "$2" "$3" false "$4" "$not_paths";
 }
 
