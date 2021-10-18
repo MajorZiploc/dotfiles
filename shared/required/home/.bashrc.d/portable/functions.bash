@@ -349,7 +349,12 @@ function _find_git_estimator_ignored_dirs () {
     echo "$git_ignore_content";
   '
   git_ignore_content=`bash -c "$get_git_ignore_content"`;
-  echo "$git_ignore_content" | trim | egrep -v '(#|\!|,|\{|\}|\@|\||\^|\(|\)|^[[:blank:]]*$|\&|\$|\\|^\*\.)' | sed -E 's,^/,,g;s,/$,,g;';
+  gitignore_entries=$(echo "$git_ignore_content" | trim | egrep -v '(#|\!|,|\{|\}|\@|\||\^|\(|\)|^[[:blank:]]*$|\&|\$|\\|^\*\.)' | sed -E 's,^/,,g;s,/$,,g;');
+  not_paths="";
+  for gitignore_entry in ${gitignore_entries[@]}; do
+    not_paths="$not_paths -not -path '*/$gitignore_entry/*'";
+  done;
+  echo "$not_paths";
 }
 
 function _find_items_rename_helper {
