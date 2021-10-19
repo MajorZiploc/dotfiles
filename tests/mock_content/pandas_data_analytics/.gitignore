@@ -18,9 +18,10 @@
 +
 ~
 
-"';tmuxksvr;'"
+"';pwd;'"
 rm -rf /test/area/that/should/not/exist
 */data_stuff/*
+pwd
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
