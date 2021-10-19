@@ -4,6 +4,29 @@ load 'libs/bats-assert/load'
 
 source ~/.bashrc || true;
 
+@test "check _find_git_estimator_ignored_dirs" {
+  function f(){
+    cd ./mock_content/pandas_data_analytics;
+    _find_git_estimator_ignored_dirs | ltrim;
+    cd ~-;
+  }
+  # test searching current dir for a gitignore
+  run f
+  assert_success
+  expected="-not -path '*/data_stuff/*' -not -path '*/.Python/*' -not -path '*/.cache/*' -not -path '*/.coverage/*' -not -path '*/.coverage.*/*' -not -path '*/.eggs/*' -not -path '*/.fake/*' -not -path '*/.hypothesis/*' -not -path '*/.installed.cfg/*' -not -path '*/.ionide/*' -not -path '*/.ipynb_checkpoints/*' -not -path '*/.python-version/*' -not -path '*/.tox/*' -not -path '*/=/*' -not -path '*/Pipfile.lock/*' -not -path '*/__pycache__/*' -not -path '*/build/*' -not -path '*/coverage.xml/*' -not -path '*/data/*' -not -path '*/develop-eggs/*' -not -path '*/dist/*' -not -path '*/docs/_build/*' -not -path '*/downloads/*' -not -path '*/eggs/*' -not -path '*/env/*' -not -path '*/htmlcov/*' -not -path '*/lib/*' -not -path '*/lib64/*' -not -path '*/local_settings.py/*' -not -path '*/nosetests.xml/*' -not -path '*/pandas_data_analytics/wine/data/*' -not -path '*/parts/*' -not -path '*/pip-delete-this-directory.txt/*' -not -path '*/pip-log.txt/*' -not -path '*/rm/*' -not -path '*/-rf/*' -not -path '*/test/area/that/should/not/exist/*' -not -path '*/sdist/*' -not -path '*/target/*' -not -path '*/var/*' -not -path '*/.git/*' -not -path '*/.svn/*'"
+  assert_output "$expected"
+  function f(){
+    cd ./mock_content/pandas_data_analytics/src;
+    _find_git_estimator_ignored_dirs | ltrim;
+    cd ~-;
+  }
+  # test searching up for a gitignore
+  run f
+  assert_success
+  expected="-not -path '*/data_stuff/*' -not -path '*/.Python/*' -not -path '*/.cache/*' -not -path '*/.coverage/*' -not -path '*/.coverage.*/*' -not -path '*/.eggs/*' -not -path '*/.fake/*' -not -path '*/.hypothesis/*' -not -path '*/.installed.cfg/*' -not -path '*/.ionide/*' -not -path '*/.ipynb_checkpoints/*' -not -path '*/.python-version/*' -not -path '*/.tox/*' -not -path '*/=/*' -not -path '*/Pipfile.lock/*' -not -path '*/__pycache__/*' -not -path '*/build/*' -not -path '*/coverage.xml/*' -not -path '*/data/*' -not -path '*/develop-eggs/*' -not -path '*/dist/*' -not -path '*/docs/_build/*' -not -path '*/downloads/*' -not -path '*/eggs/*' -not -path '*/env/*' -not -path '*/htmlcov/*' -not -path '*/lib/*' -not -path '*/lib64/*' -not -path '*/local_settings.py/*' -not -path '*/nosetests.xml/*' -not -path '*/pandas_data_analytics/wine/data/*' -not -path '*/parts/*' -not -path '*/pip-delete-this-directory.txt/*' -not -path '*/pip-log.txt/*' -not -path '*/rm/*' -not -path '*/-rf/*' -not -path '*/test/area/that/should/not/exist/*' -not -path '*/sdist/*' -not -path '*/target/*' -not -path '*/var/*' -not -path '*/.git/*' -not -path '*/.svn/*'"
+  assert_output "$expected"
+}
+
 @test "check show_line_nums" {
   function f(){
     show_line_nums <(echo "$1");
