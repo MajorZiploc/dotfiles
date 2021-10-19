@@ -32,11 +32,13 @@ assert_output "$expected"
   run f
   assert_success
 expected="$(cat << EOF
+./pandas_data_analytics/.gitignore
 ./pandas_data_analytics/docker-compose.yaml
 ./pandas_data_analytics/Dockerfile
 ./pandas_data_analytics/Pipfile
 ./pandas_data_analytics/pyproject.toml
 ./pandas_data_analytics/README.md
+./pandas_data_analytics/really you gonna  put   all these spaces in here .py
 ./pandas_data_analytics/setup.py
 ./parser_files/basic.json
 ./parser_files/el_pollo_loco.csv
@@ -57,8 +59,8 @@ EOF
   }
   run f
   expected=`cat << EOF
-rm ./pandas_data_analytics/setup.py
-rm ./pandas_data_analytics/src/pandas_notes.py
+rm './pandas_data_analytics/setup.py' ;
+rm './pandas_data_analytics/src/pandas_notes.py' ;
 EOF
 `;
   assert_success
@@ -81,8 +83,8 @@ EOF
   }
   run f
   expected=`cat << EOF
-mv ./pandas_data_analytics/setup.py ./pandas_data_analytics/zetup_squad_goals.py ;
-mv ./pandas_data_analytics/src/pandas_notes.py ./pandas_data_analytics/src/pandaz_notez_squad_goals.py ;
+mv './pandas_data_analytics/setup.py' './pandas_data_analytics/zetup_squad_goals.py' ;
+mv './pandas_data_analytics/src/pandas_notes.py' './pandas_data_analytics/src/pandaz_notez_squad_goals.py' ;
 EOF
 `;
   assert_success
@@ -118,4 +120,52 @@ EOF
 
 git restore ./mock_content/.
 
+@test "check find_files_delete can delete a file with spaces in the name" {
+  git restore ./mock_content/.
+  cd ./mock_content
+  function f () {
+    find_files_delete_preview '.*really you.*' '' '5' | sort
+  }
+  run f
+  expected=`cat << EOF
+rm './pandas_data_analytics/really you gonna  put   all these spaces in here .py' ;
+EOF
+`;
+  assert_success
+  assert_output "$expected"
+  run test -f './pandas_data_analytics/really you gonna  put   all these spaces in here .py'
+  assert_success
+  run find_files_delete '.*really you.*' '' '5'
+  assert_success
+  assert_output ''
+  run test -f './pandas_data_analytics/really you gonna  put   all these spaces in here .py'
+  assert_failure
+  git restore .
+  cd ..
+}
 
+@test "check find_files_rename can delete a file with spaces in the name" {
+  git restore ./mock_content/.
+  cd ./mock_content
+  run find_files_rename_preview '.*really you.*' "s/(you)/\1_sun/g" '' '2'
+  expected=`cat << EOF
+mv './pandas_data_analytics/really you gonna  put   all these spaces in here .py' './pandas_data_analytics/really you_sun gonna  put   all these spaces in here .py' ;
+EOF
+`;
+  assert_success
+  assert_output "$expected"
+  run test -f './pandas_data_analytics/really you_sun gonna  put   all these spaces in here .py'
+  assert_failure
+  run test -f './pandas_data_analytics/really you gonna  put   all these spaces in here .py'
+  assert_success
+  run find_files_rename '.*really you.*' "s/(you)/\1_sun/g" '' '2'
+  assert_success
+  assert_output ''
+  run test -f './pandas_data_analytics/really you_sun gonna  put   all these spaces in here .py'
+  assert_success
+  run test -f './pandas_data_analytics/really you gonna  put   all these spaces in here .py'
+  assert_failure
+  git restore .
+  rm -f './pandas_data_analytics/really you_sun gonna  put   all these spaces in here .py'
+  cd ..
+}
