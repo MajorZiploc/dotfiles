@@ -47,8 +47,22 @@ done;
 
 export PATH="/usr/local/bin:$PATH"
 
-# minimal prompt
-export PS1="\[\033[34m\]@\h \`if [[ \$? = \"0\" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\`\W\[\033[0m\]> "
+# Codespaces bash prompt theme based off of a docker container bash prompt
+__bash_prompt() {
+  local gitbranch='`\
+    export BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null); \
+    if [ "${BRANCH}" != "" ]; then \
+    echo -n " \[\033[0;36m\](\[\033[1;31m\]${BRANCH}" \
+    && echo -n "\[\033[0;36m\])"; \
+  fi`'
+  local lightblue='\[\033[1;34m\]'
+  local darkblue='\[\033[0;34m\]'
+  local removecolor='\[\033[0m\]'
+  PS1="${darkblue}@${lightblue}\h \`if [[ \$? = \"0\" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\`\W${gitbranch}${removecolor}> "
+  unset -f __bash_prompt
+}
+__bash_prompt
+export PROMPT_DIRTRIM=4
 
 # _ext bash files are for user specific edits to the bash environment
 test -f ~/.bashrc_ext && . ~/.bashrc_ext
