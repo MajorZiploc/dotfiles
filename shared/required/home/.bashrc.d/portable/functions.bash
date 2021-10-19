@@ -379,7 +379,7 @@ function _find_items_rename_helper {
       if [[ $preview == false ]]; then
         mv "$item" "$new_name";
       else
-        echo mv "$item" "$new_name" ";";
+        echo mv "'$item'" "'$new_name'" ";";
       fi
     }
     done;
@@ -432,7 +432,7 @@ function _find_items_delete_helper {
       if [[ $preview == false ]]; then
         rm -rf "$item";
       else
-        echo "rm -rf" "$item" ";";
+        echo "rm -rf" "'$item'" ";";
       fi
     done;
   done;
@@ -519,9 +519,9 @@ function _find_files_delete_preview_helper {
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local not_paths="$4";
   if [[ -z "$with_content" ]]; then
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec echo rm \"{}\" \;"
+    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec echo rm \"'{}' ;\" \;"
   else
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep -in -e '$with_content' \"{}\" \; -exec echo rm \"{}\" \;" | egrep "^rm"
+    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep -in -e '$with_content' \"{}\" \; -exec echo rm \"'{}' ;\" \;" | egrep "^rm"
   fi
 }
 
@@ -596,7 +596,7 @@ function _find_files_rename_helper {
       if [[ $preview == false ]]; then
         mv "$file" "$new_name";
       else
-        echo mv "$file" "$new_name" ";";
+        echo mv "'$file'" "'$new_name'" ";";
       fi
     }
   }

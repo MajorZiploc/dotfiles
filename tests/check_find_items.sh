@@ -35,6 +35,7 @@ assert_output "$expected"
   assert_success
 expected="$(cat << EOF
 ./FslabDataAnalytics/utils
+./pandas_data_analytics/really you gonna  put   all these spaces in here .py
 ./pandas_data_analytics/src/body_comp/run.py
 ./pandas_data_analytics/src/common_food/run.py
 ./pandas_data_analytics/src/osrs/run.py
@@ -57,12 +58,12 @@ EOF
   run f
   expected=`cat << EOF
 NOTE: This behavior may not be the exact behavior when running the command out of preview mode
-rm -rf ./FslabDataAnalytics/utils ;
-rm -rf ./FslabDataAnalytics/utils/index.fs ;
-rm -rf ./pandas_data_analytics/src/text_parser/utils.py ;
-rm -rf ./pandas_data_analytics/src/utils ;
-rm -rf ./pandas_data_analytics/src/utils/__init__.py ;
-rm -rf ./pandas_data_analytics/src/utils/utils.py ;
+rm -rf './FslabDataAnalytics/utils' ;
+rm -rf './FslabDataAnalytics/utils/index.fs' ;
+rm -rf './pandas_data_analytics/src/text_parser/utils.py' ;
+rm -rf './pandas_data_analytics/src/utils' ;
+rm -rf './pandas_data_analytics/src/utils/__init__.py' ;
+rm -rf './pandas_data_analytics/src/utils/utils.py' ;
 EOF
 `;
   assert_success
@@ -98,13 +99,38 @@ EOF
   cd ..
 }
 
+@test "check find_items_delete can delete a file with spaces in the name" {
+  git restore ./mock_content/.
+  cd ./mock_content
+  function f () {
+    find_items_delete_preview '.*really you.*' '5' | sort
+  }
+  run f
+  expected=`cat << EOF
+NOTE: This behavior may not be the exact behavior when running the command out of preview mode
+rm -rf './pandas_data_analytics/really you gonna  put   all these spaces in here .py' ;
+EOF
+`;
+  assert_success
+  assert_output "$expected"
+  run test -f './pandas_data_analytics/really you gonna  put   all these spaces in here .py'
+  assert_success
+  run find_items_delete '.*really you.*' '5'
+  assert_success
+  assert_output ''
+  run test -f './pandas_data_analytics/really you gonna  put   all these spaces in here .py'
+  assert_failure
+  git restore .
+  cd ..
+}
+
 @test "check find_items_rename '(.*utils.*|.*utils\.py)' '5' renames the proper items" {
   git restore ./mock_content/.
   cd ./mock_content
   run find_items_rename_preview '(.*utils.*|.*utils\.py)' "s/(util)/\1_sun/g" '2'
   expected=`cat << EOF
 NOTE: This behavior may not be the exact behavior when running the command out of preview mode
-mv ./FslabDataAnalytics/utils ./FslabDataAnalytics/util_suns ;
+mv './FslabDataAnalytics/utils' './FslabDataAnalytics/util_suns' ;
 EOF
 `;
   assert_success
@@ -124,3 +150,31 @@ EOF
   rm -rf ./FslabDataAnalytics/util_suns
   cd ..
 }
+
+@test "check find_items_rename can delete a file with spaces in the name" {
+  git restore ./mock_content/.
+  cd ./mock_content
+  run find_items_rename_preview '.*really you.*' "s/(you)/\1_sun/g" '2'
+  expected=`cat << EOF
+NOTE: This behavior may not be the exact behavior when running the command out of preview mode
+mv './pandas_data_analytics/really you gonna  put   all these spaces in here .py' './pandas_data_analytics/really you_sun gonna  put   all these spaces in here .py' ;
+EOF
+`;
+  assert_success
+  assert_output "$expected"
+  run test -f './pandas_data_analytics/really you_sun gonna  put   all these spaces in here .py'
+  assert_failure
+  run test -f './pandas_data_analytics/really you gonna  put   all these spaces in here .py'
+  assert_success
+  run find_items_rename '.*really you.*' "s/(you)/\1_sun/g" '2'
+  assert_success
+  assert_output ''
+  run test -f './pandas_data_analytics/really you_sun gonna  put   all these spaces in here .py'
+  assert_success
+  run test -f './pandas_data_analytics/really you gonna  put   all these spaces in here .py'
+  assert_failure
+  git restore .
+  rm -f './pandas_data_analytics/really you_sun gonna  put   all these spaces in here .py'
+  cd ..
+}
+
