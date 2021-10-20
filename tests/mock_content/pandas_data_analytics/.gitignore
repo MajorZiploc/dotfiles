@@ -22,6 +22,10 @@
 rm -rf /test/area/that/should/not/exist
 */data_stuff/*
 pwd
+**/*/ugly_glob/**/*/*/**
+*.config
+some.ps1
+secrets.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
