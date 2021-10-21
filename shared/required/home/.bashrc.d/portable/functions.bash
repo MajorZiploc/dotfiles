@@ -722,18 +722,19 @@ function git_checkout_branch_in_path {
   local branch="$1";
   local _path="$2";
   [[ -z "$branch" ]] && { echo "Must specify a branch!" >&2; return 1; }
-  [[ -z "$_path" ]] && { _path='*/'; }
-  IFS= ;
-  for ele in $_path;
-    do
-      echo "$ele";
-      cd "$ele";
-      # the first git pull to to ensure that if there is working dir changes
-      #  that it will not continue to switching the branch
-      git pull && git fetch origin && git checkout "$branch" && git pull;
-      cd ..;
+  if [[ -z "$_path" ]]; then
+    _path=(`find . -mindepth 1 -maxdepth 1 -type d | xargs`);
+  else
+    _path=(`echo "$_path" | xargs`);
+  fi
+  for ele in ${_path[@]}; do
+    echo "$ele";
+    cd "$ele";
+    # the first git pull to to ensure that if there is working dir changes
+    #  that it will not continue to switching the branch
+    git pull && git fetch origin && git checkout "$branch" && git pull;
+    cd ..;
   done;
-  unset IFS;
 }
 
 function git_log_follow {
