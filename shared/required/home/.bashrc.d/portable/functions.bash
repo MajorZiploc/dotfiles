@@ -211,7 +211,7 @@ function show_block {
   [[ -z "$from_pattern" ]] && { echo "Must specify from_pattern" >&2; return 1; }
   [[ -z "$to_pattern" ]] && { echo "Must specify to_pattern" >&2; return 1; }
   [[ -z "$content" ]] && { echo "Must specify content" >&2; return 1; }
-  [[ -f "$content" ]] && { content=`cat "$content"`; }
+  [[ -e "$content" ]] && { content=`cat "$content"`; }
   echo "$content" | while IFS="" read -r p || [ -n "$p" ]; do
     if [[ "$should_print" == "true" ]]
     then
@@ -230,7 +230,7 @@ function show_block_line_num_range {
   [[ -z "$start_n" ]] && { echo "Must specify start_n" >&2; return 1; }
   [[ -z "$end_n" ]] && { echo "Must specify end_n" >&2; return 1; }
   [[ -z "$content" ]] && { echo "Must specify content" >&2; return 1; }
-  [[ -f "$content" ]] && { content=`cat "$content"`; }
+  [[ -e "$content" ]] && { content=`cat "$content"`; }
   echo "$content" | perl -nle "print if $. >= $start_n and $. <= $end_n";
 }
 
@@ -858,7 +858,7 @@ function parse_json_fields {
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
   _parse_fields_header_helper "$fields" "$field_separator";
   local pwsh_fields=`_parse_fields_helper "$fields" "$field_separator" | tr -d "\n"`;
-  if [[ -f "$json" ]]; then
+  if [[ -e "$json" ]]; then
     pwsh -command "&{ \$js=Get-Content '$json' | ConvertFrom-Json; \$js $preprocessing_pwsh | % { Write-Host \"$pwsh_fields\"; }; }";
   else
     json=`echo "$json" | tr -d "\n"`;
@@ -877,7 +877,7 @@ function parse_csv_fields {
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
   _parse_fields_header_helper "$fields" "$field_separator";
   local pwsh_fields=`_parse_fields_helper "$fields" "$field_separator"`;
-  if [[ -f "$csv" ]]; then
+  if [[ -e "$csv" ]]; then
     pwsh -command "&{ \$cs=Get-Content $csv | ConvertFrom-Csv; \$cs $preprocessing_pwsh | % { Write-Host \"$pwsh_fields\"; }; }";
   else
     rows=`echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
@@ -889,7 +889,7 @@ function parse_csv_fields {
 
 function convert_csv_to_json {
   local csv="$1";
-  if [[ -f "$csv" ]]; then
+  if [[ -e "$csv" ]]; then
     pwsh -command "&{ Get-Content $csv | ConvertFrom-Csv | ConvertTo-Json; }";
   else
     rows=`echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
@@ -904,7 +904,7 @@ function csv_delimiter_check_single_line {
   local delimiter="$2";
   [[ -z "$sql_query" ]] && { echo "Must specify a sql_query file or string!" >&2; return 1; }
   echo "${delimiter:=","}" >/dev/null;
-  [[ -f "$sql_query" ]] && { sql_query=`cat "$sql_query"`; }
+  [[ -e "$sql_query" ]] && { sql_query=`cat "$sql_query"`; }
   echo "$sql_query" | tr -d -c "${delimiter}\n" | awk '{ print length; }' | sort -n | uniq -c;
 }
 
@@ -977,6 +977,8 @@ function rest_get {
   local auth="$3";
   local response_file_type="$4";
   local content_type="$5";
+  # authorization is mainly for Bearer token style auth
+  # TODO: Bearer should be default and we check if the $auth is of the style "auth_style: token" then do not prepend the auth with "authorization:"
   local headers="${content_type:+"Content-Type: $content_type"}${auth:+"authorization: $auth"}";
   _rest_helper "$url" "" "$curl_flags" "$response_file_type" "GET" "$headers";
 }

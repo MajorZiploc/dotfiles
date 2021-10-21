@@ -14,7 +14,7 @@ function mssql_exec {
   [[ -z "$database" ]] && { echo "Must specify a database!" >&2; return 1; }
   [[ -z "$sql_cmd" ]] && { echo "Must specify a sql_cmd file or string!" >&2; return 1; }
   echo "${column_separator_char:=","}" >/dev/null;
-  if [[ -f "$sql_cmd" ]]; then
+  if [[ -e "$sql_cmd" ]]; then
     sqlcmd.exe -S "$server" -E -i "$sql_cmd" -d "$database" -W -s "$column_separator_char";
   else
     sqlcmd.exe -S "$server" -E -Q "$sql_cmd" -d "$database" -W -s "$column_separator_char";
