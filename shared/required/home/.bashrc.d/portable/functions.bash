@@ -96,32 +96,6 @@ function tmuxds() {
   }
 }
 
-function ide1() {
-  # splits the window into 2 panes
-  tmux split-window -v -p 30;
-}
-
-function ide2() {
-  # splits the window into 3 panes
-  tmux split-window -v -p 30;
-  tmux split-window -h -p 55;
-}
-
-function ide3() {
-  # splits the window into 4 panes
-  tmux split-window -v -p 30;
-  tmux split-window -h -p 66;
-  tmux split-window -h -p 50;
-}
-
-function show_find_full_paths() {
-  # displays the full path names of $1 (the directory)
-  # $1: optional directory. Defaults to .
-  local dir="$1";
-  dir=${dir:="."};
-  find "$dir" -exec readlink -f "{}" \;
-}
-
 function show_machine_details() {
   local user=`whoami`;
   local machine_name=`uname -n`;
