@@ -959,29 +959,33 @@ function _rest_helper {
   _rest_format_and_print_response "$_file";
 }
 
-function rest_post {
+function _rest_helper_preper {
   local request_body="$1";
   local url="$2";
   local curl_flags="$3";
   local auth="$4";
   local response_file_type="$5";
   local content_type="$6";
-  [[ -z "$request_body" ]] && { echo "Must specify request_body!" >&2; return 1; }
+  local method="$7";
   # authorization is mainly for Bearer token style auth
-  [[ ! "$auth" == *":"* ]] && { auth=`echo ${auth:+"authorization: $auth"}`; }
-  local headers="${content_type:+"Content-Type: $content_type"}${auth}";
-  _rest_helper "$url" "$request_body" "$curl_flags" "$response_file_type" "POST" "$headers";
+  if [[ ! "$auth" == *":"* ]]; then
+    auth=`echo ${auth:+"-H authorization: $auth"}`;
+  else
+    auth=`echo ${auth:+"-H $auth"}`;
+  fi
+  local headers="${content_type:+"-H Content-Type: $content_type"} ${auth}";
+  _rest_helper "$url" "$request_body" "$curl_flags" "$response_file_type" "$method" "$headers";
 }
 
 function rest_get {
-  local url="$1";
-  local curl_flags="$2";
-  local auth="$3";
-  local response_file_type="$4";
-  local content_type="$5";
-  # authorization is mainly for Bearer token style auth
-  [[ ! "$auth" == *":"* ]] && { auth=`echo ${auth:+"authorization: $auth"}`; }
-  local headers="${content_type:+"Content-Type: $content_type"}${auth}";
-  _rest_helper "$url" "" "$curl_flags" "$response_file_type" "GET" "$headers";
+  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "GET";
+}
+
+function rest_post {
+  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "POST";
+}
+
+function rest_patch {
+  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "PATCH";
 }
 

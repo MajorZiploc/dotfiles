@@ -34,3 +34,6 @@ g <ctrl-a>
 # show file stats
 <ctrl-g>
 
+# run the current file as a shell command. must save the file first.
+:!sh %
+
