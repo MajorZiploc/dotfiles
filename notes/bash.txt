@@ -100,6 +100,52 @@ pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default
 pwsh -ExecutionPolicy [Bypass | Unrestricted | RemoteSigned| AllSigned | Default | Undefined | Restricted] -Command "& {Write-Host 'hi'}"
 perl -ne 'print unless $seen{$_}++' # unique without sorting
 
+# alias graveyard:
+alias dir='ls --format=vertical'
+alias vdir='ls --format=long'
+  # under color guard
+  alias dir='ls --color=auto --format=vertical'
+  alias vdir='ls --color=auto --format=long'
+
+# Default to human readable figures
+alias df_h='df -h'
+alias du_h='du -h'
+alias curl_follow_redirects='curl -Lks'
+alias curl_follow_redirects_ignore_security_exceptions='curl -0Lks'
+
+alias kill_port='npx kill-port'
+
+alias rg_nh='rg --no-heading'
+
+# function graveyard:
+
+function ide1() {
+  # splits the window into 2 panes
+  tmux split-window -v -p 30;
+}
+
+function ide2() {
+  # splits the window into 3 panes
+  tmux split-window -v -p 30;
+  tmux split-window -h -p 55;
+}
+
+function ide3() {
+  # splits the window into 4 panes
+  tmux split-window -v -p 30;
+  tmux split-window -h -p 66;
+  tmux split-window -h -p 50;
+}
+
+function show_find_full_paths() {
+  # displays the full path names of $1 (the directory)
+  # $1: optional directory. Defaults to .
+  local dir="$1";
+  dir=${dir:="."};
+  find "$dir" -exec readlink -f "{}" \;
+}
+
+
 FROM WINDOWS GIT BASH: 
 ################################## Construct PATH variable ##################################
 
