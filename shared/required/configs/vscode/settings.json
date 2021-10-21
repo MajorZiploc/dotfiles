@@ -102,6 +102,8 @@
   "vim.leader": " ",
   "vim.insertModeKeyBindings": [{ "before": ["k", "j"], "after": ["<Esc>"] }],
   "vim.timeout": 300,
+  "vim.mouseSelectionGoesIntoVisualMode": true,
+  "vim.gdefault": false,
   "vim.handleKeys": {
     "<C-f>": false
   },
