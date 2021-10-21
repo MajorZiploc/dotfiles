@@ -966,26 +966,34 @@ function _rest_helper_preper {
   local auth="$4";
   local response_file_type="$5";
   local content_type="$6";
-  local method="$7";
+  local extra_headers="$7";
+  local method="$8";
   # authorization is mainly for Bearer token style auth
   if [[ ! "$auth" == *":"* ]]; then
     auth=`echo ${auth:+"-H authorization: $auth"}`;
   else
     auth=`echo ${auth:+"-H $auth"}`;
   fi
-  local headers="${content_type:+"-H Content-Type: $content_type"} ${auth}";
+  extra_headers=${extra_headers:+" $extra_headers"}
+  local headers="${content_type:+"-H Content-Type: $content_type"} ${auth}${extra_headers}";
   _rest_helper "$url" "$request_body" "$curl_flags" "$response_file_type" "$method" "$headers";
 }
 
 function rest_get {
-  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "GET";
+  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "GET";
 }
 
 function rest_post {
-  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "POST";
+  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "POST";
 }
 
 function rest_patch {
-  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "PATCH";
+  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "PATCH";
+}
+
+function rest_generic {
+  method="$8";
+  [[ -z "$method" ]] && { echo "Must specify method!" >&2; return 1; }
+  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$method";
 }
 
