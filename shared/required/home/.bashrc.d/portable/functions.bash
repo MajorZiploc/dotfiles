@@ -967,7 +967,9 @@ function rest_post {
   local response_file_type="$5";
   local content_type="$6";
   [[ -z "$request_body" ]] && { echo "Must specify request_body!" >&2; return 1; }
-  local headers="${content_type:+"Content-Type: $content_type"}${auth:+"authorization: $auth"}";
+  # authorization is mainly for Bearer token style auth
+  [[ ! "$auth" == *":"* ]] && { auth=`echo ${auth:+"authorization: $auth"}`; }
+  local headers="${content_type:+"Content-Type: $content_type"}${auth}";
   _rest_helper "$url" "$request_body" "$curl_flags" "$response_file_type" "POST" "$headers";
 }
 
@@ -978,8 +980,8 @@ function rest_get {
   local response_file_type="$4";
   local content_type="$5";
   # authorization is mainly for Bearer token style auth
-  # TODO: Bearer should be default and we check if the $auth is of the style "auth_style: token" then do not prepend the auth with "authorization:"
-  local headers="${content_type:+"Content-Type: $content_type"}${auth:+"authorization: $auth"}";
+  [[ ! "$auth" == *":"* ]] && { auth=`echo ${auth:+"authorization: $auth"}`; }
+  local headers="${content_type:+"Content-Type: $content_type"}${auth}";
   _rest_helper "$url" "" "$curl_flags" "$response_file_type" "GET" "$headers";
 }
 
