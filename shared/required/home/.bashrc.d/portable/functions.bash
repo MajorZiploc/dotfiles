@@ -935,12 +935,15 @@ function rest_encode_url {
   echo "$url" | sed 's, ,%20,g;s,\!,%21,g;s,",%22,g;s,#,%23,g;s,\$,%24,g;s,'"'"',%27,g;';
 }
 
-function rest_get {
+function _rest_helper {
   local url="$1";
-  local curl_flags="$2";
-  local auth="$3";
+  local request_body="$2";
+  local curl_flags="$3";
   local response_file_type="$4";
+  local method="$5";
+  local headers="$6";
   [[ -z "$url" ]] && { echo "Must specify url!" >&2; return 1; }
+  echo "${content_type:="application/json"}" >/dev/null;
   echo "${curl_flags:="Lk"}" >/dev/null;
   echo "${response_file_type:="json"}" >/dev/null;
   temp_response_loc=`_rest_temp_response_loc`;
@@ -948,13 +951,11 @@ function rest_get {
   local base_url_with_endpoint=`_rest_get_base_url_with_endpoint "$url"`;
   local _file="${temp_response_loc}$(basename "$base_url_with_endpoint" | tr "/" "_").${response_file_type}";
   local query_params=`_rest_get_query_params "$url"`;
+  [[ -e "$request_body" ]] && { request_body=`cat "$request_body"`; }
+  request_body=`echo "${request_body:+"-d $request_body"}"`;
   [[ ! "$query_params" == "?"* ]] && { query_params=`echo "${query_params:+"?$query_params"}"`; }
   url="${base_url_with_endpoint}${query_params}";
-  if [[ -z "$auth" ]]; then
-    curl -"$curl_flags" "$url" > "$_file";
-  else
-    curl -"$curl_flags" "$url" -H "authorization: $auth" > "$_file";
-  fi
+  eval "curl -$curl_flags -X $method $request_body $url $headers" > "$_file";
   _rest_format_and_print_response "$_file";
 }
 
@@ -966,24 +967,17 @@ function rest_post {
   local response_file_type="$5";
   local content_type="$6";
   [[ -z "$request_body" ]] && { echo "Must specify request_body!" >&2; return 1; }
-  [[ -z "$url" ]] && { echo "Must specify url!" >&2; return 1; }
-  echo "${content_type:="application/json"}" >/dev/null;
-  echo "${curl_flags:="Lk"}" >/dev/null;
-  echo "${response_file_type:="json"}" >/dev/null;
-  temp_response_loc=`_rest_temp_response_loc`;
-  mkdir -p "$temp_response_loc";
-  local base_url_with_endpoint=`_rest_get_base_url_with_endpoint "$url"`;
-  local _file="${temp_response_loc}$(basename "$base_url_with_endpoint" | tr "/" "_").${response_file_type}";
-  local query_params=`_rest_get_query_params "$url"`;
-  [[ -f "$request_body" ]] && { request_body=`cat "$request_body"`; }
-  [[ ! "$query_params" == "?"* ]] && { query_params=`echo "${query_params:+"?$query_params"}"`; }
-  url="${base_url_with_endpoint}${query_params}";
-  if [[ -z "$auth" ]]; then
-    curl -"$curl_flags" -X POST -d "$request_body" "$url" -H "Content-Type: $content_type" > "$_file";
-  else
-    curl -"$curl_flags" -X POST -d "$request_body" "$url" -H "authorization: $auth" \
-      -H "Content-Type: $content_type" > "$_file";
-  fi
-  _rest_format_and_print_response "$_file";
+  local headers="${content_type:+"Content-Type: $content_type"}${auth:+"authorization: $auth"}";
+  _rest_helper "$url" "$request_body" "$curl_flags" "$response_file_type" "POST" "$headers";
+}
+
+function rest_get {
+  local url="$1";
+  local curl_flags="$2";
+  local auth="$3";
+  local response_file_type="$4";
+  local content_type="$5";
+  local headers="${content_type:+"Content-Type: $content_type"}${auth:+"authorization: $auth"}";
+  _rest_helper "$url" "" "$curl_flags" "$response_file_type" "GET" "$headers";
 }
 
