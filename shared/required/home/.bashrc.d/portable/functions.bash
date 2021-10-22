@@ -318,21 +318,22 @@ function _find_default_ignored_dirs () {
 }
 
 function cdfp () {
-  local project_dir='
+  local get_project_dir='
     git_ignore_content=`cat .gitignore 2>/dev/null`;
     current_path=`pwd`;
     project_dir=`pwd`;
     while [[ ! "$current_path" == "/" ]] ; do
       [[ -n "$git_ignore_content" ]] && {
+        project_dir=`pwd`;
         break;
       }
       cd ..;
       current_path=`pwd`;
       git_ignore_content=`cat .gitignore 2>/dev/null`;
     done;
-    [[ -n "$git_ignore_content" ]] && { $project_dir="$current_path"; }
     echo "$project_dir";
   '
+  project_dir=`bash -c "$get_project_dir"`;
   cd "$project_dir";
   cd "$(dirname `CDF_FUZZY_FINDER_PLACEHOLDER`)"
 }
