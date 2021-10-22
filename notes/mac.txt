@@ -1,0 +1,4 @@
+# For stopping or making the sleep time of the screen extend
+# from app store (free)
+amphetamine
+
