@@ -991,12 +991,12 @@ function _rest_helper_preper {
   local method="$8";
   # authorization is mainly for Bearer token style auth
   if [[ ! "$auth" == *":"* ]]; then
-    auth=`echo ${auth:+"-H authorization: $auth"}`;
+    auth=`echo ${auth:+"-H 'Authorization: $auth'"}`;
   else
-    auth=`echo ${auth:+"-H $auth"}`;
+    auth=`echo ${auth:+"-H '$auth'"}`;
   fi
   extra_headers=${extra_headers:+" $extra_headers"}
-  local headers="${content_type:+"-H Content-Type: $content_type"} ${auth}${extra_headers}";
+  local headers="${content_type:+"-H 'Content-Type: $content_type'"} ${auth}${extra_headers}";
   _rest_helper "$url" "$request_body" "$curl_flags" "$response_file_type" "$method" "$headers";
 }
 
