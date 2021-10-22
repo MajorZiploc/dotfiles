@@ -974,10 +974,12 @@ function _rest_helper {
   local _file="${temp_response_loc}$(basename "$base_url_with_endpoint" | tr "/" "_").${response_file_type}";
   local query_params=`_rest_get_query_params "$url"`;
   [[ -e "$request_body" ]] && { request_body=`cat "$request_body"`; }
-  request_body=`echo "${request_body:+"-d $request_body"}"`;
+  request_body=`echo "${request_body:+"-d '$request_body'"}"`;
   [[ ! "$query_params" == "?"* ]] && { query_params=`echo "${query_params:+"?$query_params"}"`; }
   url="${base_url_with_endpoint}${query_params}";
-  eval "curl -$curl_flags -X $method $request_body \"$url\" $headers"  > "$_file";
+  bash -c "
+    curl -$curl_flags -X $method $request_body \"$url\" $headers
+  " > "$_file";
   _rest_format_and_print_response "$_file";
 }
 
