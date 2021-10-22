@@ -964,6 +964,7 @@ function _rest_helper {
   local response_file_type="$4";
   local method="$5";
   local headers="$6";
+  local trailing_command="$7";
   [[ -z "$url" ]] && { echo "Must specify url!" >&2; return 1; }
   echo "${content_type:="application/json"}" >/dev/null;
   echo "${curl_flags:="Lk"}" >/dev/null;
@@ -975,49 +976,56 @@ function _rest_helper {
   local query_params=`_rest_get_query_params "$url"`;
   [[ -e "$request_body" ]] && { request_body=`cat "$request_body"`; }
   request_body=`echo "${request_body:+"-d '$request_body'"}"`;
+  [[ ! "$curl_flags" == "-"* ]] && { curl_flags=`echo "${curl_flags:+"-$curl_flags"}"`; }
   [[ ! "$query_params" == "?"* ]] && { query_params=`echo "${query_params:+"?$query_params"}"`; }
-  url="${base_url_with_endpoint}${query_params}";
+  [[ ! "$method" == " -X"* ]] && { method=`echo "${method:+" -X $method"}"`; }
+  [[ ! "$query_params" == "?"* ]] && { query_params=`echo "${query_params:+"?$query_params"}"`; }
+  [[ ! "$trailing_command" == " "* ]] && { trailing_command=`echo "${trailing_command:+" $trailing_command"}"`; }
+  [[ ! "$request_body" == " "* ]] && { request_body=`echo "${request_body:+" $request_body"}"`; }
+  [[ ! "$headers" == " "* ]] && { headers=`echo "${headers:+" $headers"}"`; }
+  url=" \"${base_url_with_endpoint}${query_params}\"";
   bash -c "
-    curl -$curl_flags -X $method $request_body \"$url\" $headers
+    curl $curl_flags$method$request_body$url$headers$trailing_command
   " > "$_file";
   _rest_format_and_print_response "$_file";
 }
 
 function _rest_helper_preper {
-  local request_body="$1";
-  local url="$2";
+  local url="$1";
+  local request_body="$2";
   local curl_flags="$3";
   local auth="$4";
   local response_file_type="$5";
   local content_type="$6";
   local extra_headers="$7";
-  local method="$8";
+  local trailing_command="$8";
+  local method="$9";
   # authorization is mainly for Bearer token style auth
   if [[ ! "$auth" == *":"* ]]; then
     auth=`echo ${auth:+"-H \"Authorization: Bearer $auth\""}`;
   else
     auth=`echo ${auth:+"-H '$auth'"}`;
   fi
-  extra_headers=${extra_headers:+" $extra_headers"}
+  [[ ! "$extra_headers" == " "* ]] && { extra_headers=`echo "${extra_headers:+" $extra_headers"}"`; }
   local headers="${content_type:+"-H \"Content-Type: $content_type\""} ${auth}${extra_headers}";
-  _rest_helper "$url" "$request_body" "$curl_flags" "$response_file_type" "$method" "$headers";
+  _rest_helper "$url" "$request_body" "$curl_flags" "$response_file_type" "$method" "$headers" "$trailing_command";
 }
 
 function rest_get {
-  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "GET";
+  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "GET";
 }
 
 function rest_post {
-  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "POST";
+  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "POST";
 }
 
 function rest_patch {
-  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "PATCH";
+  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "PATCH";
 }
 
 function rest_generic {
   method="$8";
   [[ -z "$method" ]] && { echo "Must specify method!" >&2; return 1; }
-  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$method";
+  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$method";
 }
 
