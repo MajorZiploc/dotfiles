@@ -317,6 +317,26 @@ function _find_default_ignored_dirs () {
   _find_generate_not_paths "${gitignore_entries[@]}";
 }
 
+function cdfp () {
+  local project_dir='
+    git_ignore_content=`cat .gitignore 2>/dev/null`;
+    current_path=`pwd`;
+    project_dir=`pwd`;
+    while [[ ! "$current_path" == "/" ]] ; do
+      [[ -n "$git_ignore_content" ]] && {
+        break;
+      }
+      cd ..;
+      current_path=`pwd`;
+      git_ignore_content=`cat .gitignore 2>/dev/null`;
+    done;
+    [[ -n "$git_ignore_content" ]] && { $project_dir="$current_path"; }
+    echo "$project_dir";
+  '
+  cd "$project_dir";
+  cd "$(dirname `CDF_FUZZY_FINDER_PLACEHOLDER`)"
+}
+
 function _find_git_estimator_ignored_dirs () {
   local get_git_ignore_content='
     git_ignore_content=`cat .gitignore 2>/dev/null`;
@@ -967,7 +987,7 @@ function _rest_helper_preper {
   local auth="$4";
   local response_file_type="$5";
   local content_type="$6";
-  local extra_headers="$7";
+  local trailing_command="$7";
   local method="$8";
   # authorization is mainly for Bearer token style auth
   if [[ ! "$auth" == *":"* ]]; then
@@ -975,8 +995,8 @@ function _rest_helper_preper {
   else
     auth=`echo ${auth:+"-H $auth"}`;
   fi
-  extra_headers=${extra_headers:+" $extra_headers"}
-  local headers="${content_type:+"-H Content-Type: $content_type"} ${auth}${extra_headers}";
+  trailing_command=${trailing_command:+" $trailing_command"}
+  local headers="${content_type:+"-H Content-Type: $content_type"} ${auth}${trailing_command}";
   _rest_helper "$url" "$request_body" "$curl_flags" "$response_file_type" "$method" "$headers";
 }
 
