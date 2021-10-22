@@ -987,7 +987,7 @@ function _rest_helper_preper {
   local auth="$4";
   local response_file_type="$5";
   local content_type="$6";
-  local trailing_command="$7";
+  local extra_headers="$7";
   local method="$8";
   # authorization is mainly for Bearer token style auth
   if [[ ! "$auth" == *":"* ]]; then
@@ -995,8 +995,8 @@ function _rest_helper_preper {
   else
     auth=`echo ${auth:+"-H $auth"}`;
   fi
-  trailing_command=${trailing_command:+" $trailing_command"}
-  local headers="${content_type:+"-H Content-Type: $content_type"} ${auth}${trailing_command}";
+  extra_headers=${extra_headers:+" $extra_headers"}
+  local headers="${content_type:+"-H Content-Type: $content_type"} ${auth}${extra_headers}";
   _rest_helper "$url" "$request_body" "$curl_flags" "$response_file_type" "$method" "$headers";
 }
 
