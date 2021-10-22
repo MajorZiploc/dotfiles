@@ -956,6 +956,7 @@ function rest_encode_url {
   echo "$url" | sed 's, ,%20,g;s,\!,%21,g;s,",%22,g;s,#,%23,g;s,\$,%24,g;s,'"'"',%27,g;';
 }
 
+
 function _rest_helper {
   local url="$1";
   local request_body="$2";
@@ -976,7 +977,7 @@ function _rest_helper {
   request_body=`echo "${request_body:+"-d $request_body"}"`;
   [[ ! "$query_params" == "?"* ]] && { query_params=`echo "${query_params:+"?$query_params"}"`; }
   url="${base_url_with_endpoint}${query_params}";
-  eval "curl -$curl_flags -X $method $request_body $url $headers" > "$_file";
+  eval "curl -$curl_flags -X $method $request_body \"$url\" $headers"  > "$_file";
   _rest_format_and_print_response "$_file";
 }
 
@@ -991,12 +992,12 @@ function _rest_helper_preper {
   local method="$8";
   # authorization is mainly for Bearer token style auth
   if [[ ! "$auth" == *":"* ]]; then
-    auth=`echo ${auth:+"-H 'Authorization: $auth'"}`;
+    auth=`echo ${auth:+"-H \"Authorization: Bearer $auth\""}`;
   else
     auth=`echo ${auth:+"-H '$auth'"}`;
   fi
   extra_headers=${extra_headers:+" $extra_headers"}
-  local headers="${content_type:+"-H 'Content-Type: $content_type'"} ${auth}${extra_headers}";
+  local headers="${content_type:+"-H \"Content-Type: $content_type\""} ${auth}${extra_headers}";
   _rest_helper "$url" "$request_body" "$curl_flags" "$response_file_type" "$method" "$headers";
 }
 
