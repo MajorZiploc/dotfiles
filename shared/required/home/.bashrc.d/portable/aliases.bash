@@ -101,7 +101,7 @@ alias to_unixpath='sed -E "s,^(\w):,/\L\1,g" | sed s,\\\\,/,g'
 # paste from clipboard
 alias clipp="pwsh -command 'Get-Clipboard' | head -n -1"
 
-alias cdf='cd "$(dirname `CDF_FUZZY_FINDER_PLACEHOLDER`)"'
+alias cdf='cd "$(dirname `FUZZY_FINDER_CDF_PLACEHOLDER`)"'
 
 BASH_ALIASES_PLACEHOLDER
 
