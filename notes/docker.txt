@@ -66,3 +66,8 @@ docker-compose -f <file_name>.yaml down
 # build a docker image with the given tag (image_name:image_version) using the Dockerfile in the current directory
 docker build -t image_name:1.0 .
 
+# Run a command in a docker container without staying in the container
+docker exec -t <container name> <command must not be a string even if it has spaces>
+# Example
+docker exec -t devcontainer-pandas_data_analytics_app-1 python /workspace/src/fast_food/clean_scripts/el_pollo_loco.py
+
