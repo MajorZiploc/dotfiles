@@ -1023,6 +1023,10 @@ function rest_patch {
   _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "PATCH";
 }
 
+function rest_delete {
+  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "DELETE";
+}
+
 function rest_generic {
   method="$8";
   [[ -z "$method" ]] && { echo "Must specify method!" >&2; return 1; }
