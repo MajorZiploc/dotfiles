@@ -58,7 +58,7 @@ __bash_prompt() {
   local lightblue='\[\033[1;34m\]'
   local darkblue='\[\033[0;34m\]'
   local removecolor='\[\033[0m\]'
-  PS1="${darkblue}@${lightblue}\h \`if [[ \$? = \"0\" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\`\W${gitbranch}${removecolor}> "
+  PS1="${darkblue}@${lightblue}\h \`if [[ \$? = \"0\" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]\[\$?\]"; fi\`\W${gitbranch}${removecolor}> "
   unset -f __bash_prompt
 }
 __bash_prompt
