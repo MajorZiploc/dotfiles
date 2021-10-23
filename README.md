@@ -26,6 +26,9 @@ Ubuntu:
 WSL Ubuntu:
 - apt package manager
 
+Mac:
+- homebrew
+
 ## Installs
 
 All:
@@ -86,11 +89,11 @@ To setup ssh keys for git:
 - show\_cmds\_like "egrep|string|here" # sends impls of aliases and bash fns that match the regex to stdout (useful when
   piped to clip)
 - grepn\_files(\_freq|\_uniq)? # useful chained after find\_in\_files(\_fuzz)?
-- find\_files(\_fuzz)?
-- find\_files\_rename(\_preview)?
-- find\_in\_files(\_fuzz)?
-- find\_in\_files\_replace
-- find\_items
+- [ag]?find\_files(\_fuzz)?
+- [ag]?find\_files\_rename(\_preview)?
+- [ag]?find\_in\_files(\_fuzz)?
+- [ag]?find\_in\_files\_replace
+- [ag]?find\_items
 - tmuxcs <optional\_session\_name> # Creates a tmux session based on the current path if the session name is not given
 - tmuxps <optional\_session\_name> # Creates a tmux session based the selected fzf/fzy folders specified by tmuxps\_get\_project\_dirs
 - tmuxds <optional\_session\_name> # Creates a tmux session based the selected fzf/fzy folder from the users current path
@@ -104,9 +107,12 @@ To setup ssh keys for git:
 - mssql\_exec # use to execute a sql command a database
 - rest\_get # use to call a get rest request
 - rest\_post # use to call a post rest request
+- rest\_delete # use to call a delete rest request
+- rest\_patch # use to call a patch rest request
+- rest\_generic # use to call a generic rest request
 
 ### Note on Notable bash functions/aliases
-All of the find\_ are wrappers around find to make certain common operations easy to perform.
+All of the [ag]?find\_ are wrappers around find to make certain common operations easy to perform.
 
 Use whence to view the implementations of any of them to get an understanding of how they work
 
@@ -141,6 +147,9 @@ In ~/.bashrc\_ext, you can add the following line:
 This will turn that feature off!
 
 This way you can have all the other great features you love from this repo, keep up to date with the repo, and make any changes that make these settings more you!
+
+Use ~/.zshrc\_ext for zsh
+Use ~/.vimrc\_ext for vim
 
 ## Development tools for contribution
 - docker v20.10.7
