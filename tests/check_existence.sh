@@ -94,6 +94,10 @@ function typea_check(){
   "csv_delimiter_check_single_line"
   "rest_get"
   "rest_post"
+  "rest_patch"
+  "rest_delete"
+  "rest_generic"
+  "cdfp"
   )
   for funct in ${l[@]};
     do
@@ -174,6 +178,7 @@ function typea_check(){
   "to_winpath"
   "to_unixpath"
   "show_root_folder"
+  "cdf"
   )
   for funct in ${l[@]};
     do
