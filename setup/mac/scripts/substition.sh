@@ -27,7 +27,7 @@ fuzzy_finder_cdf_placeholder="fzf";
 find -E "$tempShared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,FUZZY_FINDER_CDF_PLACEHOLDER,$fuzzy_finder_cdf_placeholder,g" {} \;
 fuzzy_finder_placeholder="fzf";
 find -E "$tempShared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,FUZZY_FINDER_PLACEHOLDER,$fuzzy_finder_placeholder,g" {} \;
-bash_aliases_placeholder="# for opening a gui file explorer\nalias explorer=\"xdg-open\"\n# copy to clipboard\nalias clip=\"pbcopy\"";
+bash_aliases_placeholder="# for opening a gui file explorer\nalias explorer=\"open\"\n# copy to clipboard\nalias clip=\"pbcopy\"";
 find -E "$tempShared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,BASH_ALIASES_PLACEHOLDER,$bash_aliases_placeholder,g" {} \;
 extra_env_checks_placeholder="which fzf 2>\&1 2>/dev/null >/dev/null; [[ \"\$?\" != \"0\" ]] \&\& { ENV_NOTES=\"\$ENV_NOTES:Missing fzf (fuzzy finder)\"; }\nwhich python3 2>\&1 2>/dev/null >/dev/null; [[ \"\$?\" != \"0\" ]] \&\& { ENV_NOTES=\"\$ENV_NOTES:Missing python v3 \"; }\n";
 find -E "$tempShared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,EXTRA_ENV_CHECKS_PLACEHOLDER,$extra_env_checks_placeholder,g" {} \;
