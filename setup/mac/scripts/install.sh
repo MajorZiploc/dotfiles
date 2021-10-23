@@ -12,6 +12,7 @@ brew install ripgrep
 brew install just
 brew install copyq
 brew install bash-completion
+brew install nvim
 
 # instal xcode
 xcode-select --install
