@@ -20,6 +20,7 @@ $tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "append"
 $tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "prepend"
 $tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "override"
 $tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "new"
+$tempShared/scripts/edit_files.sh "$temp" "$tempShared" "$tempThis" "delete"
 
 $tempShared/scripts/ensure_client_paths.sh "$setupRoot" "$temp" "$tempShared" "$tempThis" "$flags"
 
