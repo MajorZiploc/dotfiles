@@ -18,7 +18,7 @@ find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -i'' "s,VIM_PLUGIN_IN
 vim_plugset_path="so ~/vimfiles/plugin-settings/"
 vim_plugin_settings="${vim_plugset_path}fzf.vim\n${vim_plugset_path}rainbow_csv.vim\n${vim_plugset_path}airline-theme.vim\n${vim_plugset_path}fugitive.vim";
 find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -i'' "s,VIM_PLUGIN_SETTINGS_PLACEHOLDER,$vim_plugin_settings,g" {} \;
-find -E "$tempShared" -iregex ".*" -type f -exec gsed -E -i'' "s,OS_PLACEHOLDER,mac,g" {} \;
+find -E "$tempShared" -iregex ".*" -type f -exec gsed -E -i'' "s,OS_PLACEHOLDER,macm1,g" {} \;
 vsc_settings_destination_placeholder="$HOME/.vscoderc.d/";
 find -E "$tempShared" -iregex ".*\.sh" -type f -exec gsed -E -i'' "s,VSC_SETTINGS_DESTINATION_PLACEHOLDER,$vsc_settings_destination_placeholder,g" {} \;
 tmuxps_paths_array_placeholder="(\"\$(find ~ -mindepth 1 -maxdepth 1 -iregex \".*project.*\" -type d -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' 2>/dev/null)\")";
