@@ -25,6 +25,8 @@ sudo mv chromedriver /usr/bin/chromedriver
 sudo chown root:root /usr/bin/chromedriver
 sudo chmod +x /usr/bin/chromedriver
 sudo rm -rf chromedriver_linux64.zip
+# zsh
+sudo apt-get install zsh
 
 # install nvm for nodejs
 sudo apt install -y build-essential checkinstall libssl-dev
