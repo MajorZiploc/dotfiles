@@ -19,7 +19,7 @@ sudo apt-get -y install ripgrep
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 # zsh
-sudo apt-get install zsh
+sudo apt-get install -y zsh
 # neovim
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get install -y neovim
