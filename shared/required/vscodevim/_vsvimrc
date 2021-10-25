@@ -84,7 +84,7 @@ nmap <leader><leader>s :vsc Tools.InvokeAceJumpCommand<cr>
 nmap gi :vsc Edit.GoToImplementation<cr>
 nmap gq :vsc Edit.QuickInfo<cr>
 vmap gf :vsc Edit.FormatSelection<cr>
-vmap gq :vsc Edit.FormatSelection<cr>
+vmap gq :vsc Edit.QuickInfo<cr>
 nmap <leader>ws :vsc Window.NewVerticalTabGroup<cr>
 " switching between tab groups
 nnoremap <leader>wh <c-w>h
