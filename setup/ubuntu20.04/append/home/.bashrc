@@ -38,7 +38,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-[ -f ~/.fzf.bash ] && . ~/.fzf.bash
+[ -e ~/.fzf.bash ] && . ~/.fzf.bash
 
 if [ -d $HOME/.asdf ]; then
   . $HOME/.asdf/asdf.sh

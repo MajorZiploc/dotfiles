@@ -17,9 +17,14 @@ sudo apt-get -y update
 sudo apt-get -y install ripgrep
 # fuzzy finder
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+sed -E -i'' 's,curl -[^[:blank:]]+,curl -0Lk,g' ~/.fzf/install
 ~/.fzf/install
 # zsh
 sudo apt-get install -y zsh
+# vim 8.2
+sudo add-apt-repository ppa:jonathonf/vim
+sudo apt update
+sudo apt install vim
 # neovim
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get install -y neovim
