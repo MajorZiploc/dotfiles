@@ -18,6 +18,12 @@ sudo apt-get -y install ripgrep
 # fuzzy finder
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
+# zsh
+sudo apt-get install zsh
+# neovim
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt-get install -y neovim
+
 
 # nodejs nvm deps
 sudo apt install -y build-essential checkinstall libssl-dev
@@ -35,12 +41,6 @@ sudo apt-get -y install dotnet-sdk-5.0
 
 # update pip
 python -m pip install --upgrade pip
-# install python project scaffolder
-pip install pyscaffold
-pip install pyscaffoldext-django
-# Should be installed in the projects virtual env for tox support
-# pip install testresources
-# pip install tox
 
 # vim with clipboard support
 sudo apt-get -y remove vim-common vim-runtime vim
