@@ -71,7 +71,7 @@ function tmuxps() {
   # creates a tmux session
   # $1: optional session name
   local session_name="$1";
-  local items=`tmuxps_get_choices`;
+  local items="";
   tmuxps_get_project_dirs;
   for _path in `echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"`; do
     [[ -d "$_path" ]] && {
