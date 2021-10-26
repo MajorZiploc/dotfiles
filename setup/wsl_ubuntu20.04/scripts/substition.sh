@@ -10,7 +10,9 @@ tempThis="$4"
 
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find "$tempShared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" {} \;
-find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,/bin/bash,g' {} \;
+find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,/bin/zsh,g' {} \;
+# THIS SUB APPEARS TO DO NOTHING. LOOK AT ~/.zshenv FOR WHAT THIS SHOULD DO
+find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,\.bashrc,.zshrc_core,g' {} \;
 vim_plugin_include="Plug 'junegunn/fzf'\, \{ 'do': \{ -> fzf#install\(\) \} \}\nPlug 'junegunn/fzf.vim'\nPlug 'airblade/vim-rooter'\nPlug 'mechatroner/rainbow_csv' \" csv highlighter and query engine\nPlug 'frazrepo/vim-rainbow' \" color pairing brakets and such\nPlug 'bling/vim-airline' \" status bar\nPlug 'vim-airline/vim-airline-themes' \" colors for status bar\nPlug 'tpope/vim-fugitive' \" git plugin";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_INCLUDE_PLACEHOLDER,$vim_plugin_include,g" {} \;
 vim_plugset_path="so ~/vimfiles/plugin-settings/"
