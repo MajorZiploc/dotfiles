@@ -47,25 +47,13 @@ function tmuxcs() {
   tmux new -s "$session_name" 2>/dev/null || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
 }
 
-function tmuxps_get_project_dirs(){
+function tmuxps_get_project_dirs() {
   export TMUXPS_PROJECT_DIRS=TMUXPS_PATHS_ARRAY_PLACEHOLDER;
 }
 
-function tmuxps() {
-  # tmux project session
-  # creates a tmux session
-  # $1: optional session name
+function _tmux_session_list_helper() {
   local session_name="$1";
-  local items="";
-  tmuxps_get_project_dirs;
-  for _path in `echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"`;
-    do
-      [[ -d "$_path" ]] && {
-        items+=`find "$_path" -maxdepth 1 -mindepth 1 -type d`;
-        items+="\n";
-      }
-  done;
-  local selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
+  local selected="$2";
   [[ -z "$selected" ]] || {
     [[ -z "$session_name" ]] && {
       session_name=`basename $selected | tr '.[[:blank:]]' '-'`;
@@ -78,22 +66,30 @@ function tmuxps() {
   }
 }
 
+function tmuxps() {
+  # tmux project session
+  # creates a tmux session
+  # $1: optional session name
+  local session_name="$1";
+  local items=`tmuxps_get_choices`;
+  tmuxps_get_project_dirs;
+  for _path in `echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"`; do
+    [[ -d "$_path" ]] && {
+      items+=`find "$_path" -maxdepth 1 -mindepth 1 -type d`;
+      items+="\n";
+    }
+  done;
+  local selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
+  _tmux_session_list_helper "$session_name" "$selected";
+}
+
 function tmuxds() {
   # tmux directory session
   # displays a fuzzy finder listing of directories at the current directory to choose from for a tmux session
   # $1: optional session name
   local session_name="$1";
   local selected=`find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER`;
-  [[ -z "$selected" ]] || {
-    [[ -z "$session_name" ]] && {
-      session_name=`basename "$selected" | tr '.[[:blank:]]' '-'`;
-    }
-    tmux switch-client -t "$session_name";
-    if [[ $? -eq 0 ]]; then
-      exit 0;
-    fi
-    tmux new-session -c "$selected" -d -s "$session_name" && tmux switch-client -t "$session_name" || tmux new -c "$selected" -A -s "$session_name";
-  }
+  _tmux_session_list_helper "$session_name" "$selected";
 }
 
 function show_machine_details() {
