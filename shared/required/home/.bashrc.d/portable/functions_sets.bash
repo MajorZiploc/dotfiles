@@ -2,7 +2,7 @@
 # Referenced https://catonmat.net/set-operations-in-unix-shell
 
 # set operations
-function set_elem() {
+function set_elem {
   # membership check. ex: grep -xs 'element' set
   # returns 1 if set contains element, 0 if not
   local ele=$1;
@@ -10,7 +10,7 @@ function set_elem() {
   grep -xq "$ele" $set;
 }
 
-function set_eq() {
+function set_eq {
   # check if sets are equal
   # $ diff -q <(sort A | uniq) <(sort B | uniq)
   # return code 1 -- sets A and B are not equal
@@ -21,13 +21,13 @@ function set_eq() {
   diff -q <(sort -u $set1) <(sort -u $set2);
 }
 
-function set_cardinality() {
+function set_cardinality {
   # the number of elements in the set
   local set=$1;
   sort -u $set | wc -l;
 }
 
-function set_is_subset() {
+function set_is_subset {
   # test if $1 is a subset of $2
   local subset=$1;
   local superset=$2;
@@ -36,21 +36,21 @@ function set_is_subset() {
   [[ -z $(comm -23 <(sort -u $1) <(sort -u $2) | head -1) ]]
 }
 
-function set_union () {
+function set_union {
   # returns elements that occur in either sets or both sets
   local set1=$1;
   local set2=$2;
   sort -u $set1 $set2;
 }
 
-function set_intersection() {
+function set_intersection {
   # returns elements that occur in both sets
   local set1=$1;
   local set2=$2;
   comm -12 <(sort -u $set1) <(sort -u $set2) | sort -u;
 }
 
-function set_difference() {
+function set_difference {
   # returns elements that occur in $1 and not in $2
   # $1 - $2
   local set1=$1;
@@ -58,14 +58,14 @@ function set_difference() {
   comm -23 <(sort -u $set1) <(sort -u $set2);
 }
 
-function set_symmetric_difference() {
+function set_symmetric_difference {
   # returns elements that occur in either set, but not both sets
   local set1=$1;
   local set2=$2;
   sort <(sort -u $set1) <(sort -u $set2) | uniq -u;
 }
 
-function set_power_set_experimental() {
+function set_power_set_experimental {
   # EXPERIMENTAL!
   # returns a set that contains all subsets of the set
   local set=$1;
@@ -82,7 +82,7 @@ function set_power_set_experimental() {
   }' $set
 }
 
-function set_cardesian_product_experimental() {
+function set_cardesian_product_experimental {
   # EXPERIMENTAL!
   # returns a set that contains all possible pairs of elements from one set and the other
   # $1 x $2
@@ -91,7 +91,7 @@ function set_cardesian_product_experimental() {
   while read a; do while read b; do echo "$a, $b"; done < $set1; done < $set2;
 }
 
-function set_disjoint_experimental() {
+function set_disjoint_experimental {
   # EXPERIMENTAL!
   # The disjoint set test operation finds if two sets are disjoint, i.e., they do not contain common elements.
   local set1=$1;
@@ -101,22 +101,22 @@ function set_disjoint_experimental() {
   awk '{ if (++seen[$0]==2) exit 1 }' $set1 $set2;
 }
 
-function set_minimum() {
+function set_minimum {
   local set=$1;
   head -1 <(sort $set);
 }
 
-function set_minimum_num() {
+function set_minimum_num {
   local set=$1;
   head -1 <(sort -n $set);
 }
 
-function set_maximum() {
+function set_maximum {
   local set=$1;
   tail -1 <(sort $set);
 }
 
-function set_maximum_num() {
+function set_maximum_num {
   local set=$1;
   tail -1 <(sort -n $set);
 }

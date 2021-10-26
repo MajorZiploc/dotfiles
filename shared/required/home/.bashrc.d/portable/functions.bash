@@ -1,4 +1,4 @@
-function h() {
+function h {
   # show history
   # $1: optional pos num to show last n entries in the history
   local n="$1";
@@ -6,7 +6,7 @@ function h() {
   history | tail -n "$n";
 }
 
-function hf() {
+function hf {
   # show most commonly used commands based on frequency
   # $1: optional pos num to show last n entries
   local n="$1";
@@ -18,7 +18,7 @@ function _extra_env_checks {
 EXTRA_ENV_CHECKS_PLACEHOLDER
 }
 
-function show_env_notes() {
+function show_env_notes {
   export ENV_NOTES="";
   # Dependency checks
   which npm 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing npm (node package manager)"; }
@@ -36,7 +36,7 @@ function show_env_notes() {
   echo $ENV_NOTES | tr ":" "\n" | egrep -v "^\\s*$"
 }
 
-function tmuxcs() {
+function tmuxcs {
   # tmux create session
   # creates a tmux session
   # $1: optional string to represent name of the tmux session
@@ -47,11 +47,11 @@ function tmuxcs() {
   tmux new -s "$session_name" 2>/dev/null || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
 }
 
-function tmuxps_get_project_dirs() {
+function tmuxps_get_project_dirs {
   export TMUXPS_PROJECT_DIRS=TMUXPS_PATHS_ARRAY_PLACEHOLDER;
 }
 
-function _tmux_session_list_helper() {
+function _tmux_session_list_helper {
   local session_name="$1";
   local selected="$2";
   [[ -z "$selected" ]] || {
@@ -66,7 +66,7 @@ function _tmux_session_list_helper() {
   }
 }
 
-function tmuxps() {
+function tmuxps {
   # tmux project session
   # creates a tmux session
   # $1: optional session name
@@ -83,7 +83,7 @@ function tmuxps() {
   _tmux_session_list_helper "$session_name" "$selected";
 }
 
-function tmuxds() {
+function tmuxds {
   # tmux directory session
   # displays a fuzzy finder listing of directories at the current directory to choose from for a tmux session
   # $1: optional session name
@@ -92,7 +92,7 @@ function tmuxds() {
   _tmux_session_list_helper "$session_name" "$selected";
 }
 
-function show_machine_details() {
+function show_machine_details {
   local user=`whoami`;
   local machine_name=`uname -n`;
   local long_info=`uname -a`;
@@ -101,7 +101,7 @@ function show_machine_details() {
   echo "long_info: $long_info";
 }
 
-function show_folder_details() {
+function show_folder_details {
   local total_items=`ls -A | wc -l`;
   local total_dirs=`ls -Al | egrep "^d" | wc -l`;
   local total_files=`ls -Al | egrep "^-" | wc -l`;
@@ -120,7 +120,7 @@ function show_folder_details() {
   echo "git_branch:$git_branch";
 }
 
-function prefix_file() {
+function prefix_file {
   # add a line to the beginning of a file
   # $1: string to add
   # $2: file
@@ -300,7 +300,7 @@ function refresh_settings {
   show_env_notes;
 }
 
-function cdfp () {
+function cdfp {
   local get_project_dir='
     current_path=`pwd`;
     project_dir=`pwd`;
@@ -320,7 +320,7 @@ function cdfp () {
 }
 
 
-function _find_generate_not_paths () {
+function _find_generate_not_paths {
   local not_paths="";
   for gitignore_entry in $@; do
     not_paths="$not_paths -not -path '*/$gitignore_entry/*'";
@@ -328,12 +328,12 @@ function _find_generate_not_paths () {
   echo "$not_paths";
 }
 
-function _find_default_ignored_dirs () {
+function _find_default_ignored_dirs {
   local gitignore_entries=('__pycache__' 'bin' 'obj' '.git' '.svn' 'node_modules' '.ionide' '.venv');
   _find_generate_not_paths "${gitignore_entries[@]}";
 }
 
-function _find_git_estimator_ignored_dirs () {
+function _find_git_estimator_ignored_dirs {
   local get_git_ignore_content='
     git_ignore_content=`cat .gitignore 2>/dev/null`;
     current_path=`pwd`;
