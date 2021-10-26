@@ -7,7 +7,9 @@ For automating the setup of a developer machine
 
 All:
 - vim (text editor)
+- nvim (text editor)
 - bash (shell)
+- zsh (shell)
 - tmux (terminal multiplexier)
 - pwsh (cross platform powershell)
 - just (a command runner for Justfiles)
@@ -33,6 +35,8 @@ Mac m1:
 All:
 - bash configs
 - vim configs
+- zsh configs
+- nvim configs
 - vscode configs
 
 Windows:
