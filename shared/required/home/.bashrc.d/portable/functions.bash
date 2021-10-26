@@ -319,7 +319,6 @@ function cdfp {
   cdf;
 }
 
-
 function _find_generate_not_paths {
   local not_paths="";
   for gitignore_entry in $@; do
@@ -328,9 +327,9 @@ function _find_generate_not_paths {
   echo "$not_paths";
 }
 
+export FIND_DEFAULT_IGNORE_DIRS=('bin' 'obj' '.git' '.svn' 'node_modules' '.ionide' '.venv' '__pycache__');
 function _find_default_ignored_dirs {
-  local gitignore_entries=('__pycache__' 'bin' 'obj' '.git' '.svn' 'node_modules' '.ionide' '.venv');
-  _find_generate_not_paths "${gitignore_entries[@]}";
+  _find_generate_not_paths "${FIND_DEFAULT_IGNORE_DIRS[@]}";
 }
 
 function _find_git_estimator_ignored_dirs {
