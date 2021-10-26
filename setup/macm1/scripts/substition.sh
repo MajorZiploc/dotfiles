@@ -36,7 +36,7 @@ find -E "$tempShared" -iregex ".*coc.*" -type f -exec gsed -E -i'' "s/COC_PLUGIN
 find -E "$tempShared" -type f -exec gsed -E -i'' "s/find(.*?)-regextype egrep/find -E\1/g" {} \;
 find -E "$tempShared" -iregex ".*(functions|aliases).*\.bash" -type f -exec gsed -E -i'' "s/\bsed /gsed /g" {} \;
 source_shellrc_placeholder=". ~/.zshrc";
-find "$tempShared" -regextype egrep -iregex ".*bash.*(function|alias).*" -type f -exec sed -E -i'' "s,SOURCE_SHELLRC_PLACEHOLDER,$source_shellrc_placeholder,g" {} \;
+find -E "$tempShared" -iregex ".*bash.*(function|alias).*" -type f -exec gsed -E -i'' "s,SOURCE_SHELLRC_PLACEHOLDER,$source_shellrc_placeholder,g" {} \;
 # example of deleting bak files
 # find "$tempShared" -iregex '.*\.bak$' -type f -exec rm {} \;
 
