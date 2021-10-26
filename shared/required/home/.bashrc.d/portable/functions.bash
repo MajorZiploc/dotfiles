@@ -290,7 +290,7 @@ function refresh_settings {
   echo "$(git show --summary)" &&
   git pull &&
   "$project_root_path"/setup/OS_PLACEHOLDER/scripts/copy.sh "$flags" &&
-  . ~/.bash_profile &&
+  SOURCE_SHELLRC_PLACEHOLDER &&
   echo 'Refreshed settings!' &&
   echo '' &&
   echo 'Current commit information:' &&
