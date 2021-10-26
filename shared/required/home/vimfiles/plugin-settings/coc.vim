@@ -5,7 +5,7 @@ nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
 COC_PLUGINS_PLACEHOLDER
 
-nnoremap <leader>isd :call <SID>show_documentation()<CR>
+nnoremap <leader>wi :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -18,14 +18,43 @@ function! s:show_documentation()
 endfunction
 
 " Symbol renaming.
-nmap <leader>irn <Plug>(coc-rename)
+nmap <leader>rn <Plug>(coc-rename)
 "
 " Formatting selected code.
-xmap <leader>ifs  <Plug>(coc-format-selected)<CR>
-nmap <leader>ifs  <Plug>(coc-format-selected)<CR>
+xmap <leader>gf  <Plug>(coc-format-selected)<CR>
+nmap <leader>gf  <Plug>(coc-format-selected)<CR>
 "
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>ica  <Plug>(coc-codeaction-selected)
-nmap <leader>ica  <Plug>(coc-codeaction-selected)
+xmap <leader>ca  <Plug>(coc-codeaction-selected)
+nmap <leader>ca  <Plug>(coc-codeaction-selected)
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+nmap <leader>E <Plug>(coc-diagnostic-prev)
+nmap <leader>e <Plug>(coc-diagnostic-next)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
 
