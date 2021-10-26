@@ -1,7 +1,6 @@
 
 cd "~/projects"
-ls -Directory `
-| % {
+ls -Directory | ForEach-Object {
   Write-Host $_.Name
   cd $_.Name
   git pull
