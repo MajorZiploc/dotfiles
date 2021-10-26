@@ -35,6 +35,8 @@ coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright',
 find -E "$tempShared" -iregex ".*coc.*" -type f -exec gsed -E -i'' "s/COC_PLUGINS_PLACEHOLDER/$coc_plugins_placeholder/g" {} \;
 find -E "$tempShared" -type f -exec gsed -E -i'' "s/find(.*?)-regextype egrep/find -E\1/g" {} \;
 find -E "$tempShared" -iregex ".*(functions|aliases).*\.bash" -type f -exec gsed -E -i'' "s/\bsed /gsed /g" {} \;
+refresh_settings_shell=". ~/.zshrc \&\&";
+find "$tempShared" -regextype egrep -iregex ".*bash.*(function|alias).*" -type f -exec sed -E -i'' "s,\. ~/\.bash_profile \&\&,$refresh_settings_shell,g" {} \;
 # example of deleting bak files
 # find "$tempShared" -iregex '.*\.bak$' -type f -exec rm {} \;
 
@@ -48,6 +50,7 @@ unset fuzzy_finder_cdf_placeholder
 unset bash_aliases_placeholder
 unset extra_env_checks_placeholder
 unset coc_plugins_placeholder
+unset refresh_settings_shell
 unset vsc_settings_destination_placeholder
 unset setupRoot
 unset tempShared
