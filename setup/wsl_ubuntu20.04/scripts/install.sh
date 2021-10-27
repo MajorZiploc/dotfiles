@@ -12,6 +12,8 @@ sudo apt-get -y install python-is-python3
 # ripgrep for vundle use or use on its own
 sudo apt-get -y install ripgrep
 # fuzzy finder
+# make sure this isnt around (its to old for the vim plugin)
+sudo apt-get -y remove fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 sed -E -i'' 's,curl -[^[:blank:]]+,curl -0Lk,g' ~/.fzf/install
 ~/.fzf/install
