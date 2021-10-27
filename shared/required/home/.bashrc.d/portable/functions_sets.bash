@@ -2,7 +2,7 @@
 
 # set operations
 function set_elem {
-  # membership check. ex: grep -xs 'element' set
+  # membership check.
   # returns 1 if set contains element, 0 if not
   local ele=$1;
   local set=$2;
