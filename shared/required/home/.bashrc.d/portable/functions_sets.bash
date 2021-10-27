@@ -91,7 +91,7 @@ function set_cardesian_product_experimental {
   while read a; do while read b; do echo "$a, $b"; done < $set1; done < $set2;
 }
 
-function set_disjoint_experimental {
+function set_are_disjoint {
   # EXPERIMENTAL!
   # The disjoint set test operation finds if two sets are disjoint, i.e., they do not contain common elements.
   local set1=$1;

@@ -550,3 +550,52 @@ EOF
   assert_output "$expected"
 }
 
+@test "check set_are_disjoint function" {
+  cd ./mock_content
+  all=`cat << EOF
+./pandas_data_analytics/src/pokemon_learn_sets/run.py
+./pandas_data_analytics/src/pandas_notes.py
+./pandas_data_analytics/src/text_parser/utils.py
+./pandas_data_analytics/src/text_parser/run.py
+./pandas_data_analytics/src/text_parser/parser.py
+./pandas_data_analytics/src/text_parser/__init__.py
+./pandas_data_analytics/src/outliers/run.py
+./pandas_data_analytics/src/utils/utils.py
+./pandas_data_analytics/src/utils/__init__.py
+./pandas_data_analytics/src/netflix/run.py
+./pandas_data_analytics/src/osrs/run.py
+./pandas_data_analytics/src/__init__.py
+./pandas_data_analytics/src/common_food/run.py
+./pandas_data_analytics/src/body_comp/run.py
+./pandas_data_analytics/setup.py
+EOF
+`
+  df=`cat << EOF
+./pandas_data_analytics/src/pokemon_learn_sets/run.py
+./pandas_data_analytics/src/pandas_notes.py
+./pandas_data_analytics/src/text_parser/utils.py
+./pandas_data_analytics/src/text_parser/run.py
+./pandas_data_analytics/src/outliers/run.py
+./pandas_data_analytics/src/utils/utils.py
+./pandas_data_analytics/src/netflix/run.py
+./pandas_data_analytics/src/osrs/run.py
+./pandas_data_analytics/src/common_food/run.py
+./pandas_data_analytics/src/body_comp/run.py
+./pandas_data_analytics/setup.py
+EOF
+`
+  run set_are_disjoint <(echo "$df") <(echo "$all")
+  assert_failure
+  assert_output ''
+  fs=`cat << EOF
+./FslabDataAnalytics/utils/index.fs
+./FslabDataAnalytics/Program.fs
+./FslabDataAnalytics/FslabDataAnalytics/tut/run.fs
+./FslabDataAnalytics/FslabDataAnalytics/osrs/run.fs
+EOF
+`
+  run set_are_disjoint <(echo "$fs") <(echo "$all")
+  assert_success
+  assert_output ''
+}
+
