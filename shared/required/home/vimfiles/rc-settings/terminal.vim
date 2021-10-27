@@ -114,6 +114,3 @@ set wildmode=longest,list ",full
 " Added an extra select menu that shows what choice you are on for ,full
 " set wildmenu
 
-" might be needed do to filetype syntax or fzf
-set nomodeline
-
