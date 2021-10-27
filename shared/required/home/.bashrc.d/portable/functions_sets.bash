@@ -1,6 +1,3 @@
-# SET OPERATIONS BEGIN
-
-# set operations
 function set_elem {
   # membership check.
   # returns 1 if set contains element, 0 if not
@@ -11,9 +8,7 @@ function set_elem {
 
 function set_eq {
   # check if sets are equal
-  # $ diff -q <(sort A | uniq) <(sort B | uniq)
   # return code 1 -- sets A and B are not equal
-  # $ diff -q <(sort Aequal | uniq) <(sort Bequal | uniq)
   # return code 0 -- sets A and B are equal
   local set1=$1;
   local set2=$2;
@@ -92,6 +87,3 @@ function set_maximum_num {
   local set=$1;
   tail -1 <(sort -n $set);
 }
-
-# SET OPERATIONS END
-
