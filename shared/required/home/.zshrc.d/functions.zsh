@@ -6,13 +6,6 @@ function search_env_for {
     <(setopt 2> /dev/null) | egrep -i "$search_regex";
 }
 
-function search_env_for_fuzz {
-  # fuzzy searches through bash env and user defined bash tools
-  local search_regex="$1";
-  search_regex=${search_regex:+"$(echo "$search_regex" | to_fuzz)"};
-  search_env_for "$search_regex";
-}
-
 function show_cmds_like {
 	local pattern="$1";
 	[[ -z "$pattern" ]] && { echo "Must specify a command pattern!" >&2 return 1 }
@@ -24,10 +17,23 @@ function show_cmds_like {
 	done
 }
 
-function show_cmds_like_fuzz {
-  local pattern="$1";
-  [[ -z "$pattern" ]] && { echo "Must specify a command pattern!" >&2; return 1; }
-  pattern=`echo "$pattern" | to_fuzz`;
-  show_cmds_like "$pattern";
+function refresh_settings {
+  local flags="$1";
+  [[ -z "$flags" ]] && { flags="000"; }
+  local project_root_path="$HOME/projects/home-settings";
+  cd "$project_root_path" &&
+  git checkout master &&
+  echo 'Previous commit information:' &&
+  echo "$(git show --summary)" &&
+  git pull &&
+  "$project_root_path"/setup/OS_PLACEHOLDER/scripts/copy.sh "$flags" &&
+  . ~/.zshrc &&
+  echo 'Refreshed settings!' &&
+  echo '' &&
+  echo 'Current commit information:' &&
+  echo "$(git show --summary)";
+  echo '';
+  cd ~-;
+  show_env_notes;
 }
 
