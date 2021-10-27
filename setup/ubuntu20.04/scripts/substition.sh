@@ -33,8 +33,6 @@ extra_env_checks_placeholder="which fzf 2>\&1 2>/dev/null >/dev/null; [[ \"\$?\"
 find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,EXTRA_ENV_CHECKS_PLACEHOLDER,$extra_env_checks_placeholder,g" {} \;
 coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright', 'coc-sql', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-sh']";
 find "$tempShared" -regextype egrep -iregex ".*coc.*" -type f -exec sed -E -i'' "s/COC_PLUGINS_PLACEHOLDER/$coc_plugins_placeholder/g" {} \;
-source_shellrc_placeholder=". ~/.zshrc";
-find "$tempShared" -regextype egrep -iregex ".*bash.*(function|alias).*" -type f -exec sed -E -i'' "s,SOURCE_SHELLRC_PLACEHOLDER,$source_shellrc_placeholder,g" {} \;
 
 unset vsvimpath
 unset vim_plugin_include
@@ -46,7 +44,6 @@ unset fuzzy_finder_placeholder
 unset bash_aliases_placeholder
 unset extra_env_checks_placeholder
 unset coc_plugins_placeholder
-unset source_shellrc_placeholder
 unset vsc_settings_destination_placeholder
 unset setupRoot
 unset tempShared
