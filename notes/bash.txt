@@ -47,6 +47,9 @@ ${!name[@]}
 # get length of variable or array
 ${#param} || ${#param[@]}
 
+# search for variables declared
+set | egrep "<variable_pattern>"
+
 # Substition:
 ${param/search_glob_pattern/replacement_text} # non greedy
 ${param//search_glob_pattern/replacement_text} # greedy
