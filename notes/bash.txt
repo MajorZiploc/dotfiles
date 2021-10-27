@@ -124,6 +124,14 @@ alias rg_nh='rg --no-heading'
 
 # function graveyard:
 
+function hf {
+  # show most commonly used commands based on frequency
+  # $1: optional pos num to show last n entries
+  local n="$1";
+  [[ -z "$n" ]] && { n=25; }
+  history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -n | tail -n "$n";
+}
+
 function ide1() {
   # splits the window into 2 panes
   tmux split-window -v -p 30;
