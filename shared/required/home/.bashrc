@@ -1,6 +1,3 @@
-# only source this file if the shell is bash
-[[ "$0" == *"bash"* || "$0" == *"bats"* ]] || { return ; }
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
