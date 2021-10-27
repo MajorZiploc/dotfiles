@@ -1,5 +1,4 @@
 # SET OPERATIONS BEGIN
-# Referenced https://catonmat.net/set-operations-in-unix-shell
 
 # set operations
 function set_elem {
@@ -65,34 +64,7 @@ function set_symmetric_difference {
   sort <(sort -u $set1) <(sort -u $set2) | uniq -u;
 }
 
-function set_power_set_experimental {
-  # EXPERIMENTAL!
-  # returns a set that contains all subsets of the set
-  local set=$1;
-  perl -le '
-  sub powset {
-   return [[]] unless @_;
-   my $head = shift;
-   my $list = &powset;
-   [@$list, map { [$head, @$_] } @$list]
-  }
-  chomp(my @e = <>);
-  for $p (@{powset(@e)}) {
-   print @$p;
-  }' $set
-}
-
-function set_cardesian_product_experimental {
-  # EXPERIMENTAL!
-  # returns a set that contains all possible pairs of elements from one set and the other
-  # $1 x $2
-  local set1=$1;
-  local set2=$2;
-  while read a; do while read b; do echo "$a, $b"; done < $set1; done < $set2;
-}
-
 function set_are_disjoint {
-  # EXPERIMENTAL!
   # The disjoint set test operation finds if two sets are disjoint, i.e., they do not contain common elements.
   local set1=$1;
   local set2=$2;

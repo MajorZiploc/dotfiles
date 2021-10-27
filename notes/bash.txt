@@ -145,6 +145,31 @@ function show_find_full_paths() {
   find "$dir" -exec readlink -f "{}" \;
 }
 
+function set_power_set_experimental {
+  # EXPERIMENTAL!
+  # returns a set that contains all subsets of the set
+  local set=$1;
+  perl -le '
+  sub powset {
+   return [[]] unless @_;
+   my $head = shift;
+   my $list = &powset;
+   [@$list, map { [$head, @$_] } @$list]
+  }
+  chomp(my @e = <>);
+  for $p (@{powset(@e)}) {
+   print @$p;
+  }' $set
+}
+
+function set_cardesian_product_experimental {
+  # EXPERIMENTAL!
+  # returns a set that contains all possible pairs of elements from one set and the other
+  # $1 x $2
+  local set1=$1;
+  local set2=$2;
+  while read a; do while read b; do echo "$a, $b"; done < $set1; done < $set2;
+}
 
 FROM WINDOWS GIT BASH: 
 ################################## Construct PATH variable ##################################
