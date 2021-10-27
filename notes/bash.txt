@@ -67,6 +67,8 @@ array+=("four and beyound")
 array=("${array[@]// /_}")
 # recreate array with elements from index 2 to 4
 array=("${array[@]:2:3}")
+# remove the first 2 arguments
+set -- "${@:3}"
 
 # Interactive search up history for command
 <CTRL>-R
