@@ -6,14 +6,6 @@ function h {
   history | tail -n "$n";
 }
 
-function hf {
-  # show most commonly used commands based on frequency
-  # $1: optional pos num to show last n entries
-  local n="$1";
-  [[ -z "$n" ]] && { n=25; }
-  history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -n | tail -n "$n";
-}
-
 function _extra_env_checks {
 EXTRA_ENV_CHECKS_PLACEHOLDER
 }
