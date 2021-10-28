@@ -20,6 +20,9 @@ xcode-select --install
 # python deps
 brew install openssl readline sqlite3 xz zlib
 
+# rust
+brew install rust-analyzer
+
 # install asdf and its deps
 brew install gpg
 brew install gawk

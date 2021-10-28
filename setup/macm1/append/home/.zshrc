@@ -7,4 +7,7 @@ export LDFLAGS="-L/opt/homebrew/opt/zlib/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/zlib/lib/pkgconfig"
 
+# Rust
+export PATH="$PATH:/Users/manyu/.cargo/bin"
+[[ -d $HOME/.cargo ]] && . $HOME/.cargo/env
 
