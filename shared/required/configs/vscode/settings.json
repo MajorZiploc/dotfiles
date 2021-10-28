@@ -1,6 +1,6 @@
 {
   "window.zoomLevel": 0,
-  "editor.fontSize": 18,
+  "editor.fontSize": 16,
   "editor.rulers": [120],
   "explorer.confirmDragAndDrop": false,
   "[typescript]": {
