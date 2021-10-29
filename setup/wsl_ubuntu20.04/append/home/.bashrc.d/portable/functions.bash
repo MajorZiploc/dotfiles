@@ -26,3 +26,17 @@ function mssql_exec_delimiter_count_single_line {
   csv_delimiter_check_single_line "$sql_result" "$4";
 }
 
+function cdws {
+  homes=`find /mnt/c/Users/ -mindepth 1 -maxdepth 1 -type d | fzf`;
+  echo "$homes" > ~/.windows_side_home;
+  cd "$homes";
+}
+
+function cdwh {
+  if [[ ! -e ~/.windows_side_home ]]; then
+    cdws;
+  else
+    cd "`cat ~/.windows_side_home`";
+  fi
+}
+
