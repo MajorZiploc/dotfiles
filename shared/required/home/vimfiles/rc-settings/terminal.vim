@@ -31,7 +31,7 @@ nmap <leader>6 <C-^>
 " Set shell
 set shell=VIM_SHELL_PLACEHOLDER
 " Sets aliases for use in vim
-let $BASH_ENV = "~/.bashrc.d/portable/aliases.bash"
+let $BASH_ENV = VIM_BASH_ENV_PLACEHOLDER
 
 " Show file stats
 set ruler
