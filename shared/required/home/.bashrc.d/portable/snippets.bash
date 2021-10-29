@@ -1,6 +1,6 @@
 function snip_bash_for_loop {
 echo '
-IFS= ;
+IFS=$'"'\n'"';
 l=(1 2 3 "4");
 for ele in ${l[@]}; do
   echo "$ele" hi;
