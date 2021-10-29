@@ -31,6 +31,8 @@ coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright',
 find -E "$tempShared" -iregex ".*coc.*" -type f -exec gsed -E -i'' "s/COC_PLUGINS_PLACEHOLDER/$coc_plugins_placeholder/g" {} \;
 find -E "$tempShared" -type f -exec gsed -E -i'' "s/find(.*?)-regextype egrep/find -E\1/g" {} \;
 find -E "$tempShared" -iregex ".*(functions|aliases).*\.bash" -type f -exec gsed -E -i'' "s/\bsed /gsed /g" {} \;
+vim_bash_env_placeholder='"~/.bashrc.d/portable/aliases.bash"'
+find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -E -i'' "s,VIM_BASH_ENV_PLACEHOLDER,$vim_bash_env_placeholder,g" {} \;
 # example of deleting bak files
 # find "$tempShared" -iregex '.*\.bak$' -type f -exec rm {} \;
 
@@ -43,6 +45,7 @@ unset fuzzy_finder_placeholder
 unset fuzzy_finder_cdf_placeholder
 unset extra_env_checks_placeholder
 unset coc_plugins_placeholder
+unset vim_bash_env_placeholder
 unset vsc_settings_destination_placeholder
 unset setupRoot
 unset tempShared
