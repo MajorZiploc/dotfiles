@@ -19,7 +19,7 @@ find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -i'' "s,VIM_PLUGIN_SE
 find -E "$tempShared" -iregex ".*" -type f -exec gsed -E -i'' "s,OS_PLACEHOLDER,macm1,g" {} \;
 vsc_settings_destination_placeholder="$HOME/.vscoderc.d/";
 find -E "$tempShared" -iregex ".*\.sh" -type f -exec gsed -E -i'' "s,VSC_SETTINGS_DESTINATION_PLACEHOLDER,$vsc_settings_destination_placeholder,g" {} \;
-tmuxps_paths_array_placeholder="(\"\$(find ~ -mindepth 1 -maxdepth 1 -iregex \".*project.*\" -type d -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' 2>/dev/null)\")";
+tmuxps_paths_array_placeholder="(\"\$(find -E ~ -mindepth 1 -maxdepth 1 -iregex \".*(project|workspace).*\" -type d -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' 2>/dev/null)\")";
 find -E "$tempShared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,TMUXPS_PATHS_ARRAY_PLACEHOLDER,$tmuxps_paths_array_placeholder,g" {} \;
 fuzzy_finder_cdf_placeholder="fzf";
 find -E "$tempShared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,FUZZY_FINDER_CDF_PLACEHOLDER,$fuzzy_finder_cdf_placeholder,g" {} \;
