@@ -104,8 +104,6 @@ for file in `find "$HOME/.zshrc.d" -regextype egrep -iregex ".*\.zsh" -type f`; 
   . "$file";
 done;
 
-
-
 export FPATH="$FPATH:$(echo ~/.zsh_completion.d/)"
 # The following lines were added by compinstall
 zstyle :compinstall ~/.zsh_completion.d/ "$HOME/.zshrc"
