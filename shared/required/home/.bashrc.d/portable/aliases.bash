@@ -103,5 +103,3 @@ alias clipp="pwsh -command 'Get-Clipboard' | head -n -1"
 
 alias cdf='cd "$(dirname `FUZZY_FINDER_CDF_PLACEHOLDER`)"'
 
-BASH_ALIASES_PLACEHOLDER
-
