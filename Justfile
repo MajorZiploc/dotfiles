@@ -1,4 +1,4 @@
-# vim: set filetype=bash :
+# vim: filetype=bash
 
 parse-bash-function-aliases:
   #!/usr/bin/env bash
