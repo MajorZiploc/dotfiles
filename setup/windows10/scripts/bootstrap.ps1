@@ -10,9 +10,9 @@ cinst -y git
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
 # clone this repo
-git init
-git remote add origin https://github.com/MajorZiploc/home-settings
-git fetch
-git reset origin/master
-git branch --set-upstream-to=origin/master
-git checkout HEAD -- .
+# git init
+# git remote add origin https://github.com/MajorZiploc/home-settings
+# git fetch
+# git reset origin/master
+# git branch --set-upstream-to=origin/master
+# git checkout HEAD -- .
