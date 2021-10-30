@@ -1,8 +1,33 @@
 so ~/vimfiles/rc-settings/common.vim
 
+" control-keys for select all, undo, save, cut, copy, paste, quit
+nnoremap <c-a> ggVG
+nnoremap <c-s> :w<cr>
+inoremap <c-s> <esc>:w<cr>a
+nnoremap <c-z> u
+vnoremap <c-x> "+d
+vnoremap <c-c> "+y
+nnoremap <c-v> "+p
+vnoremap <c-v> "+p
+inoremap <c-v> <esc>"+pa
+" nnoremap <c-j> <c-d>
+" vnoremap <c-j> <c-d>
+" nnoremap <c-k> <c-u>
+" vnoremap <c-k> <c-u>
+
+" normal mode whitespace
+" nnoremap <cr> o<esc>
+" nnoremap <s-cr> O<esc>
+
+" nnoremap <tab> >>
+" nnoremap <s-tab> <<
+" vnoremap <tab> >
+" vnoremap <s-tab> <
+" inoremap <tab> <c-t>
+" inoremap <s-tab> <c-d>
+
 set scrolloff=3
 
-nnoremap <c-z> u
 nmap <leader><leader>s :vsc Tools.InvokeAceJumpCommand<cr>
 nmap gi :vsc Edit.GoToImplementation<cr>
 nmap gq :vsc Edit.QuickInfo<cr>
