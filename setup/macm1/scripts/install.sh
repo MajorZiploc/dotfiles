@@ -44,3 +44,6 @@ brew install --cask slack
 brew install --cask docker
 brew install --cask wine-stable
 
+# Finder: set hidden files to show by default
+defaults write http://com.apple.Finder AppleShowAllFiles true
+
