@@ -28,22 +28,26 @@ onoremap H ^
 nnoremap L $
 vnoremap L $
 onoremap L $
-nnoremap <c-j> <c-d>
-vnoremap <c-j> <c-d>
-nnoremap <c-k> <c-u>
-vnoremap <c-k> <c-u>
 
 " control-keys for select all, undo, save, cut, copy, paste, quit
-nnoremap <c-a> ggVG
-nnoremap <c-s> :w<cr>
-inoremap <c-s> <esc>:w<cr>a
+" This conflicts with screen's leader key
+" nnoremap <c-a> ggVG
+" Remove for consistency
+" nnoremap <c-s> :w<cr>
+" Remove for consistency
+" inoremap <c-s> <esc>:w<cr>a
 " This conflicts with putting a job in the background if we are using vim
 " nnoremap <c-z> u
-vnoremap <c-x> "+d
-vnoremap <c-c> "+y
-nnoremap <c-v> "+p
-vnoremap <c-v> "+p
-inoremap <c-v> <esc>"+pa
+" Remove for consistency
+" vnoremap <c-x> "+d
+" Remove for consistency
+" vnoremap <c-c> "+y
+" This conflicts with visual block mode in vim
+" nnoremap <c-v> "+p
+" This conflicts with visual block mode in vim
+" vnoremap <c-v> "+p
+" Remove for consistency
+" inoremap <c-v> <esc>"+pa
 
 " swap word under cursor with yank register
 " nnoremap <silent> <leader>s viwp
