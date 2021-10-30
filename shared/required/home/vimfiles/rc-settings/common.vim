@@ -37,7 +37,8 @@ vnoremap <c-k> <c-u>
 nnoremap <c-a> ggVG
 nnoremap <c-s> :w<cr>
 inoremap <c-s> <esc>:w<cr>a
-nnoremap <c-z> u
+" This conflicts with putting a job in the background if we are using vim
+" nnoremap <c-z> u
 vnoremap <c-x> "+d
 vnoremap <c-c> "+y
 nnoremap <c-v> "+p
