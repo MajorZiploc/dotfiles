@@ -45,7 +45,7 @@ Windows:
 Ubuntu:
 - apt packages
 
-## Install scripts - ALWAYS read scripts you are going to execute!!!!
+## Install scripts
 
 ### Warning - The following script will override any files in the destination. It copies to locations such as the home directory!!
 ### It is highly recommended to back up your current settings!!!!
@@ -76,14 +76,15 @@ Paths with content that will be affected include but are not limited to:
 - "$HOME/vscodevim/" when flags contain "01"
 - "$HOME/AppData/Roaming/Code/User/" (windows) else "$HOME/.config/Code/User/" when flags contain "01"
 
-### Windows
-To install chocolatey and clone this repo:
-- ./setup/windows/scripts/bootstrap.ps1
+### Windows and Mac
+To install chocolatey or home brew:
+- ./setup/(windows10|macm1)/scripts/bootstrap.ps1
 To install windows software with chocolatey:
-- ./setup/windows/scripts/install.ps1
-To setup ssh keys for git:
-- ./setup/windows/scripts/create\_ssh\_keys/1\_admin.ps1
-- ./setup/windows/scripts/create\_ssh\_keys/2\_std\_usr.ps1
+- ./setup/(windows10|macm1)/scripts/install.ps1
+
+### Ubuntu and Wsl Ubuntu
+To install software with apt-get:
+- ./setup/(wsl\_)?ubuntu20.04/scripts/install.ps1
 
 ## Bash tooling
 ### Notable bash functions/aliases
@@ -114,7 +115,7 @@ To setup ssh keys for git:
 - rest\_patch # use to call a patch rest request
 - rest\_generic # use to call a generic rest request
 
-### Note on Notable bash functions/aliases
+### Special mentions on bash functions/aliases
 All of the [ag]?find\_ are wrappers around find to make certain common operations easy to perform.
 
 Use whence to view the implementations of any of them to get an understanding of how they work
@@ -123,7 +124,7 @@ For more bash aliases and functions, use search\_env\_for(\_fuzz)?, or look at ~
 
 ## Extending and Staying Up to date with these settings
 
-### Staying up to date (Important notes for extending aswell)
+### Staying up to date
 If you want to stay up to date with this repo, then use the refresh\_settings bash function.
 
 refresh\_settings will pull master on this repo (~/projects/home-settings) and call the copy script.
@@ -132,7 +133,7 @@ refresh\_settings will pull master on this repo (~/projects/home-settings) and c
 
 This means that if you edit the files in the destination and then call copy, it will overwrite them.
 
-Example: you edit ~/.bashrc.d/aliases.bash to add an alias, then call refresh\_settings. This will replace ~/.bashrc.d/aliases.bash and you will lose your local edits
+Example: you edit ~/.bashrc.d/portable/aliases.bash to add an alias, then call refresh\_settings. This will replace ~/.bashrc.d/portable/aliases.bash and you will lose your local edits
 
 ### Extending
 The ~/.bashrc from this repo sources a file ~/.bashrc\_ext if it exists
