@@ -57,5 +57,5 @@ nmap <leader>i :vsc ReSharper.ReSharper_GotoImplementations<cr>
 nmap <leader>u :vsc ReSharper.ReSharper_FindUsages<cr>
 nmap <leader>r :vsc EditorContextMenus.CodeWindow.Refactor.RefactorRename
 
-inoremap kj <esc>
+" inoremap kj <esc>
 

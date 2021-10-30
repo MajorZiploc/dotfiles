@@ -1,4 +1,4 @@
-inoremap kj <esc>
+" inoremap kj <esc>
 nnoremap U <c-r>
 nnoremap Y y$
 
