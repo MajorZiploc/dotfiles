@@ -2,6 +2,7 @@ so ~/vimfiles/rc-settings/common.vim
 
 set scrolloff=3
 
+nnoremap <c-z> u
 nmap <leader><leader>s :vsc Tools.InvokeAceJumpCommand<cr>
 nmap gi :vsc Edit.GoToImplementation<cr>
 nmap gq :vsc Edit.QuickInfo<cr>
