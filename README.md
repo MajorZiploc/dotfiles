@@ -84,7 +84,7 @@ To install windows software with chocolatey:
 
 ### Ubuntu and Wsl Ubuntu
 To install software with apt-get:
-- ./setup/(wsl\_)?ubuntu20.04/scripts/install.ps1
+- ./setup/(wsl\_)?ubuntu20.04/scripts/install.sh
 
 ## Bash tooling
 ### Notable bash functions/aliases
@@ -114,6 +114,19 @@ To install software with apt-get:
 - rest\_delete # use to call a delete rest request
 - rest\_patch # use to call a patch rest request
 - rest\_generic # use to call a generic rest request
+- set\_intersection # take the intersection of 2 sets
+- set\_are\_disjoint # check if 2 sets are disjoint
+- set\_cardinality # get the number of elements in a set
+- set\_difference # take the difference of 2 sets (a - b)
+- set\_elem # check if item is an element of the set
+- set\_eq # check if 2 sets are equal
+- set\_is\_subset # check if 1 set is a subset of another set
+- set\_maximum # get the max element of a set string wise
+- set\_maximum\_num # get the max element of a set number wise
+- set\_minimum # get the min element of a set string wise
+- set\_minimum\_num # get the min element of a set number wise
+- set\_symmetric\_difference # get elements that occur in only one of the sets but not both
+- set\_union # get elements from either set or both
 
 ### Special mentions on bash functions/aliases
 All of the [ag]?find\_ are wrappers around find to make certain common operations easy to perform.
@@ -140,7 +153,7 @@ The ~/.bashrc from this repo sources a file ~/.bashrc\_ext if it exists
 
 The copy script does not have a .bashrc\_ext that it copies down, so the ~/.bashrc\_ext file is a safe place to add your own customizations of these bash settings.
 
-The ~/.bashrc\_ext is sourced after all other bash files. So you can change the implementation of aliases and functions and shopt flags that you do not like with your own flavor.
+The ~/.bashrc\_ext is sourced after all other bash files (minus OS specific append flow ~/.bashrc content). So you can change the implementation of aliases and functions and shopt flags that you do not like with your own flavor.
 
 Example: you do not like the fact that cdspell is turned on (shopt -s cdspell)
 
@@ -179,6 +192,6 @@ To contribute without mudding up your own environment from the copy scripts. The
 
 NOTE: you can also run a specific test file instead of all tests
 
-View the Justfile for more commands and details on each command or use:
+View the Justfile for more commands and details on each command or use (at the root of this project):
 > just -l
 
