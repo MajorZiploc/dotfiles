@@ -22,12 +22,18 @@ nnoremap Y y$
 nnoremap <s-k> hr<cr>^
 
 " navigation
-nnoremap H ^
-vnoremap H ^
-onoremap H ^
-nnoremap L $
-vnoremap L $
-onoremap L $
+" Using the original meaning of this key
+" nnoremap H ^
+" Using the original meaning of this key
+" vnoremap H ^
+" Using the original meaning of this key
+" onoremap H ^
+" Using the original meaning of this key
+" nnoremap L $
+" Using the original meaning of this key
+" vnoremap L $
+" Using the original meaning of this key
+" onoremap L $
 
 " control-keys for select all, undo, save, cut, copy, paste, quit
 " This conflicts with screen's leader key
