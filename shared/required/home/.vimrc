@@ -6,7 +6,7 @@ endfunction
 
 so ~/vimfiles/rc-settings/terminal.vim
 so ~/vimfiles/rc-settings/plugins.vim
-inoremap kj <esc>
+" inoremap kj <esc>
 
 call SourceIfExists("~/.vimrc_ext")
 
