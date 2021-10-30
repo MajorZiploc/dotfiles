@@ -31,7 +31,6 @@ sudo apt install vim
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get install -y neovim
 
-
 # nodejs nvm deps
 sudo apt install -y build-essential checkinstall libssl-dev
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.35.1/install.sh | bash
@@ -68,6 +67,22 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt -y update
 apt-cache policy docker-ce
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io
+
+# powershell
+# Install pre-requisite packages.
+sudo apt-get install -y wget apt-transport-https software-properties-common
+# Download the Microsoft repository GPG keys
+wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+# Register the Microsoft repository GPG keys
+sudo dpkg -i packages-microsoft-prod.deb
+# Update the list of products
+sudo apt-get update
+# Enable the "universe" repositories
+sudo add-apt-repository universe
+# Install PowerShell
+sudo apt-get install -y powershell
+# Cleanup
+sudo rm packages-microsoft-prod.deb
 
 # another way to install docker
 # sudo apt-get -y install \
