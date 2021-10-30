@@ -1,2 +1,1 @@
-let g:gitgutter_git_executable = 'C:/Program Files/Git/bin/git.exe'
-
+let g:gitgutter_git_executable = '/usr/bin/git'

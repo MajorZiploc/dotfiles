@@ -7,20 +7,18 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
 Plug 'tpope/vim-surround' " manipulate surround chars
 VIM_PLUGIN_INCLUDE_PLACEHOLDER
 
-" Plug 'airblade/vim-rooter'
-" Plug 'edkolev/tmuxline.vim' " prettier tmux
-" Plug 'itchyny/lightline.vim' " status bar
 " Plug 'airblade/vim-gitgutter' " git supporting plugin
 " Plug 'OrangeT/vim-csharp'
 " Plug 'chaoren/vim-wordmotion'
 " Plug 'scrooloose/nerdtree' " filesystem explorer
 "
-" Alt to ctrlp,ripgrep,quickfix -- fzf is much better but doesnt always work
+" Alt to ctrlp,ripgrep,quickfix
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf.vim' " works in vim 8.2 and neovim
+" Plug 'airblade/vim-rooter'
 "
 " " Alt to fzf
-" Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
+" Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder, doesnt work on mac
 " Plug 'jremmen/vim-ripgrep' " grepper, works in vim 8.1 and lower
 " Plug 'stefandtw/quickfix-reflector.vim' " editable quickfix list for ripgrep
 
