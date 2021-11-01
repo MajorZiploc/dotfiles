@@ -54,6 +54,9 @@ sudo apt-get update
 sudo apt-get install -y dotnet-sdk-3.1
 sudo apt-get install -y dotnet-sdk-5.0
 
+# snapd
+sudo apt install snapd
+
 # powershell
 # Install pre-requisite packages.
 sudo apt-get install -y wget apt-transport-https software-properties-common
