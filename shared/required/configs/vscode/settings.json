@@ -107,7 +107,8 @@
   "vim.handleKeys": {
     "<C-f>": false,
     "<C-k>": false,
-    "<C-j>": false
+    "<C-j>": false,
+    "<C-y>": false
   },
   "AREPL.whenToExecute": "onSave",
   "editor.minimap.enabled": false,
