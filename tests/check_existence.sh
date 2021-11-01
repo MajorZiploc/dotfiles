@@ -13,7 +13,6 @@ function typea_check(){
   l=(
   "find_files"
   "h"
-  "hf"
   "show_env_notes"
   "tmuxcs"
   "tmuxps"
