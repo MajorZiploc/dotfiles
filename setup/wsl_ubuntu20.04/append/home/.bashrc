@@ -43,3 +43,7 @@ if [ -d $HOME/.asdf ]; then
   . $HOME/.asdf/completions/asdf.bash
 fi
 [ -e ~/.fzf.bash ] && . ~/.fzf.bash
+
+# Rust
+export PATH="$PATH:/Users/manyu/.cargo/bin"
+[[ -d $HOME/.cargo ]] && . $HOME/.cargo/env
