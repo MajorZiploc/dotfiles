@@ -10,7 +10,7 @@ tempThis="$4"
 
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find -E "$tempShared" -iregex ".*\.json" -type f -exec gsed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" "{}" \;
-find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -i'' 's,VIM_SHELL_PLACEHOLDER,/usr/local/bin/zsh,g' "{}" \;
+find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -i'' 's,VIM_SHELL_PLACEHOLDER,/usr/local/bin/bash,g' "{}" \;
 vim_plugin_include="Plug 'junegunn/fzf'\, \{ 'do': \{ -> fzf#install\(\) \} \}\nPlug 'junegunn/fzf.vim'\nPlug 'airblade/vim-rooter'\nPlug 'mechatroner/rainbow_csv' \" csv highlighter and query engine\nPlug 'frazrepo/vim-rainbow' \" color pairing brakets and such\nPlug 'bling/vim-airline' \" status bar\nPlug 'vim-airline/vim-airline-themes' \" colors for status bar\nPlug 'tpope/vim-fugitive' \" git plugin";
 find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -i'' "s,VIM_PLUGIN_INCLUDE_PLACEHOLDER,$vim_plugin_include,g" "{}" \;
 vim_plugset_path="so ~/vimfiles/plugin-settings/"
@@ -31,7 +31,7 @@ coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright',
 find -E "$tempShared" -iregex ".*coc.*" -type f -exec gsed -E -i'' "s/COC_PLUGINS_PLACEHOLDER/$coc_plugins_placeholder/g" "{}" \;
 find -E "$tempShared" -type f -exec gsed -E -i'' "s/find(.*?)-regextype egrep/find -E\1/g" "{}" \;
 find -E "$tempShared" -iregex ".*(functions|aliases).*\.bash" -type f -exec gsed -E -i'' "s/\bsed /gsed /g" "{}" \;
-vim_bash_env_placeholder='"~/vimfiles/bash_env.zsh"';
+vim_bash_env_placeholder='"~/vimfiles/bash_env.bash"';
 find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -E -i'' "s,VIM_BASH_ENV_PLACEHOLDER,$vim_bash_env_placeholder,g" "{}" \;
 # example of deleting bak files
 # find "$tempShared" -iregex '.*\.bak$' -type f -exec rm "{}" \;
