@@ -25,8 +25,6 @@ $SCRIPTPATH/../../../shared/scripts/copy.sh "$setupRoot" "$flags"
   done;
 }
 
-{ printf "setopt aliases\n\n"; cat ~/.bashrc.d/portable/aliases.bash; } > ~/vimfiles/bash_env.zsh;
-
 git restore "$SCRIPTPATH/../../../shared/scripts/create_temps.sh"
 
 unset setupRoot

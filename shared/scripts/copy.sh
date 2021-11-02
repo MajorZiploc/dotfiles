@@ -28,6 +28,9 @@ $tempShared/scripts/copy_content_to_client.sh "$setupRoot" "$temp" "$tempShared"
 
 rm -r "$temp/"
 
+{ printf "shopt -s expand_aliases\n\n"; cat ~/.bashrc.d/portable/aliases.bash; } > ~/vimfiles/bash_env.bash;
+{ printf "setopt aliases\n\n"; cat ~/.bashrc.d/portable/aliases.bash; } > ~/vimfiles/bash_env.zsh;
+
 unset tempShared
 unset tempThis
 unset temp

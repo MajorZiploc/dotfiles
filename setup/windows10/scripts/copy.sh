@@ -27,7 +27,5 @@ $SCRIPTPATH/../../../shared/scripts/copy.sh "$setupRoot" "$flags"
   unset winterm_settings
 }
 
-{ printf "shopt -s expand_aliases\n\n"; cat ~/.bashrc.d/portable/aliases.bash; } > ~/vimfiles/bash_env.bash;
-
 unset setupRoot
 
