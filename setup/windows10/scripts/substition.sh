@@ -29,7 +29,7 @@ extra_env_checks_placeholder="which fzy 2>\&1 2>/dev/null >/dev/null; [[ \"\$?\"
 find "$tempShared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,EXTRA_ENV_CHECKS_PLACEHOLDER,$extra_env_checks_placeholder,g" "{}" \;
 coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright', 'coc-sql', 'coc-tsserver', 'coc-css', 'coc-html']";
 find "$tempShared" -regextype egrep -iregex ".*coc.*" -type f -exec sed -E -i'' "s/COC_PLUGINS_PLACEHOLDER/$coc_plugins_placeholder/g" "{}" \;
-vim_bash_env_placeholder='"~/.bashrc"'
+vim_bash_env_placeholder='"~/vimfiles/bash_env.bash"'
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i'' "s,VIM_BASH_ENV_PLACEHOLDER,$vim_bash_env_placeholder,g" "{}" \;
 
 unset vsvimpath

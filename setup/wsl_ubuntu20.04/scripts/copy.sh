@@ -10,7 +10,7 @@ flags="$1"
 
 $SCRIPTPATH/../../../shared/scripts/copy.sh "$setupRoot" "$flags"
 
-{ printf "setopt aliases\n\n"; cat ~/.bashrc.d/portable/aliases.bash; } > ~/vimfiles/bash_env.zsh;
+{ printf "shopt -s expand_aliases\n\n"; cat ~/.bashrc.d/portable/aliases.bash; } > ~/vimfiles/bash_env.bash;
 
 unset setupRoot
 
