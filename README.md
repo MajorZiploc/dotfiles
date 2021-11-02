@@ -86,6 +86,10 @@ To install windows software with chocolatey:
 To install software with apt-get:
 - ./setup/(wsl\_)?ubuntu20.04/scripts/install.sh
 
+### Vim setting shells
+Make sure to set shells in the /usr/local/bin: (NOTE: for git bash, launch as admin and run the content of this file without the 'sudo')
+- ./shared/scripts/vim\_shell/set\_shells.sh
+
 ## Bash tooling
 ### Notable bash functions/aliases
 - whence <cmd> # gives the details of a bash command
