@@ -288,7 +288,7 @@ function cdfp {
   '
   project_dir=`bash -c "$get_project_dir"`;
   cd "$project_dir";
-  cdf;
+  cd "$(dirname `FUZZY_FINDER_CDF_PLACEHOLDER`)";
 }
 
 function _find_generate_not_paths {
