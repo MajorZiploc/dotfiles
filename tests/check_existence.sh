@@ -97,6 +97,8 @@ function typea_check(){
   "rest_delete"
   "rest_generic"
   "cdfp"
+  "ideh1"
+  "idev1"
   )
   for funct in ${l[@]};
     do
