@@ -114,3 +114,9 @@ set wildmode=longest,list ",full
 " Added an extra select menu that shows what choice you are on for ,full
 " set wildmenu
 
+" menu colors
+highlight Pmenu ctermbg=gray guibg=gray
+highlight PmenuSel ctermbg=gray guibg=gray
+highlight PmenuSbar ctermbg=gray guibg=gray
+highlight Pmenu ctermbg=gray guibg=gray
+
