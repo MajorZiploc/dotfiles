@@ -84,12 +84,12 @@ function tmuxds {
   _tmux_session_list_helper "$session_name" "$selected";
 }
 
-function ideh1() {
+function ideh1 {
   # splits the window into 2 panes
   tmux split-window -h -p 39;
 }
 
-function idev1() {
+function idev1 {
   # splits the window into 2 panes
   tmux split-window -v -p 30;
 }
