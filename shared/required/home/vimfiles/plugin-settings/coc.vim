@@ -58,3 +58,10 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
+highlight CocWarningSign guifg=black
+highlight CocErrorSign guifg=black
+highlight CocSelectedText guifg=black
+highlight CocWarningFloat guifg=black
+highlight CocErrorFloat guifg=black
+highlight CocHintSign guifg=black
+
