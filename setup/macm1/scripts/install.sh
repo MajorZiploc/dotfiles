@@ -22,6 +22,7 @@ xcode-select --install
 brew install openssl readline sqlite3 xz zlib
 
 # rust
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 brew install rust-analyzer
 
 # install asdf and its deps
