@@ -4,6 +4,10 @@ let mapleader = " "
 nnoremap U <c-r>
 nnoremap Y y$
 
+" keep focus at center of screen
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 " Conflicts with ripgrep plugin
 " normal mode whitespace
 " nnoremap <cr> o<esc>

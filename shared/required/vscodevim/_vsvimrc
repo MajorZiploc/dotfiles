@@ -2,6 +2,10 @@
 nnoremap U <c-r>
 nnoremap Y y$
 
+" keep focus at center of screen
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 " normal mode whitespace
 " nnoremap <cr> o<esc>
 " nnoremap <s-cr> O<esc>
