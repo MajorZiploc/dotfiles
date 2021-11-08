@@ -315,7 +315,9 @@ function _find_default_ignored_dirs {
 }
 
 function _find_git_estimator_ignored_dirs {
-  local get_git_ignore_content='
+  local search_depth_for_nested_git_ignores=$1;
+  search_depth_for_nested_git_ignores="${search_depth_for_nested_git_ignores:="0"}";
+  local get_ancestor_git_ignore_content='
     git_ignore_content=`cat .gitignore 2>/dev/null`;
     current_path=`pwd`;
     while [[ ! "$current_path" == "/" ]] ; do
@@ -326,10 +328,16 @@ function _find_git_estimator_ignored_dirs {
       current_path=`pwd`;
       git_ignore_content=`cat .gitignore 2>/dev/null`;
     done;
-    echo "$git_ignore_content" | sort -u;
+    echo "$git_ignore_content";
   '
-  local git_ignore_content=`{ bash -c "$get_git_ignore_content"; echo ".git .svn"; }`;
-  local gitignore_entries=($(echo "$git_ignore_content" | trim | egrep -v "('|\"|;|#|\\!|,|\\{|\\}|\\@|\\||\\^|\\(|\\)|^[[:blank:]]*$|\\&|\\$|\\\\|~|\\+|\`|=|[^[:blank:]]+\.[^[:blank:]]{1,6}\$)" | tr " " "\n" | sed -E 's,^[/\*]*/,,g;s,/[/\*]*$,,g;' | xargs));
+  local child_git_ignore_content="";
+  [[ $search_depth_for_nested_git_ignores -ge 2 ]] && {
+    find . -mindepth "2" -maxdepth "$search_depth_for_nested_git_ignores" -name ".gitignore" -print0 | while read -d $'\0' _git_ignore; do
+      child_git_ignore_content+=`{ cat "$_git_ignore"; printf "\n"; }`;
+    done;
+  }
+  local git_ignore_content=`{ bash -c "$get_ancestor_git_ignore_content"; echo "$child_git_ignore_content"; echo ".git .svn"; }`;
+  local gitignore_entries=($(echo "$git_ignore_content" | sort -u | trim | egrep -v "('|\"|;|#|\\!|,|\\{|\\}|\\@|\\||\\^|\\(|\\)|^[[:blank:]]*$|\\&|\\$|\\\\|~|\\+|\`|=|[^[:blank:]]+\.[^[:blank:]]{1,6}\$)" | tr " " "\n" | sed -E 's,^[/\*]*/,,g;s,/[/\*]*$,,g;' | xargs));
   _find_generate_not_paths "${gitignore_entries[@]}";
 }
 
@@ -370,7 +378,7 @@ function afind_items_rename_preview {
 }
 
 function gfind_items_rename_preview {
-  local not_paths=`_find_git_estimator_ignored_dirs`;
+  local not_paths=`_find_git_estimator_ignored_dirs $4`;
   _preview_warning_message;
   _find_items_rename_helper "$1" "$2" true "$3" "$not_paths";
 }
@@ -386,7 +394,7 @@ function afind_items_rename {
 }
 
 function gfind_items_rename {
-  local not_paths=`_find_git_estimator_ignored_dirs`;
+  local not_paths=`_find_git_estimator_ignored_dirs $4`;
   _find_items_rename_helper "$1" "$2" false "$3" "$not_paths";
 }
 
@@ -426,7 +434,7 @@ function afind_items_delete_preview {
 }
 
 function gfind_items_delete_preview {
-  local not_paths=`_find_git_estimator_ignored_dirs`;
+  local not_paths=`_find_git_estimator_ignored_dirs $3`;
   _preview_warning_message;
   _find_items_delete_helper "$1" true "$2" "$not_paths";
 }
@@ -442,7 +450,7 @@ function afind_items_delete {
 }
 
 function gfind_items_delete {
-  local not_paths=`_find_git_estimator_ignored_dirs`;
+  local not_paths=`_find_git_estimator_ignored_dirs $3`;
   _find_items_delete_helper "$1" false "$2" "$not_paths";
 }
 
@@ -466,7 +474,7 @@ function afind_items {
 }
 
 function gfind_items {
-  local not_paths=`_find_git_estimator_ignored_dirs`;
+  local not_paths=`_find_git_estimator_ignored_dirs $3`;
   _find_items_helper "$1" "$2" "$not_paths";
 }
 
@@ -521,7 +529,7 @@ function afind_files_delete_preview {
 }
 
 function gfind_files_delete_preview {
-  local not_paths=`_find_git_estimator_ignored_dirs`;
+  local not_paths=`_find_git_estimator_ignored_dirs $4`;
   _find_files_delete_preview_helper "$1" "$2" "$3" "$not_paths";
 }
 
@@ -536,7 +544,7 @@ function afind_files_delete {
 }
 
 function gfind_files_delete {
-  local not_paths=`_find_git_estimator_ignored_dirs`;
+  local not_paths=`_find_git_estimator_ignored_dirs $4`;
   _find_files_delete_helper "$1" "$2" "$3" "$not_paths";
 }
 
@@ -585,7 +593,7 @@ function afind_files_rename_preview {
 }
 
 function gfind_files_rename_preview {
-  local not_paths=`_find_git_estimator_ignored_dirs`;
+  local not_paths=`_find_git_estimator_ignored_dirs $5`;
   _find_files_rename_helper "$1" "$2" "$3" true "$4" "$not_paths";
 }
 
@@ -600,7 +608,7 @@ function afind_files_rename {
 }
 
 function gfind_files_rename {
-  local not_paths=`_find_git_estimator_ignored_dirs`;
+  local not_paths=`_find_git_estimator_ignored_dirs $5`;
   _find_files_rename_helper "$1" "$2" "$3" false "$4" "$not_paths";
 }
 
@@ -629,7 +637,7 @@ function afind_files {
 }
 
 function gfind_files {
-  local not_paths=`_find_git_estimator_ignored_dirs`;
+  local not_paths=`_find_git_estimator_ignored_dirs $4`;
   _find_files_helper "$1" "$2" "$3" "$not_paths";
 }
 
@@ -644,7 +652,7 @@ function afind_files_fuzz {
 }
 
 function gfind_files_fuzz {
-  local not_paths=`_find_git_estimator_ignored_dirs`;
+  local not_paths=`_find_git_estimator_ignored_dirs $4`;
   _find_files_helper "$(echo "$1" | to_fuzz)" "$2" "$3" "$not_paths";
 }
 
@@ -670,7 +678,7 @@ function afind_in_files {
 }
 
 function gfind_in_files {
-  local not_paths=`_find_git_estimator_ignored_dirs`;
+  local not_paths=`_find_git_estimator_ignored_dirs $4`;
   _find_in_files_helper "$1" "$2" "$3" "$not_paths";
 }
 
@@ -685,7 +693,7 @@ function afind_in_files_fuzz {
 }
 
 function gfind_in_files_fuzz {
-  local not_paths=`_find_git_estimator_ignored_dirs`;
+  local not_paths=`_find_git_estimator_ignored_dirs $4`;
   _find_in_files_helper "$(echo "$1" | to_fuzz)" "$2" "$3" "$not_paths";
 }
 
@@ -711,7 +719,7 @@ function afind_in_files_replace {
 }
 
 function gfind_in_files_replace {
-  local not_paths=`_find_git_estimator_ignored_dirs`;
+  local not_paths=`_find_git_estimator_ignored_dirs $4`;
   _find_in_files_replace_helper "$1" "$2" "$3" "$not_paths";
 }
 
