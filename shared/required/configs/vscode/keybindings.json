@@ -132,5 +132,13 @@
     "key": "ctrl+k ctrl+i",
     "command": "-editor.action.showHover",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+w ctrl+l",
+    "command": "workbench.action.focusNextGroup"
+  },
+  {
+    "key": "ctrl+w ctrl+h",
+    "command": "workbench.action.focusPreviousGroup"
   }
 ]
