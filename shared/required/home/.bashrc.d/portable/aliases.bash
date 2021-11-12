@@ -90,7 +90,7 @@ alias back='cd ~-'
 alias time_js='gnomon'
 
 alias git_merge_keep_theirs="git merge -X theirs"
-alias git_deploy='git checkout develop && git pull && git push && git checkout master && git pull && git merge develop --commit --no-edit && git push && git checkout develop'
+alias git_deploy='git checkout develop && git pull && git push && { git checkout master 2>/dev/null || git checkout main 2>/dev/null ; } && git pull && git merge develop --commit --no-edit && git push && git checkout develop'
 alias git_log_break_down="git log --stat --oneline --all --decorate"
 alias git_graph="git log --oneline --decorate --all --graph"
 alias git_log_diff="git log --all --stat -p";

@@ -22,7 +22,7 @@ function refresh_settings {
   [[ -z "$flags" ]] && { flags="000"; }
   local project_root_path="$HOME/projects/home-settings";
   cd "$project_root_path" &&
-  git checkout master &&
+  { git checkout master 2>/dev/null || git checkout main 2>/dev/null ; } &&
   echo 'Previous commit information:' &&
   echo "$(git show --summary)" &&
   git pull &&
