@@ -22,5 +22,3 @@ $dirs | ForEach-Object {
   }
 }
 
-
-
