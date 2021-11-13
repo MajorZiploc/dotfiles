@@ -287,7 +287,7 @@ function cdfp {
     current_path=`pwd`;
     project_dir=`pwd`;
     while [[ ! "$current_path" == "/" ]] ; do
-      [[ -e .gitignore ]] && {
+      [[ -d .git ]] && {
         project_dir=`pwd`;
         break;
       }
@@ -318,15 +318,17 @@ function _find_git_estimator_ignored_dirs {
   local search_depth_for_nested_git_ignores=$1;
   search_depth_for_nested_git_ignores="${search_depth_for_nested_git_ignores:="0"}";
   local get_ancestor_git_ignore_content='
-    git_ignore_content=`cat .gitignore 2>/dev/null`;
+    git_ignore_content="`cat .gitignore 2>/dev/null`";
     current_path=`pwd`;
     while [[ ! "$current_path" == "/" ]] ; do
-      [[ -n "$git_ignore_content" ]] && {
+      [[ -d .git ]] && {
         break;
       }
       cd ..;
       current_path=`pwd`;
-      git_ignore_content=`cat .gitignore 2>/dev/null`;
+      git_ignore_content+=`printf "\n "`;
+      git_ignore_content+=`cat .gitignore 2>/dev/null`;
+      git_ignore_content+=`printf "\n "`;
     done;
     echo "$git_ignore_content";
   '
