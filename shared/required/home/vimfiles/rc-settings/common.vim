@@ -77,6 +77,7 @@ set backspace=indent,eol,start
 " indentation settings
 set expandtab
 set tabstop=2
+set softtabstop=2
 set shiftwidth=2
 set autoindent
 

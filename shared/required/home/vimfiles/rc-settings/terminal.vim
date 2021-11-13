@@ -120,3 +120,7 @@ highlight PmenuSel ctermbg=gray guibg=gray
 highlight PmenuSbar ctermbg=gray guibg=gray
 highlight Pmenu ctermbg=gray guibg=gray
 
+" remove language styles
+let g:rust_recommended_style = 0
+let g:python_recommended_style = 0
+
