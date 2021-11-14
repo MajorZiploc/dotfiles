@@ -726,20 +726,25 @@ function gfind_in_files_replace {
 }
 
 function git_checkout_branch_in_path {
-  local branch="$1";
+  local branches="$1";
   local _path="$2";
-  [[ -z "$branch" ]] && { echo "Must specify a branch!" >&2; return 1; }
+  [[ -z "$branches" ]] && { echo "Must specify a string of branches delimited by spaces!" >&2; return 1; }
+  branches=(`echo "$branches" | xargs`);
   if [[ -z "$_path" ]]; then
     _path=(`find . -mindepth 1 -maxdepth 1 -type d | xargs`);
   else
     _path=(`echo "$_path" | xargs`);
   fi
-  for ele in ${_path[@]}; do
-    echo "$ele";
-    cd "$ele";
-    # the first git pull to to ensure that if there is working dir changes
-    #  that it will not continue to switching the branch
-    git pull && git fetch origin && git checkout "$branch" && git pull;
+  for proj in ${_path[@]}; do
+    echo "$proj";
+    cd "$proj";
+    for branch in ${branches[@]}; do
+      # Breaks out of loop for the first branch that checks out successfully
+      # the first git pull to to ensure that if there is working dir changes
+      # that it will not continue to switching the branch
+      git pull && git fetch origin && git checkout "$branch" && break;
+    done;
+    git pull;
     cd ..;
   done;
 }
