@@ -25,3 +25,5 @@
 	gpgSign = false
 [tag]
 	forceSignAnnotated = false
+[init]
+	defaultBranch = master
