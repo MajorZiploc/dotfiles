@@ -738,11 +738,12 @@ function git_checkout_branch_in_path {
   for proj in ${_path[@]}; do
     echo "$proj";
     cd "$proj";
+    git pull && git fetch origin;
     for branch in ${branches[@]}; do
       # Breaks out of loop for the first branch that checks out successfully
       # the first git pull to to ensure that if there is working dir changes
       # that it will not continue to switching the branch
-      git pull && git fetch origin && git checkout "$branch" && break;
+      git checkout "$branch" && break;
     done;
     git pull;
     cd ..;
