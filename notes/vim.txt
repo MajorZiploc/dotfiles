@@ -37,3 +37,6 @@ g <ctrl-a>
 # run the current file as a shell command. must save the file first.
 :!sh %
 
+# fix dos new lines
+:%s/\r/\r/g
+
