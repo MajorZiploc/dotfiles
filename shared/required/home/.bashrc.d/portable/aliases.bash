@@ -74,10 +74,10 @@ alias show_root_folder="sed -E 's,^\./([^/]*?)/.*,\1,'"
 # reexecutes last command that beings with a pattern. ex: fc -s egrep
 alias reexe='fc -s'
 
-alias vimi='/usr/bin/vim -u NONE'
-alias vimc='/usr/bin/vim -u ~/vimfiles/rc-settings/common.vim'
-alias vimt='/usr/bin/vim -u ~/vimfiles/rc-settings/terminal.vim'
-alias vimnp='/usr/bin/vim --noplugin'
+alias vimi='vim -u NONE'
+alias vimc='vim -u ~/vimfiles/rc-settings/common.vim'
+alias vimt='vim -u ~/vimfiles/rc-settings/terminal.vim'
+alias vimnp='vim --noplugin'
 
 alias show_fn_names='declare -F'
 alias show_fn_impls='declare -f'
