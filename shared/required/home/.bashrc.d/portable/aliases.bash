@@ -30,23 +30,21 @@ alias add_semicolons='sed -E "s/(.+)/\1;/;s/;;$/;/;"'
 alias to_fuzz='sed -E "s/(\\w)/\\1\[^\[:blank:\]\]{0,3}/g" | sed "s/\[^\[:blank:\]\]{0,3}$//g"'
 alias to_newlines='tr " " "\n"'
 
-alias bash_surround_expression='sed -E "s,(.+),\"\$(\1)\","'
-alias bash_surround_stream='sed -E "s,(.+),<(\1),"'
-alias bash_surround_stream_echo='sed -E "s,(.+),<(echo \"\1\"),"'
-alias bash_surround_var_multiline='perl -0777 -ple "BEGIN{print \"var_name=\`cat << EOF\n\";};END{print \"EOF\n\`;\";};"'
-alias bash_surround_var_singleline='trim | sed -E "s,(.+),var_name=\`\1\`;,"'
-alias bash_line_join='tr -d "\n" | tr -d "\r"'
+# bash_surround_expression
+alias bse='sed -E "s,(.+),\"\$(\1)\","'
+# bash_surround_stream
+alias bss='sed -E "s,(.+),<(\1),"'
+# bash_surround_stream_echo
+alias bsse='sed -E "s,(.+),<(echo \"\1\"),"'
+# bash_surround_var_multiline
+alias bsvm='perl -0777 -ple "BEGIN{print \"var_name=\`cat << EOF\n\";};END{print \"EOF\n\`;\";};"'
+# bash_surround_var_singleline
+alias bsvs='trim | sed -E "s,(.+),var_name=\`\1\`;,"'
+# bash_line_join
+alias blj='tr -d "\n" | tr -d "\r"'
 # Line break on ; or | if it is not followed by |
-alias bash_line_split="perl -ne 's/(;|\|)(?:(?!;|\|))/\$1\\n/g; print;'"
-
-alias bse='bash_surround_expression'
-alias bss='bash_surround_stream'
-alias bsse='bash_surround_stream_echo'
-alias bsvm='bash_surround_var_multiline'
-alias bsvs='bash_surround_var_singleline'
-alias blj='bash_line_join'
-alias bls='bash_line_split'
-alias bln='to_newlines'
+# bash_line_split
+alias bls="perl -ne 's/(;|\|)(?:(?!;|\|))/\$1\\n/g; print;'"
 
 # Viewing directory information aliases
 # enable color support of ls and also add handy aliases
@@ -66,9 +64,9 @@ alias less_r='less -r'
 alias less_f='less +F'
 alias whence='type -a'
 
-alias grepn_files="sed -E 's/(.\S*?):[0-9]+:(.*?)/\1/g'"
-alias grepn_files_freq="grepn_files | sort | uniq -c | sort -n"
-alias grepn_files_uniq="grepn_files | sort | uniq"
+alias _grepn_files="sed -E 's/(.\S*?):[0-9]+:(.*?)/\1/g'"
+alias grepn_files_freq="_grepn_files | sort | uniq -c | sort -n"
+alias grepn_files_uniq="_grepn_files | sort | uniq"
 alias find_items_hidden="sed -e 's/\.\///g' | egrep \"\/\.\""
 alias find_items_nonhidden="sed -e 's/\.\///g' | egrep -v \"\/\.\""
 alias show_root_folder="sed -E 's,^\./([^/]*?)/.*,\1,'"
