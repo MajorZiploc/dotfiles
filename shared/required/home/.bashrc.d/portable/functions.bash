@@ -894,12 +894,12 @@ function convert_csv_to_json {
 }
 
 function csv_delimiter_check_single_line {
-  local sql_query="$1";
+  local csv_like="$1";
   local delimiter="$2";
-  [[ -z "$sql_query" ]] && { echo "Must specify a sql_query file or string!" >&2; return 1; }
+  [[ -z "$csv_like" ]] && { echo "Must specify a csv_like file or string!" >&2; return 1; }
   echo "${delimiter:=","}" >/dev/null;
-  [[ -e "$sql_query" ]] && { sql_query=`cat "$sql_query"`; }
-  echo "$sql_query" | tr -d -c "${delimiter}\n" | awk '{ print length; }' | sort -n | uniq -c;
+  [[ -e "$csv_like" ]] && { csv_like=`cat "$csv_like"`; }
+  echo "$csv_like" | tr -d -c "${delimiter}\n" | awk '{ print length; }' | sort -n | uniq -c;
 }
 
 function _rest_temp_response_loc {

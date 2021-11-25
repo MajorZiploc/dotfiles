@@ -100,12 +100,11 @@ function typea_check(){
   "ideh1"
   "idev1"
   )
-  for funct in ${l[@]};
-    do
-      run typea_check "$funct"
-      assert_success
-      assert_output --partial "$funct"
-    done;
+  for funct in ${l[@]}; do
+    run typea_check "$funct"
+    assert_success
+    assert_output --partial "$funct"
+  done;
   unset IFS;
 }
 
@@ -135,17 +134,13 @@ function typea_check(){
   "trim"
   "keep_last"
   "keep_first"
+  "add_semicolons"
   "to_fuzz"
   "to_newlines"
-  "bash_surround_expression"
-  "bash_surround_stream"
-  "bash_line_join"
-  "bash_line_split"
   "bse"
   "bss"
   "blj"
   "bls"
-  "bln"
   "ls"
   "grep"
   "fgrep"
@@ -157,7 +152,7 @@ function typea_check(){
   "less_r"
   "less_f"
   "whence"
-  "grepn_files"
+  "_grepn_files"
   "grepn_files_freq"
   "grepn_files_uniq"
   "find_items_hidden"
@@ -170,7 +165,7 @@ function typea_check(){
   "show_fn_names"
   "show_fn_impls"
   "back"
-  #"time_js"
+  "time_js"
   "git_merge_keep_theirs"
   "git_deploy"
   "git_log_break_down"
@@ -181,12 +176,11 @@ function typea_check(){
   "show_root_folder"
   "cdf"
   )
-  for funct in ${l[@]};
-    do
-      run typea_check "$funct"
-      assert_success
-      assert_output --partial "$funct"
-    done;
+  for funct in ${l[@]}; do
+    run typea_check "$funct"
+    assert_success
+    assert_output --partial "$funct"
+  done;
   unset IFS;
 }
 
