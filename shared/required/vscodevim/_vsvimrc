@@ -84,11 +84,17 @@ set timeoutlen=300
 
 set shell=VIM_SHELL_PLACEHOLDER
 
-nmap gd :vsc editor.action.revealDefinition<cr>
+" the trailing lh here is to refocus the screen after jump if the jump occurs
+" within the same file. Without it, it will appear to have not moved to the
+" definition
+nmap gd :vsc editor.action.revealDefinition<cr>lh
 nmap gr :vsc editor.action.goToReferences<cr>
 nmap gi :vsc editor.action.goToImplementation<cr>
 nmap gq :vsc editor.action.showHover<cr>
 vmap gq :vsc editor.action.showHover<cr>
+nmap wi :vsc editor.action.showHover<cr>
+vmap wi :vsc editor.action.showHover<cr>
 vmap gf :vsc editor.action.formatSelection<cr>
+
 nmap <leader>e :vsc editor.action.marker.next<cr>
 nmap <leader>E :vsc editor.action.marker.prev<cr>
