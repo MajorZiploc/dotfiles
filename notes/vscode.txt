@@ -1,6 +1,0 @@
-vscode cli
-
-# lists installed extensions
-code --list-extensions
-code --install-extension ms-vscode.cpptools
-code --uninstall-extension ms-vscode.csharp
