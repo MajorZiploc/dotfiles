@@ -1,3 +1,0 @@
-# swap panes
-ctrl-b - { # swap-pane -U
-ctrl-b - } # swap-pane -D

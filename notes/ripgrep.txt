@@ -1,2 +1,0 @@
-which rg 
-which rga
