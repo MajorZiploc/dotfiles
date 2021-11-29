@@ -11,6 +11,8 @@ shopt -s histappend
 shopt -s histreedit
 # Don't put duplicate lines in the history.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+# Puts a time stamp on the history entries
+export HISTTIMEFORMAT="%Y-%m-%d %T "
 # Ignore some controlling instructions
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
 # The '&' is a special pattern which suppresses duplicate entries.
