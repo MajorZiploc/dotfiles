@@ -23,6 +23,8 @@ code --install-extension janisdd.vscode-edit-csv
 code --install-extension s-nlf-fh.glassit
 # Simple tmux key binds for the vscode terminal
 code --install-extension stephlin.vscode-tmux-keybinding
+# rest api client - postman like
+code --install-extension humao.rest-client
 
 # general non mssql database connection
 # code --install-extension bajdzis.vscode-database
