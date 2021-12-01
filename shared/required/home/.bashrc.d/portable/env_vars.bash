@@ -8,3 +8,5 @@ export EDITOR='vim'
 
 export NODE_ENV='development'
 
+export NODE_TLS_REJECT_UNAUTHORIZED=0
+
