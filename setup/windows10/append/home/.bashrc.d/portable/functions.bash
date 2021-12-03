@@ -21,6 +21,10 @@ function mssql_exec {
   fi
 }
 
+function mssql_exec_clean {
+  mssql_exec "$@" | egrep -v "(^\W+$|\([[:digit:]]+ rows affected\))";
+}
+
 function mssql_exec_delimiter_count_single_line {
   local sql_result=`mssql_exec "$@"`;
   csv_delimiter_check_single_line "$sql_result" "$4";
