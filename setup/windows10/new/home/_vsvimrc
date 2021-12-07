@@ -41,6 +41,7 @@ nmap <leader>gd :vsc Edit.GoToDefinition<cr>
 nmap <leader>gi :vsc Edit.GoToImplementation<cr>
 nmap <leader>gr :vsc Edit.FindAllReferences<cr>
 nmap <leader>wi :vsc Edit.QuickInfo<cr>
+nmap <leader>gq :vsc Edit.QuickInfo<cr>
 vmap <leader>gf :vsc Edit.FormatSelection<cr>
 nmap <leader>gf :vsc Edit.FormatDocument<cr>
 

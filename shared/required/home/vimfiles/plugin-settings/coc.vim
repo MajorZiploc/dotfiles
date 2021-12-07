@@ -6,6 +6,7 @@ nmap <leader>gr <Plug>(coc-references)
 COC_PLUGINS_PLACEHOLDER
 
 nnoremap <leader>wi :call <SID>show_documentation()<CR>
+nnoremap <leader>gq :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
