@@ -1,0 +1,29 @@
+On arm mac m1 systems, you will need to add this content to:
+file: ~/.config/coc/extensions/node_modules/coc-fsharp/out/client/fsac.js
+
+// The "osx-arm64" key,value pair needs to be added
+
+const fsac_pkgs = {
+    "win-x64": {
+        executable: "fsautocomplete.dll",
+        platformPath: "fsautocomplete.netcore.zip"
+    },
+    "linux-x64": {
+        executable: "fsautocomplete.dll",
+        platformPath: "fsautocomplete.netcore.zip"
+    },
+    "osx-x64": {
+        executable: "fsautocomplete.dll",
+        platformPath: "fsautocomplete.netcore.zip"
+    },
+    "osx-arm64": {
+        executable: "fsautocomplete.dll",
+        platformPath: "fsautocomplete.netcore.zip"
+    },
+    "linux-arm64": {
+        executable: "fsautocomplete.dll",
+        platformPath: "fsautocomplete.netcore.zip"
+    },
+};
+
+Once you do this, your intellisense for fsharp should work in vim
