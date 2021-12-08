@@ -14,6 +14,7 @@ brew install just
 brew install copyq
 brew install bash-completion
 brew install nvim
+brew install dos2unix
 
 # instal xcode
 xcode-select --install
