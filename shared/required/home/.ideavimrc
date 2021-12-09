@@ -1,0 +1,84 @@
+" inoremap kj <esc>
+nnoremap U <c-r>
+nnoremap Y y$
+
+" keep focus at center of screen
+" nnoremap n nzzzv
+" nnoremap N Nzzzv
+
+" normal mode whitespace
+" nnoremap <cr> o<esc>
+" nnoremap <s-cr> O<esc>
+
+" indenting
+" nnoremap <tab> >>
+" nnoremap <s-tab> <<
+" vnoremap <tab> >
+" vnoremap <s-tab> <
+" inoremap <tab> <c-t>
+" inoremap <s-tab> <c-d>
+
+" split line (compliment of <s-j> to join)
+nnoremap <s-k> h<cr>^
+
+" navigation
+" Using the original meaning of this key
+" nnoremap H ^
+" Using the original meaning of this key
+" vnoremap H ^
+" Using the original meaning of this key
+" onoremap H ^
+" Using the original meaning of this key
+" nnoremap L $
+" Using the original meaning of this key
+" vnoremap L $
+" Using the original meaning of this key
+" onoremap L $
+
+" control-keys for select all, undo, save, cut, copy, paste, quit
+nnoremap <c-a> ggVG
+nnoremap <c-s> :w<cr>
+inoremap <c-s> <esc>:w<cr>a
+nnoremap <c-z> u
+vnoremap <c-x> "+d
+vnoremap <c-c> "+y
+nnoremap <c-v> "+p
+vnoremap <c-v> "+p
+inoremap <c-v> <esc>"+pa
+nnoremap <c-w> :q<cr>
+inoremap <c-w> <esc>:q<cr>
+vnoremap <c-w> <esc>:q<cr>
+
+" leader key
+let mapleader=" "
+" swap word under cursor with yank register
+nnoremap <silent> <leader>s viwp
+" swap word under cursor with system clipboard
+nnoremap <silent> <leader>S viw"+p
+" trim trailing spaces in file
+nnoremap <silent> <leader>t :%s/[ \t]\+$//<cr>
+
+" true delete
+vnoremap <leader>cd "_d
+" true delete followed by a paste
+vnoremap <leader>cp "_dP
+
+" enable backspace
+set backspace=indent,eol,start
+
+" indentation settings
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set autoindent
+
+" find settings
+set ignorecase
+set smartcase
+set hlsearch
+" clear search highlight with Backspace
+nnoremap <silent> <bs> :noh<cr><bs>
+
+" max time between key presses to trigger a multi-key binding
+set timeoutlen=300
+
