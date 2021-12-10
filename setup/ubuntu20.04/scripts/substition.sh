@@ -12,14 +12,12 @@ vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find "$tempShared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" "{}" \;
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,/usr/local/bin/bash,g' "{}" \;
 vim_plugin_include="Plug 'ctrlpvim/ctrlp.vim' \" fuzzy file finder\nPlug 'mechatroner/rainbow_csv' \" csv highlighter and query engine\nPlug 'frazrepo/vim-rainbow' \" color pairing brakets and such\nPlug 'bling/vim-airline' \" status bar\nPlug 'vim-airline/vim-airline-themes' \" colors for status bar\nPlug 'jremmen/vim-ripgrep' \" grepper\nPlug 'stefandtw/quickfix-reflector.vim' \" editable quickfix list for ripgrep\nPlug 'tpope/vim-fugitive' \" git plugin\nPlug 'sheerun/vim-polyglot'";
-# lsp vim plugin
-vim_plugin_include="$vim_plugin_include\nif has\('nvim'\)\n  Plug 'neovim/nvim-lspconfig'\n  Plug 'deoplete-plugins/deoplete-lsp'\n  Plug 'Shougo/deoplete.nvim'\, \{ 'do': ':UpdateRemotePlugins' \}\n endif";
-# fsharp ionide vim plugin
-vim_plugin_include="$vim_plugin_include\nif has\('nvim'\)\n  Plug 'ionide/Ionide-vim'\, \{ 'do':  'make fsautocomplete'\, \}\nendif";
+# nvim specific plugins
+vim_plugin_include="$vim_plugin_include\nif has\('nvim'\)\n  Plug 'neovim/nvim-lspconfig'\n  Plug 'deoplete-plugins/deoplete-lsp'\n  Plug 'Shougo/deoplete.nvim'\, \{ 'do': ':UpdateRemotePlugins' \}\n  Plug 'ionide/Ionide-vim'\, \{ 'do':  'make fsautocomplete'\, \}\nendif";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_INCLUDE_PLACEHOLDER,$vim_plugin_include,g" "{}" \;
 vim_plugset_path="so ~/vimfiles/plugin-settings/"
 vim_plugin_settings="${vim_plugset_path}ctrlp.vim\n${vim_plugset_path}ripgrep.vim\n${vim_plugset_path}quickfix-reflector.vim\n\"${vim_plugset_path}fzf.vim\n${vim_plugset_path}rainbow_csv.vim\n${vim_plugset_path}airline-theme.vim\n${vim_plugset_path}fugitive.vim\n${vim_plugset_path}polyglot.vim";
-# lsp vim settings
+# nvim specific settings
 vim_plugin_settings="$vim_plugin_settings\nif has\('nvim'\)\n  ${vim_plugset_path}nvim-lspconfig.vim\nendif";
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_PLACEHOLDER,$vim_plugin_settings,g" "{}" \;
 find "$tempShared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,ubuntu20.04,g" "{}" \;
