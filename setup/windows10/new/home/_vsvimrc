@@ -26,7 +26,7 @@ inoremap <c-v> <esc>"+pa
 " inoremap <tab> <c-t>
 " inoremap <s-tab> <c-d>
 
-set scrolloff=3
+set scrolloff=8
 
 nmap <leader><leader>s :vsc Tools.InvokeAceJumpCommand<cr>
 

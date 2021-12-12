@@ -72,6 +72,8 @@ set tabstop=2
 set shiftwidth=2
 set autoindent
 
+set scrolloff=8
+
 " find settings
 set ignorecase
 set smartcase
