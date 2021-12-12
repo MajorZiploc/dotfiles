@@ -28,6 +28,7 @@ inoremap <c-v> <esc>"+pa
 
 set scrolloff=8
 set encoding=utf-8
+set incsearch
 
 nmap <leader><leader>s :vsc Tools.InvokeAceJumpCommand<cr>
 
