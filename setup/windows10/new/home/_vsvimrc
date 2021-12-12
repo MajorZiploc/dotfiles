@@ -26,7 +26,9 @@ inoremap <c-v> <esc>"+pa
 " inoremap <tab> <c-t>
 " inoremap <s-tab> <c-d>
 
-set scrolloff=3
+set scrolloff=8
+set encoding=utf-8
+set incsearch
 
 nmap <leader><leader>s :vsc Tools.InvokeAceJumpCommand<cr>
 

@@ -71,6 +71,9 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 set autoindent
+set scrolloff=8
+set encoding=utf-8
+set incsearch
 
 " find settings
 set ignorecase
