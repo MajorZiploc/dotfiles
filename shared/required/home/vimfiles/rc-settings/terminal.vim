@@ -127,3 +127,8 @@ highlight Pmenu ctermbg=gray guibg=gray
 let g:rust_recommended_style = 0
 let g:python_recommended_style = 0
 
+" required so that polyglot does not set the tab size. workaround to stop
+" tabsize of 4 in fsharp so that I can use tab size 2
+" MUST BE LOADED BEFORE THE POLYGLOT PLUGIN IS LOADED IN
+let g:polyglot_disabled = ["autoindent"]
+
