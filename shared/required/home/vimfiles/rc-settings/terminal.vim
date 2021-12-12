@@ -59,6 +59,7 @@ set guifont=Consolas:h12
 set nu " line numbers
 " Display n lines above/below the cursor when scrolling with a mouse
 set scrolloff=8
+set encoding=utf-8
 set guioptions-=m  " remove menu bar
 set guioptions-=T  " remove toolbar
 set laststatus=2 " airline always on

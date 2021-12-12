@@ -73,6 +73,7 @@ set shiftwidth=2
 set autoindent
 
 set scrolloff=8
+set encoding=utf-8
 
 " find settings
 set ignorecase
