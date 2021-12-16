@@ -123,5 +123,6 @@
     "*.ipynb": "jupyter-notebook"
   },
   "glassit.alpha": 230,
-  "glassit.step": 5
+  "glassit.step": 5,
+  "bracketPairColorizer.depreciation-notice": false
 }
