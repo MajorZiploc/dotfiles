@@ -102,5 +102,5 @@ vmap <leader>wi :vsc editor.action.showHover<cr>
 vmap gf :vsc editor.action.formatSelection<cr>
 vmap <leader>gf :vsc editor.action.formatSelection<cr>
 
-nmap <leader>e :vsc editor.action.marker.next<cr>hl
-nmap <leader>E :vsc editor.action.marker.prev<cr>hl
+nmap <leader>e :vsc editor.action.marker.next<cr>
+nmap <leader>E :vsc editor.action.marker.prev<cr>
