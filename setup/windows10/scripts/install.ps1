@@ -113,8 +113,8 @@ if (($optionsAsInt -band $WorkAsInt) -eq $WorkAsInt) {
     # communcations app
     cinst -y slack
     # runtime and cli tools for creating .NET core applications
-    cinst -y dotnet-5.0-sdk
-    cinst -y dotnet-5.0-runtime
+    cinst -y dotnet-sdk
+    cinst -y dotnet-runtime
 }
 
 # adds windows terminal manager, didnt seem to work
