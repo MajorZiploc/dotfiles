@@ -20,6 +20,7 @@ zsh
 fish
 shell
 perl
+gdb
 
 scala
 c++
