@@ -3,8 +3,6 @@
 # Core plugings
 # vim emulation
 code --install-extension vscodevim.vim
-# color code (square,curly)brackets,paraens
-code --install-extension CoenraadS.bracket-pair-colorizer
 # checks spelling
 code --install-extension streetsidesoftware.code-spell-checker
 # color codes csv columns

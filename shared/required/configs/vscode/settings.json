@@ -124,5 +124,5 @@
   },
   "glassit.alpha": 230,
   "glassit.step": 5,
-  "bracketPairColorizer.depreciation-notice": false
+  "editor.bracketPairColorization.enabled": true
 }
