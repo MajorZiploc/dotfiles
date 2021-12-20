@@ -132,3 +132,6 @@ let g:python_recommended_style = 0
 " MUST BE LOADED BEFORE THE POLYGLOT PLUGIN IS LOADED IN
 let g:polyglot_disabled = ["autoindent"]
 
+autocmd BufNewFile,BufRead *.json set filetype=jsonc
+autocmd BufNewFile,BufRead Justfile set filetype=bash
+
