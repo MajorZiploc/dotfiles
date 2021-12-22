@@ -187,7 +187,7 @@ function sample_csv {
 function show_block {
   # $1: regex string
   # $2: regex string
-  # $3: file | stream
+  # $3: file | symlink to file | string
   local from_pattern="$1";
   local to_pattern="$2";
   local content="$3";
