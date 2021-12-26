@@ -6,13 +6,13 @@ parse-bash-function-aliases:
   function_names=`cat ./shared/required/home/.bashrc.d/functions*.bash | egrep "function\s*[[:alpha:]]" | sed -E 's/function\s*([a-zA-Z0-9_-]+?).*/\1/;s/(.*)/"\1"/g'`;
   paste -d= <(echo "$aliases") <(echo "$function_names");
 
-start-container:
+docker-container-start:
   docker-compose -f .devcontainer/docker-compose.yaml up -d;
 
-stop-container:
+docker-container-stop:
   docker-compose -f .devcontainer/docker-compose.yaml stop;
 
-connect-to-container CONTAINER_NAME='devcontainer_home_settings_app_1':
+docker-container-connect CONTAINER_NAME='devcontainer_home_settings_app_1':
   docker exec -it "{{CONTAINER_NAME}}" /bin/bash;
 
 setup OS='ubuntu20.04':

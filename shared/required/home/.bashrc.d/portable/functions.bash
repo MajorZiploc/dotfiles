@@ -34,7 +34,7 @@ function tmuxcs {
   # $1: optional string to represent name of the tmux session
   # If $1 not given, then use the base name of the path as the session name
   local session_name="$1";
-  session_name="${session_name:-"$(basename `pwd`)"}"
+  session_name="${session_name:-"$(basename `pwd`)"}";
   local session_name=`echo "$session_name" | tr '.[[:blank:]]' '-'`;
   tmux new -s "$session_name" 2>/dev/null || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
 }
@@ -187,7 +187,7 @@ function sample_csv {
 function show_block {
   # $1: regex string
   # $2: regex string
-  # $3: file | stream
+  # $3: file | symlink to file | string
   local from_pattern="$1";
   local to_pattern="$2";
   local content="$3";
@@ -360,7 +360,7 @@ function _find_items_rename_helper {
       if [[ $preview == false ]]; then
         mv "$item" "$new_name";
       else
-        echo mv "'$item'" "'$new_name'" ";";
+        echo "mv" "'$item'" "'$new_name'" ";";
       fi
     }
     done;
@@ -500,9 +500,9 @@ function _find_files_delete_preview_helper {
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local not_paths="$4";
   if [[ -z "$with_content" ]]; then
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec echo rm \"'{}' ;\" \;"
+    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec echo rm \"'{}' ;\" \;";
   else
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep -in -e '$with_content' \"{}\" \; -exec echo rm \"'{}' ;\" \;" | egrep "^rm"
+    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep -in -e '$with_content' \"{}\" \; -exec echo rm \"'{}' ;\" \;" | egrep "^rm";
   fi
 }
 
@@ -514,9 +514,9 @@ function _find_files_delete_helper {
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local not_paths=`_find_default_ignored_dirs`;
   if [[ -z "$with_content" ]]; then
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec rm \"{}\" \;"
+    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec rm \"{}\" \;";
   else
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep -in -e '$with_content' \"{}\" \; -exec rm \"{}\" \;" > /dev/null
+    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep -in -e '$with_content' \"{}\" \; -exec rm \"{}\" \;" > /dev/null;
   fi
 }
 
@@ -577,7 +577,7 @@ function _find_files_rename_helper {
       if [[ $preview == false ]]; then
         mv "$file" "$new_name";
       else
-        echo mv "'$file'" "'$new_name'" ";";
+        echo "mv" "'$file'" "'$new_name'" ";";
       fi
     }
   }
@@ -666,7 +666,7 @@ function _find_in_files_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local not_paths="$4";
-  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep --color -in -e '$grep_pattern' \"{}\" +;"
+  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep --color -in -e '$grep_pattern' \"{}\" +;";
 }
 
 function find_in_files {
@@ -707,7 +707,7 @@ function _find_in_files_replace_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local not_paths="$4";
-  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec sed -E -i'' '$by' \"{}\" \;"
+  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec sed -E -i'' '$by' \"{}\" \;";
 }
 
 function find_in_files_replace {
