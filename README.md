@@ -181,10 +181,10 @@ Use ~/.vimrc\_ext for vim
 To contribute without mudding up your own environment from the copy scripts. The copy scripts can be used within a docker container and all testing can happen there.
 
 - Running docker container
-> just start-container
+> just docker-container-start
 
 - Attaching to the docker container (Run the rest of the development commands in the docker container)
-> just connect-to-container
+> just docker-container-connect
 
 - The container is a based on a ubuntu image. So when you make changes to the shared content or ubuntu specific content and want to test them manually, then you need to run the copy down WITHIN the docker container
 > just setup
