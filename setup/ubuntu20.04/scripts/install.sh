@@ -109,3 +109,6 @@ sudo curl \
 
 sudo apt -y upgrade
 
+# ruby
+sudo apt install -y ruby-full
+sudo gem install solargraph
