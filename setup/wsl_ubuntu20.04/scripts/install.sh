@@ -89,3 +89,7 @@ sudo apt-get update \
 
 sudo apt -y upgrade
 
+# ruby
+sudo apt install -y ruby-full
+sudo gem install solargraph
+

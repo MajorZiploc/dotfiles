@@ -26,6 +26,9 @@ brew install openssl readline sqlite3 xz zlib
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 brew install rust-analyzer
 
+# ruby deps
+sudo gem install solargraph
+
 # install asdf and its deps
 brew install gpg
 brew install gawk
