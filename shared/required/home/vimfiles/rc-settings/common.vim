@@ -64,7 +64,7 @@ nnoremap <s-k> hr<cr>^
 " swap word under cursor with system clipboard
 " nnoremap <silent> <leader>S viw"+p
 " trim trailing spaces in file
-nnoremap <silent> <leader>t :%s/[ \t]\+$/<cr>
+nnoremap <silent> <leader>lt :%s/[ \t]\+$/<cr>
 
 " true delete
 vnoremap <leader>cd "_d
