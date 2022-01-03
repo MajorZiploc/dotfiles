@@ -64,5 +64,5 @@ __bash_prompt
 export PROMPT_DIRTRIM=4
 
 # _ext bash files are for user specific edits to the bash environment
-test -f ~/.bashrc_ext && . ~/.bashrc_ext
+test -e ~/.bashrc_ext && . ~/.bashrc_ext
 
