@@ -112,5 +112,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+test -d ~/.dotnet/tools && export PATH="$HOME/.dotnet/tools:$PATH"
+# _ext zsh files are for user specific edits to the zsh environment
 test -e ~/.zshrc_ext && . ~/.zshrc_ext
 
