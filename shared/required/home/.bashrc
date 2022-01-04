@@ -63,6 +63,7 @@ __bash_prompt() {
 __bash_prompt
 export PROMPT_DIRTRIM=4
 
+test -d ~/.dotnet/tools && export PATH="$HOME/.dotnet/tools:$PATH"
 # _ext bash files are for user specific edits to the bash environment
 test -e ~/.bashrc_ext && . ~/.bashrc_ext
 
