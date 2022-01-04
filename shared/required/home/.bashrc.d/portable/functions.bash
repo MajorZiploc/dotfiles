@@ -1021,9 +1021,9 @@ function refactor_rename_symbols {
   # [[ "$files" =~ "^[[:blank:]]*$" ]] && { files=`gfind_files ".*"`; symbol_names=`echo "$search_results" | sed -E "s,.*[[:digit:]]+:(.*),\2,g" | sed -E "s,.*$symbol_declare (\S+).*,\1," | sort -u`; }
   [[ "$symbol_names" =~ "^[[:blank:]]*$" ]] && { echo "No symbol_names found to rename!" >&2; return 1; }
   local files=(`gfind_files ".*" | xargs`);
-  for _file in ${files[@]}; do
-    for symbol_name in ${symbol_names[@]}; do
-     new_symbol_name=`echo "$symbol_name" | sed -E "$rename_pattern"`;
+  for symbol_name in ${symbol_names[@]}; do
+   new_symbol_name=`echo "$symbol_name" | sed -E "$rename_pattern"`;
+    for _file in ${files[@]}; do
      sed -E -i'' "s,\b${symbol_name}\b,$new_symbol_name,g" "$_file";
     done;
   done;

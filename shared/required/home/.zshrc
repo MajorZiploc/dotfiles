@@ -4,5 +4,5 @@ case $- in
 *) return;;
 esac
 
-test -f ~/.zshrc_core && . ~/.zshrc_core
+test -e ~/.zshrc_core && . ~/.zshrc_core
 
