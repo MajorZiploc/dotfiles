@@ -25,7 +25,7 @@ function refresh_settings {
   { git checkout master 2>/dev/null || git checkout main 2>/dev/null ; } &&
   echo 'Previous commit information:' &&
   echo "$(git show --summary)" &&
-  git pull &&
+  git pull origin master &&
   "$project_root_path"/setup/OS_PLACEHOLDER/scripts/copy.sh "$flags" &&
   . ~/.bash_profile &&
   echo 'Refreshed settings!' &&
