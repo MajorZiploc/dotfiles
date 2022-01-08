@@ -29,6 +29,7 @@ alias add_semicolons='sed -E "s/(.+)/\1;/;s/;;$/;/;"'
 # Converts a string to a fuzzy search pattern
 alias to_fuzz='sed -E "s/(\\w)/\\1\[^\[:blank:\]\]{0,3}/g" | sed "s/\[^\[:blank:\]\]{0,3}$//g"'
 alias to_newlines='tr " " "\n"'
+alias bln="to_newlines"
 
 # bash_surround_expression
 alias bse='sed -E "s,(.+),\"\$(\1)\","'
