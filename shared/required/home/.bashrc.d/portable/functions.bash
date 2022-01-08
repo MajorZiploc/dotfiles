@@ -1011,18 +1011,13 @@ function refactor_rename_symbols {
   local rename_pattern="$2";
   [[ -z "$symbol_declare" ]] && { echo "Must specify symbol_declare!" >&2; return 1; }
   [[ -z "$rename_pattern" ]] && { echo "Must specify rename_pattern!" >&2; return 1; }
-  local search_results=`gfind_in_files "^\s*$symbol_declare (\S+)"`;
-  # TODO: should we use this to filter the files we sub in? It may miss use cases of a symbol
-  # local search_results_parse_pattern="(.*?):[[:digit:]]+:(.*)";
-  # local files=`echo "$search_results" | sed -E "s,$search_results_parse_pattern,\1,g" | sort -u | trim`;
-  # local symbol_names=`echo "$search_results" | sed -E "s,$search_results_parse_pattern,\2,g" | sed -E "s,.*$symbol_declare (\S+).*,\1," | sort -u`;
-  local symbol_names=(`echo "$search_results" | sed -E "s,.*?[[:digit:]]+:(.*),\1,g" | sed -E "s,.*$symbol_declare (\w+).*,\1," | sort -u | xargs`)
-  # TODO: address with the above TODO
-  # [[ "$files" =~ "^[[:blank:]]*$" ]] && { files=`gfind_files ".*"`; symbol_names=`echo "$search_results" | sed -E "s,.*[[:digit:]]+:(.*),\2,g" | sed -E "s,.*$symbol_declare (\S+).*,\1," | sort -u`; }
+  local search_results=`gfind_in_files "^\s*$symbol_declare \b([a-zA-Z0-9_\-]+)\b"`;
+  local symbol_names=(`echo "$search_results" | sed -E "s,.*?[[:digit:]]+:.*?$symbol_declare \b([a-zA-Z0-9_\-]+)\b(.*),\1,g" | sort -u | xargs`);
   [[ "$symbol_names" =~ "^[[:blank:]]*$" ]] && { echo "No symbol_names found to rename!" >&2; return 1; }
   local files=(`gfind_files ".*" | xargs`);
   for symbol_name in ${symbol_names[@]}; do
    new_symbol_name=`echo "$symbol_name" | sed -E "$rename_pattern"`;
+   echo "$symbol_name -> $new_symbol_name";
     for _file in ${files[@]}; do
      sed -E -i'' "s,\b${symbol_name}\b,$new_symbol_name,g" "$_file";
     done;
