@@ -78,26 +78,26 @@ syntax on
 
 " toggle expandtab
 function ToggleTab()
-    if &expandtab
-        set noexpandtab
-        echo "indenting with tabs"
-    else
-        set expandtab
-        echo "indenting with spaces"
-    endif
+  if &expandtab
+    set noexpandtab
+    echo "indenting with tabs"
+  else
+    set expandtab
+    echo "indenting with spaces"
+  endif
 endfunction
 nnoremap <F9> mz:execute ToggleTab()<cr>`z
 
 " show/hide whitespace chars
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 function ToggleWhiteSpace()
-    if &list
-        set nolist
-        echo "not showing whitespace"
-    else
-        set list
-        echo "showing whitespace"
-    endif
+  if &list
+    set nolist
+    echo "not showing whitespace"
+  else
+    set list
+    echo "showing whitespace"
+  endif
 endfunction
 nnoremap <F10> mz:execute ToggleWhiteSpace()<cr>`z
 
