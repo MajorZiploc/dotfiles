@@ -13,14 +13,14 @@ find -E "$tempShared" -iregex ".*\.json" -type f -exec gsed -E -i'' "s,VSVIM_DIR
 find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -i'' 's,VIM_SHELL_PLACEHOLDER,/usr/local/bin/bash,g' "{}" \;
 vim_plugin_include="Plug 'junegunn/fzf'\, \{ 'do': \{ -> fzf#install\(\) \} \} \" fuzzy finder\nPlug 'junegunn/fzf.vim'\nPlug 'airblade/vim-rooter' \" to help fzf determine project root"
 vim_plugin_include="${vim_plugin_include}\nPlug 'mechatroner/rainbow_csv' \" csv highlighter and query engine\nPlug 'frazrepo/vim-rainbow' \" color pairing brakets and such\nPlug 'bling/vim-airline' \" status bar\nPlug 'vim-airline/vim-airline-themes' \" colors for status bar"
-vim_plugin_include="${vim_plugin_include}\nPlug 'tpope/vim-fugitive' \" git plugin\nPlug 'sheerun/vim-polyglot' \" collection of language packs\nPlug 'eddyekofo94/gruvbox-flat.nvim' \" color theme";
+vim_plugin_include="${vim_plugin_include}\nPlug 'tpope/vim-fugitive' \" git plugin\nPlug 'sheerun/vim-polyglot' \" collection of language packs";
 # nvim specific plugins
-vim_plugin_include="${vim_plugin_include}\nif has\('nvim'\)\n  Plug 'neovim/nvim-lspconfig' \" intellisense\n  Plug 'deoplete-plugins/deoplete-lsp' \" for nvim-lspconfig\n  Plug 'Shougo/deoplete.nvim'\, \{ 'do': ':UpdateRemotePlugins' \} \" for nvim-lspconfig\n  Plug 'ionide/Ionide-vim'\, \{ 'do':  'make fsautocomplete'\, \} \" fsharp intellisense\nendif";
+vim_plugin_include="${vim_plugin_include}\nif has\('nvim'\)\n  Plug 'neovim/nvim-lspconfig' \" intellisense\n  Plug 'deoplete-plugins/deoplete-lsp' \" for nvim-lspconfig\n  Plug 'Shougo/deoplete.nvim'\, \{ 'do': ':UpdateRemotePlugins' \} \" for nvim-lspconfig\n  Plug 'ionide/Ionide-vim'\, \{ 'do':  'make fsautocomplete'\, \} \" fsharp intellisense\n  Plug 'eddyekofo94/gruvbox-flat.nvim' \" color theme\nendif";
 find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -i'' "s,VIM_PLUGIN_INCLUDE_PLACEHOLDER,$vim_plugin_include,g" "{}" \;
 vim_plugset_path="so ~/vimfiles/plugin-settings/"
-vim_plugin_settings="${vim_plugset_path}fzf.vim\n${vim_plugset_path}rainbow_csv.vim\n${vim_plugset_path}airline-theme.vim\n${vim_plugset_path}fugitive.vim\n${vim_plugset_path}polyglot.vim\n${vim_plugset_path}gruvbox_flat.vim";
+vim_plugin_settings="${vim_plugset_path}fzf.vim\n${vim_plugset_path}rainbow_csv.vim\n${vim_plugset_path}airline-theme.vim\n${vim_plugset_path}fugitive.vim\n${vim_plugset_path}polyglot.vim";
 # nvim specific settings
-vim_plugin_settings="$vim_plugin_settings\nif has\('nvim'\)\n  ${vim_plugset_path}nvim-lspconfig.vim\nendif";
+vim_plugin_settings="$vim_plugin_settings\nif has\('nvim'\)\n  ${vim_plugset_path}nvim-lspconfig.vim\n  ${vim_plugset_path}gruvbox_flat.vim\nendif";
 find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -i'' "s,VIM_PLUGIN_SETTINGS_PLACEHOLDER,$vim_plugin_settings,g" "{}" \;
 find -E "$tempShared" -iregex ".*" -type f -exec gsed -E -i'' "s,OS_PLACEHOLDER,macm1,g" "{}" \;
 vsc_settings_destination_placeholder="$HOME/.vscoderc.d/";
