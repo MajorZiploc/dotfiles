@@ -1011,8 +1011,8 @@ function refactor_rename_symbols {
   local rename_pattern="$2";
   [[ -z "$symbol_declare" ]] && { echo "Must specify symbol_declare!" >&2; return 1; }
   [[ -z "$rename_pattern" ]] && { echo "Must specify rename_pattern!" >&2; return 1; }
-  local search_results=`gfind_in_files "^\s*$symbol_declare \b([a-zA-Z0-9_\-]+)\b"`;
-  local symbol_names=(`echo "$search_results" | sed -E "s,.*?[[:digit:]]+:.*?$symbol_declare \b([a-zA-Z0-9_\-]+)\b(.*),\1,g" | sort -u | xargs`);
+  local search_results=`gfind_in_files "^\s*$symbol_declare\b([a-zA-Z0-9_\-]+)\b"`;
+  local symbol_names=(`echo "$search_results" | sed -E "s,.*?[[:digit:]]+:.*?$symbol_declare\b([a-zA-Z0-9_\-]+)\b(.*),\1,g" | sort -u | xargs`);
   [[ "$symbol_names" =~ "^[[:blank:]]*$" ]] && { echo "No symbol_names found to rename!" >&2; return 1; }
   local files=(`gfind_files ".*" | xargs`);
   for symbol_name in ${symbol_names[@]}; do
