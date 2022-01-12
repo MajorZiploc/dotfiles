@@ -725,24 +725,30 @@ function gfind_in_files_replace {
   _find_in_files_replace_helper "$1" "$2" "$3" "$not_paths";
 }
 
+function git_all_the_things {
+  git branch -r | grep -v '\->' | while read remote; do
+    git branch --track "${remote#origin/}" "$remote";
+  done;
+  git fetch --all;
+  git pull --all;
+}
+
 function git_checkout_branch_in_path {
   local branches="$1";
   local _path="$2";
   [[ -z "$branches" ]] && { echo "Must specify a string of branches delimited by spaces!" >&2; return 1; }
   branches=(`echo "$branches" | xargs`);
-  if [[ -z "$_path" ]]; then
-    _path=(`find . -mindepth 1 -maxdepth 1 -type d | xargs`);
-  else
-    _path=(`echo "$_path" | xargs`);
-  fi
-  for proj in ${_path[@]}; do
+  _path="${_path:="."}";
+  _dirs=(`find "$_path" -mindepth 1 -maxdepth 1 -type d | xargs`);
+  for proj in ${_dirs[@]}; do
     echo "$proj";
     cd "$proj";
-    git pull && git fetch origin;
+    git status 2>&1 >/dev/null && git_all_the_things
+    [[ ! "$?" == "0" ]] && {
+      cd .. && continue;
+    }
     for branch in ${branches[@]}; do
       # Breaks out of loop for the first branch that checks out successfully
-      # the first git pull to to ensure that if there is working dir changes
-      # that it will not continue to switching the branch
       git checkout "$branch" && break;
     done;
     git pull;

@@ -93,7 +93,6 @@ alias git_deploy='git checkout develop && git pull && git push && { git checkout
 alias git_log_break_down="git log --stat --oneline --all --decorate"
 alias git_graph="git log --oneline --decorate --all --graph"
 alias git_log_diff="git log --all --stat -p";
-alias git_all_the_things="git branch -r | grep -v '\->' | while read remote; do git branch --track \"\${remote#origin/}\" \"\$remote\"; done; git fetch --all; git pull --all;"
 
 alias to_winpath='sed -E "s,^/(\w)/,\U\1:/,g" | sed s,/,\\\\,g'
 alias to_unixpath='sed -E "s,^(\w):,/\L\1,g" | sed s,\\\\,/,g'
