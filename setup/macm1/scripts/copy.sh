@@ -25,8 +25,8 @@ $SCRIPTPATH/../../../shared/scripts/copy.sh "$setupRoot" "$flags"
   done;
 }
 
-nvim "+:PlugInstall" "+:qa" 2>/dev/null
-vim "+:PlugInstall" "+:qa" 2>/dev/null
+nvim "+:PlugInstall" "+:CocInstall" "+:CocUpdate" "+:qa" 2>/dev/null
+vim "+:PlugInstall" "+:CocInstall" "+:CocUpdate" "+:qa" 2>/dev/null
 
 git restore "$SCRIPTPATH/../../../shared/scripts/create_temps.sh"
 
