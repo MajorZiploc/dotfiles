@@ -18,7 +18,7 @@ vim_plugin_include="${vim_plugin_include}\nPlug 'tpope/vim-fugitive' \" git plug
 vim_plugin_include="${vim_plugin_include}\nif has\('nvim'\)\n  Plug 'neovim/nvim-lspconfig' \" intellisense\n  Plug 'deoplete-plugins/deoplete-lsp' \" for nvim-lspconfig\n  Plug 'Shougo/deoplete.nvim'\, \{ 'do': ':UpdateRemotePlugins' \} \" for nvim-lspconfig\n  Plug 'ionide/Ionide-vim'\, \{ 'do':  'make fsautocomplete'\, \} \" fsharp intellisense\n  Plug 'eddyekofo94/gruvbox-flat.nvim' \" color theme\nendif";
 find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -i'' "s,VIM_PLUGIN_INCLUDE_PLACEHOLDER,$vim_plugin_include,g" "{}" \;
 vim_plugset_path="so ~/vimfiles/plugin-settings/"
-vim_plugin_settings="${vim_plugset_path}fzf.vim\n${vim_plugset_path}rainbow_csv.vim\n${vim_plugset_path}airline-theme.vim\n${vim_plugset_path}fugitive.vim\n${vim_plugset_path}polyglot.vim";
+vim_plugin_settings="${vim_plugset_path}fzf.vim\n${vim_plugset_path}rainbow_csv.vim\n${vim_plugset_path}airline-theme.vim\n${vim_plugset_path}fugitive.vim";
 # nvim specific settings
 vim_plugin_settings="$vim_plugin_settings\nif has\('nvim'\)\n  ${vim_plugset_path}nvim-lspconfig.vim\n  ${vim_plugset_path}gruvbox_flat.vim\nendif";
 find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -i'' "s,VIM_PLUGIN_SETTINGS_PLACEHOLDER,$vim_plugin_settings,g" "{}" \;
