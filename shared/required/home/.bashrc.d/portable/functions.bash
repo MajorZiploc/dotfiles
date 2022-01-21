@@ -725,6 +725,26 @@ function gfind_in_files_replace {
   _find_in_files_replace_helper "$1" "$2" "$3" "$not_paths";
 }
 
+function git_deploy {
+  local origin_branch_choices="$1";
+  local destination_branch_choices="$2";
+  origin_branch_choices=(`echo "${origin_branch_choices:="develop dev"}" | xargs`);
+  destination_branch_choices=(`echo "${destination_branch_choices:="master main"}" | xargs`);
+  local origin_branch='';
+  for origin_branch_choice in ${origin_branch_choices[@]}; do
+    if git show-ref --quiet "refs/heads/${origin_branch_choice}"; then origin_branch="$origin_branch_choice"; fi
+  done;
+  local destination_branch='';
+  for destination_branch_choice in ${destination_branch_choices[@]}; do
+    if git show-ref --quiet "refs/heads/${destination_branch_choice}"; then destination_branch="$destination_branch_choice"; fi
+  done;
+  echo "Origin Branch: $origin_branch";
+  echo "Destination Branch: $destination_branch";
+  [[ -z "$origin_branch" ]] && { echo "No origin branch found from choices: ${origin_branch_choices[@]}!" >&2; return 1; }
+  [[ -z "$destination_branch" ]] && { echo "No destination branch found from choices: ${destination_branch_choices[@]}!" >&2; return 1; }
+  git checkout "$origin_branch" && git pull && git push && git checkout "$destination_branch" && git pull && git merge "$origin_branch" --commit --no-edit && git push && git checkout "$origin_branch";
+}
+
 function git_all_the_things {
   git branch -r | grep -v '\->' | while read remote; do
     git branch --track "${remote#origin/}" "$remote";
