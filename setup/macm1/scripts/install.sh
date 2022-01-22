@@ -10,6 +10,8 @@ brew install node
 nvm install node
 brew install fzf
 brew install ripgrep
+# for Ag in vim
+brew install the_silver_searcher
 brew install just
 brew install copyq
 brew install bash-completion
