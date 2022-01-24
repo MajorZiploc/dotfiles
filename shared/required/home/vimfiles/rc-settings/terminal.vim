@@ -1,5 +1,8 @@
 so ~/vimfiles/rc-settings/common.vim
 
+" set spelllang=en_us
+" set spell
+
 " Allow mouse interactions
 set mouse=a
 
