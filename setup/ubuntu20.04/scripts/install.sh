@@ -22,7 +22,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 sed -E -i'' 's,curl -[^[:blank:]]+,curl -0Lk,g' ~/.fzf/install
 ~/.fzf/install
 # for Ag in vim
-apt-get install silversearcher-ag
+sudo apt-get -y install silversearcher-ag
 # zsh
 sudo apt-get install -y zsh
 # vim 8.2
