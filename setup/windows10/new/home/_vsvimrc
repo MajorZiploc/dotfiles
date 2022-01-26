@@ -60,8 +60,8 @@ nmap <leader>wL :vsc Window.MovetoNextTabGroup<cr>
 nmap <leader>h :vsc View.NavigateBackward<cr>
 nmap <leader>l :vsc View.NavigateForward<cr>
 nmap <leader>q :vsc Edit.QuickInfo<cr>
-nmap <leader>e :vsc ReSharper.ReSharper_GotoNextErrorInSolution<cr>
-nmap <leader>E :vsc View.NextError<cr>
+nmap <leader>e :vsc View.NextError<cr>
+nmap <leader>E :vsc View.PreviousError<cr>
 nmap <leader>d :vsc ReSharper.ReSharper_GoToDeclaration<cr>
 nmap <leader>i :vsc ReSharper.ReSharper_GotoImplementations<cr>
 nmap <leader>u :vsc ReSharper.ReSharper_FindUsages<cr>
