@@ -813,6 +813,12 @@ function git_diff_from_commit_to_current {
   git diff "$commit"^;
 }
 
+function git_rebase_i_head {
+  local n="$1";
+  [[ -z "$n" ]] && { echo "Must specify a n!" >&2; return 1; }
+  git rebase -i HEAD~"$n";
+}
+
 function show_script_path {
   local scriptpath="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
   echo "$scriptpath";

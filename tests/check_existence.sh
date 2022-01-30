@@ -71,6 +71,7 @@ function typea_check(){
   "gfind_in_files_fuzz"
   "gfind_in_files_replace"
   "git_checkout_branch_in_path"
+  "git_rebase_i_head"
   "git_log_follow"
   "git_diff_range"
   "git_log_show_last_n_on_current_branch"
