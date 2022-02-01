@@ -47,11 +47,32 @@ Ubuntu:
 
 ## Install scripts
 
+### Windows and Mac
+To install chocolatey or home brew:
+- ./setup/(windows10|macm1)/scripts/bootstrap.ps1
+To install windows software with chocolatey:
+- ./setup/(windows10|macm1)/scripts/install.ps1
+
+### Ubuntu and Wsl Ubuntu
+To install software with apt-get:
+- ./setup/(wsl\_)?ubuntu20.04/scripts/install.sh
+
+### Vim setting shells
+Make sure to set shells in the /usr/local/bin: (NOTE: for git bash, launch as admin and run the content of this file without the 'sudo')
+- ./shared/scripts/vim\_shell/set\_shells.sh
+
+### Install oh my zsh
+- ./shared/scripts/zsh/install_oh-my-zsh.sh
+
 ### Warning - The following script will override any files in the destination. It copies to locations such as the home directory!!
 ### It is highly recommended to back up your current settings!!!!
 ### The copy process makes use of sed substitutions that can affect the configs and the currently running copy scripts. See the substitutions for your os in ./setup/\<os\>/scripts/substitution.sh
 
-Use the copy.sh scripts found in ./setup/[windows10|wsl\_ubuntu20.04|ubuntu20.04|macm1]/scripts/copy.sh "$flags" to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, Vundle.
+NOTE: the copy script depends on the above install scripts being run prior, if you run the copy script before them, you will most likely experience problems
+
+Use the copy.sh scripts found in ./setup/[windows10|wsl\_ubuntu20.04|ubuntu20.04|macm1]/scripts/copy.sh "$flags" to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, vim-plug.
+
+NOTE: The copy script needs to be run twice if this is your initial setup. The first time this script runs, it has trouble during the vim plugin installs. You will need to press enter or use :qa everyonce in a while if it hangs for more than 10 seconds. Run the copy script a second time and everything will be good.
 
 copy.sh : binary\_flags? -> unit
 
@@ -75,20 +96,6 @@ Paths with content that will be affected include but are not limited to:
 - "$HOME/Tasks/"
 - "$HOME/vscodevim/" when flags contain "01"
 - "$HOME/AppData/Roaming/Code/User/" (windows) else "$HOME/.config/Code/User/" when flags contain "01"
-
-### Windows and Mac
-To install chocolatey or home brew:
-- ./setup/(windows10|macm1)/scripts/bootstrap.ps1
-To install windows software with chocolatey:
-- ./setup/(windows10|macm1)/scripts/install.ps1
-
-### Ubuntu and Wsl Ubuntu
-To install software with apt-get:
-- ./setup/(wsl\_)?ubuntu20.04/scripts/install.sh
-
-### Vim setting shells
-Make sure to set shells in the /usr/local/bin: (NOTE: for git bash, launch as admin and run the content of this file without the 'sudo')
-- ./shared/scripts/vim\_shell/set\_shells.sh
 
 ## Bash tooling
 ### Notable bash functions/aliases
