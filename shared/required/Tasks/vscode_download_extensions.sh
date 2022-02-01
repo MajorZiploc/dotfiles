@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# KEY:
+# - a '#' means its part of my extended vscode flow
+# - a '##' means it is something i would like to look into
+
 # Core plugings
 # vim emulation
 code --install-extension vscodevim.vim
@@ -16,16 +20,13 @@ code --install-extension mhutchie.git-graph
 
 # Core-Extended plugings
 # gives a table view for data, dont recommend using it to edit data
-code --install-extension janisdd.vscode-edit-csv
+# code --install-extension janisdd.vscode-edit-csv
 # See through glass feel 
-code --install-extension s-nlf-fh.glassit
+# code --install-extension s-nlf-fh.glassit
 # Simple tmux key binds for the vscode terminal
-code --install-extension stephlin.vscode-tmux-keybinding
+# code --install-extension stephlin.vscode-tmux-keybinding
 # rest api client - postman like
-code --install-extension humao.rest-client
-
-# general non mssql database connection
-# code --install-extension bajdzis.vscode-database
+## code --install-extension humao.rest-client
 
 # docker
 # run project inside the container
@@ -45,25 +46,30 @@ code --install-extension ms-vscode.powershell
 code --install-extension ms-python.python
 # intellisense
 code --install-extension ms-python.vscode-pylance
-code --install-extension ms-toolsai.jupyter
+## code --install-extension ms-toolsai.jupyter
 # run on save/edit
-code --install-extension almenon.arepl
+# code --install-extension almenon.arepl
 
 # javascript / typescript
 # run on save/edit
-code --install-extension wallabyjs.quokka-vscode
+## code --install-extension wallabyjs.quokka-vscode
 
 # bash wsl
 # run inside ubuntu wsl container
-code --install-extension ms-vscode-remote.remote-wsl
+# code --install-extension ms-vscode-remote.remote-wsl
 # debug bash code
-code --install-extension rogalmic.bash-debug
+# code --install-extension rogalmic.bash-debug
 
 # mssql
-# base language support
-code --install-extension ms-mssql.mssql
+# code --install-extension ms-mssql.mssql
+
+# postgres
+# ckolkman.vscode-postgres
+
+# general non mssql database connection
+## code --install-extension bajdzis.vscode-database
 
 # prolog
 # base language support
-code --install-extension arthurwang.vsc-prolog
+# code --install-extension arthurwang.vsc-prolog
 
