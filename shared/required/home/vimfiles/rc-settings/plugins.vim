@@ -31,6 +31,3 @@ let mapleader = " "
 so ~/vimfiles/plugin-settings/coc.vim
 VIM_PLUGIN_SETTINGS_PLACEHOLDER
 
-" so ~/vimfiles/plugin-settings/gitgutter.vim
-" so ~/vimfiles/plugin-settings/wordmotion.vim
-
