@@ -1,3 +1,4 @@
+" NOTE: For literal string searches, prefix your search string with a single quote (')
 nmap <C-p> :GFiles<CR>
 nmap <leader>fi :BLines<CR>
 nmap <leader>ffi :Lines<CR>
