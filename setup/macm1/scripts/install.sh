@@ -59,4 +59,6 @@ brew install --cask keycastr
 
 # Finder: set hidden files to show by default
 defaults write http://com.apple.Finder AppleShowAllFiles true
+# Finder: disables .DS_Store creation
+defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 
