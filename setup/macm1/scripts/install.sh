@@ -61,4 +61,6 @@ brew install --cask keycastr
 defaults write http://com.apple.Finder AppleShowAllFiles true
 # Finder: disables .DS_Store creation
 defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+# allows key repeat if key is held down in vscode
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
