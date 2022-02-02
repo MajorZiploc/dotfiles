@@ -913,6 +913,12 @@ function parse_csv_fields {
   fi
 }
 
+function to_title_case {
+  local phrase="$1";
+  [[ -z "$phrase" ]] && { echo "Must specify a phrase!" >&2; return 1; }
+  echo "$phrase" | sed -e "s/\b\(.\)/\u\1/g";
+}
+
 function convert_csv_to_json {
   local csv="$1";
   if [[ -e "$csv" ]]; then
