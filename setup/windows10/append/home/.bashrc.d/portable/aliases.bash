@@ -1,3 +1,4 @@
+alias gsed='sed'
 # for opening a gui file explorer
 alias explorer="explorer.exe"
 # copy to clipboard
