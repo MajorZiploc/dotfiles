@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo apt -y update
+sudo apt-get -y update
 # session manager
 sudo apt-get -y install tmux
 # for cr formatting between dos and unix. gives dos2unix and unix2dos
@@ -27,14 +27,22 @@ sudo apt-get -y install silversearcher-ag
 sudo apt-get install -y zsh
 # vim 8.2
 sudo add-apt-repository ppa:jonathonf/vim
-sudo apt update
-sudo apt install vim
+sudo apt-get -y update
+sudo apt-get install -y vim
 # neovim
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get install -y neovim
+# ssh
+sudo apt-get remove -y openssh-client
+sudo apt-get install -y openssh-client
+sudo apt-get remove -y openssh-server
+sudo apt-get install -y openssh-server
+sudo ufw allow ssh
+sudo ufw status verbose
+
 
 # nodejs nvm deps
-sudo apt install -y build-essential checkinstall libssl-dev
+sudo apt-get install -y build-essential checkinstall libssl-dev
 curl -Lk https://raw.githubusercontent.com/creationix/nvm/v0.35.1/install.sh | bash
 
 # Adds microsoft packages to trusted hosts
@@ -48,7 +56,7 @@ sudo apt-get -y update
 sudo apt-get -y install dotnet-sdk-6.0
 
 # snapd
-sudo apt install snapd
+sudo apt-get -y install snapd
 
 # update pip
 python -m pip install --upgrade pip
@@ -66,10 +74,10 @@ sudo apt-get -y install copyq
 # from: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
 sudo apt-get -y remove docker docker-engine docker.io containerd runc
 sudo apt-get -y update
-sudo apt -y install apt-transport-https ca-certificates curl software-properties-common
+sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-sudo apt -y update
+sudo apt-get -y update
 apt-cache policy docker-ce
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 
@@ -81,7 +89,7 @@ wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-pr
 # Register the Microsoft repository GPG keys
 sudo dpkg -i packages-microsoft-prod.deb
 # Update the list of products
-sudo apt-get update
+sudo apt-get -y update
 # Enable the "universe" repositories
 sudo add-apt-repository universe
 # Install PowerShell
@@ -109,8 +117,8 @@ sudo curl \
       -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose \
           -o /etc/bash_completion.d/docker-compose
 
-sudo apt -y upgrade
+sudo apt-get -y upgrade
 
 # ruby
-sudo apt install -y ruby-full
-sudo gem install solargraph
+sudo apt-get install -y ruby-full
+sudo gem install -y solargraph
