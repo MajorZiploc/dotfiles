@@ -31,6 +31,9 @@ nmap <C-w><down> <C-w>-
 
 nmap <leader>6 <C-^>
 
+" tabs creation in current directory
+nmap <leader>tc :tabedit .<CR>
+
 " Set shell
 set shell=VIM_SHELL_PLACEHOLDER
 " Sets aliases for use in vim

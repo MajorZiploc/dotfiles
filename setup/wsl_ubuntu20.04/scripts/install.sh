@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo apt -y update
+sudo apt-get -y update
 # session manager
 sudo apt-get -y install tmux
 # for cr formatting between dos and unix. gives dos2unix and unix2dos
@@ -22,7 +22,7 @@ sudo apt-get -y install silversearcher-ag
 # google chrome
 sudo apt-get install -y curl unzip xvfb libxi6 libgconf-2-4
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install -y ./google-chrome-stable_current_amd64.deb
+sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
 sudo rm ./google-chrome-stable_current_amd64.deb
 # google driver
 wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip
@@ -35,14 +35,21 @@ sudo rm -rf chromedriver_linux64.zip
 sudo apt-get install -y zsh
 # vim 8.2
 sudo add-apt-repository ppa:jonathonf/vim
-sudo apt update
-sudo apt install vim
+sudo apt-get -y update
+sudo apt-get install -y vim
 # neovim
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get install -y neovim
+# ssh
+sudo apt-get remove -y openssh-client
+sudo apt-get install -y openssh-client
+sudo apt-get remove -y openssh-server
+sudo apt-get install -y openssh-server
+sudo ufw allow ssh
+sudo ufw status verbose
 
 # install nvm for nodejs
-sudo apt install -y build-essential checkinstall libssl-dev
+sudo apt-get install -y build-essential checkinstall libssl-dev
 curl -Lk https://raw.githubusercontent.com/creationix/nvm/v0.35.1/install.sh | bash
 
 # Adds microsoft packages to trusted hosts
@@ -52,12 +59,12 @@ sudo rm packages-microsoft-prod.deb
 
 # dotnet cli and deps
 sudo apt-get install -y apt-transport-https
-sudo apt-get update
+sudo apt-get -y update
 sudo apt-get install -y dotnet-sdk-3.1
 sudo apt-get install -y dotnet-sdk-6.0
 
 # snapd
-sudo apt install snapd
+sudo apt-get -y install snapd
 
 # powershell
 # Install pre-requisite packages.
@@ -67,7 +74,7 @@ wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-pr
 # Register the Microsoft repository GPG keys
 sudo dpkg -i packages-microsoft-prod.deb
 # Update the list of products
-sudo apt-get update
+sudo apt-get -y update
 # Enable the "universe" repositories
 sudo add-apt-repository universe
 # Install PowerShell
@@ -79,19 +86,19 @@ sudo rm packages-microsoft-prod.deb
 python -m pip install --upgrade pip
 
 # installs extra packages for google chrome, needed for automation tools like puppeteer js
-sudo apt-get update \
+sudo apt-get -y update \
   && sudo apt-get install -y wget gnupg \
   && sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
   && sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
-  && sudo apt-get update \
+  && sudo apt-get -y update \
   && sudo apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 \
   --no-install-recommends #\
       # not sure why this is recommended to do for extra packages of google chrome
     #&& sudo rm -rf /var/lib/apt/lists/*
 
-sudo apt -y upgrade
+sudo apt-get -y upgrade
 
 # ruby
-sudo apt install -y ruby-full
-sudo gem install solargraph
+sudo apt-get install -y ruby-full
+sudo gem install -y solargraph
 

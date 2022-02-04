@@ -72,7 +72,7 @@ NOTE: the copy script depends on the above install scripts being run prior, if y
 
 Use the copy.sh scripts found in ./setup/[windows10|wsl\_ubuntu20.04|ubuntu20.04|macm1]/scripts/copy.sh "$flags" to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, vim-plug.
 
-NOTE: The copy script needs to be run twice if this is your initial setup. The first time this script runs, it has trouble during the vim plugin installs. You will need to press enter or use :qa everyonce in a while if it hangs for more than 10 seconds. Run the copy script a second time and everything will be good.
+NOTE: For nonwin platforms, you will need to type :qa <return> after both nvim and vim completes their installs
 
 copy.sh : binary\_flags? -> unit
 
