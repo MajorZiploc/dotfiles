@@ -55,7 +55,7 @@ sudo apt-get -y install apt-transport-https
 sudo apt-get -y update
 sudo apt-get -y install dotnet-sdk-6.0
 
-# snapd
+# snapd for install packages
 sudo apt-get -y install snapd
 
 # update pip
@@ -69,6 +69,10 @@ sudo apt-get -y install vim-gtk
 sudo apt-get -y install xclip
 # clipboard manager, open its configs and make ctrl-` the Shortcuts -> Global -> Show the tray menu key
 sudo apt-get -y install copyq
+# sound eq
+sudo add-apt-repository ppa:mikhailnov/pulseeffects
+sudo apt-get -y update
+sudo apt-get -y install pulseeffects pulseaudio --install-recommends
 
 # docker
 # from: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
