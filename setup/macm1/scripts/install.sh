@@ -19,6 +19,7 @@ brew install nvim
 brew install dos2unix
 # ssh
 brew install openssh
+brew install telnet
 
 # instal xcode
 xcode-select --install
