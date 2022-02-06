@@ -1,12 +1,14 @@
+COC_PLUGINS_PLACEHOLDER
+
 " GoTo code navigation.
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
-COC_PLUGINS_PLACEHOLDER
 
 nnoremap <leader>wi :call <SID>show_documentation()<CR>
 nnoremap <leader>gq :call <SID>show_documentation()<CR>
+nmap <leader>ne <Cmd>CocCommand explorer<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
