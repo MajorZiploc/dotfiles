@@ -1,13 +1,11 @@
 so ~/vimfiles/rc-settings/common.vim
 
+" spellchecking
 " set spelllang=en_us
 " set spell
 
-" Allow mouse interactions
-set mouse=a
-
-" Allow opening of other files without saving current file
-set hidden
+set mouse=a " allow mouse interactions
+set hidden " allow opening of other files without saving current file
 
 " write swap files here instead of beside each file
 set directory=$HOME/.vim/swap//
@@ -19,9 +17,20 @@ set noswapfile
 " set textwidth=120
 " set colorcolumn=+1
 
-" set column ruler
-set colorcolumn=120
-" highlight ColorColumn ctermbg=lightcyan guibg=blue
+set colorcolumn=120 " set column ruler
+" highlight ColorColumn ctermbg=lightcyan guibg=blue " recolor the column ruler
+
+" set cursorline " set cursor highlight line
+" a workaround for wsl terminals that are not windows terimanl
+nmap <leader>6 <C-^>
+" tabs creation in current directory
+nmap <leader>tc :tabedit .<CR>
+" set shell
+set shell=VIM_SHELL_PLACEHOLDER
+" sets aliases for use in vim
+let $BASH_ENV = VIM_BASH_ENV_PLACEHOLDER
+set ruler " show file stats
+set visualbell " blink cursor on error instead of beeping (grr)
 
 " Resize window
 nmap <C-w><left> <C-w><
@@ -29,46 +38,34 @@ nmap <C-w><right> <C-w>>
 nmap <C-w><up> <C-w>+
 nmap <C-w><down> <C-w>-
 
-nmap <leader>6 <C-^>
-
-" tabs creation in current directory
-nmap <leader>tc :tabedit .<CR>
-
-" Set shell
-set shell=VIM_SHELL_PLACEHOLDER
-" Sets aliases for use in vim
-let $BASH_ENV = VIM_BASH_ENV_PLACEHOLDER
-
-" Show file stats
-set ruler
-
-" Blink cursor on error instead of beeping (grr)
-set visualbell
-
 " Last line
 set showmode
 set showcmd
 
-" Rendering
-set ttyfast
+set ttyfast " rendering
+set nocompatible " Don't try to be vi compatible
 
-" Don't try to be vi compatible
-set nocompatible
+" refresh vim settings
+" command! Sorc so $MYVIMRC
+" command! Sorcvs so ~\_vsvimrc
 
-" command aliases
-command! Sorc so $MYVIMRC
-command! Sorcvs so ~\_vsvimrc
-
-" window/appearance
+" appearance
 colorscheme elflord
 set guifont=Consolas:h12
+" menu colors
+highlight Pmenu ctermbg=gray guibg=gray
+highlight PmenuSel ctermbg=gray guibg=gray
+highlight PmenuSbar ctermbg=gray guibg=gray
+highlight Pmenu ctermbg=gray guibg=gray
+
+" window
 set nu " line numbers
 " Display n lines above/below the cursor when scrolling with a mouse
 set scrolloff=8
 set encoding=utf-8
 set incsearch
-set guioptions-=m  " remove menu bar
-set guioptions-=T  " remove toolbar
+set guioptions-=m " remove menu bar
+set guioptions-=T " remove toolbar
 set laststatus=2 " airline always on
 syntax on
 " if has("gui_running")
@@ -77,10 +74,6 @@ syntax on
 " else
   " set columns=120 lines=60
 " endif
-
-" syntax filetype associations
-" au BufNewFile,BufRead *.nuspec setlocal ft=xml
-" au BufNewFile,BufRead *.cls setlocal ft=vb
 
 " toggle expandtab
 function ToggleTab()
@@ -123,12 +116,6 @@ set wildmode=longest,list ",full
 " Added an extra select menu that shows what choice you are on for ,full
 " set wildmenu
 
-" menu colors
-highlight Pmenu ctermbg=gray guibg=gray
-highlight PmenuSel ctermbg=gray guibg=gray
-highlight PmenuSbar ctermbg=gray guibg=gray
-highlight Pmenu ctermbg=gray guibg=gray
-
 " remove language styles
 let g:rust_recommended_style = 0
 let g:python_recommended_style = 0
@@ -138,5 +125,8 @@ let g:python_recommended_style = 0
 " MUST BE LOADED BEFORE THE POLYGLOT PLUGIN IS LOADED IN
 let g:polyglot_disabled = ["autoindent"]
 
+" syntax filetype associations
 autocmd BufNewFile,BufRead Justfile set filetype=bash
+autocmd BufNewFile,BufRead *.nuspec setlocal ft=xml
+autocmd BufNewFile,BufRead *.cls setlocal ft=vb
 
