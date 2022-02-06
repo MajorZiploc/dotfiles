@@ -47,6 +47,7 @@ sudo apt-get remove -y openssh-server
 sudo apt-get install -y openssh-server
 sudo ufw allow ssh
 sudo ufw status verbose
+sudo apt-get install -y net-tools
 
 # install nvm for nodejs
 sudo apt-get install -y build-essential checkinstall libssl-dev
