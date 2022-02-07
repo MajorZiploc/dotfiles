@@ -55,6 +55,7 @@ sudo rm packages-microsoft-prod.deb
 sudo apt-get -y install apt-transport-https
 sudo apt-get -y update
 sudo apt-get -y install dotnet-sdk-6.0
+dotnet tool install -g fsautocomplete
 
 # snapd for install packages
 sudo apt-get -y install snapd

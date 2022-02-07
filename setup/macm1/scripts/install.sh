@@ -46,6 +46,7 @@ brew install asdf
 brew install mono-libgdiplus
 brew install --cask dotnet-sdk
 brew install --cask powershell
+dotnet tool install -g fsautocomplete
 
 # Dont forget to prepend this bash to the /etc/shell
 # /opt/homebrew/bin/bash
