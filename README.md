@@ -101,6 +101,49 @@ Paths with content that will be affected include but are not limited to:
 - "$HOME/vscodevim/" when flags contain "01"
 - "$HOME/AppData/Roaming/Code/User/" (windows) else "$HOME/.config/Code/User/" when flags contain "01"
 
+## Troubleshooting
+
+### on open of zsh: any of the following plugins complain about having problems: git, docker, docker-compose, zsh-autosuggestions, zsh-syntax-highlighting
+- You need to rerun the oh my zsh install script and then rerun the copy down script.
+- NOTE: make sure to pick the copy down script for your os in the following command
+> ./shared/scripts/zsh/install_oh-my-zsh.sh && ./setup/(macm1|wsl_ubuntu20.04|ubuntu20.04)/scripts/copy.sh
+
+### on open of vim or nvim: coc issue where no intellisense is working
+- Can be caused if you do not have nodejs, npm, and yarn installed. Install these tools then then do the following:
+> cd ~/.vim/plugged/coc.nvim && yarn install
+
+### on open of vim or nvim: /usr/local/bin/bash or /usr/local/bin/zsh not found
+- This can occur if you have yet to set symbolic links to your bash or zsh
+> ./shared/scripts/vim_shell/set_shells.sh
+
+### on open of vim or nvim: <some_vim_plugin> module not found problem
+- You will need to open vim or nvim and install the plugins manually
+> :PlugInstall
+
+### on open of vim in git bash (windows specific issue): coc file not found.
+- Some versions of coc do not work in vim v8.1.
+- You can either remove the coc pluggin and pluggin settings or revert the plugin to a previous version
+
+#### Remove the plugin
+- delete the following lines from the ~/vimfiles/rc-settings/plugins.vim
+> Plug 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
+> so ~/vimfiles/plugin-settings/coc.vim
+
+#### Revert the plugin to a previous version
+- This route will take more effort on your part
+- You will need to go into the coc plugin repo:
+> cd ~/.vim/plugged/coc.nvim
+- Then delete the current node\_modules folder
+> rm -rf node_modules
+- Then you will need to revert to a previous commit (I am unsure which commit you will need. Use git log to see commit hashs to try)
+> git reset --hard <commit\_hash>
+- Then relaunch vim and coc should try to install various languages servers. you may need to use the following commands inside of vim:
+> :PlugInstall
+> :CocInstall
+- You will know it is successful if vim pops up with a new window stating which language servers it is installing. Another way to know it was successful is if on open of vim, there is no error from coc
+- Repeat the process until you find a commit that works. I know that there are releases in 2020 and 2021 that work (unless the rebase those releases away which I have seen happen)
+- For further help. Google coc vim and look at their github docs
+
 ## Bash tooling
 ### Notable bash functions/aliases
 - whence <cmd> # gives the details of a bash command
