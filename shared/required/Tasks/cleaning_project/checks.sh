@@ -13,12 +13,12 @@ function main {
   checks=(`echo "${checks}" | tr "\n" " " | xargs`);
 
   for check in ${checks[@]}; do
+
     local search_pattern="`echo "$check" | sed -E 's,(.*)~(.*),\1,' | tr 'A-Z' 'a-z'`";
     local replace_pattern="`echo "$check" | sed -E 's,(.*)~(.*),\2,' | tr 'A-Z' 'a-z'`";
-
     echo "Checking for $search_pattern";
     echo "";
-    gfind_in_files "s,\b${search_pattern}\b,$replace_pattern,g"
+    gfind_in_files "${search_pattern}"
     gfind_items ".*$search_pattern.*";
 
   done;
