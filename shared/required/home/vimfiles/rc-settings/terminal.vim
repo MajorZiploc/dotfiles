@@ -127,6 +127,4 @@ let g:polyglot_disabled = ["autoindent"]
 
 " syntax filetype associations
 autocmd BufNewFile,BufRead Justfile set filetype=bash
-autocmd BufNewFile,BufRead *.nuspec setlocal ft=xml
-autocmd BufNewFile,BufRead *.cls setlocal ft=vb
 
