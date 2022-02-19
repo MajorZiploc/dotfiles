@@ -11,3 +11,5 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/zlib/lib/pkgconfig"
 export PATH="$PATH:/Users/manyu/.cargo/bin"
 [[ -d $HOME/.cargo ]] && . $HOME/.cargo/env
 
+export PATH="$HOME/.dotnet/tools:$PATH"
+
