@@ -127,4 +127,6 @@ let g:polyglot_disabled = ["autoindent"]
 
 " syntax filetype associations
 autocmd BufNewFile,BufRead Justfile set filetype=bash
+autocmd BufNewFile,BufRead *.fs set filetype=fsharp
+autocmd BufNewFile,BufRead *.fsx set filetype=fsharp
 
