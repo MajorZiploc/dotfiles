@@ -20,6 +20,7 @@ brew install dos2unix
 # ssh
 brew install openssh
 brew install telnet
+brew install swi-prolog
 
 # instal xcode
 xcode-select --install

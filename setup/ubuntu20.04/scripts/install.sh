@@ -41,6 +41,10 @@ sudo ufw allow ssh
 sudo ufw status verbose
 sudo apt-get install -y net-tools
 
+# prolog
+sudo add-apt-repository ppa:swi-prolog/stable
+sudo apt-get update
+sudo apt-get install swi-prolog
 
 # nodejs nvm deps
 sudo apt-get install -y build-essential checkinstall libssl-dev
