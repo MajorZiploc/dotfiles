@@ -1,0 +1,21 @@
+{
+  "languageserver": {
+    "prolog-lsp": {
+      "command": "swipl",
+      "args": [
+        "-g",
+        "use_module(library(lsp_server)).",
+        "-g",
+        "lsp_server:main",
+        "-t",
+        "halt",
+        "--",
+        "stdio"
+      ],
+      "filetypes": [
+        "prolog"
+      ]
+    }
+  }
+}
+
