@@ -48,5 +48,3 @@ fi
 # Rust
 export PATH="$PATH:/Users/manyu/.cargo/bin"
 [[ -d $HOME/.cargo ]] && . $HOME/.cargo/env
-
-export PATH="$HOME/.dotnet/tools:$PATH"
