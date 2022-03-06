@@ -131,4 +131,4 @@ sudo apt-get -y upgrade
 
 # ruby
 sudo apt-get install -y ruby-full
-sudo gem install -y solargraph
+sudo gem install solargraph
