@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+this_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+
 softwareupdate --all --install --force
 
 brew update
@@ -21,6 +23,8 @@ brew install dos2unix
 brew install openssh
 brew install telnet
 brew install swi-prolog
+# for vim coc prolog language server support
+swipl -q -l "$this_path/../../../shared/scripts/prolog/install_language_server.pl";
 
 # instal xcode
 xcode-select --install
