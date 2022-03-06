@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+this_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+
 sudo apt-get -y update
 # session manager
 sudo apt-get -y install tmux
@@ -45,6 +47,8 @@ sudo apt-get install -y net-tools
 sudo add-apt-repository ppa:swi-prolog/stable
 sudo apt-get update
 sudo apt-get install swi-prolog
+# for vim coc prolog language server support
+swipl -q -l "$this_path/../../../shared/scripts/prolog/install_language_server.pl";
 
 # nodejs nvm deps
 sudo apt-get install -y build-essential checkinstall libssl-dev
