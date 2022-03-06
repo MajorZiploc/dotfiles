@@ -6,3 +6,7 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$PATH:/Users/manyu/.cargo/bin"
 [[ -d $HOME/.cargo ]] && . $HOME/.cargo/env
 
+if [ -d $HOME/.asdf ]; then
+  . $HOME/.asdf/asdf.sh
+fi
+
