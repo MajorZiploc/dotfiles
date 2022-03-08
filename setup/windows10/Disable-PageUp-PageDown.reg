@@ -1,0 +1,12 @@
+Windows Registry Editor Version 5.00
+; Disables PageUp and PageDown
+; Useful for Keyboards where PgUp, PgDn are on top of left and right arrows
+; win key -> Registry Editor -> File -> Import -> this file
+; Should import into the path below
+; Restart machine for it to take effect
+;
+; Revert
+; Simply delete the Scancode Map in the Keyboard Layout to remove this settings and restart your machine
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+"Scancode Map"=hex:00,00,00,00,00,00,00,00,03,00,00,00,00,00,49,E0,00,00,51,E0,00,00,00,00
