@@ -49,9 +49,9 @@ Ubuntu:
 
 ### Windows and Mac
 To install chocolatey or home brew:
-- ./setup/(windows10|mac)/scripts/bootstrap.ps1
+- ./setup/(windows|mac)/scripts/bootstrap.ps1
 To install windows software with chocolatey:
-- ./setup/(windows10|mac)/scripts/install.ps1
+- ./setup/(windows|mac)/scripts/install.ps1
 
 ### Ubuntu and Wsl Ubuntu
 To install software with apt-get:
@@ -70,7 +70,7 @@ Make sure to set shells in the /usr/local/bin: (NOTE: for git bash, launch as ad
 
 NOTE: the copy script depends on the above install scripts being run prior, if you run the copy script before them, you will most likely experience problems
 
-Use the copy.sh scripts found in ./setup/[windows10|wsl\_ubuntu|ubuntu|mac]/scripts/copy.sh "$flags" to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, vim-plug.
+Use the copy.sh scripts found in ./setup/[windows|wsl\_ubuntu|ubuntu|mac]/scripts/copy.sh "$flags" to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, vim-plug.
 
 NOTE: For nonwin platforms, you will need to type :qa <return> after both nvim and vim completes their installs
 
