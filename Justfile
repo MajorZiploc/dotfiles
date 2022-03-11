@@ -15,10 +15,10 @@ docker-container-stop:
 docker-container-connect CONTAINER_NAME='devcontainer_home_settings_app_1':
   docker exec -it "{{CONTAINER_NAME}}" /bin/bash;
 
-setup OS='ubuntu20.04':
+setup OS='ubuntu':
   ./"setup/{{OS}}/scripts/copy.sh" "111" && . ~/.bash_profile;
 
-run-tests FILE_GLOB='' OS='ubuntu20.04':
+run-tests FILE_GLOB='' OS='ubuntu':
   #!/usr/bin/env bash
   file_glob="{{FILE_GLOB}}";
   cd tests;

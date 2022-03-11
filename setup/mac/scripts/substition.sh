@@ -22,7 +22,7 @@ vim_plugin_settings="${vim_plugset_path}fzf.vim\n${vim_plugset_path}rainbow_csv.
 # nvim specific settings
 vim_plugin_settings="$vim_plugin_settings\nif has\('nvim'\)\n  ${vim_plugset_path}nvim-lspconfig.vim\n  ${vim_plugset_path}gruvbox_flat.vim\nendif";
 find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -i'' "s,VIM_PLUGIN_SETTINGS_PLACEHOLDER,$vim_plugin_settings,g" "{}" \;
-find -E "$tempShared" -iregex ".*" -type f -exec gsed -E -i'' "s,OS_PLACEHOLDER,macm1,g" "{}" \;
+find -E "$tempShared" -iregex ".*" -type f -exec gsed -E -i'' "s,OS_PLACEHOLDER,mac,g" "{}" \;
 vsc_settings_destination_placeholder="$HOME/.vscoderc.d/";
 find -E "$tempShared" -iregex ".*\.sh" -type f -exec gsed -E -i'' "s,VSC_SETTINGS_DESTINATION_PLACEHOLDER,$vsc_settings_destination_placeholder,g" "{}" \;
 tmuxps_paths_array_placeholder="(\"\$(find -E ~ -mindepth 1 -maxdepth 1 -iregex \".*(project|workspace).*\" -type d -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' 2>/dev/null)\")";

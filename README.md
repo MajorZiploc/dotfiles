@@ -3,6 +3,13 @@
 ## Purpose
 For automating the setup of a developer machine
 
+## Platforms these configs are used on:
+- windows10
+- windows11
+- mac m1
+- ubuntu 20.04
+- wsl ubuntu 20.04
+
 ## Tools
 
 All:
@@ -27,7 +34,7 @@ Ubuntu:
 WSL Ubuntu:
 - apt package manager
 
-Mac m1:
+Mac:
 - homebrew
 
 ## Installs
@@ -49,13 +56,13 @@ Ubuntu:
 
 ### Windows and Mac
 To install chocolatey or home brew:
-- ./setup/(windows10|macm1)/scripts/bootstrap.ps1
+- ./setup/(windows|mac)/scripts/bootstrap.ps1
 To install windows software with chocolatey:
-- ./setup/(windows10|macm1)/scripts/install.ps1
+- ./setup/(windows|mac)/scripts/install.ps1
 
 ### Ubuntu and Wsl Ubuntu
 To install software with apt-get:
-- ./setup/(wsl\_)?ubuntu20.04/scripts/install.sh
+- ./setup/(wsl\_)?ubuntu/scripts/install.sh
 
 ### Vim setting shells
 Make sure to set shells in the /usr/local/bin: (NOTE: for git bash, launch as admin and run the content of this file without the 'sudo')
@@ -70,7 +77,7 @@ Make sure to set shells in the /usr/local/bin: (NOTE: for git bash, launch as ad
 
 NOTE: the copy script depends on the above install scripts being run prior, if you run the copy script before them, you will most likely experience problems
 
-Use the copy.sh scripts found in ./setup/[windows10|wsl\_ubuntu20.04|ubuntu20.04|macm1]/scripts/copy.sh "$flags" to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, vim-plug.
+Use the copy.sh scripts found in ./setup/[windows|wsl\_ubuntu|ubuntu|mac]/scripts/copy.sh "$flags" to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, vim-plug.
 
 NOTE: For nonwin platforms, you will need to type :qa <return> after both nvim and vim completes their installs
 
@@ -106,7 +113,7 @@ Paths with content that will be affected include but are not limited to:
 ### on open of zsh: any of the following plugins complain about having problems: git, docker, docker-compose, zsh-autosuggestions, zsh-syntax-highlighting
 - You need to rerun the oh my zsh install script and then rerun the copy down script.
 - NOTE: make sure to pick the copy down script for your os in the following command
-> ./shared/scripts/zsh/install_oh-my-zsh.sh && ./setup/(macm1|wsl_ubuntu20.04|ubuntu20.04)/scripts/copy.sh
+> ./shared/scripts/zsh/install_oh-my-zsh.sh && ./setup/(mac|wsl_ubuntu|ubuntu)/scripts/copy.sh
 
 ### on open of vim or nvim: coc issue where no intellisense is working
 - Can be caused if you do not have nodejs, npm, and yarn installed. Install these tools then then do the following:
