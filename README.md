@@ -3,6 +3,13 @@
 ## Purpose
 For automating the setup of a developer machine
 
+## Platforms these configs are used on:
+- windows10
+- windows11
+- mac m1
+- ubuntu 20.04
+- wsl ubuntu 20.04
+
 ## Tools
 
 All:
