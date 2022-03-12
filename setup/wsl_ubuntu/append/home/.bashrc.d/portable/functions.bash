@@ -31,16 +31,16 @@ function mssql_exec_delimiter_count_single_line {
 }
 
 function cdws {
-  homes=`find /mnt/c/Users/ -mindepth 1 -maxdepth 1 -type d | fzf`;
-  echo "$homes" > ~/.windows_side_home;
-  cd "$homes";
+  export HOMEWS=`find /mnt/c/Users/ -mindepth 1 -maxdepth 1 -type d | fzf`;
+  echo "$HOMEWS" > ~/.windows_side_home;
+  cd "$HOMEWS";
 }
 
 function cdwh {
-  if [[ ! -e ~/.windows_side_home ]]; then
+  if [[ -z "$HOMEWS" ]]; then
     cdws;
   else
-    cd "`cat ~/.windows_side_home`";
+    cd "$HOMEWS";
   fi
 }
 
