@@ -9,8 +9,14 @@ sudo apt-get -y install tmux
 sudo apt-get -y install dos2unix
 # view directories in tree format
 sudo apt-get -y install tree
+
 # creates a 'python' and makes it point to python3 that is installed
 sudo apt-get -y install python-is-python3
+# for gui support for matplotlib
+sudo apt-get install python3-tk
+# OR you can use this pip library in your project
+# pip install pyqt5
+
 # ripgrep for vundle use or use on its own
 sudo apt-get -y install ripgrep
 # fuzzy finder
