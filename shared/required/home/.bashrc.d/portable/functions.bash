@@ -713,7 +713,7 @@ function git_checkout_branch_in_path {
   _path="${_path:="."}";
   _dirs=(`find "$_path" -mindepth 1 -maxdepth 1 -type d | xargs`);
   for proj in ${_dirs[@]}; do
-    echo "$proj";
+    echo "Project: $proj";
     cd "$proj";
     git status 2>&1 >/dev/null && git_all_the_things
     [[ ! "$?" == "0" ]] && {
