@@ -8,7 +8,8 @@ nmap <leader>gr <Plug>(coc-references)
 
 nnoremap <leader>wi :call <SID>show_documentation()<CR>
 nnoremap <leader>gq :call <SID>show_documentation()<CR>
-nmap <leader>ne <Cmd>CocCommand explorer<CR>
+" NOTE: Requires coc-explorer in the coc_global_extensions list
+" nmap <leader>ne <Cmd>CocCommand explorer<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
