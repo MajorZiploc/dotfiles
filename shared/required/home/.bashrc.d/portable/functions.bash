@@ -680,8 +680,8 @@ function gfind_in_files_replace {
 function git_deploy {
   local origin_branch_choices="$1";
   local destination_branch_choices="$2";
-  origin_branch_choices=(`echo "${origin_branch_choices:="develop dev"}" | xargs`);
-  destination_branch_choices=(`echo "${destination_branch_choices:="master main"}" | xargs`);
+  origin_branch_choices=(`echo "${origin_branch_choices:=$GIT_ORIGIN_BRANCH_CHOICES}" | xargs`);
+  destination_branch_choices=(`echo "${destination_branch_choices:=$GIT_DESTINATION_BRANCH_CHOICES}" | xargs`);
   local origin_branch='';
   for origin_branch_choice in ${origin_branch_choices[@]}; do
     if git show-ref --quiet "refs/heads/${origin_branch_choice}"; then origin_branch="$origin_branch_choice"; fi
@@ -715,7 +715,7 @@ function git_checkout_branch_in_path {
   for proj in ${_dirs[@]}; do
     echo "Project: $proj";
     cd "$proj";
-    git status 2>&1 >/dev/null && git_all_the_things
+    git status 2>&1 >/dev/null && git_all_the_things;
     [[ ! "$?" == "0" ]] && {
       cd .. && continue;
     }

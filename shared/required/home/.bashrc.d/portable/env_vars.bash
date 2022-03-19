@@ -8,5 +8,8 @@ export EDITOR='vim'
 
 export NODE_ENV='development'
 
+export GIT_ORIGIN_BRANCH_CHOICES=(`echo "develop dev staging" | xargs`)
+export GIT_DESTINATION_BRANCH_CHOICES=(`echo "master main" | xargs`)
+
 export NODE_TLS_REJECT_UNAUTHORIZED=0
 
