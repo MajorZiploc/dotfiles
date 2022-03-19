@@ -42,7 +42,7 @@ if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
     # create gifs from screen
     cinst -y screentogif
     # scripting language for workflow automations
-    cinst -y autohotkey
+    # cinst -y autohotkey
     # for calling urls from cli
     cinst -y curl
     # display keystrokes on screen, one key at a time
@@ -50,11 +50,11 @@ if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
     # display keystrokes on screen, shows multiple keys at a time
     cinst -y keycastow
     # for vim grep plugin
-    cinst -y ripgrep
+    # cinst -y ripgrep
     # for searching pdfs, ebooks, zips, etc...
-    cinst -y ripgrep-all
+    # cinst -y ripgrep-all
     # for fuzzy file finder
-    cinst -y fzf
+    # cinst -y fzf
 }
 
 if (($optionsAsInt -band $GamingAsInt) -eq $GamingAsInt) {
@@ -68,7 +68,7 @@ if (($optionsAsInt -band $CreativeAsInt) -eq $CreativeAsInt) {
     Write-Host("Installing Creative packages")
     # Creative Packages
     # photo editing tool
-    cinst -y gimp
+    # cinst -y gimp
     # compact image viewer and converter
     cinst -y irfanview
     # photo editing tool - easier than gimp
@@ -83,11 +83,11 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     # or just use this bash instead of git bash
     cinst -y msys2
     # prolog language
-    cinst -y swi-prolog
+    # cinst -y swi-prolog
     # javascript runtime
     cinst -y nodejs
     # javascript package manager
-    cinst -y yarn
+    # cinst -y yarn
     # python language
     cinst -y python3
     # local testing of sending emails
@@ -102,9 +102,9 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     # java development kit 12
     cinst -y openjdk.portable
     # vim gui
-    cinst -y vim-tux
+    # cinst -y vim-tux
     # api manual testing
-    cinst -y postman
+    # cinst -y postman
 }
 
 if (($optionsAsInt -band $WorkAsInt) -eq $WorkAsInt) {
@@ -117,25 +117,18 @@ if (($optionsAsInt -band $WorkAsInt) -eq $WorkAsInt) {
     cinst -y dotnet-runtime
 }
 
-# adds windows terminal manager, didnt seem to work
-# cinst -y microsoft-windows-terminal
 # example of installing something (atom) for all users
 # choco install atom -y --force --params "'ALLUSERS=1"
 # jre + jdk 12
 # cinst -y openjdk12
 
 # look into these
-# cinst -y logitechgaming
-# cinst -y vim-tux
-# cinst -y autohotkey
 # cinst -y nircmd
 # cinst -y vlc
 
 # install dev tools
 # cinst -y gitkraken
 # cinst -y linqpad5
-# cinst -y fake
-# cinst -y visualstudio2019-workload-manageddesktopbuildtools
 
 # generate shims
 # & "$env:ChocolateyInstall\tools\shimgen.exe" -p "$env:ChocolateyInstall\tools\shimgen.exe" -o "$env:ChocolateyInstall\bin\shimgen.exe"
