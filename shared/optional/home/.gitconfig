@@ -14,8 +14,6 @@
   symlinks = true
 [merge]
   ff = false
-[alias]
-	sweep = !git branch --merged | egrep -v \"(^\\*|^\\s*(main|master|develop|test)$)\" | xargs git branch -d
 [pull]
 	rebase = true
 [push]

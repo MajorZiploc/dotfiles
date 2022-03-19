@@ -771,6 +771,11 @@ function git_rebase_i_head {
   git rebase -i HEAD~"$n";
 }
 
+function git_sweep {
+  local exclude_branches=`echo "$GIT_DESTINATION_BRANCH_CHOICES $GIT_ORIGIN_BRANCH_CHOICES" | tr " " "|"`;
+  git branch -d `git branch --merged | egrep -v "(^\\*|^\\s*($exclude_branches)$)"`;
+}
+
 function show_script_path {
   local scriptpath="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
   echo "$scriptpath";
