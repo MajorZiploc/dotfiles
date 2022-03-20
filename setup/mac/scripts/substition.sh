@@ -35,10 +35,12 @@ extra_env_checks_placeholder="which fzf 2>\&1 2>/dev/null >/dev/null; [[ \"\$?\"
 find -E "$tempShared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,EXTRA_ENV_CHECKS_PLACEHOLDER,$extra_env_checks_placeholder,g" "{}" \;
 coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright', 'coc-sql', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-sh', 'coc-rust-analyzer', 'coc-omnisharp', 'coc-solargraph', 'coc-solargraph', 'coc-explorer']";
 find -E "$tempShared" -iregex ".*coc.*" -type f -exec gsed -E -i'' "s/COC_PLUGINS_PLACEHOLDER/$coc_plugins_placeholder/g" "{}" \;
-find -E "$tempShared" -type f -exec gsed -E -i'' "s/find(.*?)-regextype egrep/find -E\1/g" "{}" \;
-find -E "$tempShared" -iregex ".*(functions|aliases).*\.bash" -type f -exec gsed -E -i'' "s/\bsed /gsed /g" "{}" \;
 vim_bash_env_placeholder='"~/vimfiles/bash_env.bash"';
 find -E "$tempShared" -iregex ".*vim.*" -type f -exec gsed -E -i'' "s,VIM_BASH_ENV_PLACEHOLDER,$vim_bash_env_placeholder,g" "{}" \;
+
+find -E "$tempShared" -type f -exec gsed -E -i'' "s/find(.*?)-regextype egrep/find -E\1/g" "{}" \;
+find -E "$tempShared" -iregex ".*(functions|aliases).*\.bash" -type f -exec gsed -E -i'' "s/\bsed /gsed /g" "{}" \;
+find -E "$tempShared" -iregex ".*sh" -type f -exec gsed -E -i'' "s,(export )(FCEDIT|EDITOR|VISUAL).*?,\1\2='nvim'," "{}" \;
 # example of deleting bak files
 # find "$tempShared" -iregex '.*\.bak$' -type f -exec rm "{}" \;
 
