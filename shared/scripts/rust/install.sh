@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
-. ~/.zshrc_core
+. ~/.zshrc_core;
 
 # install rust
-curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh;
 
 # install rust analyzer
 # linux - first solution worked. might have to launch into bash first when in a rust project

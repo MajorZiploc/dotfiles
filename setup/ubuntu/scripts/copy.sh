@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
-SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+script_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
 
 # root of the os style configs being downloaded
-setupRoot="$SCRIPTPATH/.."
+setup_root="$script_path/..";
 
-flags="$1"
+flags="$1";
 [[ -z "$flags" ]] && { flags='00'; }
 
-$SCRIPTPATH/../../../shared/scripts/copy.sh "$setupRoot" "$flags"
+$script_path/../../../shared/scripts/copy.sh "$setup_root" "$flags";
 
-nvim "+:PlugUpgrade" "+:PlugUpdate" "+:PlugInstall" "+:CocInstall" "+:CocUpdate" 2>/dev/null
-vim "+:PlugUpgrade" "+:PlugUpdate" "+:PlugInstall" "+:CocInstall" "+:CocUpdate" 2>/dev/null
+nvim "+:PlugUpgrade" "+:PlugUpdate" "+:PlugInstall" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
+vim "+:PlugUpgrade" "+:PlugUpdate" "+:PlugInstall" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
 
-unset setupRoot
+unset setup_root;
 

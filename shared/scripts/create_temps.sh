@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 
-SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+script_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
 
 # root of the os style configs being downloaded
-setupRoot="$1"
-temp="$2"
-tempShared="$3"
-tempThis="$4"
+setup_root="$1";
+temp="$2";
+temp_shared="$3";
+temp_this="$4";
 
-mkdir -p "$tempShared/"
-cp -r "$SCRIPTPATH/../../shared/" "$temp/"
-mkdir -p "$tempThis/"
-cp -r "$setupRoot" "$tempThis/"
+mkdir -p "$temp_shared/";
+cp -r "$script_path/../../shared/" "$temp/";
+mkdir -p "$temp_this/";
+cp -r "$setup_root" "$temp_this/";
 
-unset setupRoot
-unset tempShared
-unset tempThis
-unset temp
+unset setup_root;
+unset temp_shared;
+unset temp_this;
+unset temp;
 

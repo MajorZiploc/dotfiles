@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-asdf plugin add python
+asdf plugin add python;
 
