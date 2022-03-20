@@ -38,6 +38,8 @@ find "$tempShared" -regextype egrep -iregex ".*coc.*" -type f -exec sed -E -i'' 
 vim_bash_env_placeholder='"~/vimfiles/bash_env.bash"';
 find "$tempShared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i'' "s,VIM_BASH_ENV_PLACEHOLDER,$vim_bash_env_placeholder,g" "{}" \;
 
+find "$tempShared" -regextype egrep -iregex ".*sh" -type f -exec sed -E -i'' "s,(export )(FCEDIT|EDITOR|VISUAL).*?,\1\2='nvim'," "{}" \;
+
 unset vsvimpath
 unset vim_plugin_include
 unset vim_plugset_path
