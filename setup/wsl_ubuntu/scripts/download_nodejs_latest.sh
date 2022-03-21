@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-. ~/.bashrc
+. ~/.bashrc;
 
-nvm install --lts
+nvm install --lts;
 
-nvm use --lts
+nvm use --lts;
 

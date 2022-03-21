@@ -1,47 +1,47 @@
 #!/usr/bin/env bash
 
-this_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+this_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
 
-sudo apt-get -y update
+sudo apt-get -y update;
 # session manager
-sudo apt-get -y install tmux
+sudo apt-get -y install tmux;
 # for cr formatting between dos and unix. gives dos2unix and unix2dos
-sudo apt-get -y install dos2unix
+sudo apt-get -y install dos2unix;
 # view directories in tree format
-sudo apt-get -y install tree
+sudo apt-get -y install tree;
 # creates a 'python' and makes it point to python3 that is installed
-sudo apt-get -y install python-is-python3
+sudo apt-get -y install python-is-python3;
 # for creating python virtual environments
-sudo apt-get -y install python3-venv
+sudo apt-get -y install python3-venv;
 # ripgrep for vundle use or use on its own
-sudo add-apt-repository ppa:x4121/ripgrep
-sudo apt-get -y update
-sudo apt-get -y install ripgrep
+sudo add-apt-repository ppa:x4121/ripgrep;
+sudo apt-get -y update;
+sudo apt-get -y install ripgrep;
 # fuzzy finder
 # make sure this isnt around (its to old for the vim plugin)
-sudo apt-get -y remove fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-sed -E -i'' 's,curl -[^[:blank:]]+,curl -0Lk,g' ~/.fzf/install
-~/.fzf/install
+sudo apt-get -y remove fzf;
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf;
+sed -E -i'' 's,curl -[^[:blank:]]+,curl -0Lk,g' ~/.fzf/install;
+~/.fzf/install;
 # for Ag in vim
-sudo apt-get -y install silversearcher-ag
+sudo apt-get -y install silversearcher-ag;
 # zsh
-sudo apt-get install -y zsh
+sudo apt-get install -y zsh;
 # vim 8.2
-sudo add-apt-repository ppa:jonathonf/vim
-sudo apt-get -y update
-sudo apt-get install -y vim
+sudo add-apt-repository ppa:jonathonf/vim;
+sudo apt-get -y update;
+sudo apt-get install -y vim;
 # neovim
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt-get install -y neovim
+sudo add-apt-repository ppa:neovim-ppa/unstable;
+sudo apt-get install -y neovim;
 # ssh
-sudo apt-get remove -y openssh-client
-sudo apt-get install -y openssh-client
-sudo apt-get remove -y openssh-server
-sudo apt-get install -y openssh-server
-sudo ufw allow ssh
-sudo ufw status verbose
-sudo apt-get install -y net-tools
+sudo apt-get remove -y openssh-client;
+sudo apt-get install -y openssh-client;
+sudo apt-get remove -y openssh-server;
+sudo apt-get install -y openssh-server;
+sudo ufw allow ssh;
+sudo ufw status verbose;
+sudo apt-get install -y net-tools;
 
 # prolog
 sudo add-apt-repository ppa:swi-prolog/stable
@@ -61,65 +61,65 @@ sudo mv composer.phar /usr/local/bin/composer
 rm composer.phar
 
 # nodejs nvm deps
-sudo apt-get install -y build-essential checkinstall libssl-dev
-curl -Lk https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+sudo apt-get install -y build-essential checkinstall libssl-dev;
+curl -Lk https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash;
 
 # Adds microsoft packages to trusted hosts
-wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-sudo rm packages-microsoft-prod.deb
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb;
+sudo dpkg -i packages-microsoft-prod.deb;
+sudo rm packages-microsoft-prod.deb;
 
 # dotnet cli and deps
-sudo apt-get -y install apt-transport-https
-sudo apt-get -y update
-sudo apt-get -y install dotnet-sdk-6.0
-dotnet tool install -g fsautocomplete
+sudo apt-get -y install apt-transport-https;
+sudo apt-get -y update;
+sudo apt-get -y install dotnet-sdk-6.0;
+dotnet tool install -g fsautocomplete;
 
 # snapd for install packages
-sudo apt-get -y install snapd
+sudo apt-get -y install snapd;
 
 # update pip
-python -m pip install --upgrade pip
+python -m pip install --upgrade pip;
 
 # vim with clipboard support
-sudo apt-get -y remove vim-common vim-runtime vim
-sudo apt-get -y install --upgrade vim-common vim-runtime vim
-sudo apt-get -y install vim-gtk
+sudo apt-get -y remove vim-common vim-runtime vim;
+sudo apt-get -y install --upgrade vim-common vim-runtime vim;
+sudo apt-get -y install vim-gtk;
 # clipboard tool
-sudo apt-get -y install xclip
+sudo apt-get -y install xclip;
 # clipboard manager, open its configs and make ctrl-` the Shortcuts -> Global -> Show the tray menu key
-sudo apt-get -y install copyq
+sudo apt-get -y install copyq;
 # sound eq
-sudo add-apt-repository ppa:mikhailnov/pulseeffects
-sudo apt-get -y update
-sudo apt-get -y install pulseeffects pulseaudio --install-recommends
+sudo add-apt-repository ppa:mikhailnov/pulseeffects;
+sudo apt-get -y update;
+sudo apt-get -y install pulseeffects pulseaudio --install-recommends;
 
 # docker
 # from: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
-sudo apt-get -y remove docker docker-engine docker.io containerd runc
-sudo apt-get -y update
-sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-sudo apt-get -y update
-apt-cache policy docker-ce
-sudo apt-get -y install docker-ce docker-ce-cli containerd.io
+sudo apt-get -y remove docker docker-engine docker.io containerd runc;
+sudo apt-get -y update;
+sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common;
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -;
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable";
+sudo apt-get -y update;
+apt-cache policy docker-ce;
+sudo apt-get -y install docker-ce docker-ce-cli containerd.io;
 
 # powershell
 # Install pre-requisite packages.
-sudo apt-get install -y wget apt-transport-https software-properties-common
+sudo apt-get install -y wget apt-transport-https software-properties-common;
 # Download the Microsoft repository GPG keys
-wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb;
 # Register the Microsoft repository GPG keys
-sudo dpkg -i packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb;
 # Update the list of products
-sudo apt-get -y update
+sudo apt-get -y update;
 # Enable the "universe" repositories
-sudo add-apt-repository universe
+sudo add-apt-repository universe;
 # Install PowerShell
-sudo apt-get install -y powershell
+sudo apt-get install -y powershell;
 # Cleanup
-sudo rm packages-microsoft-prod.deb
+sudo rm packages-microsoft-prod.deb;
 
 # another way to install docker
 # sudo apt-get -y install \
@@ -139,10 +139,10 @@ sudo rm packages-microsoft-prod.deb
 # docker terminal auto completion
 sudo curl \
       -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose \
-          -o /etc/bash_completion.d/docker-compose
+          -o /etc/bash_completion.d/docker-compose;
 
-sudo apt-get -y upgrade
+sudo apt-get -y upgrade;
 
 # ruby
-sudo apt-get install -y ruby-full
-sudo gem install solargraph
+sudo apt-get install -y ruby-full;
+sudo gem install solargraph;

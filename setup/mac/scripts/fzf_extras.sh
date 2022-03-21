@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-$(brew --prefix)/opt/fzf/install
+$(brew --prefix)/opt/fzf/install;
 

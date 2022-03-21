@@ -1,30 +1,30 @@
 #!/usr/bin/env bash
 
-SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+script_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
 
 # root of the os style configs being downloaded
-setupRoot="$1"
-temp="$2"
-tempShared="$3"
-tempThis="$4"
-flags="$5"
-flags_as_int="$((2#$flags))"
-vscode_flag_as_int="$((2#01))"
-clipboard_flag_as_int="$((2#10))"
-tasks_flag_as_int="$((2#100))"
+setup_root="$1";
+temp="$2";
+temp_shared="$3";
+temp_this="$4";
+flags="$5";
+flags_as_int="$((2#$flags))";
+vscode_flag_as_int="$((2#01))";
+clipboard_flag_as_int="$((2#10))";
+tasks_flag_as_int="$((2#100))";
 
-test -f "$tempThis/.ahk" && { cp -a "$tempThis/.ahk" "$HOME/"; }
-cp -a "$tempShared/required/home/." "$HOME/"
-cp -a "$tempShared/required/home_bin/." "$HOME/bin/"
+test -f "$temp_this/.ahk" && { cp -a "$temp_this/.ahk" "$HOME/"; }
+cp -a "$temp_shared/required/home/." "$HOME/";
+cp -a "$temp_shared/required/home_bin/." "$HOME/bin/";
 [[ $(($clipboard_flag_as_int & $flags_as_int)) == $clipboard_flag_as_int ]] && {
-  cp -a "$tempShared/required/clipboard/." "$HOME/clipboard/"
+  cp -a "$temp_shared/required/clipboard/." "$HOME/clipboard/";
 }
 [[ $(($tasks_flag_as_int & $flags_as_int)) == $tasks_flag_as_int ]] && {
-  cp -a "$tempShared/required/Tasks/." "$HOME/Tasks/"
+  cp -a "$temp_shared/required/Tasks/." "$HOME/Tasks/";
 }
 [[ $(($vscode_flag_as_int & $flags_as_int)) == $vscode_flag_as_int ]] && {
-  cp -a "$tempShared/required/vscodevim/." "$HOME/vscodevim/"
-  cp -a "$tempShared/required/configs/vscode/." VSC_SETTINGS_DESTINATION_PLACEHOLDER
+  cp -a "$temp_shared/required/vscodevim/." "$HOME/vscodevim/";
+  cp -a "$temp_shared/required/configs/vscode/." VSC_SETTINGS_DESTINATION_PLACEHOLDER;
 }
 
 # download vimplug if it does not exist
@@ -35,15 +35,15 @@ vim_plug_path="$vim_plug_dir/plug.vim";
   curl -0Lk https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > "$vim_plug_path";
 }
 
-unset setupRoot
-unset tempShared
-unset tempThis
-unset temp
-unset flags
-unset flags_as_int
-unset vscode_flag_as_int
-unset clipboard_flag_as_int
-unset tasks_flag_as_int
-unset vim_plug_dir
-unset vim_plug_path
+unset setup_root;
+unset temp_shared;
+unset temp_this;
+unset temp;
+unset flags;
+unset flags_as_int;
+unset vscode_flag_as_int;
+unset clipboard_flag_as_int;
+unset tasks_flag_as_int;
+unset vim_plug_dir;
+unset vim_plug_path;
 

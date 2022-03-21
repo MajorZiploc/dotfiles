@@ -1,61 +1,61 @@
 #!/usr/bin/env bash
 
-this_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+this_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
 
-sudo apt-get -y update
+sudo apt-get -y update;
 # session manager
-sudo apt-get -y install tmux
+sudo apt-get -y install tmux;
 # for cr formatting between dos and unix. gives dos2unix and unix2dos
-sudo apt-get -y install dos2unix
+sudo apt-get -y install dos2unix;
 # view directories in tree format
-sudo apt-get -y install tree
+sudo apt-get -y install tree;
 
 # creates a 'python' and makes it point to python3 that is installed
-sudo apt-get -y install python-is-python3
+sudo apt-get -y install python-is-python3;
 # for gui support for matplotlib
-sudo apt-get install python3-tk
+sudo apt-get install python3-tk;
 # OR you can use this pip library in your project
 # pip install pyqt5
 
 # ripgrep for vundle use or use on its own
-sudo apt-get -y install ripgrep
+sudo apt-get -y install ripgrep;
 # fuzzy finder
 # make sure this isnt around (its to old for the vim plugin)
-sudo apt-get -y remove fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-sed -E -i'' 's,curl -[^[:blank:]]+,curl -0Lk,g' ~/.fzf/install
-~/.fzf/install
+sudo apt-get -y remove fzf;
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf;
+sed -E -i'' 's,curl -[^[:blank:]]+,curl -0Lk,g' ~/.fzf/install;
+~/.fzf/install;
 # for Ag in vim
-sudo apt-get -y install silversearcher-ag
+sudo apt-get -y install silversearcher-ag;
 # google chrome
-sudo apt-get install -y curl unzip xvfb libxi6 libgconf-2-4
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
-sudo rm ./google-chrome-stable_current_amd64.deb
+sudo apt-get install -y curl unzip xvfb libxi6 libgconf-2-4;
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb;
+sudo apt-get install -y ./google-chrome-stable_current_amd64.deb;
+sudo rm ./google-chrome-stable_current_amd64.deb;
 # google driver
-wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip
-unzip chromedriver_linux64.zip
-sudo mv chromedriver /usr/bin/chromedriver
-sudo chown root:root /usr/bin/chromedriver
-sudo chmod +x /usr/bin/chromedriver
-sudo rm -rf chromedriver_linux64.zip
+wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip;
+unzip chromedriver_linux64.zip;
+sudo mv chromedriver /usr/bin/chromedriver;
+sudo chown root:root /usr/bin/chromedriver;
+sudo chmod +x /usr/bin/chromedriver;
+sudo rm -rf chromedriver_linux64.zip;
 # zsh
-sudo apt-get install -y zsh
+sudo apt-get install -y zsh;
 # vim 8.2
-sudo add-apt-repository ppa:jonathonf/vim
-sudo apt-get -y update
-sudo apt-get install -y vim
+sudo add-apt-repository ppa:jonathonf/vim;
+sudo apt-get -y update;
+sudo apt-get install -y vim;
 # neovim
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt-get install -y neovim
+sudo add-apt-repository ppa:neovim-ppa/unstable;
+sudo apt-get install -y neovim;
 # ssh
-sudo apt-get remove -y openssh-client
-sudo apt-get install -y openssh-client
-sudo apt-get remove -y openssh-server
-sudo apt-get install -y openssh-server
-sudo ufw allow ssh
-sudo ufw status verbose
-sudo apt-get install -y net-tools
+sudo apt-get remove -y openssh-client;
+sudo apt-get install -y openssh-client;
+sudo apt-get remove -y openssh-server;
+sudo apt-get install -y openssh-server;
+sudo ufw allow ssh;
+sudo ufw status verbose;
+sudo apt-get install -y net-tools;
 
 # prolog
 sudo add-apt-repository ppa:swi-prolog/stable
@@ -75,42 +75,42 @@ sudo mv composer.phar /usr/local/bin/composer
 rm composer.phar
 
 # install nvm for nodejs
-sudo apt-get install -y build-essential checkinstall libssl-dev
-curl -Lk https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+sudo apt-get install -y build-essential checkinstall libssl-dev;
+curl -Lk https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash;
 
 # Adds microsoft packages to trusted hosts
-wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-sudo rm packages-microsoft-prod.deb
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb;
+sudo dpkg -i packages-microsoft-prod.deb;
+sudo rm packages-microsoft-prod.deb;
 
 # dotnet cli and deps
-sudo apt-get install -y apt-transport-https
-sudo apt-get -y update
-sudo apt-get install -y dotnet-sdk-3.1
-sudo apt-get install -y dotnet-sdk-6.0
-dotnet tool install -g fsautocomplete
+sudo apt-get install -y apt-transport-https;
+sudo apt-get -y update;
+sudo apt-get install -y dotnet-sdk-3.1;
+sudo apt-get install -y dotnet-sdk-6.0;
+dotnet tool install -g fsautocomplete;
 
 # snapd
-sudo apt-get -y install snapd
+sudo apt-get -y install snapd;
 
 # powershell
 # Install pre-requisite packages.
-sudo apt-get install -y wget apt-transport-https software-properties-common
+sudo apt-get install -y wget apt-transport-https software-properties-common;
 # Download the Microsoft repository GPG keys
-wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb;
 # Register the Microsoft repository GPG keys
-sudo dpkg -i packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb;
 # Update the list of products
-sudo apt-get -y update
+sudo apt-get -y update;
 # Enable the "universe" repositories
-sudo add-apt-repository universe
+sudo add-apt-repository universe;
 # Install PowerShell
-sudo apt-get install -y powershell
+sudo apt-get install -y powershell;
 # Cleanup
-sudo rm packages-microsoft-prod.deb
+sudo rm packages-microsoft-prod.deb;
 
 # update pip
-python -m pip install --upgrade pip
+python -m pip install --upgrade pip;
 
 # installs extra packages for google chrome, needed for automation tools like puppeteer js
 sudo apt-get -y update \
@@ -123,9 +123,9 @@ sudo apt-get -y update \
       # not sure why this is recommended to do for extra packages of google chrome
     #&& sudo rm -rf /var/lib/apt/lists/*
 
-sudo apt-get -y upgrade
+sudo apt-get -y upgrade;
 
 # ruby
-sudo apt-get install -y ruby-full
-sudo gem install solargraph
+sudo apt-get install -y ruby-full;
+sudo gem install solargraph;
 
