@@ -45,14 +45,14 @@ sudo apt-get install -y net-tools
 
 # prolog
 sudo add-apt-repository ppa:swi-prolog/stable
-sudo apt-get update
-sudo apt-get install swi-prolog
+sudo apt-get update -y
+sudo apt-get install -y swi-prolog
 # for vim coc prolog language server support
 swipl -q -l "$this_path/../../../shared/scripts/prolog/install_language_server.pl";
 
 # php
 sudo add-apt-repository ppa:ondrej/php
-sudo apt install php8.0
+sudo apt install -y php8.0
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php -r "if (hash_file('sha384', 'composer-setup.php') === '906a84df04cea2aa72f40b5f787e49f22d4c2f19492ac310e8cba5b96ac8b64115ac402c8cd292b8a03482574915d1a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 php composer-setup.php
