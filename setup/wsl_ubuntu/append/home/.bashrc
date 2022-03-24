@@ -43,9 +43,10 @@ if [ -d $HOME/.asdf ]; then
   . $HOME/.asdf/completions/asdf.bash
 fi
 [ -e ~/.fzf.bash ] && . ~/.fzf.bash
+[[ -e /etc/profile.d/gradle.sh ]] && { . /etc/profile.d/gradle.sh; }
 
 # Rust
-export PATH="$PATH:/Users/manyu/.cargo/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 [[ -d $HOME/.cargo ]] && . $HOME/.cargo/env
 
  export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
