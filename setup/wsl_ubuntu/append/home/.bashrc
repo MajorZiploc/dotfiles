@@ -45,7 +45,7 @@ fi
 [ -e ~/.fzf.bash ] && . ~/.fzf.bash
 
 # Rust
-export PATH="$PATH:/Users/manyu/.cargo/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 [[ -d $HOME/.cargo ]] && . $HOME/.cargo/env
 
  export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0

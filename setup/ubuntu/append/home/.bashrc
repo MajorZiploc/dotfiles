@@ -46,5 +46,5 @@ if [ -d $HOME/.asdf ]; then
 fi
 
 # Rust
-export PATH="$PATH:/Users/manyu/.cargo/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 [[ -d $HOME/.cargo ]] && . $HOME/.cargo/env
