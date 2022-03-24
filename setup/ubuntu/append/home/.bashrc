@@ -39,6 +39,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -e ~/.fzf.bash ] && . ~/.fzf.bash
+[[ -e /etc/profile.d/gradle.sh ]] && { . /etc/profile.d/gradle.sh; }
 
 if [ -d $HOME/.asdf ]; then
   . $HOME/.asdf/asdf.sh

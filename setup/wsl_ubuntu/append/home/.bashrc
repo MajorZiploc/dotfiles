@@ -43,6 +43,7 @@ if [ -d $HOME/.asdf ]; then
   . $HOME/.asdf/completions/asdf.bash
 fi
 [ -e ~/.fzf.bash ] && . ~/.fzf.bash
+[[ -e /etc/profile.d/gradle.sh ]] && { . /etc/profile.d/gradle.sh; }
 
 # Rust
 export PATH="$PATH:$HOME/.cargo/bin"

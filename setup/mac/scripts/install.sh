@@ -36,6 +36,9 @@ brew install openssl readline sqlite3 xz zlib;
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh;
 brew install rust-analyzer;
 
+brew install java11;
+brew install gradle;
+
 # php
 brew install php;
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');";

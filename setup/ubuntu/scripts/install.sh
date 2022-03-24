@@ -50,6 +50,15 @@ sudo apt-get install -y swi-prolog;
 # for vim coc prolog language server support
 swipl -q -l "$this_path/../../../shared/scripts/prolog/install_language_server.pl";
 
+sudo apt-get install -y openjdk-11-jdk;
+gradle_version='7.4.1';
+wget https://services.gradle.org/distributions/gradle-${gradle_version}-bin.zip -P /tmp;
+sudo unzip -d /opt/gradle /tmp/gradle-${gradle_version}-bin.zip;
+sudo ln -s /opt/gradle/gradle-${gradle_version} /opt/gradle/latest;
+sudo sed -E -i'' '/export PATH=\/opt\/gradle\/latest\/bin:\$\{PATH\}/d' /etc/profile.d/gradle.sh;
+echo 'export PATH=/opt/gradle/latest/bin:${PATH}' | sudo tee /etc/profile.d/gradle.sh;
+sudo chmod +x /etc/profile.d/gradle.sh;
+
 # php
 sudo add-apt-repository ppa:ondrej/php -y;
 sudo apt install -y php8.0;
