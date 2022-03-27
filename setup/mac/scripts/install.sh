@@ -22,6 +22,8 @@ brew install copyq;
 brew install bash-completion;
 brew install nvim;
 brew install dos2unix;
+# json query for cli
+brew install jq
 # ssh
 brew install openssh;
 brew install telnet;
