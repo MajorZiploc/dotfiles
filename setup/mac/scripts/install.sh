@@ -22,6 +22,8 @@ brew install copyq;
 brew install bash-completion;
 brew install nvim;
 brew install dos2unix;
+# json query for cli
+brew install jq
 # ssh
 brew install openssh;
 brew install telnet;
@@ -38,6 +40,13 @@ brew install rust-analyzer;
 
 brew install java11;
 brew install gradle;
+
+# golang
+brew install golang;
+# bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer);
+# . ~/.gvm/scripts/gvm;
+# gvm install go1.18;
+# gvm use go1.18;
 
 # php
 brew install php;

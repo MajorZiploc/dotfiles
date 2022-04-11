@@ -679,8 +679,10 @@ function gfind_in_files_replace {
 function git_deploy {
   local origin_branch_choices="$1";
   local destination_branch_choices="$2";
-  origin_branch_choices=(`echo "${origin_branch_choices:=$GIT_ORIGIN_BRANCH_CHOICES}" | xargs`);
-  destination_branch_choices=(`echo "${destination_branch_choices:=$GIT_DESTINATION_BRANCH_CHOICES}" | xargs`);
+  local g_origin_branch_choices="`echo "${GIT_ORIGIN_BRANCH_CHOICES[@]}"`";
+  local g_destination_branch_choices="`echo "${GIT_DESTINATION_BRANCH_CHOICES[@]}"`";
+  origin_branch_choices=(`echo "${origin_branch_choices:=$g_origin_branch_choices}" | xargs`);
+  destination_branch_choices=(`echo "${destination_branch_choices:=$g_destination_branch_choices}" | xargs`);
   local origin_branch='';
   for origin_branch_choice in ${origin_branch_choices[@]}; do
     if git show-ref --quiet "refs/heads/${origin_branch_choice}"; then origin_branch="$origin_branch_choice"; fi

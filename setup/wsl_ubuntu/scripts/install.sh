@@ -7,6 +7,8 @@ sudo apt-get -y update;
 sudo apt-get -y install tmux;
 # for cr formatting between dos and unix. gives dos2unix and unix2dos
 sudo apt-get -y install dos2unix;
+# json query for cli
+sudo apt-get -y install jq;
 # view directories in tree format
 sudo apt-get -y install tree;
 
