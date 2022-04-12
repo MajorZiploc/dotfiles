@@ -31,7 +31,7 @@
     "when": "editorTextFocus && editorLangId == 'powershell'"
   },
   {
-    "key": "ctrl+g ctrl+s",
+    "key": "ctrl+v ctrl+s",
     "command": "git.stageSelectedRanges",
     "when": "isInDiffEditor"
   },
@@ -41,7 +41,7 @@
     "when": "isInDiffEditor"
   },
   {
-    "key": "ctrl+g ctrl+u",
+    "key": "ctrl+v ctrl+u",
     "command": "git.unstageSelectedRanges",
     "when": "isInDiffEditor"
   },
@@ -51,7 +51,7 @@
     "when": "isInDiffEditor"
   },
   {
-    "key": "ctrl+g ctrl+r",
+    "key": "ctrl+v ctrl+r",
     "command": "git.revertSelectedRanges",
     "when": "isInDiffEditor"
   },
