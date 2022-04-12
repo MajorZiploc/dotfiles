@@ -41,13 +41,6 @@ brew install rust-analyzer;
 brew install java11;
 brew install gradle;
 
-# golang
-brew install golang;
-# bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer);
-# . ~/.gvm/scripts/gvm;
-# gvm install go1.18;
-# gvm use go1.18;
-
 # php
 brew install php;
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');";
