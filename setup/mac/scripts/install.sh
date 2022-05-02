@@ -95,6 +95,8 @@ defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1;
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false;
 # Clock: dont let the date separators flash
 defaults write com.apple.menuextra.clock FlashDateSeparators -bool false;
+# Makes key held down actions the quickest possible, <cmd>-<space> Keyboard for all options
+defaults write NSGlobalDomain KeyRepeat -int 0
 
 # Personal Preferences
 # Dock: sets dock icon size to small
