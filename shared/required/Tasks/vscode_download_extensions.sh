@@ -64,7 +64,7 @@ code --install-extension ms-python.vscode-pylance
 # code --install-extension ms-mssql.mssql
 
 # postgres
-# ckolkman.vscode-postgres
+# code --install-extension ckolkman.vscode-postgres
 
 # general non mssql database connection
 ## code --install-extension bajdzis.vscode-database
