@@ -777,6 +777,14 @@ function git_sweep {
   git branch -d `git branch --merged | egrep -v "(^\\*|^\\s*($exclude_branches)$)"`;
 }
 
+function git_add_all_kinda {
+  git add .;
+  dont_adds=(`echo "$GIT_DONT_ADD" | xargs`);
+  for dont_add in ${dont_adds[@]}; do
+    git restore --staged "$dont_add";
+  done;
+}
+
 function show_script_path {
   local scriptpath="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
   echo "$scriptpath";
