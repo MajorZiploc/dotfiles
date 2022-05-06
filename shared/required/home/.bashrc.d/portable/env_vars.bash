@@ -14,3 +14,5 @@ export GIT_DONT_ADD="just.bash *compose*.yml *compose*.yaml .env* .vim/* .devcon
 
 export FIND_DEFAULT_IGNORE_DIRS=('bin' 'obj' '.git' '.svn' 'node_modules' '.ionide' '.venv' '__pycache__');
 
+export FIND_GIT_EXTRA_IGNORE_DIRS=('node_modules' '.venv');
+

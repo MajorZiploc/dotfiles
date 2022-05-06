@@ -291,6 +291,9 @@ function _find_git_estimator_ignored_dirs {
   }
   local git_ignore_content=`{ bash -c "$get_ancestor_git_ignore_content"; echo "$child_git_ignore_content"; echo ".git .svn"; }`;
   local gitignore_entries=($(echo "$git_ignore_content" | sort -u | trim | egrep -v "('|\"|;|#|\\!|,|\\{|\\}|\\@|\\||\\^|\\(|\\)|^[[:blank:]]*$|\\&|\\$|\\\\|~|\\+|\`|=|[^[:blank:]]+\.[^[:blank:]]{1,6}\$)" | tr " " "\n" | sed -E 's,^[/\*]*/,,g;s,/[/\*]*$,,g;' | xargs));
+  # TODO: filter out duplicates
+  gitignore_entries+=(`echo "${FIND_GIT_EXTRA_IGNORE_DIRS[@]}"`);
+  gitignore_entries=(`echo "${gitignore_entries[@]}" | tr ' ' '\n' | sort -u | xargs`);
   _find_generate_not_paths "${gitignore_entries[@]}";
 }
 
