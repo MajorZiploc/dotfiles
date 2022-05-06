@@ -5,16 +5,16 @@ $records = Import-Csv -Path "$PSScriptRoot/projs/github_repos_clone.csv"
 $root_path="~/projects"
 cd "$root_path"
 $records | ForEach-Object {
-  if (! (Test-Path -Path "$root_path\$($_.repo_name -replace " ", "-")")) {
+  # if (! (Test-Path -Path "$root_path\$($_.repo_name -replace " ", "-")")) {
     # Write-Host "Cloning the Project $($_.repo_name)"
     # bitbucket
     # Invoke-Expression -Command $_.clone
 
     # github
     git clone $_.clone
-  }
-  else {
+  # }
+  # else {
     # Write-Host "Project $($_.repo_name) already exists! Not cloning this repo."
-  }
+  # }
 }
 
