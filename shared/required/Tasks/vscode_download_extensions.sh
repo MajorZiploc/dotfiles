@@ -31,6 +31,7 @@ code --install-extension mhutchie.git-graph
 # docker
 # run project inside the container
 code --install-extension ms-vscode-remote.remote-containers
+# code --enable-proposed-api ms-vscode-remote.remote-containers
 code --install-extension ms-azuretools.vscode-docker
 
 # dotnet

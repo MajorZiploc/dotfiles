@@ -620,7 +620,7 @@ function _find_in_files_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=9; }
   local not_paths="$4";
-  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep --color -in -e '$grep_pattern' \"{}\" +;";
+  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep --with-filename --color -in -e '$grep_pattern' \"{}\" +;";
 }
 
 function find_in_files {
