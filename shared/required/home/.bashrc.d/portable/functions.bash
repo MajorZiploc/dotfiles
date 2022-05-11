@@ -267,7 +267,7 @@ function _find_default_ignored_dirs {
 
 function _find_git_estimator_ignored_dirs {
   local search_depth_for_nested_git_ignores=$1;
-  search_depth_for_nested_git_ignores="${search_depth_for_nested_git_ignores:="0"}";
+  search_depth_for_nested_git_ignores="${search_depth_for_nested_git_ignores:="$FIND_GIT_DEFAULT_CHILD_GITIGNORE_SEARCH_DEPTH"}";
   local get_ancestor_git_ignore_content='
     git_ignore_content="`cat .gitignore 2>/dev/null`";
     current_path=`pwd`;
