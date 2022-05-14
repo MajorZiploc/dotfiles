@@ -736,7 +736,7 @@ function git_log_follow {
   # search current branch git commits for commits that change a file
   local item_name="$1";
   [[ -z "$item_name" ]] && { echo "Must specify item_name!" >&2; return 1; }
-  git log --stats --all --date-order --follow -- "$item_name";
+  git log --stats --date-order --follow -- "$item_name";
 }
 
 function git_diff_range {
