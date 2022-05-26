@@ -11,7 +11,6 @@ brew update;
 brew install tmux;
 mkdir ~/.nvm;
 brew install nvm;
-brew install node;
 nvm install node;
 brew install fzf;
 brew install ripgrep;
