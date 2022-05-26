@@ -9,10 +9,12 @@ xcode-select --install;
 
 brew update;
 brew install tmux;
+# node version manager
 mkdir ~/.nvm;
 brew install nvm;
-brew install node;
 nvm install node;
+# python version manager like nvm
+brew install pyenv;
 brew install fzf;
 brew install ripgrep;
 # for Ag in vim
@@ -24,6 +26,8 @@ brew install nvim;
 brew install dos2unix;
 # json query for cli
 brew install jq
+# yaml query for cli
+brew install yq
 # ssh
 brew install openssh;
 brew install telnet;
