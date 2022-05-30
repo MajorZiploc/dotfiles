@@ -260,3 +260,8 @@ NOTE: you can also run a specific test file instead of all tests
 View the Justfile for more commands and details on each command or use (at the root of this project):
 > just -l
 
+
+## TODO:
+
+- Cleanup ubuntu-slim-container
+  - was rushed and has alot of things around that it does not need
