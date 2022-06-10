@@ -1,0 +1,15 @@
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -e ~/.fzf.zsh ] && . ~/.fzf.zsh
+
+# Rust
+export PATH="$PATH:$HOME/.cargo/bin"
+[[ -d $HOME/.cargo ]] && . $HOME/.cargo/env
+
+if [ -d $HOME/.asdf ]; then
+  . $HOME/.asdf/asdf.sh
+fi
+
+[[ -e /etc/profile.d/gradle.sh ]] && { . /etc/profile.d/gradle.sh; }
+
+
