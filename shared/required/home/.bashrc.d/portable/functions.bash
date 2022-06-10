@@ -705,8 +705,8 @@ function git_all_the_things {
   git branch -r | grep -v '\->' | while read remote; do
     git branch --track "${remote#origin/}" "$remote";
   done;
-  git fetch --all;
-  git pull --all;
+  git fetch --all --prune;
+  git pull --all --prune;
 }
 
 function git_checkout_branch_in_path {
