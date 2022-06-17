@@ -12,6 +12,7 @@
 	# else
 	# editor = 'vim'
   symlinks = true
+	hooksPath = /dev/null
 [merge]
   ff = false
 [pull]
