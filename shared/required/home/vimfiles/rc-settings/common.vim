@@ -66,6 +66,10 @@ nnoremap <s-k> hr<cr>^
 " trim trailing spaces in file
 nnoremap <silent> <leader>lt :%s/[ \t]\+$/<cr>
 
+" Helpful for with goto definition or reference doesnt work
+" pair with fzf or find_* bash commands
+nnoremap <silent> <leader>yw "+yiw
+
 " true delete
 vnoremap <leader>cd "_d
 " true delete followed by a paste
