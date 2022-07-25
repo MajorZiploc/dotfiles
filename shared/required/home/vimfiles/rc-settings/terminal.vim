@@ -25,6 +25,8 @@ set colorcolumn=120 " set column ruler
 nmap <leader>6 <C-^>
 " tabs creation in current directory
 nmap <leader>tc :tabedit .<CR>
+" close the currently focused buffer
+nmap <leader>bw :bwipeout<CR>
 " set shell
 set shell=VIM_SHELL_PLACEHOLDER
 " sets aliases for use in vim
