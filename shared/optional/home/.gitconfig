@@ -29,3 +29,7 @@
 	forceSignAnnotated = false
 [init]
 	defaultBranch = master
+# USE IF YARN/NPM GIVES YOU THIS ERROR:
+#   fatal: unable to connect to github.com:
+# [url "https://"]
+  # insteadOf = git://
