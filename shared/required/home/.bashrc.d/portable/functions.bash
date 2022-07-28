@@ -297,6 +297,8 @@ function _find_git_estimator_ignored_dirs {
   _find_generate_not_paths "${gitignore_entries[@]}";
 }
 
+export FIND_DEFAULT_MAX_DEPTH=9;
+
 function _find_items_rename_helper {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
@@ -305,7 +307,7 @@ function _find_items_rename_helper {
   local preview=$3;
   [[ -z "$preview" ]] && { echo "Must specify the preview flag!" >&2; return 1; }
   local maxdepth="$4";
-  [[ -z "$maxdepth" ]] && { maxdepth=9; }
+  [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$5";
   for mdepth in `seq 1 $maxdepth`; do
     eval "find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' $not_paths -print0" | while read -d $'\0' item; do
@@ -360,7 +362,7 @@ function _find_items_delete_helper {
   local preview=$2;
   [[ -z "$preview" ]] && { echo "Must specify the preview flag!" >&2; return 1; }
   local maxdepth="$3";
-  [[ -z "$maxdepth" ]] && { maxdepth=9; }
+  [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
   for mdepth in `seq 1 $maxdepth`; do
     eval "find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' $not_paths -print0" | while read -d $'\0' item; do
@@ -414,7 +416,7 @@ function _find_items_helper {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local maxdepth="$2";
-  [[ -z "$maxdepth" ]] && { maxdepth=9; }
+  [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$3";
   eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' $not_paths";
 }
@@ -451,7 +453,7 @@ function _find_files_delete_preview_helper {
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local with_content="$2";
   local maxdepth="$3";
-  [[ -z "$maxdepth" ]] && { maxdepth=9; }
+  [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
   if [[ -z "$with_content" ]]; then
     eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec echo rm \"'{}' ;\" \;";
@@ -465,7 +467,7 @@ function _find_files_delete_helper {
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local with_content="$2";
   local maxdepth="$3";
-  [[ -z "$maxdepth" ]] && { maxdepth=9; }
+  [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths=`_find_default_ignored_dirs`;
   if [[ -z "$with_content" ]]; then
     eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec rm \"{}\" \;";
@@ -513,7 +515,7 @@ function _find_files_rename_helper {
   local preview=$4
   [[ -z "$preview" ]] && { echo "Must specify the preview flag!" >&2; return 1; }
   local maxdepth="$5";
-  [[ -z "$maxdepth" ]] && { maxdepth=9; }
+  [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$6";
   eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -print0" | while read -d $'\0' file; do
   local should_rename=false;
@@ -573,7 +575,7 @@ function _find_files_helper {
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
   local with_content="$2";
   local maxdepth="$3";
-  [[ -z "$maxdepth" ]] && { maxdepth=9; }
+  [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
   if [[ -z "$with_content" ]]; then
     eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths";
@@ -618,7 +620,7 @@ function _find_in_files_helper {
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
   local maxdepth="$3";
-  [[ -z "$maxdepth" ]] && { maxdepth=9; }
+  [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
   eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep --with-filename --color -in -e '$grep_pattern' \"{}\" +;";
 }
@@ -659,7 +661,7 @@ function _find_in_files_replace_helper {
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
   local maxdepth="$3";
-  [[ -z "$maxdepth" ]] && { maxdepth=9; }
+  [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
   eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec sed -E -i'' '$by' \"{}\" \;";
 }
