@@ -28,6 +28,10 @@ nnoremap Y y$
 " split line (compliment of <s-j> to join)
 nnoremap <s-k> h<cr>^
 
+" Helpful for with goto definition or reference doesnt work
+" pair with fzf or find_* bash commands
+nnoremap <silent> <leader>yw "+yiw
+
 " navigation
 " Using the original meaning of this key
 " nnoremap H ^
