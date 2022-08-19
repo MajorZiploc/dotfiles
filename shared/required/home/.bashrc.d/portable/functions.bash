@@ -681,6 +681,19 @@ function gfind_in_files_replace {
   _find_in_files_replace_helper "$1" "$2" "$3" "$not_paths";
 }
 
+function cdp {
+  local items="";
+  tmuxps_get_project_dirs;
+  for _path in `echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"`; do
+    [[ -d "$_path" ]] && {
+      items+=`find "$_path" -maxdepth 1 -mindepth 1 -type d`;
+      items+="\n";
+    }
+  done;
+  local selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
+  cd "$selected";
+}
+
 function git_deploy {
   local origin_branch_choices="$1";
   local destination_branch_choices="$2";
