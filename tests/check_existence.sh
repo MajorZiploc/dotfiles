@@ -96,6 +96,7 @@ function typea_check(){
   "cdfp"
   "ideh1"
   "idev1"
+  "cdp"
   )
   for funct in ${l[@]}; do
     run typea_check "$funct"
