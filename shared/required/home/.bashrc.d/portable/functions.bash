@@ -781,7 +781,7 @@ function git_log_follow {
   # search current branch git commits for commits that change a file
   local item_name="$1";
   [[ -z "$item_name" ]] && { echo "Must specify item_name!" >&2; return 1; }
-  git log --stats --date-order --follow -- "$item_name";
+  git log --date-order --ignore-space-change --follow -- "$item_name";
 }
 
 function git_diff_range {
@@ -805,13 +805,13 @@ function git_log_show_last_n_on_current_branch {
 function git_diff_of_commit {
   local commit="$1";
   [[ -z "$commit" ]] && { echo "Must specify a commit!" >&2; return 1; }
-  git diff "$commit"^!;
+  git diff --ignore-space-change "$commit"^! ;
 }
 
 function git_diff_from_commit_to_current {
   local commit="$1";
   [[ -z "$commit" ]] && { echo "Must specify a commit!" >&2; return 1; }
-  git diff "$commit"^;
+  git diff --ignore-space-change "$commit"^;
 }
 
 function git_rebase_i_head {
