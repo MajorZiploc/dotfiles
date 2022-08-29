@@ -728,7 +728,7 @@ function git_deploy {
   local origin_branch_choices="$1";
   local destination_branch_choices="$2";
   local g_origin_branch_choices="`echo "${GIT_ORIGIN_BRANCH_CHOICES[@]}"`";
-  local g_destination_branch_choices="`echo "${GIT_DESTINATION_BRANCH_CHOICES[@]}"`";
+  local g_destination_branch_choices="`git_main_branch` `echo "${GIT_DESTINATION_BRANCH_CHOICES[@]}"`";
   origin_branch_choices=(`echo "${origin_branch_choices:=$g_origin_branch_choices}" | xargs`);
   destination_branch_choices=(`echo "${destination_branch_choices:=$g_destination_branch_choices}" | xargs`);
   local origin_branch='';
@@ -821,7 +821,7 @@ function git_rebase_i_head {
 }
 
 function git_sweep {
-  local exclude_branches=`echo "$GIT_DESTINATION_BRANCH_CHOICES $GIT_ORIGIN_BRANCH_CHOICES" | tr " " "|"`;
+  local exclude_branches="`git_main_branch;`|`echo "$GIT_DESTINATION_BRANCH_CHOICES $GIT_ORIGIN_BRANCH_CHOICES" | tr " " "|"`";
   git branch -d `git branch --merged | egrep -v "(^\\*|^\\s*($exclude_branches)$)"`;
 }
 
