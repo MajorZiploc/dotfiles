@@ -20,3 +20,6 @@ export PATH="/opt/homebrew/opt/openjdk${MY_JAVA_VERSION}/bin:$PATH"
 export PATH="$PATH:$HOME/.cargo/bin"
 [[ -d $HOME/.cargo ]] && . $HOME/.cargo/env
 
+# golang
+# [[ -e $HOME/.gvm/scripts/gvm ]] && . ~/.gvm/scripts/gvm;
+
