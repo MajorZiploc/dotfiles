@@ -35,6 +35,14 @@ vim_plug_path="$vim_plug_dir/plug.vim";
   curl -0Lk https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > "$vim_plug_path";
 }
 
+# download tpm if it does not exist
+tmux_plugin_dir="$HOME/.tmux/plugins";
+tmux_plugin_manager_dir="$tmux_plugin_dir/tpm";
+[[ -d "$tmux_plugin_manager_dir" ]] || {
+  mkdir -p "$tmux_plugin_dir";
+  git clone https://github.com/tmux-plugins/tpm "$tmux_plugin_manager_dir";
+}
+
 unset setup_root;
 unset temp_shared;
 unset temp_this;
