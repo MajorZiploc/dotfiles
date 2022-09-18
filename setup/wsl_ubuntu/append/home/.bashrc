@@ -50,3 +50,7 @@ export PATH="$PATH:$HOME/.cargo/bin"
 [[ -d $HOME/.cargo ]] && . $HOME/.cargo/env
 
  export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
+
+# golang
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin

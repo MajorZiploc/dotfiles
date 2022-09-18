@@ -49,3 +49,7 @@ fi
 # Rust
 export PATH="$PATH:$HOME/.cargo/bin"
 [[ -d $HOME/.cargo ]] && . $HOME/.cargo/env
+
+# golang
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
