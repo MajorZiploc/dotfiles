@@ -97,6 +97,7 @@ function typea_check(){
   "ideh1"
   "idev1"
   "cdp"
+  "vim_session"
   )
   for funct in ${l[@]}; do
     run typea_check "$funct"
