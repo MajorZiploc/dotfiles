@@ -29,6 +29,19 @@ function show_env_notes {
   echo $ENV_NOTES | tr ":" "\n" | egrep -v "^\\s*$"
 }
 
+function vim_session {
+  local default_session_name="./Session.vim";
+  local session_name="${1:-"$default_session_name"}";
+  [[ -e "$session_name" ]] || { echo "Must specify a session_name that is a valid file or sym link!" >&2; return 1; }
+  [[ "$session_name" == "$default_session_name" ]] || { cp "$session_name" "$default_session_name"; }
+  local session_history_path="$HOME/vimfiles/sessions";
+  local session_history_file="$session_history_path/history.csv";
+  mkdir -p "$session_history_path";
+  [[ -e "$session_history_file" ]] || { echo "project_path,session_name,fn_call_timestamp" > "$session_history_file"; }
+  echo "`pwd`,$session_name,`date`" >> "$session_history_file";
+  nvim -S "$default_session_name";
+}
+
 function tmuxcs {
   # tmux create session
   # creates a tmux session
