@@ -12,3 +12,6 @@ fi
 
 [[ -e /etc/profile.d/gradle.sh ]] && { . /etc/profile.d/gradle.sh; }
 
+# golang
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin

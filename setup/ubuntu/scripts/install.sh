@@ -52,6 +52,9 @@ sudo apt-get install -y swi-prolog;
 # for vim coc prolog language server support
 swipl -q -l "$this_path/../../../shared/scripts/prolog/install_language_server.pl";
 
+# golang
+sudo apt-get install -y golang-go;
+
 sudo apt-get install -y openjdk-11-jdk;
 gradle_version='7.4.1';
 wget https://services.gradle.org/distributions/gradle-${gradle_version}-bin.zip -P /tmp;
