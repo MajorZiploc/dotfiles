@@ -19,6 +19,7 @@
 	rebase = true
 [push]
 	default = simple
+  autoSetupRemote = true
 [remote "origin"]
 	prune = true
 [gpg]
