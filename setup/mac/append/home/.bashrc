@@ -70,3 +70,5 @@ export PATH="$PATH:$HOME/.cargo/bin"
 # golang
 # [[ -e $HOME/.gvm/scripts/gvm ]] && . ~/.gvm/scripts/gvm;
 
+# ruby - the default location if not using rvm
+# export GEM_HOME="$HOME/.gem";

@@ -51,6 +51,9 @@ code --install-extension ms-python.vscode-pylance
 # run on save/edit
 # code --install-extension almenon.arepl
 
+# Java
+# code --install-extension vscjava.vscode-java-pack
+
 # javascript / typescript
 # run on save/edit
 ## code --install-extension wallabyjs.quokka-vscode
