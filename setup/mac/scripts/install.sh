@@ -86,6 +86,7 @@ brew install --cask google-chrome;
 brew install --cask iterm2;
 brew install --cask discord;
 brew install --cask gimp;
+brew install --cask krita;
 brew install --cask visual-studio-code;
 brew install --cask slack;
 brew install --cask docker;
