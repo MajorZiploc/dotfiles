@@ -67,12 +67,13 @@ if (($optionsAsInt -band $GamingAsInt) -eq $GamingAsInt) {
 if (($optionsAsInt -band $CreativeAsInt) -eq $CreativeAsInt) {
     Write-Host("Installing Creative packages")
     # Creative Packages
+    cinst -y krita
     # photo editing tool
-    # cinst -y gimp
+    cinst -y gimp
     # compact image viewer and converter
-    cinst -y irfanview
+    # cinst -y irfanview
     # photo editing tool - easier than gimp
-    cinst -y paint.net
+    # cinst -y paint.net
 }
 
 if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
