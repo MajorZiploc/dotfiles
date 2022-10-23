@@ -30,6 +30,8 @@
 	forceSignAnnotated = false
 [init]
 	defaultBranch = master
+[color]
+	ui = true
 # USE IF YARN/NPM GIVES YOU THIS ERROR:
 #   fatal: unable to connect to github.com:
 # [url "https://"]

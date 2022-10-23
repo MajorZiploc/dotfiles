@@ -25,3 +25,6 @@ export PATH="$PATH:$HOME/.cargo/bin"
 
 # ruby - the default location if not using rvm
 # export GEM_HOME="$HOME/.gem";
+
+# ruby - rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
