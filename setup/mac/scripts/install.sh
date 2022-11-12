@@ -15,14 +15,20 @@ brew install nvm;
 nvm install node;
 # python version manager like nvm
 brew install pyenv;
+# fuzzy finder
 brew install fzf;
+# a grepper that can look inside binary files like pdf's
 brew install ripgrep;
 # for Ag in vim
 brew install the_silver_searcher;
+# just command line runner
 brew install just;
+# a better system copy tray that acts as a stack
 brew install copyq;
 brew install bash-completion;
+# neovim
 brew install nvim;
+# convert files for OS'es, comes with others like unix2dos
 brew install dos2unix;
 # json query for cli
 brew install jq
@@ -31,6 +37,7 @@ brew install yq
 # ssh
 brew install openssh;
 brew install telnet;
+# prolog
 brew install swi-prolog;
 # for vim coc prolog language server support
 swipl -q -l "$this_path/../../../shared/scripts/prolog/install_language_server.pl";
