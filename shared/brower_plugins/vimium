@@ -1,0 +1,10 @@
+# In Extension Options
+# in the Customer key mappings section add:
+```
+  map F f
+  unmap f
+```
+
+# In top level Manage Extensions
+# enable incognito checkbox
+# enable Allow access to file URLs checkbox
