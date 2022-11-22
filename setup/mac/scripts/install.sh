@@ -31,9 +31,9 @@ brew install nvim;
 # convert files for OS'es, comes with others like unix2dos
 brew install dos2unix;
 # json query for cli
-brew install jq
+brew install jq;
 # yaml query for cli
-brew install yq
+brew install yq;
 # ssh
 brew install openssh;
 brew install telnet;
@@ -50,7 +50,7 @@ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh;
 brew install rust-analyzer;
 
 # brew install java11;
-brew install openjdk
+brew install openjdk;
 brew install gradle;
 
 # golang
@@ -73,7 +73,7 @@ rm composer.phar;
 brew install gnupg;
 # is this needed still? it was needed when using rvm, does rbenv need it?
 # gpg --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-brew install rbenv ruby-build
+brew install rbenv ruby-build;
 sudo gem install solargraph;
 
 # install asdf and its deps
@@ -121,7 +121,7 @@ defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false;
 # Clock: dont let the date separators flash
 defaults write com.apple.menuextra.clock FlashDateSeparators -bool false;
 # Makes key held down actions the quickest possible, <cmd>-<space> Keyboard for all options
-defaults write NSGlobalDomain KeyRepeat -int 0
+defaults write NSGlobalDomain KeyRepeat -int 0;
 
 # Personal Preferences
 # Dock: sets dock icon size to small
