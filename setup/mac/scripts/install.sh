@@ -8,6 +8,8 @@ softwareupdate --all --install --force;
 xcode-select --install;
 
 brew update;
+# gsed: a gnu like sed for mac
+brew install gnu-sed;
 brew install tmux;
 # node version manager
 mkdir ~/.nvm;
