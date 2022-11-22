@@ -75,3 +75,6 @@ export PATH="$PATH:$HOME/.cargo/bin"
 
 # ruby - rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# adds python version manager to path
+export PATH="$(pyenv root)/shims:$PATH";
