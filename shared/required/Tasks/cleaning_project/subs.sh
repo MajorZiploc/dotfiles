@@ -19,8 +19,8 @@ function replacer {
   echo "";
   gfind_in_files_replace "s,\b${search_pattern}\b,$replace_pattern,g$extra_sed_flags"
   for num in `seq 1 11`; do gfind_items_rename ".*$search_pattern.*" "s,\b${search_pattern}\b,$replace_pattern,g$extra_sed_flags" $num; done;
-  [[ ! $exclude_from_boundary_free_replacement_patterns =~ $search_pattern ]] && {
-    echo "Performing nonboundary replace for $search_pattern since it was not found in the exclude list $exclude_from_boundary_free_replacement_patterns";
+  [[ ! $exclude_from_boundary_free_replace_patterns =~ $search_pattern ]] && {
+    echo "Performing nonboundary replace for $search_pattern since it was not found in the exclude list $exclude_from_boundary_free_replace_patterns";
     gfind_in_files_replace "s,${search_pattern},$replace_pattern,g$extra_sed_flags";
     for num in `seq 1 11`; do gfind_items_rename ".*$search_pattern.*" "s,${search_pattern},$replace_pattern,g$extra_sed_flags" $num; done;
   }
