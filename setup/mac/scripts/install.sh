@@ -124,6 +124,8 @@ defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false;
 defaults write com.apple.menuextra.clock FlashDateSeparators -bool false;
 # Makes key held down actions the quickest possible, <cmd>-<space> Keyboard for all options
 defaults write NSGlobalDomain KeyRepeat -int 0;
+# Finder: show path
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true;
 
 # Personal Preferences
 # Dock: sets dock icon size to small
