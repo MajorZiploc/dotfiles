@@ -122,7 +122,7 @@ autocmd FileType netrw set nolist
 
 " longest,list for bash like tab completion.
 " Add ,full for more zsh style on third tab
-set wildmode=longest,list ",full
+set wildmode=longest,list,full
 " Added an extra select menu that shows what choice you are on for ,full
 " set wildmenu
 
