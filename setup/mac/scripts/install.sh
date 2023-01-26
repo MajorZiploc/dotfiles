@@ -17,6 +17,8 @@ brew install nvm;
 nvm install node;
 # python version manager like nvm
 brew install pyenv;
+pyenv install 3.8.10;
+pyenv global 3.8.10;
 # fuzzy finder
 brew install fzf;
 # a grepper that can look inside binary files like pdf's
