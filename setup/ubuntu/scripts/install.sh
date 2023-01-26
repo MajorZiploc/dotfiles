@@ -3,6 +3,11 @@
 this_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
 
 sudo apt-get -y update;
+# ensure basic system dependencies: from pyenv install steps: https://www.liquidweb.com/kb/how-to-install-pyenv-on-ubuntu-18-04/
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
+  libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
+  libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl \
+  git;
 # session manager
 sudo apt-get -y install tmux;
 # for cr formatting between dos and unix. gives dos2unix and unix2dos
@@ -15,6 +20,8 @@ sudo apt-get -y install tree;
 sudo apt-get -y install python-is-python3;
 # for creating python virtual environments
 sudo apt-get -y install python3-venv;
+# pyenv: python version manager
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv;
 # ripgrep for vundle use or use on its own
 sudo add-apt-repository ppa:x4121/ripgrep -y;
 sudo apt-get -y update;
