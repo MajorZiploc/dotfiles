@@ -10,7 +10,7 @@
 #
 # best to set these env vars in your shell's rc file
 
-function my_workplace_find_files {
+function workplace_find_files {
   local project_patterns_arg="--${MY_WORKPLACE_PROJECT_PATTERNS_ARG_NAME:-project_patterns}=";
   local args=($@);
   if [[ "${args}" == "$project_patterns_arg"* ]]; then
@@ -42,7 +42,7 @@ function my_workplace_find_files {
   done;
 }
 
-function my_workplace_find_in_files {
+function workplace_find_in_files {
   local project_patterns_arg="--${MY_WORKPLACE_PROJECT_PATTERNS_ARG_NAME:-project_patterns}=";
   local args=($@);
   if [[ "${args}" == "$project_patterns_arg"* ]]; then
@@ -74,7 +74,7 @@ function my_workplace_find_in_files {
   done;
 }
 
-function my_workplace_find_items {
+function workplace_find_items {
   local project_patterns_arg="--${MY_WORKPLACE_PROJECT_PATTERNS_ARG_NAME:-project_patterns}=";
   local args=($@);
   if [[ "${args}" == "$project_patterns_arg"* ]]; then
@@ -106,7 +106,7 @@ function my_workplace_find_items {
   done;
 }
 
-function my_workplace_repos_do_thing {
+function workplace_repos_do_thing {
   local project_patterns_arg="--${MY_WORKPLACE_PROJECT_PATTERNS_ARG_NAME:-project_patterns}=";
   local args=($@);
   if [[ "${args}" == "$project_patterns_arg"* ]]; then
