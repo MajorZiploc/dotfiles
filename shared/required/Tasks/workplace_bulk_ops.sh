@@ -100,6 +100,7 @@ function my_workplace_repos_do_thing {
   else
     local project_patterns=".*";
   fi
+  local repo_operation="${args[@]}";
   if [[ "${args[*]}" == *"$project_patterns_arg"* ]]; then
     echo "$project_patterns_arg must be the first argument in the list\!" >&2;
     return 1;
@@ -112,12 +113,9 @@ function my_workplace_repos_do_thing {
       if [[ ! "$proj" =~ "/data$" && `echo "$proj" | egrep -i "$project_patterns"` ]]; then
         echo '--------------------------';
         pwd;
-        echo "Must specify something to do for each project (manually edit this function)" >&2;
-        return 1;
+        eval "$repo_operation";
       fi
       cd ..;
     done;
   done;
 }
-
-
