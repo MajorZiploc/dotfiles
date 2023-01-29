@@ -69,7 +69,9 @@ function _tmux_session_list_helper {
     if [[ $? -eq 0 ]]; then
       exit 0;
     fi
-    tmux new-session -c "$selected" -d -s "$session_name" && tmux switch-client -t "$session_name" || tmux new -c "$selected" -A -s "$session_name";
+    tmux new-session -c "$selected" -d -s "$session_name" \
+      && tmux switch-client -t "$session_name"\; split-window -c "$selected" -h \; select-pane -L \; new-window -c "$selected" \; next-window \
+      || tmux new -c "$selected" -A -s "$session_name";
   }
 }
 
