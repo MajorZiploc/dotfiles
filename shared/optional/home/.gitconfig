@@ -10,7 +10,7 @@
 	# if windows
 	# editor = 'C:/Program Files/Git/usr/bin/vim.exe'
 	# else
-	# editor = 'vim'
+	# editor = nvim --noplugin
   symlinks = true
 	hooksPath = /dev/null
 [merge]
