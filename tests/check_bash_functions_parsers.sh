@@ -2,7 +2,7 @@
 load 'libs/bats-support/load'
 load 'libs/bats-assert/load'
 
-source ~/.bashrc || true;
+source ~/.bashrc 2>/dev/null || true;
 
 @test "check parse_json_fields of basic (nonlist) json string" {
   file="./mock_content/parser_files/basic.json";
