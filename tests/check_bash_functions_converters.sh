@@ -2,7 +2,7 @@
 load 'libs/bats-support/load'
 load 'libs/bats-assert/load'
 
-source ~/.bashrc || true;
+source ~/.bashrc 2>/dev/null || true;
 
 @test "check convert_csv_to_json of a csv string" {
   file="./mock_content/parser_files/el_pollo_loco.csv";

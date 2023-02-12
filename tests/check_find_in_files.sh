@@ -2,7 +2,7 @@
 load 'libs/bats-support/load'
 load 'libs/bats-assert/load'
 
-source ~/.bashrc || true;
+source ~/.bashrc 2>/dev/null || true;
 
 @test "check find_in_files '\bdf\.Columns' for proper listing of occurrences" {
   git restore ./mock_content/.
