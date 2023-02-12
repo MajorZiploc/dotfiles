@@ -49,8 +49,8 @@ function tmuxcs {
   # $1: optional string to represent name of the tmux session
   # If $1 not given, then use the base name of the path as the session name
   local session_name="$1";
-  session_name="${session_name:-"$(basename `pwd`)"}";
-  local session_name=`echo "$session_name" | tr '.[[:blank:]]' '-'`;
+  session_name="${session_name:-"$(basename "`pwd`")"}";
+  session_name=$(echo "$session_name" | tr '.[[:blank:]]' '-');
   tmux new -s "$session_name" 2>/dev/null || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
 }
 
@@ -63,7 +63,7 @@ function _tmux_session_list_helper {
   local selected="$2";
   [[ -z "$selected" ]] || {
     [[ -z "$session_name" ]] && {
-      session_name=`basename $selected | tr '.[[:blank:]]' '-'`;
+      session_name=$(basename "$selected" | tr '.[[:blank:]]' '-');
     }
     tmux switch-client -t "$session_name";
     if [[ $? -eq 0 ]]; then
@@ -82,13 +82,14 @@ function tmuxps {
   local session_name="$1";
   local items="";
   tmuxps_get_project_dirs;
-  for _path in `echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"`; do
+  for _path in $(echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"); do
     [[ -d "$_path" ]] && {
-      items+=`find "$_path" -maxdepth 1 -mindepth 1 -type d`;
+      items+=$(find "$_path" -maxdepth 1 -mindepth 1 -type d);
       items+="\n";
     }
   done;
-  local selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
+  local selected;
+  selected=$(printf "$items" | FUZZY_FINDER_PLACEHOLDER);
   _tmux_session_list_helper "$session_name" "$selected";
 }
 
@@ -97,7 +98,8 @@ function tmuxds {
   # displays a fuzzy finder listing of directories at the current directory to choose from for a tmux session
   # $1: optional session name
   local session_name="$1";
-  local selected=`find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER`;
+  local selected;
+  selected=$(find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER);
   _tmux_session_list_helper "$session_name" "$selected";
 }
 
@@ -112,9 +114,10 @@ function idev1 {
 }
 
 function show_machine_details {
-  local user=`whoami`;
-  local machine_name=`uname -n`;
-  local long_info=`uname -a`;
+  local user machine_name long_info;
+  user=$(whoami);
+  machine_name=$(uname -n);
+  long_info=$(uname -a);
   echo "user: $user";
   echo "machine_name: $machine_name";
   echo "long_info: $long_info";
@@ -163,7 +166,7 @@ function show_block {
   [[ -z "$from_pattern" ]] && { echo "Must specify from_pattern" >&2; return 1; }
   [[ -z "$to_pattern" ]] && { echo "Must specify to_pattern" >&2; return 1; }
   [[ -z "$content" ]] && { echo "Must specify content" >&2; return 1; }
-  [[ -e "$content" ]] && { content=`cat "$content"`; }
+  [[ -e "$content" ]] && { content=$(cat "$content"); }
   echo "$content" | while IFS="" read -r p || [ -n "$p" ]; do
     if [[ "$should_print" == "true" ]]
     then
@@ -182,7 +185,7 @@ function show_block_line_num_range {
   [[ -z "$start_n" ]] && { echo "Must specify start_n" >&2; return 1; }
   [[ -z "$end_n" ]] && { echo "Must specify end_n" >&2; return 1; }
   [[ -z "$content" ]] && { echo "Must specify content" >&2; return 1; }
-  [[ -e "$content" ]] && { content=`cat "$content"`; }
+  [[ -e "$content" ]] && { content=$(cat "$content"); }
   echo "$content" | perl -nle "print if $. >= $start_n and $. <= $end_n";
 }
 
@@ -246,7 +249,7 @@ function search_env_for_fuzz {
 function show_cmds_like_fuzz {
   local pattern="$1";
   [[ -z "$pattern" ]] && { echo "Must specify a command pattern!" >&2; return 1; }
-  pattern=`echo "$pattern" | to_fuzz`;
+  pattern=$(echo "$pattern" | to_fuzz);
   show_cmds_like "$pattern";
 }
 
@@ -264,7 +267,7 @@ function cdfp {
     done;
     echo "$project_dir";
   '
-  project_dir=`bash -c "$get_project_dir"`;
+  project_dir=$(bash -c "$get_project_dir");
   cd "$project_dir";
   cd "$(dirname `FUZZY_FINDER_CDF_PLACEHOLDER`)";
 }
@@ -302,14 +305,15 @@ function _find_git_estimator_ignored_dirs {
   local child_git_ignore_content="";
   [[ $search_depth_for_nested_git_ignores -ge 2 ]] && {
     find . -mindepth "2" -maxdepth "$search_depth_for_nested_git_ignores" -name ".gitignore" -print0 | while read -d $'\0' _git_ignore; do
-      child_git_ignore_content+=`{ cat "$_git_ignore"; printf "\n"; }`;
+      child_git_ignore_content+=$({ cat "$_git_ignore"; printf "\n"; });
     done;
   }
-  local git_ignore_content=`{ bash -c "$get_ancestor_git_ignore_content"; echo "$child_git_ignore_content"; echo ".git .svn"; }`;
-  local gitignore_entries=($(echo "$git_ignore_content" | sort -u | trim | egrep -v "('|\"|;|#|\\!|,|\\{|\\}|\\@|\\||\\^|\\(|\\)|^[[:blank:]]*$|\\&|\\$|\\\\|~|\\+|\`|=|[^[:blank:]]+\.[^[:blank:]]{1,6}\$)" | tr " " "\n" | sed -E 's,^[/\*]*/,,g;s,/[/\*]*$,,g;' | xargs));
+  local git_ignore_content gitignore_entries;
+  git_ignore_content=$({ bash -c "$get_ancestor_git_ignore_content"; echo "$child_git_ignore_content"; echo ".git .svn"; });
+  gitignore_entries=($(echo "$git_ignore_content" | sort -u | trim | egrep -v "('|\"|;|#|\\!|,|\\{|\\}|\\@|\\||\\^|\\(|\\)|^[[:blank:]]*$|\\&|\\$|\\\\|~|\\+|\`|=|[^[:blank:]]+\.[^[:blank:]]{1,6}\$)" | tr " " "\n" | sed -E 's,^[/\*]*/,,g;s,/[/\*]*$,,g;' | xargs));
   # TODO: filter out duplicates
-  gitignore_entries+=(`echo "${FIND_GIT_EXTRA_IGNORE_DIRS[@]}"`);
-  gitignore_entries=(`echo "${gitignore_entries[@]}" | tr ' ' '\n' | sort -u | xargs`);
+  gitignore_entries+=($(echo "${FIND_GIT_EXTRA_IGNORE_DIRS[@]}"));
+  gitignore_entries=($(echo "${gitignore_entries[@]}" | tr ' ' '\n' | sort -u | xargs));
   _find_generate_not_paths "${gitignore_entries[@]}";
 }
 
@@ -325,9 +329,9 @@ function _find_items_rename_helper {
   local maxdepth="$4";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$5";
-  for mdepth in `seq 1 $maxdepth`; do
+  for mdepth in $(seq 1 "$maxdepth"); do
     eval "find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' $not_paths -print0" | while read -d $'\0' item; do
-    local new_name="$(echo "$item" | sed -E "$by")";
+    local new_name; new_name="$(echo "$item" | sed -E "$by")";
     [[ $f != $new_name ]] && {
       if [[ $preview == false ]]; then
         mv "$item" "$new_name";
@@ -340,7 +344,7 @@ function _find_items_rename_helper {
 }
 
 function find_items_rename_preview {
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   _preview_warning_message;
   _find_items_rename_helper "$1" "$2" true "$3" "$not_paths";
 }
@@ -352,13 +356,13 @@ function afind_items_rename_preview {
 }
 
 function gfind_items_rename_preview {
-  local not_paths=`_find_git_estimator_ignored_dirs $4`;
+  local not_paths; not_paths=$(_find_git_estimator_ignored_dirs $4);
   _preview_warning_message;
   _find_items_rename_helper "$1" "$2" true "$3" "$not_paths";
 }
 
 function find_items_rename {
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   _find_items_rename_helper "$1" "$2" false "$3" "$not_paths";
 }
 
@@ -368,7 +372,7 @@ function afind_items_rename {
 }
 
 function gfind_items_rename {
-  local not_paths=`_find_git_estimator_ignored_dirs $4`;
+  local not_paths; not_paths=$(_find_git_estimator_ignored_dirs $4);
   _find_items_rename_helper "$1" "$2" false "$3" "$not_paths";
 }
 
@@ -380,7 +384,7 @@ function _find_items_delete_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
-  for mdepth in `seq 1 $maxdepth`; do
+  for mdepth in $(seq 1 "$maxdepth"); do
     eval "find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' $not_paths -print0" | while read -d $'\0' item; do
       if [[ $preview == false ]]; then
         rm -rf "$item";
@@ -396,7 +400,7 @@ function _preview_warning_message {
 }
 
 function find_items_delete_preview {
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   _preview_warning_message;
   _find_items_delete_helper "$1" true "$2" "$not_paths";
 }
@@ -408,13 +412,13 @@ function afind_items_delete_preview {
 }
 
 function gfind_items_delete_preview {
-  local not_paths=`_find_git_estimator_ignored_dirs $3`;
+  local not_paths; not_paths=$(_find_git_estimator_ignored_dirs $3);
   _preview_warning_message;
   _find_items_delete_helper "$1" true "$2" "$not_paths";
 }
 
 function find_items_delete {
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   _find_items_delete_helper "$1" false "$2" "$not_paths";
 }
 
@@ -424,7 +428,7 @@ function afind_items_delete {
 }
 
 function gfind_items_delete {
-  local not_paths=`_find_git_estimator_ignored_dirs $3`;
+  local not_paths; not_paths=$(_find_git_estimator_ignored_dirs $3);
   _find_items_delete_helper "$1" false "$2" "$not_paths";
 }
 
@@ -438,7 +442,7 @@ function _find_items_helper {
 }
 
 function find_items {
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   _find_items_helper "$1" "$2" "$not_paths";
 }
 
@@ -448,7 +452,7 @@ function afind_items {
 }
 
 function gfind_items {
-  local not_paths=`_find_git_estimator_ignored_dirs $3`;
+  local not_paths; not_paths=$(_find_git_estimator_ignored_dirs $3);
   _find_items_helper "$1" "$2" "$not_paths";
 }
 
@@ -484,7 +488,7 @@ function _find_files_delete_helper {
   local with_content="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   if [[ -z "$with_content" ]]; then
     eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec rm \"{}\" \;";
   else
@@ -493,7 +497,7 @@ function _find_files_delete_helper {
 }
 
 function find_files_delete_preview {
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   _find_files_delete_preview_helper "$1" "$2" "$3" "$not_paths";
 }
 
@@ -503,12 +507,12 @@ function afind_files_delete_preview {
 }
 
 function gfind_files_delete_preview {
-  local not_paths=`_find_git_estimator_ignored_dirs $4`;
+  local not_paths; not_paths=$(_find_git_estimator_ignored_dirs $4);
   _find_files_delete_preview_helper "$1" "$2" "$3" "$not_paths";
 }
 
 function find_files_delete {
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   _find_files_delete_helper "$1" "$2" "$3" "$not_paths";
 }
 
@@ -518,7 +522,7 @@ function afind_files_delete {
 }
 
 function gfind_files_delete {
-  local not_paths=`_find_git_estimator_ignored_dirs $4`;
+  local not_paths; not_paths=$(_find_git_estimator_ignored_dirs $4);
   _find_files_delete_helper "$1" "$2" "$3" "$not_paths";
 }
 
@@ -542,9 +546,10 @@ function _find_files_rename_helper {
     [[ -z "$file_content_matches" ]] || { should_rename=true; }
   }
   [[ $should_rename == true ]] && {
-    local b=$(basename "$file");
-    local nb="$(echo "$b" | sed -E "$by")";
-    local new_name="$(dirname "$file")/$nb"
+    local b nb new_name;
+    b=$(basename "$file");
+    nb="$(echo "$b" | sed -E "$by")";
+    new_name="$(dirname "$file")/$nb"
     [[ "$f" != "$new_name" ]] && {
       if [[ $preview == false ]]; then
         mv "$file" "$new_name";
@@ -557,7 +562,7 @@ function _find_files_rename_helper {
 }
 
 function find_files_rename_preview {
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   _find_files_rename_helper "$1" "$2" "$3" true "$4" "$not_paths";
 }
 
@@ -567,12 +572,12 @@ function afind_files_rename_preview {
 }
 
 function gfind_files_rename_preview {
-  local not_paths=`_find_git_estimator_ignored_dirs $5`;
+  local not_paths; not_paths=$(_find_git_estimator_ignored_dirs $5);
   _find_files_rename_helper "$1" "$2" "$3" true "$4" "$not_paths";
 }
 
 function find_files_rename {
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   _find_files_rename_helper "$1" "$2" "$3" false "$4" "$not_paths";
 }
 
@@ -582,7 +587,7 @@ function afind_files_rename {
 }
 
 function gfind_files_rename {
-  local not_paths=`_find_git_estimator_ignored_dirs $5`;
+  local not_paths; not_paths=$(_find_git_estimator_ignored_dirs $5);
   _find_files_rename_helper "$1" "$2" "$3" false "$4" "$not_paths";
 }
 
@@ -601,7 +606,7 @@ function _find_files_helper {
 }
 
 function find_files {
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   _find_files_helper "$1" "$2" "$3" "$not_paths";
 }
 
@@ -611,12 +616,12 @@ function afind_files {
 }
 
 function gfind_files {
-  local not_paths=`_find_git_estimator_ignored_dirs $4`;
+  local not_paths; not_paths=$(_find_git_estimator_ignored_dirs $4);
   _find_files_helper "$1" "$2" "$3" "$not_paths";
 }
 
 function find_files_fuzz {
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   _find_files_helper "$(echo "$1" | to_fuzz)" "$2" "$3" "$not_paths";
 }
 
@@ -626,7 +631,7 @@ function afind_files_fuzz {
 }
 
 function gfind_files_fuzz {
-  local not_paths=`_find_git_estimator_ignored_dirs $4`;
+  local not_paths; not_paths=$(_find_git_estimator_ignored_dirs $4);
   _find_files_helper "$(echo "$1" | to_fuzz)" "$2" "$3" "$not_paths";
 }
 
@@ -642,7 +647,7 @@ function _find_in_files_helper {
 }
 
 function find_in_files {
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   _find_in_files_helper "$1" "$2" "$3" "$not_paths";
 }
 
@@ -652,12 +657,12 @@ function afind_in_files {
 }
 
 function gfind_in_files {
-  local not_paths=`_find_git_estimator_ignored_dirs $4`;
+  local not_paths; not_paths=$(_find_git_estimator_ignored_dirs $4);
   _find_in_files_helper "$1" "$2" "$3" "$not_paths";
 }
 
 function find_in_files_fuzz {
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   _find_in_files_helper "$(echo "$1" | to_fuzz)" "$2" "$3" "$not_paths";
 }
 
@@ -667,7 +672,7 @@ function afind_in_files_fuzz {
 }
 
 function gfind_in_files_fuzz {
-  local not_paths=`_find_git_estimator_ignored_dirs $4`;
+  local not_paths; not_paths=$(_find_git_estimator_ignored_dirs $4);
   _find_in_files_helper "$(echo "$1" | to_fuzz)" "$2" "$3" "$not_paths";
 }
 
@@ -683,7 +688,7 @@ function _find_in_files_replace_helper {
 }
 
 function find_in_files_replace {
-  local not_paths=`_find_default_ignored_dirs`;
+  local not_paths; not_paths=$(_find_default_ignored_dirs);
   _find_in_files_replace_helper "$1" "$2" "$3" "$not_paths";
 }
 
@@ -693,20 +698,20 @@ function afind_in_files_replace {
 }
 
 function gfind_in_files_replace {
-  local not_paths=`_find_git_estimator_ignored_dirs $4`;
+  local not_paths; not_paths=$(_find_git_estimator_ignored_dirs $4);
   _find_in_files_replace_helper "$1" "$2" "$3" "$not_paths";
 }
 
 function cdp {
   local items="";
   tmuxps_get_project_dirs;
-  for _path in `echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"`; do
+  for _path in $(echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"); do
     [[ -d "$_path" ]] && {
       items+=`find "$_path" -maxdepth 1 -mindepth 1 -type d`;
       items+="\n";
     }
   done;
-  local selected=`printf "$items" | FUZZY_FINDER_PLACEHOLDER`;
+  local selected; selected=$(printf "$items" | FUZZY_FINDER_PLACEHOLDER);
   cd "$selected";
 }
 
@@ -737,16 +742,16 @@ function docker_local {
     done;
   fi
   docker compose -f "$compose_base" -f "$compose_ext" down;
-  docker compose -f "$compose_base" -f "$compose_ext" up -d $containers;
+  docker compose -f "$compose_base" -f "$compose_ext" up -d "$containers";
 }
 
 function git_deploy {
   local origin_branch_choices="$1";
   local destination_branch_choices="$2";
-  local g_origin_branch_choices="`echo "${GIT_ORIGIN_BRANCH_CHOICES[@]}"`";
-  local g_destination_branch_choices="`git_main_branch` `echo "${GIT_DESTINATION_BRANCH_CHOICES[@]}"`";
-  origin_branch_choices=(`echo "${origin_branch_choices:=$g_origin_branch_choices}" | xargs`);
-  destination_branch_choices=(`echo "${destination_branch_choices:=$g_destination_branch_choices}" | xargs`);
+  local g_origin_branch_choices; g_origin_branch_choices="$(echo "${GIT_ORIGIN_BRANCH_CHOICES[@]}")";
+  local g_destination_branch_choices; g_destination_branch_choices="$(git_main_branch) $(echo "${GIT_DESTINATION_BRANCH_CHOICES[@]}")";
+  origin_branch_choices=($(echo "${origin_branch_choices:=$g_origin_branch_choices}" | xargs));
+  destination_branch_choices=($(echo "${destination_branch_choices:=$g_destination_branch_choices}" | xargs));
   local origin_branch='';
   for origin_branch_choice in ${origin_branch_choices[@]}; do
     if git show-ref --quiet "refs/heads/${origin_branch_choice}"; then origin_branch="$origin_branch_choice"; fi
@@ -774,9 +779,9 @@ function git_checkout_branch_in_path {
   local branches="$1";
   local _path="$2";
   [[ -z "$branches" ]] && { echo "Must specify a string of branches delimited by spaces!" >&2; return 1; }
-  branches=(`echo "$branches" | xargs`);
+  branches=($(echo "$branches" | xargs));
   _path="${_path:="."}";
-  _dirs=(`find "$_path" -mindepth 1 -maxdepth 1 -type d | xargs`);
+  _dirs=($(find "$_path" -mindepth 1 -maxdepth 1 -type d | xargs));
   for proj in ${_dirs[@]}; do
     echo "Project: $proj";
     cd "$proj";
@@ -806,9 +811,9 @@ function git_diff_range {
   [[ -z "$2" ]] && { echo "Must specify to!" >&2; return 1; }
   local from=$(($1 + 1));
   local to=$(($2 + 1));
-  local commits="$(git --no-pager log --oneline -n "$from" | col_n 1 | xargs)";
-  local from_commit="$(echo "$commits" | col_n "$from")";
-  local to_commit="$(echo "$commits" | col_n "$to")";
+  local commits; commits="$(git --no-pager log --oneline -n "$from" | col_n 1 | xargs)";
+  local from_commit; from_commit="$(echo "$commits" | col_n "$from")";
+  local to_commit; to_commit="$(echo "$commits" | col_n "$to")";
   git diff --ignore-space-change "$from_commit" "$to_commit";
 }
 
@@ -837,20 +842,20 @@ function git_rebase_i_head {
 }
 
 function git_sweep {
-  local exclude_branches="`git_main_branch;`|`echo "$GIT_DESTINATION_BRANCH_CHOICES $GIT_ORIGIN_BRANCH_CHOICES" | tr " " "|"`";
-  git branch -d `git branch --merged | egrep -v "(^\\*|^\\s*($exclude_branches)$)"`;
+  local exclude_branches; exclude_branches="$(git_main_branch;)|$(echo "$GIT_DESTINATION_BRANCH_CHOICES $GIT_ORIGIN_BRANCH_CHOICES" | tr " " "|")";
+  git branch -d "$(git branch --merged | egrep -v "(^\\*|^\\s*($exclude_branches)$)")";
 }
 
 function git_add_all_kinda {
   git add .;
-  dont_adds=(`echo "$GIT_DONT_ADD" | xargs`);
+  dont_adds=($(echo "$GIT_DONT_ADD" | xargs));
   for dont_add in ${dont_adds[@]}; do
     git restore --staged "$dont_add";
   done;
 }
 
 function show_script_path {
-  local scriptpath="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
+  local scriptpath; scriptpath="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
   echo "$scriptpath";
 }
 
@@ -860,7 +865,7 @@ function show_cheat_sheet {
   [[ -n "$tool" ]];
   local tool_was_param="$?";
   [[ -z "$tool" ]] && {
-    tool=`cat "$HOME/.cheat_sheet/languages" "$HOME/.cheat_sheet/command" "$HOME/.cheat_sheet/languages-ext" "$HOME/.cheat_sheet/command-ext" 2>/dev/null | egrep -v "^\s*$" | FUZZY_FINDER_PLACEHOLDER`;
+    tool=$(cat "$HOME/.cheat_sheet/languages" "$HOME/.cheat_sheet/command" "$HOME/.cheat_sheet/languages-ext" "$HOME/.cheat_sheet/command-ext" 2>/dev/null | egrep -v "^\s*$" | FUZZY_FINDER_PLACEHOLDER);
     true;
   } || {
     if [[ ! "$tool" =~ ~$ && ! "$tool" =~ /$ ]]; then
@@ -874,9 +879,9 @@ function show_cheat_sheet {
   if [[ -z "$query" ]]; then
     tool=${tool/%\~$/};
     tool=${tool/%\/$/};
-    curl cht.sh/$tool/;
+    curl "cht.sh/$tool/";
   else
-    query=`echo "$query" | tr ' ' '+'`;
+    query=$(echo "$query" | tr ' ' '+');
     [[ ! "$tool_was_param" == "0" ]] && {
       if cat "$HOME/.cheat_sheet/languages" "$HOME/.cheat_sheet/languages-ext" 2>/dev/null | grep -xq "$tool"; then
         tool="$tool/";
@@ -913,11 +918,11 @@ function parse_json_fields {
   [[ -z "$json" ]] && { echo "Must specify a json file or string!" >&2; return 1; }
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
   _parse_fields_header_helper "$fields" "$field_separator";
-  local pwsh_fields=`_parse_fields_helper "$fields" "$field_separator" | tr -d "\n"`;
+  local pwsh_fields; pwsh_fields=$(_parse_fields_helper "$fields" "$field_separator" | tr -d "\n");
   if [[ -e "$json" ]]; then
     pwsh -command "&{ \$js=Get-Content '$json' | ConvertFrom-Json; \$js $preprocessing_pwsh | % { Write-Host \"$pwsh_fields\"; }; }";
   else
-    json=`echo "$json" | tr -d "\n"`;
+    json=$(echo "$json" | tr -d "\n");
     pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$json'; \$js $preprocessing_pwsh | % { Write-Host \"$pwsh_fields\"; }; }";
   fi
 }
@@ -932,13 +937,13 @@ function parse_csv_fields {
   [[ -z "$csv" ]] && { echo "Must specify a csv file or string!" >&2; return 1; }
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
   _parse_fields_header_helper "$fields" "$field_separator";
-  local pwsh_fields=`_parse_fields_helper "$fields" "$field_separator"`;
+  local pwsh_fields; pwsh_fields=$(_parse_fields_helper "$fields" "$field_separator");
   if [[ -e "$csv" ]]; then
     pwsh -command "&{ \$cs=Get-Content $csv | ConvertFrom-Csv; \$cs $preprocessing_pwsh | % { Write-Host \"$pwsh_fields\"; }; }";
   else
-    rows=`echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
-    rows=`echo "$rows" | perl -0777 -ple "s/,\$//"`;
-    rows=`echo "(" "$rows" ")"`;
+    rows=$(echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g');
+    rows=$(echo "$rows" | perl -0777 -ple "s/,\$//");
+    rows=$(echo "(" "$rows" ")");
     pwsh -command "&{ \$cs=$rows | ConvertFrom-Csv; \$cs $preprocessing_pwsh | % { Write-Host \"$pwsh_fields\"; }; }";
   fi
 }
@@ -954,9 +959,9 @@ function convert_csv_to_json {
   if [[ -e "$csv" ]]; then
     pwsh -command "&{ Get-Content $csv | ConvertFrom-Csv | ConvertTo-Json; }";
   else
-    rows=`echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g'`;
-    rows=`echo "$rows" | perl -0777 -ple "s/,\$//"`;
-    rows=`echo "(" "$rows" ")"`;
+    rows=$(echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g');
+    rows=$(echo "$rows" | perl -0777 -ple "s/,\$//");
+    rows=$(echo "(" "$rows" ")");
     pwsh -command "&{ $rows | ConvertFrom-Csv | ConvertTo-Json; }";
   fi
 }
@@ -966,7 +971,7 @@ function csv_delimiter_check_single_line {
   local delimiter="$2";
   [[ -z "$csv_like" ]] && { echo "Must specify a csv_like file or string!" >&2; return 1; }
   echo "${delimiter:=","}" >/dev/null;
-  [[ -e "$csv_like" ]] && { csv_like=`cat "$csv_like"`; }
+  [[ -e "$csv_like" ]] && { csv_like=$(cat "$csv_like"); }
   echo "$csv_like" | tr -d -c "${delimiter}\n" | awk '{ print length; }' | sort -n | uniq -c;
 }
 
@@ -976,7 +981,7 @@ function _rest_temp_response_loc {
 
 function _rest_get_query_params {
   local url="$1";
-  local query_params=`echo "$url" | sed -E "s/([^?]*?)\??(.*?)/\2/g"`;
+  local query_params; query_params=$(echo "$url" | sed -E "s/([^?]*?)\??(.*?)/\2/g");
   [[ -n "$query_params" ]] && { rest_encode_url "$query_params"; }
 }
 
@@ -1010,20 +1015,20 @@ function _rest_helper {
   echo "${content_type:="application/json"}" >/dev/null;
   echo "${curl_flags:="Lk"}" >/dev/null;
   echo "${response_file_type:="json"}" >/dev/null;
-  temp_response_loc=`_rest_temp_response_loc`;
+  temp_response_loc=$(_rest_temp_response_loc);
   mkdir -p "$temp_response_loc";
-  local base_url_with_endpoint=`_rest_get_base_url_with_endpoint "$url"`;
-  local _file="${temp_response_loc}$(basename "$base_url_with_endpoint" | tr "/" "_").${response_file_type}";
-  local query_params=`_rest_get_query_params "$url"`;
-  [[ -e "$request_body" ]] && { request_body=`cat "$request_body"`; }
-  request_body=`echo "${request_body:+"-d '$request_body'"}"`;
-  [[ ! "$curl_flags" == "-"* ]] && { curl_flags=`echo "${curl_flags:+"-$curl_flags"}"`; }
-  [[ ! "$query_params" == "?"* ]] && { query_params=`echo "${query_params:+"?$query_params"}"`; }
-  [[ ! "$method" == " -X"* ]] && { method=`echo "${method:+" -X $method"}"`; }
-  [[ ! "$query_params" == "?"* ]] && { query_params=`echo "${query_params:+"?$query_params"}"`; }
-  [[ ! "$trailing_command" == " "* ]] && { trailing_command=`echo "${trailing_command:+" $trailing_command"}"`; }
-  [[ ! "$request_body" == " "* ]] && { request_body=`echo "${request_body:+" $request_body"}"`; }
-  [[ ! "$headers" == " "* ]] && { headers=`echo "${headers:+" $headers"}"`; }
+  local base_url_with_endpoint; base_url_with_endpoint=$(_rest_get_base_url_with_endpoint "$url");
+  local _file; _file="${temp_response_loc}$(basename "$base_url_with_endpoint" | tr "/" "_").${response_file_type}";
+  local query_params; query_params=$(_rest_get_query_params "$url");
+  [[ -e "$request_body" ]] && { request_body=$(cat "$request_body"); }
+  request_body=$(echo "${request_body:+"-d '$request_body'"}");
+  [[ ! "$curl_flags" == "-"* ]] && { curl_flags=$(echo "${curl_flags:+"-$curl_flags"}"); }
+  [[ ! "$query_params" == "?"* ]] && { query_params=$(echo "${query_params:+"?$query_params"}"); }
+  [[ ! "$method" == " -X"* ]] && { method=$(echo "${method:+" -X $method"}"); }
+  [[ ! "$query_params" == "?"* ]] && { query_params=$(echo "${query_params:+"?$query_params"}"); }
+  [[ ! "$trailing_command" == " "* ]] && { trailing_command=$(echo "${trailing_command:+" $trailing_command"}"); }
+  [[ ! "$request_body" == " "* ]] && { request_body=$(echo "${request_body:+" $request_body"}"); }
+  [[ ! "$headers" == " "* ]] && { headers=$(echo "${headers:+" $headers"}"); }
   url=" \"${base_url_with_endpoint}${query_params}\"";
   bash -c "
     curl $curl_flags$method$request_body$url$headers$trailing_command
@@ -1043,12 +1048,12 @@ function _rest_helper_preper {
   local method="$9";
   # authorization is mainly for Bearer token style auth
   if [[ ! "$auth" == *":"* ]]; then
-    auth=`echo ${auth:+"-H \"Authorization: Bearer $auth\""}`;
+    auth=$(echo ${auth:+"-H \"Authorization: Bearer $auth\""});
   else
-    auth=`echo ${auth:+"-H '$auth'"}`;
+    auth=$(echo ${auth:+"-H '$auth'"});
   fi
-  [[ ! "$extra_headers" == " "* ]] && { extra_headers=`echo "${extra_headers:+" $extra_headers"}"`; }
-  local headers="${content_type:+"-H \"Content-Type: $content_type\""} ${auth}${extra_headers}";
+  [[ ! "$extra_headers" == " "* ]] && { extra_headers=$(echo "${extra_headers:+" $extra_headers"}"); }
+  local headers; headers="${content_type:+"-H \"Content-Type: $content_type\""} ${auth}${extra_headers}";
   _rest_helper "$url" "$request_body" "$curl_flags" "$response_file_type" "$method" "$headers" "$trailing_command";
 }
 
@@ -1079,12 +1084,12 @@ function refactor_rename_symbols {
   local rename_pattern="$2";
   [[ -z "$symbol_declare" ]] && { echo "Must specify symbol_declare!" >&2; return 1; }
   [[ -z "$rename_pattern" ]] && { echo "Must specify rename_pattern!" >&2; return 1; }
-  local search_results=`gfind_in_files "^\s*$symbol_declare\b([a-zA-Z0-9_\-]+)\b"`;
-  local symbol_names=(`echo "$search_results" | sed -E "s,.*?[[:digit:]]+:.*?$symbol_declare\b([a-zA-Z0-9_\-]+)\b(.*),\1,g" | sort -u | xargs`);
+  local search_results; search_results=$(gfind_in_files "^\s*$symbol_declare\b([a-zA-Z0-9_\-]+)\b");
+  local symbol_names; symbol_names=($(echo "$search_results" | sed -E "s,.*?[[:digit:]]+:.*?$symbol_declare\b([a-zA-Z0-9_\-]+)\b(.*),\1,g" | sort -u | xargs));
   [[ "$symbol_names" =~ "^[[:blank:]]*$" ]] && { echo "No symbol_names found to rename!" >&2; return 1; }
-  local files=(`gfind_files ".*" | xargs`);
+  local files; files=($(gfind_files ".*" | xargs));
   for symbol_name in ${symbol_names[@]}; do
-   new_symbol_name=`echo "$symbol_name" | sed -E "$rename_pattern"`;
+   new_symbol_name=$(echo "$symbol_name" | sed -E "$rename_pattern");
    echo "$symbol_name -> $new_symbol_name";
     for _file in ${files[@]}; do
      sed -E -i'' "s,\b${symbol_name}\b,$new_symbol_name,g" "$_file";
