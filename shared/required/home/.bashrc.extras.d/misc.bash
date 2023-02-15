@@ -1,10 +1,10 @@
 function show_folder_details {
   local total_items=`ls -A | wc -l`;
-  local total_dirs=`ls -Al | egrep "^d" | wc -l`;
-  local total_files=`ls -Al | egrep "^-" | wc -l`;
+  local total_dirs=`ls -Al | grep -E "^d" | wc -l`;
+  local total_files=`ls -Al | grep -E "^-" | wc -l`;
   local nonhidden_items=`ls | wc -l`;
-  local nonhidden_dirs=`ls -l | egrep "^d" | wc -l`;
-  local nonhidden_files=`ls -l | egrep "^-" | wc -l`;
+  local nonhidden_dirs=`ls -l | grep -E "^d" | wc -l`;
+  local nonhidden_files=`ls -l | grep -E "^-" | wc -l`;
   local hidden_items=$(($total_items - $nonhidden_items));
   local hidden_dirs=$(($total_dirs - $nonhidden_dirs));
   local hidden_files=$(($total_files - $nonhidden_files));

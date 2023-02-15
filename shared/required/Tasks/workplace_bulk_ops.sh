@@ -34,7 +34,7 @@ function workplace_find_files {
     cd "$proj_dir";
     for proj in `find "$proj_dir" -mindepth 1 -maxdepth 1 -type d`; do
       cd "$proj";
-      if [[ ! "$proj" =~ "/data$" && `echo "$proj" | egrep -i "$project_patterns"` ]]; then
+      if [[ ! "$proj" =~ "/data$" && `echo "$proj" | grep -E -i "$project_patterns"` ]]; then
         gfind_files $args | sed -E "s,^./(.*?),`pwd`/\1,g" | sed -E 's,/Users/\w+?/,~/,';
       fi
       cd ..;
@@ -66,7 +66,7 @@ function workplace_find_in_files {
     cd "$proj_dir";
     for proj in `find "$proj_dir" -mindepth 1 -maxdepth 1 -type d`; do
       cd "$proj";
-      if [[ ! "$proj" =~ "/data$" && `echo "$proj" | egrep -i "$project_patterns"` ]]; then
+      if [[ ! "$proj" =~ "/data$" && `echo "$proj" | grep -E -i "$project_patterns"` ]]; then
         gfind_in_files $args | sed -E "s,^./(.*?),`pwd`/\1,g" | sed -E 's,/Users/\w+?/,~/,';
       fi
       cd ..;
@@ -98,7 +98,7 @@ function workplace_find_items {
     cd "$proj_dir";
     for proj in `find "$proj_dir" -mindepth 1 -maxdepth 1 -type d`; do
       cd "$proj";
-      if [[ ! "$proj" =~ "/data$" && `echo "$proj" | egrep -i "$project_patterns"` ]]; then
+      if [[ ! "$proj" =~ "/data$" && `echo "$proj" | grep -E -i "$project_patterns"` ]]; then
         gfind_items $args | sed -E "s,^./(.*?),`pwd`/\1,g" | sed -E 's,/Users/\w+?/,~/,';
       fi
       cd ..;
@@ -131,7 +131,7 @@ function workplace_repos_do_thing {
     cd "$proj_dir";
     for proj in `find "$proj_dir" -mindepth 1 -maxdepth 1 -type d`; do
       cd "$proj";
-      if [[ ! "$proj" =~ "/data$" && `echo "$proj" | egrep -i "$project_patterns"` ]]; then
+      if [[ ! "$proj" =~ "/data$" && `echo "$proj" | grep -E -i "$project_patterns"` ]]; then
         echo '--------------------------';
         pwd;
         eval "$repo_operation";

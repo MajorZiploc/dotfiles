@@ -54,7 +54,7 @@ if [ -x /usr/bin/dircolors ]; then
   alias ls='ls --color=auto'
   alias grep='grep --color=auto'
   alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
+  alias grep -E='grep -E --color=auto'
 fi
 alias ll='ls -alF'
 alias la='ls -A'
@@ -68,11 +68,11 @@ alias whence='type -a'
 alias _grepn_files="sed -E 's/(.\S*?):[0-9]+:(.*?)/\1/g'"
 alias grepn_files_freq="_grepn_files | sort | uniq -c | sort -n"
 alias grepn_files_uniq="_grepn_files | sort | uniq"
-alias find_items_hidden="sed -e 's/\.\///g' | egrep \"\/\.\""
-alias find_items_nonhidden="sed -e 's/\.\///g' | egrep -v \"\/\.\""
+alias find_items_hidden="sed -e 's/\.\///g' | grep -E \"\/\.\""
+alias find_items_nonhidden="sed -e 's/\.\///g' | grep -E -v \"\/\.\""
 alias show_root_folder="sed -E 's,^\./([^/]*?).*,\1,'"
 
-# reexecutes last command that beings with a pattern. ex: fc -s egrep
+# reexecutes last command that beings with a pattern. ex: fc -s grep -E
 alias reexe='fc -s'
 
 alias vimi='vim -u NONE'

@@ -154,8 +154,8 @@ Paths with content that will be affected include but are not limited to:
 ## Bash tooling
 ### Notable bash functions/aliases
 - whence <cmd> # gives the details of a bash command
-- search\_env\_for(\_fuzz)? "egrep|string|here" # searches the bash env for the given string (a fuzzy variant is available
-- show\_cmds\_like "egrep|string|here" # sends impls of aliases and bash fns that match the regex to stdout (useful when
+- search\_env\_for(\_fuzz)? "grep -E|string|here" # searches the bash env for the given string (a fuzzy variant is available
+- show\_cmds\_like "grep -E|string|here" # sends impls of aliases and bash fns that match the regex to stdout (useful when
   piped to clip)
 - grepn\_files(\_freq|\_uniq)? # useful chained after find\_in\_files(\_fuzz)?
 - [ag]?find\_files(\_fuzz)?
