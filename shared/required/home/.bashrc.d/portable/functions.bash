@@ -13,21 +13,21 @@ EXTRA_ENV_CHECKS_PLACEHOLDER
 function show_env_notes {
   export ENV_NOTES="";
   # Dependency checks
-  which npm 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing npm (node package manager)"; }
-  which tmux 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing tmux (terminal multiplexier)"; }
-  which pwsh 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing pwsh (cross platform powershell)"; }
-  which gnomon 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing gnomon (npm package) for calculating time taking for commands"; }
-  which prettier 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing prettier (npm package) for formatting various file formats"; }
-  which concurrently 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing concurrently (npm package) for running multiple commands that hang a terminal without multiple terminals"; }
-  which trash 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing trash-cli (npm package) safer rm"; }
-  which rg 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing rg (ripgrep) a file content search utility"; }
-  [[ -z $(dotnet --version 2>/dev/null | egrep "^6") ]] && { ENV_NOTES="$ENV_NOTES:Missing dotnet v6 (cross platform dotnet cli tooling)"; }
-  which just 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing just (a command runner for Justfiles)"; }
-  which asdf 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing asdf (a general programming language version manager)"; }
+  which npm >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing npm (node package manager)"; }
+  which tmux >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing tmux (terminal multiplexier)"; }
+  which pwsh >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing pwsh (cross platform powershell)"; }
+  which gnomon >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing gnomon (npm package) for calculating time taking for commands"; }
+  which prettier >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing prettier (npm package) for formatting various file formats"; }
+  which concurrently >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing concurrently (npm package) for running multiple commands that hang a terminal without multiple terminals"; }
+  which trash >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing trash-cli (npm package) safer rm"; }
+  which rg >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing rg (ripgrep) a file content search utility"; }
+  [[ -z $(dotnet --version 2>/dev/null | grep -E "^6") ]] && { ENV_NOTES="$ENV_NOTES:Missing dotnet v6 (cross platform dotnet cli tooling)"; }
+  which just >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing just (a command runner for Justfiles)"; }
+  which asdf >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing asdf (a general programming language version manager)"; }
   _extra_env_checks;
   # final check on environment
   [[ -z "$ENV_NOTES" ]] && { ENV_NOTES="No missing dependencies! Setup is complete!"; }
-  echo $ENV_NOTES | tr ":" "\n" | egrep -v "^\\s*$"
+  echo $ENV_NOTES | tr ":" "\n" | grep -Ev "^\\s*$"
 }
 
 function vim_session {
@@ -310,7 +310,7 @@ function _find_git_estimator_ignored_dirs {
   }
   local git_ignore_content gitignore_entries;
   git_ignore_content=$({ bash -c "$get_ancestor_git_ignore_content"; echo "$child_git_ignore_content"; echo ".git .svn"; });
-  gitignore_entries=($(echo "$git_ignore_content" | sort -u | trim | egrep -v "('|\"|;|#|\\!|,|\\{|\\}|\\@|\\||\\^|\\(|\\)|^[[:blank:]]*$|\\&|\\$|\\\\|~|\\+|\`|=|[^[:blank:]]+\.[^[:blank:]]{1,6}\$)" | tr " " "\n" | sed -E 's,^[/\*]*/,,g;s,/[/\*]*$,,g;' | xargs));
+  gitignore_entries=($(echo "$git_ignore_content" | sort -u | trim | grep -Ev "('|\"|;|#|\\!|,|\\{|\\}|\\@|\\||\\^|\\(|\\)|^[[:blank:]]*$|\\&|\\$|\\\\|~|\\+|\`|=|[^[:blank:]]+\.[^[:blank:]]{1,6}\$)" | tr " " "\n" | sed -E 's,^[/\*]*/,,g;s,/[/\*]*$,,g;' | xargs));
   # TODO: filter out duplicates
   gitignore_entries+=($(echo "${FIND_GIT_EXTRA_IGNORE_DIRS[@]}"));
   gitignore_entries=($(echo "${gitignore_entries[@]}" | tr ' ' '\n' | sort -u | xargs));
@@ -478,7 +478,7 @@ function _find_files_delete_preview_helper {
   if [[ -z "$with_content" ]]; then
     eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec echo rm \"'{}' ;\" \;";
   else
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep -in -e '$with_content' \"{}\" \; -exec echo rm \"'{}' ;\" \;" | egrep "^rm";
+    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec echo rm \"'{}' ;\" \;" | grep -E "^rm";
   fi
 }
 
@@ -492,7 +492,7 @@ function _find_files_delete_helper {
   if [[ -z "$with_content" ]]; then
     eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec rm \"{}\" \;";
   else
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep -in -e '$with_content' \"{}\" \; -exec rm \"{}\" \;" > /dev/null;
+    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec rm \"{}\" \;" > /dev/null;
   fi
 }
 
@@ -542,7 +542,7 @@ function _find_files_rename_helper {
   [[ -z "$with_content" ]] && {
     should_rename=true;
   } || {
-    file_content_matches="$(egrep -in "$with_content" "$file")"
+    file_content_matches="$(grep -Ein "$with_content" "$file")"
     [[ -z "$file_content_matches" ]] || { should_rename=true; }
   }
   [[ $should_rename == true ]] && {
@@ -601,7 +601,7 @@ function _find_files_helper {
   if [[ -z "$with_content" ]]; then
     eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths";
   else
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep -in -e '$with_content' \"{}\" \; -exec echo \"{}\" \;" | egrep -v "\s*^[[:digit:]]+:";
+    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec echo \"{}\" \;" | grep -Ev "\s*^[[:digit:]]+:";
   fi
 }
 
@@ -643,7 +643,7 @@ function _find_in_files_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
-  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep --with-filename --color -in -e '$grep_pattern' \"{}\" +;";
+  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -E --with-filename --color -in -e '$grep_pattern' \"{}\" +;";
 }
 
 function find_in_files {
@@ -785,7 +785,7 @@ function git_checkout_branch_in_path {
   for proj in ${_dirs[@]}; do
     echo "Project: $proj";
     cd "$proj";
-    git status 2>&1 >/dev/null && git_all_the_things;
+    git status >/dev/null 2>&1 && git_all_the_things;
     [[ ! "$?" == "0" ]] && {
       cd .. && continue;
     }
@@ -843,7 +843,7 @@ function git_rebase_i_head {
 
 function git_sweep {
   local exclude_branches; exclude_branches="$(git_main_branch;)|$(echo "$GIT_DESTINATION_BRANCH_CHOICES $GIT_ORIGIN_BRANCH_CHOICES" | tr " " "|")";
-  git branch -d "$(git branch --merged | egrep -v "(^\\*|^\\s*($exclude_branches)$)")";
+  git branch -d "$(git branch --merged | grep -Ev "(^\\*|^\\s*($exclude_branches)$)")";
 }
 
 function git_add_all_kinda {
@@ -865,7 +865,7 @@ function show_cheat_sheet {
   [[ -n "$tool" ]];
   local tool_was_param="$?";
   [[ -z "$tool" ]] && {
-    tool=$(cat "$HOME/.cheat_sheet/languages" "$HOME/.cheat_sheet/command" "$HOME/.cheat_sheet/languages-ext" "$HOME/.cheat_sheet/command-ext" 2>/dev/null | egrep -v "^\s*$" | FUZZY_FINDER_PLACEHOLDER);
+    tool=$(cat "$HOME/.cheat_sheet/languages" "$HOME/.cheat_sheet/command" "$HOME/.cheat_sheet/languages-ext" "$HOME/.cheat_sheet/command-ext" 2>/dev/null | grep -Ev "^\s*$" | FUZZY_FINDER_PLACEHOLDER);
     true;
   } || {
     if [[ ! "$tool" =~ ~$ && ! "$tool" =~ /$ ]]; then
