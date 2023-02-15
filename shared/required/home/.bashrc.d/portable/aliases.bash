@@ -69,7 +69,7 @@ alias _grepn_files="sed -E 's/(.\S*?):[0-9]+:(.*?)/\1/g'"
 alias grepn_files_freq="_grepn_files | sort | uniq -c | sort -n"
 alias grepn_files_uniq="_grepn_files | sort | uniq"
 alias find_items_hidden="sed -e 's/\.\///g' | grep -E \"\/\.\""
-alias find_items_nonhidden="sed -e 's/\.\///g' | grep -E -v \"\/\.\""
+alias find_items_nonhidden="sed -e 's/\.\///g' |  grep -Ev \"\/\.\""
 alias show_root_folder="sed -E 's,^\./([^/]*?).*,\1,'"
 
 # reexecutes last command that beings with a pattern. ex: fc -s grep -E

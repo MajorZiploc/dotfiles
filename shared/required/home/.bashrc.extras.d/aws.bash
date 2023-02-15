@@ -1,7 +1,7 @@
 function aws_ecs_tasks_describe {
   local cluster_name="$1";
   [[ -z "$cluster_name"]] && { echo "Must specify cluster_name\!" >&2; return 1; }
-  aws ecs describe-tasks --task `aws ecs list-tasks --cluster "$cluster_name" | grep -E -i "arn:" | tr -d "," | xargs` --cluster "$cluster_name";
+  aws ecs describe-tasks --task `aws ecs list-tasks --cluster "$cluster_name" |  grep -Ei "arn:" | tr -d "," | xargs` --cluster "$cluster_name";
 }
 
 function aws_ecs_container_connect {

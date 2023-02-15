@@ -22,7 +22,7 @@ function mssql_exec {
 }
 
 function mssql_exec_clean {
-  mssql_exec "$@" | grep -E -v "(^\W+$|\([[:digit:]]+ rows affected\))";
+  mssql_exec "$@" |  grep -Ev "(^\W+$|\([[:digit:]]+ rows affected\))";
 }
 
 function mssql_exec_delimiter_count_single_line {
