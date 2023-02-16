@@ -742,7 +742,7 @@ function docker_local {
     done;
   fi
   docker compose -f "$compose_base" -f "$compose_ext" down;
-  docker compose -f "$compose_base" -f "$compose_ext" up -d "$containers";
+  docker compose -f "$compose_base" -f "$compose_ext" up -d $containers;
 }
 
 function git_deploy {
