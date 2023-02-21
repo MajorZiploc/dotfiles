@@ -1,4 +1,5 @@
 {
+  "semanticTokens.enable": true,
   "languageserver": {
     "prolog-lsp": {
       "command": "swipl",
