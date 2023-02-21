@@ -54,7 +54,11 @@ function check_for_placeholder {
   [[ -f "$vscode_dir" ]] || {
     vscode_dir="$HOME/.config/Code/User"
   }
-  files=`find "$vscode_dir" -type f`;
+  [[ -f "$vscode_dir" ]] || {
+    # TODO: verify that space in the path doesnt impact the check_for_placeholder check of files later on
+    vscode_dir="$HOME/Library/Application Support/Code/User"
+  }
+  files=`find "$vscode_dir" -maxdepth 1 -type f -iname "*.json"`;
   check_for_placeholder $files;
 }
 

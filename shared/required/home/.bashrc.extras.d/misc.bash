@@ -1,10 +1,10 @@
 function show_folder_details {
   local total_items=`ls -A | wc -l`;
-  local total_dirs=`ls -Al | egrep "^d" | wc -l`;
-  local total_files=`ls -Al | egrep "^-" | wc -l`;
+  local total_dirs=`ls -Al | grep -E "^d" | wc -l`;
+  local total_files=`ls -Al | grep -E "^-" | wc -l`;
   local nonhidden_items=`ls | wc -l`;
-  local nonhidden_dirs=`ls -l | egrep "^d" | wc -l`;
-  local nonhidden_files=`ls -l | egrep "^-" | wc -l`;
+  local nonhidden_dirs=`ls -l | grep -E "^d" | wc -l`;
+  local nonhidden_files=`ls -l | grep -E "^-" | wc -l`;
   local hidden_items=$(($total_items - $nonhidden_items));
   local hidden_dirs=$(($total_dirs - $nonhidden_dirs));
   local hidden_files=$(($total_files - $nonhidden_files));
@@ -23,8 +23,8 @@ function prefix_file {
   # $2: file
   local text="$1";
   local file="$2";
-  [[ -z "$text" ]] && { echo "Must specify text!" >&2; return 1; }
-  [[ -z "$file" ]] && { echo "Must specify file!" >&2; return 1; }
+  [[ -z "$text" ]] && { echo "Must specify text\!" >&2; return 1; }
+  [[ -z "$file" ]] && { echo "Must specify file\!" >&2; return 1; }
   sed -i "1s/^/$text/" "$file";
 }
 
@@ -35,8 +35,8 @@ function sample {
   # $2: file/stdout
   local n="$1";
   local content="$2";
-  [[ -z "$n" ]] && { echo "Must specify n!" >&2; return 1; }
-  [[ -z "$content" ]] && { echo "Must specify content!" >&2; return 1; }
+  [[ -z "$n" ]] && { echo "Must specify n\!" >&2; return 1; }
+  [[ -z "$content" ]] && { echo "Must specify content\!" >&2; return 1; }
   shuf -n "$n" $content;
 }
 

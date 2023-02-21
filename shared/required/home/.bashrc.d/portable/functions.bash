@@ -13,27 +13,27 @@ EXTRA_ENV_CHECKS_PLACEHOLDER
 function show_env_notes {
   export ENV_NOTES="";
   # Dependency checks
-  which npm 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing npm (node package manager)"; }
-  which tmux 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing tmux (terminal multiplexier)"; }
-  which pwsh 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing pwsh (cross platform powershell)"; }
-  which gnomon 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing gnomon (npm package) for calculating time taking for commands"; }
-  which prettier 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing prettier (npm package) for formatting various file formats"; }
-  which concurrently 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing concurrently (npm package) for running multiple commands that hang a terminal without multiple terminals"; }
-  which trash 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing trash-cli (npm package) safer rm"; }
-  which rg 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing rg (ripgrep) a file content search utility"; }
-  [[ -z $(dotnet --version 2>/dev/null | egrep "^6") ]] && { ENV_NOTES="$ENV_NOTES:Missing dotnet v6 (cross platform dotnet cli tooling)"; }
-  which just 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing just (a command runner for Justfiles)"; }
-  which asdf 2>&1 2>/dev/null >/dev/null; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing asdf (a general programming language version manager)"; }
+  which npm >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing npm (node package manager)"; }
+  which tmux >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing tmux (terminal multiplexier)"; }
+  which pwsh >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing pwsh (cross platform powershell)"; }
+  which gnomon >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing gnomon (npm package) for calculating time taking for commands"; }
+  which prettier >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing prettier (npm package) for formatting various file formats"; }
+  which concurrently >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing concurrently (npm package) for running multiple commands that hang a terminal without multiple terminals"; }
+  which trash >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing trash-cli (npm package) safer rm"; }
+  which rg >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing rg (ripgrep) a file content search utility"; }
+  [[ -z $(dotnet --version 2>/dev/null | grep -E "^6") ]] && { ENV_NOTES="$ENV_NOTES:Missing dotnet v6 (cross platform dotnet cli tooling)"; }
+  which just >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing just (a command runner for Justfiles)"; }
+  which asdf >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing asdf (a general programming language version manager)"; }
   _extra_env_checks;
   # final check on environment
   [[ -z "$ENV_NOTES" ]] && { ENV_NOTES="No missing dependencies! Setup is complete!"; }
-  echo $ENV_NOTES | tr ":" "\n" | egrep -v "^\\s*$"
+  echo $ENV_NOTES | tr ":" "\n" | grep -Ev "^\\s*$"
 }
 
 function vim_session {
   local default_session_name="./Session.vim";
   local session_name="${1:-"$default_session_name"}";
-  [[ -e "$session_name" ]] || { echo "Must specify a session_name that is a valid file or sym link!" >&2; return 1; }
+  [[ -e "$session_name" ]] || { echo "Must specify a session_name that is a valid file or sym link\!" >&2; return 1; }
   [[ "$session_name" == "$default_session_name" ]] || { cp "$session_name" "$default_session_name"; }
   local session_history_path="$HOME/vimfiles/sessions";
   local session_history_file="$session_history_path/history.csv";
@@ -127,7 +127,7 @@ function col_n {
   # Extract the nths column from a tabular output
   # $1: pos num
   local n="$1";
-  [[ -z "$n" ]] && { echo "Must specify n!" >&2; return 1; }
+  [[ -z "$n" ]] && { echo "Must specify n\!" >&2; return 1; }
   awk -v col=$n '{print $col}';
 }
 
@@ -135,7 +135,7 @@ function skip_n {
   # Skip first n words in line
   # $1: pos num
   local n=$(($1 + 1));
-  [[ -z "$n" ]] && { echo "Must specify n!" >&2; return 1; }
+  [[ -z "$n" ]] && { echo "Must specify n\!" >&2; return 1; }
   cut -d' ' -f$n-;
 }
 
@@ -143,7 +143,7 @@ function take_n {
   # Keep first n words in line
   # $1: pos num
   local n="$1";
-  [[ -z "$n" ]] && { echo "Must specify n!" >&2; return 1; }
+  [[ -z "$n" ]] && { echo "Must specify n\!" >&2; return 1; }
   cut -d' ' -f1-$n;
 }
 
@@ -191,7 +191,7 @@ function show_block_line_num_range {
 
 function show_line_nums {
   local content="$1";
-  [[ -z "$content" ]] && { echo "Must specify content!" >&2; return 1; }
+  [[ -z "$content" ]] && { echo "Must specify content\!" >&2; return 1; }
   perl -nle 'print "$. $_"' "$content";
 }
 
@@ -248,7 +248,7 @@ function search_env_for_fuzz {
 
 function show_cmds_like_fuzz {
   local pattern="$1";
-  [[ -z "$pattern" ]] && { echo "Must specify a command pattern!" >&2; return 1; }
+  [[ -z "$pattern" ]] && { echo "Must specify a command pattern\!" >&2; return 1; }
   pattern=$(echo "$pattern" | to_fuzz);
   show_cmds_like "$pattern";
 }
@@ -310,7 +310,7 @@ function _find_git_estimator_ignored_dirs {
   }
   local git_ignore_content gitignore_entries;
   git_ignore_content=$({ bash -c "$get_ancestor_git_ignore_content"; echo "$child_git_ignore_content"; echo ".git .svn"; });
-  gitignore_entries=($(echo "$git_ignore_content" | sort -u | trim | egrep -v "('|\"|;|#|\\!|,|\\{|\\}|\\@|\\||\\^|\\(|\\)|^[[:blank:]]*$|\\&|\\$|\\\\|~|\\+|\`|=|[^[:blank:]]+\.[^[:blank:]]{1,6}\$)" | tr " " "\n" | sed -E 's,^[/\*]*/,,g;s,/[/\*]*$,,g;' | xargs));
+  gitignore_entries=($(echo "$git_ignore_content" | sort -u | trim | grep -Ev "('|\"|;|#|\\!|,|\\{|\\}|\\@|\\||\\^|\\(|\\)|^[[:blank:]]*$|\\&|\\$|\\\\|~|\\+|\`|=|[^[:blank:]]+\.[^[:blank:]]{1,6}\$)" | tr " " "\n" | sed -E 's,^[/\*]*/,,g;s,/[/\*]*$,,g;' | xargs));
   # TODO: filter out duplicates
   gitignore_entries+=($(echo "${FIND_GIT_EXTRA_IGNORE_DIRS[@]}"));
   gitignore_entries=($(echo "${gitignore_entries[@]}" | tr ' ' '\n' | sort -u | xargs));
@@ -321,11 +321,11 @@ export FIND_DEFAULT_MAX_DEPTH=9;
 
 function _find_items_rename_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
   local by="$2";
-  [[ -z "$by" ]] && { echo "Must specify a by substitution!" >&2; return 1; }
+  [[ -z "$by" ]] && { echo "Must specify a by substitution\!" >&2; return 1; }
   local preview=$3;
-  [[ -z "$preview" ]] && { echo "Must specify the preview flag!" >&2; return 1; }
+  [[ -z "$preview" ]] && { echo "Must specify the preview flag\!" >&2; return 1; }
   local maxdepth="$4";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$5";
@@ -378,9 +378,9 @@ function gfind_items_rename {
 
 function _find_items_delete_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
   local preview=$2;
-  [[ -z "$preview" ]] && { echo "Must specify the preview flag!" >&2; return 1; }
+  [[ -z "$preview" ]] && { echo "Must specify the preview flag\!" >&2; return 1; }
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
@@ -434,7 +434,7 @@ function gfind_items_delete {
 
 function _find_items_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
   local maxdepth="$2";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$3";
@@ -470,7 +470,7 @@ function gfind_items_fuzz {
 
 function _find_files_delete_preview_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
   local with_content="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
@@ -478,13 +478,13 @@ function _find_files_delete_preview_helper {
   if [[ -z "$with_content" ]]; then
     eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec echo rm \"'{}' ;\" \;";
   else
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep -in -e '$with_content' \"{}\" \; -exec echo rm \"'{}' ;\" \;" | egrep "^rm";
+    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec echo rm \"'{}' ;\" \;" | grep -E "^rm";
   fi
 }
 
 function _find_files_delete_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
   local with_content="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
@@ -492,7 +492,7 @@ function _find_files_delete_helper {
   if [[ -z "$with_content" ]]; then
     eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec rm \"{}\" \;";
   else
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep -in -e '$with_content' \"{}\" \; -exec rm \"{}\" \;" > /dev/null;
+    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec rm \"{}\" \;" > /dev/null;
   fi
 }
 
@@ -528,12 +528,12 @@ function gfind_files_delete {
 
 function _find_files_rename_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
   local by="$2";
-  [[ -z "$by" ]] && { echo "Must specify a by substitution!" >&2; return 1; }
+  [[ -z "$by" ]] && { echo "Must specify a by substitution\!" >&2; return 1; }
   local with_content="$3";
   local preview=$4
-  [[ -z "$preview" ]] && { echo "Must specify the preview flag!" >&2; return 1; }
+  [[ -z "$preview" ]] && { echo "Must specify the preview flag\!" >&2; return 1; }
   local maxdepth="$5";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$6";
@@ -542,7 +542,7 @@ function _find_files_rename_helper {
   [[ -z "$with_content" ]] && {
     should_rename=true;
   } || {
-    file_content_matches="$(egrep -in "$with_content" "$file")"
+    file_content_matches="$(grep -Ein "$with_content" "$file")"
     [[ -z "$file_content_matches" ]] || { should_rename=true; }
   }
   [[ $should_rename == true ]] && {
@@ -593,7 +593,7 @@ function gfind_files_rename {
 
 function _find_files_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
   local with_content="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
@@ -601,7 +601,7 @@ function _find_files_helper {
   if [[ -z "$with_content" ]]; then
     eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths";
   else
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep -in -e '$with_content' \"{}\" \; -exec echo \"{}\" \;" | egrep -v "\s*^[[:digit:]]+:";
+    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec echo \"{}\" \;" | grep -Ev "\s*^[[:digit:]]+:";
   fi
 }
 
@@ -637,13 +637,13 @@ function gfind_files_fuzz {
 
 function _find_in_files_helper {
   local grep_pattern="$1";
-  [[ -z "$grep_pattern" ]] && { echo "Must specify a grep pattern!" >&2; return 1; }
+  [[ -z "$grep_pattern" ]] && { echo "Must specify a grep pattern\!" >&2; return 1; }
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
-  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec egrep --with-filename --color -in -e '$grep_pattern' \"{}\" +;";
+  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -E --with-filename --color -in -e '$grep_pattern' \"{}\" +;";
 }
 
 function find_in_files {
@@ -678,7 +678,7 @@ function gfind_in_files_fuzz {
 
 function _find_in_files_replace_helper {
   local by="$1";
-  [[ -z "$by" ]] && { echo "Must specify a by substitution!" >&2; return 1; }
+  [[ -z "$by" ]] && { echo "Must specify a by substitution\!" >&2; return 1; }
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
   local maxdepth="$3";
@@ -742,7 +742,7 @@ function docker_local {
     done;
   fi
   docker compose -f "$compose_base" -f "$compose_ext" down;
-  docker compose -f "$compose_base" -f "$compose_ext" up -d "$containers";
+  docker compose -f "$compose_base" -f "$compose_ext" up -d $containers;
 }
 
 function git_deploy {
@@ -778,14 +778,14 @@ function git_all_the_things {
 function git_checkout_branch_in_path {
   local branches="$1";
   local _path="$2";
-  [[ -z "$branches" ]] && { echo "Must specify a string of branches delimited by spaces!" >&2; return 1; }
+  [[ -z "$branches" ]] && { echo "Must specify a string of branches delimited by spaces\!" >&2; return 1; }
   branches=($(echo "$branches" | xargs));
   _path="${_path:="."}";
   _dirs=($(find "$_path" -mindepth 1 -maxdepth 1 -type d | xargs));
   for proj in ${_dirs[@]}; do
     echo "Project: $proj";
     cd "$proj";
-    git status 2>&1 >/dev/null && git_all_the_things;
+    git status >/dev/null 2>&1 && git_all_the_things;
     [[ ! "$?" == "0" ]] && {
       cd .. && continue;
     }
@@ -801,14 +801,14 @@ function git_checkout_branch_in_path {
 function git_log_follow {
   # search current branch git commits for commits that change a file
   local item_name="$1";
-  [[ -z "$item_name" ]] && { echo "Must specify item_name!" >&2; return 1; }
+  [[ -z "$item_name" ]] && { echo "Must specify item_name\!" >&2; return 1; }
   git log --date-order --ignore-space-change --follow -- "$item_name";
 }
 
 function git_diff_range {
   # assumption from commit is older than to commit
-  [[ -z "$1" ]] && { echo "Must specify from!" >&2; return 1; }
-  [[ -z "$2" ]] && { echo "Must specify to!" >&2; return 1; }
+  [[ -z "$1" ]] && { echo "Must specify from\!" >&2; return 1; }
+  [[ -z "$2" ]] && { echo "Must specify to\!" >&2; return 1; }
   local from=$(($1 + 1));
   local to=$(($2 + 1));
   local commits; commits="$(git --no-pager log --oneline -n "$from" | col_n 1 | xargs)";
@@ -819,31 +819,31 @@ function git_diff_range {
 
 function git_log_show_last_n_on_current_branch {
   local n="$1";
-  [[ -z "$n" ]] && { echo "Must specify n!" >&2; return 1; }
+  [[ -z "$n" ]] && { echo "Must specify n\!" >&2; return 1; }
   git --no-pager log --oneline -n "$n" | perl -nle '$i=$.-1; print "$i $_"';
 }
 
 function git_diff_of_commit {
   local commit="$1";
-  [[ -z "$commit" ]] && { echo "Must specify a commit!" >&2; return 1; }
+  [[ -z "$commit" ]] && { echo "Must specify a commit\!" >&2; return 1; }
   git diff --ignore-space-change "$commit"^! ;
 }
 
 function git_diff_from_commit_to_current {
   local commit="$1";
-  [[ -z "$commit" ]] && { echo "Must specify a commit!" >&2; return 1; }
+  [[ -z "$commit" ]] && { echo "Must specify a commit\!" >&2; return 1; }
   git diff --ignore-space-change "$commit"^;
 }
 
 function git_rebase_i_head {
   local n="$1";
-  [[ -z "$n" ]] && { echo "Must specify a n!" >&2; return 1; }
+  [[ -z "$n" ]] && { echo "Must specify a n\!" >&2; return 1; }
   git rebase -i HEAD~"$n";
 }
 
 function git_sweep {
   local exclude_branches; exclude_branches="$(git_main_branch;)|$(echo "$GIT_DESTINATION_BRANCH_CHOICES $GIT_ORIGIN_BRANCH_CHOICES" | tr " " "|")";
-  git branch -d "$(git branch --merged | egrep -v "(^\\*|^\\s*($exclude_branches)$)")";
+  git branch -d "$(git branch --merged | grep -Ev "(^\\*|^\\s*($exclude_branches)$)")";
 }
 
 function git_add_all_kinda {
@@ -865,7 +865,7 @@ function show_cheat_sheet {
   [[ -n "$tool" ]];
   local tool_was_param="$?";
   [[ -z "$tool" ]] && {
-    tool=$(cat "$HOME/.cheat_sheet/languages" "$HOME/.cheat_sheet/command" "$HOME/.cheat_sheet/languages-ext" "$HOME/.cheat_sheet/command-ext" 2>/dev/null | egrep -v "^\s*$" | FUZZY_FINDER_PLACEHOLDER);
+    tool=$(cat "$HOME/.cheat_sheet/languages" "$HOME/.cheat_sheet/command" "$HOME/.cheat_sheet/languages-ext" "$HOME/.cheat_sheet/command-ext" 2>/dev/null | grep -Ev "^\s*$" | FUZZY_FINDER_PLACEHOLDER);
     true;
   } || {
     if [[ ! "$tool" =~ ~$ && ! "$tool" =~ /$ ]]; then
@@ -915,7 +915,7 @@ function parse_json_fields {
   local preprocessing_pwsh="$4";
   field_separator="${field_separator:=","}";
   preprocessing_pwsh="${preprocessing_pwsh:=""}";
-  [[ -z "$json" ]] && { echo "Must specify a json file or string!" >&2; return 1; }
+  [[ -z "$json" ]] && { echo "Must specify a json file or string\!" >&2; return 1; }
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
   _parse_fields_header_helper "$fields" "$field_separator";
   local pwsh_fields; pwsh_fields=$(_parse_fields_helper "$fields" "$field_separator" | tr -d "\n");
@@ -934,7 +934,7 @@ function parse_csv_fields {
   local preprocessing_pwsh="$4";
   field_separator="${field_separator:=","}";
   preprocessing_pwsh="${preprocessing_pwsh:=""}";
-  [[ -z "$csv" ]] && { echo "Must specify a csv file or string!" >&2; return 1; }
+  [[ -z "$csv" ]] && { echo "Must specify a csv file or string\!" >&2; return 1; }
   [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
   _parse_fields_header_helper "$fields" "$field_separator";
   local pwsh_fields; pwsh_fields=$(_parse_fields_helper "$fields" "$field_separator");
@@ -950,7 +950,7 @@ function parse_csv_fields {
 
 function to_title_case {
   local phrase="$1";
-  [[ -z "$phrase" ]] && { echo "Must specify a phrase!" >&2; return 1; }
+  [[ -z "$phrase" ]] && { echo "Must specify a phrase\!" >&2; return 1; }
   echo "$phrase" | sed -e "s/\b\(.\)/\u\1/g";
 }
 
@@ -969,7 +969,7 @@ function convert_csv_to_json {
 function csv_delimiter_check_single_line {
   local csv_like="$1";
   local delimiter="$2";
-  [[ -z "$csv_like" ]] && { echo "Must specify a csv_like file or string!" >&2; return 1; }
+  [[ -z "$csv_like" ]] && { echo "Must specify a csv_like file or string\!" >&2; return 1; }
   echo "${delimiter:=","}" >/dev/null;
   [[ -e "$csv_like" ]] && { csv_like=$(cat "$csv_like"); }
   echo "$csv_like" | tr -d -c "${delimiter}\n" | awk '{ print length; }' | sort -n | uniq -c;
@@ -998,7 +998,7 @@ function _rest_format_and_print_response {
 
 function rest_encode_url {
   local url="$1";
-  [[ -z "$url" ]] && { echo "Must specify url!" >&2; return 1; }
+  [[ -z "$url" ]] && { echo "Must specify url\!" >&2; return 1; }
   echo "$url" | sed 's, ,%20,g;s,\!,%21,g;s,",%22,g;s,#,%23,g;s,\$,%24,g;s,'"'"',%27,g;';
 }
 
@@ -1011,7 +1011,7 @@ function _rest_helper {
   local method="$5";
   local headers="$6";
   local trailing_command="$7";
-  [[ -z "$url" ]] && { echo "Must specify url!" >&2; return 1; }
+  [[ -z "$url" ]] && { echo "Must specify url\!" >&2; return 1; }
   echo "${content_type:="application/json"}" >/dev/null;
   echo "${curl_flags:="Lk"}" >/dev/null;
   echo "${response_file_type:="json"}" >/dev/null;
@@ -1075,15 +1075,15 @@ function rest_delete {
 
 function rest_generic {
   method="$8";
-  [[ -z "$method" ]] && { echo "Must specify method!" >&2; return 1; }
+  [[ -z "$method" ]] && { echo "Must specify method\!" >&2; return 1; }
   _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$method";
 }
 
 function refactor_rename_symbols {
   local symbol_declare="$1";
   local rename_pattern="$2";
-  [[ -z "$symbol_declare" ]] && { echo "Must specify symbol_declare!" >&2; return 1; }
-  [[ -z "$rename_pattern" ]] && { echo "Must specify rename_pattern!" >&2; return 1; }
+  [[ -z "$symbol_declare" ]] && { echo "Must specify symbol_declare\!" >&2; return 1; }
+  [[ -z "$rename_pattern" ]] && { echo "Must specify rename_pattern\!" >&2; return 1; }
   local search_results; search_results=$(gfind_in_files "^\s*$symbol_declare\b([a-zA-Z0-9_\-]+)\b");
   local symbol_names; symbol_names=($(echo "$search_results" | sed -E "s,.*?[[:digit:]]+:.*?$symbol_declare\b([a-zA-Z0-9_\-]+)\b(.*),\1,g" | sort -u | xargs));
   [[ "$symbol_names" =~ "^[[:blank:]]*$" ]] && { echo "No symbol_names found to rename!" >&2; return 1; }
