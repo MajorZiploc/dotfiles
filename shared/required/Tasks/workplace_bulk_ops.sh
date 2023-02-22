@@ -149,10 +149,6 @@ function project_operation {
   local og_git_branch; og_git_branch="$(git_current_branch)";
   local dest_branch; dest_branch="$2"; dest_branch="${dest_branch:-"$og_git_branch"}";
   local should_pause; should_pause="$3";
-  [[ -z "$should_pause" ]] && {
-    echo "$prompt_indicator should_pause after each project has been processed with proj_op? (y/N)";
-    read -r should_pause;
-  }
   git status >/dev/null 2>&1
   local is_git_repo="$?";
   [[ "$is_git_repo" != "0" ]] && { echo "$(pwd) is not a git repo\!" >&2; return $is_git_repo; }
