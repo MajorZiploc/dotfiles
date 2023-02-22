@@ -1,5 +1,5 @@
 {
-  "semanticTokens.enable": true,
+  "semanticTokens.enable": false,
   "java.enabled": true,
   "languageserver": {
     "prolog-lsp": {
