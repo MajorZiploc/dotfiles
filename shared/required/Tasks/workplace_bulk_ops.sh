@@ -147,7 +147,8 @@ function project_operation {
   local prompt_indicator='#######';
   local press_enter_to='press enter to';
   local og_git_branch; og_git_branch="$(git_current_branch)";
-  local dest_branch; dest_branch="$2"; dest_branch="${dest_branch:-"$og_git_branch"}";
+  local dest_branch_choices; dest_branch_choices="$2"; dest_branch_choices="${dest_branch_choices:-"$og_git_branch"}";
+  dest_branch_choices=($(echo "$dest_branch_choices" | xargs));
   local should_pause; should_pause="$3";
   git status >/dev/null 2>&1
   local is_git_repo="$?";
@@ -155,7 +156,9 @@ function project_operation {
   git stash push | grep -E 'No local changes to save';
   local wasStashed=$?;
   git_all_the_things 2>/dev/null;
-  git checkout "$dest_branch";
+  for dest_branch in ${dest_branch_choices[@]}; do
+    git checkout "$dest_branch" && break;
+  done;
   git pull;
   # operation
   eval "$proj_op";
