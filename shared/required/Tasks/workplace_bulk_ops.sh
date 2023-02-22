@@ -140,3 +140,73 @@ function workplace_repos_do_thing {
     done;
   done;
 }
+
+function project_operation {
+  local proj_op; proj_op="$1";
+  [[ -z "$proj_op" ]] && { echo "Must specify proj_op\!" >&2; return 1; }
+  local prompt_indicator='#######';
+  local press_enter_to='press enter to';
+  local og_git_branch; og_git_branch="$(git_current_branch)";
+  local dest_branch; dest_branch="$2"; dest_branch="${dest_branch:-"$og_git_branch"}";
+  local should_pause; should_pause="$3";
+  [[ -z "$should_pause" ]] && {
+    echo "$prompt_indicator should_pause after each project has been processed with proj_op? (y/N)";
+    read -r should_pause;
+  }
+  git status >/dev/null 2>&1
+  local is_git_repo="$?";
+  [[ "$is_git_repo" != "0" ]] && { echo "$(pwd) is not a git repo\!" >&2; return $is_git_repo; }
+  git stash push | grep -E 'No local changes to save';
+  local wasStashed=$?;
+  git_all_the_things 2>/dev/null;
+  git checkout "$dest_branch";
+  git pull;
+  # operation
+  eval "$proj_op";
+  git checkout "$og_git_branch";
+  [[ "$wasStashed" != "0" ]] && { git stash pop; }
+  echo "Finished with $(pwd)";
+  [[ "$should_pause" == "y" ]] && {
+    echo "$prompt_indicator $press_enter_to go to next project $prompt_indicator";
+    read -r;
+  }
+}
+
+function find_and_replace {
+  declare -a inputs; inputs=($@);
+  local tuple_delimiter="${inputs[1]}";
+  inputs=("${inputs[@]:1}")
+  local preadd_processing="${inputs[1]}";
+  inputs=("${inputs[@]:1}")
+  local prompt_indicator='#######';
+  local press_enter_to='press enter to';
+  local file_pattern="${inputs[1]}";
+  inputs=("${inputs[@]:1}")
+  local commit_msg="${inputs[1]}";
+  inputs=("${inputs[@]:1}")
+  local old_new_vals=($inputs[@]);
+  local files_to_act_on="";
+  for old_new_val in "${old_new_vals[@]}"; do
+    local old_val new_val;
+    old_val="$(echo "$old_new_val" | sed -E "s/(.*)${tuple_delimiter}(.*)/\\1/")";
+    new_val="$(echo "$old_new_val" | sed -E "s/(.*)${tuple_delimiter}(.*)/\\2/")";
+    files_to_act_on+=" $(gfind_files "$file_pattern" "$old_val")";
+    echo "s/$old_val/$new_val/g";
+    echo "$files_to_act_on";
+    gfind_in_files_replace "s/$old_val/$new_val/g" "$file_pattern";
+  done;
+  files_to_act_on="$(echo "$files_to_act_on" | trim)"
+  echo "All edited files: $files_to_act_on";
+  [[ -n "$files_to_act_on" ]] && {
+    eval "$preadd_processing";
+    echo "$files_to_act_on" | xargs git add;
+  }
+  git status;
+  echo "$prompt_indicator $press_enter_to continue $prompt_indicator";
+  read -r;
+  git diff --staged;
+  echo "should commit? (y/N)";
+  local shouldCommit; read -r shouldCommit;
+  [[ "$shouldCommit" == "y" ]] && { git commit -m "$commit_msg"; git push; }
+}
+
