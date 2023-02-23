@@ -843,7 +843,7 @@ function git_rebase_i_head {
 
 function git_sweep {
   local exclude_branches; exclude_branches="$(git_main_branch;)|$(echo "$GIT_DESTINATION_BRANCH_CHOICES $GIT_ORIGIN_BRANCH_CHOICES" | tr " " "|")";
-  git branch -d "$(git branch --merged | grep -Ev "(^\\*|^\\s*($exclude_branches)$)")";
+  git branch -d $(git branch --merged | grep -Ev "(^\\*|^\\s*($exclude_branches)$)");
 }
 
 function git_add_all_kinda {
