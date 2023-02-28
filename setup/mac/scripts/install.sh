@@ -104,6 +104,11 @@ brew install --cask krita;
 brew install --cask visual-studio-code;
 brew install --cask slack;
 brew install --cask docker;
+# k8s: docker compose to k8s resources helper
+brew install kompose
+# k8s: minikube for runnning clusters locally
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-arm64
+sudo install minikube-darwin-arm64 /usr/local/bin/minikube
 
 brew install --cask wine-stable;
 brew install --cask keycastr;
