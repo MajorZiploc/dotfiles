@@ -104,6 +104,8 @@ brew install --cask krita;
 brew install --cask visual-studio-code;
 brew install --cask slack;
 brew install --cask docker;
+# k8s: docker compose to k8s resources helper
+brew install kompose
 
 brew install --cask wine-stable;
 brew install --cask keycastr;
