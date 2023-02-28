@@ -68,3 +68,6 @@ highlight CocWarningFloat guifg=black
 highlight CocErrorFloat guifg=black
 highlight CocHintSign guifg=black
 
+" Can show an error on startup if opening directly to a *.env file without the <cr> at the end
+autocmd BufNewFile,BufRead *.env execute ":silent! :CocDisable<cr>"
+
