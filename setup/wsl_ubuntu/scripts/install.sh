@@ -151,6 +151,10 @@ curl -L https://github.com/kubernetes/kompose/releases/download/v1.26.0/kompose-
 chmod +x kompose
 sudo mv ./kompose /usr/local/bin/kompose
 
+# k8s: minikube for runnning clusters locally
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
 # ruby
 sudo apt-get install -y ruby-full;
 sudo gem install solargraph;
