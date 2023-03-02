@@ -31,7 +31,7 @@ brew install just;
 brew install copyq;
 brew install bash-completion;
 # neovim
-brew install nvim;
+brew install neovim;
 # convert files for OS'es, comes with others like unix2dos
 brew install dos2unix;
 # json query for cli
