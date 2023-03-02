@@ -68,6 +68,7 @@ highlight CocWarningFloat guifg=black
 highlight CocErrorFloat guifg=black
 highlight CocHintSign guifg=black
 
-" Can show an error on startup if opening directly to a *.env file without the <cr> at the end
-autocmd BufNewFile,BufRead *.env execute ":silent! :CocDisable<cr>"
+" Can show an error on startup if opening directly to a *.env file; tried a <cr> at the end and it seems to cancel the command all together
+" put at the bottom of your ~/vimrc_ext to work; remove the \'s
+" autocmd BufNewFile,BufRead *.env execute \":silent! :CocDisable\"
 
