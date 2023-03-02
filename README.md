@@ -52,7 +52,12 @@ Windows:
 Ubuntu:
 - apt packages
 
+Mac:
+- brew packages
+
 ## Install scripts
+
+### NOTE:
 
 ### Windows and Mac
 To install chocolatey or home brew:
@@ -67,6 +72,12 @@ To install software with apt-get:
 ### Vim setting shells
 Make sure to set shells in the /usr/local/bin: (NOTE: for git bash, launch as admin and run the content of this file without the 'sudo')
 - ./shared/scripts/vim\_shell/set\_shells.sh
+
+### Nodejs (nvm)
+Required for coc vim installs
+- ./shared/scripts/nodejs/nvm\_install\_lts.sh
+Misc tooling
+- ./shared/scripts/nodejs/install\_global\_tooling.sh.sh
 
 ### Install oh my zsh
 - ./shared/scripts/zsh/install_oh-my-zsh.sh
@@ -116,7 +127,7 @@ Paths with content that will be affected include but are not limited to:
 > ./shared/scripts/zsh/install_oh-my-zsh.sh && ./setup/(mac|wsl_ubuntu|ubuntu)/scripts/copy.sh
 
 ### on open of vim or nvim: coc issue where no intellisense is working
-- Can be caused if you do not have nodejs, npm, and yarn installed. Install these tools then then do the following:
+- Can be caused if you do not have nodejs, npm, and yarn installed (npm should work too). Install these tools then then do the following:
 > cd ~/.vim/plugged/coc.nvim && yarn install
 
 ### on open of vim or nvim: /usr/local/bin/bash or /usr/local/bin/zsh not found
@@ -199,6 +210,42 @@ All of the [ag]?find\_ are wrappers around find to make certain common operation
 Use whence to view the implementations of any of them to get an understanding of how they work
 
 For more bash aliases and functions, use search\_env\_for(\_fuzz)?, or look at ~/.bashrc.d/portable/\*
+
+### workplace_* bash functions
+./shared/required/Tasks/workplace_bulk_ops.sh contains maybe great utilities for performing tasks on a batch of projects at once
+
+If you wish to have them sourced in your bash or zsh environment, then place this line in your ~/.bashrc_ext or ~/.zshrc_ext file
+> . ~/Tasks/workplace_bulk_ops.sh
+
+### Even slimmer prompt by removing the whoami info from the beginning:
+Put this in your ~/.zshrc_ext:
+```
+function set_prompt {
+  PROMPT='%(?.%F{cyan}.%F{red}[$?])%c';
+	local can_i_run_sudo=$(sudo -n uptime 2>&1 | grep "load" | wc -l);
+	if [ ${can_i_run_sudo} -gt 0 ]; then
+		PROMPT+='%{$fg_bold[red]%}!%{$reset_color%}';
+	fi
+  PROMPT+=' %F{magenta}${vcs_info_msg_0_}%F{cyan}> %F{reset}';
+}
+```
+
+Put this in your ~/.bashrc_ext:
+```
+__bash_prompt() {
+  local gitbranch='`\
+    export BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null); \
+    if [ "${BRANCH}" != "" ]; then \
+    echo -n " \[\033[0;36m\](\[\033[1;31m\]${BRANCH}" \
+    && echo -n "\[\033[0;36m\])"; \
+  fi`'
+  local removecolor='\[\033[0m\]'
+  PS1="\`if [[ \$? = \"0\" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]\[\$?\]"; fi\`\W${gitbranch}${removecolor}> "
+  unset -f __bash_prompt
+}
+__bash_prompt
+```
+
 
 ## Extending and Staying Up to date with these settings
 
