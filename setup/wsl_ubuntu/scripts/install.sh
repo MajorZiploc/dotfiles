@@ -77,6 +77,9 @@ sudo apt-get install -y swi-prolog;
 # for vim coc prolog language server support
 swipl -q -l "$this_path/../../../shared/scripts/prolog/install_language_server.pl";
 
+# help address issues in shell scripts
+sudo apt install shellcheck;
+
 # golang
 sudo apt-get install -y golang-go;
 
