@@ -14,6 +14,10 @@ sudo apt-get -y install tmux;
 sudo apt-get -y install dos2unix;
 # json query for cli
 sudo apt-get -y install jq;
+# yaml query for cli
+sudo add-apt-repository ppa:rmescandon/yq -y;
+sudo apt-get -y update;
+sudo apt-get install yq -y;
 # view directories in tree format
 sudo apt-get -y install tree;
 
