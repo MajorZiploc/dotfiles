@@ -27,8 +27,6 @@ cargo install bat
 # cargo install cargo-watch
 # timer
 # cargo install porsmo
-# ping
-cargo install speedtest-rc
 # git terminal gui
 # cargo install gitui
 # A simple and easy to use Wikipedia Text User Interface
