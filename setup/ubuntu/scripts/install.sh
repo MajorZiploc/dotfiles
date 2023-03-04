@@ -17,7 +17,7 @@ sudo apt-get -y install jq;
 # yaml query for cli
 sudo add-apt-repository ppa:rmescandon/yq -y;
 sudo apt-get -y update;
-sudo apt-get install yq -y;
+sudo apt-get -y install yq;
 # view directories in tree format
 sudo apt-get -y install tree;
 # creates a 'python' and makes it point to python3 that is installed
@@ -57,14 +57,14 @@ sudo ufw status verbose;
 sudo apt-get install -y net-tools;
 
 # prolog
-sudo add-apt-repository ppa:swi-prolog/stable;
+sudo add-apt-repository ppa:swi-prolog/stable -y;
 sudo apt-get update -y;
 sudo apt-get install -y swi-prolog;
 # for vim coc prolog language server support
 swipl -q -l "$this_path/../../../shared/scripts/prolog/install_language_server.pl";
 
 # help address issues in shell scripts
-sudo apt install shellcheck;
+sudo apt-get install -y shellcheck;
 
 # golang
 sudo apt-get install -y golang-go;
@@ -76,7 +76,7 @@ wget https://services.gradle.org/distributions/gradle-${gradle_version}-bin.zip 
 sudo unzip -d /opt/gradle /tmp/gradle-${gradle_version}-bin.zip;
 sudo ln -s /opt/gradle/gradle-${gradle_version} /opt/gradle/latest;
 sudo sed -E -i'' '/export PATH=\/opt\/gradle\/latest\/bin:\$\{PATH\}/d' /etc/profile.d/gradle.sh;
-echo 'export PATH=/opt/gradle/latest/bin:${PATH}' | sudo tee /etc/profile.d/gradle.sh;
+echo 'export PATH=/opt/gradle/latest/bin:${PATH}' | sudo tee -a /etc/profile.d/gradle.sh;
 sudo chmod +x /etc/profile.d/gradle.sh;
 
 # php
