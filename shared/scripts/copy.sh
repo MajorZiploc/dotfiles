@@ -28,8 +28,8 @@ done;
 
 rm -r "${temp:?}/";
 
-{ printf "shopt -s expand_aliases\n\n"; cat ~/.bashrc.d/portable/aliases.bash; } > ~/vimfiles/bash_env.bash;
-{ printf "setopt aliases\n\n"; cat ~/.bashrc.d/portable/aliases.bash; } > ~/vimfiles/bash_env.zsh;
+{ printf "function main {\nshopt -s expand_aliases\n\n"; cat ~/.bashrc.d/portable/aliases.bash; printf "\n}\n"; echo 'main >/dev/null 2>&1;'; } > ~/vimfiles/bash_env.bash;
+{ printf "function main {\nsetopt aliases\n\n"; cat ~/.bashrc.d/portable/aliases.bash; printf "\n}\n"; echo 'main >/dev/null 2>&1;'; } > ~/vimfiles/bash_env.zsh;
 
 unset temp_shared;
 unset temp_this;
