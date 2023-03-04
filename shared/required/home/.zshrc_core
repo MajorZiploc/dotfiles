@@ -97,11 +97,11 @@ source $ZSH/oh-my-zsh.sh
 setopt aliases
 
 for file in `find "$HOME/.bashrc.d/portable" -regextype egrep -iregex ".*\.bash" -type f`; do
-  . "$file";
+  . "$file" >/dev/null 2>&1;
 done;
 
 for file in `find "$HOME/.zshrc.d" -regextype egrep -iregex ".*\.zsh" -type f`; do
-  . "$file";
+  . "$file" >/dev/null 2>&1;
 done;
 
 export FPATH="$FPATH:$(echo ~/.zsh_completion.d/)"
