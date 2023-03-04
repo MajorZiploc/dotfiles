@@ -69,7 +69,8 @@ sudo apt install shellcheck;
 # golang
 sudo apt-get install -y golang-go;
 
-sudo apt-get install -y openjdk-11-jdk;
+# java
+sudo apt-get install -y openjdk-17-jdk openjdk-17-jre;
 gradle_version='7.4.1';
 wget https://services.gradle.org/distributions/gradle-${gradle_version}-bin.zip -P /tmp;
 sudo unzip -d /opt/gradle /tmp/gradle-${gradle_version}-bin.zip;
