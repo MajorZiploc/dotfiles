@@ -79,6 +79,12 @@ Required for coc vim installs
 Misc tooling
 - ./shared/scripts/nodejs/install\_global\_tooling.sh.sh
 
+### Rust (cargo)
+# install rust
+- ./shared/scripts/rust/install.sh
+Misc tooling; Adds color to fzf previews with bat!
+- ./shared/scripts/rust/packages.sh
+
 ### Install oh my zsh
 - ./shared/scripts/zsh/install_oh-my-zsh.sh
 

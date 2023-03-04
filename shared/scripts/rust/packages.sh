@@ -11,7 +11,7 @@ cargo install ripgrep
 cargo install du-dust
 # ls
 cargo install exa 
-# cat
+# a cat clone with syntax highlighting; for colors in fzf preview
 cargo install bat
 # rust interactive
 # cargo install irust
