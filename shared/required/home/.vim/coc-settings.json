@@ -1,4 +1,6 @@
 {
+  "semanticTokens.enable": false,
+  "java.enabled": true,
   "languageserver": {
     "prolog-lsp": {
       "command": "swipl",
@@ -18,5 +20,10 @@
     }
   },
   "python.formatting.provider": "autopep8",
-  "pyright.disableProgressNotifications": true
+  "pyright.disableProgressNotifications": true,
+  "[java]": {
+    "semanticTokens.enable": true,
+  },
+  "java.trace.server": "verbose"
+
 }
