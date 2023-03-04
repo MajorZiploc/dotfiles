@@ -10,7 +10,7 @@ flags="$1"
 flags_as_int="$((2#$flags))"
 all="$((2#111))"
 
-$script_path/../../../shared/scripts/copy.sh "$setup_root" "$flags"
+"$script_path/../../../shared/scripts/copy.sh" "$setup_root" "$flags";
 
 [[ $(($all & $flags_as_int)) == $all ]] && {
   home_wallpapers="$HOME/Pictures/Wallpapers"

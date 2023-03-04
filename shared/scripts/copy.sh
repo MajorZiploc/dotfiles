@@ -11,20 +11,20 @@ temp="$setup_root/../temp";
 temp_shared="$temp/shared";
 temp_this="$temp/this";
 
-$script_path/create_temps.sh "$setup_root" "$temp" "$temp_shared" "$temp_this";
+"$script_path/create_temps.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this";
 
 # call os specific substition flow script
-test -f "$setup_root/scripts/substition.sh" && { $setup_root/scripts/substition.sh "$setup_root" "$temp" "$temp_shared" "$temp_this"; };
+test -f "$setup_root/scripts/substition.sh" && { "$setup_root/scripts/substition.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this"; };
 
 content_modifiers=("append" "prepend" "override" "new" "delete");
 for content_modifier in ${content_modifiers[@]}; do
-  $temp_shared/scripts/edit_files.sh "$temp" "$temp_shared" "$temp_this" "$content_modifier";
+  "$temp_shared/scripts/edit_files.sh" "$temp" "$temp_shared" "$temp_this" "$content_modifier";
 done;
 
 
-$temp_shared/scripts/ensure_client_paths.sh "$setup_root" "$temp" "$temp_shared" "$temp_this" "$flags";
+"$temp_shared/scripts/ensure_client_paths.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this" "$flags";
 
-$temp_shared/scripts/copy_content_to_client.sh "$setup_root" "$temp" "$temp_shared" "$temp_this" "$flags";
+"$temp_shared/scripts/copy_content_to_client.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this" "$flags";
 
 rm -r "$temp/";
 

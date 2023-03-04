@@ -13,7 +13,7 @@ flags_as_int="$((2#$flags))";
 vscode_flag_as_int="$((2#01))";
 [[ -z "$flags" ]] && { flags='00'; }
 
-$script_path/../../../shared/scripts/copy.sh "$setup_root" "$flags";
+"$script_path/../../../shared/scripts/copy.sh" "$setup_root" "$flags";
 
 [[ $(($vscode_flag_as_int & $flags_as_int)) == $vscode_flag_as_int ]] && {
   vscode_dir="$HOME/.vscoderc.d/";

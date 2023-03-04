@@ -8,7 +8,7 @@ setup_root="$script_path/..";
 flags="$1";
 [[ -z "$flags" ]] && { flags='00'; }
 
-$script_path/../../../shared/scripts/copy.sh "$setup_root" "$flags";
+"$script_path/../../../shared/scripts/copy.sh" "$setup_root" "$flags";
 
 nvim "+:PlugInstall" "+:PlugUpgrade" "+:PlugUpdate" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
 # vim "+:PlugInstall" "+:PlugUpgrade" "+:PlugUpdate" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
