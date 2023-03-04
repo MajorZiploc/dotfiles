@@ -27,7 +27,7 @@ function edit_files_helper {
   local estyle="$3";
   for i in $dirGlob ; do
     [[ -f "$i" ]] && {
-      local b=$(basename "$i");
+      local b; b=$(basename "$i");
       [[ $estyle == "append" ]] && {
         # echo "cat \"$i\" >> \"$destDir/$b"
         # echo "rm \"$i\""
@@ -37,7 +37,7 @@ function edit_files_helper {
       [[ $estyle == "prepend" ]] && {
         # echo "cat <(cat \"$i\") <(cat \"$destDir/$b\") > \"$destDir/$b\""
         # echo "rm \"$i\""
-        echo "$content" > "$destDir/$b";
+        echo "$i" > "$destDir/$b";
         rm "$i";
       }
       [[ $estyle == "override" || $estyle == "new" ]] && {
@@ -49,7 +49,7 @@ function edit_files_helper {
       [[ $estyle == "delete" ]] && {
         # echo "cat \"$i\" > \"$destDir/$b\""
         # echo "rm \"$i\""
-        rm "$destDir/$b";
+        rm "${destDir:?}/$b";
         rm "$i";
       }
     }
