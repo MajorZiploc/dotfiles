@@ -16,7 +16,6 @@ vscode_flag_as_int="$((2#01))";
 $script_path/../../../shared/scripts/copy.sh "$setup_root" "$flags";
 
 [[ $(($vscode_flag_as_int & $flags_as_int)) == $vscode_flag_as_int ]] && {
-  vsc_settings="$HOME/Library/Application Support/Code/User/settings.json";
   vscode_dir="$HOME/.vscoderc.d/";
   find "$vscode_dir" -type f -print0 | while read -d $'\0' file; do
     bname=`basename "$file"`;
@@ -25,8 +24,8 @@ $script_path/../../../shared/scripts/copy.sh "$setup_root" "$flags";
   done;
 }
 
-nvim "+:PlugUpgrade" "+:PlugUpdate" "+:PlugInstall" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
-vim "+:PlugUpgrade" "+:PlugUpdate" "+:PlugInstall" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
+nvim "+:PlugInstall" "+:PlugUpgrade" "+:PlugUpdate" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
+# vim "+:PlugInstall" "+:PlugUpgrade" "+:PlugUpdate" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
 
 git restore "$script_path/../../../shared/scripts/create_temps.sh";
 
