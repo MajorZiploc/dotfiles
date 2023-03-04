@@ -8,6 +8,7 @@ softwareupdate --all --install --force;
 xcode-select --install;
 
 brew update;
+brew tap homebrew/cask-versions;
 # gsed: a gnu like sed for mac
 brew install gnu-sed;
 brew install tmux;
@@ -57,10 +58,10 @@ brew install rust-analyzer;
 
 # java
 # brew install java11;
-brew install --cask corretto
-brew install openjdk;
-brew install gradle;
-brew install maven;
+brew install --cask corretto17
+brew install openjdk@17
+brew install --ignore-dependencies gradle;
+brew install --ignore-dependencies maven;
 
 # golang
 brew install golang;
