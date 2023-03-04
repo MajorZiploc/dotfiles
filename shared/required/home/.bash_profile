@@ -4,5 +4,5 @@ case $- in
 *) return;;
 esac
 
-test -e ~/.bashrc && . ~/.bashrc
+test -e ~/.bashrc && . ~/.bashrc >/dev/null 2>&1;
 

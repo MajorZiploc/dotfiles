@@ -1,4 +1,10 @@
-. ~/.bashrc;
+. ~/.bashrc 2>/dev/null;
 
-pyenv install 3.8.10;
-pyenv global 3.8.10;
+function main {
+  local python_version='3.11.2';
+  pyenv install "$python_version";
+  pyenv global "$python_version";
+  pip install --upgrade pip;
+}
+
+main
