@@ -1081,7 +1081,7 @@ function rest_delete {
 }
 
 function rest_generic {
-  method="$8";
+  method="$9";
   [[ -z "$method" ]] && { echo "Must specify method\!" >&2; return 1; }
   _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$method";
 }
