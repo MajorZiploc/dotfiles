@@ -725,20 +725,26 @@ function docker_local {
   local compose_ext="${7:-"docker-compose.local.yml"}";
   echo "" > "$output_env_file";
   find "./$env_file_location/base" -type f -name "*.env*" -print0 | while read -d $'\0' cur_env_file; do
-    echo "# $cur_env_file BEGIN -------------------" >> "$output_env_file";
-    cat "$cur_env_file" >> "$output_env_file";
-    echo "" >> "$output_env_file";
+    {
+      echo "# $cur_env_file BEGIN -------------------";
+      cat "$cur_env_file";
+      echo "";
+    } >> "$output_env_file";
   done;
   find "./$env_file_location/$environment" -type f -name "*.env*" -print0 | while read -d $'\0' cur_env_file; do
-    echo "# $cur_env_file BEGIN -------------------" >> "$output_env_file";
-    cat "$cur_env_file" >> "$output_env_file";
-    echo "" >> "$output_env_file";
+    {
+      echo "# $cur_env_file BEGIN -------------------";
+      cat "$cur_env_file";
+      echo "";
+    } >> "$output_env_file";
   done;
   if [[ -n "$extra_env_files_pattern" ]]; then
     find "./$env_file_location" -maxdepth 1 -regextype egrep -iregex "$extra_env_files_pattern" -type f -print0 | while read -d $'\0' cur_env_file; do
-      echo "# $cur_env_file BEGIN -------------------" >> "$output_env_file";
-      cat "$cur_env_file" >> "$output_env_file";
-      echo "" >> "$output_env_file";
+      {
+        echo "# $cur_env_file BEGIN -------------------";
+        cat "$cur_env_file";
+        echo "";
+      } >> "$output_env_file";
     done;
   fi
   docker compose -f "$compose_base" -f "$compose_ext" down;
