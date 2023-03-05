@@ -1065,25 +1065,35 @@ function _rest_helper_preper {
 }
 
 function rest_get {
-  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "GET";
+  declare -a inputs; inputs=($@);
+  inputs+=("GET");
+  _rest_helper_preper $inputs[@];
 }
 
 function rest_post {
-  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "POST";
+  declare -a inputs; inputs=($@);
+  inputs+=("POST");
+  _rest_helper_preper $inputs[@];
 }
 
 function rest_patch {
-  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "PATCH";
+  declare -a inputs; inputs=($@);
+  inputs+=("PATCH");
+  _rest_helper_preper $inputs[@];
 }
 
 function rest_delete {
-  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "DELETE";
+  declare -a inputs; inputs=($@);
+  inputs+=("DELETE");
+  _rest_helper_preper $inputs[@];
 }
 
 function rest_generic {
   method="$9";
   [[ -z "$method" ]] && { echo "Must specify method\!" >&2; return 1; }
-  _rest_helper_preper "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$method";
+  declare -a inputs; inputs=($@);
+  inputs+=("$method");
+  _rest_helper_preper $inputs[@];
 }
 
 function refactor_rename_symbols {
