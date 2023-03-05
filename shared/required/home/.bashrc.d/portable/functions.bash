@@ -268,8 +268,8 @@ function cdfp {
     echo "$project_dir";
   '
   project_dir=$(bash -c "$get_project_dir");
-  cd "$project_dir";
-  cd "$(dirname `FUZZY_FINDER_CDF_PLACEHOLDER`)";
+  cd "$project_dir" || { echo "Unable to find project_dir\!" >&2; return 1; }
+  cd "$(dirname `FUZZY_FINDER_CDF_PLACEHOLDER`)"  || { echo "Unable to find selected files directory\!" >&2; return 1; };
 }
 
 function _find_generate_not_paths {
@@ -790,7 +790,7 @@ function git_checkout_branch_in_path {
   _dirs=($(find "$_path" -mindepth 1 -maxdepth 1 -type d | xargs));
   for proj in ${_dirs[@]}; do
     echo "Project: $proj";
-    cd "$proj";
+    cd "$proj" || continue;
     git status >/dev/null 2>&1 && git_all_the_things;
     [[ ! "$?" == "0" ]] && {
       cd .. && continue;
