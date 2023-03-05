@@ -65,13 +65,14 @@ function _tmux_session_list_helper {
     [[ -z "$session_name" ]] && {
       session_name=$(basename "$selected" | tr '.[[:blank:]]' '-');
     }
-    tmux switch-client -t "$session_name";
-    if [[ $? -eq 0 ]]; then
+    if tmux switch-client -t "$session_name"; then
       exit 0;
     fi
-    tmux new-session -c "$selected" -d -s "$session_name" \
-      && tmux switch-client -t "$session_name"\; split-window -c "$selected" -h \; select-pane -L \; new-window -c "$selected" \; next-window \
-      || tmux new -c "$selected" -A -s "$session_name"\; split-window -c "$selected" -h \; select-pane -L \; new-window -c "$selected" \; next-window;
+    if tmux new-session -c "$selected" -d -s "$session_name"; then
+      tmux switch-client -t "$session_name"\; split-window -c "$selected" -h \; select-pane -L \; new-window -c "$selected" \; next-window;
+    else
+      tmux new -c "$selected" -A -s "$session_name"\; split-window -c "$selected" -h \; select-pane -L \; new-window -c "$selected" \; next-window;
+    fi
   }
 }
 
