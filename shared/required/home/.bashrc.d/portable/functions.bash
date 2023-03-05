@@ -332,7 +332,7 @@ function _find_items_rename_helper {
   for mdepth in $(seq 1 "$maxdepth"); do
     eval "find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' $not_paths -print0" | while read -d $'\0' item; do
     local new_name; new_name="$(echo "$item" | sed -E "$by")";
-    [[ $f != $new_name ]] && {
+    [[ "$item" != "$new_name" ]] && {
       if [[ $preview == false ]]; then
         mv "$item" "$new_name";
       else
@@ -539,18 +539,18 @@ function _find_files_rename_helper {
   local not_paths="$6";
   eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -print0" | while read -d $'\0' file; do
   local should_rename=false;
-  [[ -z "$with_content" ]] && {
+  if [[ -z "$with_content" ]]; then
     should_rename=true;
-  } || {
+  else
     file_content_matches="$(grep -Ein "$with_content" "$file")"
     [[ -z "$file_content_matches" ]] || { should_rename=true; }
-  }
+  fi
   [[ $should_rename == true ]] && {
     local b nb new_name;
     b=$(basename "$file");
     nb="$(echo "$b" | sed -E "$by")";
     new_name="$(dirname "$file")/$nb"
-    [[ "$f" != "$new_name" ]] && {
+    [[ "$file" != "$new_name" ]] && {
       if [[ $preview == false ]]; then
         mv "$file" "$new_name";
       else
@@ -712,7 +712,7 @@ function cdp {
     }
   done;
   local selected; selected=$(printf "$items" | FUZZY_FINDER_PLACEHOLDER);
-  cd "$selected";
+  cd "$selected" || { echo "Unable to find selected project\!" >&2; return 1; }
 }
 
 function docker_local {
@@ -792,7 +792,8 @@ function git_checkout_branch_in_path {
     echo "Project: $proj";
     cd "$proj" || continue;
     git status >/dev/null 2>&1 && git_all_the_things;
-    [[ ! "$?" == "0" ]] && {
+    local is_git_repo="$?";
+    [[ ! "$is_git_repo" == "0" ]] && {
       cd .. && continue;
     }
     for branch in ${branches[@]}; do
@@ -870,15 +871,15 @@ function show_cheat_sheet {
   local tool="$2";
   [[ -n "$tool" ]];
   local tool_was_param="$?";
-  [[ -z "$tool" ]] && {
+  if [[ -z "$tool" ]]; then
     tool=$(cat "$HOME/.cheat_sheet/languages" "$HOME/.cheat_sheet/command" "$HOME/.cheat_sheet/languages-ext" "$HOME/.cheat_sheet/command-ext" 2>/dev/null | grep -Ev "^\s*$" | FUZZY_FINDER_PLACEHOLDER);
     true;
-  } || {
+  else
     if [[ ! "$tool" =~ ~$ && ! "$tool" =~ /$ ]]; then
       echo "if tool is specified, you must end it with the character / (for language) or ~ (for command)" >&2;
       return 1;
     fi
-  }
+  fi
   if [[ -z "$tool" ]]; then
     return 1;
   fi
@@ -957,7 +958,7 @@ function parse_csv_fields {
 function to_title_case {
   local phrase="$1";
   [[ -z "$phrase" ]] && { echo "Must specify a phrase\!" >&2; return 1; }
-  echo "$phrase" | sed -e "s/\b\(.\)/\u\1/g";
+  echo "$phrase" | sed -E "s/\b\(.\)/\u\1/g";
 }
 
 function convert_csv_to_json {
