@@ -9,8 +9,45 @@ xcode-select --install;
 
 brew update;
 brew tap homebrew/cask-versions;
-# gsed: a gnu like sed for mac
+
+# general gnu utils
+brew install coreutils;
+brew install binutils;
+brew install diffutils;
+brew install ed;
+brew install findutils;
+brew install gawk;
+brew install gnu-indent;
 brew install gnu-sed;
+brew install gnu-tar;
+brew install gnu-which;
+brew install gnutls;
+brew install grep;
+brew install gzip;
+brew install screen;
+brew install watch;
+brew install wdiff;
+brew install wget;
+
+# general gnu utils extras
+brew install gpatch;
+brew install less;
+brew install m4;
+brew install make;
+# brew install gdb;  # gdb requires further actions to make it work. See `brew info gdb`.
+# brew install nano;
+# brew install emacs;
+
+# newer versions of macOS existing tooling
+brew install zsh;
+brew install file-formula;
+brew install git;
+brew install openssh;
+brew install perl;
+brew install rsync;
+# brew install svn;
+brew install unzip;
+
 brew install tmux;
 # node version manager
 mkdir ~/.nvm;
@@ -88,7 +125,6 @@ sudo gem install solargraph;
 
 # install asdf and its deps
 brew install gpg;
-brew install gawk;
 brew install asdf;
 
 # dotnet core

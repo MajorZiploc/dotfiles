@@ -33,3 +33,6 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # adds python version manager to path
 export PATH="$(pyenv root)/shims:$PATH";
+
+# adds gnu core utils tools before the mac flavors
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH";
