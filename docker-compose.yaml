@@ -1,13 +1,14 @@
 version: '3'
 services:
   home_settings_app:
-    build: 
+    platform: "${LOCAL_SYSTEM_ARCH}"
+    build:
       context: .
       dockerfile: Dockerfile.app
       args:
         VARIANT: focal
     volumes:
-      - ..:/workspace:cached
+      - .:/workspace:cached
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
-  
+

@@ -291,6 +291,9 @@ Use ~/.vimrc\_ext for vim
 - bash v5.0.17 or zsh
 - vim v8.1 or nvim
 
+## Copy env file (make changes if needed)
+> cp .example.env .env
+
 ## Developing in the docker container
 To contribute without mudding up your own environment from the copy scripts. The copy scripts can be used within a docker container and all testing can happen there.
 
