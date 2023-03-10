@@ -32,10 +32,11 @@ function just_run_tests {
   cd "$JUST_PROJECT_ROOT/tests" || return 1;
   just_setup "$os";
   if [[ -z "$file_glob" ]]; then
-    "$JUST_PROJECT_ROOT/run_tests.sh";
+    "./run_tests.sh";
   else
-    "$JUST_PROJECT_ROOT/$file_glob";
+    "./$file_glob";
   fi
+  cd ~- || return 1;
 }
 
 function just_get_all_permissions_to_test_content {
