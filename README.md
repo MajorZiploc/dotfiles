@@ -294,24 +294,27 @@ Use ~/.vimrc\_ext for vim
 ## Developing in the docker container
 To contribute without mudding up your own environment from the copy scripts. The copy scripts can be used within a docker container and all testing can happen there.
 
+- Source just.bash from root of project
+> . ./just.bash;
+
 - Running docker container
-> just docker-container-start
+> just_docker_container_start
 
 - Attaching to the docker container (Run the rest of the development commands in the docker container)
-> just docker-container-connect
+> just_docker_container_connect
 
 - The container is a based on a ubuntu image. So when you make changes to the shared content or ubuntu specific content and want to test them manually, then you need to run the copy down WITHIN the docker container
-> just setup
+> just_setup
 
 ### Unit tests in the docker container
 
 - Run all the tests
-> just run-tests
+> just_run_tests
 
 NOTE: you can also run a specific test file instead of all tests
 
 View the Justfile for more commands and details on each command or use (at the root of this project):
-> just -l
+> cat just.bash
 
 
 ## TODO:
