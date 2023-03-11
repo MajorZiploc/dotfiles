@@ -4,9 +4,11 @@ script_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
 
 # root of the os style configs being downloaded
 setup_root="$script_path/..";
-create_shared_temps_to_replace='cp -r "\$script_path/../../shared/" "\$temp/"';
-create_shared_temps_replace_with='cp -r "\$script_path/../../shared/" "\$temp_shared/"';
-gsed -E -i'' "s,$create_shared_temps_to_replace,$create_shared_temps_replace_with,g" "$script_path/../../../shared/scripts/create_temps.sh";
+
+# NOTE: use this subsitition if you are not using gnu linux bash polyfills on mac
+# create_shared_temps_to_replace='cp -r "\$script_path/../../shared/" "\$temp/"';
+# create_shared_temps_replace_with='cp -r "\$script_path/../../shared/" "\$temp_shared/"';
+# gsed -E -i'' "s,$create_shared_temps_to_replace,$create_shared_temps_replace_with,g" "$script_path/../../../shared/scripts/create_temps.sh";
 
 flags="$1";
 flags_as_int="$((2#$flags))";
