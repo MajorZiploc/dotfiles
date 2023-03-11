@@ -9,6 +9,7 @@ xcode-select --install;
 
 brew update;
 brew tap homebrew/cask-versions;
+brew tap homebrew/cask-fonts
 
 # general gnu utils
 brew install coreutils;
@@ -152,6 +153,8 @@ sudo install minikube-darwin-arm64 /usr/local/bin/minikube
 
 brew install --cask wine-stable;
 brew install --cask keycastr;
+
+brew install --cask font-hack-nerd-font
 
 # Finder: set hidden files to show by default
 defaults write http://com.apple.Finder AppleShowAllFiles -bool true;
