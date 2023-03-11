@@ -11,7 +11,6 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = false
-lvim.colorscheme = "lunar"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -168,8 +167,6 @@ lvim.builtin.treesitter.highlight.enable = true
 
 lvim.transparent_window = true
 
-lvim.colorscheme = "tokyonight-night"
-
 -- tabline will go away when only 1 tab exists
 vim.opt.showtabline = 1
 -- dont use system clipboard by default
@@ -206,7 +203,11 @@ lvim.plugins = {
   {"tpope/vim-fugitive"}, -- git plugin
   {"mechatroner/rainbow_csv"}, -- csv highlighter and query engine
   {"tpope/vim-obsession"}, -- self managing n?vim sessions (Session.vim w/ :Obsession <file_name.vim>?/:Obsession! (start/discard current session respectively))
+  {'eddyekofo94/gruvbox-flat.nvim'} -- color theme
 }
+
+lvim.colorscheme = "gruvbox-flat"
+-- lvim.colorscheme = "tokyonight-night"
 
 lvim.keys.normal_mode['<leader>vj'] = "<CMD>diffget //3<CR>"
 lvim.keys.normal_mode['<leader>vf'] = "<CMD>diffget //2<CR>"
@@ -258,5 +259,6 @@ lvim.builtin.telescope.defaults.mappings = {
   },
 }
 
+vim.cmd('source ~/vimfiles/plugin-settings/rainbow_csv.vim')
 vim.cmd('source ~/vimfiles/rc-settings/terminal.vim')
-vim.cmd('source ~/vimfiles/rc-settings/.vimrc_ext')
+vim.cmd('source ~/.vimrc_ext')
