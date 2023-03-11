@@ -261,6 +261,8 @@ lvim.builtin.telescope.pickers = {
   },
 }
 
+lvim.builtin.telescope.defaults.layout_strategy = "horizontal"
+
 local _, actions = pcall(require, "telescope.actions")
 lvim.builtin.telescope.defaults.mappings = {
   i = {
