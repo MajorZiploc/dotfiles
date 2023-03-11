@@ -26,24 +26,6 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- override a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
 
--- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
--- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
--- local _, actions = pcall(require, "telescope.actions")
--- lvim.builtin.telescope.defaults.mappings = {
---   -- for input mode
---   i = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---     ["<C-n>"] = actions.cycle_history_next,
---     ["<C-p>"] = actions.cycle_history_prev,
---   },
---   -- for normal mode
---   n = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---   },
--- }
-
 -- Change theme settings
 -- lvim.builtin.theme.options.dim_inactive = true
 -- lvim.builtin.theme.options.style = "storm"
@@ -183,6 +165,98 @@ lvim.builtin.treesitter.highlight.enable = true
 --     require("nvim-treesitter.highlight").attach(0, "bash")
 --   end,
 -- })
---
 
 lvim.transparent_window = true
+
+lvim.colorscheme = "tokyonight-night"
+
+-- tabline will go away when only 1 tab exists
+vim.opt.showtabline = 1
+-- dont use system clipboard by default
+vim.opt.clipboard = nil
+-- vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
+-- remove top lunar tab bar
+lvim.builtin.bufferline.active = false
+
+lvim.builtin.which_key.mappings["e"] = nil
+lvim.keys.normal_mode["<leader>ne"] = "<CMD>NvimTreeToggle<CR>"
+
+lvim.keys.normal_mode['<bs>'] = "<CMD>noh<CR>"
+
+lvim.builtin.which_key.mappings['w'] = nil
+
+lvim.keys.normal_mode['<C-p>'] = require("lvim.core.telescope.custom-finders").find_project_files
+lvim.builtin.which_key.mappings['f'] = nil
+lvim.keys.normal_mode['<leader>fb'] = "<CMD>Telescope buffers<CR>"
+lvim.keys.normal_mode['<leader>fa'] = "<CMD>Telescope live_grep<CR>"
+
+lvim.lsp.buffer_mappings.normal_mode['<leader>wi'] = lvim.lsp.buffer_mappings.normal_mode['K']
+lvim.lsp.buffer_mappings.normal_mode['<leader>gq'] = lvim.lsp.buffer_mappings.normal_mode['K']
+lvim.lsp.buffer_mappings.normal_mode['<leader>gd'] = lvim.lsp.buffer_mappings.normal_mode['gd']
+lvim.lsp.buffer_mappings.normal_mode['<leader>gr'] = lvim.lsp.buffer_mappings.normal_mode['gr']
+lvim.lsp.buffer_mappings.normal_mode['<leader>rn'] = { vim.lsp.buf.rename, "Rename" }
+lvim.lsp.buffer_mappings.visual_mode['<leader>gf'] = { vim.lsp.buf.format, "Format" }
+lvim.lsp.buffer_mappings.visual_mode['<leader>ca'] = { vim.lsp.buf.code_action, "Code action" }
+lvim.lsp.buffer_mappings.normal_mode['<leader>ca'] = { vim.lsp.buf.code_action, "Code action" }
+lvim.lsp.buffer_mappings.normal_mode['<leader>e'] = { vim.diagnostic.goto_next, "Next Error" }
+lvim.lsp.buffer_mappings.normal_mode['<leader>E'] = { vim.diagnostic.goto_prev, "Previous Error" }
+
+
+lvim.plugins = {
+  {"tpope/vim-fugitive"}, -- git plugin
+  {"mechatroner/rainbow_csv"}, -- csv highlighter and query engine
+  {"tpope/vim-obsession"}, -- self managing n?vim sessions (Session.vim w/ :Obsession <file_name.vim>?/:Obsession! (start/discard current session respectively))
+}
+
+lvim.keys.normal_mode['<leader>vj'] = "<CMD>diffget //3<CR>"
+lvim.keys.normal_mode['<leader>vf'] = "<CMD>diffget //2<CR>"
+lvim.keys.normal_mode['<leader>vs'] = "<CMD>diffput<CR>"
+lvim.keys.visual_mode['<leader>vs'] = "<CMD>diffput<CR>"
+lvim.keys.normal_mode['<leader>vi'] = "<CMD>Git<CR>"
+
+require("mason-lspconfig").setup {
+    ensure_installed = {
+    "rust_analyzer",
+    "jdtls",
+    "pyright",
+    "sqlls",
+    "tsserver",
+    "vimls",
+    "html",
+    "cssls",
+    "bashls",
+    "gopls",
+    "jsonls",
+    "grammarly",
+  },
+}
+
+lvim.builtin.telescope.pickers = {
+  find_files = {
+    layout_config = {
+      width = 0.80,
+    },
+  },
+  live_grep = {
+    layout_config = {
+      width = 0.80,
+    },
+  },
+}
+
+local _, actions = pcall(require, "telescope.actions")
+lvim.builtin.telescope.defaults.mappings = {
+  i = {
+    ["<C-j>"] = actions.move_selection_next,
+    ["<C-k>"] = actions.move_selection_previous,
+    ["<C-n>"] = actions.cycle_history_next,
+    ["<C-p>"] = actions.cycle_history_prev,
+  },
+  n = {
+    ["<C-j>"] = actions.move_selection_next,
+    ["<C-k>"] = actions.move_selection_previous,
+  },
+}
+
+vim.cmd('source ~/vimfiles/rc-settings/terminal.vim')
+vim.cmd('source ~/vimfiles/rc-settings/.vimrc_ext')

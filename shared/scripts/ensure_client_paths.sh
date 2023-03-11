@@ -29,6 +29,8 @@ mkdir -p "$HOME/bin";
   mkdir -p VSC_SETTINGS_DESTINATION_PLACEHOLDER;
 }
 
+touch ~/.vimrc_ext;
+
 unset setup_root;
 unset temp_shared;
 unset temp_this;
