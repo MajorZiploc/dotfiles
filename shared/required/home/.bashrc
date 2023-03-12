@@ -45,7 +45,7 @@ for file in `find "$HOME/.bash_completion.d/" -maxdepth 1 -mindepth 1 -regextype
 done;
 
 export PATH="/usr/local/bin:$PATH"
-export PATH="$HOME/local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Codespaces bash prompt theme based off of a docker container bash prompt
 __bash_prompt() {
