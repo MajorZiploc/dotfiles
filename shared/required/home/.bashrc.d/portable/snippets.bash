@@ -1,31 +1,3 @@
-function snip_bash_for_loop {
-echo '
-OLDIFS=$IFS;
-IFS=$'"'\\\\n'"';
-l=(1 2 3 "4");
-for ele in ${l[@]}; do
-  echo "$ele" hi;
-done;
-IFS=$OLDIFS;
-';
-}
-
-function snip_bash_while {
-echo '
-echo "$eles" | while read -d $'"'\\\\n'"' ele; do
-  echo "$ele hi";
-done;
-';
-}
-
-function snip_bash_while_stream {
-echo '
-while read -d $'"'\\\\n'"' ele; do
-  echo "$ele hi";
-done < <(echo "$eles");
-';
-}
-
 function snip_sql_search_column {
   local snip; snip=`cat << EOF
 /* SQL column search */
