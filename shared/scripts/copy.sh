@@ -27,8 +27,8 @@ done;
 
 rm -r "${temp:?}/";
 
-{ printf "function main {\nshopt -s expand_aliases\n\n"; cat ~/.bashrc.d/portable/aliases.bash; printf "\n}\n"; echo 'main >/dev/null 2>&1;'; } > ~/vimfiles/bash_env.bash;
-{ printf "function main {\nsetopt aliases\n\n"; cat ~/.bashrc.d/portable/aliases.bash; printf "\n}\n"; echo 'main >/dev/null 2>&1;'; } > ~/vimfiles/bash_env.zsh;
+{ printf "function main {\nshopt -s expand_aliases\n\n"; cat ~/.bashrc.d/portable/snippets.bash; cat ~/.bashrc.d/portable/aliases.bash; printf "\n}\n"; echo 'main >/dev/null 2>&1;'; } > ~/vimfiles/bash_env.bash;
+{ printf "function main {\nsetopt aliases\n\n"; cat ~/.bashrc.d/portable/snippets.bash; cat ~/.bashrc.d/portable/aliases.bash; printf "\n}\n"; echo 'main >/dev/null 2>&1;'; } > ~/vimfiles/bash_env.zsh;
 
 dap_dir="$HOME/.dap";
 chrome_debugger_dir="${dap_dir}/vscode-chrome-debug";

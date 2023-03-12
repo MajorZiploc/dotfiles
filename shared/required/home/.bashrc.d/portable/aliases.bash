@@ -130,34 +130,6 @@ function snip_log {
     echo "$log_statement($var_name)$append";
 }
 
-function snip_bash_for_loop {
-echo '
-OLDIFS=$IFS;
-IFS=$'"'\\\\n'"';
-l=(1 2 3 "4");
-for ele in ${l[@]}; do
-  echo "$ele" hi;
-done;
-IFS=$OLDIFS;
-';
-}
-
-function snip_bash_while {
-echo '
-echo "$eles" | while read -d $'"'\\\\n'"' ele; do
-  echo "$ele hi";
-done;
-';
-}
-
-function snip_bash_while_stream {
-echo '
-while read -d $'"'\\\\n'"' ele; do
-  echo "$ele hi";
-done < <(echo "$eles");
-';
-}
-
 alias sl='snip_log';
 alias sbw='snip_bash_while';
 alias sbws='snip_bash_while_stream';
