@@ -30,11 +30,14 @@ rm -r "${temp:?}/";
 { printf "function main {\nshopt -s expand_aliases\n\n"; cat ~/.bashrc.d/portable/snippets.bash; cat ~/.bashrc.d/portable/aliases.bash; printf "\n}\n"; echo 'main >/dev/null 2>&1;'; } > ~/vimfiles/bash_env.bash;
 { printf "function main {\nsetopt aliases\n\n"; cat ~/.bashrc.d/portable/snippets.bash; cat ~/.bashrc.d/portable/aliases.bash; printf "\n}\n"; echo 'main >/dev/null 2>&1;'; } > ~/vimfiles/bash_env.zsh;
 
-dap_dir="$HOME/.dap";
-chrome_debugger_dir="${dap_dir}/vscode-chrome-debug";
+microsoft_dev_tools="$HOME/dev/microsoft";
+chrome_debugger_dir="${microsoft_dev_tools}/vscode-chrome-debug";
+node_debugger_dir="${microsoft_dev_tools}/vscode-node-debug2";
+[[ ! -d  "$microsoft_dev_tools" ]] && { mkdir -p "$microsoft_dev_tools"; }
+
 [[ ! -d  "$chrome_debugger_dir" ]] && {
-  mkdir "$dap_dir";
-  cd "$dap_dir";
+  mkdir -p "$microsoft_dev_tools";
+  cd "$microsoft_dev_tools";
   git clone https://github.com/microsoft/vscode-chrome-debug.git;
   cd "$chrome_debugger_dir";
   npm i;
@@ -42,7 +45,16 @@ chrome_debugger_dir="${dap_dir}/vscode-chrome-debug";
   cd "$script_path";
 }
 
-unset dap_dir;
+[[ ! -d  "$node_debugger_dir" ]] && {
+  cd "$microsoft_dev_tools";
+  git clone https://github.com/microsoft/vscode-node-debug2.git;
+  cd "$node_debugger_dir";
+  npm i;
+  NODE_OPTIONS=--no-experimental-fetch npm run build;
+  cd "$script_path";
+}
+
+unset microsoft_dev_tools;
 unset chrome_debugger_dir;
 unset temp_shared;
 unset temp_this;
