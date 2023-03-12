@@ -31,8 +31,13 @@ did_copy_fail=$?;
   done;
 }
 
-nvim "+:PlugInstall" "+:PlugUpgrade" "+:PlugUpdate" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
-# vim "+:PlugInstall" "+:PlugUpgrade" "+:PlugUpdate" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
+if which lvim; then
+  lvim "+:PackerInstall" "+:PackerUpdate" 2>/dev/null;
+elif which nvim; then
+  nvim "+:PlugInstall" "+:PlugUpgrade" "+:PlugUpdate" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
+elif which vim; then
+  vim "+:PlugInstall" "+:PlugUpgrade" "+:PlugUpdate" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
+fi
 
 git restore "$script_path/../../../shared/scripts/create_temps.sh";
 

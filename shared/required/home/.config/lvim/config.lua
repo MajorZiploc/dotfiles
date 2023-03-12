@@ -166,6 +166,7 @@ lvim.builtin.treesitter.highlight.enable = true
 -- })
 
 lvim.transparent_window = true
+lvim.builtin.autopairs.active = false
 
 -- tabline will go away when only 1 tab exists
 vim.opt.showtabline = 1
@@ -261,6 +262,9 @@ lvim.builtin.telescope.pickers = {
       width = 0.80,
     },
   },
+  buffers = {
+    sort_mru = true
+  }
 }
 
 lvim.builtin.telescope.defaults.layout_strategy = "horizontal"

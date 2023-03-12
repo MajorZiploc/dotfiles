@@ -31,6 +31,9 @@ mkdir -p "$HOME/bin";
 
 touch ~/.vimrc_ext;
 
+mkdir -p "/usr/local/bin";
+mkdir -p "$HOME/.local/bin";
+
 unset setup_root;
 unset temp_shared;
 unset temp_this;
