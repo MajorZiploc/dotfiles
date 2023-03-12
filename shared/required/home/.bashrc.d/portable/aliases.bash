@@ -101,3 +101,64 @@ alias clipp="pwsh -command 'Get-Clipboard' | head -n -1"
 
 alias cdf='cd "$(dirname `FUZZY_FINDER_CDF_PLACEHOLDER`)"'
 
+# NOTE: these function is in this file rather than snippets.bash so we can use it to create an alias to use in vim
+function snip_log {
+  local lang="$1";
+  local log_statement="echo";
+  local var_name="thing";
+  local append=";";
+  if [[ "$lang" == "sh" ]]; then
+    echo "$log_statement \"$var_name\"$append";
+    echo "$log_statement $var_name$append";
+    return 0;
+  elif [[ "$lang" == "js" ]]; then
+    log_statement="console.log";
+  elif [[ "$lang" == "py" ]]; then
+    log_statement="print";
+    append="";
+  elif [[ "$lang" == "java" ]]; then
+    log_statement="System.out.println";
+  elif [[ "$lang" == "cs" ]]; then
+    log_statement="Console.WriteLine";
+  elif [[ "$lang" == "fs" ]]; then
+    log_statement="printfn \"$var_name: %A\"";
+    append="";
+    echo "$log_statement $var_name$append";
+    return 0;
+  fi
+    echo "$log_statement(\"$var_name\")$append";
+    echo "$log_statement($var_name)$append";
+}
+
+function snip_bash_for_loop {
+echo '
+OLDIFS=$IFS;
+IFS=$'"'\\\\n'"';
+l=(1 2 3 "4");
+for ele in ${l[@]}; do
+  echo "$ele" hi;
+done;
+IFS=$OLDIFS;
+';
+}
+
+function snip_bash_while {
+echo '
+echo "$eles" | while read -d $'"'\\\\n'"' ele; do
+  echo "$ele hi";
+done;
+';
+}
+
+function snip_bash_while_stream {
+echo '
+while read -d $'"'\\\\n'"' ele; do
+  echo "$ele hi";
+done < <(echo "$eles");
+';
+}
+
+alias sl='snip_log';
+alias sbw='snip_bash_while';
+alias sbws='snip_bash_while_stream';
+alias sbfl='snip_bash_for_loop';
