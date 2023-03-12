@@ -283,6 +283,29 @@ lvim.builtin.telescope.defaults.mappings = {
   },
 }
 
+local dap = require('dap')
+
+dap.adapters.python = {
+  type = 'executable';
+  -- TODO: change this to your venv python
+  command = os.getenv('HOME') .. '/.pyenv/shims/python';
+  -- TODO: in your venv: pip install debugpy
+  args = { '-m', 'debugpy.adapter' };
+}
+
+dap.configurations.python = {
+  {
+    type = 'python';
+    request = 'launch';
+    name = "Launch file";
+    program = "${file}";
+    pythonPath = function()
+      -- TODO: change this to your venv python
+      return os.getenv('HOME') .. '/.pyenv/shims/python'
+    end;
+  },
+}
+
 vim.cmd('source ~/vimfiles/plugin-settings/rainbow_csv.vim')
 vim.cmd('source ~/vimfiles/rc-settings/terminal.vim')
 vim.cmd('source ~/.vimrc_ext')
