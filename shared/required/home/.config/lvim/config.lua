@@ -166,6 +166,7 @@ lvim.builtin.treesitter.highlight.enable = true
 -- })
 
 lvim.transparent_window = true
+lvim.builtin.autopairs.active = false
 
 -- tabline will go away when only 1 tab exists
 vim.opt.showtabline = 1
