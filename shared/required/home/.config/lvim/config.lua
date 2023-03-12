@@ -261,6 +261,9 @@ lvim.builtin.telescope.pickers = {
       width = 0.80,
     },
   },
+  buffers = {
+    sort_mru = true
+  }
 }
 
 lvim.builtin.telescope.defaults.layout_strategy = "horizontal"
