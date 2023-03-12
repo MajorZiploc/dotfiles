@@ -21,7 +21,6 @@ for content_modifier in ${content_modifiers[@]}; do
   "$temp_shared/scripts/edit_files.sh" "$temp" "$temp_shared" "$temp_this" "$content_modifier";
 done;
 
-
 "$temp_shared/scripts/ensure_client_paths.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this" "$flags";
 
 "$temp_shared/scripts/copy_content_to_client.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this" "$flags";
@@ -31,6 +30,20 @@ rm -r "${temp:?}/";
 { printf "function main {\nshopt -s expand_aliases\n\n"; cat ~/.bashrc.d/portable/aliases.bash; printf "\n}\n"; echo 'main >/dev/null 2>&1;'; } > ~/vimfiles/bash_env.bash;
 { printf "function main {\nsetopt aliases\n\n"; cat ~/.bashrc.d/portable/aliases.bash; printf "\n}\n"; echo 'main >/dev/null 2>&1;'; } > ~/vimfiles/bash_env.zsh;
 
+dap_dir="$HOME/.dap";
+chrome_debugger_dir="${dap_dir}/vscode-chrome-debug";
+[[ ! -d  "$chrome_debugger_dir" ]] && {
+  mkdir "$dap_dir";
+  cd "$dap_dir";
+  git clone https://github.com/microsoft/vscode-chrome-debug.git;
+  cd "$chrome_debugger_dir";
+  npm i;
+  npm run build;
+  cd "$script_path";
+}
+
+unset dap_dir;
+unset chrome_debugger_dir;
 unset temp_shared;
 unset temp_this;
 unset temp;

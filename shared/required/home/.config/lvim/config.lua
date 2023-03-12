@@ -287,8 +287,7 @@ local dap = require('dap')
 
 dap.adapters.python = {
   type = 'executable';
-  -- TODO: change this to your venv python
-  command = os.getenv('HOME') .. '/.pyenv/shims/python';
+  command = (os.getenv("PY_PATH") or os.getenv('HOME') .. '/.pyenv/shims/python'),
   -- TODO: in your venv: pip install debugpy
   args = { '-m', 'debugpy.adapter' };
 }
@@ -300,10 +299,77 @@ dap.configurations.python = {
     name = "Launch file";
     program = "${file}";
     pythonPath = function()
-      -- TODO: change this to your venv python
-      return os.getenv('HOME') .. '/.pyenv/shims/python'
+      return (os.getenv("PY_PATH") or os.getenv('HOME') .. '/.pyenv/shims/python')
     end;
   },
+}
+
+-- NOTE: chrome has to be started with a remote debugging port google-chrome-stable --remote-debugging-port=9222
+-- chrome_debug_open
+dap.adapters.chrome = {
+    type = "executable",
+    command = "node",
+    args = {os.getenv("HOME") .. "/.dap/vscode-chrome-debug/out/src/chromeDebug.js",  "--server=9222"}
+}
+
+dap.configurations.javascriptreact = {
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        -- urlFilter = "http://localhost:3000/*",
+        -- url = "http://localhost:3000",
+        webRoot = "${workspaceFolder}"
+    }
+}
+
+dap.configurations.typescriptreact = {
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        -- urlFilter = "http://localhost:3000/*",
+        -- url = "http://localhost:3000",
+        webRoot = "${workspaceFolder}"
+    }
+}
+
+dap.configurations.javascript = {
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        -- urlFilter = "http://localhost:3000/*",
+        -- url = "http://localhost:3000",
+        webRoot = "${workspaceFolder}"
+    }
+}
+
+dap.configurations.typescript = {
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        -- urlFilter = "http://localhost:3000/*",
+        -- url = "http://localhost:3000",
+        webRoot = "${workspaceFolder}"
+    }
 }
 
 vim.cmd('source ~/vimfiles/plugin-settings/rainbow_csv.vim')
