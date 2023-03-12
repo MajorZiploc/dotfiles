@@ -304,6 +304,74 @@ dap.configurations.python = {
   },
 }
 
+-- NOTE: chrome has to be started with a remote debugging port google-chrome-stable --remote-debugging-port=9222
+-- chrome_debug_open
+dap.adapters.chrome = {
+    type = "executable",
+    command = "node",
+    args = {os.getenv("HOME") .. "/.dap/vscode-chrome-debug/out/src/chromeDebug.js",  "--server=9222"}
+}
+
+dap.configurations.javascriptreact = {
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        -- urlFilter = "http://localhost:3000/*",
+        -- url = "http://localhost:3000",
+        webRoot = "${workspaceFolder}"
+    }
+}
+
+dap.configurations.typescriptreact = {
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        -- urlFilter = "http://localhost:3000/*",
+        -- url = "http://localhost:3000",
+        webRoot = "${workspaceFolder}"
+    }
+}
+
+dap.configurations.javascript = {
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        -- urlFilter = "http://localhost:3000/*",
+        -- url = "http://localhost:3000",
+        webRoot = "${workspaceFolder}"
+    }
+}
+
+dap.configurations.typescript = {
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        -- urlFilter = "http://localhost:3000/*",
+        -- url = "http://localhost:3000",
+        webRoot = "${workspaceFolder}"
+    }
+}
+
 vim.cmd('source ~/vimfiles/plugin-settings/rainbow_csv.vim')
 vim.cmd('source ~/vimfiles/rc-settings/terminal.vim')
 vim.cmd('source ~/.vimrc_ext')
