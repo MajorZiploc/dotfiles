@@ -27,7 +27,7 @@ done < <(echo "$eles");
 }
 
 function snip_sql_search_column {
-  local snip=`cat << EOF
+  local snip; snip=`cat << EOF
 /* SQL column search */
 SELECT
 c.name  AS 'ColumnName'
@@ -47,7 +47,7 @@ EOF
 }
 
 function snip_sql_search_general {
-  local snip=`cat << EOF
+  local snip; snip=`cat << EOF
 /* SQL general search, NOT FOR COLUMNS */
 SELECT
 name AS [Name],
@@ -65,7 +65,7 @@ EOF
 }
 
 function snip_sql_column_info {
-  local snip=`cat << EOF
+  local snip; snip=`cat << EOF
 /* SQL get column information */
 SELECT
 c.TABLE_CATALOG
@@ -87,7 +87,7 @@ EOF
 }
 
 function snip_sql_function_info {
-  local snip=`cat << EOF
+  local snip; snip=`cat << EOF
 /* SQL get function information */
 /* Includes functions, sprocs, and those with/without params */
 SELECT
@@ -113,7 +113,7 @@ EOF
 }
 
 function snip_sql_table_constraints {
-  local snip=`cat << EOF
+  local snip; snip=`cat << EOF
 /* SQL get table constraints information */
 SELECT tc.TABLE_NAME
 , tc.CONSTRAINT_NAME
@@ -129,7 +129,7 @@ EOF
 }
 
 function snip_sql_table_and_view_info {
-  local snip=`cat << EOF
+  local snip; snip=`cat << EOF
 /* SQL get table and view information */
 SELECT
 t.TABLE_CATALOG
@@ -152,7 +152,7 @@ EOF
 }
 
 function snip_pwsh_init_module {
-  local snip=`cat << EOF
+  local snip; snip=`cat << EOF
 pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Module -Path ./ -ModuleName "test" -Author "Manyu Lakhotia" -Description "Test powershell module" -ModuleVersion "0.0.1" -PowershellVersion "5.1" -CompanyName "N/A" -CopyRight "N/A";}'
 EOF
 `;
@@ -160,10 +160,9 @@ EOF
 }
 
 function snip_pwsh_init_script {
-  local snip=`cat << EOF
+  local snip; snip=`cat << EOF
 pwsh -Command '& {Set-StrictMode -Version 3; Import-Module powershell_scaffolder; Initialize-Script -Path ./ -ScriptName "test" -ShouldUseAdvLogging $false}'
 EOF
 `;
   echo "$snip";
 }
-
