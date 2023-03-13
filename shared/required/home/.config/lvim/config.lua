@@ -284,15 +284,21 @@ lvim.builtin.telescope.defaults.mappings = {
   },
 }
 
+-- ################## DAP BEGIN ###########################
+
 local dap = require('dap')
 
+-- NOTE: source your venv and make sure the env var VIRTUAL_ENV is set to your .venv/bin/python path
 dap.adapters.python = {
   type = 'executable';
-  command = (os.getenv("PY_PATH") or os.getenv('HOME') .. '/.pyenv/shims/python'),
+  -- May have to hardcode this to your python in your venv if it doesnt seem to work
+  command = (os.getenv("VIRTUAL_ENV") or os.getenv('HOME') .. '/.pyenv/shims/python'),
   -- TODO: in your venv: pip install debugpy
   args = { '-m', 'debugpy.adapter' };
 }
 
+-- NOTE: delete this config if it looks like your debugger is looking at the wrong python to confirm its using this config
+-- set filetype=python if your filetype in vim isnt python already. thats how it maps which config to use
 dap.configurations.python = {
   {
     type = 'python';
@@ -300,7 +306,8 @@ dap.configurations.python = {
     name = "Launch file";
     program = "${file}";
     pythonPath = function()
-      return (os.getenv("PY_PATH") or os.getenv('HOME') .. '/.pyenv/shims/python')
+      -- May have to hardcode this to your python in your venv if it doesnt seem to work
+      return (os.getenv("VIRTUAL_ENV") or os.getenv('HOME') .. '/.pyenv/shims/python')
     end;
   },
 }
@@ -310,6 +317,7 @@ dap.configurations.python = {
 dap.adapters.chrome = {
     type = "executable",
     command = "node",
+    -- TODO: switch to mason managed dap
     args = {os.getenv("HOME") .. "/dev/microsoft/vscode-chrome-debug/out/src/chromeDebug.js",  "--server=9222"}
 }
 
@@ -361,6 +369,7 @@ dap.configurations.javascript = {
 dap.adapters.node2 = {
   type = 'executable',
   command = 'node',
+  -- TODO: switch to mason managed dap
   args = {os.getenv('HOME') .. '/dev/microsoft/vscode-node-debug2/out/src/nodeDebug.js'},
 }
 dap.configurations.javascript = {
@@ -397,6 +406,36 @@ dap.configurations.typescript = {
         webRoot = "${workspaceFolder}"
     }
 }
+
+dap.adapters.bashdb = {
+  type = 'executable';
+  command = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/bash-debug-adapter';
+  name = 'bashdb';
+}
+
+dap.configurations.sh = {
+  {
+    type = 'bashdb';
+    request = 'launch';
+    name = "Launch file";
+    showDebugOutput = true;
+    pathBashdb = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb';
+    pathBashdbLib = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir';
+    trace = true;
+    file = "${file}";
+    program = "${file}";
+    cwd = '${workspaceFolder}';
+    pathCat = "cat";
+    pathBash = "/usr/local/bin/bash";
+    pathMkfifo = "mkfifo";
+    pathPkill = "pkill";
+    args = {};
+    env = {};
+    terminalKind = "integrated";
+  }
+}
+
+-- ################## DAP END ###########################
 
 vim.cmd('source ~/vimfiles/plugin-settings/rainbow_csv.vim')
 vim.cmd('source ~/vimfiles/rc-settings/terminal.vim')

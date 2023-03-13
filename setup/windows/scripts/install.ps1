@@ -23,6 +23,7 @@ $TechAsInt = [convert]::ToInt32($Tech, $base)
 if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
     Write-Host("Installing Minimal packages")
     # Minimal packages
+    cinst -y cascadia-code-nerd-font
     # web browser
     cinst -y googlechrome
     # clipboard tool
