@@ -398,6 +398,34 @@ dap.configurations.typescript = {
     }
 }
 
+dap.adapters.bashdb = {
+  type = 'executable';
+  command = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/bash-debug-adapter';
+  name = 'bashdb';
+}
+
+dap.configurations.sh = {
+  {
+    type = 'bashdb';
+    request = 'launch';
+    name = "Launch file";
+    showDebugOutput = true;
+    pathBashdb = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb';
+    pathBashdbLib = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir';
+    trace = true;
+    file = "${file}";
+    program = "${file}";
+    cwd = '${workspaceFolder}';
+    pathCat = "cat";
+    pathBash = "/usr/local/bin/bash";
+    pathMkfifo = "mkfifo";
+    pathPkill = "pkill";
+    args = {};
+    env = {};
+    terminalKind = "integrated";
+  }
+}
+
 vim.cmd('source ~/vimfiles/plugin-settings/rainbow_csv.vim')
 vim.cmd('source ~/vimfiles/rc-settings/terminal.vim')
 vim.cmd('source ~/.vimrc_ext')
