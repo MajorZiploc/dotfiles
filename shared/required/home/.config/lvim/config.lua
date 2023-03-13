@@ -288,7 +288,20 @@ lvim.builtin.telescope.defaults.mappings = {
 
 local dap = require('dap')
 
+-- PYTHON DEBUG NOTES
 -- NOTE: source your venv and make sure the env var VIRTUAL_ENV is set to your .venv/bin/python path
+-- Troubleshooting
+-- make sure you source your venv before opening lvim -- you should see (.venv) at the bottom of lvim
+-- make sure lvim cache is fresh :LvimCacheReset
+-- make sure debuggers and formats are installed in :Mason
+-- make sure pip is upgrade in venv -- pip install --upgrade pip
+-- make sure debugpy is installed in venv is upgrade in venv -- pip install debugpy
+-- Permission denied to .venv issue:
+--   1. Try reversing the way you source the venv and the bash file that has the VIRTUAL_ENV
+--     if you source venv then bash file with env vars, then you will see (python) instead of (.venv) at the bottom and that can fix the permissions for some reason
+--   2. try chmod 777 .venv
+--     I havnt had success with this method
+-- try rerunning the lvim installer
 dap.adapters.python = {
   type = 'executable';
   -- May have to hardcode this to your python in your venv if it doesnt seem to work
