@@ -166,3 +166,31 @@ while read -d $'"'\\\\n'"' ele; do
 done < <(echo "$eles");
 ';
 }
+
+function snip_log {
+  local lang="$1";
+  local log_statement="echo";
+  local var_name="thing";
+  local append=";";
+  if [[ "$lang" == "sh" ]]; then
+    echo "$log_statement \"$var_name\"$append";
+    echo "$log_statement $var_name$append";
+    return 0;
+  elif [[ "$lang" == "js" ]]; then
+    log_statement="console.log";
+  elif [[ "$lang" == "py" ]]; then
+    log_statement="print";
+    append="";
+  elif [[ "$lang" == "java" ]]; then
+    log_statement="System.out.println";
+  elif [[ "$lang" == "cs" ]]; then
+    log_statement="Console.WriteLine";
+  elif [[ "$lang" == "fs" ]]; then
+    log_statement="printfn \"$var_name: %A\"";
+    append="";
+    echo "$log_statement $var_name$append";
+    return 0;
+  fi
+  echo "$log_statement(\"$var_name\")$append";
+  echo "$log_statement($var_name)$append";
+}
