@@ -284,6 +284,8 @@ lvim.builtin.telescope.defaults.mappings = {
   },
 }
 
+-- ################## DAP BEGIN ###########################
+
 local dap = require('dap')
 
 dap.adapters.python = {
@@ -310,6 +312,7 @@ dap.configurations.python = {
 dap.adapters.chrome = {
     type = "executable",
     command = "node",
+    -- TODO: switch to mason managed dap
     args = {os.getenv("HOME") .. "/dev/microsoft/vscode-chrome-debug/out/src/chromeDebug.js",  "--server=9222"}
 }
 
@@ -361,6 +364,7 @@ dap.configurations.javascript = {
 dap.adapters.node2 = {
   type = 'executable',
   command = 'node',
+  -- TODO: switch to mason managed dap
   args = {os.getenv('HOME') .. '/dev/microsoft/vscode-node-debug2/out/src/nodeDebug.js'},
 }
 dap.configurations.javascript = {
@@ -425,6 +429,8 @@ dap.configurations.sh = {
     terminalKind = "integrated";
   }
 }
+
+-- ################## DAP END ###########################
 
 vim.cmd('source ~/vimfiles/plugin-settings/rainbow_csv.vim')
 vim.cmd('source ~/vimfiles/rc-settings/terminal.vim')
