@@ -288,13 +288,17 @@ lvim.builtin.telescope.defaults.mappings = {
 
 local dap = require('dap')
 
+-- NOTE: source your venv and make sure the env var VIRTUAL_ENV is set to your .venv/bin/python path
 dap.adapters.python = {
   type = 'executable';
-  command = (os.getenv("PY_PATH") or os.getenv('HOME') .. '/.pyenv/shims/python'),
+  -- May have to hardcode this to your python in your venv if it doesnt seem to work
+  command = (os.getenv("VIRTUAL_ENV") or os.getenv('HOME') .. '/.pyenv/shims/python'),
   -- TODO: in your venv: pip install debugpy
   args = { '-m', 'debugpy.adapter' };
 }
 
+-- NOTE: delete this config if it looks like your debugger is looking at the wrong python to confirm its using this config
+-- set filetype=python if your filetype in vim isnt python already. thats how it maps which config to use
 dap.configurations.python = {
   {
     type = 'python';
@@ -302,7 +306,8 @@ dap.configurations.python = {
     name = "Launch file";
     program = "${file}";
     pythonPath = function()
-      return (os.getenv("PY_PATH") or os.getenv('HOME') .. '/.pyenv/shims/python')
+      -- May have to hardcode this to your python in your venv if it doesnt seem to work
+      return (os.getenv("VIRTUAL_ENV") or os.getenv('HOME') .. '/.pyenv/shims/python')
     end;
   },
 }
