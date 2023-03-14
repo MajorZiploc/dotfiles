@@ -65,8 +65,7 @@ function _tmux_session_list_helper {
     [[ -z "$session_name" ]] && {
       session_name=$(basename "$selected" | tr '.[[:blank:]]' '-');
     }
-    tmux switch-client -t "$session_name";
-    if [[ $? -eq 0 ]]; then
+    if tmux switch-client -t "$session_name"; then
       exit 0;
     fi
     tmux new-session -c "$selected" -d -s "$session_name" \
