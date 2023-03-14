@@ -68,11 +68,9 @@ function _tmux_session_list_helper {
     if tmux switch-client -t "$session_name"; then
       exit 0;
     fi
-    if tmux new-session -c "$selected" -d -s "$session_name"; then
-      tmux switch-client -t "$session_name"\; split-window -c "$selected" -h \; select-pane -L \; new-window -c "$selected" \; next-window;
-    else
-      tmux new -c "$selected" -A -s "$session_name"\; split-window -c "$selected" -h \; select-pane -L \; new-window -c "$selected" \; next-window;
-    fi
+    tmux new-session -c "$selected" -d -s "$session_name" \
+      && tmux switch-client -t "$session_name"\; split-window -c "$selected" -h \; select-pane -L \; new-window -c "$selected" \; next-window \
+      || tmux new -c "$selected" -A -s "$session_name"\; split-window -c "$selected" -h \; select-pane -L \; new-window -c "$selected" \; next-window;
   }
 }
 

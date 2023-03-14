@@ -176,6 +176,9 @@ vim.opt.clipboard = nil
 -- remove top lunar tab bar
 lvim.builtin.bufferline.active = false
 
+lvim.builtin.which_key.mappings["n"] = {
+  name = "+Navigation",
+}
 lvim.builtin.which_key.mappings["e"] = nil
 lvim.keys.normal_mode["<leader>ne"] = "<CMD>NvimTreeToggle<CR>"
 
@@ -191,12 +194,26 @@ lvim.keys.normal_mode['<leader>fa'] = "<CMD>Telescope grep_string<CR>"
 lvim.keys.normal_mode['<leader>fca'] = "<CMD>Telescope git_commits<CR>"
 lvim.keys.normal_mode['<leader>fci'] = "<CMD>Telescope git_bcommits<CR>"
 
-lvim.lsp.buffer_mappings.normal_mode['<leader>wi'] = lvim.lsp.buffer_mappings.normal_mode['K']
-lvim.lsp.buffer_mappings.normal_mode['<leader>gq'] = lvim.lsp.buffer_mappings.normal_mode['K']
+lvim.builtin.which_key.mappings["w"] = {
+  name = "+SecondaryLeader",
+}
+lvim.builtin.which_key.mappings["g"] = {
+  name = "+GoTo/Do",
+}
+lvim.lsp.buffer_mappings.visual_mode['<leader>ca'] = { vim.lsp.buf.code_action, "Code action" }
+lvim.lsp.buffer_mappings.normal_mode['<leader>wi'] = { vim.lsp.buf.hover, "Show hover" }
+lvim.lsp.buffer_mappings.normal_mode['<leader>gq'] = { vim.lsp.buf.hover, "Show hover" }
 lvim.lsp.buffer_mappings.normal_mode['<leader>gd'] = lvim.lsp.buffer_mappings.normal_mode['gd']
 lvim.lsp.buffer_mappings.normal_mode['<leader>gr'] = lvim.lsp.buffer_mappings.normal_mode['gr']
+lvim.builtin.which_key.mappings["r"] = {
+  name = "+Refactor",
+}
 lvim.lsp.buffer_mappings.normal_mode['<leader>rn'] = { vim.lsp.buf.rename, "Rename" }
 lvim.lsp.buffer_mappings.visual_mode['<leader>gf'] = { vim.lsp.buf.format, "Format" }
+lvim.lsp.buffer_mappings.visual_mode['<leader>qf'] = { "<CMD>Telescope quickfix<CR>", "Quickfix" }
+lvim.builtin.which_key.mappings["c"] = {
+  name = "+Code",
+}
 lvim.lsp.buffer_mappings.visual_mode['<leader>ca'] = { vim.lsp.buf.code_action, "Code action" }
 lvim.lsp.buffer_mappings.normal_mode['<leader>ca'] = { vim.lsp.buf.code_action, "Code action" }
 lvim.lsp.buffer_mappings.normal_mode['<leader>e'] = { vim.diagnostic.goto_next, "Next Error" }
@@ -229,11 +246,15 @@ require'colorizer'.setup()
 lvim.colorscheme = "gruvbox-flat"
 -- lvim.colorscheme = "tokyonight-night"
 
-lvim.keys.normal_mode['<leader>vj'] = "<CMD>diffget //3<CR>"
-lvim.keys.normal_mode['<leader>vf'] = "<CMD>diffget //2<CR>"
-lvim.keys.normal_mode['<leader>vs'] = "<CMD>diffput<CR>"
 lvim.keys.visual_mode['<leader>vs'] = "<CMD>diffput<CR>"
-lvim.keys.normal_mode['<leader>vi'] = "<CMD>Git<CR>"
+
+lvim.builtin.which_key.mappings["v"] = {
+  name = "+VersionControl",
+  j = { "<CMD>diffget //3<CR>", "TakeRight" },
+  f = { "<CMD>diffget //2<CR>", "TakeLeft" },
+  i = { "<CMD>Git<CR>", "GitStatus" },
+  b = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+}
 
 require("mason-lspconfig").setup {
     ensure_installed = {
