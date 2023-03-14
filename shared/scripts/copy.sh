@@ -35,7 +35,11 @@ function make_vim_sh_envs {
   echo "$header" > "$bashenv";
   printf "shopt -s expand_aliases\n\n" >> "$zshenv";
   printf "setopt aliases\n\n" >> "$bashenv";
-  local body; body=$({ cat ~/.bashrc.d/portable/snippets.bash; cat ~/.bashrc.d/portable/aliases.bash; });
+  local snippets_file="$HOME/.bashrc.d/portable/snippets.bash";
+  local aliases_file="$HOME/.bashrc.d/portable/aliases.bash";
+  local padding="#################################";
+  local begin="BEGIN";
+  local body; body=$({ echo "$padding $begin $snippets_file $padding"; cat "$snippets_file"; echo "$padding $begin $aliases_file $padding"; cat "$aliases_file"; });
   echo "$body" >> "$zshenv";
   echo "$body" >> "$bashenv";
   local footer; footer=$(printf "\n}\n"; echo 'main >/dev/null 2>&1;');
