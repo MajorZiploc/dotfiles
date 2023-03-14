@@ -27,8 +27,27 @@ done;
 
 rm -r "${temp:?}/";
 
-{ printf "function main {\nshopt -s expand_aliases\n\n"; cat ~/.bashrc.d/portable/snippets.bash; cat ~/.bashrc.d/portable/aliases.bash; printf "\n}\n"; echo 'main >/dev/null 2>&1;'; } > ~/vimfiles/bash_env.bash;
-{ printf "function main {\nsetopt aliases\n\n"; cat ~/.bashrc.d/portable/snippets.bash; cat ~/.bashrc.d/portable/aliases.bash; printf "\n}\n"; echo 'main >/dev/null 2>&1;'; } > ~/vimfiles/bash_env.zsh;
+function make_vim_sh_envs {
+  local zshenv="$HOME/vimfiles/bash_env.bash";
+  local bashenv="$HOME/vimfiles/bash_env.zsh";
+  local header="function main {";
+  echo "$header" > "$zshenv";
+  echo "$header" > "$bashenv";
+  printf "shopt -s expand_aliases\n\n" >> "$zshenv";
+  printf "setopt aliases\n\n" >> "$bashenv";
+  local snippets_file="$HOME/.bashrc.d/portable/snippets.bash";
+  local aliases_file="$HOME/.bashrc.d/portable/aliases.bash";
+  local padding="#################################";
+  local begin="BEGIN";
+  local body; body=$({ echo "$padding $begin $snippets_file $padding"; cat "$snippets_file"; echo "$padding $begin $aliases_file $padding"; cat "$aliases_file"; });
+  echo "$body" >> "$zshenv";
+  echo "$body" >> "$bashenv";
+  local footer; footer=$(printf "\n}\n"; echo 'main >/dev/null 2>&1;');
+  echo "$footer" >> "$zshenv";
+  echo "$footer" >> "$bashenv";
+}
+
+make_vim_sh_envs;
 
 microsoft_dev_tools="$HOME/dev/microsoft";
 chrome_debugger_dir="${microsoft_dev_tools}/vscode-chrome-debug";
