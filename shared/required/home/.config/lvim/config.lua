@@ -471,6 +471,7 @@ dap.configurations.sh = {
 
 -- ################## DAP END ###########################
 
+vim.cmd('set wrap')
 vim.cmd('source ~/vimfiles/plugin-settings/rainbow_csv.vim')
 vim.cmd('source ~/vimfiles/rc-settings/terminal.vim')
 vim.cmd('source ~/.vimrc_ext')
