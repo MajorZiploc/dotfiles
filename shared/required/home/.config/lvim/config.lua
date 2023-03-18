@@ -163,6 +163,7 @@ lvim.builtin.which_key.mappings["n"] = {
   name = "+Navigation",
 }
 lvim.builtin.which_key.mappings["e"] = nil
+lvim.builtin.which_key.mappings["q"] = nil
 lvim.keys.normal_mode["<leader>ne"] = "<CMD>NvimTreeToggle<CR>"
 
 lvim.keys.normal_mode['<bs>'] = "<CMD>noh<CR>"
