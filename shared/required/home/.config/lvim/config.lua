@@ -190,7 +190,10 @@ lvim.keys.normal_mode['<C-p>'] = require("lvim.core.telescope.custom-finders").f
 lvim.builtin.which_key.mappings['f'] = nil
 lvim.keys.normal_mode['<leader>fb'] = "<CMD>Telescope buffers<CR>"
 lvim.keys.normal_mode['<leader>fi'] = "<CMD>Telescope live_grep<CR>"
-lvim.keys.normal_mode['<leader>fa'] = "<CMD>Telescope grep_string<CR>"
+local function blank_grep_string_search ()
+  require('telescope.builtin').grep_string({ search = '' })
+end
+lvim.keys.normal_mode['<leader>fa'] = blank_grep_string_search
 lvim.keys.normal_mode['<leader>fca'] = "<CMD>Telescope git_commits<CR>"
 lvim.keys.normal_mode['<leader>fci'] = "<CMD>Telescope git_bcommits<CR>"
 
