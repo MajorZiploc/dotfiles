@@ -57,6 +57,24 @@ lvim.builtin.treesitter.highlight.enable = true
 --     toggle_server_expand = "o",
 -- }
 
+-- This should be the same as the above
+require("mason-lspconfig").setup {
+    ensure_installed = {
+    "rust_analyzer",
+    "jdtls",
+    "pyright",
+    "sqlls",
+    "tsserver",
+    "vimls",
+    "html",
+    "cssls",
+    "bashls",
+    "gopls",
+    "jsonls",
+    "grammarly",
+  },
+}
+
 -- ---@usage disable automatic installation of servers
 -- lvim.lsp.installer.setup.automatic_installation = false
 
@@ -83,20 +101,20 @@ lvim.builtin.treesitter.highlight.enable = true
 -- end
 
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
--- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup {
---   { command = "black", filetypes = { "python" } },
---   { command = "isort", filetypes = { "python" } },
---   {
---     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
---     command = "prettier",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     extra_args = { "--print-with", "100" },
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "typescript", "typescriptreact" },
---   },
--- }
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { command = "black", filetypes = { "python" } },
+  { command = "isort", filetypes = { "python" } },
+  {
+    -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+    command = "prettier",
+    --     ---@usage arguments to pass to the formatter
+    --     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    --     extra_args = { "--print-with", "100" },
+    --     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "typescript", "typescriptreact" },
+  },
+}
 
 -- -- set additional linters
 -- local linters = require "lvim.lsp.null-ls.linters"
@@ -222,23 +240,6 @@ lvim.builtin.which_key.mappings["v"] = {
   f = { "<CMD>diffget //2<CR>", "TakeLeft" },
   i = { "<CMD>Git<CR>", "GitStatus" },
   b = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
-}
-
-require("mason-lspconfig").setup {
-    ensure_installed = {
-    "rust_analyzer",
-    "jdtls",
-    "pyright",
-    "sqlls",
-    "tsserver",
-    "vimls",
-    "html",
-    "cssls",
-    "bashls",
-    "gopls",
-    "jsonls",
-    "grammarly",
-  },
 }
 
 lvim.builtin.telescope.pickers = {
