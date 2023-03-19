@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-# rainbow query language; USE FLAG: --policy rfc
-pip install rbql;
+function main {
+  local pip_flags="$1"; pip_flags="${pip_flags:-""}";
+  # rbql: rainbow query language; USE FLAG: --policy rfc
+  # debugpy: debug adapter
+  eval "pip install $pip_flags rbql debugpy";
+}
 
-# debug adapter
-pip install debugpy;
+main $@;
