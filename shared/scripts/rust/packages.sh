@@ -1,41 +1,34 @@
 #!/usr/bin/env bash
 
-# speed up rust compliation - cache deps and non changing code
-# RUSTC_WRAPPER=sccache cargo install {package}
-# cargo install sccache
 # query crates.io for crate details
 # cargo install cargo-info
-# grep
-cargo install ripgrep
-# disk space util
-cargo install du-dust
-# ls
-cargo install exa 
-# a cat clone with syntax highlighting; for colors in fzf preview
-cargo install bat
-# rust interactive
-# cargo install irust
-# a new shell with types - like powershell
-# cargo install nu
-# cross shell prompt
-# cargo install starship
-# tmux replacement
-# cargo install zellij
-# rust code check - like shellcheck - integrates with lsp's
-# cargo install bacon
-# watcher for source code changes
-# cargo install cargo-watch
-# timer
-# cargo install porsmo
-# git terminal gui
-# cargo install gitui
-# A simple and easy to use Wikipedia Text User Interface
-# cargo install wiki-tui
-# jupyter for rust
-# cargo install evcxr_jupyter
-# tool for managing programming language and tool versions - like asdf
-# cargo install rtx-cli
-# simple tmux like watcher for long running processes
-# cargo install mprocs
-# speed up rust build times by cacheing libs and code that didnt change since last time
-cargo install sccache
+
+# ripgrep: grep
+# du-dust: disk space util
+# exa: ls
+# bat: a cat clone with syntax highlighting; for colors in fzf preview
+# irust: rust interactive
+# nu: a new shell with types - like powershell
+# starship: cross shell prompt
+# zellij: tmux replacement
+# bacon: rust code check - like shellcheck - integrates with lsp's
+# cargo-watch: watcher for source code changes
+# porsmo: timer
+# gitui: git terminal gui
+# wiki-tui: A simple and easy to use Wikipedia Text User Interface
+# evcxr_jupyter: jupyter for rust
+# rtx-cli: tool for managing programming language and tool versions - like asdf
+# mprocs: simple tmux like watcher for long running processes
+# sccache: speed up rust build times by cacheing libs and code that didnt change since last time
+
+function main {
+  local method="$1"; method="${method:-"install"}";
+  if [[ "$method" == "install" ]]; then
+    cargo install cargo-update ripgrep du-dust exa bat sccache;
+  else
+    # command from cargo-update package
+    cargo install-update -a;
+  fi
+}
+
+main $@;

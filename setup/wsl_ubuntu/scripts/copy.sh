@@ -10,13 +10,5 @@ flags="$1";
 
 "$script_path/../../../shared/scripts/copy.sh" "$setup_root" "$flags";
 
-if which lvim; then
-  lvim "+:PackerInstall" "+:PackerUpdate" 2>/dev/null;
-elif which nvim; then
-  nvim "+:PlugInstall" "+:PlugUpgrade" "+:PlugUpdate" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
-elif which vim; then
-  vim "+:PlugInstall" "+:PlugUpgrade" "+:PlugUpdate" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
-fi
-
 unset setup_root;
 

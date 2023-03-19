@@ -10,8 +10,5 @@ flags="$1";
 
 "$script_path/../../../shared/scripts/copy.sh" "$setup_root" "$flags";
 
-nvim "+:PlugInstall" "+:PlugUpgrade" "+:PlugUpdate" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
-# vim "+:PlugInstall" "+:PlugUpgrade" "+:PlugUpdate" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
-
 unset setup_root;
 
