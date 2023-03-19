@@ -96,8 +96,6 @@ NOTE: the copy script depends on the above install scripts being run prior, if y
 
 Use the copy.sh scripts found in ./setup/[windows|wsl\_ubuntu|ubuntu|mac]/scripts/copy.sh "$flags" to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, vim-plug.
 
-NOTE: For nonwin platforms, you will need to type :qa <return> after both nvim and vim completes their installs
-
 copy.sh : binary\_flags? -> unit
 
 Paths with content that will be affected include but are not limited to:
@@ -124,6 +122,14 @@ Paths with content that will be affected include but are not limited to:
 - "$HOME/Tasks/"
 - "$HOME/vscodevim/" when flags contain "01"
 - "$HOME/AppData/Roaming/Code/User/" (windows) else "$HOME/.config/Code/User/" when flags contain "01"
+
+### Install/Update various vims
+This isnt perfect - for best results - open the vim you want to use and run the commands you see in this script
+- ./shared/scripts/update_vims.sh
+
+### Update global tooling
+This will update various package manager packages for things like pip, npm, and cargo
+- ./shared/scripts/update_packages.sh
 
 ## Troubleshooting
 
