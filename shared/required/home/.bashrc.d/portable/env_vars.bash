@@ -5,6 +5,9 @@ export VISUAL='vim -u ~/vimfiles/rc-settings/terminal.vim'
 # the fall back to fc and <c-x> <c-e> 
 export EDITOR='vim'
 
+# speed up rust build times
+export RUSTC_WRAPPER="$HOME/.cargo/bin/sccache"
+
 export NODE_ENV='development'
 export NODE_TLS_REJECT_UNAUTHORIZED=0
 

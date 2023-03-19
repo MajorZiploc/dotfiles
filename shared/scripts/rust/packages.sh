@@ -37,3 +37,5 @@ cargo install bat
 # cargo install rtx-cli
 # simple tmux like watcher for long running processes
 # cargo install mprocs
+# speed up rust build times by cacheing libs and code that didnt change since last time
+cargo install sccache
