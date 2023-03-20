@@ -3,6 +3,12 @@
   "editor.fontSize": 14,
   "editor.rulers": [120],
   "explorer.confirmDragAndDrop": false,
+  "[sql]": {
+    "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
+  },
+  "[postgres]": {
+    "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
+  },
   "[typescript]": {
     "editor.tabSize": 2,
     "editor.defaultFormatter": "esbenp.prettier-vscode",

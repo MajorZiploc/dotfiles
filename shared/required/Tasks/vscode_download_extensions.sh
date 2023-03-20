@@ -64,6 +64,9 @@ code --install-extension ms-python.vscode-pylance
 # debug bash code
 # code --install-extension rogalmic.bash-debug
 
+# sql formatter
+# code --install-extension adpyke.vscode-sql-formatter
+
 # mssql
 # code --install-extension ms-mssql.mssql
 
