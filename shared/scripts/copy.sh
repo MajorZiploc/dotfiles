@@ -27,27 +27,39 @@ done;
 
 rm -r "${temp:?}/";
 
-function make_vim_sh_envs {
-  local zshenv="$HOME/vimfiles/bash_env.bash";
-  local bashenv="$HOME/vimfiles/bash_env.zsh";
+function make_vim_sh_envs_and_single_file_shells {
+  local vim_zshenv="$HOME/vimfiles/bash_env.bash";
+  local vim_bashenv="$HOME/vimfiles/bash_env.zsh";
   local header="function main {";
-  echo "$header" > "$zshenv";
-  echo "$header" > "$bashenv";
-  printf "shopt -s expand_aliases\n\n" >> "$zshenv";
-  printf "setopt aliases\n\n" >> "$bashenv";
+  echo "$header" > "$vim_zshenv";
+  echo "$header" > "$vim_bashenv";
+  printf "shopt -s expand_aliases\n\n" >> "$vim_zshenv";
+  printf "setopt aliases\n\n" >> "$vim_bashenv";
   local snippets_file="$HOME/.bashrc.d/portable/snippets.bash";
   local aliases_file="$HOME/.bashrc.d/portable/aliases.bash";
   local padding="#################################";
   local begin="BEGIN";
   local body; body=$({ echo "$padding $begin $snippets_file $padding"; cat "$snippets_file"; echo "$padding $begin $aliases_file $padding"; cat "$aliases_file"; });
-  echo "$body" >> "$zshenv";
-  echo "$body" >> "$bashenv";
+  echo "$body" >> "$vim_zshenv";
+  echo "$body" >> "$vim_bashenv";
   local footer; footer=$(printf "\n}\n"; echo 'main >/dev/null 2>&1;');
-  echo "$footer" >> "$zshenv";
-  echo "$footer" >> "$bashenv";
+  echo "$footer" >> "$vim_zshenv";
+  echo "$footer" >> "$vim_bashenv";
+  local all_in_one_zsh="$HOME/all_in_one.bash";
+  local all_in_one_bash="$HOME/all_in_one.zsh";
+  local env_vars_file="$HOME/.bashrc.d/portable/env_vars.bash";
+  local functions_file="$HOME/.bashrc.d/portable/functions.bash";
+  local functions_sets_file="$HOME/.bashrc.d/portable/functions_sets.bash";
+  echo "$header" > "$all_in_one_zsh";
+  echo "$header" > "$all_in_one_bash";
+  body+=$({ echo "$padding $begin $env_vars_file $padding"; cat "$env_vars_file"; echo "$padding $begin $functions_file $padding"; cat "$functions_file"; echo "$padding $begin $functions_sets_file $padding"; cat "$functions_sets_file"; });
+  echo "$body" >> "$all_in_one_zsh";
+  echo "$body" >> "$all_in_one_bash";
+  echo "$footer" >> "$vim_zshenv";
+  echo "$footer" >> "$vim_bashenv";
 }
 
-make_vim_sh_envs;
+make_vim_sh_envs_and_single_file_shells;
 
 microsoft_dev_tools="$HOME/dev/microsoft";
 chrome_debugger_dir="${microsoft_dev_tools}/vscode-chrome-debug";
