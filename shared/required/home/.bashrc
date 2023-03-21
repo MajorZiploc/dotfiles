@@ -36,9 +36,13 @@ shopt -s cdspell
 
 shopt -s expand_aliases
 
-for file in `find "$HOME/.bashrc.d/" -regextype egrep -iregex ".*\.bash" -type f`; do
-  . "$file" >/dev/null 2>&1;
-done;
+# squashed file from files in ~/.bashrc.d/
+. "$HOME/all_in_one.bash";
+
+# To source the base files that make the all_in_one file
+# for file in `find "$HOME/.bashrc.d/" -regextype egrep -iregex ".*\.bash" -type f`; do
+#   . "$file" >/dev/null 2>&1;
+# done;
 
 for file in `find "$HOME/.bash_completion.d/" -maxdepth 1 -mindepth 1 -regextype egrep -iregex ".*\.bash" -type f`; do
   . "$file" >/dev/null 2>&1;

@@ -97,13 +97,18 @@ source $ZSH/oh-my-zsh.sh
 
 setopt aliases
 
-for file in `find "$HOME/.bashrc.d/portable" -regextype egrep -iregex ".*\.bash" -type f`; do
-  . "$file" >/dev/null 2>&1;
-done;
 
-for file in `find "$HOME/.zshrc.d" -regextype egrep -iregex ".*\.zsh" -type f`; do
-  . "$file" >/dev/null 2>&1;
-done;
+# squashed file from files in ~/.bashrc.d/portable/ and ~/.zshrc.d/
+. "$HOME/all_in_one.zsh";
+
+# To source the base files that make the all_in_one file
+# for file in `find "$HOME/.zshrc.d" -regextype egrep -iregex ".*\.zsh" -type f`; do
+#   . "$file" >/dev/null 2>&1;
+# done;
+#
+# for file in `find "$HOME/.bashrc.d/portable" -regextype egrep -iregex ".*\.bash" -type f`; do
+#   . "$file" >/dev/null 2>&1;
+# done;
 
 export FPATH="$FPATH:$(echo ~/.zsh_completion.d/)"
 # The following lines were added by compinstall
