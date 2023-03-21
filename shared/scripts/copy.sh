@@ -47,7 +47,29 @@ function make_vim_sh_envs {
   echo "$footer" >> "$bashenv";
 }
 
+function make_all_in_one_shell_files {
+  local zshenv="$HOME/all_in_one.bash";
+  local bashenv="$HOME/all_in_one.zsh";
+  local header="function main {";
+  echo "$header" > "$zshenv";
+  echo "$header" > "$bashenv";
+  printf "shopt -s expand_aliases\n\n" >> "$zshenv";
+  printf "setopt aliases\n\n" >> "$bashenv";
+  local padding="#################################";
+  local begin="BEGIN";
+  local bash_body; bash_body=$(find "$HOME/.bashrc.d/" -iname "*.bash" -type f -exec cat "{}" \;);
+  local zsh_body;
+  zsh_body=$(find "$HOME/.bashrc.d/portable/" -iname "*.bash" -type f -exec echo "$padding $begin {} $padding" \; -exec cat "{}" \; -exec echo "" \;);
+  zsh_body+=$(find "$HOME/.zshrc.d/" -iname "*.zsh" -type f -exec echo "$padding $begin {} $padding" \; -exec cat "{}" \; -exec echo "" \;);
+  echo "$zsh_body" >> "$zshenv";
+  echo "$bash_body" >> "$bashenv";
+  local footer; footer=$(printf "\n}\n"; echo 'main >/dev/null 2>&1;');
+  echo "$footer" >> "$zshenv";
+  echo "$footer" >> "$bashenv";
+}
+
 make_vim_sh_envs;
+make_all_in_one_shell_files;
 
 microsoft_dev_tools="$HOME/dev/microsoft";
 chrome_debugger_dir="${microsoft_dev_tools}/vscode-chrome-debug";
