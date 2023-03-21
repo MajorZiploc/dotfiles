@@ -55,9 +55,11 @@ function make_all_in_one_shell_files {
   local bash_body; bash_body=$(find "$HOME/.bashrc.d" -iname "*.bash" -type f -exec echo "$padding $begin {} $padding" \; -exec cat "{}" \; -exec echo "" \;);
   local zsh_body;
   zsh_body=$(find "$HOME/.zshrc.d" -iname "*.zsh" -type f -exec echo "$padding $begin {} $padding" \; -exec cat "{}" \; -exec echo "" \;);
+  zsh_body+="
+";
   zsh_body+=$(find "$HOME/.bashrc.d/portable" -iname "*.bash" -type f -exec echo "$padding $begin {} $padding" \; -exec cat "{}" \; -exec echo "" \;);
-  echo "$zsh_body" >> "$zshenv";
-  echo "$bash_body" >> "$bashenv";
+  echo "$zsh_body" > "$zshenv";
+  echo "$bash_body" > "$bashenv";
 }
 
 make_vim_sh_envs;
