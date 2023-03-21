@@ -42,7 +42,7 @@ function make_vim_sh_envs {
   local body; body=$({ echo "$padding $begin $snippets_file $padding"; cat "$snippets_file"; echo "$padding $begin $aliases_file $padding"; cat "$aliases_file"; });
   echo "$body" >> "$zshenv";
   echo "$body" >> "$bashenv";
-  local footer; footer=$(printf "\n}\n"; echo 'main >/dev/null 2>&1;');
+  local footer; footer=$(printf "\n}\n"; echo 'main $@ >/dev/null 2>&1;');
   echo "$footer" >> "$zshenv";
   echo "$footer" >> "$bashenv";
 }
