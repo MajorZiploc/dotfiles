@@ -99,7 +99,7 @@ setopt aliases
 
 
 # squashed file from files in ~/.bashrc.d/portable/ and ~/.zshrc.d/
-. "$HOME/all_in_one.zsh";
+. "$HOME/all_in_one.zsh" >/dev/null 2>&1;
 
 # To source the base files that make the all_in_one file
 # for file in `find "$HOME/.zshrc.d" -regextype egrep -iregex ".*\.zsh" -type f`; do
