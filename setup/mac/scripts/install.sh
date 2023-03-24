@@ -101,7 +101,7 @@ brew install openjdk@17
 brew install --ignore-dependencies gradle;
 brew install --ignore-dependencies maven;
 
-brew pin openjdk;
+brew pin openjdk@17;
 brew pin gradle;
 brew pin maven;
 
