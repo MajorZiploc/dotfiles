@@ -101,6 +101,10 @@ brew install openjdk@17
 brew install --ignore-dependencies gradle;
 brew install --ignore-dependencies maven;
 
+brew pin openjdk;
+brew pin gradle;
+brew pin maven;
+
 # golang
 brew install golang;
 # bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer);
