@@ -160,6 +160,9 @@ brew install --cask keycastr;
 
 brew install --cask font-hack-nerd-font
 
+# Open-source version of the X.Org X Window System; good for gui in docker containers
+brew install --cask xquartz
+
 # Finder: set hidden files to show by default
 defaults write http://com.apple.Finder AppleShowAllFiles -bool true;
 # Finder: show file extensions
