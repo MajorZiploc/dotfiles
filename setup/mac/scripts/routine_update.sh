@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 scriptpath="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
 
