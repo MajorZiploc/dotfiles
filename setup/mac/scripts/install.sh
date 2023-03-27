@@ -30,6 +30,11 @@ brew install watch;
 brew install wdiff;
 brew install wget;
 
+# cpp
+brew install llvm;
+brew install ccls;
+brew install cmake;
+
 # general gnu utils extras
 brew install gpatch;
 brew install less;

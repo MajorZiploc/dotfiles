@@ -17,6 +17,28 @@
       "filetypes": [
         "prolog"
       ]
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": [
+        "c",
+        "cc",
+        "cpp",
+        "c++",
+        "objc",
+        "objcpp"
+      ],
+      "rootPatterns": [
+        ".ccls",
+        "compile_commands.json",
+        ".git/",
+        ".hg/"
+      ],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
     }
   },
   "python.formatting.provider": "autopep8",
@@ -25,5 +47,5 @@
     "semanticTokens.enable": true,
   },
   "java.trace.server": "verbose"
-
 }
+
