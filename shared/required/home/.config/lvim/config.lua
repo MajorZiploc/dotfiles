@@ -174,6 +174,7 @@ lvim.keys.normal_mode['<C-p>'] = require("lvim.core.telescope.custom-finders").f
 lvim.builtin.which_key.mappings['f'] = nil
 lvim.keys.normal_mode['<leader>fb'] = "<CMD>Telescope buffers<CR>"
 lvim.keys.normal_mode['<leader>fi'] = "<CMD>Telescope live_grep<CR>"
+lvim.keys.normal_mode['<leader>fch'] = "<CMD>Telescope command_history<CR>"
 local function blank_grep_string_search ()
   require('telescope.builtin').grep_string({ search = '' })
 end
