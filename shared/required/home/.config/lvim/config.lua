@@ -239,27 +239,43 @@ lvim.builtin.which_key.mappings["v"] = {
   name = "+VersionControl",
   j = { "<CMD>diffget //3<CR>", "TakeRight" },
   f = { "<CMD>diffget //2<CR>", "TakeLeft" },
-  i = { "<CMD>Git<CR>", "GitStatus" },
+  i = { "<CMD>:horizontal topleft Git<CR>", "GitStatus" },
   b = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+}
+
+lvim.builtin.telescope.defaults = {
+  file_ignore_patterns = { ".git/", "node_modules" },
+  layout_config = {
+    preview_width = 0.6,
+    prompt_position = "top",
+  },
+  path_display = { "smart" },
+  prompt_position = "top",
+  prompt_prefix = " ",
+  selection_caret = " ",
+  sorting_strategy = "ascending",
 }
 
 lvim.builtin.telescope.pickers = {
   find_files = {
-    layout_config = {
-      width = 0.80,
-    },
+    prompt_prefix = " ",
+    find_command = { "rg", "--files", "--hidden" },
   },
-  live_grep = {
-    layout_config = {
-      width = 0.80,
-    },
-  },
+  live_grep = {},
   buffers = {
-    sort_mru = true
-  }
+    sort_mru = true,
+    prompt_prefix = "﬘ ",
+  },
+  commands = {
+    prompt_prefix = " ",
+  },
+  git_files = {
+    prompt_prefix = " ",
+    show_untracked = true,
+  },
 }
 
-lvim.builtin.telescope.defaults.layout_strategy = "horizontal"
+-- lvim.builtin.telescope.defaults.layout_strategy = "horizontal"
 
 local _, actions = pcall(require, "telescope.actions")
 lvim.builtin.telescope.defaults.mappings = {
