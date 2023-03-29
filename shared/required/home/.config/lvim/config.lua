@@ -255,6 +255,16 @@ lvim.builtin.telescope.defaults = {
   prompt_prefix = " ",
   selection_caret = " ",
   sorting_strategy = "ascending",
+  vimgrep_arguments = {
+    'rg',
+    '--color=never',
+    '--no-heading',
+    '--with-filename',
+    '--line-number',
+    '--column',
+    '--smart-case',
+    '--hidden',
+  },
 }
 
 lvim.builtin.telescope.pickers = {
