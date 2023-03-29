@@ -174,6 +174,7 @@ lvim.keys.normal_mode['<C-p>'] = require("lvim.core.telescope.custom-finders").f
 lvim.builtin.which_key.mappings['f'] = nil
 lvim.keys.normal_mode['<leader>fb'] = "<CMD>Telescope buffers<CR>"
 lvim.keys.normal_mode['<leader>fi'] = "<CMD>Telescope live_grep<CR>"
+lvim.keys.normal_mode['<leader>fch'] = "<CMD>Telescope command_history<CR>"
 local function blank_grep_string_search ()
   require('telescope.builtin').grep_string({ search = '' })
 end
@@ -254,6 +255,16 @@ lvim.builtin.telescope.defaults = {
   prompt_prefix = " ",
   selection_caret = " ",
   sorting_strategy = "ascending",
+  vimgrep_arguments = {
+    'rg',
+    '--color=never',
+    '--no-heading',
+    '--with-filename',
+    '--line-number',
+    '--column',
+    '--smart-case',
+    '--hidden',
+  },
 }
 
 lvim.builtin.telescope.pickers = {
