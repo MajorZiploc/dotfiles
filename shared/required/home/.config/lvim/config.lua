@@ -175,10 +175,7 @@ lvim.builtin.which_key.mappings['f'] = nil
 lvim.keys.normal_mode['<leader>fb'] = "<CMD>Telescope buffers<CR>"
 lvim.keys.normal_mode['<leader>fi'] = "<CMD>Telescope live_grep<CR>"
 lvim.keys.normal_mode['<leader>fch'] = "<CMD>Telescope command_history<CR>"
-local function blank_grep_string_search ()
-  require('telescope.builtin').grep_string({ search = '' })
-end
-lvim.keys.normal_mode['<leader>fa'] = blank_grep_string_search
+lvim.keys.normal_mode['<leader>fa'] = "<CMD>Telescope grep_string<CR>"
 lvim.keys.normal_mode['<leader>fca'] = "<CMD>Telescope git_commits<CR>"
 lvim.keys.normal_mode['<leader>fci'] = "<CMD>Telescope git_bcommits<CR>"
 
@@ -266,7 +263,16 @@ lvim.builtin.telescope.defaults = {
   },
 }
 
+-- Example of writing fn and using in a key binding
+-- local function blank_grep_string_search ()
+--   require('telescope.builtin').grep_string({ search = '' })
+-- end
+-- lvim.keys.normal_mode['<leader>fa'] = blank_grep_string_search
+
 lvim.builtin.telescope.pickers = {
+  grep_string = {
+   search = '',
+  },
   find_files = {
     prompt_prefix = " ",
     find_command = { "rg", "--files", "--hidden" },
