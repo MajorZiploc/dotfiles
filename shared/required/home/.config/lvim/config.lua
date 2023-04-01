@@ -275,13 +275,20 @@ lvim.builtin.telescope.defaults = {
 
 lvim.builtin.telescope.pickers = {
   grep_string = {
-   search = '',
+    search = '',
+    additional_args = function(opts)
+      return { "--hidden" }
+    end
   },
   find_files = {
     prompt_prefix = " ",
     find_command = { "rg", "--files", "--hidden" },
   },
-  live_grep = {},
+  live_grep = {
+    additional_args = function(opts)
+      return { "--hidden" }
+    end
+  },
   buffers = {
     sort_mru = true,
     prompt_prefix = "﬘ ",
