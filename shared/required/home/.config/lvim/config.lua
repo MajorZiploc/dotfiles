@@ -208,7 +208,7 @@ lvim.plugins = {
   {"tpope/vim-fugitive"}, -- git plugin
   {"mechatroner/rainbow_csv"}, -- csv highlighter and query engine
   {"tpope/vim-obsession"}, -- self managing n?vim sessions (Session.vim w/ :Obsession <file_name.vim>?/:Obsession! (start/discard current session respectively))
-  {'eddyekofo94/gruvbox-flat.nvim'}, -- color theme
+  {"eddyekofo94/gruvbox-flat.nvim"}, -- color theme
   {
   "norcalli/nvim-colorizer.lua",
     config = function()
@@ -223,6 +223,7 @@ lvim.plugins = {
           })
   end,
   },
+  {"nvim-treesitter/nvim-treesitter-context"}, -- pin the function/class/interface/enum name to top line if inside that thing
 }
 
 require'colorizer'.setup()
