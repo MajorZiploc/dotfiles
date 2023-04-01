@@ -86,6 +86,9 @@ alias vimc='vim -u ~/vimfiles/rc-settings/common.vim'
 alias vimt='vim -u ~/vimfiles/rc-settings/terminal.vim'
 alias vimnp='vim --noplugin'
 
+alias v='vim . -S Session.vim';
+alias gv='vim . -S Session.vim "+:horizontal topleft Git"';
+
 alias show_fn_names='declare -F'
 alias show_fn_impls='declare -f'
 
@@ -111,3 +114,4 @@ alias sl='snip_log';
 alias sbw='snip_bash_while';
 alias sbws='snip_bash_while_stream';
 alias sbfl='snip_bash_for_loop';
+
