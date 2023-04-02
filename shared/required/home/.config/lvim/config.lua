@@ -22,19 +22,30 @@ lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
--- if you don't want all the parsers change this to a table of the ones you want
+-- Syntax highlighting
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
+  "cpp",
+  "css",
+  "diff",
+  "dockerfile",
+  "git_rebase",
+  "gitignore",
+  "html",
+  "java",
   "javascript",
   "json",
+  "jsonc",
+  "kotlin",
   "lua",
   "python",
-  "typescript",
-  "tsx",
-  "css",
   "rust",
-  "java",
+  "scss",
+  "sql",
+  "tsx",
+  "typescript",
+  "vim",
   "yaml",
 }
 
