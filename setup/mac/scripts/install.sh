@@ -27,8 +27,8 @@ export NVM_DIR=~/.nvm;
 source "$(brew --prefix nvm)/nvm.sh";
 nvm install node;
 
-pyenv install 3.8.10;
-pyenv global 3.8.10;
+pyenv install 3.11.2;
+pyenv global 3.11.2;
 
 # for vim coc prolog language server support
 swipl -q -l "$this_path/../../../shared/scripts/prolog/install_language_server.pl";
