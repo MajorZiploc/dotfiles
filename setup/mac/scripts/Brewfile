@@ -1,0 +1,155 @@
+# vim:ft=ruby
+
+if OS.mac?
+  # TODO: figure out what isnt needed or doesnt work on linux from below and put here
+  true
+elsif OS.linux?
+    brew "xclip" # access to clipboard (similar to pbcopy/pbpaste)
+end
+
+brew 'openssh'
+
+tap 'homebrew/cask-versions'
+tap 'homebrew/cask-fonts'
+
+# general gnu utils
+brew 'coreutils'
+brew 'binutils'
+brew 'diffutils'
+brew 'ed'
+brew 'findutils'
+brew 'gawk'
+brew 'gnu-indent'
+brew 'gnu-sed'
+brew 'gnu-tar'
+brew 'gnu-which'
+brew 'gnutls'
+brew 'grep'
+brew 'gzip'
+brew 'screen'
+brew 'watch'
+brew 'wdiff'
+brew 'wget'
+
+# cpp
+brew 'llvm'
+brew 'ccls'
+brew 'cmake'
+
+# general gnu utils extras
+brew 'gpatch'
+brew 'less'
+brew 'm4'
+brew 'make'
+# brew 'gdb';  # gdb requires further actions to make it work. See `brew info gdb`
+# brew 'nano'
+# brew 'emacs'
+
+# newer versions of macOS existing tooling
+brew 'zsh'
+brew 'file-formula'
+brew 'git'
+brew 'openssh'
+brew 'perl'
+brew 'rsync'
+# brew 'svn'
+brew 'unzip'
+
+brew 'tmux'
+# node version manager
+brew 'nvm'
+# python version manager like nvm
+brew 'pyenv'
+# fuzzy finder
+brew 'fzf'
+# a grepper that can look inside binary files like pdf's
+brew 'ripgrep'
+# for Ag in vim
+brew 'the_silver_searcher'
+# just command line runner
+brew 'just'
+# a better system copy tray that acts as a stack
+cask 'copyq'
+brew 'bash-completion'
+# neovim
+brew 'neovim'
+# convert files for OS'es, comes with others like unix2dos
+brew 'dos2unix'
+# json query for cli
+brew 'jq'
+# yaml query for cli
+brew 'yq'
+# ssh
+brew 'openssh'
+brew 'telnet'
+# prolog
+brew 'swi-prolog'
+# help address issues in shell scripts
+brew 'shellcheck'
+
+# python deps
+brew 'openssl'
+brew 'readline'
+brew 'sqlite3'
+brew 'xz'
+brew 'zlib'
+
+# rust
+brew 'rust-analyzer'
+
+# java
+# if Brewfile can not handle pinning, then the java section may need to move into the shell script rather than Brewfile
+# brew 'java11'
+cask 'corretto17'
+brew 'openjdk@17'
+brew 'gradle', args: ['ignore-dependencies']
+brew 'maven', args: ['ignore-dependencies']
+
+# TODO: verify that this pinning is not needed. hopefully the Brewfile.lock.json will cover this
+# brew pin openjdk@17;
+# brew pin gradle;
+# brew pin maven;
+
+# golang
+brew 'golang'
+
+# php
+brew 'php'
+
+# ruby deps
+brew 'gnupg'
+# is this needed still? it was needed when using rvm, does rbenv need it?
+# gpg --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+brew 'rbenv'
+brew 'ruby-build'
+
+# install asdf and its deps
+brew 'gpg'
+brew 'asdf'
+
+# dotnet core
+brew 'mono-libgdiplus'
+cask 'dotnet-sdk'
+cask 'powershell'
+
+# Dont forget to prepend this bash to the /etc/shell
+# /opt/homebrew/bin/bash
+brew 'bash'
+cask 'google-chrome'
+cask 'iterm2'
+cask 'discord'
+cask 'gimp'
+cask 'krita'
+cask 'visual-studio-code'
+cask 'slack'
+cask 'docker'
+# k8s: docker compose to k8s resources helper
+brew 'kompose'
+
+cask 'wine-stable'
+cask 'keycastr'
+
+cask 'font-hack-nerd-font'
+
+# Open-source version of the X.Org X Window System; good for gui in docker containers
+cask 'xquartz'
