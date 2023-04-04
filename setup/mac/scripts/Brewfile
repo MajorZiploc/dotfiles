@@ -73,6 +73,8 @@ cask 'copyq'
 brew 'bash-completion'
 # neovim
 brew 'neovim'
+# updated vim
+brew 'vim'
 # convert files for OS'es, comes with others like unix2dos
 brew 'dos2unix'
 # json query for cli
