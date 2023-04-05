@@ -218,6 +218,8 @@ lvim.lsp.buffer_mappings.visual_mode['<leader>ca'] = { vim.lsp.buf.code_action, 
 lvim.lsp.buffer_mappings.normal_mode['<leader>ca'] = { vim.lsp.buf.code_action, "Code action" }
 lvim.lsp.buffer_mappings.normal_mode['<leader>e'] = { vim.diagnostic.goto_next, "Next Error" }
 lvim.lsp.buffer_mappings.normal_mode['<leader>E'] = { vim.diagnostic.goto_prev, "Previous Error" }
+lvim.lsp.buffer_mappings.normal_mode[']d'] = { vim.diagnostic.goto_next, "Next Error" }
+lvim.lsp.buffer_mappings.normal_mode['[d'] = { vim.diagnostic.goto_prev, "Previous Error" }
 
 
 lvim.plugins = {
@@ -253,9 +255,14 @@ lvim.builtin.which_key.mappings["v"] = {
   name = "+VersionControl",
   j = { "<CMD>diffget //3<CR>", "TakeRight" },
   f = { "<CMD>diffget //2<CR>", "TakeLeft" },
-  i = { "<CMD>:horizontal topleft Git<CR>", "GitStatus" },
+  s = { "<CMD>diffput<CR>", "Stage Hunk" },
+  i = { "<CMD>horizontal topleft Git<CR>", "GitStatus" },
   b = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
 }
+
+local gitsigns = require('gitsigns')
+lvim.keys.normal_mode[']g'] = gitsigns.next_hunk
+lvim.keys.normal_mode['[g'] = gitsigns.prev_hunk
 
 lvim.builtin.telescope.defaults = {
   file_ignore_patterns = { ".git/", "node_modules" },
