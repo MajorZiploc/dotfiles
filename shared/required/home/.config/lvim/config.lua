@@ -160,6 +160,7 @@ formatters.setup {
 -- })
 
 lvim.transparent_window = true
+-- disable auto pairing of paired chars in favor of manual keys
 lvim.builtin.autopairs.active = false
 
 -- tabline will go away when only 1 tab exists
@@ -186,6 +187,7 @@ lvim.builtin.which_key.mappings['f'] = nil
 lvim.keys.normal_mode['<leader>fb'] = "<CMD>Telescope buffers<CR>"
 lvim.keys.normal_mode['<leader>fi'] = "<CMD>Telescope live_grep<CR>"
 lvim.keys.normal_mode['<leader>fch'] = "<CMD>Telescope command_history<CR>"
+lvim.keys.normal_mode['<leader>fcs'] = "<CMD>Telescope commands<CR>"
 lvim.keys.normal_mode['<leader>fa'] = "<CMD>Telescope grep_string<CR>"
 lvim.keys.normal_mode['<leader>fca'] = "<CMD>Telescope git_commits<CR>"
 lvim.keys.normal_mode['<leader>fci'] = "<CMD>Telescope git_bcommits<CR>"
