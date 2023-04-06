@@ -251,6 +251,9 @@ lvim.colorscheme = "gruvbox-flat"
 
 lvim.keys.visual_mode['<leader>vs'] = "<CMD>diffput<CR>"
 lvim.keys.normal_mode['<leader>vs'] = "<CMD>Gitsigns stage_hunk<CR>"
+-- TODO: remove this workaround for the in favor of using the prev line
+-- the prev line doesnt seem to work, it seems to use diffput regardless
+lvim.keys.normal_mode['<leader>va'] = "<CMD>Gitsigns stage_hunk<CR>"
 
 lvim.builtin.which_key.mappings["v"] = {
   name = "+VersionControl",
