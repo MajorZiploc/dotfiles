@@ -264,9 +264,8 @@ lvim.builtin.which_key.mappings["v"] = {
   b = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
 }
 
-local gitsigns = require('gitsigns')
-lvim.keys.normal_mode[']g'] = gitsigns.next_hunk
-lvim.keys.normal_mode['[g'] = gitsigns.prev_hunk
+lvim.keys.normal_mode[']g'] = "<CMD>Gitsigns next_hunk<CR>"
+lvim.keys.normal_mode['[g'] = "<CMD>Gitsigns prev_hunk<CR>"
 
 lvim.builtin.telescope.defaults = {
   file_ignore_patterns = { ".git/", "node_modules" },
