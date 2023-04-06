@@ -274,6 +274,8 @@ lvim.builtin.telescope.defaults = {
   prompt_prefix = " ",
   selection_caret = " ",
   sorting_strategy = "ascending",
+  use_highlighter = false,
+  minimum_grep_characters = 3,
   vimgrep_arguments = {
     'rg',
     '--color=never',
@@ -282,7 +284,6 @@ lvim.builtin.telescope.defaults = {
     '--line-number',
     '--column',
     '--smart-case',
-    '--hidden',
   },
 }
 
@@ -295,18 +296,20 @@ lvim.builtin.telescope.defaults = {
 lvim.builtin.telescope.pickers = {
   grep_string = {
     search = '',
-    additional_args = function(opts)
-      return { "--hidden" }
-    end
+    only_sort_text = true,
+    -- additional_args = function(opts)
+    --   return { "--hidden" }
+    -- end
   },
   find_files = {
     prompt_prefix = " ",
     find_command = { "rg", "--files", "--hidden" },
   },
   live_grep = {
-    additional_args = function(opts)
-      return { "--hidden" }
-    end
+    only_sort_text = true,
+    -- additional_args = function(opts)
+    --   return { "--hidden" }
+    -- end
   },
   buffers = {
     sort_mru = true,
