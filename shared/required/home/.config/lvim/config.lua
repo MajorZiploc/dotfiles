@@ -250,6 +250,7 @@ lvim.colorscheme = "gruvbox-flat"
 -- lvim.colorscheme = "tokyonight-night"
 
 lvim.keys.visual_mode['<leader>vs'] = "<CMD>diffput<CR>"
+lvim.keys.normal_mode['<leader>vs'] = "<CMD>Gitsigns stage_hunk<CR>"
 
 lvim.builtin.which_key.mappings["v"] = {
   name = "+VersionControl",
