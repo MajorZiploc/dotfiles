@@ -274,8 +274,9 @@ lvim.builtin.telescope.defaults = {
   prompt_prefix = " ",
   selection_caret = " ",
   sorting_strategy = "ascending",
-  use_highlighter = false,
-  minimum_grep_characters = 3,
+  -- TODO: where to put these options?
+  -- use_highlighter = false,
+  -- minimum_grep_characters = 3,
   vimgrep_arguments = {
     'rg',
     '--color=never',
