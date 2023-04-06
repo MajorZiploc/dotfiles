@@ -44,6 +44,8 @@ set shortmess+=c
 
 nmap <leader>E <Plug>(coc-diagnostic-prev)
 nmap <leader>e <Plug>(coc-diagnostic-next)
+nmap [d <Plug>(coc-diagnostic-prev)
+nmap ]d <Plug>(coc-diagnostic-next)
 
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
