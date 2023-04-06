@@ -259,7 +259,6 @@ lvim.builtin.which_key.mappings["v"] = {
   name = "+VersionControl",
   j = { "<CMD>diffget //3<CR>", "TakeRight" },
   f = { "<CMD>diffget //2<CR>", "TakeLeft" },
-  s = { "<CMD>diffput<CR>", "Stage Hunk" },
   i = { "<CMD>horizontal topleft Git<CR>", "GitStatus" },
   b = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
 }
