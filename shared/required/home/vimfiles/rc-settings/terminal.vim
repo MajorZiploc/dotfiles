@@ -7,6 +7,10 @@ so ~/vimfiles/rc-settings/common.vim
 set mouse=a " allow mouse interactions
 set hidden " allow opening of other files without saving current file
 
+" Remove extra space at bottom usually to show mode info or commands
+" NOTE: command will overlap airline bar when using commands
+set cmdheight=0
+
 " write swap files here instead of beside each file
 set directory=$HOME/.vim/swap//
 " disable backups and swapfiles
