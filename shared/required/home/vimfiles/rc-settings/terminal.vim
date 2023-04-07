@@ -9,7 +9,9 @@ set hidden " allow opening of other files without saving current file
 
 " Remove extra space at bottom usually to show mode info or commands
 " NOTE: command will overlap airline bar when using commands
-set cmdheight=0
+if has('nvim')
+  set cmdheight=0
+endif
 
 " write swap files here instead of beside each file
 set directory=$HOME/.vim/swap//
@@ -143,4 +145,3 @@ let g:polyglot_disabled = ["autoindent"]
 autocmd BufNewFile,BufRead Justfile set filetype=bash
 autocmd BufNewFile,BufRead *.fs set filetype=fsharp
 autocmd BufNewFile,BufRead *.fsx set filetype=fsharp
-
