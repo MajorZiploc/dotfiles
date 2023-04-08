@@ -222,6 +222,12 @@ lvim.lsp.buffer_mappings.normal_mode['<leader>E'] = { vim.diagnostic.goto_prev, 
 lvim.lsp.buffer_mappings.normal_mode[']d'] = { vim.diagnostic.goto_next, "Next Error" }
 lvim.lsp.buffer_mappings.normal_mode['[d'] = { vim.diagnostic.goto_prev, "Previous Error" }
 
+-- disable inline virtual_text diagnostic
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = false
+    }
+)
 
 lvim.plugins = {
   {"tpope/vim-fugitive"}, -- git plugin
