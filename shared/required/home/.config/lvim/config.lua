@@ -229,6 +229,12 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
 )
 
+-- this will disable all visual indicators of diagnostics but will still allow next/prev diagnostic to work
+-- vim.diagnostic.disable()
+
+-- may be useful for disabling other virtual_text's
+-- vim.diagnostic.config({virtual_text = false})
+
 lvim.plugins = {
   {"tpope/vim-fugitive"}, -- git plugin
   {"mechatroner/rainbow_csv"}, -- csv highlighter and query engine
