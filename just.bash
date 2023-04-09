@@ -1,6 +1,6 @@
 export JUST_PROJECT_ROOT="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
 
-function just_parse_bash_Punction_aliases {
+function just_parse_bash_function_aliases {
   local aliases; aliases=`cat "$JUST_PROJECT_ROOT"/shared/required/home/.bashrc.d/functions* | grep -E "function\s*[[:alpha:]]" | sed -E 's/function (\w+).*/\1/;s/([[:alpha:]])[[:alpha:]]+_/\1:/g;s/([[:alpha:]])[[:alpha:]]+/\1/g;s/(.*)/_\1/g;s/(.*)/alias \1/g' | tr -d ":"`;
   local function_names; function_names=`cat "$JUST_PROJECT_ROOT"/shared/required/home/.bashrc.d/functions*.bash | grep -E "function\s*[[:alpha:]]" | sed -E 's/function\s*([a-zA-Z0-9_-]+?).*/\1/;s/(.*)/"\1"/g'`;
   paste -d= <(echo "$aliases") <(echo "$function_names");

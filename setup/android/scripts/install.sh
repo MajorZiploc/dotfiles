@@ -16,6 +16,7 @@ pkg install -y vim-python;
 # neovim
 pkg install -y neovim;
 pkg install -y zsh;
+pkg install -y shellcheck;
 
 # TODO: verifty fzf works here
 # fuzzy finder
@@ -28,5 +29,5 @@ sed -E -i'' 's,curl -[^[:blank:]]+,curl -0Lk,g' ~/.fzf/install;
 # for Ag in vim
 pkg install -y silversearcher-ag;
 
-pkg install -g nodejs;
+pkg install -y nodejs;
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash;

@@ -9,7 +9,7 @@ For automating the setup of a developer machine
 - mac m1
 - ubuntu 20.04
 - wsl ubuntu 20.04
-- android (REQUIRES MORE WORK: EXPERIMENTAL)
+- android (REQUIRES MORE WORK: EXPERIMENTAL - Uses F-droid installed Termux - The Google Play Store has a depreciated version of Termux)
 
 ## Tools
 
@@ -56,19 +56,24 @@ Ubuntu:
 Mac:
 - brew packages
 
+android: (FreeBSD)
+- pkg and apt packages
+
 ## Install scripts
 
 ### NOTE:
 
 ### Windows and Mac
 To install chocolatey or home brew:
-- ./setup/(windows|mac)/scripts/bootstrap.ps1
-To install windows software with chocolatey:
-- ./setup/(windows|mac)/scripts/install.ps1
+- ./setup/(windows|mac)/scripts/bootstrap.(ps1|sh)
 
-### Ubuntu and Wsl Ubuntu
+### Windows
+To install windows software with chocolatey:
+- ./setup/windows/scripts/install.ps1
+
+### Ubuntu and Wsl Ubuntu and Mac and Android
 To install software with apt-get:
-- ./setup/(wsl\_)?ubuntu/scripts/install.sh
+- ./setup/((wsl\_)?ubuntu|mac|android)/scripts/install.sh
 
 ### Vim setting shells
 Make sure to set shells in the /usr/local/bin: (NOTE: for git bash, launch as admin and run the content of this file without the 'sudo')
@@ -81,7 +86,7 @@ Misc tooling
 - ./shared/scripts/nodejs/install\_global\_tooling.sh.sh
 
 ### Rust (cargo)
-# install rust
+install rust
 - ./shared/scripts/rust/install.sh
 Misc tooling; Adds color to fzf previews with bat!
 - ./shared/scripts/rust/packages.sh
