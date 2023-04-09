@@ -311,9 +311,9 @@ lvim.builtin.telescope.pickers = {
   grep_string = {
     search = '',
     only_sort_text = true,
-    -- additional_args = function(opts)
-    --   return { "--hidden" }
-    -- end
+    additional_args = function(opts)
+      return { "--hidden" }
+    end
   },
   find_files = {
     prompt_prefix = " ",
@@ -321,9 +321,9 @@ lvim.builtin.telescope.pickers = {
   },
   live_grep = {
     only_sort_text = true,
-    -- additional_args = function(opts)
-    --   return { "--hidden" }
-    -- end
+    additional_args = function(opts)
+      return { "--hidden" }
+    end
   },
   buffers = {
     sort_mru = true,
