@@ -23,7 +23,7 @@ nnoremap Y y$
 " inoremap <s-tab> <c-d>
 
 " split line (compliment of <s-j> to join)
-nnoremap <s-k> hr<cr>^
+" nnoremap <s-k> hr<cr>^
 
 " navigation
 " Using the original meaning of this key

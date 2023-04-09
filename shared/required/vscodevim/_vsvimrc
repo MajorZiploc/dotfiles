@@ -26,7 +26,7 @@ nnoremap Y y$
 " inoremap <s-tab> <c-d>
 
 " split line (compliment of <s-j> to join)
-nnoremap <s-k> h<cr>^
+" nnoremap <s-k> h<cr>^
 
 " Helpful for with goto definition or reference doesnt work
 " pair with fzf or find_* bash commands
