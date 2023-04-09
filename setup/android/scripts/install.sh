@@ -2,8 +2,8 @@
 
 this_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
 
-# This block is all fine
 pkg install root-repo;
+pkg install -y x11-repo;
 pkg upgrade;
 pkg update -y;
 # session manager
@@ -17,17 +17,13 @@ pkg install -y vim-python;
 pkg install -y neovim;
 pkg install -y zsh;
 pkg install -y shellcheck;
-
-# TODO: verifty fzf works here
-# fuzzy finder
-# make sure this isnt around (its to old for the vim plugin)
-pkg remove -y fzf;
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf;
-sed -E -i'' 's,curl -[^[:blank:]]+,curl -0Lk,g' ~/.fzf/install;
-~/.fzf/install;
+pkg install -y xclip;
 
 # for Ag in vim
 pkg install -y silversearcher-ag;
 
 pkg install -y nodejs;
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash;
+
+pkg install -y openssh;
+
