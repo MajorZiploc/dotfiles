@@ -9,6 +9,7 @@ For automating the setup of a developer machine
 - mac m1
 - ubuntu 20.04
 - wsl ubuntu 20.04
+- android (REQUIRES MORE WORK: EXPERIMENTAL)
 
 ## Tools
 
