@@ -185,7 +185,8 @@ lvim.builtin.which_key.mappings['w'] = nil
 lvim.keys.normal_mode['<C-p>'] = require("lvim.core.telescope.custom-finders").find_project_files
 lvim.builtin.which_key.mappings['f'] = nil
 lvim.keys.normal_mode['<leader>fb'] = "<CMD>Telescope buffers<CR>"
-lvim.keys.normal_mode['<leader>fi'] = "<CMD>Telescope live_grep<CR>"
+lvim.keys.normal_mode['<leader>fda'] = "<CMD>Telescope live_grep<CR>"
+lvim.keys.normal_mode['<leader>fi'] = "<CMD>Telescope current_buffer_fuzzy_find<CR>"
 lvim.keys.normal_mode['<leader>fch'] = "<CMD>Telescope command_history<CR>"
 lvim.keys.normal_mode['<leader>fcs'] = "<CMD>Telescope commands<CR>"
 lvim.keys.normal_mode['<leader>fa'] = "<CMD>Telescope grep_string<CR>"
@@ -311,9 +312,9 @@ lvim.builtin.telescope.pickers = {
   grep_string = {
     search = '',
     only_sort_text = true,
-    -- additional_args = function(opts)
-    --   return { "--hidden" }
-    -- end
+    additional_args = function(opts)
+      return { "--hidden" }
+    end
   },
   find_files = {
     prompt_prefix = " ",
@@ -321,9 +322,9 @@ lvim.builtin.telescope.pickers = {
   },
   live_grep = {
     only_sort_text = true,
-    -- additional_args = function(opts)
-    --   return { "--hidden" }
-    -- end
+    additional_args = function(opts)
+      return { "--hidden" }
+    end
   },
   buffers = {
     sort_mru = true,
