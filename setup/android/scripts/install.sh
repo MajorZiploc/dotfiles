@@ -18,6 +18,8 @@ pkg install -y neovim;
 pkg install -y zsh;
 pkg install -y shellcheck;
 pkg install -y xclip;
+pkg install -y ripgrep;
+pkg install -y fzf;
 
 # for Ag in vim
 pkg install -y silversearcher-ag;
