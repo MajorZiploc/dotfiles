@@ -46,14 +46,6 @@ if [ -d $HOME/.asdf ]; then
   . $HOME/.asdf/completions/asdf.bash
 fi
 
-# Rust
-export PATH="$PATH:$HOME/.cargo/bin"
-[[ -d $HOME/.cargo ]] && . $HOME/.cargo/env
-
-# golang
-export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-
 # python
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
