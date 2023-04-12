@@ -1,11 +1,3 @@
-" inoremap kj <esc>
-" imap kj <esc>
-" imap <tab> <esc>
-imap <c-l> <esc>
-imap <c-[> <esc>
-" imap 1` <esc>
-" imap `1 <esc>
-
 nnoremap U <c-r>
 nnoremap Y y$
 
@@ -115,3 +107,12 @@ vmap <leader>gf :vsc editor.action.formatSelection<cr>
 
 nmap <leader>e :vsc editor.action.marker.next<cr>
 nmap <leader>E :vsc editor.action.marker.prev<cr>
+
+" backup mappings for <esc>
+" inoremap kj <esc>
+" imap kj <esc>
+" imap <tab> <esc>
+imap <c-l> <esc>
+imap <c-[> <esc>
+" imap 1` <esc>
+" imap `1 <esc>
