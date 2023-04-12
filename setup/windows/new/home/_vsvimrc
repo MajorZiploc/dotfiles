@@ -75,5 +75,11 @@ nmap <leader>i :vsc ReSharper.ReSharper_GotoImplementations<cr>
 nmap <leader>u :vsc ReSharper.ReSharper_FindUsages<cr>
 nmap <leader>r :vsc EditorContextMenus.CodeWindow.Refactor.RefactorRename
 
+" backup mappings for <esc>
 " inoremap kj <esc>
-
+" imap kj <esc>
+" imap <tab> <esc>
+imap <c-l> <esc>
+imap <c-[> <esc>
+" imap 1` <esc>
+" imap `1 <esc>
