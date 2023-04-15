@@ -107,3 +107,7 @@ imap <c-l> <esc>
 imap <c-[> <esc>
 " imap 1` <esc>
 " imap `1 <esc>
+
+" Reselect visual selection after indenting
+vnoremap < <gv
+vnoremap > >gv
