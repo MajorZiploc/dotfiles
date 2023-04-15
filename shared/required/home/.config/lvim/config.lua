@@ -283,7 +283,7 @@ lvim.builtin.telescope.defaults = {
     preview_width = 0.6,
     prompt_position = "top",
   },
-  path_display = { "smart" },
+  path_display = { truncate = 1 },
   prompt_position = "top",
   prompt_prefix = " ",
   selection_caret = " ",
