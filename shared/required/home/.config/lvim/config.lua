@@ -70,7 +70,7 @@ lvim.builtin.treesitter.highlight.enable = true
 
 -- This should be the same as the above
 require("mason-lspconfig").setup {
-    ensure_installed = {
+  ensure_installed = {
     "rust_analyzer",
     "jdtls",
     "pyright",
@@ -225,9 +225,9 @@ lvim.lsp.buffer_mappings.normal_mode['[d'] = { vim.diagnostic.goto_prev, "Previo
 
 -- disable inline virtual_text diagnostic
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = false
-    }
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = false
+  }
 )
 
 -- this will disable all visual indicators of diagnostics but will still allow next/prev diagnostic to work
@@ -237,28 +237,28 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 -- vim.diagnostic.config({virtual_text = false})
 
 lvim.plugins = {
-  {"tpope/vim-fugitive"}, -- git plugin
-  {"mechatroner/rainbow_csv"}, -- csv highlighter and query engine
-  {"tpope/vim-obsession"}, -- self managing n?vim sessions (Session.vim w/ :Obsession <file_name.vim>?/:Obsession! (start/discard current session respectively))
-  {"eddyekofo94/gruvbox-flat.nvim"}, -- color theme
+  { "tpope/vim-fugitive" },          -- git plugin
+  { "mechatroner/rainbow_csv" },     -- csv highlighter and query engine
+  { "tpope/vim-obsession" },         -- self managing n?vim sessions (Session.vim w/ :Obsession <file_name.vim>?/:Obsession! (start/discard current session respectively))
+  { "eddyekofo94/gruvbox-flat.nvim" }, -- color theme
   {
-  "norcalli/nvim-colorizer.lua",
+    "norcalli/nvim-colorizer.lua",
     config = function()
       require("colorizer").setup({ "css", "scss", "html", "javascript" }, {
-          RGB = true, -- #RGB hex codes
-          RRGGBB = true, -- #RRGGBB hex codes
-          RRGGBBAA = true, -- #RRGGBBAA hex codes
-          rgb_fn = true, -- CSS rgb() and rgba() functions
-          hsl_fn = true, -- CSS hsl() and hsla() functions
-          css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-          css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-          })
-  end,
+        RGB = true,        -- #RGB hex codes
+        RRGGBB = true,     -- #RRGGBB hex codes
+        RRGGBBAA = true,   -- #RRGGBBAA hex codes
+        rgb_fn = true,     -- CSS rgb() and rgba() functions
+        hsl_fn = true,     -- CSS hsl() and hsla() functions
+        css = true,        -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn = true,     -- Enable all CSS *functions*: rgb_fn, hsl_fn
+      })
+    end,
   },
-  {"nvim-treesitter/nvim-treesitter-context"}, -- pin the function/class/interface/enum name to top line if inside that thing
+  { "nvim-treesitter/nvim-treesitter-context" }, -- pin the function/class/interface/enum name to top line if inside that thing
 }
 
-require'colorizer'.setup()
+require 'colorizer'.setup()
 
 lvim.colorscheme = "gruvbox-flat"
 -- lvim.colorscheme = "tokyonight-night"
@@ -374,87 +374,87 @@ local dap = require('dap')
 --     I havnt had success with this method
 -- try rerunning the lvim installer
 dap.adapters.python = {
-  type = 'executable';
+  type = 'executable',
   -- May have to hardcode this to your python in your venv if it doesnt seem to work
   command = (os.getenv("VIRTUAL_ENV") or os.getenv('HOME') .. '/.pyenv/shims/python'),
   -- TODO: in your venv: pip install debugpy
-  args = { '-m', 'debugpy.adapter' };
+  args = { '-m', 'debugpy.adapter' },
 }
 
 -- NOTE: delete this config if it looks like your debugger is looking at the wrong python to confirm its using this config
 -- set filetype=python if your filetype in vim isnt python already. thats how it maps which config to use
 dap.configurations.python = {
   {
-    type = 'python';
-    request = 'launch';
-    name = "Launch file";
-    program = "${file}";
+    type = 'python',
+    request = 'launch',
+    name = "Launch file",
+    program = "${file}",
     pythonPath = function()
       -- May have to hardcode this to your python in your venv if it doesnt seem to work
       return (os.getenv("VIRTUAL_ENV") or os.getenv('HOME') .. '/.pyenv/shims/python')
-    end;
+    end,
   },
 }
 
 -- NOTE: chrome has to be started with a remote debugging port google-chrome-stable --remote-debugging-port=9222
 -- chrome_debug_open
 dap.adapters.chrome = {
-    type = "executable",
-    command = "node",
-    -- TODO: switch to mason managed dap
-    args = {os.getenv("HOME") .. "/dev/microsoft/vscode-chrome-debug/out/src/chromeDebug.js",  "--server=9222"}
+  type = "executable",
+  command = "node",
+  -- TODO: switch to mason managed dap
+  args = { os.getenv("HOME") .. "/dev/microsoft/vscode-chrome-debug/out/src/chromeDebug.js", "--server=9222" }
 }
 
 dap.configurations.javascriptreact = {
-    {
-        type = "chrome",
-        request = "attach",
-        program = "${file}",
-        cwd = vim.fn.getcwd(),
-        sourceMaps = true,
-        protocol = "inspector",
-        port = 9222,
-        -- urlFilter = "http://localhost:3000/*",
-        -- url = "http://localhost:3000",
-        webRoot = "${workspaceFolder}"
-    }
+  {
+    type = "chrome",
+    request = "attach",
+    program = "${file}",
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = "inspector",
+    port = 9222,
+    -- urlFilter = "http://localhost:3000/*",
+    -- url = "http://localhost:3000",
+    webRoot = "${workspaceFolder}"
+  }
 }
 
 dap.configurations.typescriptreact = {
-    {
-        type = "chrome",
-        request = "attach",
-        program = "${file}",
-        cwd = vim.fn.getcwd(),
-        sourceMaps = true,
-        protocol = "inspector",
-        port = 9222,
-        -- urlFilter = "http://localhost:3000/*",
-        -- url = "http://localhost:3000",
-        webRoot = "${workspaceFolder}"
-    }
+  {
+    type = "chrome",
+    request = "attach",
+    program = "${file}",
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = "inspector",
+    port = 9222,
+    -- urlFilter = "http://localhost:3000/*",
+    -- url = "http://localhost:3000",
+    webRoot = "${workspaceFolder}"
+  }
 }
 
 dap.configurations.javascript = {
-    {
-        type = "chrome",
-        request = "attach",
-        program = "${file}",
-        cwd = vim.fn.getcwd(),
-        sourceMaps = true,
-        protocol = "inspector",
-        port = 9222,
-        -- urlFilter = "http://localhost:3000/*",
-        -- url = "http://localhost:3000",
-        webRoot = "${workspaceFolder}"
-    }
+  {
+    type = "chrome",
+    request = "attach",
+    program = "${file}",
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = "inspector",
+    port = 9222,
+    -- urlFilter = "http://localhost:3000/*",
+    -- url = "http://localhost:3000",
+    webRoot = "${workspaceFolder}"
+  }
 }
 
 dap.adapters.node2 = {
   type = 'executable',
   command = 'node',
   -- TODO: switch to mason managed dap
-  args = {os.getenv('HOME') .. '/dev/microsoft/vscode-node-debug2/out/src/nodeDebug.js'},
+  args = { os.getenv('HOME') .. '/dev/microsoft/vscode-node-debug2/out/src/nodeDebug.js' },
 }
 dap.configurations.javascript = {
   {
@@ -472,50 +472,50 @@ dap.configurations.javascript = {
     name = 'Attach to process',
     type = 'node2',
     request = 'attach',
-    processId = require'dap.utils'.pick_process,
+    processId = require 'dap.utils'.pick_process,
   },
 }
 
 dap.configurations.typescript = {
-    {
-        type = "chrome",
-        request = "attach",
-        program = "${file}",
-        cwd = vim.fn.getcwd(),
-        sourceMaps = true,
-        protocol = "inspector",
-        port = 9222,
-        -- urlFilter = "http://localhost:3000/*",
-        -- url = "http://localhost:3000",
-        webRoot = "${workspaceFolder}"
-    }
+  {
+    type = "chrome",
+    request = "attach",
+    program = "${file}",
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = "inspector",
+    port = 9222,
+    -- urlFilter = "http://localhost:3000/*",
+    -- url = "http://localhost:3000",
+    webRoot = "${workspaceFolder}"
+  }
 }
 
 dap.adapters.bashdb = {
-  type = 'executable';
-  command = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/bash-debug-adapter';
-  name = 'bashdb';
+  type = 'executable',
+  command = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/bash-debug-adapter',
+  name = 'bashdb',
 }
 
 dap.configurations.sh = {
   {
-    type = 'bashdb';
-    request = 'launch';
-    name = "Launch file";
-    showDebugOutput = true;
-    pathBashdb = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb';
-    pathBashdbLib = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir';
-    trace = true;
-    file = "${file}";
-    program = "${file}";
-    cwd = '${workspaceFolder}';
-    pathCat = "cat";
-    pathBash = "/usr/local/bin/bash";
-    pathMkfifo = "mkfifo";
-    pathPkill = "pkill";
-    args = {};
-    env = {};
-    terminalKind = "integrated";
+    type = 'bashdb',
+    request = 'launch',
+    name = "Launch file",
+    showDebugOutput = true,
+    pathBashdb = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb',
+    pathBashdbLib = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir',
+    trace = true,
+    file = "${file}",
+    program = "${file}",
+    cwd = '${workspaceFolder}',
+    pathCat = "cat",
+    pathBash = "/usr/local/bin/bash",
+    pathMkfifo = "mkfifo",
+    pathPkill = "pkill",
+    args = {},
+    env = {},
+    terminalKind = "integrated",
   }
 }
 
@@ -528,8 +528,8 @@ local orig_notify = vim.notify
 local filter_notify = function(text, level, opts)
   -- more specific to this case
   if type(text) == "string" and (string.find(text, "get_query", 1, true) or string.find(text, "get_node_text", 1, true)) then
-  -- for all deprecated and stack trace warnings
-  -- if type(text) == "string" and (string.find(text, ":help deprecated", 1, true) or string.find(text, "stack trace", 1, true)) then
+    -- for all deprecated and stack trace warnings
+    -- if type(text) == "string" and (string.find(text, ":help deprecated", 1, true) or string.find(text, "stack trace", 1, true)) then
     return
   end
   orig_notify(text, level, opts)
