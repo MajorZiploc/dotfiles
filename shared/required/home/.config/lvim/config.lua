@@ -182,6 +182,84 @@ lvim.keys.normal_mode['<bs>'] = "<CMD>noh<CR>"
 
 lvim.builtin.which_key.mappings['w'] = nil
 
+lvim.builtin.telescope.defaults = {
+  file_ignore_patterns = { ".git/", "node_modules" },
+  layout_config = {
+    preview_width = 0.6,
+    prompt_position = "top",
+  },
+  path_display = { truncate = 1 },
+  prompt_position = "top",
+  prompt_prefix = " ",
+  selection_caret = " ",
+  sorting_strategy = "ascending",
+  -- TODO: where to put these options?
+  -- use_highlighter = false,
+  -- minimum_grep_characters = 3,
+  vimgrep_arguments = {
+    'rg',
+    '--color=never',
+    '--no-heading',
+    '--with-filename',
+    '--line-number',
+    '--column',
+    '--smart-case',
+  },
+}
+
+-- Example of writing fn and using in a key binding
+-- local function blank_grep_string_search ()
+--   require('telescope.builtin').grep_string({ search = '' })
+-- end
+-- lvim.keys.normal_mode['<leader>fa'] = blank_grep_string_search
+
+lvim.builtin.telescope.pickers = {
+  grep_string = {
+    search = '',
+    only_sort_text = true,
+    additional_args = function(opts)
+      return { "--hidden" }
+    end
+  },
+  find_files = {
+    prompt_prefix = " ",
+    find_command = { "rg", "--files", "--hidden" },
+  },
+  live_grep = {
+    only_sort_text = true,
+    additional_args = function(opts)
+      return { "--hidden" }
+    end
+  },
+  buffers = {
+    sort_mru = true,
+    prompt_prefix = "﬘ ",
+  },
+  commands = {
+    prompt_prefix = " ",
+  },
+  git_files = {
+    prompt_prefix = " ",
+    show_untracked = true,
+  },
+}
+
+-- lvim.builtin.telescope.defaults.layout_strategy = "horizontal"
+
+local _, actions = pcall(require, "telescope.actions")
+lvim.builtin.telescope.defaults.mappings = {
+  i = {
+    ["<C-j>"] = actions.move_selection_next,
+    ["<C-k>"] = actions.move_selection_previous,
+    ["<C-n>"] = actions.cycle_history_next,
+    ["<C-p>"] = actions.cycle_history_prev,
+  },
+  n = {
+    ["<C-j>"] = actions.move_selection_next,
+    ["<C-k>"] = actions.move_selection_previous,
+  },
+}
+
 lvim.keys.normal_mode['<C-p>'] = require("lvim.core.telescope.custom-finders").find_project_files
 lvim.builtin.which_key.mappings['f'] = nil
 lvim.keys.normal_mode['<leader>fb'] = "<CMD>Telescope buffers<CR>"
@@ -276,84 +354,6 @@ lvim.builtin.which_key.mappings["v"] = {
 
 lvim.keys.normal_mode[']g'] = "<CMD>Gitsigns next_hunk<CR>"
 lvim.keys.normal_mode['[g'] = "<CMD>Gitsigns prev_hunk<CR>"
-
-lvim.builtin.telescope.defaults = {
-  file_ignore_patterns = { ".git/", "node_modules" },
-  layout_config = {
-    preview_width = 0.6,
-    prompt_position = "top",
-  },
-  path_display = { truncate = 1 },
-  prompt_position = "top",
-  prompt_prefix = " ",
-  selection_caret = " ",
-  sorting_strategy = "ascending",
-  -- TODO: where to put these options?
-  -- use_highlighter = false,
-  -- minimum_grep_characters = 3,
-  vimgrep_arguments = {
-    'rg',
-    '--color=never',
-    '--no-heading',
-    '--with-filename',
-    '--line-number',
-    '--column',
-    '--smart-case',
-  },
-}
-
--- Example of writing fn and using in a key binding
--- local function blank_grep_string_search ()
---   require('telescope.builtin').grep_string({ search = '' })
--- end
--- lvim.keys.normal_mode['<leader>fa'] = blank_grep_string_search
-
-lvim.builtin.telescope.pickers = {
-  grep_string = {
-    search = '',
-    only_sort_text = true,
-    additional_args = function(opts)
-      return { "--hidden" }
-    end
-  },
-  find_files = {
-    prompt_prefix = " ",
-    find_command = { "rg", "--files", "--hidden" },
-  },
-  live_grep = {
-    only_sort_text = true,
-    additional_args = function(opts)
-      return { "--hidden" }
-    end
-  },
-  buffers = {
-    sort_mru = true,
-    prompt_prefix = "﬘ ",
-  },
-  commands = {
-    prompt_prefix = " ",
-  },
-  git_files = {
-    prompt_prefix = " ",
-    show_untracked = true,
-  },
-}
-
--- lvim.builtin.telescope.defaults.layout_strategy = "horizontal"
-
-local _, actions = pcall(require, "telescope.actions")
-lvim.builtin.telescope.defaults.mappings = {
-  i = {
-    ["<C-j>"] = actions.move_selection_next,
-    ["<C-k>"] = actions.move_selection_previous,
-    ["<C-n>"] = actions.cycle_history_next,
-    ["<C-p>"] = actions.cycle_history_prev,
-  },
-  n = {
-    ["<C-j>"] = actions.move_selection_next,
-    ["<C-k>"] = actions.move_selection_previous,
-  },
-}
 
 -- ################## DAP BEGIN ###########################
 
