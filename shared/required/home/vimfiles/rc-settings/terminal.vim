@@ -145,3 +145,7 @@ autocmd BufNewFile,BufRead *.fsx set filetype=fsharp
 
 " Navigate to file: Allows open of non-existent files aswell
 map <leader>nf :edit <cfile><cr>
+
+" Reselect visual selection after indenting
+vnoremap < <gv
+vnoremap > >gv
