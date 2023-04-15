@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 function main {
   local script_path; script_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
