@@ -24,7 +24,7 @@
 function main {
   local method="$1"; method="${method:-"install"}";
   if [[ "$method" == "install" ]]; then
-    cargo install cargo-update ripgrep du-dust exa bat sccache;
+    cargo install cargo-update ripgrep du-dust exa bat sccache cargo-outdated;
   else
     # command from cargo-update package
     cargo install-update -a;
