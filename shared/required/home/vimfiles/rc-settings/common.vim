@@ -111,3 +111,6 @@ imap <c-[> <esc>
 " Reselect visual selection after indenting
 vnoremap < <gv
 vnoremap > >gv
+
+" repeat dot command on a visual selection
+xmap <silent> . :normal .<cr>
