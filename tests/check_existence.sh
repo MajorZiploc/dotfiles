@@ -13,7 +13,6 @@ function typea_check(){
   l=(
   "find_files"
   "h"
-  "show_env_notes"
   "tmuxcs"
   "tmuxps"
   "tmuxds"
@@ -84,8 +83,6 @@ function typea_check(){
   "snip_pwsh_init_module"
   "snip_pwsh_init_script"
   "show_cheat_sheet"
-  "parse_json_fields"
-  "parse_csv_fields"
   "convert_csv_to_json"
   "csv_delimiter_check_single_line"
   "rest_get"
@@ -94,8 +91,6 @@ function typea_check(){
   "rest_delete"
   "rest_generic"
   "cdfp"
-  "ideh1"
-  "idev1"
   "cdp"
   "vim_session"
   )
@@ -128,6 +123,7 @@ function typea_check(){
   "space_to_camel"
   "to_lower"
   "to_upper"
+  "to_title_case"
   "rtrim"
   "ltrim"
   "trim"

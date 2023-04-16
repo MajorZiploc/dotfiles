@@ -13,7 +13,6 @@ export NODE_TLS_REJECT_UNAUTHORIZED=0
 
 export GIT_ORIGIN_BRANCH_CHOICES=(`echo "develop dev staging" | xargs`)
 export GIT_DESTINATION_BRANCH_CHOICES=(`echo "main master " | xargs`)
-export GIT_DONT_ADD="just.bash *compose*.yml *compose*.yaml .env* .vim/* .devcontainer/* .vscode/*";
 
 export FIND_DEFAULT_IGNORE_DIRS=('bin' 'obj' '.git' '.svn' 'node_modules' '.ionide' '.venv' '__pycache__');
 
