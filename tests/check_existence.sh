@@ -111,7 +111,6 @@ function typea_check(){
   "tmuxls"
   #"clip"
   #"clipp"
-  "show_path"
   "rev_chars"
   "rev_lines"
   "toggle_case"
