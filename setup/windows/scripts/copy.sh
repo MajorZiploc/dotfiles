@@ -24,7 +24,7 @@ all="$((2#111))"
   rm "$winterm_settings";
 }
 
-cp ~/.config/nvim/init.vim /AppData/Local/nvim/init.vim;
+cp ~/.config/nvim/init.vim ~/AppData/Local/nvim/init.vim;
 
 unset winterm_ubuntu_background_image_path_placeholder;
 unset home_wallpapers;
