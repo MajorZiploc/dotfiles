@@ -82,14 +82,6 @@ alias reexe='fc -s'
 alias v='vim . -S Session.vim';
 alias gv='vim . -S Session.vim "+:horizontal topleft Git"';
 
-alias show_fn_names='declare -F'
-alias show_fn_impls='declare -f'
-
-alias back='cd ~-'
-
-# requires <npm i gnomon -g> for the current user
-alias time_js='gnomon'
-
 alias git_merge_keep_theirs="git merge -X theirs"
 alias git_log_break_down="git log --stat --oneline --decorate"
 alias git_graph="git log --oneline --decorate --all --graph"
