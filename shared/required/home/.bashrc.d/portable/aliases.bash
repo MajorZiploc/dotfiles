@@ -4,9 +4,6 @@ alias tmuxks="tmux kill-session"
 alias tmuxksvr="tmux kill-server"
 alias tmuxls="tmux ls"
 
-# View path directories alias
-alias show_path='echo $PATH | tr ":" "\n"'
-
 # text manipulation aliaes
 alias rev_chars='perl -F"" -anle "print reverse @F" | perl -ple "s/^\r//"'
 alias rev_lines='tac'
@@ -33,11 +30,10 @@ alias keep_first='cat | awk "!x[\$0]++" | cat'
 alias add_semicolons='sed -E "s/(.+)/\1;/;s/;;$/;/;"'
 alias to_title_case='sed -E "s/\b\(.\)/\u\1/g"'
 
-
 # Converts a string to a fuzzy search pattern
 alias to_fuzz='sed -E "s/(\\w)/\\1\[^\[:blank:\]\]{0,3}/g" | sed "s/\[^\[:blank:\]\]{0,3}$//g"'
-alias to_newlines='tr " " "\n"'
-alias bln="to_newlines"
+alias space_to_newlines='tr " " "\n"'
+alias colon_to_newline='tr ":" "\n"'
 
 # bash_surround_expression
 alias bse='sed -E "s,(.+),\"\$(\1)\","'
@@ -82,11 +78,6 @@ alias show_root_folder="sed -E 's,^\./([^/]*?).*,\1,'"
 
 # reexecutes last command that beings with a pattern. ex: fc -s grep -E
 alias reexe='fc -s'
-
-alias vimi='vim -u NONE'
-alias vimc='vim -u ~/vimfiles/rc-settings/common.vim'
-alias vimt='vim -u ~/vimfiles/rc-settings/terminal.vim'
-alias vimnp='vim --noplugin'
 
 alias v='vim . -S Session.vim';
 alias gv='vim . -S Session.vim "+:horizontal topleft Git"';
