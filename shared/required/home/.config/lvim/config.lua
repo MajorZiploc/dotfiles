@@ -22,6 +22,10 @@ lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
+-- TODO: consider if we really need to install these upfront
+-- usually they are installed as you go to files that match various filetypes
+-- this list usually just causes errors of various OS'es
+-- maybe trim it down to the bare minimum
 -- Syntax highlighting
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
@@ -69,6 +73,10 @@ lvim.builtin.treesitter.highlight.enable = true
 -- }
 
 -- This should be the same as the above
+-- TODO: consider if we really need to install these upfront
+-- usually they are installed as you go to files that match various filetypes
+-- this list usually just causes errors of various OS'es
+-- maybe trim it down to the bare minimum
 require("mason-lspconfig").setup {
   ensure_installed = {
     "rust_analyzer",
@@ -519,17 +527,18 @@ dap.configurations.sh = {
 
 -- ################## DAP END ###########################
 
--- PATCH: in order to address the message:
--- vim.treesitter.query.get_query() is deprecated, use vim.treesitter.query.get() instead. :help deprecated
---   This feature will be removed in Nvim version 0.10
+-- PATCH: annoying error and warning notifications
 local orig_notify = vim.notify
 local filter_notify = function(text, level, opts)
-  -- more specific to this case
+  -- vim.treesitter.query.get_query() is deprecated, use vim.treesitter.query.get() instead. :help deprecated
+  --   This feature will be removed in Nvim version 0.10
   if type(text) == "string" and (string.find(text, "get_query", 1, true) or string.find(text, "get_node_text", 1, true)) then
-    -- for all deprecated and stack trace warnings
-    -- if type(text) == "string" and (string.find(text, ":help deprecated", 1, true) or string.find(text, "stack trace", 1, true)) then
     return
   end
+  -- for all deprecated and stack trace warnings
+  -- if type(text) == "string" and (string.find(text, ":help deprecated", 1, true) or string.find(text, "stack trace", 1, true)) then
+  --   return
+  -- end
   orig_notify(text, level, opts)
 end
 vim.notify = filter_notify
