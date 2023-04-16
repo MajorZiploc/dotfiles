@@ -145,3 +145,6 @@ autocmd BufNewFile,BufRead *.fsx set filetype=fsharp
 
 " Navigate to file: Allows open of non-existent files aswell
 map <leader>nf :edit <cfile><cr>
+
+" save all dirty buffers
+nmap <c-s> :wa<cr>
