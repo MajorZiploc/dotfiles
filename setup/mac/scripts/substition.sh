@@ -31,8 +31,6 @@ fuzzy_finder_cdf_placeholder="fzf";
 find -E "$temp_shared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,FUZZY_FINDER_CDF_PLACEHOLDER,$fuzzy_finder_cdf_placeholder,g" "{}" \;
 fuzzy_finder_placeholder="fzf";
 find -E "$temp_shared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,FUZZY_FINDER_PLACEHOLDER,$fuzzy_finder_placeholder,g" "{}" \;
-extra_env_checks_placeholder="which fzf 2>\&1 2>/dev/null >/dev/null; [[ \"\$?\" != \"0\" ]] \&\& { ENV_NOTES=\"\$ENV_NOTES:Missing fzf (fuzzy finder)\"; }\nwhich python3 2>\&1 2>/dev/null >/dev/null; [[ \"\$?\" != \"0\" ]] \&\& { ENV_NOTES=\"\$ENV_NOTES:Missing python v3 \"; }\n";
-find -E "$temp_shared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,EXTRA_ENV_CHECKS_PLACEHOLDER,$extra_env_checks_placeholder,g" "{}" \;
 coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright', 'coc-sql', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-sh', 'coc-rust-analyzer', 'coc-omnisharp', 'coc-solargraph', 'coc-phpls', 'coc-java', 'coc-go', 'coc-explorer']";
 find -E "$temp_shared" -iregex ".*coc.*" -type f -exec gsed -E -i'' "s/COC_PLUGINS_PLACEHOLDER/$coc_plugins_placeholder/g" "{}" \;
 vim_bash_env_placeholder='"~/vimfiles/bash_env.bash"';
@@ -51,7 +49,6 @@ unset vim_plugin_settings
 unset tmuxps_paths_array_placeholder
 unset fuzzy_finder_placeholder
 unset fuzzy_finder_cdf_placeholder
-unset extra_env_checks_placeholder
 unset coc_plugins_placeholder
 unset vim_bash_env_placeholder
 unset vsc_settings_destination_placeholder

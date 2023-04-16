@@ -34,6 +34,5 @@ function refresh_settings {
   echo "$(git show --summary)";
   echo '';
   cd ~-;
-  show_env_notes;
 }
 

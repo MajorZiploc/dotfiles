@@ -6,30 +6,6 @@ function h {
   history | tail -n "$n";
 }
 
-function _extra_env_checks {
-EXTRA_ENV_CHECKS_PLACEHOLDER
-}
-
-function show_env_notes {
-  export ENV_NOTES="";
-  # Dependency checks
-  which npm >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing npm (node package manager)"; }
-  which tmux >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing tmux (terminal multiplexier)"; }
-  which pwsh >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing pwsh (cross platform powershell)"; }
-  which gnomon >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing gnomon (npm package) for calculating time taking for commands"; }
-  which prettier >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing prettier (npm package) for formatting various file formats"; }
-  which concurrently >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing concurrently (npm package) for running multiple commands that hang a terminal without multiple terminals"; }
-  which trash >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing trash-cli (npm package) safer rm"; }
-  which rg >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing rg (ripgrep) a file content search utility"; }
-  [[ -z $(dotnet --version 2>/dev/null | grep -E "^6") ]] && { ENV_NOTES="$ENV_NOTES:Missing dotnet v6 (cross platform dotnet cli tooling)"; }
-  which just >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing just (a command runner for Justfiles)"; }
-  which asdf >/dev/null 2>&1; [[ "$?" != "0" ]] && { ENV_NOTES="$ENV_NOTES:Missing asdf (a general programming language version manager)"; }
-  _extra_env_checks;
-  # final check on environment
-  [[ -z "$ENV_NOTES" ]] && { ENV_NOTES="No missing dependencies! Setup is complete!"; }
-  echo $ENV_NOTES | tr ":" "\n" | grep -Ev "^\\s*$"
-}
-
 function vim_session {
   local default_session_name="./Session.vim";
   local session_name="${1:-"$default_session_name"}";
@@ -100,16 +76,6 @@ function tmuxds {
   local selected;
   selected=$(find . -maxdepth 1 -mindepth 1 -type d | FUZZY_FINDER_PLACEHOLDER);
   _tmux_session_list_helper "$session_name" "$selected";
-}
-
-function ideh1 {
-  # splits the window into 2 panes
-  tmux split-window -h -p 39;
-}
-
-function idev1 {
-  # splits the window into 2 panes
-  tmux split-window -v -p 30;
 }
 
 function show_machine_details {
@@ -852,14 +818,6 @@ function git_sweep {
   git branch -d $(git branch --merged | grep -Ev "(^\\*|^\\s*($exclude_branches)$)");
 }
 
-function git_add_all_kinda {
-  git add .;
-  dont_adds=($(echo "$GIT_DONT_ADD" | xargs));
-  for dont_add in ${dont_adds[@]}; do
-    git restore --staged "$dont_add";
-  done;
-}
-
 function show_script_path {
   local scriptpath; scriptpath="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
   echo "$scriptpath";
@@ -897,67 +855,6 @@ function show_cheat_sheet {
     }
     curl "cht.sh/$tool/$query";
   fi
-}
-
-function _parse_fields_helper {
-  local fields="$1";
-  local field_separator="$2";
-  function _parse_fields_helper_inner {
-    echo "$fields" | tr ":," "\n" | while read -d $'\n' field; do echo "\$(\$_.${field})${field_separator}"; done;
-  }
-  _parse_fields_helper_inner | perl -0777 -ple "s/(${field_separator})\$//" | tr -d "\n";
-}
-
-function _parse_fields_header_helper {
-  local fields="$1";
-  local field_separator="$2";
-  echo "$fields" | sed -E "s/[:,]/${field_separator}/g";
-}
-
-function parse_json_fields {
-  local json="$1";
-  local fields="$2";
-  local field_separator="$3";
-  local preprocessing_pwsh="$4";
-  field_separator="${field_separator:=","}";
-  preprocessing_pwsh="${preprocessing_pwsh:=""}";
-  [[ -z "$json" ]] && { echo "Must specify a json file or string\!" >&2; return 1; }
-  [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
-  _parse_fields_header_helper "$fields" "$field_separator";
-  local pwsh_fields; pwsh_fields=$(_parse_fields_helper "$fields" "$field_separator" | tr -d "\n");
-  if [[ -e "$json" ]]; then
-    pwsh -command "&{ \$js=Get-Content '$json' | ConvertFrom-Json; \$js $preprocessing_pwsh | % { Write-Host \"$pwsh_fields\"; }; }";
-  else
-    json=$(echo "$json" | tr -d "\n");
-    pwsh -command "&{ \$js=ConvertFrom-Json -InputObject '$json'; \$js $preprocessing_pwsh | % { Write-Host \"$pwsh_fields\"; }; }";
-  fi
-}
-
-function parse_csv_fields {
-  local csv="$1";
-  local fields="$2";
-  local field_separator="$3";
-  local preprocessing_pwsh="$4";
-  field_separator="${field_separator:=","}";
-  preprocessing_pwsh="${preprocessing_pwsh:=""}";
-  [[ -z "$csv" ]] && { echo "Must specify a csv file or string\!" >&2; return 1; }
-  [[ -z "$fields" ]] && { echo "Must specify fields! (list of fields delimited by commas or colons)" >&2; return 1; }
-  _parse_fields_header_helper "$fields" "$field_separator";
-  local pwsh_fields; pwsh_fields=$(_parse_fields_helper "$fields" "$field_separator");
-  if [[ -e "$csv" ]]; then
-    pwsh -command "&{ \$cs=Get-Content $csv | ConvertFrom-Csv; \$cs $preprocessing_pwsh | % { Write-Host \"$pwsh_fields\"; }; }";
-  else
-    rows=$(echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g');
-    rows=$(echo "$rows" | perl -0777 -ple "s/,\$//");
-    rows=$(echo "(" "$rows" ")");
-    pwsh -command "&{ \$cs=$rows | ConvertFrom-Csv; \$cs $preprocessing_pwsh | % { Write-Host \"$pwsh_fields\"; }; }";
-  fi
-}
-
-function to_title_case {
-  local phrase="$1";
-  [[ -z "$phrase" ]] && { echo "Must specify a phrase\!" >&2; return 1; }
-  echo "$phrase" | sed -E "s/\b\(.\)/\u\1/g";
 }
 
 function convert_csv_to_json {
