@@ -22,10 +22,12 @@ all="$((2#111))"
   sed -E -i'' "s/WINTERM_UBUNTU_BACKGROUND_IMAGE_PATH_PLACEHOLDER/$winterm_ubuntu_background_image_path_placeholder/g" "$winterm_settings";
   cp "$winterm_settings" "$HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json";
   rm "$winterm_settings";
-  unset winterm_ubuntu_background_image_path_placeholder
-  unset home_wallpapers
-  unset winterm_settings
 }
 
+cp ~/.config/nvim/init.vim /AppData/Local/nvim/init.vim;
+
+unset winterm_ubuntu_background_image_path_placeholder;
+unset home_wallpapers;
+unset winterm_settings;
 unset setup_root
 
