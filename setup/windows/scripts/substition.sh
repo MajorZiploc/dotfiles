@@ -31,7 +31,7 @@ coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright',
 find "$temp_shared" -regextype egrep -iregex ".*coc.*" -type f -exec sed -E -i'' "s/COC_PLUGINS_PLACEHOLDER/$coc_plugins_placeholder/g" "{}" \;
 vim_bash_env_placeholder='"~/vimfiles/bash_env.bash"';
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i'' "s,VIM_BASH_ENV_PLACEHOLDER,$vim_bash_env_placeholder,g" "{}" \;
-remove_coc="Plug 'neoclide/coc.nvim'";
+remove_coc="Plug 'neoclide\/coc.nvim'";
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i'' "/$remove_coc/d" "{}" \;
 
 unset vsvimpath;
