@@ -22,6 +22,10 @@ lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
+-- TODO: consider if we really need to install these upfront
+-- usually they are installed as you go to files that match various filetypes
+-- this list usually just causes errors of various OS'es
+-- maybe trim it down to the bare minimum
 -- Syntax highlighting
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
@@ -69,6 +73,10 @@ lvim.builtin.treesitter.highlight.enable = true
 -- }
 
 -- This should be the same as the above
+-- TODO: consider if we really need to install these upfront
+-- usually they are installed as you go to files that match various filetypes
+-- this list usually just causes errors of various OS'es
+-- maybe trim it down to the bare minimum
 require("mason-lspconfig").setup {
   ensure_installed = {
     "rust_analyzer",
