@@ -16,7 +16,7 @@ find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s
 vim_plugset_path="so ~/vimfiles/plugin-settings/";
 vim_plugin_settings="${vim_plugset_path}ctrlp.vim";
 # nvim specific plugins
-vim_plugin_include="${vim_plugin_include}\nif has\('nvim'\)\n  Plug 'glacambre/firenvim'\, \{ 'do': 'call firenvim#install\(0\)' \} \" use nvim in your browser for any text box\nendif";
+vim_plugin_settings="${vim_plugin_settings}\nif has\('nvim'\)\n  Plug 'glacambre/firenvim'\, \{ 'do': 'call firenvim#install\(0\)' \} \" use nvim in your browser for any text box\nendif";
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_PLACEHOLDER,$vim_plugin_settings,g" "{}" \;
 find "$temp_shared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,windows,g" "{}" \;
 vsc_settings_destination_placeholder="\$HOME/AppData/Roaming/Code/User/";
