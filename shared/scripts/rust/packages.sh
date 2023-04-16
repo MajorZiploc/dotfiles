@@ -13,6 +13,8 @@
 # zellij: tmux replacement
 # bacon: rust code check - like shellcheck - integrates with lsp's
 # cargo-watch: watcher for source code changes
+# cargo-update: cargo install-update command
+# cargo-outdated: cargo outdated command
 # porsmo: timer
 # gitui: git terminal gui
 # wiki-tui: A simple and easy to use Wikipedia Text User Interface
@@ -20,6 +22,7 @@
 # rtx-cli: tool for managing programming language and tool versions - like asdf
 # mprocs: simple tmux like watcher for long running processes
 # sccache: speed up rust build times by cacheing libs and code that didnt change since last time
+# bob-nvim: nvim version manager - doesnt allow for a global nvim. so all nvim versions must be managed by bob
 
 function main {
   local method="$1"; method="${method:-"install"}";
