@@ -107,6 +107,8 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     # cinst -y vim-tux
     # api manual testing
     # cinst -y postman
+    # neovim
+    cinst -y neovim
 }
 
 if (($optionsAsInt -band $WorkAsInt) -eq $WorkAsInt) {

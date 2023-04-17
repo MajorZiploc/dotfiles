@@ -7,6 +7,9 @@ setup_root="$1";
 
 flags="$2";
 
+home_dir="$3";
+home_dir="${home_dir:-"$HOME"}";
+
 temp="$setup_root/../temp";
 temp_shared="$temp/shared";
 temp_this="$temp/this";
@@ -21,22 +24,22 @@ for content_modifier in ${content_modifiers[@]}; do
   "$temp_shared/scripts/edit_files.sh" "$temp" "$temp_shared" "$temp_this" "$content_modifier";
 done;
 
-"$temp_shared/scripts/ensure_client_paths.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this" "$flags";
+"$temp_shared/scripts/ensure_client_paths.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this" "$flags" "${home_dir:?}";
 
-"$temp_shared/scripts/copy_content_to_client.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this" "$flags";
+"$temp_shared/scripts/copy_content_to_client.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this" "$flags" "${home_dir:?}";
 
 rm -r "${temp:?}/";
 
 function make_vim_sh_envs {
-  local zshenv="$HOME/vimfiles/bash_env.bash";
-  local bashenv="$HOME/vimfiles/bash_env.zsh";
+  local zshenv="${home_dir:?}/vimfiles/bash_env.bash";
+  local bashenv="${home_dir:?}/vimfiles/bash_env.zsh";
   local header="function main {";
   echo "$header" > "$zshenv";
   echo "$header" > "$bashenv";
   printf "shopt -s expand_aliases\n\n" >> "$zshenv";
   printf "setopt aliases\n\n" >> "$bashenv";
-  local snippets_file="$HOME/.bashrc.d/portable/snippets.bash";
-  local aliases_file="$HOME/.bashrc.d/portable/aliases.bash";
+  local snippets_file="${home_dir:?}/.bashrc.d/portable/snippets.bash";
+  local aliases_file="${home_dir:?}/.bashrc.d/portable/aliases.bash";
   local padding="#################################";
   local begin="BEGIN";
   local body; body=$({ echo "$padding $begin $snippets_file $padding"; cat "$snippets_file"; echo "$padding $begin $aliases_file $padding"; cat "$aliases_file"; });
@@ -48,11 +51,11 @@ function make_vim_sh_envs {
 }
 
 function make_slim_vimrc {
-  local slim_vimrc="$HOME/.slim_vimrc";
+  local slim_vimrc="${home_dir:?}/.slim_vimrc";
   local header="\" Meant for use when sshing/docker/k8s containers";
   echo "$header" > "$slim_vimrc";
-  local commonrc_file="$HOME/vimfiles/rc-settings/common.vim";
-  local terminalrc_file="$HOME/vimfiles/rc-settings/terminal.vim";
+  local commonrc_file="${home_dir:?}/vimfiles/rc-settings/common.vim";
+  local terminalrc_file="${home_dir:?}/vimfiles/rc-settings/terminal.vim";
   local padding="\" #################################";
   local begin="BEGIN";
   local body; body=$({ echo "$padding $begin $commonrc_file $padding"; cat "$commonrc_file"; echo "$padding $begin $terminalrc_file $padding"; cat "$terminalrc_file"; });
@@ -60,16 +63,16 @@ function make_slim_vimrc {
 }
 
 function make_all_in_one_shell_files {
-  local zshenv="$HOME/all_in_one.zsh";
-  local bashenv="$HOME/all_in_one.bash";
+  local zshenv="${home_dir:?}/all_in_one.zsh";
+  local bashenv="${home_dir:?}/all_in_one.bash";
   local padding="#################################";
   local begin="BEGIN";
-  local bash_body; bash_body=$(find "$HOME/.bashrc.d" -iname "*.bash" -type f -exec echo "$padding $begin {} $padding" \; -exec cat "{}" \; -exec echo "" \;);
+  local bash_body; bash_body=$(find "${home_dir:?}/.bashrc.d" -iname "*.bash" -type f -exec echo "$padding $begin {} $padding" \; -exec cat "{}" \; -exec echo "" \;);
   local zsh_body;
-  zsh_body=$(find "$HOME/.zshrc.d" -iname "*.zsh" -type f -exec echo "$padding $begin {} $padding" \; -exec cat "{}" \; -exec echo "" \;);
+  zsh_body=$(find "${home_dir:?}/.zshrc.d" -iname "*.zsh" -type f -exec echo "$padding $begin {} $padding" \; -exec cat "{}" \; -exec echo "" \;);
   zsh_body+="
 ";
-  zsh_body+=$(find "$HOME/.bashrc.d/portable" -iname "*.bash" -type f -exec echo "$padding $begin {} $padding" \; -exec cat "{}" \; -exec echo "" \;);
+  zsh_body+=$(find "${home_dir:?}/.bashrc.d/portable" -iname "*.bash" -type f -exec echo "$padding $begin {} $padding" \; -exec cat "{}" \; -exec echo "" \;);
   echo "$zsh_body" > "$zshenv";
   echo "$bash_body" > "$bashenv";
 }
@@ -78,7 +81,7 @@ make_vim_sh_envs;
 make_slim_vimrc;
 make_all_in_one_shell_files;
 
-microsoft_dev_tools="$HOME/dev/microsoft";
+microsoft_dev_tools="${home_dir:?}/dev/microsoft";
 chrome_debugger_dir="${microsoft_dev_tools}/vscode-chrome-debug";
 node_debugger_dir="${microsoft_dev_tools}/vscode-node-debug2";
 [[ ! -d  "$microsoft_dev_tools" ]] && { mkdir -p "$microsoft_dev_tools"; }
@@ -109,5 +112,6 @@ unset temp_this;
 unset temp;
 unset setup_root;
 unset flags;
+unset home_dir;
 unset content_modifiers;
 
