@@ -27,7 +27,7 @@ home_dir="${home_dir:-"$HOME"}";
   rm "$winterm_settings";
 }
 
-cp ~/.config/nvim/init.vim ~/AppData/Local/nvim/init.vim;
+cp "$home_dir/.config/nvim/init.vim" "$home_dir/AppData/Local/nvim/init.vim";
 
 unset winterm_ubuntu_background_image_path_placeholder;
 unset home_wallpapers;
