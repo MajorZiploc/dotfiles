@@ -32,8 +32,6 @@ alias to_title_case='sed -E "s/\b\(.\)/\u\1/g"'
 
 # Converts a string to a fuzzy search pattern
 alias to_fuzz='sed -E "s/(\\w)/\\1\[^\[:blank:\]\]{0,3}/g" | sed "s/\[^\[:blank:\]\]{0,3}$//g"'
-alias space_to_newlines='tr " " "\n"'
-alias colon_to_newline='tr ":" "\n"'
 
 # bash_surround_expression
 alias bse='sed -E "s,(.+),\"\$(\1)\","'

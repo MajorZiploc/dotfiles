@@ -92,7 +92,6 @@ function typea_check(){
   "rest_generic"
   "cdfp"
   "cdp"
-  "vim_session"
   )
   for funct in ${l[@]}; do
     run typea_check "$funct"
@@ -130,8 +129,6 @@ function typea_check(){
   "keep_first"
   "add_semicolons"
   "to_fuzz"
-  "space_to_newlines"
-  "colon_to_newlines"
   "bse"
   "bss"
   "blj"
