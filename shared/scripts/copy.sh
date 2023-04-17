@@ -47,6 +47,18 @@ function make_vim_sh_envs {
   echo "$footer" >> "$bashenv";
 }
 
+function make_slim_vimrc {
+  local slim_vimrc="$HOME/.slim_vimrc";
+  local header="\" Meant for use when sshing/docker/k8s containers";
+  echo "$header" > "$slim_vimrc";
+  local commonrc_file="$HOME/vimfiles/rc-settings/common.vim";
+  local terminalrc_file="$HOME/vimfiles/rc-settings/terminal.vim";
+  local padding="\" #################################";
+  local begin="BEGIN";
+  local body; body=$({ echo "$padding $begin $commonrc_file $padding"; cat "$commonrc_file"; echo "$padding $begin $terminalrc_file $padding"; cat "$terminalrc_file"; });
+  echo "$body" >> "$slim_vimrc";
+}
+
 function make_all_in_one_shell_files {
   local zshenv="$HOME/all_in_one.zsh";
   local bashenv="$HOME/all_in_one.bash";
@@ -63,6 +75,7 @@ function make_all_in_one_shell_files {
 }
 
 make_vim_sh_envs;
+make_slim_vimrc;
 make_all_in_one_shell_files;
 
 microsoft_dev_tools="$HOME/dev/microsoft";
