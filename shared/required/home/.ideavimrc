@@ -121,3 +121,6 @@ xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 " save all dirty buffers
 nmap <c-s> :wa<cr>
+
+" save and quite
+nmap <c-w><c-q> :wq<cr>
