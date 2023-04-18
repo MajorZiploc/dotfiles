@@ -29,6 +29,7 @@ alias keep_last='tac | awk "!x[\$0]++" | tac'
 alias keep_first='cat | awk "!x[\$0]++" | cat'
 alias add_semicolons='sed -E "s/(.+)/\1;/;s/;;$/;/;"'
 alias to_title_case='sed -E "s/\b(.)/\u\1/g"'
+alias to_less_blank_lines='perl -00 -pe '"'"'s/\n{2,}(?=[^\n])/"\n"/g'"'"
 
 # Converts a string to a fuzzy search pattern
 alias to_fuzz='sed -E "s/(\\w)/\\1\[^\[:blank:\]\]{0,3}/g" | sed "s/\[^\[:blank:\]\]{0,3}$//g"'
