@@ -37,6 +37,9 @@ inoremap <c-v> <esc>"+pa
 set scrolloff=8
 set incsearch
 
+" clear search highlight with Backspace
+nnoremap <silent> <bs> :noh<cr>
+
 nmap <leader><leader>s :vsc Tools.InvokeAceJumpCommand<cr>
 
 nmap gi :vsc Edit.GoToImplementation<cr>
