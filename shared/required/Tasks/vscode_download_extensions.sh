@@ -57,6 +57,8 @@ code --install-extension ms-python.vscode-pylance
 # javascript / typescript
 # run on save/edit
 ## code --install-extension wallabyjs.quokka-vscode
+## prettier typescript error blocks
+code --install-extension yoavbls.pretty-ts-errors
 
 # bash wsl
 # run inside ubuntu wsl container
