@@ -134,5 +134,9 @@ xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 " save all dirty buffers
 nmap <c-s> :wa<cr>
 
+function WriteIfPossibleThenQuitBuffer()
+  :w
+  :q!
+endfunction
 " save and quite
-nmap <c-w><c-q> :wq<cr>
+nmap <leader>wq :call WriteIfPossibleThenQuitBuffer()<cr>

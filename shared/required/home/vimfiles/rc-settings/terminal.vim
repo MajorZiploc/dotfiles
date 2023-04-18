@@ -149,8 +149,12 @@ map <leader>nf :edit <cfile><cr>
 " save all dirty buffers
 nmap <c-s> :wa<cr>
 
+function WriteIfPossibleThenQuitBuffer()
+  :w
+  :q!
+endfunction
 " save and quite
-nmap <c-w><c-q> :wq<cr>
+nmap <leader>wq :call WriteIfPossibleThenQuitBuffer()<cr>
 
 " line nuke
 nmap <leader>ln <cmd>%!to_less_blank_lines<cr>
