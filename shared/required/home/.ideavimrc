@@ -91,7 +91,7 @@ set ignorecase
 set smartcase
 set hlsearch
 " clear search highlight with Backspace
-nnoremap <silent> <bs> :noh<cr><bs>
+nnoremap <silent> <bs> :noh<cr>
 
 " max time between key presses to trigger a multi-key binding
 set timeoutlen=300
