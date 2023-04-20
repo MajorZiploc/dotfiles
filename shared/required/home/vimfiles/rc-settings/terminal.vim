@@ -176,5 +176,5 @@ function! GoToRecentBuffer(direction)
         echo "No " . a:direction . " file."
     endif
 endfunction
-nnoremap <leader>k :call GoToRecentBuffer('previous')<CR>
-nnoremap <leader>K :call GoToRecentBuffer('next')<CR>
+nnoremap <leader>o :call GoToRecentBuffer('previous')<CR>
+nnoremap <leader>i :call GoToRecentBuffer('next')<CR>
