@@ -4,7 +4,8 @@
 
 function main {
   if which lvim; then
-    lvim "+:PackerInstall" "+:PackerUpdate" 2>/dev/null;
+    # TODO: error here; this doesnt work, most update yourself in lvim for now
+    lvim --headless "+Lazy! sync" +qa;
   fi
   if which nvim; then
     nvim "+:PlugInstall" "+:PlugUpgrade" "+:PlugUpdate" "+:CocInstall" "+:CocUpdate" 2>/dev/null;
