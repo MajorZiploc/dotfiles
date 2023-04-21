@@ -28,29 +28,29 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 -- maybe trim it down to the bare minimum
 -- Syntax highlighting
 lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "c",
-  "cpp",
-  "css",
-  "diff",
-  "dockerfile",
-  "git_rebase",
-  "gitignore",
-  "html",
-  "java",
+  -- "bash",
+  -- "c",
+  -- "cpp",
+  -- "css",
+  -- "diff",
+  -- "dockerfile",
+  -- "git_rebase",
+  -- "gitignore",
+  -- "html",
+  -- "java",
   "javascript",
   "json",
-  "jsonc",
-  "kotlin",
+  -- "jsonc",
+  -- "kotlin",
   "lua",
   "python",
-  "rust",
-  "scss",
-  "sql",
-  "tsx",
+  -- "rust",
+  -- "scss",
+  -- "sql",
+  -- "tsx",
   "typescript",
   "vim",
-  "yaml",
+  -- "yaml",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -77,22 +77,22 @@ lvim.builtin.treesitter.highlight.enable = true
 -- usually they are installed as you go to files that match various filetypes
 -- this list usually just causes errors of various OS'es
 -- maybe trim it down to the bare minimum
-require("mason-lspconfig").setup {
-  ensure_installed = {
-    "rust_analyzer",
-    "jdtls",
-    "pyright",
-    "sqlls",
-    "tsserver",
-    "vimls",
-    "html",
-    "cssls",
-    "bashls",
-    "gopls",
-    "jsonls",
-    "grammarly",
-  },
-}
+-- require("mason-lspconfig").setup {
+--   ensure_installed = {
+--     "rust_analyzer",
+--     "jdtls",
+--     "pyright",
+--     "sqlls",
+--     "tsserver",
+--     "vimls",
+--     "html",
+--     "cssls",
+--     "bashls",
+--     "gopls",
+--     "jsonls",
+--     "grammarly",
+--   },
+-- }
 
 -- ---@usage disable automatic installation of servers
 -- lvim.lsp.installer.setup.automatic_installation = false
@@ -193,9 +193,13 @@ lvim.builtin.which_key.mappings['w'] = nil
 lvim.builtin.telescope.defaults = {
   file_ignore_patterns = { ".git/", "node_modules" },
   layout_config = {
-    preview_width = 0.6,
+    width = 0.9,
+    height = 0.9,
+    preview_width = 0.65,
     prompt_position = "top",
+    preview_cutoff = 40,
   },
+  layout_strategy = 'horizontal',
   path_display = { truncate = 1 },
   prompt_position = "top",
   prompt_prefix = " ",
@@ -527,21 +531,21 @@ dap.configurations.sh = {
 
 -- ################## DAP END ###########################
 
--- PATCH: annoying error and warning notifications
-local orig_notify = vim.notify
-local filter_notify = function(text, level, opts)
-  -- vim.treesitter.query.get_query() is deprecated, use vim.treesitter.query.get() instead. :help deprecated
-  --   This feature will be removed in Nvim version 0.10
-  if type(text) == "string" and (string.find(text, "get_query", 1, true) or string.find(text, "get_node_text", 1, true)) then
-    return
-  end
-  -- for all deprecated and stack trace warnings
-  -- if type(text) == "string" and (string.find(text, ":help deprecated", 1, true) or string.find(text, "stack trace", 1, true)) then
-  --   return
-  -- end
-  orig_notify(text, level, opts)
-end
-vim.notify = filter_notify
+-- -- PATCH: annoying error and warning notifications
+-- local orig_notify = vim.notify
+-- local filter_notify = function(text, level, opts)
+--   -- vim.treesitter.query.get_query() is deprecated, use vim.treesitter.query.get() instead. :help deprecated
+--   --   This feature will be removed in Nvim version 0.10
+--   if type(text) == "string" and (string.find(text, "get_query", 1, true) or string.find(text, "get_node_text", 1, true)) then
+--     return
+--   end
+--   -- for all deprecated and stack trace warnings
+--   -- if type(text) == "string" and (string.find(text, ":help deprecated", 1, true) or string.find(text, "stack trace", 1, true)) then
+--   --   return
+--   -- end
+--   orig_notify(text, level, opts)
+-- end
+-- vim.notify = filter_notify
 
 vim.cmd('set wrap')
 vim.cmd('source ~/vimfiles/plugin-settings/rainbow_csv.vim')
