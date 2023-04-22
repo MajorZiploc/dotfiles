@@ -148,7 +148,7 @@ This will update various package manager packages for things like pip, npm, and 
 - Can be caused if you do not have nodejs, npm, and yarn installed (npm should work too). Install these tools then then do the following:
 > cd ~/.vim/plugged/coc.nvim && yarn install
 
-### on open of vim or nvim: /usr/local/bin/bash or /usr/local/bin/zsh not found
+### on open of vim or nvim: ~/bin/bash or /usr/local/bin/zsh not found
 - This can occur if you have yet to set symbolic links to your bash or zsh
 > ./shared/scripts/vim_shell/set_shells.sh
 
