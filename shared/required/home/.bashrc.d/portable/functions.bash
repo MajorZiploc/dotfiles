@@ -236,25 +236,13 @@ function _find_default_ignored_dirs {
   _find_generate_not_paths "${FIND_DEFAULT_IGNORE_DIRS[@]}";
 }
 
-function _find_git_ignore_children_roots {
-  local search_depth_for_nested_git_ignores="$1";
-  search_depth_for_nested_git_ignores="${search_depth_for_nested_git_ignores:-"2"}";
-  [[ $search_depth_for_nested_git_ignores -ge 2 ]] && {
-    find . -mindepth "2" -maxdepth "$search_depth_for_nested_git_ignores" -name ".gitignore" -exec dirname "{}" \; ;
-  }
-}
-
 function _find_determine_child_search_roots {
   # only go 1 level into a .gitignore structure
   # if there is nested .gitignores past this, then only take the highest level for the search
   local search_depth_for_nested_git_ignores="$1";
   search_depth_for_nested_git_ignores="${search_depth_for_nested_git_ignores:-"2"}";
-  local child_git_ignore_roots; child_git_ignore_roots=($(_find_git_ignore_children_roots "$search_depth_for_nested_git_ignores"));
-  child_git_ignore_roots=(
-  ./tests/mock_content/pandas_data_analytics
-./tests/mock_content/FslabDataAnalytics/FslabDataAnalytics
-./tests/mock_content/FslabDataAnalytics
-)
+  [[ $search_depth_for_nested_git_ignores -lt 2 ]] && return;
+  local child_git_ignore_roots; child_git_ignore_roots=($(find . -mindepth "2" -maxdepth "$search_depth_for_nested_git_ignores" -name ".gitignore" -exec dirname "{}" \; ;));
   [[ 0 == ${#child_git_ignore_roots[@]} ]] && return;
   local child_git_ignore_roots_trimmed=();
   # TODO: change this index to 0 for bash
