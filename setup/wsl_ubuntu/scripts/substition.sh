@@ -10,7 +10,7 @@ temp_this="$4";
 
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")";
 find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" "{}" \;
-vim_shell='/usr/local/bin/bash';
+vim_shell='~/bin/bash';
 # NOTE: change to comment out the line containing VIM_SHELL_PLACEHOLDER if fzf starts erroring; commonly caused by bash_env file setting in vim if the env file has terminal output
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_SHELL_PLACEHOLDER,$vim_shell,g" "{}" \;
 vim_plugin_include="Plug 'junegunn/fzf'\, \{ 'do': \{ -> fzf#install\(\) \} \} \" fuzzy finder\nPlug 'junegunn/fzf.vim'\nPlug 'airblade/vim-rooter' \" to help fzf determine project root";
