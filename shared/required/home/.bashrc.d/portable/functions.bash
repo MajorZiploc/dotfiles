@@ -299,15 +299,8 @@ function _find_git_estimator_ignored_dirs {
     done;
      echo "$git_ignore_content";
   )";
-  # TODO: remove child_git_ignore_content from this fn
-  local child_git_ignore_content="";
-  [[ $search_depth_for_nested_git_ignores -ge 2 ]] && {
-    find . -mindepth "2" -maxdepth "$search_depth_for_nested_git_ignores" -name ".gitignore" -print0 | while read -d $'\0' _git_ignore; do
-      child_git_ignore_content+=$({ cat "$_git_ignore"; printf "\n"; });
-    done;
-  }
   local git_ignore_content gitignore_entries;
-  git_ignore_content=$({ echo "$get_ancestor_git_ignore_content"; echo "$child_git_ignore_content"; echo ".git .svn"; });
+  git_ignore_content=$({ echo "$get_ancestor_git_ignore_content"; echo ".git .svn"; });
   gitignore_entries=($(echo "$git_ignore_content" | sort -u | trim | grep -Ev "('|\"|;|#|\\!|,|\\{|\\}|\\@|\\||\\^|\\(|\\)|^[[:blank:]]*$|\\&|\\$|\\\\|~|\\+|\`|=|[^[:blank:]]+\.[^[:blank:]]{1,6}\$)" | tr " " "\n" | sed -E 's,^[/\*]*/,,g;s,/[/\*]*$,,g;' | xargs));
   # TODO: filter out duplicates
   gitignore_entries+=($(echo "${FIND_GIT_EXTRA_IGNORE_DIRS[@]}"));
