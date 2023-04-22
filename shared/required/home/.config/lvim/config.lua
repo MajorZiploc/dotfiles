@@ -548,6 +548,6 @@ dap.configurations.sh = {
 -- vim.notify = filter_notify
 
 vim.cmd('set wrap')
-vim.cmd('source ~/vimfiles/plugin-settings/rainbow_csv.vim')
-vim.cmd('source ~/vimfiles/rc-settings/terminal.vim')
+vim.cmd('source ~/.vim/plugin-settings/rainbow_csv.vim')
+vim.cmd('source ~/.slim_vimrc')
 vim.cmd('source ~/.vimrc_ext')

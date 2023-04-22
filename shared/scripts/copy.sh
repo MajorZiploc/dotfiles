@@ -31,8 +31,8 @@ done;
 rm -r "${temp:?}/";
 
 function make_vim_sh_envs {
-  local zshenv="${home_dir:?}/vimfiles/bash_env.bash";
-  local bashenv="${home_dir:?}/vimfiles/bash_env.zsh";
+  local zshenv="${home_dir:?}/.vim/bash_env.bash";
+  local bashenv="${home_dir:?}/.vim/bash_env.zsh";
   local header="function main {";
   echo "$header" > "$zshenv";
   echo "$header" > "$bashenv";
@@ -54,8 +54,8 @@ function make_slim_vimrc {
   local slim_vimrc="${home_dir:?}/.slim_vimrc";
   local header="\" Meant for use when sshing/docker/k8s containers";
   echo "$header" > "$slim_vimrc";
-  local commonrc_file="${home_dir:?}/vimfiles/rc-settings/common.vim";
-  local terminalrc_file="${home_dir:?}/vimfiles/rc-settings/terminal.vim";
+  local commonrc_file="${home_dir:?}/.vim/rc-settings/common.vim";
+  local terminalrc_file="${home_dir:?}/.vim/rc-settings/terminal.vim";
   local padding="\" #################################";
   local begin="BEGIN";
   local body; body=$({ echo "$padding $begin $commonrc_file $padding"; cat "$commonrc_file"; echo "$padding $begin $terminalrc_file $padding"; cat "$terminalrc_file"; });
