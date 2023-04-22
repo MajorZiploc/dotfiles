@@ -288,8 +288,6 @@ function _find_git_estimator_ignored_dirs {
   echo "$not_paths";
 }
 
-export FIND_DEFAULT_MAX_DEPTH=9;
-
 function _find_items_rename_helper {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
