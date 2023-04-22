@@ -35,7 +35,7 @@ function check_for_placeholder {
 }
 
 @test "$check vim plugin $phdoesntexist" {
-  files=`find ~/vimfiles/plugin-settings -maxdepth 1 -type f`;
+  files=`find ~/.vim/plugin-settings -maxdepth 1 -type f`;
   check_for_placeholder $files;
 }
 

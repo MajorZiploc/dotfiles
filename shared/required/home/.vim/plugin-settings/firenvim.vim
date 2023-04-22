@@ -1,4 +1,4 @@
-" NOTE: Meant to be used by ~/vimfiles/plugin-settings/firenvim.lua
+" NOTE: Meant to be used by ~/.vim/plugin-settings/firenvim.lua
 " This solution still doesnt work tho
 
 " Resize nvim

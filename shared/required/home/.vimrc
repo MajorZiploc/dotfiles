@@ -4,8 +4,8 @@ function! SourceIfExists(file)
   endif
 endfunction
 
-so ~/vimfiles/rc-settings/terminal.vim
-so ~/vimfiles/rc-settings/plugins.vim
+so ~/.vim/rc-settings/terminal.vim
+so ~/.vim/rc-settings/plugins.vim
 
 call SourceIfExists("~/.vimrc_ext")
 

@@ -13,7 +13,7 @@ find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,/bin/bash,g' "{}" \;
 vim_plugin_include="Plug 'ctrlpvim/ctrlp.vim' \" fuzzy file finder";
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_INCLUDE_PLACEHOLDER,$vim_plugin_include,g" "{}" \;
-vim_plugset_path="so ~/vimfiles/plugin-settings/"
+vim_plugset_path="so ~/.vim/plugin-settings/"
 vim_plugin_settings="${vim_plugset_path}ctrlp.vim";
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_PLACEHOLDER,$vim_plugin_settings,g" "{}" \;
 find "$temp_shared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,ubuntu,g" "{}" \;
@@ -29,7 +29,7 @@ extra_env_checks_placeholder="";
 find "$temp_shared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,EXTRA_ENV_CHECKS_PLACEHOLDER,$extra_env_checks_placeholder,g" "{}" \;
 coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright', 'coc-sql', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-sh']";
 find "$temp_shared" -regextype egrep -iregex ".*coc.*" -type f -exec sed -E -i'' "s/COC_PLUGINS_PLACEHOLDER/$coc_plugins_placeholder/g" "{}" \;
-vim_bash_env_placeholder='"~/vimfiles/bash_env.bash"';
+vim_bash_env_placeholder='"~/.vim/bash_env.bash"';
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i'' "s,VIM_BASH_ENV_PLACEHOLDER,$vim_bash_env_placeholder,g" "{}" \;
 
 find "$temp_shared" -regextype egrep -iregex ".*sh" -type f -exec sed -E -i'' "s,(export )(FCEDIT|EDITOR|VISUAL).*?,\1\2='vim'," "{}" \;

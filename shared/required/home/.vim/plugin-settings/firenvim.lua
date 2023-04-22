@@ -29,7 +29,7 @@ if vim.g.started_by_firenvim == true then
 --   augroup end
 -- ]])
 
-  -- vim.cmd('so ~/vimfiles/plugin-settings/firenvim.vim')
+  -- vim.cmd('so ~/.vim/plugin-settings/firenvim.vim')
 
   -- vim.api.nvim_create_autocmd({'UIEnter'}, {
   --   callback = function(event)

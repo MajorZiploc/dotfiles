@@ -28,6 +28,6 @@ filetype plugin indent on
 " leader key
 let mapleader = " "
 
-so ~/vimfiles/plugin-settings/coc.vim
+so ~/.vim/plugin-settings/coc.vim
 VIM_PLUGIN_SETTINGS_PLACEHOLDER
 

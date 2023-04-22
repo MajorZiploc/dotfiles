@@ -1,4 +1,4 @@
-so ~/vimfiles/rc-settings/common.vim
+so ~/.vim/rc-settings/common.vim
 
 " spellchecking
 " set spelllang=en_us

@@ -1,7 +1,7 @@
 # fc uses $FCEDIT, then $EDITOR, then vi
-export FCEDIT='vim -u ~/vimfiles/rc-settings/terminal.vim'
+export FCEDIT='vim -u ~/.vim/rc-settings/terminal.vim'
 # <c-x> <c-e> tries to use $VISUAL, then $EDITOR, and then emacs
-export VISUAL='vim -u ~/vimfiles/rc-settings/terminal.vim'
+export VISUAL='vim -u ~/.vim/rc-settings/terminal.vim'
 # the fall back to fc and <c-x> <c-e> 
 export EDITOR='vim'
 

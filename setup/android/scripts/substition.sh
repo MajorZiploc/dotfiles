@@ -17,7 +17,7 @@ vim_plugin_include="${vim_plugin_include}\nPlug 'tpope/vim-fugitive' \" git plug
 # nvim specific plugins
 vim_plugin_include="${vim_plugin_include}\nif has\('nvim'\)\n  Plug 'eddyekofo94/gruvbox-flat.nvim' \" color theme\n  Plug 'lewis6991/gitsigns.nvim' \" git gutter info\nendif";
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_INCLUDE_PLACEHOLDER,$vim_plugin_include,g" "{}" \;
-vim_plugset_path="so ~/vimfiles/plugin-settings/";
+vim_plugset_path="so ~/.vim/plugin-settings/";
 vim_plugin_settings="${vim_plugset_path}ctrlp.vim";
 # nvim specific settings
 vim_plugin_settings="$vim_plugin_settings\nif has\('nvim'\)\n  ${vim_plugset_path}gruvbox_flat.vim\n  ${vim_plugset_path}gitsigns.vim\nendif";
@@ -33,7 +33,7 @@ fuzzy_finder_placeholder="fzf";
 find "$temp_shared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,FUZZY_FINDER_PLACEHOLDER,$fuzzy_finder_placeholder,g" "{}" \;
 coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright', 'coc-sql', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-sh']";
 find "$temp_shared" -regextype egrep -iregex ".*coc.*" -type f -exec sed -E -i'' "s/COC_PLUGINS_PLACEHOLDER/$coc_plugins_placeholder/g" "{}" \;
-vim_bash_env_placeholder='"~/vimfiles/bash_env.bash"';
+vim_bash_env_placeholder='"~/.vim/bash_env.bash"';
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i'' "s,VIM_BASH_ENV_PLACEHOLDER,$vim_bash_env_placeholder,g" "{}" \;
 lvim_treesitter_and_mason_removals='"(sql(ls)?|rust(_analyzer)|gopls)",';
 find "$temp_shared" -regextype egrep -iregex ".*lvim.*" -type f -exec sed -E -i'' "/$lvim_treesitter_and_mason_removals/d" "{}" \;

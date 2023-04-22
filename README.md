@@ -119,8 +119,8 @@ Paths with content that will be affected include but are not limited to:
 - "$HOME/.vim/bundle/"
 - "$HOME/.vim/swap/"
 - "$HOME/.vim/coc-settings.json"
-- "$HOME/vimfiles/plugin-settings/"
-- "$HOME/vimfiles/rc-settings/"
+- "$HOME/.vim/plugin-settings/"
+- "$HOME/.vim/rc-settings/"
 - "$HOME/.prettierrc"
 - "$HOME/.prettierignore"
 - "$HOME/clipboard/" when flags contain "10"
@@ -161,9 +161,9 @@ This will update various package manager packages for things like pip, npm, and 
 - You can either remove the coc pluggin and pluggin settings or revert the plugin to a previous version
 
 #### Remove the plugin
-- delete the following lines from the ~/vimfiles/rc-settings/plugins.vim
+- delete the following lines from the ~/.vim/rc-settings/plugins.vim
 > Plug 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
-> so ~/vimfiles/plugin-settings/coc.vim
+> so ~/.vim/plugin-settings/coc.vim
 
 #### Revert the plugin to a previous version
 - This route will take more effort on your part
