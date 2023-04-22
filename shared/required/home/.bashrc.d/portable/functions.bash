@@ -206,20 +206,19 @@ function show_cmds_like_fuzz {
 }
 
 function cdfp {
-  local get_project_dir='
-    current_path=`pwd`;
-    project_dir=`pwd`;
+  local project_dir; project_dir="$(
+    current_path="$(pwd)";
+    project_dir="$(pwd)";
     while [[ ! "$current_path" == "/" ]] ; do
       [[ -d .git ]] && {
-        project_dir=`pwd`;
+        project_dir="$(pwd)";
         break;
       }
       cd ..;
-      current_path=`pwd`;
+      current_path="$(pwd)";
     done;
     echo "$project_dir";
-  '
-  project_dir=$(bash -c "$get_project_dir");
+  )";
   cd "$project_dir" || { echo "Unable to find project_dir\!" >&2; return 1; }
   cd "$(dirname `FUZZY_FINDER_CDF_PLACEHOLDER`)"  || { echo "Unable to find selected files directory\!" >&2; return 1; };
 }
@@ -288,8 +287,6 @@ function _find_git_estimator_ignored_dirs {
   fi
   echo "$not_paths";
 }
-
-export FIND_DEFAULT_MAX_DEPTH=9;
 
 function _find_items_rename_helper {
   local file_pattern="$1";

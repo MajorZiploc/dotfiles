@@ -19,3 +19,4 @@ export FIND_DEFAULT_IGNORE_DIRS=('bin' 'obj' '.git' '.svn' 'node_modules' '.ioni
 export FIND_GIT_EXTRA_IGNORE_DIRS=('node_modules' '.venv');
 export FIND_GIT_DEFAULT_CHILD_GITIGNORE_SEARCH_DEPTH="0";
 
+export FIND_DEFAULT_MAX_DEPTH=9;
