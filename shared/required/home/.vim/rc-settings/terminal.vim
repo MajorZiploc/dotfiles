@@ -1,5 +1,3 @@
-so ~/.vim/rc-settings/common.vim
-
 " spellchecking
 " set spelllang=en_us
 " set spell
