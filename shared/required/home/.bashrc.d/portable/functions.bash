@@ -606,7 +606,28 @@ function afind_files {
 
 function gfind_files {
   local not_paths; not_paths=$(_find_git_estimator_ignored_dirs);
-  _find_files_helper "$1" "$2" "$3" "$not_paths";
+  local child_search_roots; child_search_roots=($(_find_determine_child_search_roots "$4"));
+  local child_not_path_roots="";
+  for child_search_root in ${child_search_roots[@]}; do
+    child_not_path_roots="$child_not_path_roots -not -path '$child_search_root/*'";
+  done;
+  child_not_path_roots="${child_not_path_roots+" $child_not_path_roots"}";
+  echo "root not paths: ${not_paths}${child_not_path_roots}"
+  echo "----------Root Result"
+  _find_files_helper "$1" "$2" "$3" "${not_paths}${child_not_path_roots}";
+  for child_search_root in ${child_search_roots[@]}; do
+    if [[ -d "$child_search_root" ]]; then
+      echo "----------Results for $child_search_root"
+    (
+      cd "$child_search_root";
+      # This could be slightly optimized to use the exist not_paths var and glue on unread gitignore not paths to it
+      #   rathern than recreating the not paths from scratch for every child
+      local x="$(_find_git_estimator_ignored_dirs)";
+      echo "$x";
+      _find_files_helper "$1" "$2" "$3" "$x";
+    )
+    fi
+  done;
 }
 
 function find_files_fuzz {
