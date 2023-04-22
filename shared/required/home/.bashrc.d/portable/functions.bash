@@ -236,6 +236,63 @@ function _find_default_ignored_dirs {
   _find_generate_not_paths "${FIND_DEFAULT_IGNORE_DIRS[@]}";
 }
 
+function _find_git_ignore_children_roots {
+  local search_depth_for_nested_git_ignores="$1";
+  search_depth_for_nested_git_ignores="${search_depth_for_nested_git_ignores:-"2"}";
+  [[ $search_depth_for_nested_git_ignores -ge 2 ]] && {
+    find . -mindepth "2" -maxdepth "$search_depth_for_nested_git_ignores" -name ".gitignore" -exec dirname "{}" \; ;
+  }
+}
+
+function _find_determine_child_search_roots {
+  # only go 1 level into a .gitignore structure
+  # if there is nested .gitignores past this, then only take the highest level for the search
+  local search_depth_for_nested_git_ignores="$1";
+  search_depth_for_nested_git_ignores="${search_depth_for_nested_git_ignores:-"2"}";
+  local child_git_ignore_roots; child_git_ignore_roots=($(_find_git_ignore_children_roots "$search_depth_for_nested_git_ignores"));
+  child_git_ignore_roots=(
+  ./tests/mock_content/pandas_data_analytics
+./tests/mock_content/FslabDataAnalytics/FslabDataAnalytics
+./tests/mock_content/FslabDataAnalytics
+)
+  [[ 0 == ${#child_git_ignore_roots[@]} ]] && return;
+  local child_git_ignore_roots_trimmed=();
+  # TODO: change this index to 0 for bash
+  child_git_ignore_roots_trimmed+=(${child_git_ignore_roots[1]});
+  for child_git_ignore_root in ${child_git_ignore_roots[@]}; do
+    # TODO: change this index to 0 for bash
+    local i=1;
+    local should_add=0;
+    # TODO: change this -le to -lt for bash
+    while [ $i -le ${#child_git_ignore_roots_trimmed[@]} ]; do
+      if [[ "$child_git_ignore_root" = "${child_git_ignore_roots_trimmed[$i]}"* ]]; then
+        # dont add
+        # echo "no add ---"
+        # echo  "$child_git_ignore_root"
+        # echo "trimm entry ${child_git_ignore_roots_trimmed[$i]}"
+        ((i++));
+        should_add=1;
+        break;
+      fi
+      if [[ "${child_git_ignore_roots_trimmed[$i]}" = "$child_git_ignore_root"* ]]; then
+        # replace with parent entry
+        # echo "replace"
+        # echo  "$child_git_ignore_root"
+        # echo "trimm entry ${child_git_ignore_roots_trimmed[$i]}"
+        child_git_ignore_roots_trimmed[$i]="$child_git_ignore_root";
+        ((i++));
+        should_add=1;
+        break;
+      fi
+      ((i++));
+    done;
+    if [[ "$should_add" == "0" ]]; then
+      child_git_ignore_roots_trimmed+=("$child_git_ignore_root");
+    fi
+  done;
+  echo "${child_git_ignore_roots_trimmed[*]}";
+}
+
 function _find_git_estimator_ignored_dirs {
   local search_depth_for_nested_git_ignores=$1;
   search_depth_for_nested_git_ignores="${search_depth_for_nested_git_ignores:="$FIND_GIT_DEFAULT_CHILD_GITIGNORE_SEARCH_DEPTH"}";
@@ -254,6 +311,7 @@ function _find_git_estimator_ignored_dirs {
     done;
      echo "$git_ignore_content";
   )";
+  # TODO: remove child_git_ignore_content from this fn
   local child_git_ignore_content="";
   [[ $search_depth_for_nested_git_ignores -ge 2 ]] && {
     find . -mindepth "2" -maxdepth "$search_depth_for_nested_git_ignores" -name ".gitignore" -print0 | while read -d $'\0' _git_ignore; do
