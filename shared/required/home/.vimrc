@@ -4,7 +4,7 @@
 "   endif
 " endfunction
 
-so ~/.vim/rc-settings/terminal.vim
+so ~/.slim_vimrc
 so ~/.vim/rc-settings/plugins.vim
 so ~/.vimrc_ext
 

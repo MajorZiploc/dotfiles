@@ -549,6 +549,5 @@ dap.configurations.sh = {
 
 vim.cmd('set wrap')
 vim.cmd('source ~/.vim/plugin-settings/rainbow_csv.vim')
-vim.cmd('source ~/.vim/rc-settings/common.vim')
-vim.cmd('source ~/.vim/rc-settings/terminal.vim')
+vim.cmd('source ~/.slim_vimrc')
 vim.cmd('source ~/.vimrc_ext')
