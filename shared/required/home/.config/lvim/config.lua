@@ -547,6 +547,13 @@ dap.configurations.sh = {
 -- end
 -- vim.notify = filter_notify
 
+local solargraph = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/solargraph")
+if solargraph ~= "" then
+  -- solargraph is installed
+  -- required to make ruby lsp activate in ruby files
+  require('lvim.lsp.manager').setup('solargraph', {})
+end
+
 vim.cmd('set wrap')
 vim.cmd('source ~/.vim/plugin-settings/rainbow_csv.vim')
 vim.cmd('source ~/.slim_vimrc')
