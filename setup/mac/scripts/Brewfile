@@ -1,5 +1,9 @@
 # vim:ft=ruby
 
+tap "homebrew/cask"
+tap "buo/cask-upgrade"
+brew "mas"
+
 if OS.mac?
   # TODO: figure out what isnt needed or doesnt work on linux from below and put here
   true
