@@ -531,35 +531,41 @@ dap.configurations.sh = {
 
 -- ################## DAP END ###########################
 
--- -- PATCH: annoying error and warning notifications
--- local orig_notify = vim.notify
--- local filter_notify = function(text, level, opts)
---   -- vim.treesitter.query.get_query() is deprecated, use vim.treesitter.query.get() instead. :help deprecated
---   --   This feature will be removed in Nvim version 0.10
---   if type(text) == "string" and (string.find(text, "get_query", 1, true) or string.find(text, "get_node_text", 1, true)) then
---     return
---   end
---   -- for all deprecated and stack trace warnings
---   -- if type(text) == "string" and (string.find(text, ":help deprecated", 1, true) or string.find(text, "stack trace", 1, true)) then
---   --   return
---   -- end
---   orig_notify(text, level, opts)
+-- PATCH: annoying error and warning notifications
+local orig_notify = vim.notify
+local filter_notify = function(text, level, opts)
+  -- when opening python files, the notification comes up and pylyzer appears to never get installed
+  if type(text) == "string" and string.find(text, "Installation in progress for [pylyzer]", 1, true) then
+    return
+  end
+  -- vim.treesitter.query.get_query() is deprecated, use vim.treesitter.query.get() instead. :help deprecated
+  --   This feature will be removed in Nvim version 0.10
+  -- if type(text) == "string" and (string.find(text, "get_query", 1, true) or string.find(text, "get_node_text", 1, true)) then
+  --   return
+  -- end
+  -- for all deprecated and stack trace warnings
+  -- if type(text) == "string" and (string.find(text, ":help deprecated", 1, true) or string.find(text, "stack trace", 1, true)) then
+  --   return
+  -- end
+  orig_notify(text, level, opts)
+end
+vim.notify = filter_notify
+
+-- CAUTION: CAN BREAK OTHER LSPS SUCH AS PYTHON
+-- local solargraph = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/solargraph")
+-- if solargraph ~= "" then
+--   -- solargraph is installed
+--   -- required to make ruby lsp activate in ruby files
+--   require('lvim.lsp.manager').setup('solargraph', {})
 -- end
--- vim.notify = filter_notify
 
-local solargraph = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/solargraph")
-if solargraph ~= "" then
-  -- solargraph is installed
-  -- required to make ruby lsp activate in ruby files
-  require('lvim.lsp.manager').setup('solargraph', {})
-end
-
-local perlnavigator = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/perlnavigator")
-if perlnavigator ~= "" then
-  -- perlnavigator is installed
-  -- required to make perl lsp activate in perl files
-  require('lvim.lsp.manager').setup('perlnavigator', {})
-end
+-- CAUTION: CAN BREAK OTHER LSPS SUCH AS PYTHON
+-- local perlnavigator = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/perlnavigator")
+-- if perlnavigator ~= "" then
+--   -- perlnavigator is installed
+--   -- required to make perl lsp activate in perl files
+--   require('lvim.lsp.manager').setup('perlnavigator', {})
+-- end
 
 vim.cmd('set wrap')
 vim.cmd('source ~/.vim/plugin-settings/rainbow_csv.vim')
