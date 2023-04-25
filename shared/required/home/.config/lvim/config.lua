@@ -547,19 +547,21 @@ dap.configurations.sh = {
 -- end
 -- vim.notify = filter_notify
 
-local solargraph = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/solargraph")
-if solargraph ~= "" then
-  -- solargraph is installed
-  -- required to make ruby lsp activate in ruby files
-  require('lvim.lsp.manager').setup('solargraph', {})
-end
+-- CAUTION: CAN BREAK OTHER LSPS SUCH AS PYTHON
+-- local solargraph = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/solargraph")
+-- if solargraph ~= "" then
+--   -- solargraph is installed
+--   -- required to make ruby lsp activate in ruby files
+--   require('lvim.lsp.manager').setup('solargraph', {})
+-- end
 
-local perlnavigator = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/perlnavigator")
-if perlnavigator ~= "" then
-  -- perlnavigator is installed
-  -- required to make perl lsp activate in perl files
-  require('lvim.lsp.manager').setup('perlnavigator', {})
-end
+-- CAUTION: CAN BREAK OTHER LSPS SUCH AS PYTHON
+-- local perlnavigator = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/perlnavigator")
+-- if perlnavigator ~= "" then
+--   -- perlnavigator is installed
+--   -- required to make perl lsp activate in perl files
+--   require('lvim.lsp.manager').setup('perlnavigator', {})
+-- end
 
 vim.cmd('set wrap')
 vim.cmd('source ~/.vim/plugin-settings/rainbow_csv.vim')
