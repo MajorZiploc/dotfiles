@@ -684,14 +684,11 @@ function cdp {
   cd "$selected" || { echo "Unable to find selected project\!" >&2; return 1; }
 }
 
-function docker_local {
+function docker_create_env_file {
   local environment="${1:-"dev"}";
-  local containers="$2";
-  local extra_env_files_pattern="${3}";
-  local env_file_location="${4:-"my.scripts.d/env"}";
-  local output_env_file="${5:-".env"}";
-  local compose_base="${6:-"docker-compose.yml"}";
-  local compose_ext="${7:-"docker-compose.local.yml"}";
+  local extra_env_files_pattern="${2}";
+  local env_file_location="${3:-"my.scripts.d/env"}";
+  local output_env_file="${4:-".env"}";
   echo "" > "$output_env_file";
   find "./$env_file_location/base" -type f -name "*.env*" -print0 | while read -d $'\0' cur_env_file; do
     {
@@ -716,8 +713,6 @@ function docker_local {
       } >> "$output_env_file";
     done;
   fi
-  docker compose -f "$compose_base" -f "$compose_ext" down;
-  docker compose -f "$compose_base" -f "$compose_ext" up -d $containers;
 }
 
 function git_deploy {
