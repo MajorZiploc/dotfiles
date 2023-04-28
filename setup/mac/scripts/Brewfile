@@ -55,6 +55,8 @@ brew 'file-formula'
 brew 'git'
 brew 'openssh'
 brew 'perl'
+# cpanm package manager for perl
+brew 'cpanminus'
 brew 'rsync'
 # brew 'svn'
 brew 'unzip'
