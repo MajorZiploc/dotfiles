@@ -140,3 +140,7 @@ function WriteIfPossibleThenQuitBuffer()
 endfunction
 " save and quite
 nmap <leader>wq :call WriteIfPossibleThenQuitBuffer()<cr>
+
+" Patch H and L to have 8 padding from top
+nnoremap <s-h> Hjjjjjjjj
+nnoremap <s-l> Lkkkkkkkk<c-y>
