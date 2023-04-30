@@ -4,7 +4,7 @@ this_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
 
 pkg install root-repo;
 pkg install -y x11-repo;
-pkg upgrade;
+pkg upgrade -y;
 pkg update -y;
 # session manager
 pkg install -y tmux;
