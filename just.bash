@@ -19,6 +19,7 @@ function just_docker_container_connect {
   container_name="${container_name:-"devcontainer_home_settings_app_1"}";
   docker exec -it "$container_name" /bin/bash;
 }
+
 function just_setup {
   local os; os="$1";
   os="${os:-"ubuntu"}";
