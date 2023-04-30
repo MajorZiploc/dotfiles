@@ -6,7 +6,7 @@ alias tmuxls="tmux ls";
 
 # text manipulation aliaes
 alias rev_chars='perl -F"" -anle "print reverse @F" | perl -ple "s/^\r//"';
-alias rev_lines='tac';
+alias rev_lines='perl -e "'"print reverse <>"'"';
 alias toggle_case='tr "[a-zA-Z]" "[A-Za-z]"';
 alias camel_to_snake="sed -E 's/([A-Z])/_\L\1/g;s/^_//;'";
 alias camel_to_kebab="sed -E 's/([A-Z])/-\L\1/g;s/^\-//;'";
@@ -25,7 +25,7 @@ alias to_upper="sed -E 's/([a-z])/\U\1/g'";
 alias rtrim="sed -E 's/[ '$'\t'']+$//'";
 alias ltrim="sed -E 's/\s*(.*)/\1/g'";
 alias trim="rtrim | ltrim";
-alias keep_last='tac | awk "!x[\$0]++" | tac';
+alias keep_last='rev_lines | awk "!x[\$0]++" | rev_lines';
 alias keep_first='cat | awk "!x[\$0]++" | cat';
 alias add_semicolons='sed -E "s/(.+)/\1;/;s/;;$/;/;"';
 alias to_title_case='sed -E "s/\b(.)/\u\1/g"';
