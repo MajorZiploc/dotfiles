@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 . "$HOME/.zshrc_core";
 . "$HOME/Tasks/workplace_bulk_ops.sh";
