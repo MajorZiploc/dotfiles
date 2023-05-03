@@ -58,6 +58,17 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin
 sudo install minikube-darwin-arm64 /usr/local/bin/minikube
 rm minikube-darwin-arm64;
 
+# MacPorts
+curl -O https://distfiles.macports.org/MacPorts/MacPorts-2.8.1.tar.bz2 ;
+tar xf MacPorts-2.8.1.tar.bz2 ;
+cd MacPorts-2.8.1/;
+./configure;
+make;
+sudo make install;
+cd ..;
+rm -rf MacPorts-2.8.1/;
+rm MacPorts-2.8.1.tar.bz2 ;
+
 # Finder: set hidden files to show by default
 defaults write http://com.apple.Finder AppleShowAllFiles -bool true;
 # Finder: show file extensions
