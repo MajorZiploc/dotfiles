@@ -48,6 +48,10 @@ set showcmd
 set ttyfast " rendering
 set nocompatible " Don't try to be vi compatible
 
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
+
 " refresh vim settings
 " command! Sorc so $MYVIMRC
 " command! Sorcvs so ~\_vsvimrc
@@ -79,6 +83,8 @@ set guioptions-=m " remove menu bar
 set guioptions-=T " remove toolbar
 set laststatus=2 " airline always on
 syntax on
+" enable netrw
+filetype plugin on
 " if has("gui_running")
   " GUI is running or is about to start.
   " set lines=999 columns=999
