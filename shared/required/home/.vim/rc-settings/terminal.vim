@@ -83,6 +83,8 @@ set guioptions-=m " remove menu bar
 set guioptions-=T " remove toolbar
 set laststatus=2 " airline always on
 syntax on
+" enable netrw
+filetype plugin on
 " if has("gui_running")
   " GUI is running or is about to start.
   " set lines=999 columns=999
