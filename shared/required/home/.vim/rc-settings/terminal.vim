@@ -48,6 +48,10 @@ set showcmd
 set ttyfast " rendering
 set nocompatible " Don't try to be vi compatible
 
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
+
 " refresh vim settings
 " command! Sorc so $MYVIMRC
 " command! Sorcvs so ~\_vsvimrc
