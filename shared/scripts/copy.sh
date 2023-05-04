@@ -28,7 +28,7 @@ done;
 
 "$temp_shared/scripts/copy_content_to_client.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this" "$flags" "${home_dir:?}";
 
-rm -r "${temp:?}/";
+rm -rf "${temp:?}/";
 
 function make_vim_sh_envs {
   local zshenv="${home_dir:?}/.vim/bash_env.bash";
