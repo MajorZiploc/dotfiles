@@ -83,3 +83,5 @@ export PATH="$(pyenv root)/shims:$PATH";
 
 # adds gnu core utils tools before the mac flavors
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH";
+
+export PATH="$(brew --prefix ctags):$PATH";
