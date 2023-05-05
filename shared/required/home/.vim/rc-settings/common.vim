@@ -121,3 +121,9 @@ function! ExecuteMacroOverVisualRange()
   execute ":'<,'>normal @" . nr2char(getchar())
 endfunction
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+" save all dirty buffers
+nmap <c-s> :wa<cr>
+
+" copy to system clipboard
+vnoremap <leader>cc "+y
