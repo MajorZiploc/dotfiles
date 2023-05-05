@@ -31,8 +31,14 @@ alias keep_first='cat | awk "!x[\$0]++" | cat';
 alias add_semicolons='sed -E "s/(.+)/\1;/;s/;;$/;/;"';
 alias to_title_case='sed -E "s/\b(.)/\u\1/g"';
 alias to_less_blank_lines='perl -00 -pe '"'"'s/\n{2,}(?=[^\n])/"\n"/g'"'";
-alias indent_4_to_2='perl -pe '"'"'s{^((?: {4})*)}{" " x (2*length($1)/4)}e'"'"''
-alias indent_2_to_4='perl -pe '"'"'s{^((?: {2})*)}{" " x (4*length($1)/2)}e'"'"''
+alias indent_4_to_2='perl -pe '"'"'s{^((?: {4})*)}{" " x (2*length($1)/4)}e'"'"'';
+alias indent_2_to_4='perl -pe '"'"'s{^((?: {2})*)}{" " x (4*length($1)/2)}e'"'"'';
+alias bash_remove_colors="sed 's/\x1B\[[0-9;]*[A-Za-z]//g'";
+alias js_remove_comments="sed -E '/^\s*(\/\/|\/\*|\*\/|\*)/d;'";
+alias sql_remove_comments="sed -E '/^\s*(--)/d;'";
+alias bash_remove_comments="sed -E '/^\s*(\#)/d;'";
+alias remove_blank_lines="sed -E '/^\s*$/d;'";
+alias clean_cheat_sheet="bash_remove_colors | js_remove_comments | sql_remove_comments | bash_remove_comments | remove_blank_lines";
 
 # Converts a string to a fuzzy search pattern
 alias to_fuzz='sed -E "s/(\\w)/\\1\[^\[:blank:\]\]{0,3}/g" | sed "s/\[^\[:blank:\]\]{0,3}$//g"';

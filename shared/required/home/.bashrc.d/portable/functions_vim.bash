@@ -89,7 +89,7 @@ function show_cheat_sheet {
   if [[ -z "$query" ]]; then
     tool=${tool/%\~$/};
     tool=${tool/%\/$/};
-    curl "cht.sh/$tool/";
+    curl -s "cht.sh/$tool/";
   else
     query=$(echo "$query" | tr ' ' '+');
     [[ ! "$tool_was_param" == "0" ]] && {
@@ -99,7 +99,7 @@ function show_cheat_sheet {
         tool="$tool~";
       fi
     }
-    curl "cht.sh/$tool/$query";
+    curl -s "cht.sh/$tool/$query";
   fi
 }
 
