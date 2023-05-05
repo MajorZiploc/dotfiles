@@ -3,6 +3,7 @@ alias tmuxas="tmux attach-session";
 alias tmuxks="tmux kill-session";
 alias tmuxksvr="tmux kill-server";
 alias tmuxls="tmux ls";
+alias t="tmuxps";
 
 # text manipulation aliaes
 alias rev_chars='perl -F"" -anle "print reverse @F" | perl -ple "s/^\r//"';
