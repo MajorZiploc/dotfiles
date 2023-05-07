@@ -196,6 +196,18 @@ endfunction
 " new scratch
 nmap ns :call CreateSmallTopLeftScratch()<CR>
 
-" bash finds
+" wrapper around gfind_files bash command for tight integration with vim
+function! GFindFiles(...)
+  let my_args = ''
+  for my_arg in a:000
+    let my_args = my_args . ' ' . '"' . my_arg . '"'
+  endfor
+  let g:my_search_files = systemlist('gfind_files' . my_args)
+endfunction
+
+nmap <leader>cn :let my_search_files = my_search_files[1:] + [my_search_files[0]]<CR>:execute 'find ' . my_search_files[0]<CR>
+nmap <leader>cp :let my_search_files = [my_search_files[-1]] + my_search_files[:-2]<CR>:execute 'find ' . my_search_files[-1]<CR>
+
+" bash finds raw
 vmap <leader>fa <ESC>ogfind_in_files "(search_phrase)" ".*(file_pattern).*"<ESC>^
-vmap <leader>ff <ESC>ogfind_files ".*(file_pattern).*" "(search_phrase)"<ESC>^
+vmap <leader>ff <ESC>olet my_search_files = systemlist('gfind_files ".*(file_pattern).*" "(search_phrase)"')<ESC>^
