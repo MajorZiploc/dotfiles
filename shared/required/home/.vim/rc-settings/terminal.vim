@@ -181,3 +181,7 @@ function! GoToRecentBuffer(direction)
 endfunction
 nnoremap <leader>o :call GoToRecentBuffer('previous')<CR>
 nnoremap <leader>i :call GoToRecentBuffer('next')<CR>
+
+" create a scratch buffer
+command! Scratch new | setlocal bt=nofile bh=wipe nobl noswapfile nu
+
