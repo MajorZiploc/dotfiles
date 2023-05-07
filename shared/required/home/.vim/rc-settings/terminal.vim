@@ -164,21 +164,19 @@ nmap <leader>ln <cmd>%!to_less_blank_lines<cr>
 vmap <leader>ln !to_less_blank_lines<cr>
 
 function! GoToRecentBuffer(direction)
-    let limit     = 0
-    let startName = bufname('%')
-    let nowName   = bufname('%')
-
-    while (startName == nowName) && (a:direction == 'previous' ? limit < 100 : limit <= 100)
-        execute a:direction == 'previous' ? "normal! \<C-o>" : "normal! 1\<C-i>"
-
-        let nowName = bufname('%')
-        let limit  += 1
-    endwhile
-
-    if startName == nowName
-        echo "No " . a:direction . " file."
-    endif
+  let limit = 0
+  let startName = bufname('%')
+  let nowName = bufname('%')
+  while (startName == nowName) && (a:direction == 'previous' ? limit < 100 : limit <= 100)
+    execute a:direction == 'previous' ? "normal! \<C-o>" : "normal! 1\<C-i>"
+    let nowName = bufname('%')
+    let limit += 1
+  endwhile
+  if startName == nowName
+    echo "No " . a:direction . " file."
+  endif
 endfunction
+
 nnoremap <leader>o :call GoToRecentBuffer('previous')<CR>
 nnoremap <leader>i :call GoToRecentBuffer('next')<CR>
 
