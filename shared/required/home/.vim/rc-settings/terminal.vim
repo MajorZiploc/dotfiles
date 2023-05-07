@@ -185,3 +185,17 @@ nnoremap <leader>i :call GoToRecentBuffer('next')<CR>
 " create a scratch buffer
 command! Scratch new | setlocal bt=nofile bh=wipe nobl noswapfile nu
 
+" if horizontal topleft doesnt seem to be working, use this:
+" set splitbelow!
+
+function! CreateSmallTopLeftScratch()
+  horizontal topleft Scratch
+  resize 10
+endfunction
+
+" new scratch
+nmap ns :call CreateSmallTopLeftScratch()<CR>
+
+" bash finds
+vmap <leader>fa <ESC>ogfind_in_files "(search_phrase)" ".*(file_pattern).*"<ESC>^
+vmap <leader>ff <ESC>ogfind_files ".*(file_pattern).*" "(search_phrase)"<ESC>^
