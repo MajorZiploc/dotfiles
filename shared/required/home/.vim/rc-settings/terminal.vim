@@ -192,7 +192,7 @@ function! CreateSmallTopLeftScratch()
 endfunction
 
 " new scratch
-nmap ns :call CreateSmallTopLeftScratch()<CR>
+nmap <leader>ns :call CreateSmallTopLeftScratch()<CR>
 
 " wrapper around gfind_files bash command for tight integration with vim
 function! GFindFiles(...)
