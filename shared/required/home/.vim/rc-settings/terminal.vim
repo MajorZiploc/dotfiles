@@ -207,6 +207,9 @@ endfunction
 nmap <leader>cn :let my_search_files = my_search_files[1:] + [my_search_files[0]]<CR>:execute 'find ' . my_search_files[0]<CR>
 nmap <leader>cp :let my_search_files = [my_search_files[-1]] + my_search_files[:-2]<CR>:execute 'find ' . my_search_files[-1]<CR>
 
+" hidden files dont seem to be included if in a hidden directory
+command! -nargs=1 VFindFiles let my_search_files_glob = globpath('.', '**/' . <q-args>, 1, 1) | if len(my_search_files_glob) | execute 'edit ' . my_search_files_glob[0] | endif
+
 " bash finds raw
 vmap <leader>fa <ESC>ogfind_in_files "(search_phrase)" ".*(file_pattern).*"<ESC>^
 vmap <leader>ff <ESC>olet my_search_files = systemlist('gfind_files ".*(file_pattern).*" "(search_phrase)"')<ESC>^
