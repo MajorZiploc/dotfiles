@@ -201,7 +201,9 @@ function! GFindFiles(...)
     let my_args = my_args . ' ' . '"' . my_arg . '"'
   endfor
   let g:my_search_files = systemlist('gfind_files' . my_args)
+  execute 'find ' . g:my_search_files[0]
   echo g:my_search_files
+  let g:my_search_files = g:my_search_files[1:] + [g:my_search_files[0]]
 endfunction
 
 nmap <leader>cn :let my_search_files = my_search_files[1:] + [my_search_files[0]]<CR>:execute 'find ' . my_search_files[0]<CR>
