@@ -528,3 +528,18 @@ EOF
   assert_output "$expected"
 }
 
+@test "check regex_unix_to_vim" {
+  function f(){
+    echo "$1" | regex_unix_to_vim;
+  }
+  input='/reset\(\)'
+  run f "$input"
+  assert_success
+  expected='\/reset()'
+  assert_output "$expected"
+  input=''
+  run f "$input"
+  assert_success
+  expected=''
+  assert_output "$expected"
+}

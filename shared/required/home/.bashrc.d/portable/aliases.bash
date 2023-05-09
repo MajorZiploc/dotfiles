@@ -39,6 +39,8 @@ alias sql_remove_comments="sed -E '/^\s*(--)/d;'";
 alias bash_remove_comments="sed -E '/^\s*(\#)/d;'";
 alias remove_blank_lines="sed -E '/^\s*$/d;'";
 alias clean_cheat_sheet="bash_remove_colors | js_remove_comments | sql_remove_comments | bash_remove_comments | remove_blank_lines";
+alias regex_unix_to_vim="sed -E 's,(/),\\\1,g;s,\\(\(|\)),\1,g'";
+alias regex_vim_to_unix="sed -E 's,(\(|\)),\\\1,g;s,\\(/),\1,g'";
 
 # Converts a string to a fuzzy search pattern
 alias to_fuzz='sed -E "s/(\\w)/\\1\[^\[:blank:\]\]{0,3}/g" | sed "s/\[^\[:blank:\]\]{0,3}$//g"';
