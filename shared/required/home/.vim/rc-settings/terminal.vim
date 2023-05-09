@@ -203,10 +203,17 @@ function! GFindFiles(...)
   for my_arg in a:000
     let my_args = my_args . ' ' . '"' . my_arg . '"'
   endfor
-  let g:my_search_files = systemlist('gfind_files' . my_args)
-  execute 'find ' . g:my_search_files[0]
-  echo g:my_search_files
-  let g:my_search_files = g:my_search_files[1:] + [g:my_search_files[0]]
+  let cmd = 'gfind_files' . my_args
+  let g:my_search_files = systemlist(cmd)
+  if len(g:my_search_files) > 0
+    execute 'find ' . g:my_search_files[0]
+    echo g:my_search_files
+    let g:my_search_files = g:my_search_files[1:] + [g:my_search_files[0]]
+  else
+    echohl WarningMsg
+    echo "No results found for: " . cmd
+    echohl None
+  endif
 endfunction
 
 nmap <leader>cn :let my_search_files = my_search_files[1:] + [my_search_files[0]]<CR>:execute 'find ' . my_search_files[0]<CR>
