@@ -183,6 +183,9 @@ nnoremap <leader>i :call GoToRecentBuffer('next')<CR>
 " create a scratch buffer
 command! Scratch new | setlocal bt=nofile bh=wipe nobl noswapfile nu
 
+" windo diffthis setup
+nmap wd <C-w><C-v><CMD>Scratch<CR><C-w><C-j><C-w><C-q>
+
 " if horizontal topleft doesnt seem to be working, use this:
 " set splitbelow!
 
