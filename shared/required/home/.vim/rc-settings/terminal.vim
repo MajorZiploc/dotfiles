@@ -261,15 +261,15 @@ vmap <leader>5 "ty:call Run()<CR>
 
 function! PsqlConfigs(...)
   let show_password = get(a:, 1, 0)
-  echo "PGHOST: " . $PGHOST
-  echo "PGHOST: " .  $PGPORT
-  echo "PGDATABASE: " .  $PGDATABASE
-  echo "PGUSER: " .  $PGUSER
+  echo "export PGHOST=" . '"' . $PGHOST . '";'
+  echo "export PGHOST=" . '"' .  $PGPORT . '";'
+  echo "export PGDATABASE=" . '"' .  $PGDATABASE . '";'
+  echo "export PGUSER=" . '"' . $PGUSER . '";'
   let _password = "<OMITTED> pass 1 as first arg to see it"
   if (show_password != 0)
     let _password = $PGPASSWORD
   endif
-  echo "PGPASSWORD: " .  _password
+  echo "export PGPASSWORD=" . '"' .  _password . '";'
 endfunction
 
 " default splits to above
