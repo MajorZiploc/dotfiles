@@ -225,3 +225,41 @@ command! -nargs=1 VFindFiles let my_search_files_glob = globpath('.', '**/' . <q
 " bash finds raw
 vmap <leader>fa <ESC>ogfind_in_files "(search_phrase)" ".*(file_pattern).*"<ESC>^
 vmap <leader>ff <ESC>olet my_search_files = systemlist('gfind_files ".*(file_pattern).*" "(search_phrase)"')<ESC>^
+
+function! Run(...)
+  let run_type = get(a:, 1, '')
+  " assumes the selected text will be yanked into the t register prior to Run
+  let selected_text = @t
+  if (trim(selected_text) == '')
+    echohl WarningMsg
+    echo "No selected_text!"
+    echohl None
+    return
+  endif
+  " check file_extension
+  if (expand('%:e') == 'pgsql' || run_type == 'pgsql')
+    let _command = 'psql --csv -c "' . selected_text . '"'
+    let g:my_query_results = system(_command)
+    set splitbelow
+    horizontal belowright Scratch
+    put =g:my_query_results
+    set filetype=rfc_csv
+    execute "normal! ggdd"
+    set splitbelow!
+  " elseif (&filetype == 'python' || run_type == 'python')
+  "   echo "python run by filetype"
+  else
+    echohl WarningMsg
+    echo "No matching run condition!"
+    echohl None
+  endif
+  " check filetype
+  " if &filetype == 'sql'
+endfunction
+
+vmap <leader>5 "ty:call Run()<CR>
+
+
+" default splits to above
+set splitbelow
+set splitbelow!
