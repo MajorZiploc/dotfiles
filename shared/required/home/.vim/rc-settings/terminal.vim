@@ -320,7 +320,6 @@ vmap <leader>4 "ty:call Run('', 'true')<CR>
 
 function! _RunConfigsPsql(...)
   let show_secrets = get(a:, 1, 0)
-  echo show_secrets
   let is_in_container = !empty(get(g:, 'container_name', "")) && trim(g:container_name) != ''
   if (is_in_container)
     echo "container_name=" . '"' . g:container_name . '";'
