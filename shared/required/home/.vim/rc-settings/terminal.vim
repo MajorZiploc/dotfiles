@@ -227,6 +227,7 @@ vmap <leader>fa <ESC>ogfind_in_files "(search_phrase)" ".*(file_pattern).*"<ESC>
 vmap <leader>ff <ESC>olet my_search_files = systemlist('gfind_files ".*(file_pattern).*" "(search_phrase)"')<ESC>^
 
 function _RunPsql(selected_text, is_in_container)
+  let _command_prepend = ''
   if (a:is_in_container)
     if (get(g:, 'use_env_vars_in_container', "false") == 'true')
       let _command_prepend = 'export PGDATABASE=' . $PGDATABASE . '; '
@@ -238,7 +239,7 @@ function _RunPsql(selected_text, is_in_container)
     let _command = 'psql --csv -c "' . a:selected_text . '"'
   endif
   let _should_bottom_split = 1
-  return [l:_command, l:_should_bottom_split]
+  return [l:_command, l:_should_bottom_split, l:_command_prepend]
 endfunction
 
 function! Run(...)
@@ -264,6 +265,7 @@ function! Run(...)
     let case_values = _RunPsql(selected_text, is_in_container)
     let _command = get(case_values, 0, '')
     let _should_bottom_split = get(case_values, 1, 0)
+    let _command_prepend = get(case_values, 2, '')
   " elseif (&filetype == 'python' || run_type == 'python')
   "   echo "python run by filetype"
   else
