@@ -226,6 +226,21 @@ command! -nargs=1 VFindFiles let my_search_files_glob = globpath('.', '**/' . <q
 vmap <leader>fa <ESC>ogfind_in_files "(search_phrase)" ".*(file_pattern).*"<ESC>^
 vmap <leader>ff <ESC>olet my_search_files = systemlist('gfind_files ".*(file_pattern).*" "(search_phrase)"')<ESC>^
 
+function _RunPsql(selected_text, is_in_container)
+  if (a:is_in_container)
+    if (get(g:, 'use_env_vars_in_container', "false") == 'true')
+      let _command_prepend = 'export PGDATABASE=' . $PGDATABASE . '; '
+            \ . 'export PGUSER=' . $PGUSER . '; '
+            \ . 'export PGPASSWORD=' . $PGPASSWORD . '; '
+    endif
+    let _command = 'psql --csv -c \"' . a:selected_text . '\"'
+  else
+    let _command = 'psql --csv -c "' . a:selected_text . '"'
+  endif
+  let _should_bottom_split = 1
+  return [l:_command, l:_should_bottom_split]
+endfunction
+
 function! Run(...)
   let run_type = get(a:, 1, '')
   let debug = get(a:, 2, 'false')
@@ -246,17 +261,9 @@ function! Run(...)
   " check file_extension
   if (expand('%:e') == 'pgsql' || run_type == 'pgsql')
     let run_path = "pgsql"
-    if (is_in_container)
-      if (get(g:, 'use_env_vars_in_container', "false") == 'true')
-        let _command_prepend = 'export PGDATABASE=' . $PGDATABASE . '; '
-              \ . 'export PGUSER=' . $PGUSER . '; '
-              \ . 'export PGPASSWORD=' . $PGPASSWORD . '; '
-      endif
-      let _command = 'psql --csv -c \"' . selected_text . '\"'
-    else
-      let _command = 'psql --csv -c "' . selected_text . '"'
-    endif
-    let _should_bottom_split = 1
+    let case_values = _RunPsql(selected_text, is_in_container)
+    let _command = get(case_values, 0, '')
+    let _should_bottom_split = get(case_values, 1, 0)
   " elseif (&filetype == 'python' || run_type == 'python')
   "   echo "python run by filetype"
   else
