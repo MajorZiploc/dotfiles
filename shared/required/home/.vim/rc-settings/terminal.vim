@@ -253,6 +253,27 @@ function _RunPsql(selected_text, is_in_container, debug, debug_label)
   return [l:_command, l:_should_bottom_split, l:_command_prepend]
 endfunction
 
+function _RunPython(selected_text, is_in_container, debug, debug_label)
+  let _command_prepend = ''
+  let _command = 'python -c "' . a:selected_text . '"'
+  let _should_bottom_split = 1
+  return [l:_command, l:_should_bottom_split, l:_command_prepend]
+endfunction
+
+function _RunJavascript(selected_text, is_in_container, debug, debug_label)
+  let _command_prepend = ''
+  let _command = 'node -e "' . a:selected_text . '"'
+  let _should_bottom_split = 1
+  return [l:_command, l:_should_bottom_split, l:_command_prepend]
+endfunction
+
+function _RunTypescript(selected_text, is_in_container, debug, debug_label)
+  let _command_prepend = ''
+  let _command = 'ts-node -e "' . a:selected_text . '"'
+  let _should_bottom_split = 1
+  return [l:_command, l:_should_bottom_split, l:_command_prepend]
+endfunction
+
 function! Run(...)
   let run_type = get(a:, 1, '')
   let debug = get(a:, 2, 'false')
@@ -277,8 +298,24 @@ function! Run(...)
     let _command = get(case_values, 0, '')
     let _should_bottom_split = get(case_values, 1, 0)
     let _command_prepend = get(case_values, 2, '')
-  " elseif (&filetype == 'python' || run_type == 'python')
-  "   echo "python run by filetype"
+  elseif (&filetype == 'python' || run_type == 'python')
+    let run_path = "python"
+    let case_values = _RunPython(selected_text, is_in_container, debug, debug_label)
+    let _command = get(case_values, 0, '')
+    let _should_bottom_split = get(case_values, 1, 0)
+    let _command_prepend = get(case_values, 2, '')
+  elseif (&filetype == 'javascript' || run_type == 'javascript')
+    let run_path = "javascript"
+    let case_values = _RunPython(selected_text, is_in_container, debug, debug_label)
+    let _command = get(case_values, 0, '')
+    let _should_bottom_split = get(case_values, 1, 0)
+    let _command_prepend = get(case_values, 2, '')
+  elseif (&filetype == 'typescript' || run_type == 'typescript')
+    let run_path = "typescript"
+    let case_values = _RunTypescript(selected_text, is_in_container, debug, debug_label)
+    let _command = get(case_values, 0, '')
+    let _should_bottom_split = get(case_values, 1, 0)
+    let _command_prepend = get(case_values, 2, '')
   else
     echohl WarningMsg
     echo "No matching run_path!"
