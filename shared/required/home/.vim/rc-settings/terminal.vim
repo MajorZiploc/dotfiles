@@ -228,18 +228,24 @@ vmap <leader>ff <ESC>olet my_search_files = systemlist('gfind_files ".*(file_pat
 
 function! Run(...)
   let run_type = get(a:, 1, '')
+  let debug = get(a:, 2, 'false')
+  let debug_label = "DEBUG-> "
   " assumes the selected text will be yanked into the t register prior to Run
   let selected_text = @t
   if (trim(selected_text) == '')
     echohl WarningMsg
-    echo "No selected_text!"
+    echo "No selected_text stored in the t register! Use the vmap <leader>5 after selecting some text to run"
     echohl None
     return
+  endif
+  if (debug == 'true')
+    echo debug_label "selected_text: " selected_text
   endif
   let is_in_container = !empty(get(g:, 'container_name', "")) && trim(g:container_name) != ''
   let _should_bottom_split = 0
   " check file_extension
   if (expand('%:e') == 'pgsql' || run_type == 'pgsql')
+    let run_path = "pgsql"
     if (is_in_container)
       if (get(g:, 'use_env_vars_in_container', "false") == 'true')
         let _command_prepend = 'export PGDATABASE=' . $PGDATABASE . '; '
@@ -255,7 +261,7 @@ function! Run(...)
   "   echo "python run by filetype"
   else
     echohl WarningMsg
-    echo "No matching run condition!"
+    echo "No matching run_path!"
     echohl None
   endif
   if (is_in_container)
@@ -272,20 +278,26 @@ function! Run(...)
     endif
     let _command = _command . '"'
   endif
-  let g:my_query_results = system(_command)
-  if (_should_bottom_split)
-    set splitbelow
-    horizontal belowright Scratch
-    put =g:my_query_results
-    set filetype=rfc_csv
-    execute "normal! ggdd"
-    set splitbelow!
+  if (debug != 'true')
+    let g:my_query_results = system(_command)
+    if (_should_bottom_split)
+      set splitbelow
+      horizontal belowright Scratch
+      put =g:my_query_results
+      set filetype=rfc_csv
+      execute "normal! ggdd"
+      set splitbelow!
+    else
+      put =g:my_query_results
+    endif
   else
-    put =g:my_query_results
+    echo debug_label "run_path: " run_path
+    echo debug_label "_command: " _command
   endif
 endfunction
 
 vmap <leader>5 "ty:call Run()<CR>
+vmap <leader>4 "ty:call Run('', 'true')<CR>
 
 function! PsqlConfigs(...)
   let show_password = get(a:, 1, 0)
