@@ -315,8 +315,9 @@ endfunction
 vmap <leader>5 "ty:call Run()<CR>
 vmap <leader>4 "ty:call Run('', 'true')<CR>
 
-function! PsqlConfigs(...)
-  let show_password = get(a:, 1, 0)
+function! _RunConfigsPsql(...)
+  let show_secrets = get(a:, 1, 0)
+  echo show_secrets
   let is_in_container = !empty(get(g:, 'container_name', "")) && trim(g:container_name) != ''
   if (is_in_container)
     echo "container_name=" . '"' . g:container_name . '";'
@@ -342,10 +343,22 @@ function! PsqlConfigs(...)
   echo "export PGDATABASE=" . '"' .  $PGDATABASE . '";'
   echo "export PGUSER=" . '"' . $PGUSER . '";'
   let _password = "<OMITTED> pass 1 as first arg to see it"
-  if (show_password != 0)
+  if (show_secrets != 0)
     let _password = $PGPASSWORD
   endif
   echo "export PGPASSWORD=" . '"' .  _password . '";'
+endfunction
+
+function! RunConfigs(...)
+  let config_type = get(a:, 1, 0)
+  let rest_of_args = a:000[1:]
+  if (config_type == 'pgsql')
+    call call('_RunConfigsPsql', rest_of_args)
+  else
+    echohl WarningMsg
+    echo "Invalid config_type: " config_type
+    echohl None
+  endif
 endfunction
 
 " default splits to above
