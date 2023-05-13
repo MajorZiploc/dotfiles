@@ -236,10 +236,20 @@ function! Run(...)
     echohl None
     return
   endif
+  let is_in_container = !empty(get(g:, 'container_name', "")) && trim(g:container_name) != ''
   let _should_bottom_split = 0
   " check file_extension
   if (expand('%:e') == 'pgsql' || run_type == 'pgsql')
-    let _command = 'psql --csv -c "' . selected_text . '"'
+    if (is_in_container)
+      if (get(g:, 'use_env_vars_in_container', "false") == 'true')
+        let _command_prepend = 'export PGDATABASE=' . $PGDATABASE . '; '
+              \ . 'export PGUSER=' . $PGUSER . '; '
+              \ . 'export PGPASSWORD=' . $PGPASSWORD . '; '
+      endif
+      let _command = 'psql --csv -c \"' . selected_text . '\"'
+    else
+      let _command = 'psql --csv -c "' . selected_text . '"'
+    endif
     let _should_bottom_split = 1
   " elseif (&filetype == 'python' || run_type == 'python')
   "   echo "python run by filetype"
@@ -248,8 +258,19 @@ function! Run(...)
     echo "No matching run condition!"
     echohl None
   endif
-  if (!empty(get(g:, 'container_name', "")) && trim(g:container_name) != '')
-    let _command = "cmd_wrap 'docker exec \"" . g:container_name . "\" ". _command . "'"
+  if (is_in_container)
+    let _base_command = _command
+    let _command = "cmd_wrap \"docker exec \\\"" . g:container_name . '\" '
+    if (!empty(get(l:, '_command_prepend', '')))
+      let _shell_command = " sh -c '"
+            \ . _command_prepend
+            \ . _base_command
+            \ . "'"
+      let _command = _command . _shell_command
+    else
+      let _command = _command . _base_command
+    endif
+    let _command = _command . '"'
   endif
   let g:my_query_results = system(_command)
   if (_should_bottom_split)
@@ -262,20 +283,34 @@ function! Run(...)
   else
     put =g:my_query_results
   endif
-  " check filetype
-  " if &filetype == 'sql'
 endfunction
 
 vmap <leader>5 "ty:call Run()<CR>
 
 function! PsqlConfigs(...)
   let show_password = get(a:, 1, 0)
-  if (!empty(get(g:, 'container_name', "")))
+  let is_in_container = !empty(get(g:, 'container_name', "")) && trim(g:container_name) != ''
+  if (is_in_container)
     echo "container_name=" . '"' . g:container_name . '";'
-    echo "NOTE: since container_name is set; the PG* vars are not used"
+  endif
+  if (!empty(get(g:, 'use_env_vars_in_container', "")))
+    echo "use_env_vars_in_container=" . '"' . g:use_env_vars_in_container . '";'
+  endif
+  if (is_in_container && get(g:, 'use_env_vars_in_container', "false") == 'true')
+    echohl WarningMsg
+    echo "NOTE: since container_name is set and use_env_vars_in_container='true'; PGUSER, PGPASSWORD, and PGDATABASE env vars will be used"
+    echohl None
+  elseif (is_in_container)
+    echohl WarningMsg
+    echo "NOTE: since container_name is set without use_env_vars_in_container='true'; PG* env vars wont be used"
+    echohl None
+  elseif (get(g:, 'use_env_vars_in_container', "false") == 'true')
+    echohl WarningMsg
+    echo "NOTE: since use_env_vars_in_container='true' without container_name being set; it will take no effect"
+    echohl None
   endif
   echo "export PGHOST=" . '"' . $PGHOST . '";'
-  echo "export PGHOST=" . '"' .  $PGPORT . '";'
+  echo "export PGPORT=" . '"' .  $PGPORT . '";'
   echo "export PGDATABASE=" . '"' .  $PGDATABASE . '";'
   echo "export PGUSER=" . '"' . $PGUSER . '";'
   let _password = "<OMITTED> pass 1 as first arg to see it"
