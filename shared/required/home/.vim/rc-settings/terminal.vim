@@ -239,6 +239,9 @@ function! Run(...)
   " check file_extension
   if (expand('%:e') == 'pgsql' || run_type == 'pgsql')
     let _command = 'psql --csv -c "' . selected_text . '"'
+    if (!empty(g:container_name) && trim(g:container_name) != '')
+      let _command = "cmd_wrap 'docker exec \"" . g:container_name . "\" ". _command . "'"
+    endif
     let g:my_query_results = system(_command)
     set splitbelow
     horizontal belowright Scratch
