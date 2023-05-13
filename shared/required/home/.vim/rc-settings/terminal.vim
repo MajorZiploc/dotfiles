@@ -352,7 +352,7 @@ function! _RunConfigsPsql(...)
 endfunction
 
 function! RunConfigs(...)
-  let config_type = get(a:, 1, 0)
+  let config_type = get(a:, 1, '')
   let rest_of_args = a:000[1:]
   if (config_type == 'pgsql')
     call call('_RunConfigsPsql', rest_of_args)
