@@ -227,7 +227,7 @@ command! -nargs=1 VFindFiles let my_search_files_glob = globpath('.', '**/' . <q
 vmap <leader>fa <ESC>ogfind_in_files "(search_phrase)" ".*(file_pattern).*"<ESC>^
 vmap <leader>ff <ESC>olet my_search_files = systemlist('gfind_files ".*(file_pattern).*" "(search_phrase)"')<ESC>^
 
-function _RunPsql(selected_text, is_in_container)
+function _RunPsql(selected_text, is_in_container, debug, debug_label)
   let _command_prepend = ''
   if (a:is_in_container)
     if (get(g:, 'use_env_vars_in_container', "false") == 'true')
@@ -237,6 +237,14 @@ function _RunPsql(selected_text, is_in_container)
     endif
     let _command = 'psql --csv -c \"' . a:selected_text . '\"'
   else
+    if (a:debug == 'true')
+      echo a:debug_label "local PG* configs that will be used since not running in a container:"
+      echo a:debug_label "  export PGHOST=\"".$PGHOST."\";"
+      echo a:debug_label "  export PGPORT=\"".$PGPORT."\";"
+      echo a:debug_label "  export PGDATABASE=\"".$PGDATABASE."\";"
+      echo a:debug_label "  export PGUSER=\"".$PGUSER."\";"
+      echo a:debug_label "  export PGPASSWORD=\"".$PGPASSWORD."\";"
+    endif
     let _command = 'psql --csv -c "' . a:selected_text . '"'
   endif
   let _should_bottom_split = 1
@@ -263,7 +271,7 @@ function! Run(...)
   " check file_extension
   if (expand('%:e') == 'pgsql' || run_type == 'pgsql')
     let run_path = "pgsql"
-    let case_values = _RunPsql(selected_text, is_in_container)
+    let case_values = _RunPsql(selected_text, is_in_container, debug, debug_label)
     let _command = get(case_values, 0, '')
     let _should_bottom_split = get(case_values, 1, 0)
     let _command_prepend = get(case_values, 2, '')
