@@ -274,8 +274,8 @@ function! Run(...)
     echo "No matching run_path!"
     echohl None
   endif
+  let _base_command = _command
   if (is_in_container)
-    let _base_command = _command
     let _command = "cmd_wrap \"docker exec \\\"" . g:container_name . '\" '
     if (!empty(get(l:, '_command_prepend', '')))
       let _shell_command = " sh -c '"
