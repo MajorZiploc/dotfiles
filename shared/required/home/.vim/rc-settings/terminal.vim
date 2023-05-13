@@ -234,8 +234,10 @@ function _RunPsql(selected_text, is_in_container, debug, debug_label)
       let _command_prepend = 'export PGDATABASE=' . $PGDATABASE . '; '
             \ . 'export PGUSER=' . $PGUSER . '; '
             \ . 'export PGPASSWORD=' . $PGPASSWORD . '; '
+      let _command = 'psql --csv -c \"' . a:selected_text . '\"'
+    else
+      let _command = 'psql --csv -c "' . a:selected_text . '"'
     endif
-    let _command = 'psql --csv -c \"' . a:selected_text . '\"'
   else
     if (a:debug == 'true')
       echo a:debug_label "local PG* configs that will be used since not running in a container:"
@@ -284,17 +286,16 @@ function! Run(...)
   endif
   let _base_command = _command
   if (is_in_container)
-    let _command = "cmd_wrap \"docker exec \\\"" . g:container_name . '\" '
+    let _command = "docker exec \"" . g:container_name . '" '
     if (!empty(get(l:, '_command_prepend', '')))
-      let _shell_command = " sh -c '"
+      let _shell_command = "sh -c \""
             \ . _command_prepend
             \ . _base_command
-            \ . "'"
+            \ . '"'
       let _command = _command . _shell_command
     else
       let _command = _command . _base_command
     endif
-    let _command = _command . '"'
   endif
   if (trim(_base_command) == '')
     echohl WarningMsg
