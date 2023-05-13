@@ -314,42 +314,30 @@ function! Run(...)
     let run_path = "pgsql"
     let case_values = _RunPsql(selected_text, is_in_container, debug, debug_label)
     let _command = get(case_values, 0, '')
-    let _should_bottom_split = get(case_values, 1, 0)
-    let _command_prepend = get(case_values, 2, '')
-    let _file_type = get(case_values, 3, _default_file_type)
   elseif (&filetype == 'python' || run_type == 'python')
     let run_path = "python"
     let case_values = _RunPython(selected_text, is_in_container, debug, debug_label)
     let _command = get(case_values, 0, '')
-    let _should_bottom_split = get(case_values, 1, 0)
-    let _command_prepend = get(case_values, 2, '')
-    let _file_type = get(case_values, 3, _default_file_type)
   elseif (&filetype == 'javascript' || run_type == 'javascript')
     let run_path = "javascript"
     let case_values = _RunJavascript(selected_text, is_in_container, debug, debug_label)
     let _command = get(case_values, 0, '')
-    let _should_bottom_split = get(case_values, 1, 0)
-    let _command_prepend = get(case_values, 2, '')
-    let _file_type = get(case_values, 3, _default_file_type)
   elseif (&filetype == 'typescript' || run_type == 'typescript')
     let run_path = "typescript"
     let case_values = _RunTypescript(selected_text, is_in_container, debug, debug_label)
     let _command = get(case_values, 0, '')
-    let _should_bottom_split = get(case_values, 1, 0)
-    let _command_prepend = get(case_values, 2, '')
-    let _file_type = get(case_values, 3, _default_file_type)
   elseif (&filetype == 'ruby' || run_type == 'ruby')
     let run_path = "ruby"
     let case_values = _RunRuby(selected_text, is_in_container, debug, debug_label)
     let _command = get(case_values, 0, '')
-    let _should_bottom_split = get(case_values, 1, 0)
-    let _command_prepend = get(case_values, 2, '')
-    let _file_type = get(case_values, 3, _default_file_type)
   else
     echohl WarningMsg
     echo "No matching run_path!"
     echohl None
   endif
+  let _should_bottom_split = get(case_values, 1, 0)
+  let _command_prepend = get(case_values, 2, '')
+  let _file_type = get(case_values, 3, _default_file_type)
   let _base_command = _command
   if (is_in_container)
     let _command = "docker exec \"" . g:container_name . '" '
