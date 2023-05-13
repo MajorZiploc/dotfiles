@@ -236,25 +236,31 @@ function! Run(...)
     echohl None
     return
   endif
+  let _should_bottom_split = 0
   " check file_extension
   if (expand('%:e') == 'pgsql' || run_type == 'pgsql')
     let _command = 'psql --csv -c "' . selected_text . '"'
-    if (!empty(g:container_name) && trim(g:container_name) != '')
-      let _command = "cmd_wrap 'docker exec \"" . g:container_name . "\" ". _command . "'"
-    endif
-    let g:my_query_results = system(_command)
-    set splitbelow
-    horizontal belowright Scratch
-    put =g:my_query_results
-    set filetype=rfc_csv
-    execute "normal! ggdd"
-    set splitbelow!
+    let _should_bottom_split = 1
   " elseif (&filetype == 'python' || run_type == 'python')
   "   echo "python run by filetype"
   else
     echohl WarningMsg
     echo "No matching run condition!"
     echohl None
+  endif
+  if (!empty(g:container_name) && trim(g:container_name) != '')
+    let _command = "cmd_wrap 'docker exec \"" . g:container_name . "\" ". _command . "'"
+  endif
+  let g:my_query_results = system(_command)
+  if (_should_bottom_split)
+    set splitbelow
+    horizontal belowright Scratch
+    put =g:my_query_results
+    set filetype=rfc_csv
+    execute "normal! ggdd"
+    set splitbelow!
+  else
+    put =g:my_query_results
   endif
   " check filetype
   " if &filetype == 'sql'
