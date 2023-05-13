@@ -236,22 +236,31 @@ function! Run(...)
     echohl None
     return
   endif
+  let _should_bottom_split = 0
   " check file_extension
   if (expand('%:e') == 'pgsql' || run_type == 'pgsql')
     let _command = 'psql --csv -c "' . selected_text . '"'
-    let g:my_query_results = system(_command)
-    set splitbelow
-    horizontal belowright Scratch
-    put =g:my_query_results
-    set filetype=rfc_csv
-    execute "normal! ggdd"
-    set splitbelow!
+    let _should_bottom_split = 1
   " elseif (&filetype == 'python' || run_type == 'python')
   "   echo "python run by filetype"
   else
     echohl WarningMsg
     echo "No matching run condition!"
     echohl None
+  endif
+  if (!empty(g:container_name) && trim(g:container_name) != '')
+    let _command = "cmd_wrap 'docker exec \"" . g:container_name . "\" ". _command . "'"
+  endif
+  let g:my_query_results = system(_command)
+  if (_should_bottom_split)
+    set splitbelow
+    horizontal belowright Scratch
+    put =g:my_query_results
+    set filetype=rfc_csv
+    execute "normal! ggdd"
+    set splitbelow!
+  else
+    put =g:my_query_results
   endif
   " check filetype
   " if &filetype == 'sql'
@@ -261,15 +270,15 @@ vmap <leader>5 "ty:call Run()<CR>
 
 function! PsqlConfigs(...)
   let show_password = get(a:, 1, 0)
-  echo "PGHOST: " . $PGHOST
-  echo "PGHOST: " .  $PGPORT
-  echo "PGDATABASE: " .  $PGDATABASE
-  echo "PGUSER: " .  $PGUSER
+  echo "export PGHOST=" . '"' . $PGHOST . '";'
+  echo "export PGHOST=" . '"' .  $PGPORT . '";'
+  echo "export PGDATABASE=" . '"' .  $PGDATABASE . '";'
+  echo "export PGUSER=" . '"' . $PGUSER . '";'
   let _password = "<OMITTED> pass 1 as first arg to see it"
   if (show_password != 0)
     let _password = $PGPASSWORD
   endif
-  echo "PGPASSWORD: " .  _password
+  echo "export PGPASSWORD=" . '"' .  _password . '";'
 endfunction
 
 " default splits to above
