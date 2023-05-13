@@ -275,7 +275,7 @@ function! PsqlConfigs(...)
     echo "NOTE: since container_name is set; the PG* vars are not used"
   endif
   echo "export PGHOST=" . '"' . $PGHOST . '";'
-  echo "export PGHOST=" . '"' .  $PGPORT . '";'
+  echo "export PGPORT=" . '"' .  $PGPORT . '";'
   echo "export PGDATABASE=" . '"' .  $PGDATABASE . '";'
   echo "export PGUSER=" . '"' . $PGUSER . '";'
   let _password = "<OMITTED> pass 1 as first arg to see it"
