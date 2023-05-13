@@ -278,6 +278,14 @@ function! Run(...)
     endif
     let _command = _command . '"'
   endif
+  if (trim(_base_command) == '')
+    echohl WarningMsg
+    echo "No _base_command could be generated for your specific use case"
+    echo "run_path: " run_path
+    echo "_base_command: " _base_command
+    echohl None
+    return
+  endif
   if (debug != 'true')
     let g:my_query_results = system(_command)
     if (_should_bottom_split)
