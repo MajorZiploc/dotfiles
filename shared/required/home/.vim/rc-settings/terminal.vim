@@ -308,6 +308,7 @@ function! Run(...)
   else
     echo debug_label "run_path: " run_path
     echo debug_label "_command: " _command
+    echo debug_label "_command_prepend: " _command_prepend
     echo debug_label "_should_bottom_split: " _should_bottom_split
   endif
 endfunction
