@@ -248,7 +248,7 @@ function! Run(...)
     echo "No matching run condition!"
     echohl None
   endif
-  if (!empty(g:container_name) && trim(g:container_name) != '')
+  if (!empty(get(g:, 'container_name', "")) && trim(g:container_name) != '')
     let _command = "cmd_wrap 'docker exec \"" . g:container_name . "\" ". _command . "'"
   endif
   let g:my_query_results = system(_command)
@@ -270,6 +270,10 @@ vmap <leader>5 "ty:call Run()<CR>
 
 function! PsqlConfigs(...)
   let show_password = get(a:, 1, 0)
+  if (!empty(get(g:, 'container_name', "")))
+    echo "container_name=" . '"' . g:container_name . '";'
+    echo "NOTE: since container_name is set; the PG* vars are not used"
+  endif
   echo "export PGHOST=" . '"' . $PGHOST . '";'
   echo "export PGHOST=" . '"' .  $PGPORT . '";'
   echo "export PGDATABASE=" . '"' .  $PGDATABASE . '";'
