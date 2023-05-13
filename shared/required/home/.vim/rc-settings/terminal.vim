@@ -229,14 +229,15 @@ vmap <leader>ff <ESC>olet my_search_files = systemlist('gfind_files ".*(file_pat
 
 function _RunPsql(selected_text, is_in_container, debug, debug_label)
   let _command_prepend = ''
+  let _preped_selected_text = substitute(a:selected_text, "'", "'\"'\"'", "g")
   if (a:is_in_container)
     if (get(g:, 'use_env_vars_in_container', "false") == 'true')
       let _command_prepend = 'export PGDATABASE=' . $PGDATABASE . '; '
             \ . 'export PGUSER=' . $PGUSER . '; '
             \ . 'export PGPASSWORD=' . $PGPASSWORD . '; '
-      let _command = 'psql --csv -c \"' . a:selected_text . '\"'
+      let _command = 'psql --csv -c "' . _preped_selected_text . '"'
     else
-      let _command = 'psql --csv -c "' . a:selected_text . '"'
+      let _command = "psql --csv -c '" . _preped_selected_text . "'"
     endif
   else
     if (a:debug == 'true')
@@ -247,7 +248,7 @@ function _RunPsql(selected_text, is_in_container, debug, debug_label)
       echo a:debug_label "  export PGUSER=\"".$PGUSER."\";"
       echo a:debug_label "  export PGPASSWORD=\"".$PGPASSWORD."\";"
     endif
-    let _command = 'psql --csv -c "' . a:selected_text . '"'
+    let _command = "psql --csv -c '" . _preped_selected_text . "'"
   endif
   let _should_bottom_split = 1
   return [l:_command, l:_should_bottom_split, l:_command_prepend]
@@ -255,21 +256,24 @@ endfunction
 
 function _RunPython(selected_text, is_in_container, debug, debug_label)
   let _command_prepend = ''
-  let _command = 'python -c "' . a:selected_text . '"'
+  let _preped_selected_text = substitute(a:selected_text, "'", "'\"'\"'", "g")
+  let _command = "python -c '" . _preped_selected_text . "'"
   let _should_bottom_split = 1
   return [l:_command, l:_should_bottom_split, l:_command_prepend]
 endfunction
 
 function _RunJavascript(selected_text, is_in_container, debug, debug_label)
   let _command_prepend = ''
-  let _command = 'node -e "' . a:selected_text . '"'
+  let _preped_selected_text = substitute(a:selected_text, "'", "'\"'\"'", "g")
+  let _command = "node -e '" . _preped_selected_text . "'"
   let _should_bottom_split = 1
   return [l:_command, l:_should_bottom_split, l:_command_prepend]
 endfunction
 
 function _RunTypescript(selected_text, is_in_container, debug, debug_label)
   let _command_prepend = ''
-  let _command = 'ts-node -e "' . a:selected_text . '"'
+  let _preped_selected_text = substitute(a:selected_text, "'", "'\"'\"'", "g")
+  let _command = "ts-node -e '" . _preped_selected_text . "'"
   let _should_bottom_split = 1
   return [l:_command, l:_should_bottom_split, l:_command_prepend]
 endfunction
@@ -325,10 +329,10 @@ function! Run(...)
   if (is_in_container)
     let _command = "docker exec \"" . g:container_name . '" '
     if (!empty(get(l:, '_command_prepend', '')))
-      let _shell_command = "sh -c \""
+      let _shell_command = "sh -c '"
             \ . _command_prepend
             \ . _base_command
-            \ . '"'
+            \ . "'"
       let _command = _command . _shell_command
     else
       let _command = _command . _base_command
