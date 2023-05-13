@@ -148,6 +148,7 @@ let g:polyglot_disabled = ["autoindent"]
 autocmd BufNewFile,BufRead Justfile set filetype=bash
 autocmd BufNewFile,BufRead *.fs set filetype=fsharp
 autocmd BufNewFile,BufRead *.fsx set filetype=fsharp
+autocmd BufNewFile,BufRead *.pgsql set filetype=sql
 
 " Navigate to file: Allows open of non-existent files aswell
 map <leader>nf :edit <cfile><cr>
