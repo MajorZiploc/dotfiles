@@ -326,6 +326,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 lvim.plugins = {
   { "tpope/vim-fugitive" },          -- git plugin
+  { "MajorZiploc/vim_code_runner" },  -- run selected code chunks
   { "mechatroner/rainbow_csv" },     -- csv highlighter and query engine
   { "tpope/vim-obsession" },         -- self managing n?vim sessions (Session.vim w/ :Obsession <file_name.vim>?/:Obsession! (start/discard current session respectively))
   { "eddyekofo94/gruvbox-flat.nvim" }, -- color theme
@@ -376,6 +377,9 @@ lvim.plugins = {
   },
 
 }
+
+lvim.keys.visual_mode['<leader>5'] = '"ty:call VimCodeRunnerRun()<CR>'
+lvim.keys.visual_mode['<leader>4'] = '"ty:call VimCodeRunnerRun("", "true")<CR>'
 
 require 'colorizer'.setup()
 
