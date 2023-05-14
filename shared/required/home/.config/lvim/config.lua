@@ -378,11 +378,10 @@ lvim.plugins = {
 
 }
 
-vim.cmd('let @t = ""')
-lvim.keys.visual_mode['<leader>5'] = '"ty:call VimCodeRunnerRun()<CR>:let @t = ""<CR>'
-lvim.keys.visual_mode['<leader>4'] = '"ty:call VimCodeRunnerRun("", "true")<CR>:let @t = ""<CR>'
-lvim.keys.normal_mode['<leader>5'] = ':call VimCodeRunnerRun()<CR>:let @t = ""<CR>'
-lvim.keys.normal_mode['<leader>4'] = ':call VimCodeRunnerRun("", "true")<CR>:let @t = ""<CR>'
+lvim.keys.visual_mode['<leader>5'] = '"ty:call VimCodeRunnerRun()<CR>'
+lvim.keys.visual_mode['<leader>4'] = '"ty:call VimCodeRunnerRun("", "true")<CR>'
+lvim.keys.normal_mode['<leader>5'] = ':let @t = ""<CR>:call VimCodeRunnerRun()<CR>'
+lvim.keys.normal_mode['<leader>4'] = ':let @t = ""<CR>:call VimCodeRunnerRun("", "true")<CR>'
 
 vim.cmd('let vim_code_runner_csv_type="rfc_csv"')
 
