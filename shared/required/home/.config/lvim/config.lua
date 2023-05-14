@@ -380,7 +380,15 @@ lvim.plugins = {
 
 lvim.keys.visual_mode['<leader>5'] = '"ty:call VimCodeRunnerRun()<CR>'
 lvim.keys.visual_mode['<leader>4'] = '"ty:call VimCodeRunnerRun("", "true")<CR>'
+lvim.keys.normal_mode['<leader>5'] = ':let @t = ""<CR>:call VimCodeRunnerRun()<CR>'
+lvim.keys.normal_mode['<leader>4'] = ':let @t = ""<CR>:call VimCodeRunnerRun("", "true")<CR>'
 vim.cmd('let vim_code_runner_csv_type="rfc_csv"')
+
+
+vim.cmd('let g:rbql_with_headers = 1')
+vim.cmd('let g:rbql_backend_language = "python"')
+vim.cmd('let g:rbql_use_system_python = 1')
+vim.cmd('autocmd BufNewFile,BufRead *.csv set filetype=rfc_csv')
 
 require 'colorizer'.setup()
 
@@ -604,6 +612,5 @@ vim.notify = filter_notify
 -- end
 
 vim.cmd('set wrap')
-vim.cmd('source ~/.vim/plugin-settings/rainbow_csv.vim')
 vim.cmd('source ~/.slim_vimrc')
 vim.cmd('source ~/.vimrc_ext')
