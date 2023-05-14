@@ -300,6 +300,15 @@ function _RunSh(selected_text, is_in_container, debug, debug_label)
   return [l:_command, l:_should_bottom_split, l:_command_prepend, l:_file_type]
 endfunction
 
+function _RunPerl(selected_text, is_in_container, debug, debug_label)
+  let _command_prepend = ''
+  let _file_type = 'log'
+  let _preped_selected_text = substitute(a:selected_text, "'", "'\"'\"'", "g")
+  let _command = "perl -e '" . _preped_selected_text . "'"
+  let _should_bottom_split = 1
+  return [l:_command, l:_should_bottom_split, l:_command_prepend, l:_file_type]
+endfunction
+
 function! Run(...)
   let run_type = get(a:, 1, '')
   let debug = get(a:, 2, 'false')
@@ -337,6 +346,9 @@ function! Run(...)
   elseif (&filetype == 'sh' || run_type == 'sh')
     let run_path = "sh"
     let case_values = _RunSh(selected_text, is_in_container, debug, debug_label)
+  elseif (&filetype == 'perl' || run_type == 'perl')
+    let run_path = "perl"
+    let case_values = _RunPerl(selected_text, is_in_container, debug, debug_label)
   else
     echohl WarningMsg
     echo "No matching run_path!"
