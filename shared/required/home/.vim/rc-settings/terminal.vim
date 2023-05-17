@@ -202,7 +202,7 @@ nmap <leader>ns :call CreateSmallTopLeftScratch()<CR>
 function! GFindFiles(...)
   let my_args = ''
   for my_arg in a:000
-    let my_args = my_args . ' ' . '"' . my_arg . '"'
+    let my_args = my_args . ' ' . "'" . my_arg . "'"
   endfor
   let cmd = 'gfind_files' . my_args
   let g:my_search_files = systemlist(cmd)
