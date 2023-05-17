@@ -150,6 +150,9 @@ autocmd BufNewFile,BufRead *.fs set filetype=fsharp
 autocmd BufNewFile,BufRead *.fsx set filetype=fsharp
 autocmd BufNewFile,BufRead *.pgsql set filetype=sql
 
+" enforce 2 space indents for markdown files
+autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
+
 " Navigate to file: Allows open of non-existent files aswell
 map <leader>nf :edit <cfile><cr>
 
