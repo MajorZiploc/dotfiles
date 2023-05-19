@@ -90,6 +90,8 @@ alias reexe='fc -s';
 alias v='vim . -S Session.vim';
 alias gv='vim . -S Session.vim "+:horizontal topleft Git"';
 
+alias make_tags='rg --files | ctags -R --links=no -L -';
+
 alias git_merge_keep_theirs="git merge -X theirs";
 alias git_log_break_down="git log --stat --oneline --decorate";
 alias git_graph="git log --oneline --decorate --all --graph";
