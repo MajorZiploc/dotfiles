@@ -104,12 +104,12 @@ function show_cheat_sheet {
 }
 
 function refactor_rename_symbols {
-  local symbol_declare="$1";
-  local rename_pattern="$2";
-  [[ -z "$symbol_declare" ]] && { echo "Must specify symbol_declare\!" >&2; return 1; }
+  local rename_pattern="$1";
+  local symbol_declare_prefix="$2"; symbol_declare_prefix="${symbol_declare_prefix:-""}";
+  local symbol_declare_postfix="$3"; symbol_declare_postfix="${symbol_declare_postfix:-""}";
   [[ -z "$rename_pattern" ]] && { echo "Must specify rename_pattern\!" >&2; return 1; }
-  local search_results; search_results=$(gfind_in_files "^\s*$symbol_declare\b([a-zA-Z0-9_\-]+)\b");
-  local symbol_names; symbol_names=($(echo "$search_results" | sed -E "s,.*?[[:digit:]]+:.*?$symbol_declare\b([a-zA-Z0-9_\-]+)\b(.*),\1,g" | sort -u | xargs));
+  local search_results; search_results=$(gfind_in_files "^\s*$symbol_declare_prefix\b([a-zA-Z0-9_\-]+)\b$symbol_declare_postfix");
+  local symbol_names; symbol_names=($(echo "$search_results" | sed -E "s,.*?[[:digit:]]+:.*?$symbol_declare_prefix\b([a-zA-Z0-9_\-]+)\b$symbol_declare_postfix(.*),\1,g" | sort -u | xargs));
   [[ "$symbol_names" =~ "^[[:blank:]]*$" ]] && { echo "No symbol_names found to rename!" >&2; return 1; }
   local files; files=($(gfind_files ".*" | xargs));
   for symbol_name in ${symbol_names[@]}; do
