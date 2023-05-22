@@ -187,7 +187,7 @@ nnoremap <leader>o :call GoToRecentBuffer('previous')<CR>
 nnoremap <leader>i :call GoToRecentBuffer('next')<CR>
 
 " create a scratch buffer
-command! Scratch new | setlocal bt=nofile bh=wipe nobl noswapfile nu
+command! Scratch new | setlocal bt=nofile bh=wipe nobl noswapfile nu | set filetype=log
 
 " windo diffthis setup
 nmap <leader>wd <C-w><C-v><CMD>Scratch<CR><C-w><C-j><C-w><C-q>
