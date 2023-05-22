@@ -3,7 +3,7 @@ if vim.g.started_by_firenvim == true then
   vim.cmd("let g:firenvim_config={'globalSettings':{},'localSettings':{'.*':{ 'takeover': 'never' }}}")
 
   -- text box
-  vim.cmd("nmap <leader>tb <cmd>set lines=20<cr><cmd>set columns=100<cr>")
+  vim.cmd("nmap <leader>tb <cmd>set lines=20<cr><cmd>set columns=100<cr><cmd>set filetype=log<cr>")
 
 -- TODO: fix one of these attempts to resize the window on open of the window
 --
