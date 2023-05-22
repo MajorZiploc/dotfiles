@@ -154,6 +154,7 @@ autocmd BufNewFile,BufRead *.mongodb set filetype=javascript
 autocmd BufNewFile,BufRead *.mongo set filetype=javascript
 autocmd BufNewFile,BufRead *.sqlite3 set filetype=sql
 autocmd BufNewFile,BufRead *.sqlite set filetype=sql
+autocmd BufNewFile,BufRead *.mssql set filetype=sql
 
 " enforce 2 space indents for markdown files
 autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
