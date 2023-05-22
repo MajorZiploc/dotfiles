@@ -36,7 +36,8 @@ import pytz
 # from dateutil import parser as date_parser, tz
 import dateutil
 import signal
-import pandas
+import pandas as pd
+import numpy as np
 from sentry_sdk import capture_message
 from django.db import models
 # from django.utils.timezone import now
