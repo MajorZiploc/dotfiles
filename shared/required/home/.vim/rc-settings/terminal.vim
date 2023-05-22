@@ -150,6 +150,9 @@ autocmd BufNewFile,BufRead *.fs set filetype=fsharp
 autocmd BufNewFile,BufRead *.fsx set filetype=fsharp
 autocmd BufNewFile,BufRead *.pgsql set filetype=sql
 autocmd BufNewFile,BufRead *.psql set filetype=sql
+autocmd BufNewFile,BufRead *.mongodb set filetype=javascript
+autocmd BufNewFile,BufRead *.mongo set filetype=javascript
+autocmd BufNewFile,BufRead *.sqlite3 set filetype=sql
 autocmd BufNewFile,BufRead *.sqlite set filetype=sql
 
 " enforce 2 space indents for markdown files
