@@ -197,9 +197,10 @@ function _find_items_rename_helper {
   local maxdepth="$4";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$5";
+  local new_name;
   for mdepth in $(seq 1 "$maxdepth"); do
     eval "find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' $not_paths -print0" | while read -d $'\0' item; do
-    local new_name; new_name="$(echo "$item" | sed -E "$by")";
+    unset new_name; new_name="$(echo "$item" | sed -E "$by")";
     [[ "$item" != "$new_name" ]] && {
       if [[ $preview == false ]]; then
         mv "$item" "$new_name";
