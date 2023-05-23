@@ -197,9 +197,10 @@ function _find_items_rename_helper {
   local maxdepth="$4";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$5";
+  local new_name;
   for mdepth in $(seq 1 "$maxdepth"); do
     eval "find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' $not_paths -print0" | while read -d $'\0' item; do
-    local new_name; new_name="$(echo "$item" | sed -E "$by")";
+    unset new_name; new_name="$(echo "$item" | sed -E "$by")";
     [[ "$item" != "$new_name" ]] && {
       if [[ $preview == false ]]; then
         mv "$item" "$new_name";
@@ -405,8 +406,9 @@ function _find_files_rename_helper {
   local maxdepth="$5";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$6";
+  local b nb new_name should_rename;
   eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -print0" | while read -d $'\0' file; do
-  local should_rename=false;
+  should_rename=false;
   if [[ -z "$with_content" ]]; then
     should_rename=true;
   else
@@ -414,10 +416,9 @@ function _find_files_rename_helper {
     [[ -z "$file_content_matches" ]] || { should_rename=true; }
   fi
   [[ $should_rename == true ]] && {
-    local b nb new_name;
-    b=$(basename "$file");
-    nb="$(echo "$b" | sed -E "$by")";
-    new_name="$(dirname "$file")/$nb"
+    unset b; b=$(basename "$file");
+    unset nb; nb="$(echo "$b" | sed -E "$by")";
+    unset new_name; new_name="$(dirname "$file")/$nb"
     [[ "$file" != "$new_name" ]] && {
       if [[ $preview == false ]]; then
         mv "$file" "$new_name";
