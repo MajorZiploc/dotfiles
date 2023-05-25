@@ -3,6 +3,7 @@
 this_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
 
 sudo apt-get -y update;
+sudo apt-get install -y software-properties-common;
 # ensure basic system dependencies: from pyenv install steps: https://www.liquidweb.com/kb/how-to-install-pyenv-on-ubuntu-18-04/
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
   libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
