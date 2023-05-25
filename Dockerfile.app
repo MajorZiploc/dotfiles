@@ -4,15 +4,14 @@
 ARG VARIANT="focal"
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
-# [Optional] Uncomment this section to install additional OS packages.
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive # \
-     # && apt-get -y install --no-install-recommends vim neovim tmux npm wget zsh
+COPY . /home-settings
 
-# Install powershell core
-# RUN apt-get -y install --no-install-recommends apt-transport-https software-properties-common \
-#      && wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb \
-#      && dpkg -i packages-microsoft-prod.deb \
-#      && apt-get update \
-#      && add-apt-repository universe \
-#      && apt-get install -y --no-install-recommends powershell
+# RUN /home-settings/setup/ubuntu/scripts/install.sh
 
+# RUN /home-settings/shared/scripts/vim_shell/set_shells.sh
+
+# RUN /home-settings/shared/scripts/nodejs/nvm_install_lts.sh
+
+# RUN /home-settings/setup/ubuntu/scripts/copy.sh 111
+
+CMD ["sleep", "infinity"]
