@@ -35,6 +35,9 @@ sudo apt-get -y install ripgrep;
 sudo apt-get -y remove fzf;
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf;
 sed -E -i'' 's,curl -[^[:blank:]]+,curl -0Lk,g' ~/.fzf/install;
+sed -E -i'' 's,(\s*\bask .*),#\1,' ~/.fzf/install;
+sed -E -i'' 's,auto_completion=\$\?,true,' ~/.fzf/install;
+sed -E -i'' 's,key_bindings=\$\?,true,' ~/.fzf/install;
 ~/.fzf/install;
 # for Ag in vim
 sudo apt-get -y install silversearcher-ag;
