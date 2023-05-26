@@ -23,11 +23,12 @@
 # mprocs: simple tmux like watcher for long running processes
 # sccache: speed up rust build times by cacheing libs and code that didnt change since last time
 # bob-nvim: nvim version manager - doesnt allow for a global nvim. so all nvim versions must be managed by bob
+# zoxide: smarter cd
 
 function main {
   local method="$1"; method="${method:-"install"}";
   if [[ "$method" == "install" ]]; then
-    cargo install cargo-update ripgrep du-dust exa bat sccache cargo-outdated;
+    cargo install cargo-update ripgrep du-dust exa bat sccache cargo-outdated zoxide;
   else
     # command from cargo-update package
     cargo install-update -a;
