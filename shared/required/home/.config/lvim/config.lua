@@ -375,7 +375,7 @@ lvim.plugins = {
       -- "rcarriga/nvim-notify",
     }
   },
-  { 'MajorZiploc/nvim-dev-container' } -- Use vscode devcontainers - the nvim integration on the containers doesnt seem to work well. Look into using this more
+  -- { 'esensar/nvim-dev-container' } -- Use vscode devcontainers - the nvim integration on the containers doesnt seem to work well. Look into using this more
 }
 
 require("devcontainer").setup{}
