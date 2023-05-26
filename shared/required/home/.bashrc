@@ -69,5 +69,8 @@ __bash_prompt
 export PROMPT_DIRTRIM=4
 
 test -d ~/.dotnet/tools && export PATH="$HOME/.dotnet/tools:$PATH"
+
+test which zoxide && eval "$(zoxide init zsh)"
+
 # _ext bash files are for user specific edits to the bash environment
 test -e ~/.bashrc_ext && . ~/.bashrc_ext
