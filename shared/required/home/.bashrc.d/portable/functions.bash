@@ -43,15 +43,19 @@ function tmuxps {
   # $1: optional session name
   local session_name="$1";
   local items="";
-  tmuxps_get_project_dirs;
-  for _path in $(echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"); do
-    [[ -d "$_path" ]] && {
-      items+=$(find "$_path" -maxdepth 1 -mindepth 1 -type d);
-      items+="\n";
-    }
-  done;
   local selected;
-  selected=$(printf "$items" | FUZZY_FINDER_PLACEHOLDER);
+  if which zoxide &>/dev/null ; then
+    selected=$(zoxide query -l | FUZZY_FINDER_PLACEHOLDER);
+  else
+    tmuxps_get_project_dirs;
+    for _path in $(echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"); do
+      [[ -d "$_path" ]] && {
+        items+=$(find "$_path" -maxdepth 1 -mindepth 1 -type d);
+        items+="\n";
+      }
+    done;
+    selected=$(printf "$items" | FUZZY_FINDER_PLACEHOLDER);
+  fi
   _tmux_session_list_helper "$session_name" "$selected";
 }
 
@@ -443,4 +447,32 @@ function rest_generic {
   declare -a inputs; inputs=($@);
   inputs+=("$method");
   _rest_helper_preper $inputs[@];
+}
+
+function zoxide_refresh_projects {
+  tmuxps_get_project_dirs;
+  local all_existing_projects_for_path;
+  local all_zoxide_entries_for_path;
+  local does_zoxide_entry_exist;
+  for _path in $(echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"); do
+    all_existing_projects_for_path="";
+    [[ -d "$_path" ]] && {
+      find "$_path" -maxdepth 1 -mindepth 1 -type d -print0 | while read -d $'\0' project; do
+        zoxide query "$project" &>/dev/null;
+        zoxide_result_exit_code=$?;
+        if [ ! $zoxide_result_exit_code -eq 0 ]; then
+          zoxide add "$project";
+        fi
+        all_existing_projects_for_path+=" $project";
+      done
+      all_zoxide_entries_for_path=$(zoxide query -l | grep "$_path");
+      for zoxide_entry_for_path in $(echo "${all_zoxide_entries_for_path}" | tr " " "\n"); do
+        echo "all_zoxide_entries_for_path" | grep "$zoxide_entry_for_path" &> /dev/null;
+        does_zoxide_entry_exist=$?;
+        if [ $does_zoxide_entry_exist -eq 0 ]; then
+          zoxide remove "$zoxide_entry_for_path";
+        fi
+      done;
+    }
+  done;
 }
