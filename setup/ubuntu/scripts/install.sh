@@ -3,6 +3,7 @@
 this_path="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )";
 
 sudo apt-get -y update;
+sudo apt-get install -y software-properties-common;
 # ensure basic system dependencies: from pyenv install steps: https://www.liquidweb.com/kb/how-to-install-pyenv-on-ubuntu-18-04/
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
   libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
@@ -35,6 +36,9 @@ sudo apt-get -y install ripgrep;
 sudo apt-get -y remove fzf;
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf;
 sed -E -i'' 's,curl -[^[:blank:]]+,curl -0Lk,g' ~/.fzf/install;
+sed -E -i'' 's,(\s*\bask .*),#\1,' ~/.fzf/install;
+sed -E -i'' 's,auto_completion=\$\?,true,' ~/.fzf/install;
+sed -E -i'' 's,key_bindings=\$\?,true,' ~/.fzf/install;
 ~/.fzf/install;
 # for Ag in vim
 sudo apt-get -y install silversearcher-ag;

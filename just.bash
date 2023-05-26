@@ -7,11 +7,11 @@ function just_parse_bash_function_aliases {
 }
 
 function just_docker_container_start {
-  docker-compose -f "$JUST_PROJECT_ROOT/docker-compose.yaml" up -d;
+  docker-compose -f "$JUST_PROJECT_ROOT/docker-compose.yml" up -d;
 }
 
 function just_docker_container_stop {
-  docker-compose -f "$JUST_PROJECT_ROOT/docker-compose.yaml" stop;
+  docker-compose -f "$JUST_PROJECT_ROOT/docker-compose.yml" stop;
 }
 
 function just_docker_container_connect {
