@@ -43,7 +43,7 @@ lvim_treesitter_and_mason_removals='"(gopls|gitignore)",';
 find "$temp_shared" -regextype egrep -iregex ".*lvim.*" -type f -exec sed -E -i'' "/$lvim_treesitter_and_mason_removals/d" "{}" \;
 if ! which zoxide &>/dev/null ; then
   tmux_session_manager_plugin="joshmedeski(/t-smart-tmux-session-manager')";
-  find -E "$temp_shared" -iregex ".*tmux.*" -type f -exec gsed -E -i'' "s,$tmux_session_manager_plugin,MajorZiploc\1 # This version does not use zoxide. Use $tmux_session_manager_plugin for zoxide," "{}" \;
+  find "$temp_shared" -regextype egrep -iregex ".*tmux.*" -type f -exec sed -E -i'' "s,$tmux_session_manager_plugin,MajorZiploc\1 # This version does not use zoxide. Use $tmux_session_manager_plugin for zoxide," "{}" \;
   unset tmux_session_manager_plugin
 fi
 
