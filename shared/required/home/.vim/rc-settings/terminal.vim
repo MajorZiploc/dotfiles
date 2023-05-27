@@ -204,7 +204,10 @@ nmap <leader>ns :call CreateSmallTopLeftScratch()<CR>
 function! GFindFiles(...)
   let my_args = ''
   for my_arg in a:000
-    let my_args = my_args . ' ' . "'" . my_arg . "'"
+    if (! (my_arg =~ '^".*"$' || my_arg =~ "^'.*'$"))
+      let my_arg = "'" . my_arg . "'"
+    endif
+    let my_args = my_args . ' ' . my_arg
   endfor
   let cmd = 'gfind_files' . my_args
   let g:my_search_files = systemlist(cmd)
@@ -224,6 +227,8 @@ nmap <leader>cp :let my_search_files = [my_search_files[-1]] + my_search_files[:
 
 " hidden files dont seem to be included if in a hidden directory
 command! -nargs=1 VFindFiles let my_search_files_glob = globpath('.', '**/' . <q-args>, 1, 1) | if len(my_search_files_glob) | execute 'edit ' . my_search_files_glob[0] | endif
+
+command! -nargs=+ GFindFiles call GFindFiles(<q-args>)
 
 " bash finds raw
 vmap <leader>fa <ESC>ogfind_in_files "(search_phrase)" ".*(file_pattern).*"<ESC>^
