@@ -31,6 +31,7 @@ alias keep_first='cat | awk "!x[\$0]++" | cat';
 alias add_semicolons='sed -E "s/(.+)/\1;/;s/;;$/;/;"';
 alias to_title_case='sed -E "s/\b(.)/\u\1/g"';
 alias to_less_blank_lines='perl -00 -pe '"'"'s/\n{2,}(?=[^\n])/"\n"/g'"'";
+alias paragraph_count='perl -00 -ne '"'"'BEGIN{$paragraph_count=0}; $paragraph_count=$paragraph_count + 1; END{print $paragraph_count};'"'"''
 alias indent_4_to_2='perl -pe '"'"'s{^((?: {4})*)}{" " x (2*length($1)/4)}e'"'"'';
 alias indent_2_to_4='perl -pe '"'"'s{^((?: {2})*)}{" " x (4*length($1)/2)}e'"'"'';
 alias bash_remove_colors="sed 's/\x1B\[[0-9;]*[A-Za-z]//g'";
