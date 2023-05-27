@@ -165,14 +165,18 @@ function cdfp {
 
 function cdp {
   local items="";
-  tmuxps_get_project_dirs;
-  for _path in $(echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"); do
-    [[ -d "$_path" ]] && {
-      items+=`find "$_path" -maxdepth 1 -mindepth 1 -type d`;
-      items+="\n";
-    }
-  done;
-  local selected; selected=$(printf "$items" | FUZZY_FINDER_PLACEHOLDER);
+  if which zoxide &>/dev/null ; then
+    selected=$(zoxide query -l | FUZZY_FINDER_PLACEHOLDER);
+  else
+    tmuxps_get_project_dirs;
+    for _path in $(echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"); do
+      [[ -d "$_path" ]] && {
+        items+=`find "$_path" -maxdepth 1 -mindepth 1 -type d`;
+        items+="\n";
+      }
+    done;
+    local selected; selected=$(printf "$items" | FUZZY_FINDER_PLACEHOLDER);
+  fi
   cd "$selected" || { echo "Unable to find selected project\!" >&2; return 1; }
 }
 
