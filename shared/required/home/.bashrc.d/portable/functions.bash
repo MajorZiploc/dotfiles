@@ -46,6 +46,7 @@ function tmuxps {
   local selected;
   if which zoxide &>/dev/null ; then
     selected=$(zoxide query -l | FUZZY_FINDER_PLACEHOLDER);
+    zoxide add "$selected";
   else
     tmuxps_get_project_dirs;
     for _path in $(echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"); do
@@ -167,6 +168,7 @@ function cdp {
   local items="";
   if which zoxide &>/dev/null ; then
     selected=$(zoxide query -l | FUZZY_FINDER_PLACEHOLDER);
+    zoxide add "$selected";
   else
     tmuxps_get_project_dirs;
     for _path in $(echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"); do
