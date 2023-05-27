@@ -130,8 +130,7 @@ vnoremap <leader>cc "+y
 
 function! FoldWholeFile()
   let last_line = line("$")
-  execute "normal! gg"
-  let normal_mode_command = ''
+  let normal_mode_command = 'gg'
   let file_name = expand('%')
   let paragraph_count = system("cat '" . file_name . "' | paragraph_count")
   let i = 0
@@ -144,8 +143,7 @@ endfunction
 
 function! UnFoldWholeFile()
   let last_line = line("$")
-  execute "normal! gg"
-  let normal_mode_command = ''
+  let normal_mode_command = 'gg'
   let file_name = expand('%')
   let paragraph_count = system("cat '" . file_name . "' | paragraph_count")
   let i = 0
