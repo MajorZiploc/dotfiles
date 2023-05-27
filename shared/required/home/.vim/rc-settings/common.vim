@@ -133,26 +133,24 @@ nmap <c-s> :wa<cr>
 " copy to system clipboard
 vnoremap <leader>cc "+y
 
-function! FoldWholeFile()
-  let last_line = line("$")
+function! FoldWholeFileByParagraph()
   let normal_mode_command = 'gg'
   let file_name = expand('%')
   let paragraph_count = system("cat '" . file_name . "' | paragraph_count")
   let i = 0
-  while (i <= paragraph_count)
+  while (i < paragraph_count)
     let normal_mode_command = normal_mode_command . "zfapj"
     let i = i + 1
   endwhile
   execute "normal! " . normal_mode_command
 endfunction
 
-function! UnFoldWholeFile()
-  let last_line = line("$")
+function! UnFoldWholeFileByParagraph()
   let normal_mode_command = 'gg'
   let file_name = expand('%')
   let paragraph_count = system("cat '" . file_name . "' | paragraph_count")
   let i = 0
-  while (i <= paragraph_count)
+  while (i < paragraph_count)
     let current_line = line(".")
     let normal_mode_command = normal_mode_command . "zO}j"
     let i = i + 1
@@ -160,5 +158,35 @@ function! UnFoldWholeFile()
   execute "normal! " . normal_mode_command
 endfunction
 
-nmap <leader>zf :call FoldWholeFile()<cr>
-nmap <leader>zu :call UnFoldWholeFile()<cr>
+function! FoldSelectionByParagraph()
+  let normal_mode_command = ''
+  let selected_text = @z
+  let _preped_text = substitute(selected_text, "'", "'\"'\"'", "g")
+  let paragraph_count = system("echo '" . _preped_text . "' | paragraph_count")
+  let i = 0
+  while (i < paragraph_count)
+    let normal_mode_command = normal_mode_command . "zfapj"
+    let i = i + 1
+  endwhile
+  execute "normal! " . normal_mode_command
+endfunction
+
+function! UnFoldSelectionByParagraph()
+  let normal_mode_command = ''
+  let selected_text = @z
+  let _preped_text = substitute(selected_text, "'", "'\"'\"'", "g")
+  let paragraph_count = system("echo '" . _preped_text . "' | paragraph_count")
+  let i = 0
+  while (i < paragraph_count)
+    let current_line = line(".")
+    let normal_mode_command = normal_mode_command . "zO}j"
+    let i = i + 1
+  endwhile
+  execute "normal! " . normal_mode_command
+endfunction
+
+nmap <leader>zf :call FoldWholeFileByParagraph()<cr>
+nmap <leader>zu :call UnFoldWholeFileByParagraph()<cr>
+
+vmap <leader>zf "zy:call FoldSelectionByParagraph()<cr>
+vmap <leader>zu "zy:call UnFoldSelectionByParagraph()<cr>
