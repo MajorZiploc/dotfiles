@@ -66,14 +66,14 @@ if !has('nvim')
   " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
   " For Vim<8, replace EndOfBuffer by NonText
   " autocmd vimenter * hi EndOfBuffer guibg=NONE ctermbg=NONE
+  " menu colors
+  highlight Pmenu ctermbg=gray guibg=gray
+  highlight PmenuSel ctermbg=gray guibg=gray
+  highlight PmenuSbar ctermbg=gray guibg=gray
+  highlight Pmenu ctermbg=gray guibg=gray
 endif
 
 set guifont=Consolas:h12
-" menu colors
-highlight Pmenu ctermbg=gray guibg=gray
-highlight PmenuSel ctermbg=gray guibg=gray
-highlight PmenuSbar ctermbg=gray guibg=gray
-highlight Pmenu ctermbg=gray guibg=gray
 
 " window
 set nu " line numbers
