@@ -174,3 +174,8 @@ endfunction
 
 nmap <leader>zf :call FoldWholeFile()<cr>
 nmap <leader>zu :call UnFoldWholeFile()<cr>
+
+" command mode polyfills for emacs terminal navigation
+cnoremap <C-A> <Home>
+cnoremap <C-F> <Right>
+cnoremap <C-B> <Left>
