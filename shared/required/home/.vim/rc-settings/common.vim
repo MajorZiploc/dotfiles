@@ -138,7 +138,7 @@ function! FoldWholeFile()
   let file_name = expand('%')
   let paragraph_count = system("cat '" . file_name . "' | paragraph_count")
   let i = 0
-  while (i <= paragraph_count)
+  while (i < paragraph_count)
     let normal_mode_command = normal_mode_command . "zfapj"
     let i = i + 1
   endwhile
@@ -150,7 +150,34 @@ function! UnFoldWholeFile()
   let file_name = expand('%')
   let paragraph_count = system("cat '" . file_name . "' | paragraph_count")
   let i = 0
-  while (i <= paragraph_count)
+  while (i < paragraph_count)
+    let current_line = line(".")
+    let normal_mode_command = normal_mode_command . "zO}j"
+    let i = i + 1
+  endwhile
+  execute "normal! " . normal_mode_command
+endfunction
+
+function! FoldSelection()
+  let normal_mode_command = ''
+  let selected_text = @z
+  let _preped_text = substitute(selected_text, "'", "'\"'\"'", "g")
+  let paragraph_count = system("echo '" . _preped_text . "' | paragraph_count")
+  let i = 0
+  while (i < paragraph_count)
+    let normal_mode_command = normal_mode_command . "zfapj"
+    let i = i + 1
+  endwhile
+  execute "normal! " . normal_mode_command
+endfunction
+
+function! UnFoldSelection()
+  let normal_mode_command = ''
+  let selected_text = @z
+  let _preped_text = substitute(selected_text, "'", "'\"'\"'", "g")
+  let paragraph_count = system("echo '" . _preped_text . "' | paragraph_count")
+  let i = 0
+  while (i < paragraph_count)
     let current_line = line(".")
     let normal_mode_command = normal_mode_command . "zO}j"
     let i = i + 1
@@ -160,3 +187,6 @@ endfunction
 
 nmap <leader>zf :call FoldWholeFile()<cr>
 nmap <leader>zu :call UnFoldWholeFile()<cr>
+
+vmap <leader>zf "zy:call FoldSelection()<cr>
+vmap <leader>zu "zy:call UnFoldSelection()<cr>
