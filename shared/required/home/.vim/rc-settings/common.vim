@@ -133,7 +133,7 @@ nmap <c-s> :wa<cr>
 " copy to system clipboard
 vnoremap <leader>cc "+y
 
-function! FoldWholeFile()
+function! FoldWholeFileByParagraph()
   let normal_mode_command = 'gg'
   let file_name = expand('%')
   let paragraph_count = system("cat '" . file_name . "' | paragraph_count")
@@ -145,7 +145,7 @@ function! FoldWholeFile()
   execute "normal! " . normal_mode_command
 endfunction
 
-function! UnFoldWholeFile()
+function! UnFoldWholeFileByParagraph()
   let normal_mode_command = 'gg'
   let file_name = expand('%')
   let paragraph_count = system("cat '" . file_name . "' | paragraph_count")
@@ -158,7 +158,7 @@ function! UnFoldWholeFile()
   execute "normal! " . normal_mode_command
 endfunction
 
-function! FoldSelection()
+function! FoldSelectionByParagraph()
   let normal_mode_command = ''
   let selected_text = @z
   let _preped_text = substitute(selected_text, "'", "'\"'\"'", "g")
@@ -171,7 +171,7 @@ function! FoldSelection()
   execute "normal! " . normal_mode_command
 endfunction
 
-function! UnFoldSelection()
+function! UnFoldSelectionByParagraph()
   let normal_mode_command = ''
   let selected_text = @z
   let _preped_text = substitute(selected_text, "'", "'\"'\"'", "g")
@@ -185,8 +185,8 @@ function! UnFoldSelection()
   execute "normal! " . normal_mode_command
 endfunction
 
-nmap <leader>zf :call FoldWholeFile()<cr>
-nmap <leader>zu :call UnFoldWholeFile()<cr>
+nmap <leader>zf :call FoldWholeFileByParagraph()<cr>
+nmap <leader>zu :call UnFoldWholeFileByParagraph()<cr>
 
-vmap <leader>zf "zy:call FoldSelection()<cr>
-vmap <leader>zu "zy:call UnFoldSelection()<cr>
+vmap <leader>zf "zy:call FoldSelectionByParagraph()<cr>
+vmap <leader>zu "zy:call UnFoldSelectionByParagraph()<cr>
