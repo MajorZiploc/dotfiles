@@ -4,6 +4,11 @@ let mapleader = " "
 nnoremap U <c-r>
 nnoremap Y y$
 
+" command mode polyfills for emacs terminal navigation
+cnoremap <C-A> <Home>
+cnoremap <C-F> <Right>
+cnoremap <C-B> <Left>
+
 " keep focus at center of screen
 " nnoremap n nzzzv
 " nnoremap N Nzzzv
