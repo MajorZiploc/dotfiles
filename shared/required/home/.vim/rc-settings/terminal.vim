@@ -162,13 +162,6 @@ autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
 " Navigate to file: Allows open of non-existent files aswell
 map <leader>nf :edit <cfile><cr>
 
-function WriteIfPossibleThenQuitBuffer()
-  :w
-  :q!
-endfunction
-" save and quite
-nmap <leader>wq :call WriteIfPossibleThenQuitBuffer()<cr>
-
 " line nuke
 nmap <leader>ln <cmd>%!to_less_blank_lines<cr>
 vmap <leader>ln !to_less_blank_lines<cr>
