@@ -94,7 +94,7 @@ Refresh your bash, vim, clipboard, Tasks, and/or vscode settings
 Can toggle some refreshes on and off with use of binary flag system
 
 Assumption:
-the ~/projects/home-settings repo has no working changes
+the ~/projects/dotfiles repo has no working changes
 
 refresh_settings() = refresh_settings_with_flags "00"
 refresh_settings_all() = refresh_settings_with_flags "111"
@@ -115,7 +115,7 @@ refresh_settings_with_flags "011" -- copy vscode and clipboard aswell but not th
 
 How:
 type -a refresh_settings to see implementation
-This process tries to retain working changes in the git repo for home-settings for the copy down process
+This process tries to retain working changes in the git repo for dotfiles for the copy down process
 EOF
 `
   echo "$docs";

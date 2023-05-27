@@ -1,4 +1,4 @@
-# home-settings
+# dotfiles
 
 ## Purpose
 For automating the setup of a developer machine
@@ -270,7 +270,7 @@ __bash_prompt
 ### Staying up to date
 If you want to stay up to date with this repo, then use the refresh\_settings bash function.
 
-refresh\_settings will pull master on this repo (~/projects/home-settings) and call the copy script.
+refresh\_settings will pull master on this repo (~/projects/dotfiles) and call the copy script.
 
 ### Remember that the copy script will copy over any files that exist in the destination path that have the same name as files being copied from the source. See the Install Scripts section for more detail on this!!!
 
