@@ -296,6 +296,7 @@ This will turn that feature off!
 This way you can have all the other great features you love from this repo, keep up to date with the repo, and make any changes that make these settings more you!
 
 Use ~/.zshrc\_ext for zsh
+
 Use ~/.vimrc\_ext for vim
 
 ## Development tools for contribution
