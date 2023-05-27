@@ -73,17 +73,17 @@ To install windows software with chocolatey:
 
 ### Ubuntu and Wsl Ubuntu and Mac and Android
 To install software with apt-get:
-- ./setup/((wsl\_)?ubuntu|mac|android)/scripts/install.sh
+- ./setup/((wsl_)?ubuntu|mac|android)/scripts/install.sh
 
 ### Vim setting shells
 Make sure to set shells in the /usr/local/bin: (NOTE: for git bash, launch as admin and run the content of this file without the 'sudo')
-- ./shared/scripts/vim\_shell/set\_shells.sh
+- ./shared/scripts/vim_shell/set_shells.sh
 
 ### Nodejs (nvm)
 Required for coc vim installs
-- ./shared/scripts/nodejs/nvm\_install\_lts.sh
+- ./shared/scripts/nodejs/nvm_install_lts.sh
 Misc tooling
-- ./shared/scripts/nodejs/install\_global\_tooling.sh.sh
+- ./shared/scripts/nodejs/install_global_tooling.sh.sh
 
 ### Rust (cargo)
 install rust
@@ -100,16 +100,16 @@ Misc tooling; Adds color to fzf previews with bat!
 
 NOTE: the copy script depends on the above install scripts being run prior, if you run the copy script before them, you will most likely experience problems
 
-Use the copy.sh scripts found in ./setup/[windows|wsl\_ubuntu|ubuntu|mac]/scripts/copy.sh "$flags" to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, vim-plug.
+Use the copy.sh scripts found in ./setup/[windows|wsl_ubuntu|ubuntu|mac]/scripts/copy.sh "$flags" to copy over vscode keybindings and settings, vim, bash settings, tasks, and clipboard files. It will also clone a vim plugin manager, vim-plug.
 
-copy.sh : binary\_flags? -> unit
+copy.sh : binary_flags? -> unit
 
 Paths with content that will be affected include but are not limited to:
 - "$HOME/.bashrc"
-- "$HOME/.bash\_profile"
+- "$HOME/.bash_profile"
 - "$HOME/.bashrc.d/"
-- "$HOME/.zsh\_completion.d/"
-- "$HOME/.zshrc\_core"
+- "$HOME/.zsh_completion.d/"
+- "$HOME/.zshrc_core"
 - "$HOME/.zshrc"
 - "$HOME/.zshrc.d/"
 - "$HOME/.vimrc"
@@ -169,10 +169,10 @@ This will update various package manager packages for things like pip, npm, and 
 - This route will take more effort on your part
 - You will need to go into the coc plugin repo:
 > cd ~/.vim/plugged/coc.nvim
-- Then delete the current node\_modules folder
+- Then delete the current node_modules folder
 > rm -rf node_modules
 - Then you will need to revert to a previous commit (I am unsure which commit you will need. Use git log to see commit hashs to try)
-> git reset --hard <commit\_hash>
+> git reset --hard <commit_hash>
 - Then relaunch vim and coc should try to install various languages servers. you may need to use the following commands inside of vim:
 > :PlugInstall
 > :CocInstall
@@ -183,51 +183,51 @@ This will update various package manager packages for things like pip, npm, and 
 ## Bash tooling
 ### Notable bash functions/aliases
 - whence <cmd> # gives the details of a bash command
-- search\_env\_for(\_fuzz)? "grep -E|string|here" # searches the bash env for the given string (a fuzzy variant is available
-- show\_cmds\_like "grep -E|string|here" # sends impls of aliases and bash fns that match the regex to stdout (useful when
+- search_env_for(_fuzz)? "grep -E|string|here" # searches the bash env for the given string (a fuzzy variant is available
+- show_cmds_like "grep -E|string|here" # sends impls of aliases and bash fns that match the regex to stdout (useful when
   piped to clip)
-- grepn\_files(\_freq|\_uniq)? # useful chained after find\_in\_files(\_fuzz)?
-- [ag]?find\_files(\_fuzz)?
-- [ag]?find\_files\_rename(\_preview)?
-- [ag]?find\_in\_files(\_fuzz)?
-- [ag]?find\_in\_files\_replace
-- [ag]?find\_items
-- tmuxcs <optional\_session\_name> # Creates a tmux session based on the current path if the session name is not given
-- tmuxps <optional\_session\_name> # Creates a tmux session based the selected fzf/fzy folders specified by tmuxps\_get\_project\_dirs
-- tmuxds <optional\_session\_name> # Creates a tmux session based the selected fzf/fzy folder from the users current path
-- tmuxks -t <session\_name> # kill a tmux session
-- tmuxas -t <session\_name> # attach to a tmux session
+- grepn_files(_freq|_uniq)? # useful chained after find_in_files(_fuzz)?
+- [ag]?find_files(_fuzz)?
+- [ag]?find_files_rename(_preview)?
+- [ag]?find_in_files(_fuzz)?
+- [ag]?find_in_files_replace
+- [ag]?find_items
+- tmuxcs <optional_session_name> # Creates a tmux session based on the current path if the session name is not given
+- tmuxps <optional_session_name> # Creates a tmux session based the selected fzf/fzy folders specified by tmuxps_get_project_dirs
+- tmuxds <optional_session_name> # Creates a tmux session based the selected fzf/fzy folder from the users current path
+- tmuxks -t <session_name> # kill a tmux session
+- tmuxas -t <session_name> # attach to a tmux session
 - tmuxksvr # kills the tmux server
-- refresh\_settings(\_help|\_all|\_with\_flags)?
-- show\_script\_path # useful when writing bash scripts to get the local of the script being written
-- show\_cheat\_sheet # uses cht.sh to search for language or command functionality
-- set\_\S+ # use search\_env\_for "set\_" to see all set functions available
-- mssql\_exec # use to execute a sql command a database
-- rest\_get # use to call a get rest request
-- rest\_post # use to call a post rest request
-- rest\_delete # use to call a delete rest request
-- rest\_patch # use to call a patch rest request
-- rest\_generic # use to call a generic rest request
-- set\_intersection # take the intersection of 2 sets
-- set\_are\_disjoint # check if 2 sets are disjoint
-- set\_cardinality # get the number of elements in a set
-- set\_difference # take the difference of 2 sets (a - b)
-- set\_elem # check if item is an element of the set
-- set\_eq # check if 2 sets are equal
-- set\_is\_subset # check if 1 set is a subset of another set
-- set\_maximum # get the max element of a set string wise
-- set\_maximum\_num # get the max element of a set number wise
-- set\_minimum # get the min element of a set string wise
-- set\_minimum\_num # get the min element of a set number wise
-- set\_symmetric\_difference # get elements that occur in only one of the sets but not both
-- set\_union # get elements from either set or both
+- refresh_settings(_help|_all|_with_flags)?
+- show_script_path # useful when writing bash scripts to get the local of the script being written
+- show_cheat_sheet # uses cht.sh to search for language or command functionality
+- set_\S+ # use search_env_for "set_" to see all set functions available
+- mssql_exec # use to execute a sql command a database
+- rest_get # use to call a get rest request
+- rest_post # use to call a post rest request
+- rest_delete # use to call a delete rest request
+- rest_patch # use to call a patch rest request
+- rest_generic # use to call a generic rest request
+- set_intersection # take the intersection of 2 sets
+- set_are_disjoint # check if 2 sets are disjoint
+- set_cardinality # get the number of elements in a set
+- set_difference # take the difference of 2 sets (a - b)
+- set_elem # check if item is an element of the set
+- set_eq # check if 2 sets are equal
+- set_is_subset # check if 1 set is a subset of another set
+- set_maximum # get the max element of a set string wise
+- set_maximum_num # get the max element of a set number wise
+- set_minimum # get the min element of a set string wise
+- set_minimum_num # get the min element of a set number wise
+- set_symmetric_difference # get elements that occur in only one of the sets but not both
+- set_union # get elements from either set or both
 
 ### Special mentions on bash functions/aliases
-All of the [ag]?find\_ are wrappers around find to make certain common operations easy to perform.
+All of the [ag]?find_ are wrappers around find to make certain common operations easy to perform.
 
 Use whence to view the implementations of any of them to get an understanding of how they work
 
-For more bash aliases and functions, use search\_env\_for(\_fuzz)?, or look at ~/.bashrc.d/portable/\*
+For more bash aliases and functions, use search_env_for(_fuzz)?, or look at ~/.bashrc.d/portable/\*
 
 ### workplace_* bash functions
 ./shared/required/Tasks/workplace_bulk_ops.sh contains maybe great utilities for performing tasks on a batch of projects at once
@@ -268,26 +268,26 @@ __bash_prompt
 ## Extending and Staying Up to date with these settings
 
 ### Staying up to date
-If you want to stay up to date with this repo, then use the refresh\_settings bash function.
+If you want to stay up to date with this repo, then use the refresh_settings bash function.
 
-refresh\_settings will pull master on this repo (~/projects/dotfiles) and call the copy script.
+refresh_settings will pull master on this repo (~/projects/dotfiles) and call the copy script.
 
 ### Remember that the copy script will copy over any files that exist in the destination path that have the same name as files being copied from the source. See the Install Scripts section for more detail on this!!!
 
 This means that if you edit the files in the destination and then call copy, it will overwrite them.
 
-Example: you edit ~/.bashrc.d/portable/aliases.bash to add an alias, then call refresh\_settings. This will replace ~/.bashrc.d/portable/aliases.bash and you will lose your local edits
+Example: you edit ~/.bashrc.d/portable/aliases.bash to add an alias, then call refresh_settings. This will replace ~/.bashrc.d/portable/aliases.bash and you will lose your local edits
 
 ### Extending
-The ~/.bashrc from this repo sources a file ~/.bashrc\_ext if it exists
+The ~/.bashrc from this repo sources a file ~/.bashrc_ext if it exists
 
-The copy script does not have a .bashrc\_ext that it copies down, so the ~/.bashrc\_ext file is a safe place to add your own customizations of these bash settings.
+The copy script does not have a .bashrc_ext that it copies down, so the ~/.bashrc_ext file is a safe place to add your own customizations of these bash settings.
 
-The ~/.bashrc\_ext is sourced after all other bash files (minus OS specific append flow ~/.bashrc content). So you can change the implementation of aliases and functions and shopt flags that you do not like with your own flavor.
+The ~/.bashrc_ext is sourced after all other bash files (minus OS specific append flow ~/.bashrc content). So you can change the implementation of aliases and functions and shopt flags that you do not like with your own flavor.
 
 Example: you do not like the fact that cdspell is turned on (shopt -s cdspell)
 
-In ~/.bashrc\_ext, you can add the following line:
+In ~/.bashrc_ext, you can add the following line:
 
 > shopt -u cdspell
 
@@ -295,9 +295,9 @@ This will turn that feature off!
 
 This way you can have all the other great features you love from this repo, keep up to date with the repo, and make any changes that make these settings more you!
 
-Use ~/.zshrc\_ext for zsh
+Use ~/.zshrc_ext for zsh
 
-Use ~/.vimrc\_ext for vim
+Use ~/.vimrc_ext for vim
 
 ## Development tools for contribution
 - docker v20.10.7
