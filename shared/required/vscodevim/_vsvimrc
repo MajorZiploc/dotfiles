@@ -146,3 +146,33 @@ vnoremap <leader>cc "+y
 " Patch H and L to have 8 padding from top
 nnoremap <s-h> Hjjjjjjjj
 nnoremap <s-l> Lkkkkkkkk<c-y>
+
+function! FoldWholeFile()
+  let last_line = line("$")
+  let normal_mode_command = 'gg'
+  let file_name = expand('%')
+  let paragraph_count = system("cat '" . file_name . "' | paragraph_count")
+  let i = 0
+  while (i <= paragraph_count)
+    let normal_mode_command = normal_mode_command . "zfapj"
+    let i = i + 1
+  endwhile
+  execute "normal! " . normal_mode_command
+endfunction
+
+function! UnFoldWholeFile()
+  let last_line = line("$")
+  let normal_mode_command = 'gg'
+  let file_name = expand('%')
+  let paragraph_count = system("cat '" . file_name . "' | paragraph_count")
+  let i = 0
+  while (i <= paragraph_count)
+    let current_line = line(".")
+    let normal_mode_command = normal_mode_command . "zO}j"
+    let i = i + 1
+  endwhile
+  execute "normal! " . normal_mode_command
+endfunction
+
+nmap <leader>zf :call FoldWholeFile()<cr>
+nmap <leader>zu :call UnFoldWholeFile()<cr>
