@@ -128,10 +128,9 @@ vnoremap <leader>cc "+y
 function! FoldWholeFile()
   let last_line = line("$")
   let normal_mode_command = 'gg'
-  let file_name = expand('%')
-  let paragraph_count = system("cat '" . file_name . "' | paragraph_count")
   let i = 0
-  while (i <= paragraph_count)
+  " NOTE: cant use paragraph_count bash fn to optimize this
+  while (i <= last_line)
     let normal_mode_command = normal_mode_command . "zfapj"
     let i = i + 1
   endwhile
@@ -141,10 +140,9 @@ endfunction
 function! UnFoldWholeFile()
   let last_line = line("$")
   let normal_mode_command = 'gg'
-  let file_name = expand('%')
-  let paragraph_count = system("cat '" . file_name . "' | paragraph_count")
   let i = 0
-  while (i <= paragraph_count)
+  " NOTE: cant use paragraph_count bash fn to optimize this
+  while (i <= last_line)
     let current_line = line(".")
     let normal_mode_command = normal_mode_command . "zO}j"
     let i = i + 1
