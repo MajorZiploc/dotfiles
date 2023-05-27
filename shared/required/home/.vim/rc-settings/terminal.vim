@@ -66,14 +66,14 @@ if !has('nvim')
   " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
   " For Vim<8, replace EndOfBuffer by NonText
   " autocmd vimenter * hi EndOfBuffer guibg=NONE ctermbg=NONE
+  " menu colors
+  highlight Pmenu ctermbg=gray guibg=gray
+  highlight PmenuSel ctermbg=gray guibg=gray
+  highlight PmenuSbar ctermbg=gray guibg=gray
+  highlight Pmenu ctermbg=gray guibg=gray
 endif
 
 set guifont=Consolas:h12
-" menu colors
-highlight Pmenu ctermbg=gray guibg=gray
-highlight PmenuSel ctermbg=gray guibg=gray
-highlight PmenuSbar ctermbg=gray guibg=gray
-highlight Pmenu ctermbg=gray guibg=gray
 
 " window
 set nu " line numbers
@@ -231,10 +231,6 @@ nmap <leader>cp :let my_search_files = [my_search_files[-1]] + my_search_files[:
 
 " hidden files dont seem to be included if in a hidden directory
 command! -nargs=1 VFindFiles let my_search_files_glob = globpath('.', '**/' . <q-args>, 1, 1) | if len(my_search_files_glob) | execute 'edit ' . my_search_files_glob[0] | endif
-
-" bash finds raw
-vmap <leader>fa <ESC>ogfind_in_files "(search_phrase)" ".*(file_pattern).*"<ESC>^
-vmap <leader>ff <ESC>olet my_search_files = systemlist('gfind_files ".*(file_pattern).*" "(search_phrase)"')<ESC>^
 
 " default splits to above
 set splitbelow
