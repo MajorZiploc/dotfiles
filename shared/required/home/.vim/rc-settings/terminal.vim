@@ -59,11 +59,11 @@ set wildignore+=*.zip,*.png,*.jpg,*.gif,*.pdf,*DS_Store*,*/.git/*,*/node_modules
 " command! Sorcvs so ~\_vsvimrc
 
 " appearance
-colorscheme elflord
 if !has('nvim')
+  colorscheme elflord
   " NOT A PERFECT SOLUTION. STILL LEADS TO PART WITH NON TRANSPARENT BG
   " Vim>=8 transparent bg
-  autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+  " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
   " For Vim<8, replace EndOfBuffer by NonText
   " autocmd vimenter * hi EndOfBuffer guibg=NONE ctermbg=NONE
 endif
@@ -201,7 +201,7 @@ endfunction
 nmap <leader>ns :call CreateSmallTopLeftScratch()<CR>
 
 " wrapper around gfind_files bash command for tight integration with vim
-function! GFindFiles(...)
+function! MyFindFiles(find_style, ...)
   let my_args = ''
   for my_arg in a:000
     if (! (my_arg =~ '^".*"$' || my_arg =~ "^'.*'$"))
@@ -209,7 +209,7 @@ function! GFindFiles(...)
     endif
     let my_args = my_args . ' ' . my_arg
   endfor
-  let cmd = 'gfind_files' . my_args
+  let cmd = a:find_style . 'find_files' . my_args
   let g:my_search_files = systemlist(cmd)
   if len(g:my_search_files) > 0
     execute 'find ' . g:my_search_files[0]
@@ -222,13 +222,15 @@ function! GFindFiles(...)
   endif
 endfunction
 
+command! -nargs=+ GFindFiles call MyFindFiles('g', <f-args>)
+command! -nargs=+ AFindFiles call MyFindFiles('a', <f-args>)
+command! -nargs=+ FindFiles call MyFindFiles('', <f-args>)
+
 nmap <leader>cn :let my_search_files = my_search_files[1:] + [my_search_files[0]]<CR>:execute 'find ' . my_search_files[0]<CR>
 nmap <leader>cp :let my_search_files = [my_search_files[-1]] + my_search_files[:-2]<CR>:execute 'find ' . my_search_files[-1]<CR>
 
 " hidden files dont seem to be included if in a hidden directory
 command! -nargs=1 VFindFiles let my_search_files_glob = globpath('.', '**/' . <q-args>, 1, 1) | if len(my_search_files_glob) | execute 'edit ' . my_search_files_glob[0] | endif
-
-command! -nargs=+ GFindFiles call GFindFiles(<q-args>)
 
 " bash finds raw
 vmap <leader>fa <ESC>ogfind_in_files "(search_phrase)" ".*(file_pattern).*"<ESC>^
