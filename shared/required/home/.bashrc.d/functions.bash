@@ -20,7 +20,7 @@ function show_cmds_like {
 function refresh_settings {
   local flags="$1";
   [[ -z "$flags" ]] && { flags="000"; }
-  local project_root_path="$HOME/projects/home-settings";
+  local project_root_path="$HOME/projects/dotfiles";
   cd "$project_root_path" &&
   git checkout master &&
   echo 'Previous commit information:' &&

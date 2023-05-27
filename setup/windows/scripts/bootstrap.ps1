@@ -11,7 +11,7 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";"
 
 # clone this repo
 # git init
-# git remote add origin https://github.com/MajorZiploc/home-settings
+# git remote add origin https://github.com/MajorZiploc/dotfiles
 # git fetch
 # git reset origin/master
 # git branch --set-upstream-to=origin/master
