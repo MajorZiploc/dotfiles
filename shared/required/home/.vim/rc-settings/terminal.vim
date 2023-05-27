@@ -59,11 +59,11 @@ set wildignore+=*.zip,*.png,*.jpg,*.gif,*.pdf,*DS_Store*,*/.git/*,*/node_modules
 " command! Sorcvs so ~\_vsvimrc
 
 " appearance
-colorscheme elflord
 if !has('nvim')
+  colorscheme elflord
   " NOT A PERFECT SOLUTION. STILL LEADS TO PART WITH NON TRANSPARENT BG
   " Vim>=8 transparent bg
-  autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+  " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
   " For Vim<8, replace EndOfBuffer by NonText
   " autocmd vimenter * hi EndOfBuffer guibg=NONE ctermbg=NONE
 endif
