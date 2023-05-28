@@ -243,9 +243,15 @@ function! MyFindFiles(find_style_prefix, find_style_postfix, ...)
   endif
 endfunction
 
-function! ShowMySearchResultFiles(key)
+function! ShowMySearchResultFiles(key, ...)
+  let rest_of_args = a:000
+  let fallback_key = get(rest_of_args, 0, '')
   for my_search_result_file in g:my_search_result_files
-    echo my_search_result_file[a:key]
+    let result = my_search_result_file[a:key]
+    if (fallback_key != '' && result == '')
+      let result = my_search_result_file[fallback_key]
+    endif
+    echo result
   endfor
 endfunction
 
@@ -258,7 +264,7 @@ command! -nargs=+ FindFilesFuzz call MyFindFiles('', '_fuzz', <f-args>)
 
 nmap <leader>cn :let my_search_result_files = my_search_result_files[1:] + [my_search_result_files[0]]<CR>:execute 'find ' . my_search_result_files[0]["abs_file_name"]<CR>:echo my_search_result_files[0]["index"] "/" len(my_search_result_files)<CR>
 nmap <leader>cp :let my_search_result_files = [my_search_result_files[-1]] + my_search_result_files[:-2]<CR>:execute 'find ' . my_search_result_files[-1]["abs_file_name"]<CR>:echo my_search_result_files[0]["index"] "/" len(my_search_result_files)<CR>
-nmap <leader>cl :call ShowMySearchResultFiles("rel_file_name")<CR>
+nmap <leader>cl :call ShowMySearchResultFiles("rel_file_name", "abs_file_name")<CR>
 vmap <leader>cp "ty:call PopulateMySearchResultFiles(split(@t, '\n'))<CR>
 
 " hidden files dont seem to be included if in a hidden directory
