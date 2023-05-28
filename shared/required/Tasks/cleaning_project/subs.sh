@@ -43,8 +43,8 @@ function main {
     local search_pattern="`echo "$search_pattern" | tr 'A-Z' 'a-z'`";
     local replace_pattern="`echo "$replace_pattern" | tr 'A-Z' 'a-z'`";
 
-    search_pattern="echo "$search_pattern" | `to_title_case`";
-    replace_pattern="echo "$replace_pattern" | `to_title_case`";
+    search_pattern="`echo "$search_pattern" | to_title_case`";
+    replace_pattern="`echo "$replace_pattern" | to_title_case`";
     echo "title case patterns";
     replacer "$search_pattern" "$replace_pattern" "" "$exclude_from_boundary_free_replacement_patterns"
 
