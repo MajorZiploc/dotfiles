@@ -207,9 +207,6 @@ endfunction
 " new scratch
 nmap <leader>ns :call CreateSmallTopLeftScratch()<CR>
 
-" hidden files dont seem to be included if in a hidden directory
-command! -nargs=1 VFindFiles let my_search_files_glob = globpath('.', '**/' . <q-args>, 1, 1) | if len(my_search_files_glob) | execute 'edit ' . my_search_files_glob[0] | endif
-
 " default splits to above
 set splitbelow
 set splitbelow!
