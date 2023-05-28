@@ -216,14 +216,14 @@ function! MyFindFiles(find_style_prefix, find_style_postfix, ...)
   let my_search_files_len = len(my_search_files)
   let i = 0
   while (i < my_search_files_len)
-    let relative_file_name = my_search_files[i]
-    let absolute_file_name = substitute(relative_file_name, '^./', project_root , '')
-    let absolute_file_name = substitute(absolute_file_name, '\n', '', '')
-    let g:my_search_results = g:my_search_results + [{ "relative_file_name": relative_file_name, "result_number": i + 1, "absolute_file_name": absolute_file_name }]
+    let rel_file_name = my_search_files[i]
+    let abs_file_name = substitute(rel_file_name, '^./', project_root , '')
+    let abs_file_name = substitute(abs_file_name, '\n', '', '')
+    let g:my_search_results = g:my_search_results + [{ "rel_file_name": rel_file_name, "result_number": i + 1, "abs_file_name": abs_file_name }]
     let i = i + 1
   endwhile
   if len(g:my_search_results) > 0
-    execute 'find ' . g:my_search_results[0]["absolute_file_name"]
+    execute 'find ' . g:my_search_results[0]["abs_file_name"]
     echo g:my_search_results[0]["result_number"] "/" len(g:my_search_results)
   else
     echohl WarningMsg
@@ -245,9 +245,9 @@ command! -nargs=+ GFindFilesFuzz call MyFindFiles('g', '_fuzz', <f-args>)
 command! -nargs=+ AFindFilesFuzz call MyFindFiles('a', '_fuzz', <f-args>)
 command! -nargs=+ FindFilesFuzz call MyFindFiles('', '_fuzz', <f-args>)
 
-nmap <leader>cn :let my_search_results = my_search_results[1:] + [my_search_results[0]]<CR>:execute 'find ' . my_search_results[0]["absolute_file_name"]<CR>:echo my_search_results[0]["result_number"] "/" len(my_search_results)<CR>
-nmap <leader>cp :let my_search_results = [my_search_results[-1]] + my_search_results[:-2]<CR>:execute 'find ' . my_search_results[-1]["absolute_file_name"]<CR>:echo my_search_results[0]["result_number"] "/" len(my_search_results)<CR>
-nmap <leader>cl :call ShowMySearchResults("relative_file_name")<CR>
+nmap <leader>cn :let my_search_results = my_search_results[1:] + [my_search_results[0]]<CR>:execute 'find ' . my_search_results[0]["abs_file_name"]<CR>:echo my_search_results[0]["result_number"] "/" len(my_search_results)<CR>
+nmap <leader>cp :let my_search_results = [my_search_results[-1]] + my_search_results[:-2]<CR>:execute 'find ' . my_search_results[-1]["abs_file_name"]<CR>:echo my_search_results[0]["result_number"] "/" len(my_search_results)<CR>
+nmap <leader>cl :call ShowMySearchResults("rel_file_name")<CR>
 
 " hidden files dont seem to be included if in a hidden directory
 command! -nargs=1 VFindFiles let my_search_files_glob = globpath('.', '**/' . <q-args>, 1, 1) | if len(my_search_files_glob) | execute 'edit ' . my_search_files_glob[0] | endif
