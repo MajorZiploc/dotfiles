@@ -32,5 +32,6 @@ let mapleader = " "
 
 so ~/.vim/plugin-settings/coc.vim
 so ~/.vim/plugin-settings/vim_code_runner.vim
+so ~/.vim/plugin-settings/fold_focus.vim
 VIM_PLUGIN_SETTINGS_PLACEHOLDER
 
