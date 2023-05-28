@@ -232,6 +232,12 @@ function! MyFindFiles(find_style_prefix, find_style_postfix, ...)
   endif
 endfunction
 
+function! ShowMySearchResults(key)
+  for my_search_file_result in g:my_search_files_results
+    echo my_search_file_result[a:key]
+  endfor
+endfunction
+
 command! -nargs=+ GFindFiles call MyFindFiles('g', '', <f-args>)
 command! -nargs=+ AFindFiles call MyFindFiles('a', '', <f-args>)
 command! -nargs=+ FindFiles call MyFindFiles('', '', <f-args>)
@@ -241,6 +247,7 @@ command! -nargs=+ FindFilesFuzz call MyFindFiles('', '_fuzz', <f-args>)
 
 nmap <leader>cn :let my_search_files_results = my_search_files_results[1:] + [my_search_files_results[0]]<CR>:execute 'find ' . my_search_files_results[0]["absolute_file_name"]<CR>:echo my_search_files_results[0]["result_number"] "/" len(my_search_files_results)<CR>
 nmap <leader>cp :let my_search_files_results = [my_search_files_results[-1]] + my_search_files_results[:-2]<CR>:execute 'find ' . my_search_files_results[-1]["absolute_file_name"]<CR>:echo my_search_files_results[0]["result_number"] "/" len(my_search_files_results)<CR>
+nmap <leader>cl :call ShowMySearchResults("relative_file_name")<CR>
 
 " hidden files dont seem to be included if in a hidden directory
 command! -nargs=1 VFindFiles let my_search_files_glob = globpath('.', '**/' . <q-args>, 1, 1) | if len(my_search_files_glob) | execute 'edit ' . my_search_files_glob[0] | endif
