@@ -202,6 +202,7 @@ nmap <leader>ns :call CreateSmallTopLeftScratch()<CR>
 
 function! PopulateMySearchResultFiles(my_search_files)
   let g:my_search_result_files = []
+  let g:my_search_result_files_current_index = 0
   let my_search_files_len = len(a:my_search_files)
   let project_root = system('pwd') . '/'
   let i = 0
@@ -215,9 +216,14 @@ function! PopulateMySearchResultFiles(my_search_files)
       let abs_file_name = file_name
       let rel_file_name = ""
     endif
-    let g:my_search_result_files = g:my_search_result_files + [{ "rel_file_name": rel_file_name, "index": i + 1, "abs_file_name": abs_file_name }]
+    let g:my_search_result_files = g:my_search_result_files + [{ "rel_file_name": rel_file_name, "abs_file_name": abs_file_name }]
     let i = i + 1
   endwhile
+  let g:my_search_result_files_length = len(g:my_search_result_files)
+endfunction
+
+function! ShowMySearchResultFilesPosition()
+  echo (g:my_search_result_files_current_index + 1) "/" g:my_search_result_files_length
 endfunction
 
 " wrapper around gfind_files bash command for tight integration with vim
@@ -235,7 +241,7 @@ function! MyFindFiles(find_style_prefix, find_style_postfix, ...)
   let _ = PopulateMySearchResultFiles(my_search_files)
   if len(g:my_search_result_files) > 0
     execute 'find ' . g:my_search_result_files[0]["abs_file_name"]
-    echo g:my_search_result_files[0]["index"] "/" len(g:my_search_result_files)
+    let _ = ShowMySearchResultFilesPosition()
   else
     echohl WarningMsg
     echo "No results found for: " . cmd
@@ -262,8 +268,8 @@ command! -nargs=+ GFindFilesFuzz call MyFindFiles('g', '_fuzz', <f-args>)
 command! -nargs=+ AFindFilesFuzz call MyFindFiles('a', '_fuzz', <f-args>)
 command! -nargs=+ FindFilesFuzz call MyFindFiles('', '_fuzz', <f-args>)
 
-nmap <leader>cn :let my_search_result_files = my_search_result_files[1:] + [my_search_result_files[0]]<CR>:execute 'find ' . my_search_result_files[0]["abs_file_name"]<CR>:echo my_search_result_files[0]["index"] "/" len(my_search_result_files)<CR>
-nmap <leader>cp :let my_search_result_files = [my_search_result_files[-1]] + my_search_result_files[:-2]<CR>:execute 'find ' . my_search_result_files[-1]["abs_file_name"]<CR>:echo my_search_result_files[0]["index"] "/" len(my_search_result_files)<CR>
+nmap <leader>cn :let my_search_result_files_current_index = (my_search_result_files_current_index + 1) % my_search_result_files_length<CR>:execute 'find ' . my_search_result_files[my_search_result_files_current_index]["abs_file_name"]<CR>:call ShowMySearchResultFilesPosition()<CR>
+nmap <leader>cp :let my_search_result_files_current_index = ((my_search_result_files_current_index <= 0 ? my_search_result_files_length : my_search_result_files_current_index) - 1) % my_search_result_files_length<CR>:execute 'find ' . my_search_result_files[my_search_result_files_current_index]["abs_file_name"]<CR>:call ShowMySearchResultFilesPosition()<CR>
 nmap <leader>cl :call ShowMySearchResultFiles("rel_file_name", "abs_file_name")<CR>
 vmap <leader>cp "ty:call PopulateMySearchResultFiles(split(@t, '\n'))<CR>
 
