@@ -200,8 +200,8 @@ endfunction
 " new scratch
 nmap <leader>ns :call CreateSmallTopLeftScratch()<CR>
 
-function! PopulateMySearchResults(my_search_files)
-  let g:my_search_results = []
+function! PopulateMySearchResultFiles(my_search_files)
+  let g:my_search_result_files = []
   let my_search_files_len = len(a:my_search_files)
   let project_root = system('pwd') . '/'
   let i = 0
@@ -215,7 +215,7 @@ function! PopulateMySearchResults(my_search_files)
       let abs_file_name = file_name
       let rel_file_name = ""
     endif
-    let g:my_search_results = g:my_search_results + [{ "rel_file_name": rel_file_name, "result_number": i + 1, "abs_file_name": abs_file_name }]
+    let g:my_search_result_files = g:my_search_result_files + [{ "rel_file_name": rel_file_name, "result_number": i + 1, "abs_file_name": abs_file_name }]
     let i = i + 1
   endwhile
 endfunction
@@ -232,10 +232,10 @@ function! MyFindFiles(find_style_prefix, find_style_postfix, ...)
   let cmd = a:find_style_prefix . 'find_files' . a:find_style_postfix . my_args
   let my_search_files = systemlist(cmd)
   let my_search_files_len = len(my_search_files)
-  let _ = PopulateMySearchResults(my_search_files)
-  if len(g:my_search_results) > 0
-    execute 'find ' . g:my_search_results[0]["abs_file_name"]
-    echo g:my_search_results[0]["result_number"] "/" len(g:my_search_results)
+  let _ = PopulateMySearchResultFiles(my_search_files)
+  if len(g:my_search_result_files) > 0
+    execute 'find ' . g:my_search_result_files[0]["abs_file_name"]
+    echo g:my_search_result_files[0]["result_number"] "/" len(g:my_search_result_files)
   else
     echohl WarningMsg
     echo "No results found for: " . cmd
@@ -243,9 +243,9 @@ function! MyFindFiles(find_style_prefix, find_style_postfix, ...)
   endif
 endfunction
 
-function! ShowMySearchResults(key)
-  for my_search_result in g:my_search_results
-    echo my_search_result[a:key]
+function! ShowMySearchResultFiles(key)
+  for my_search_result_file in g:my_search_result_files
+    echo my_search_result_file[a:key]
   endfor
 endfunction
 
@@ -256,10 +256,10 @@ command! -nargs=+ GFindFilesFuzz call MyFindFiles('g', '_fuzz', <f-args>)
 command! -nargs=+ AFindFilesFuzz call MyFindFiles('a', '_fuzz', <f-args>)
 command! -nargs=+ FindFilesFuzz call MyFindFiles('', '_fuzz', <f-args>)
 
-nmap <leader>cn :let my_search_results = my_search_results[1:] + [my_search_results[0]]<CR>:execute 'find ' . my_search_results[0]["abs_file_name"]<CR>:echo my_search_results[0]["result_number"] "/" len(my_search_results)<CR>
-nmap <leader>cp :let my_search_results = [my_search_results[-1]] + my_search_results[:-2]<CR>:execute 'find ' . my_search_results[-1]["abs_file_name"]<CR>:echo my_search_results[0]["result_number"] "/" len(my_search_results)<CR>
-nmap <leader>cl :call ShowMySearchResults("rel_file_name")<CR>
-vmap <leader>cp "ty:call PopulateMySearchResults(split(@t, '\n'))<CR>
+nmap <leader>cn :let my_search_result_files = my_search_result_files[1:] + [my_search_result_files[0]]<CR>:execute 'find ' . my_search_result_files[0]["abs_file_name"]<CR>:echo my_search_result_files[0]["result_number"] "/" len(my_search_result_files)<CR>
+nmap <leader>cp :let my_search_result_files = [my_search_result_files[-1]] + my_search_result_files[:-2]<CR>:execute 'find ' . my_search_result_files[-1]["abs_file_name"]<CR>:echo my_search_result_files[0]["result_number"] "/" len(my_search_result_files)<CR>
+nmap <leader>cl :call ShowMySearchResultFiles("rel_file_name")<CR>
+vmap <leader>cp "ty:call PopulateMySearchResultFiles(split(@t, '\n'))<CR>
 
 " hidden files dont seem to be included if in a hidden directory
 command! -nargs=1 VFindFiles let my_search_files_glob = globpath('.', '**/' . <q-args>, 1, 1) | if len(my_search_files_glob) | execute 'edit ' . my_search_files_glob[0] | endif
