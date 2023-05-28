@@ -111,7 +111,6 @@
   "vim.mouseSelectionGoesIntoVisualMode": true,
   "vim.gdefault": false,
   "vim.handleKeys": {
-    "<C-f>": false,
     "<C-k>": false,
     "<C-j>": false
   },
