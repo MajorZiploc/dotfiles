@@ -390,6 +390,8 @@ vim.cmd('let vim_code_runner_csv_type="rfc_csv"')
 
 lvim.keys.normal_mode['<leader>zf'] = ':AnyFoldActivate<cr>:set foldlevel=0<cr>'
 lvim.keys.normal_mode['<leader>zu'] = ':AnyFoldActivate<cr>:set foldlevel=99<cr>'
+lvim.keys.normal_mode['<leader>za'] = ':AnyFoldActivate<cr>:let &foldlevel=&foldlevel+1<cr>'
+lvim.keys.normal_mode['<leader>zx'] = ':AnyFoldActivate<cr>:let &foldlevel=&foldlevel-1<cr>'
 
 vim.cmd('let g:rbql_with_headers = 1')
 vim.cmd('let g:rbql_backend_language = "python"')
