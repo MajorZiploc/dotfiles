@@ -166,6 +166,11 @@ map <leader>nf :edit <cfile><cr>
 nmap <leader>ln <cmd>%!to_less_blank_lines<cr>
 vmap <leader>ln !to_less_blank_lines<cr>
 
+" set grep command (Default: grep -n $* /dev/null)
+" set gp=git\ grep\ -Pin
+set gp=gfind_in_files
+" use :copen to open a quickfix list of the results of the grep
+
 function! GoToRecentBuffer(direction)
   let limit = 0
   let startName = bufname('%')
