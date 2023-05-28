@@ -387,6 +387,11 @@ lvim.keys.normal_mode['<leader>4'] = 'ggVG"ty:call VimCodeRunnerRun("", "true")<
 vim.cmd('let vim_code_runner_csv_type="rfc_csv"')
 
 
+lvim.keys.visual_mode['<leader>zf'] = '"zy:call VimFoldFocusRun("true")<cr>'
+lvim.keys.visual_mode['<leader>zu'] = '"zy:call VimFoldFocusRun("false")<cr>'
+lvim.keys.normal_mode['<leader>zf'] = 'ggVG"zy:call VimFoldFocusRun("true")<cr>'
+lvim.keys.normal_mode['<leader>zu'] = 'ggVG"zy:call VimFoldFocusRun("false")<cr>'
+
 vim.cmd('let g:rbql_with_headers = 1')
 vim.cmd('let g:rbql_backend_language = "python"')
 vim.cmd('let g:rbql_use_system_python = 1')

@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
 Plug 'tpope/vim-surround' " manipulate surround chars
 Plug 'MajorZiploc/code_runner.vim' " run selected code chunks
+Plug 'MajorZiploc/fold_focus.vim' " fold/unfold
 VIM_PLUGIN_INCLUDE_PLACEHOLDER
 
 " Plug 'airblade/vim-gitgutter' " git supporting plugin

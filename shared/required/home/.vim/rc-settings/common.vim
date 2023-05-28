@@ -132,36 +132,3 @@ nmap <c-s> :wa<cr>
 
 " copy to system clipboard
 vnoremap <leader>cc "+y
-
-function! FoldSelectionByParagraph()
-  let normal_mode_command = ''
-  let selected_text = @z
-  let _preped_text = substitute(selected_text, "'", "'\"'\"'", "g")
-  let paragraph_count = system("echo '" . _preped_text . "' | paragraph_count")
-  let i = 0
-  while (i < paragraph_count)
-    let normal_mode_command = normal_mode_command . "zfapj"
-    let i = i + 1
-  endwhile
-  execute "normal! " . normal_mode_command
-endfunction
-
-function! UnFoldSelectionByParagraph()
-  let normal_mode_command = ''
-  let selected_text = @z
-  let _preped_text = substitute(selected_text, "'", "'\"'\"'", "g")
-  let paragraph_count = system("echo '" . _preped_text . "' | paragraph_count")
-  let i = 0
-  while (i < paragraph_count)
-    let current_line = line(".")
-    let normal_mode_command = normal_mode_command . "zO}j"
-    let i = i + 1
-  endwhile
-  execute "normal! " . normal_mode_command
-endfunction
-
-nmap <leader>zf ggVG"zy:call FoldSelectionByParagraph()<cr>
-nmap <leader>zu ggVG"zy:call UnFoldSelectionByParagraph()<cr>
-
-vmap <leader>zf "zy:call FoldSelectionByParagraph()<cr>
-vmap <leader>zu "zy:call UnFoldSelectionByParagraph()<cr>
