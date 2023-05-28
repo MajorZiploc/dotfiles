@@ -107,34 +107,6 @@ nmap <c-s> :wa<cr>
 " copy to system clipboard
 vnoremap <leader>cc "+y
 
-function! FoldWholeFile()
-  let last_line = line("$")
-  let normal_mode_command = 'gg'
-  let i = 0
-  " NOTE: cant use paragraph_count bash fn to optimize this
-  while (i <= last_line)
-    let normal_mode_command = normal_mode_command . "zfapj"
-    let i = i + 1
-  endwhile
-  execute "normal! " . normal_mode_command
-endfunction
-
-function! UnFoldWholeFile()
-  let last_line = line("$")
-  let normal_mode_command = 'gg'
-  let i = 0
-  " NOTE: cant use paragraph_count bash fn to optimize this
-  while (i <= last_line)
-    let current_line = line(".")
-    let normal_mode_command = normal_mode_command . "zO}j"
-    let i = i + 1
-  endwhile
-  execute "normal! " . normal_mode_command
-endfunction
-
-nmap <leader>zf :call FoldWholeFile()<cr>
-nmap <leader>zu :call UnFoldWholeFile()<cr>
-
 " command mode polyfills for emacs terminal navigation
 cnoremap <C-A> <Home>
 cnoremap <C-F> <Right>
