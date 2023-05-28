@@ -159,7 +159,8 @@ autocmd BufNewFile,BufRead *.mssql set filetype=sql
 " enforce 2 space indents for markdown files
 autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
 
-" Navigate to file: Allows open of non-existent files aswell
+" Navigate to file:
+" Similar to the buildin gf but also allows open of non-existent files aswell
 map <leader>nf :edit <cfile><cr>
 
 " line nuke
