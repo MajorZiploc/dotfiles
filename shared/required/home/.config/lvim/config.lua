@@ -327,7 +327,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 lvim.plugins = {
   { "tpope/vim-fugitive" },          -- git plugin
   { "MajorZiploc/code_runner.vim" },  -- run selected code chunks
-  { "MajorZiploc/fold_focus.vim" },  -- fold/unfold
+  { "pseewald/vim-anyfold" },  -- fold/unfold
   { "mechatroner/rainbow_csv" },     -- csv highlighter and query engine
   { "tpope/vim-obsession" },         -- self managing n?vim sessions (Session.vim w/ :Obsession <file_name.vim>?/:Obsession! (start/discard current session respectively))
   { "eddyekofo94/gruvbox-flat.nvim" }, -- color theme
@@ -388,10 +388,8 @@ lvim.keys.normal_mode['<leader>4'] = 'ggVG"ty:call VimCodeRunnerRun("", "true")<
 vim.cmd('let vim_code_runner_csv_type="rfc_csv"')
 
 
-lvim.keys.visual_mode['<leader>zf'] = '"zy:call VimFoldFocusRun("true")<cr>'
-lvim.keys.visual_mode['<leader>zu'] = '"zy:call VimFoldFocusRun("false")<cr>'
-lvim.keys.normal_mode['<leader>zf'] = 'ggVG"zy:call VimFoldFocusRun("true")<cr>'
-lvim.keys.normal_mode['<leader>zu'] = 'ggVG"zy:call VimFoldFocusRun("false")<cr>'
+lvim.keys.normal_mode['<leader>zf'] = ':AnyFoldActivate<cr>:set foldlevel=0<cr>'
+lvim.keys.normal_mode['<leader>zu'] = ':AnyFoldActivate<cr>:set foldlevel=99<cr>'
 
 vim.cmd('let g:rbql_with_headers = 1')
 vim.cmd('let g:rbql_backend_language = "python"')
