@@ -377,9 +377,18 @@ lvim.plugins = {
     }
   },
   -- { 'esensar/nvim-dev-container' } -- Use vscode devcontainers - the nvim integration on the containers doesnt seem to work well. Look into using this more
+  {
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = {
+      {"nvim-lua/plenary.nvim"},
+      {"nvim-treesitter/nvim-treesitter"},
+    }
+  }
 }
 
 -- require("devcontainer").setup{} -- related to esensar/nvim-dev-container
+require('refactoring').setup({})
+lvim.keys.visual_mode["<leader>rr"] = ":lua require('refactoring').select_refactor()<CR>"
 
 lvim.keys.visual_mode['<leader>5'] = '"ty:call VimCodeRunnerRun()<CR>'
 lvim.keys.visual_mode['<leader>4'] = '"ty:call VimCodeRunnerRun("", "true")<CR>'
