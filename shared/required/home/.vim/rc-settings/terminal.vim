@@ -201,7 +201,7 @@ endfunction
 nmap <leader>ns :call CreateSmallTopLeftScratch()<CR>
 
 " wrapper around gfind_files bash command for tight integration with vim
-function! MyFindFiles(find_style, ...)
+function! MyFindFiles(find_style_prefix, find_style_postfix, ...)
   let my_args = ''
   for my_arg in a:000
     if (! (my_arg =~ '^".*"$' || my_arg =~ "^'.*'$"))
@@ -209,7 +209,7 @@ function! MyFindFiles(find_style, ...)
     endif
     let my_args = my_args . ' ' . my_arg
   endfor
-  let cmd = a:find_style . 'find_files' . my_args
+  let cmd = a:find_style_prefix . 'find_files' . a:find_style_postfix . my_args
   let g:my_search_files = systemlist(cmd)
   if len(g:my_search_files) > 0
     execute 'find ' . g:my_search_files[0]
@@ -222,9 +222,12 @@ function! MyFindFiles(find_style, ...)
   endif
 endfunction
 
-command! -nargs=+ GFindFiles call MyFindFiles('g', <f-args>)
-command! -nargs=+ AFindFiles call MyFindFiles('a', <f-args>)
-command! -nargs=+ FindFiles call MyFindFiles('', <f-args>)
+command! -nargs=+ GFindFiles call MyFindFiles('g', '', <f-args>)
+command! -nargs=+ AFindFiles call MyFindFiles('a', '', <f-args>)
+command! -nargs=+ FindFiles call MyFindFiles('', '', <f-args>)
+command! -nargs=+ GFindFilesFuzz call MyFindFiles('g', '_fuzz', <f-args>)
+command! -nargs=+ AFindFilesFuzz call MyFindFiles('a', '_fuzz', <f-args>)
+command! -nargs=+ FindFilesFuzz call MyFindFiles('', '_fuzz', <f-args>)
 
 nmap <leader>cn :let my_search_files = my_search_files[1:] + [my_search_files[0]]<CR>:execute 'find ' . my_search_files[0]<CR>
 nmap <leader>cp :let my_search_files = [my_search_files[-1]] + my_search_files[:-2]<CR>:execute 'find ' . my_search_files[-1]<CR>
