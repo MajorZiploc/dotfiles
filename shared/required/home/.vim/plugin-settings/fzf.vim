@@ -22,7 +22,8 @@ nmap <leader>fda :Ag<CR>
 nmap <leader>fca :Commits<CR>
 " searches commit related to the current buffer
 nmap <leader>fci :BCommits<CR>
-
+" search commands
+nmap <leader>fcs :Commands<CR>
 " searches open buffers and old buffers, generally is to broad
 nmap <leader>fhb :History<CR>
 " searches command history
