@@ -403,10 +403,10 @@ lvim.keys.normal_mode['<leader>cp'] = ':let vf_my_search_result_files_current_in
 lvim.keys.normal_mode['<leader>cl'] = ':call VipFiles_ShowMySearchResultFiles("rel_file_name", "abs_file_name")<CR>'
 lvim.keys.visual_mode['<leader>cp'] = '"ty:call VipFiles_PopulateMySearchResultFiles(split(@t, "\n"))<CR>'
 
-lvim.keys.normal_mode['<leader>zf'] = ':AnyFoldActivate<cr>:set foldlevel=0<cr>'
-lvim.keys.normal_mode['<leader>zu'] = ':AnyFoldActivate<cr>:set foldlevel=99<cr>'
-lvim.keys.normal_mode['<leader>za'] = ':AnyFoldActivate<cr>:let &foldlevel=&foldlevel+1<cr>'
-lvim.keys.normal_mode['<leader>zx'] = ':AnyFoldActivate<cr>:let &foldlevel=&foldlevel-1<cr>'
+lvim.keys.normal_mode['<leader>zM'] = ':AnyFoldActivate<cr>:set foldlevel=0<cr>'
+lvim.keys.normal_mode['<leader>zR'] = ':AnyFoldActivate<cr>:set foldlevel=99<cr>'
+lvim.keys.normal_mode['<leader>zm'] = ':AnyFoldActivate<cr>:let &foldlevel=&foldlevel-1<cr>'
+lvim.keys.normal_mode['<leader>zr'] = ':AnyFoldActivate<cr>:let &foldlevel=&foldlevel+1<cr>'
 
 vim.cmd('let g:rbql_with_headers = 1')
 vim.cmd('let g:rbql_backend_language = "python"')
