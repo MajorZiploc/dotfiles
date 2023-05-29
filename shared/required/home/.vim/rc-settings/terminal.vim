@@ -211,5 +211,9 @@ nmap <leader>ns :call CreateSmallTopLeftScratch()<CR>
 set splitbelow
 set splitbelow!
 
-" (Default: manual)
-set foldmethod=indent
+nmap <leader>zi :set foldmethod=indent<cr>
+nmap <leader>ze :set foldmethod=expr<cr>
+nmap <leader>zm :set foldmethod=manual<cr>
+nmap <leader>zs :set foldmethod=syntax<cr>
+nmap <leader>zd :set foldmethod=diff<cr>
+nmap <leader>zk :set foldmethod=marker<cr>
