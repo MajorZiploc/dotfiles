@@ -328,7 +328,7 @@ lvim.plugins = {
   { "tpope/vim-fugitive" },          -- git plugin
   { "MajorZiploc/code_runner.vim" },  -- run selected code chunks
   { "MajorZiploc/vip_files.vim" },  -- file ring
-  { "pseewald/vim-anyfold" },  -- fold/unfold
+  -- { "pseewald/vim-anyfold" },  -- fold/unfold
   { "mechatroner/rainbow_csv" },     -- csv highlighter and query engine
   { "tpope/vim-obsession" },         -- self managing n?vim sessions (Session.vim w/ :Obsession <file_name.vim>?/:Obsession! (start/discard current session respectively))
   { "eddyekofo94/gruvbox-flat.nvim" }, -- color theme
@@ -403,10 +403,10 @@ lvim.keys.normal_mode['<leader>cp'] = ':let vf_my_search_result_files_current_in
 lvim.keys.normal_mode['<leader>cl'] = ':call VipFiles_ShowMySearchResultFiles("rel_file_name", "abs_file_name")<CR>'
 lvim.keys.visual_mode['<leader>cp'] = '"ty:call VipFiles_PopulateMySearchResultFiles(split(@t, "\n"))<CR>'
 
-lvim.keys.normal_mode['<leader>zM'] = ':AnyFoldActivate<cr>:set foldlevel=0<cr>'
-lvim.keys.normal_mode['<leader>zR'] = ':AnyFoldActivate<cr>:set foldlevel=99<cr>'
-lvim.keys.normal_mode['<leader>zm'] = ':AnyFoldActivate<cr>:let &foldlevel=&foldlevel-1<cr>'
-lvim.keys.normal_mode['<leader>zr'] = ':AnyFoldActivate<cr>:let &foldlevel=&foldlevel+1<cr>'
+-- lvim.keys.normal_mode['<leader>zM'] = ':AnyFoldActivate<cr>:set foldlevel=0<cr>'
+-- lvim.keys.normal_mode['<leader>zR'] = ':AnyFoldActivate<cr>:set foldlevel=99<cr>'
+-- lvim.keys.normal_mode['<leader>zm'] = ':AnyFoldActivate<cr>:let &foldlevel=&foldlevel-1<cr>'
+-- lvim.keys.normal_mode['<leader>zr'] = ':AnyFoldActivate<cr>:let &foldlevel=&foldlevel+1<cr>'
 
 vim.cmd('let g:rbql_with_headers = 1')
 vim.cmd('let g:rbql_backend_language = "python"')
