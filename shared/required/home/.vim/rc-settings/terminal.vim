@@ -218,7 +218,16 @@ nmap <leader>zs :set foldmethod=syntax<cr>
 nmap <leader>zd :set foldmethod=diff<cr>
 nmap <leader>zk :set foldmethod=marker<cr>
 
-nnoremap zr :let og_foldmethod=&foldmethod<cr>:set foldmethod=indent<cr>zr:let &foldmethod = og_foldmethod<cr>
-nnoremap zR :let og_foldmethod=&foldmethod<cr>:set foldmethod=indent<cr>zR:let &foldmethod = og_foldmethod<cr>
-nnoremap zm :let og_foldmethod=&foldmethod<cr>:set foldmethod=indent<cr>zm:let &foldmethod = og_foldmethod<cr>
-nnoremap zM :let og_foldmethod=&foldmethod<cr>:set foldmethod=indent<cr>zM:let &foldmethod = og_foldmethod<cr>
+function! FoldHelper(fold_action)
+  let og_foldmethod=&foldmethod
+  if (og_foldmethod == 'manual')
+    set foldmethod=indent
+  endif
+  execute 'normal! ' . a:fold_action
+  let &foldmethod = og_foldmethod
+endfunction
+
+nnoremap zr :call FoldHelper('zr')<cr>
+nnoremap zR :call FoldHelper('zR')<cr>
+nnoremap zm :call FoldHelper('zm')<cr>
+nnoremap zM :call FoldHelper('zM')<cr>
