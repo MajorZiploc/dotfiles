@@ -217,3 +217,8 @@ nmap <leader>zm :set foldmethod=manual<cr>
 nmap <leader>zs :set foldmethod=syntax<cr>
 nmap <leader>zd :set foldmethod=diff<cr>
 nmap <leader>zk :set foldmethod=marker<cr>
+
+nnoremap zr :let og_foldmethod=&foldmethod<cr>:set foldmethod=indent<cr>zr:let &foldmethod = og_foldmethod<cr>
+nnoremap zR :let og_foldmethod=&foldmethod<cr>:set foldmethod=indent<cr>zR:let &foldmethod = og_foldmethod<cr>
+nnoremap zm :let og_foldmethod=&foldmethod<cr>:set foldmethod=indent<cr>zm:let &foldmethod = og_foldmethod<cr>
+nnoremap zM :let og_foldmethod=&foldmethod<cr>:set foldmethod=indent<cr>zM:let &foldmethod = og_foldmethod<cr>
