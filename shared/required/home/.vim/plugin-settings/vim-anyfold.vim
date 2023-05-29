@@ -6,9 +6,10 @@
 " autocmd Filetype <your-filetype> AnyFoldActivate " activate for a specific filetype
 
 
+" using these keys to mimic how set foldmethod=indent works
 
-nmap <leader>zf :AnyFoldActivate<cr>:set foldlevel=0<cr>
-nmap <leader>zu :AnyFoldActivate<cr>:set foldlevel=99<cr>
+nmap <leader>zM :AnyFoldActivate<cr>:set foldlevel=0<cr>
+nmap <leader>zR :AnyFoldActivate<cr>:set foldlevel=99<cr>
 
-nmap <leader>za :AnyFoldActivate<cr>:let &foldlevel=&foldlevel+1<cr>
-nmap <leader>zx :AnyFoldActivate<cr>:let &foldlevel=&foldlevel-1<cr>
+nmap <leader>zm :AnyFoldActivate<cr>:let &foldlevel=&foldlevel-1<cr>
+nmap <leader>zr :AnyFoldActivate<cr>:let &foldlevel=&foldlevel+1<cr>
