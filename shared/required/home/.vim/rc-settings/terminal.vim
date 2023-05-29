@@ -210,3 +210,6 @@ nmap <leader>ns :call CreateSmallTopLeftScratch()<CR>
 " default splits to above
 set splitbelow
 set splitbelow!
+
+" (Default: manual)
+set foldmethod=indent
