@@ -231,3 +231,9 @@ nnoremap zr :call FoldHelper('zr')<cr>
 nnoremap zR :call FoldHelper('zR')<cr>
 nnoremap zm :call FoldHelper('zm')<cr>
 nnoremap zM :call FoldHelper('zM')<cr>
+
+function! LoadQuickFixList(content)
+  cexpr a:content
+endfunction
+
+vmap <leader>qp "ty:call LoadQuickFixList(@t)<CR>
