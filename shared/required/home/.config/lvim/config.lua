@@ -280,6 +280,7 @@ lvim.keys.normal_mode['<leader>fcs'] = "<CMD>Telescope commands<CR>"
 lvim.keys.normal_mode['<leader>fa'] = "<CMD>Telescope grep_string<CR>"
 lvim.keys.normal_mode['<leader>fca'] = "<CMD>Telescope git_commits<CR>"
 lvim.keys.normal_mode['<leader>fci'] = "<CMD>Telescope git_bcommits<CR>"
+lvim.keys.normal_mode['<leader>fm'] = "<CMD>Telescope marks<CR>"
 
 lvim.builtin.which_key.mappings["w"] = {
   name = "+SecondaryLeader",
