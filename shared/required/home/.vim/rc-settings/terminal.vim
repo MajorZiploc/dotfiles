@@ -243,3 +243,7 @@ function! LoadLocationQuickFixList(content)
 endfunction
 
 vmap <leader>lp "ty:call LoadLocationQuickFixList(@t)<CR>
+
+" extended regex instead of basic thing it uses by default
+nnoremap / /\v
+vnoremap / /\v
