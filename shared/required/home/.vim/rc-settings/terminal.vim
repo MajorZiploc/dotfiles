@@ -237,3 +237,9 @@ function! LoadQuickFixList(content)
 endfunction
 
 vmap <leader>qp "ty:call LoadQuickFixList(@t)<CR>
+
+function! LoadLocationQuickFixList(content)
+  lexpr a:content
+endfunction
+
+vmap <leader>lp "ty:call LoadLocationQuickFixList(@t)<CR>
