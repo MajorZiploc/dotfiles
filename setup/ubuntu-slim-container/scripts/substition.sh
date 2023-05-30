@@ -33,11 +33,6 @@ vim_bash_env_placeholder='"~/.vim/bash_env.bash"';
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i'' "s,VIM_BASH_ENV_PLACEHOLDER,$vim_bash_env_placeholder,g" "{}" \;
 
 find "$temp_shared" -regextype egrep -iregex ".*sh" -type f -exec sed -E -i'' "s,(export )(FCEDIT|EDITOR|VISUAL).*?,\1\2='vim'," "{}" \;
-if ! which zoxide &>/dev/null ; then
-  tmux_session_manager_plugin="joshmedeski(/t-smart-tmux-session-manager')";
-  find -E "$temp_shared" -iregex ".*tmux.*" -type f -exec gsed -E -i'' "s,$tmux_session_manager_plugin,MajorZiploc\1 # This version does not use zoxide. Use $tmux_session_manager_plugin for zoxide," "{}" \;
-  unset tmux_session_manager_plugin
-fi
 
 unset vsvimpath;
 unset vim_plugin_include;

@@ -37,11 +37,6 @@ vim_bash_env_placeholder='"~/.vim/bash_env.bash"';
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i'' "s,VIM_BASH_ENV_PLACEHOLDER,$vim_bash_env_placeholder,g" "{}" \;
 lvim_treesitter_and_mason_removals='"(sql(ls)?|rust(_analyzer)|gopls)",';
 find "$temp_shared" -regextype egrep -iregex ".*lvim.*" -type f -exec sed -E -i'' "/$lvim_treesitter_and_mason_removals/d" "{}" \;
-if ! which zoxide &>/dev/null ; then
-  tmux_session_manager_plugin="joshmedeski(/t-smart-tmux-session-manager')";
-  find "$temp_shared" -regextype egrep -iregex ".*tmux.*" -type f -exec sed -E -i'' "s,$tmux_session_manager_plugin,MajorZiploc\1 # This version does not use zoxide. Use $tmux_session_manager_plugin for zoxide," "{}" \;
-  unset tmux_session_manager_plugin
-fi
 
 unset lvim_treesitter_and_mason_removals
 unset vsvimpath;

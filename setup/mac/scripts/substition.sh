@@ -39,11 +39,6 @@ find -E "$temp_shared" -iregex ".*vim.*" -type f -exec gsed -E -i'' "s,VIM_BASH_
 find -E "$temp_shared" -type f -exec gsed -E -i'' "s/find(.*?)-regextype egrep/find -E\1/g" "{}" \;
 find -E "$temp_shared" -iregex ".*(functions|aliases).*\.bash" -type f -exec gsed -E -i'' "s/\bsed /gsed /g" "{}" \;
 find -E "$temp_shared" -iregex ".*sh" -type f -exec gsed -E -i'' "s,(export )(FCEDIT|EDITOR|VISUAL).*?,\1\2='nvim'," "{}" \;
-if ! which zoxide &>/dev/null ; then
-  tmux_session_manager_plugin="joshmedeski(/t-smart-tmux-session-manager')";
-  find -E "$temp_shared" -iregex ".*tmux.*" -type f -exec gsed -E -i'' "s,$tmux_session_manager_plugin,MajorZiploc\1 # This version does not use zoxide. Use $tmux_session_manager_plugin for zoxide," "{}" \;
-  unset tmux_session_manager_plugin
-fi
 # example of deleting bak files
 # find "$temp_shared" -iregex '.*\.bak$' -type f -exec rm "{}" \;
 
