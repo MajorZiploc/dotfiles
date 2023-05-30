@@ -14,8 +14,12 @@
   symlinks = true
 	hooksPath = /dev/null
 [merge]
+  autostash = true
   ff = false
+[rebase]
+  autostash = true
 [pull]
+  autostash = true
 	rebase = true
 [push]
 	default = simple

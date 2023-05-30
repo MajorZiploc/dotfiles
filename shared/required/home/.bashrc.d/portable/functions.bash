@@ -235,13 +235,6 @@ function git_deploy {
   git checkout "$origin_branch" && git pull && git push && git checkout "$destination_branch" && git pull && git merge "$origin_branch" --commit --no-edit && git push && git checkout "$origin_branch";
 }
 
-function git_pull {
-  git stash push | grep -E 'No local changes to save';
-  local wasStashed=$?;
-  git pull;
-  [[ "$wasStashed" != "0" ]] && { git stash pop; }
-}
-
 function git_all_the_things {
   git branch -r | grep -v '\->' | while read remote; do
     git branch --track "${remote#origin/}" "$remote";
