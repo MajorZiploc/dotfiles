@@ -169,8 +169,8 @@ nmap <leader>ln <cmd>%!to_less_blank_lines<cr>
 vmap <leader>ln !to_less_blank_lines<cr>
 
 " set grep command (Default: grep -n $* /dev/null)
-" set gp=git\ grep\ -Pin
-set gp=gfind_in_files
+set gp=git\ grep\ -Pin
+" set gp=gfind_in_files
 " use :grep with args of the fn set above
 " use :copen to open a quickfix list of the results of the grep; cn, cp, cl work as expected
 
