@@ -13,7 +13,7 @@ function tmuxcs {
   # If $1 not given, then use the base name of the path as the session name
   local session_name="$1";
   session_name="${session_name:-"$(basename "`pwd`")"}";
-  session_name=$(echo "$session_name" | tr '.[[:blank:]]' '-');
+  session_name=$(echo "$session_name" | tr ':.[[:blank:]]' '-');
   tmux new -s "$session_name" 2>/dev/null || tmux new -d -s "$session_name" && tmux switch-client -t "$session_name";
 }
 
@@ -26,7 +26,7 @@ function _tmux_session_list_helper {
   local selected="$2";
   [[ -z "$selected" ]] || {
     [[ -z "$session_name" ]] && {
-      session_name=$(basename "$selected" | tr '.[[:blank:]]' '-');
+      session_name=$(basename "$selected" | tr ':.[[:blank:]]' '-');
     }
     if tmux switch-client -t "$session_name"; then
       exit 0;
