@@ -689,3 +689,10 @@ vim.cmd('autocmd vimenter * highlight TelescopeResultsStruct guibg=NONE ctermbg=
 -- vim.cmd('autocmd vimenter * highlight TelescopeResultsDiffUntracked guibg=NONE ctermbg=NONE')
 -- vim.cmd('autocmd vimenter * highlight TelescopeResultsSpecialComment guibg=NONE ctermbg=NONE')
 -- vim.cmd('autocmd vimenter * highlight TelescopePreviewMessageFillchar guibg=NONE ctermbg=NONE')
+
+lvim.builtin.lualine.sections.lualine_c = {
+  {
+    'filename',
+    path = 1,
+  }
+}
