@@ -59,19 +59,20 @@ set wildignore+=*.zip,*.png,*.jpg,*.gif,*.pdf,*DS_Store*,*/.git/*,*/node_modules
 " command! Sorcvs so ~\_vsvimrc
 
 " appearance
-if !has('nvim')
-  colorscheme elflord
+" if !has('nvim')
   " NOT A PERFECT SOLUTION. STILL LEADS TO PART WITH NON TRANSPARENT BG
   " Vim>=8 transparent bg
   " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
   " For Vim<8, replace EndOfBuffer by NonText
   " autocmd vimenter * hi EndOfBuffer guibg=NONE ctermbg=NONE
-  " menu colors
-  highlight Pmenu ctermbg=gray guibg=gray
-  highlight PmenuSel ctermbg=gray guibg=gray
-  highlight PmenuSbar ctermbg=gray guibg=gray
-  highlight Pmenu ctermbg=gray guibg=gray
-endif
+" endfi
+
+colorscheme elflord
+" menu colors
+highlight Pmenu ctermbg=gray guibg=gray
+highlight PmenuSel ctermbg=gray guibg=gray
+highlight PmenuSbar ctermbg=gray guibg=gray
+highlight Pmenu ctermbg=gray guibg=gray
 
 set guifont=Consolas:h12
 
@@ -168,8 +169,8 @@ nmap <leader>ln <cmd>%!to_less_blank_lines<cr>
 vmap <leader>ln !to_less_blank_lines<cr>
 
 " set grep command (Default: grep -n $* /dev/null)
-" set gp=git\ grep\ -Pin
-set gp=gfind_in_files
+set gp=git\ grep\ -Pin
+" set gp=gfind_in_files
 " use :grep with args of the fn set above
 " use :copen to open a quickfix list of the results of the grep; cn, cp, cl work as expected
 

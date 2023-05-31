@@ -629,10 +629,6 @@ vim.notify = filter_notify
 --   require('lvim.lsp.manager').setup('perlnavigator', {})
 -- end
 
-vim.cmd('set wrap')
-vim.cmd('source ~/.slim_vimrc')
-vim.cmd('source ~/.vimrc_ext')
-
 -- PATCH: for making Telescope transparent
 vim.cmd('autocmd vimenter * highlight TelescopeTitle guibg=NONE ctermbg=NONE')
 vim.cmd('autocmd vimenter * highlight TelescopeBorder guibg=NONE ctermbg=NONE')
@@ -689,3 +685,14 @@ vim.cmd('autocmd vimenter * highlight TelescopeResultsStruct guibg=NONE ctermbg=
 -- vim.cmd('autocmd vimenter * highlight TelescopeResultsDiffUntracked guibg=NONE ctermbg=NONE')
 -- vim.cmd('autocmd vimenter * highlight TelescopeResultsSpecialComment guibg=NONE ctermbg=NONE')
 -- vim.cmd('autocmd vimenter * highlight TelescopePreviewMessageFillchar guibg=NONE ctermbg=NONE')
+
+lvim.builtin.lualine.sections.lualine_c = {
+  {
+    'filename',
+    path = 1,
+  }
+}
+
+vim.cmd('set wrap')
+vim.cmd('source ~/.slim_vimrc')
+vim.cmd('source ~/.vimrc_ext')
