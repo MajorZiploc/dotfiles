@@ -391,18 +391,6 @@ lvim.plugins = {
 require('refactoring').setup({})
 lvim.keys.visual_mode["<leader>rr"] = ":lua require('refactoring').select_refactor()<CR>"
 
-lvim.keys.visual_mode['<leader>5'] = '"ty:call VimCodeRunnerRun()<CR>'
-lvim.keys.visual_mode['<leader>4'] = '"ty:call VimCodeRunnerRun("", "true")<CR>'
-lvim.keys.normal_mode['<leader>5'] = 'ggVG"ty:call VimCodeRunnerRun()<CR>'
-lvim.keys.normal_mode['<leader>4'] = 'ggVG"ty:call VimCodeRunnerRun("", "true")<CR>'
-vim.cmd('let vim_code_runner_csv_type="rfc_csv"')
-
-
-lvim.keys.normal_mode['<leader>cn'] = ':let vf_my_search_result_files_current_index = (vf_my_search_result_files_current_index + 1) % vf_my_search_result_files_length<CR>:execute "edit " . vf_my_search_result_files[vf_my_search_result_files_current_index]["abs_file_name"]<CR>:call VipFiles_ShowMySearchResultFilesPosition()<CR>'
-lvim.keys.normal_mode['<leader>cp'] = ':let vf_my_search_result_files_current_index = ((vf_my_search_result_files_current_index <= 0 ? vf_my_search_result_files_length : vf_my_search_result_files_current_index) - 1) % vf_my_search_result_files_length<CR>:execute "edit " . vf_my_search_result_files[vf_my_search_result_files_current_index]["abs_file_name"]<CR>:call VipFiles_ShowMySearchResultFilesPosition()<CR>'
-lvim.keys.normal_mode['<leader>cl'] = ':call VipFiles_ShowMySearchResultFiles("rel_file_name", "abs_file_name")<CR>'
-lvim.keys.visual_mode['<leader>cp'] = '"ty:call VipFiles_PopulateMySearchResultFiles(split(@t, "\n"))<CR>'
-
 vim.cmd('let g:rbql_with_headers = 1')
 vim.cmd('let g:rbql_backend_language = "python"')
 vim.cmd('let g:rbql_use_system_python = 1')
@@ -695,4 +683,6 @@ lvim.builtin.lualine.sections.lualine_c = {
 
 vim.cmd('set wrap')
 vim.cmd('source ~/.slim_vimrc')
+vim.cmd('source ~/.vim/plugin-settings/vim_code_runner.vim')
+vim.cmd('source ~/.vim/plugin-settings/vip_files.vim')
 vim.cmd('source ~/.vimrc_ext')
