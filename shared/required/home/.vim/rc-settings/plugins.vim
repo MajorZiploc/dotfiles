@@ -6,7 +6,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
 Plug 'tpope/vim-surround' " manipulate surround chars
 Plug 'MajorZiploc/code_runner.vim' " run selected code chunks
-Plug 'MajorZiploc/vip_files.vim' " file ring
 VIM_PLUGIN_INCLUDE_PLACEHOLDER
 
 " Plug 'airblade/vim-gitgutter' " git supporting plugin
@@ -32,6 +31,5 @@ let mapleader = " "
 
 so ~/.vim/plugin-settings/coc.vim
 so ~/.vim/plugin-settings/vim_code_runner.vim
-so ~/.vim/plugin-settings/vip_files.vim
 VIM_PLUGIN_SETTINGS_PLACEHOLDER
 

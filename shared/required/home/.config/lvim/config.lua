@@ -328,7 +328,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 lvim.plugins = {
   { "tpope/vim-fugitive" },          -- git plugin
   { "MajorZiploc/code_runner.vim" },  -- run selected code chunks
-  { "MajorZiploc/vip_files.vim" },  -- file ring
   { "mechatroner/rainbow_csv" },     -- csv highlighter and query engine
   { "tpope/vim-obsession" },         -- self managing n?vim sessions (Session.vim w/ :Obsession <file_name.vim>?/:Obsession! (start/discard current session respectively))
   { "eddyekofo94/gruvbox-flat.nvim" }, -- color theme
@@ -684,5 +683,4 @@ lvim.builtin.lualine.sections.lualine_c = {
 vim.cmd('set wrap')
 vim.cmd('source ~/.slim_vimrc')
 vim.cmd('source ~/.vim/plugin-settings/vim_code_runner.vim')
-vim.cmd('source ~/.vim/plugin-settings/vip_files.vim')
 vim.cmd('source ~/.vimrc_ext')

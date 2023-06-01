@@ -237,13 +237,31 @@ nnoremap zm :call FoldHelper('zm')<cr>
 nnoremap zM :call FoldHelper('zM')<cr>
 
 function! LoadQuickFixList(content)
-  cexpr a:content
+  if (a:content =~ ':\d\+:')
+    cexpr a:content
+  else
+    call setqflist(map(split(a:content, '\n'), '{ "filename": v:val }'))
+    cc
+  endif
+  copen
 endfunction
 
-vmap <leader>qp "ty:call LoadQuickFixList(@t)<CR>
+vmap <leader>cp "ty:call LoadQuickFixList(@t)<CR>
 
 function! LoadLocationQuickFixList(content)
-  lexpr a:content
+  if (a:content =~ ':\d\+:')
+    lexpr a:content
+  else
+    let s:lines = split(a:content, '\n')
+    let s:locations = []
+    for line in s:lines
+      let s:location = {'filename': line}
+      call add(s:locations, s:location)
+    endfor
+    call setloclist(0, s:locations)
+    lc
+  endif
+  lopen
 endfunction
 
 vmap <leader>lp "ty:call LoadLocationQuickFixList(@t)<CR>
@@ -251,3 +269,47 @@ vmap <leader>lp "ty:call LoadLocationQuickFixList(@t)<CR>
 " extended regex instead of basic thing it uses by default
 nnoremap / /\v
 vnoremap / /\v
+
+" wrapper around [ag]?find_files(_fuzz)? bash command for tight integration with vim
+function! MyFinder(find_command, quick_fix_list_style, ...)
+  let my_args = ''
+  for my_arg in a:000
+    if (! (my_arg =~ '^".*"$' || my_arg =~ "^'.*'$"))
+      let my_arg = "'" . my_arg . "'"
+    endif
+    let my_args = my_args . ' ' . my_arg
+  endfor
+  let cmd = a:find_command . my_args
+  let my_search_files = system(cmd)
+  if (a:quick_fix_list_style == 'global')
+    call LoadQuickFixList(my_search_files)
+  else
+    call LoadLocationQuickFixList(my_search_files)
+  endif
+endfunction
+
+command! -nargs=+ GFindFiles call MyFinder('gfind_files', 'global', <f-args>)
+command! -nargs=+ GFindFilesFuzz call MyFinder('gfind_files_fuzz', 'global', <f-args>)
+command! -nargs=+ AFindFiles call MyFinder('afind_files', 'global', <f-args>)
+command! -nargs=+ AFindFilesFuzz call MyFinder('afind_files_fuzz', 'global', <f-args>)
+command! -nargs=+ FindFiles call MyFinder('find_files',  'global', <f-args>)
+command! -nargs=+ FindFilesFuzz call MyFinder('find_files_fuzz', 'global', <f-args>)
+command! -nargs=+ LGFindFiles call MyFinder('gfind_files', 'local', <f-args>)
+command! -nargs=+ LGFindFilesFuzz call MyFinder('gfind_files_fuzz', 'local', <f-args>)
+command! -nargs=+ LAFindFiles call MyFinder('afind_files', 'local', <f-args>)
+command! -nargs=+ LAFindFilesFuzz call MyFinder('afind_files_fuzz', 'local', <f-args>)
+command! -nargs=+ LFindFiles call MyFinder('file_files', 'local', <f-args>)
+command! -nargs=+ LFindFilesFuzz call MyFinder('find_files_fuzz, 'local', <f-args>)
+
+command! -nargs=+ GFindInFiles call MyFinder('gfind_in_files', 'global', <f-args>)
+command! -nargs=+ GFindInFilesFuzz call MyFinder('gfind_in_files_fuzz', 'global', <f-args>)
+command! -nargs=+ AFindInFiles call MyFinder('afind_in_files', 'global', <f-args>)
+command! -nargs=+ AFindInFilesFuzz call MyFinder('afind_in_files_fuzz', 'global', <f-args>)
+command! -nargs=+ FindInFiles call MyFinder('find_in_files, 'global', <f-args>)
+command! -nargs=+ FindInFilesFuzz call MyFinder('find_in_files_fuzz, 'global', <f-args>)
+command! -nargs=+ LGFindInFiles call MyFinder('gfind_in_files', 'local', <f-args>)
+command! -nargs=+ LGFindInFilesFuzz call MyFinder('gfind_in_files_fuzz', 'local', <f-args>)
+command! -nargs=+ LAFindInFiles call MyFinder('afind_in_files', 'local', <f-args>)
+command! -nargs=+ LAFindInFilesFuzz call MyFinder('afind_in_files_fuzz', 'local', <f-args>)
+command! -nargs=+ LFindInFiles call MyFinder('find_in_files, 'local', <f-args>)
+command! -nargs=+ LFindInFilesFuzz call MyFinder('find_in_files_fuzz, 'local', <f-args>)
