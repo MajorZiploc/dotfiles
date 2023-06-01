@@ -68,8 +68,8 @@ cnoremap <C-B> <Left>
 " nnoremap <silent> <leader>s viwp
 " swap word under cursor with system clipboard
 " nnoremap <silent> <leader>S viw"+p
-" trim trailing spaces in file
-nnoremap <silent> <leader>lt :%s/[ \t]\+$/<cr>
+" text trim trailing spaces in file
+nnoremap <silent> <leader>tt :%s/[ \t]\+$/<cr>
 
 " Helpful for with goto definition or reference doesnt work
 " pair with fzf or find_* bash commands

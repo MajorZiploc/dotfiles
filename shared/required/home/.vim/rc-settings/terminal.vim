@@ -167,9 +167,9 @@ autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
 " Similar to the buildin gf but also allows open of non-existent files aswell
 map <leader>nf :edit <cfile><cr>
 
-" line nuke
-nmap <leader>ln <cmd>%!to_less_blank_lines<cr>
-vmap <leader>ln !to_less_blank_lines<cr>
+" text nuke
+nmap <leader>tn <cmd>%!to_less_blank_lines<cr>
+vmap <leader>tn !to_less_blank_lines<cr>
 
 " set grep command (Default: grep -n $* /dev/null)
 set gp=git\ grep\ -Pin
