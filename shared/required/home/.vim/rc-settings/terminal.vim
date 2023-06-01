@@ -271,7 +271,7 @@ nnoremap / /\v
 vnoremap / /\v
 
 " wrapper around [ag]?find_files(_fuzz)? bash command for tight integration with vim
-function! MyFinder(find_command, quick_fix_list_style, ...)
+function MyFinder(find_command, quick_fix_list_style, ...)
   let my_args = ''
   for my_arg in a:000
     if (! (my_arg =~ '^".*"$' || my_arg =~ "^'.*'$"))
