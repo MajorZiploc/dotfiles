@@ -271,7 +271,7 @@ nnoremap / /\v
 vnoremap / /\v
 
 " wrapper around [ag]?find_files(_fuzz)? bash command for tight integration with vim
-function! MyFinder(find_command, quick_fix_list_style, ...)
+function MyFinder(find_command, quick_fix_list_style, ...)
   let my_args = ''
   for my_arg in a:000
     if (! (my_arg =~ '^".*"$' || my_arg =~ "^'.*'$"))
@@ -281,10 +281,16 @@ function! MyFinder(find_command, quick_fix_list_style, ...)
   endfor
   let cmd = a:find_command . my_args
   let my_search_files = system(cmd)
-  if (a:quick_fix_list_style == 'global')
-    call LoadQuickFixList(my_search_files)
+  if (my_search_files != '')
+    if (a:quick_fix_list_style == 'global')
+      call LoadQuickFixList(my_search_files)
+    else
+      call LoadLocationQuickFixList(my_search_files)
+    endif
   else
-    call LoadLocationQuickFixList(my_search_files)
+    echohl WarningMsg
+    echo "No search results!"
+    echohl None
   endif
 endfunction
 
