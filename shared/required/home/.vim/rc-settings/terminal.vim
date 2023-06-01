@@ -237,13 +237,31 @@ nnoremap zm :call FoldHelper('zm')<cr>
 nnoremap zM :call FoldHelper('zM')<cr>
 
 function! LoadQuickFixList(content)
-  cexpr a:content
+  if (a:content =~ ':\d\+:')
+    cexpr a:content
+  else
+    call setqflist(map(split(a:content, '\n'), '{ "filename": v:val }'))
+    cc
+  endif
+  copen
 endfunction
 
 vmap <leader>qp "ty:call LoadQuickFixList(@t)<CR>
 
 function! LoadLocationQuickFixList(content)
-  lexpr a:content
+  if (a:content =~ ':\d\+:')
+    lexpr a:content
+  else
+    let s:lines = split(a:content, '\n')
+    let s:locations = []
+    for line in s:lines
+      let s:location = {'filename': line}
+      call add(s:locations, s:location)
+    endfor
+    call setloclist(0, s:locations)
+    lc
+  endif
+  lopen
 endfunction
 
 vmap <leader>lp "ty:call LoadLocationQuickFixList(@t)<CR>
