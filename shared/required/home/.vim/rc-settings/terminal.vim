@@ -246,7 +246,7 @@ function! LoadQuickFixList(content)
   copen
 endfunction
 
-vmap <leader>cp "ty:call LoadQuickFixList(@t)<CR>
+vmap <leader>cp "td:call LoadQuickFixList(@t)<CR>
 
 function! LoadLocationQuickFixList(content)
   if (a:content =~ ':\d\+:')
@@ -264,7 +264,7 @@ function! LoadLocationQuickFixList(content)
   lopen
 endfunction
 
-vmap <leader>lp "ty:call LoadLocationQuickFixList(@t)<CR>
+vmap <leader>lp "td:call LoadLocationQuickFixList(@t)<CR>
 
 " extended regex instead of basic thing it uses by default
 nnoremap / /\v
