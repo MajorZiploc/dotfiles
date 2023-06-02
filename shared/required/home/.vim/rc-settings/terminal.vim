@@ -246,6 +246,7 @@ function! LoadQuickFixList(content)
   copen
 endfunction
 
+nmap <leader>cp :call LoadQuickFixList(@+)<CR>
 vmap <leader>cp "td:call LoadQuickFixList(@t)<CR>
 
 function! LoadLocationQuickFixList(content)
@@ -264,6 +265,7 @@ function! LoadLocationQuickFixList(content)
   lopen
 endfunction
 
+nmap <leader>lp :call LoadLocationQuickFixList(@+)<CR>
 vmap <leader>lp "td:call LoadLocationQuickFixList(@t)<CR>
 
 " extended regex instead of basic thing it uses by default
