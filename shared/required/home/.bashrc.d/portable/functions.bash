@@ -275,11 +275,12 @@ function git_log_follow {
 }
 
 function git_diff_range {
-  # assumption from commit is older than to commit
   [[ -z "$1" ]] && { echo "Must specify from\!" >&2; return 1; }
   [[ -z "$2" ]] && { echo "Must specify to\!" >&2; return 1; }
   local from=$(($1 + 1));
   local to=$(($2 + 1));
+  [[ $from -le 0 || $to -le 0 ]] && { echo "from and to must be greater than or equal to 0\!" >&2; return 1; }
+  [[ $from -le $to ]] && { echo "from must be greater than to\!" >&2; return 1; }
   local commits; commits="$(git --no-pager log --oneline -n "$from" | col_n 1 | xargs)";
   local from_commit; from_commit="$(echo "$commits" | col_n "$from")";
   local to_commit; to_commit="$(echo "$commits" | col_n "$to")";
