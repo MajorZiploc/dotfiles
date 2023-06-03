@@ -33,7 +33,7 @@ assert_output "$expected"
   assert_success
 expected="$(cat << EOF
 ./pandas_data_analytics/.gitignore
-./pandas_data_analytics/docker-compose.yml
+./pandas_data_analytics/docker-compose.yaml
 ./pandas_data_analytics/Dockerfile
 ./pandas_data_analytics/Pipfile
 ./pandas_data_analytics/pyproject.toml
