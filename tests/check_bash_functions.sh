@@ -74,6 +74,7 @@ EOF
   run f "$content"
   assert_success
   expected=`cat << EOF
+:3:10:
 Very nice content coming up
 all the lines
 go

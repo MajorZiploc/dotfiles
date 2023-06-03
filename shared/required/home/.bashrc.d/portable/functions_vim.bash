@@ -36,20 +36,29 @@ function show_block {
   local from_pattern="$1";
   local to_pattern="$2";
   local content="$3";
-  local should_print="false";
+  local should_append="false";
+  local filename;
   [[ -z "$from_pattern" ]] && { echo "Must specify from_pattern" >&2; return 1; }
   [[ -z "$to_pattern" ]] && { echo "Must specify to_pattern" >&2; return 1; }
   [[ -z "$content" ]] && { echo "Must specify content" >&2; return 1; }
-  [[ -e "$content" ]] && { content=$(cat "$content"); }
-  echo "$content" | while IFS="" read -r p || [ -n "$p" ]; do
-    if [[ "$should_print" == "true" ]]
-    then
-      echo "$p";
-      [[ "$p" =~ $to_pattern ]] && { break; }
+  [[ -e "$content" ]] && { filename="$content"; content=$(cat "$content"); }
+  local block="";
+  local starting_line;
+  local ending_line;
+  local current_line=1;
+  while IFS="" read -r p || [ -n "$p" ]; do
+    if [[ "$should_append" == "true" ]]; then
+      block="${block}
+${p}";
+      [[ "$p" =~ $to_pattern ]] && { ending_line="$current_line"; break; }
     else
-      [[ "$p" =~ $from_pattern ]] && { echo "$p"; should_print="true"; }
+      [[ "$p" =~ $from_pattern ]] && { starting_line="$current_line"; block="$p"; should_append="true"; }
     fi
-  done;
+    current_line=$((current_line + 1));
+  done < <(echo "$content");
+  [[ -n "$filename" ]] && { echo "$filename"; }
+  echo ":$starting_line:$ending_line:";
+  echo "$block";
 }
 
 function show_block_line_num_range {
