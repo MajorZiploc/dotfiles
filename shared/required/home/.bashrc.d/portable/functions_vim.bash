@@ -198,17 +198,23 @@ function _find_items_rename_helper {
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$5";
   local new_name;
+  local _cmd;
   for mdepth in $(seq 1 "$maxdepth"); do
-    eval "find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' $not_paths -print0" | while read -d $'\0' item; do
-    unset new_name; new_name="$(echo "$item" | sed -E "$by")";
-    [[ "$item" != "$new_name" ]] && {
-      if [[ $preview == false ]]; then
-        mv "$item" "$new_name";
-      else
-        echo "mv" "'$item'" "'$new_name'" ";";
-      fi
-    }
-    done;
+    _cmd="find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' $not_paths -print0";
+    if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
+      echo "$_cmd"
+    else
+      eval "$_cmd" | while read -d $'\0' item; do
+      unset new_name; new_name="$(echo "$item" | sed -E "$by")";
+      [[ "$item" != "$new_name" ]] && {
+        if [[ $preview == false ]]; then
+          mv "$item" "$new_name";
+        else
+          echo "mv" "'$item'" "'$new_name'" ";";
+        fi
+      }
+      done;
+    fi
   done;
 }
 
@@ -253,14 +259,20 @@ function _find_items_delete_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
+  local _cmd;
   for mdepth in $(seq 1 "$maxdepth"); do
-    eval "find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' $not_paths -print0" | while read -d $'\0' item; do
-      if [[ $preview == false ]]; then
-        rm -rf "$item";
-      else
-        echo "rm -rf" "'$item'" ";";
-      fi
-    done;
+    _cmd="find . -mindepth '$mdepth' -maxdepth '$mdepth' -regextype egrep -iregex '$file_pattern' $not_paths -print0";
+    if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
+      echo "$_cmd"
+    else
+      eval "$_cmd" | while read -d $'\0' item; do
+        if [[ $preview == false ]]; then
+          rm -rf "$item";
+        else
+          echo "rm -rf" "'$item'" ";";
+        fi
+      done;
+    fi
   done;
 }
 
@@ -307,7 +319,12 @@ function _find_items_helper {
   local maxdepth="$2";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$3";
-  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' $not_paths";
+  local _cmd; _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' $not_paths";
+  if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
+    echo "$_cmd";
+  else
+    eval "$_cmd";
+  fi
 }
 
 function find_items {
@@ -344,10 +361,16 @@ function _find_files_delete_preview_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
+  local _cmd="";
   if [[ -z "$with_content" ]]; then
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec echo rm \"'{}' ;\" \;";
+    _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec echo rm \"'{}' ;\" \;";
   else
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec echo rm \"'{}' ;\" \;" | grep -E "^rm";
+    _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec echo rm \"'{}' ;\" \; | grep -E \"^rm\" ;";
+  fi
+  if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
+    echo "$_cmd";
+  else
+    eval "$_cmd";
   fi
 }
 
@@ -358,10 +381,16 @@ function _find_files_delete_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths; not_paths="$(_find_default_ignored_dirs)";
+  local _cmd="";
   if [[ -z "$with_content" ]]; then
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec rm \"{}\" \;";
+    _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec rm \"{}\" \;";
   else
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec rm \"{}\" \;" > /dev/null;
+    _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec rm \"{}\" \;" > /dev/null;
+  fi
+  if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
+    echo "$_cmd";
+  else
+    eval "$_cmd";
   fi
 }
 
@@ -407,27 +436,32 @@ function _find_files_rename_helper {
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$6";
   local b nb new_name should_rename;
-  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -print0" | while read -d $'\0' file; do
-  should_rename=false;
-  if [[ -z "$with_content" ]]; then
-    should_rename=true;
+  local _cmd; _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -print0";
+  if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
+    echo "$_cmd";
   else
-    file_content_matches="$(grep -Ein "$with_content" "$file")"
-    [[ -z "$file_content_matches" ]] || { should_rename=true; }
-  fi
-  [[ $should_rename == true ]] && {
-    unset b; b=$(basename "$file");
-    unset nb; nb="$(echo "$b" | sed -E "$by")";
-    unset new_name; new_name="$(dirname "$file")/$nb"
-    [[ "$file" != "$new_name" ]] && {
-      if [[ $preview == false ]]; then
-        mv "$file" "$new_name";
-      else
-        echo "mv" "'$file'" "'$new_name'" ";";
-      fi
+    eval "$_cmd" | while read -d $'\0' file; do
+    should_rename=false;
+    if [[ -z "$with_content" ]]; then
+      should_rename=true;
+    else
+      file_content_matches="$(grep -Ein "$with_content" "$file")"
+      [[ -z "$file_content_matches" ]] || { should_rename=true; }
+    fi
+    [[ $should_rename == true ]] && {
+      unset b; b=$(basename "$file");
+      unset nb; nb="$(echo "$b" | sed -E "$by")";
+      unset new_name; new_name="$(dirname "$file")/$nb"
+      [[ "$file" != "$new_name" ]] && {
+        if [[ $preview == false ]]; then
+          mv "$file" "$new_name";
+        else
+          echo "mv" "'$file'" "'$new_name'" ";";
+        fi
+      }
     }
-  }
-  done;
+    done;
+  fi
 }
 
 function find_files_rename_preview {
@@ -467,10 +501,16 @@ function _find_files_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
+  local _cmd;
   if [[ -z "$with_content" ]]; then
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths";
+    _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths";
   else
-    eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec echo \"{}\" \;" | grep -Ev "\s*^[[:digit:]]+:";
+    _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec echo \"{}\" \; | grep -Ev \"\s*^[[:digit:]]+:\"";
+  fi
+  if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
+    echo "$_cmd";
+  else
+    eval "$_cmd";
   fi
 }
 
@@ -512,7 +552,12 @@ function _find_in_files_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
-  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -E --with-filename --color -in -e '$grep_pattern' \"{}\" +;";
+  local _cmd; _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -E --with-filename --color -in -e '$grep_pattern' \"{}\" +;";
+  if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
+    echo "$_cmd";
+  else
+    eval "$_cmd";
+  fi
 }
 
 function find_in_files {
@@ -553,7 +598,12 @@ function _find_in_files_replace_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
-  eval "find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec sed -E -i'' '$by' \"{}\" \;";
+  local _cmd; _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec sed -E -i'' '$by' \"{}\" \;";
+  if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
+    echo "$_cmd";
+  else
+    eval "$_cmd";
+  fi
 }
 
 function find_in_files_replace {
