@@ -365,7 +365,7 @@ function _find_files_delete_preview_helper {
   if [[ -z "$with_content" ]]; then
     _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec echo rm \"'{}' ;\" \;";
   else
-    _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec echo rm \"'{}' ;\" | grep -E \"^rm\" \;";
+    _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec echo rm \"'{}' ;\" \; | grep -E \"^rm\" ;";
   fi
   if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
     echo "$_cmd";
