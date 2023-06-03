@@ -19,3 +19,7 @@ done;
 unset IFS;
 # IFS= is for null character delimited
 <:>
+# search for block and print first line of the block in quick fix list format only if it exists in the file
+gfind_in_files "-exec bash -c 'source ~/.bashrc.d/portable/functions_vim.bash; show_block \"function\" \"function\" \"{}\" | head -n 3 | tr -d \"\n\"; echo \"\";' \;" | grep -Ev "^[^:]+:::$"
+# search for block and print filename
+gfind_files ".*" "-exec bash -c 'source ~/.bashrc.d/portable/functions_vim.bash; show_block \"function\" \"function\" \"{}\" | head -n 3 | tr -d \"\n\"; echo \"\";' \;" | grep -Ev "^[^:]+:::$" | sed -E 's,([^:]+).*,\1,g'
