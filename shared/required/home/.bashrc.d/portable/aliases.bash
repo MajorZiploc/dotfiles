@@ -84,6 +84,8 @@ alias grepn_files_uniq="_grepn_files | sort | uniq";
 alias find_items_hidden="sed -e 's/\.\///g' | grep -E \"\/\.\"";
 alias find_items_nonhidden="sed -e 's/\.\///g' |  grep -Ev \"\/\.\"";
 alias show_root_folder="sed -E 's,^\./([^/]*?).*,\1,'";
+alias find_in_files_trim_block_search='sed -E "/^\s*$/d"';
+alias find_files_trim_block_search='find_in_files_trim_block_search | sed -E "s,([^:]+).*,\1,g"';
 
 # reexecutes last command that beings with a pattern. ex: fc -s grep -E
 alias reexe='fc -s';

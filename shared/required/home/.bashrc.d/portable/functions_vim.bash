@@ -163,6 +163,14 @@ function _find_git_estimator_children_git_ignores {
   echo "$not_paths";
 }
 
+function find_show_exec_search_block {
+  local from_pattern="$1";
+  local to_pattern="$2";
+  [[ -z "$from_pattern" ]] && { echo "Must specify from_pattern" >&2; return 1; }
+  [[ -z "$to_pattern" ]] && { echo "Must specify to_pattern" >&2; return 1; }
+  echo "-exec bash -c 'source ~/.bashrc.d/portable/functions_vim.bash; show_block \"$from_pattern\" \"$to_pattern\" \"{}\" | head -n 3 | tr -d \"\n\"; echo \"\";' \;";
+}
+
 function _find_git_estimator_ignored_dirs_root {
   local get_ancestor_git_ignore_content; get_ancestor_git_ignore_content="$(
     git_ignore_content="$(cat .gitignore 2>/dev/null)";
