@@ -55,7 +55,7 @@ function tmuxps {
         items+="\n";
       }
     done;
-    selected=$(printf "$items" | FUZZY_FINDER_PLACEHOLDER);
+    selected=$(printf "%s" "$items" | FUZZY_FINDER_PLACEHOLDER);
   fi
   _tmux_session_list_helper "$session_name" "$selected";
 }
@@ -177,7 +177,7 @@ function cdp {
         items+="\n";
       }
     done;
-    local selected; selected=$(printf "$items" | FUZZY_FINDER_PLACEHOLDER);
+    local selected; selected=$(printf "%s" "$items" | FUZZY_FINDER_PLACEHOLDER);
   fi
   cd "$selected" || { echo "Unable to find selected project\!" >&2; return 1; }
 }
