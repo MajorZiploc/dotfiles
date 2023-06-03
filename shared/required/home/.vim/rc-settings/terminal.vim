@@ -224,11 +224,17 @@ nmap <leader>zk :set foldmethod=marker<cr>
 
 function! FoldHelper(fold_action)
   let og_foldmethod=&foldmethod
+  let feedback="set foldmethod=" . og_foldmethod
   if (og_foldmethod == 'manual')
     set foldmethod=indent
+    let feedback = feedback . " -> set foldmethod=indent"
+  else
+    let feedback = feedback . " -> ##(foldmethod must be manual for this switch to indent)##"
   endif
   execute 'normal! ' . a:fold_action
   let &foldmethod = og_foldmethod
+  let feedback = feedback . " -> set foldmethod=" . og_foldmethod
+  echo feedback
 endfunction
 
 nnoremap zr :call FoldHelper('zr')<cr>
