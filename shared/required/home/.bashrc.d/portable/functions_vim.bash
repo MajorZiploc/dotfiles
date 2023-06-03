@@ -36,20 +36,31 @@ function show_block {
   local from_pattern="$1";
   local to_pattern="$2";
   local content="$3";
-  local should_print="false";
+  local should_append="false";
+  local filename;
   [[ -z "$from_pattern" ]] && { echo "Must specify from_pattern" >&2; return 1; }
   [[ -z "$to_pattern" ]] && { echo "Must specify to_pattern" >&2; return 1; }
   [[ -z "$content" ]] && { echo "Must specify content" >&2; return 1; }
-  [[ -e "$content" ]] && { content=$(cat "$content"); }
-  echo "$content" | while IFS="" read -r p || [ -n "$p" ]; do
-    if [[ "$should_print" == "true" ]]
-    then
-      echo "$p";
-      [[ "$p" =~ $to_pattern ]] && { break; }
+  [[ -e "$content" ]] && { filename="$content"; content=$(cat "$content"); }
+  local block="";
+  local starting_line;
+  local ending_line;
+  local current_line=1;
+  while IFS="" read -r p || [ -n "$p" ]; do
+    if [[ "$should_append" == "true" ]]; then
+      block="${block}
+${p}";
+      [[ "$p" =~ $to_pattern ]] && { ending_line="$current_line"; break; }
     else
-      [[ "$p" =~ $from_pattern ]] && { echo "$p"; should_print="true"; }
+      [[ "$p" =~ $from_pattern ]] && { starting_line="$current_line"; block="$p"; should_append="true"; }
     fi
-  done;
+    current_line=$((current_line + 1));
+  done < <(echo "$content");
+  if [[ -n "$starting_line" && -n "$ending_line" ]]; then
+    [[ -n "$filename" ]] && { echo "$filename"; }
+    echo ":$starting_line:$ending_line:";
+    echo "$block";
+  fi
 }
 
 function show_block_line_num_range {
@@ -150,6 +161,14 @@ function _find_git_estimator_children_git_ignores {
     not_paths="$not_paths -not -path '$gitignore_entry/*'";
   done;
   echo "$not_paths";
+}
+
+function find_show_exec_search_block {
+  local from_pattern="$1";
+  local to_pattern="$2";
+  [[ -z "$from_pattern" ]] && { echo "Must specify from_pattern" >&2; return 1; }
+  [[ -z "$to_pattern" ]] && { echo "Must specify to_pattern" >&2; return 1; }
+  echo "-exec bash -c 'source ~/.bashrc.d/portable/functions_vim.bash; show_block \"$from_pattern\" \"$to_pattern\" \"{}\" | head -n 3 | tr -d \"\n\"; echo \"\";' \;";
 }
 
 function _find_git_estimator_ignored_dirs_root {
@@ -502,10 +521,15 @@ function _find_files_helper {
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
   local _cmd;
-  if [[ -z "$with_content" ]]; then
-    _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths";
-  else
-    _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec echo \"{}\" \; | grep -Ev \"\s*^[[:digit:]]+:\"";
+  _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths";
+  if [[ -n "$with_content" ]]; then
+    local _exec_cmd=" -exec grep -Ein -e '$with_content' \"{}\" \; -exec echo \"{}\" \; | grep -Ev \"\s*^[[:digit:]]+:\"";
+    # NOTE: use \-exec to search for -exec rather than providing your own -exec command
+    local _exec_pattern="^-exec .{5,}"
+    if [[ "$with_content" =~ $_exec_pattern ]]; then
+      local _exec_cmd="$with_content";
+    fi
+    _cmd="$_cmd $_exec_cmd";
   fi
   if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
     echo "$_cmd";
@@ -552,7 +576,13 @@ function _find_in_files_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
-  local _cmd; _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -E --with-filename --color -in -e '$grep_pattern' \"{}\" +;";
+  local _exec_cmd="-exec grep -E --with-filename --color -in -e '$grep_pattern' \"{}\" +;";
+  # NOTE: use \-exec to search for -exec rather than providing your own -exec command
+  local _exec_pattern="^-exec .{5,}"
+  if [[ "$grep_pattern" =~ $_exec_pattern ]]; then
+    local _exec_cmd="$grep_pattern";
+  fi
+  local _cmd; _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths $_exec_cmd";
   if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
     echo "$_cmd";
   else
