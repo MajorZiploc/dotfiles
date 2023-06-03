@@ -328,7 +328,7 @@ function convert_csv_to_json {
   else
     rows=$(echo "$csv" | tr -d '"' | sed -E 's/(.*)/"\1",/g');
     rows=$(echo "$rows" | perl -0777 -ple "s/,\$//");
-    rows=$(echo "(" "$rows" ")");
+    rows="($rows)";
     pwsh -command "&{ $rows | ConvertFrom-Csv | ConvertTo-Json; }";
   fi
 }
@@ -388,14 +388,14 @@ function _rest_helper {
   local _file; _file="${temp_response_loc}$(basename "$base_url_with_endpoint" | tr "/" "_").${response_file_type}";
   local query_params; query_params=$(_rest_get_query_params "$url");
   [[ -e "$request_body" ]] && { request_body=$(cat "$request_body"); }
-  request_body=$(echo "${request_body:+"-d '$request_body'"}");
-  [[ ! "$curl_flags" == "-"* ]] && { curl_flags=$(echo "${curl_flags:+"-$curl_flags"}"); }
-  [[ ! "$query_params" == "?"* ]] && { query_params=$(echo "${query_params:+"?$query_params"}"); }
-  [[ ! "$method" == " -X"* ]] && { method=$(echo "${method:+" -X $method"}"); }
-  [[ ! "$query_params" == "?"* ]] && { query_params=$(echo "${query_params:+"?$query_params"}"); }
-  [[ ! "$trailing_command" == " "* ]] && { trailing_command=$(echo "${trailing_command:+" $trailing_command"}"); }
-  [[ ! "$request_body" == " "* ]] && { request_body=$(echo "${request_body:+" $request_body"}"); }
-  [[ ! "$headers" == " "* ]] && { headers=$(echo "${headers:+" $headers"}"); }
+  request_body="${request_body:+"-d '$request_body'"}";
+  [[ ! "$curl_flags" == "-"* ]] && { curl_flags="${curl_flags:+"-$curl_flags"}"; }
+  [[ ! "$query_params" == "?"* ]] && { query_params="${query_params:+"?$query_params"}"; }
+  [[ ! "$method" == " -X"* ]] && { method="${method:+" -X $method"}"; }
+  [[ ! "$query_params" == "?"* ]] && { query_params="${query_params:+"?$query_params"}"; }
+  [[ ! "$trailing_command" == " "* ]] && { trailing_command="${trailing_command:+" $trailing_command"}"; }
+  [[ ! "$request_body" == " "* ]] && { request_body="${request_body:+" $request_body"}"; }
+  [[ ! "$headers" == " "* ]] && { headers="${headers:+" $headers"}"; }
   url=" \"${base_url_with_endpoint}${query_params}\"";
   bash -c "
     curl $curl_flags$method$request_body$url$headers$trailing_command
@@ -415,11 +415,11 @@ function _rest_helper_preper {
   local method="$9";
   # authorization is mainly for Bearer token style auth
   if [[ ! "$auth" == *":"* ]]; then
-    auth=$(echo ${auth:+"-H \"Authorization: Bearer $auth\""});
+    auth="${auth:+"-H \"Authorization: Bearer $auth\""}";
   else
-    auth=$(echo ${auth:+"-H '$auth'"});
+    auth="${auth:+"-H '$auth'"}";
   fi
-  [[ ! "$extra_headers" == " "* ]] && { extra_headers=$(echo "${extra_headers:+" $extra_headers"}"); }
+  [[ ! "$extra_headers" == " "* ]] && { extra_headers="${extra_headers:+" $extra_headers"}"; }
   local headers; headers="${content_type:+"-H \"Content-Type: $content_type\""} ${auth}${extra_headers}";
   _rest_helper "$url" "$request_body" "$curl_flags" "$response_file_type" "$method" "$headers" "$trailing_command";
 }
