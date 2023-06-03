@@ -97,6 +97,9 @@ source $ZSH/oh-my-zsh.sh
 
 setopt aliases
 
+# use if you need zsh to handle backslashes the same way as bash
+# setopt zsh_null_glob
+
 # squashed file from files in ~/.bashrc.d/portable/ and ~/.zshrc.d/
 . "$HOME/all_in_one.zsh" >/dev/null 2>&1;
 

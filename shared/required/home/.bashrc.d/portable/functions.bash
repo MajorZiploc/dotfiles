@@ -188,14 +188,14 @@ function docker_create_env_file {
   local env_file_location="${3:-"my.scripts.d/env"}";
   local output_env_file="${4:-".env"}";
   echo "" > "$output_env_file";
-  find "./$env_file_location/base" -type f -name "*.env*" -print0 | while read -d $'\0' cur_env_file; do
+  find "./$env_file_location/base" -type f -name "*.env*" -print0 | while read -r -d $'\0' cur_env_file; do
     {
       echo "# $cur_env_file BEGIN -------------------";
       cat "$cur_env_file";
       echo "";
     } >> "$output_env_file";
   done;
-  find "./$env_file_location/$environment" -type f -name "*.env*" -print0 | while read -d $'\0' cur_env_file; do
+  find "./$env_file_location/$environment" -type f -name "*.env*" -print0 | while read -r -d $'\0' cur_env_file; do
     {
       echo "# $cur_env_file BEGIN -------------------";
       cat "$cur_env_file";
@@ -203,7 +203,7 @@ function docker_create_env_file {
     } >> "$output_env_file";
   done;
   if [[ -n "$extra_env_files_pattern" ]]; then
-    find "./$env_file_location" -maxdepth 1 -regextype egrep -iregex "$extra_env_files_pattern" -type f -print0 | while read -d $'\0' cur_env_file; do
+    find "./$env_file_location" -maxdepth 1 -regextype egrep -iregex "$extra_env_files_pattern" -type f -print0 | while read -r -d $'\0' cur_env_file; do
       {
         echo "# $cur_env_file BEGIN -------------------";
         cat "$cur_env_file";
@@ -236,7 +236,7 @@ function git_deploy {
 }
 
 function git_all_the_things {
-  git branch -r | grep -v '\->' | while read remote; do
+  git branch -r | grep -v '\->' | while read -r remote; do
     git branch --track "${remote#origin/}" "$remote";
   done;
   git fetch --all --prune;
@@ -463,7 +463,7 @@ function zoxide_refresh_projects {
   for _path in $(echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"); do
     all_existing_projects_for_path="";
     [[ -d "$_path" ]] && {
-      find "$_path" -maxdepth 1 -mindepth 1 -type d -print0 | while read -d $'\0' project; do
+      find "$_path" -maxdepth 1 -mindepth 1 -type d -print0 | while read -r -d $'\0' project; do
         zoxide query "$project" &>/dev/null;
         zoxide_result_exit_code=$?;
         if [ ! $zoxide_result_exit_code -eq 0 ]; then

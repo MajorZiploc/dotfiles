@@ -153,7 +153,7 @@ IFS=$OLDIFS;
 
 function snip_bash_while {
 echo '
-echo "$eles" | while read -d $'"'\\\\n'"' ele; do
+echo "$eles" | while read -r -d $'"'\\\\n'"' ele; do
   echo "$ele hi";
 done;
 ';
@@ -161,7 +161,7 @@ done;
 
 function snip_bash_while_stream {
 echo '
-while read -d $'"'\\\\n'"' ele; do
+while read -r -d $'"'\\\\n'"' ele; do
   echo "$ele hi";
 done < <(echo "$eles");
 ';
