@@ -56,9 +56,11 @@ ${p}";
     fi
     current_line=$((current_line + 1));
   done < <(echo "$content");
-  [[ -n "$filename" ]] && { echo "$filename"; }
-  echo ":$starting_line:$ending_line:";
-  echo "$block";
+  if [[ -n "$starting_line" && -n "$ending_line" ]]; then
+    [[ -n "$filename" ]] && { echo "$filename"; }
+    echo ":$starting_line:$ending_line:";
+    echo "$block";
+  fi
 }
 
 function show_block_line_num_range {
