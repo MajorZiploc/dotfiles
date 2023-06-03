@@ -380,11 +380,11 @@ function _find_files_delete_preview_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
-  local _cmd="";
+  local _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths";
   if [[ -z "$with_content" ]]; then
-    _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec echo rm \"'{}' ;\" \;";
+    _cmd="$_cmd -exec echo rm \"'{}' ;\" \;";
   else
-    _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec echo rm \"'{}' ;\" \; | grep -E \"^rm\" ;";
+    _cmd="$_cmd -exec grep -Ein -e '$with_content' \"{}\" \; -exec echo rm \"'{}' ;\" \; | grep -E \"^rm\" ;";
   fi
   if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
     echo "$_cmd";
@@ -400,11 +400,11 @@ function _find_files_delete_helper {
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths; not_paths="$(_find_default_ignored_dirs)";
-  local _cmd="";
+  local _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths";
   if [[ -z "$with_content" ]]; then
-    _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec rm \"{}\" \;";
+    _cmd="$_cmd -exec rm \"{}\" \;";
   else
-    _cmd="find . -maxdepth '$maxdepth' -regextype egrep -iregex '$file_pattern' -type f $not_paths -exec grep -Ein -e '$with_content' \"{}\" \; -exec rm \"{}\" \;" > /dev/null;
+    _cmd="$_cmd -exec grep -Ein -e '$with_content' \"{}\" \; -exec rm \"{}\" \;" > /dev/null;
   fi
   if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
     echo "$_cmd";
