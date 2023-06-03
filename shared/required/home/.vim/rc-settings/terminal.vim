@@ -255,7 +255,7 @@ endfunction
 nmap <leader>cp :call LoadQuickFixList(@+)<CR>
 vmap <leader>cp "td:call LoadQuickFixList(@t)<CR>
 
-function! LoadLocationQuickFixList(content)
+function! LoadLocationFixList(content)
   if (a:content =~ ':\d\+:')
     lexpr a:content
   else
@@ -271,8 +271,8 @@ function! LoadLocationQuickFixList(content)
   lopen
 endfunction
 
-nmap <leader>lp :call LoadLocationQuickFixList(@+)<CR>
-vmap <leader>lp "td:call LoadLocationQuickFixList(@t)<CR>
+nmap <leader>lp :call LoadLocationFixList(@+)<CR>
+vmap <leader>lp "td:call LoadLocationFixList(@t)<CR>
 
 " extended regex instead of basic thing it uses by default
 nnoremap / /\v
@@ -293,7 +293,7 @@ function MyFinder(find_command, quick_fix_list_style, ...)
     if (a:quick_fix_list_style == 'global')
       call LoadQuickFixList(my_search_files)
     else
-      call LoadLocationQuickFixList(my_search_files)
+      call LoadLocationFixList(my_search_files)
     endif
   else
     echohl WarningMsg
