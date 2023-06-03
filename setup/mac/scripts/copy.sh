@@ -30,7 +30,7 @@ echo "Finished shared copy script";
 
 [[ $(($vscode_flag_as_int & $flags_as_int)) == $vscode_flag_as_int ]] && {
   vscode_dir="$HOME/.vscoderc.d/";
-  find "$vscode_dir" -type f -print0 | while read -d $'\0' file; do
+  find "$vscode_dir" -type f -print0 | while read -r -d $'\0' file; do
     bname=`basename "$file"`;
     rm "$HOME/Library/Application Support/Code/User/$bname";
     ln -s "$vscode_dir/$bname" "$HOME/Library/Application Support/Code/User/$bname";

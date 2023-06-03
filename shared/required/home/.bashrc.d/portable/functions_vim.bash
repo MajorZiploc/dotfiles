@@ -150,9 +150,9 @@ function _find_git_estimator_children_git_ignores {
   search_depth_for_nested_git_ignores="${search_depth_for_nested_git_ignores:="$FIND_GIT_DEFAULT_CHILD_GITIGNORE_SEARCH_DEPTH"}";
   local git_ignore_content="";
   [[ $search_depth_for_nested_git_ignores -ge 2 ]] && {
-    find . -mindepth "2" -maxdepth "$search_depth_for_nested_git_ignores" -name ".gitignore" -print0 | while read -d $'\0' _git_ignore; do
+    while read -r -d $'\0' _git_ignore; do
       git_ignore_content+="$({ sort -u "$_git_ignore" | trim | grep -Ev "('|\"|;|#|\\!|,|\\{|\\}|\\@|\\||\\^|\\(|\\)|^[[:blank:]]*$|\\&|\\$|\\\\|~|\\+|\`|=|[^[:blank:]]+\.[^[:blank:]]{1,6}\$)" | tr " " "\n" | sed -E 's,^[/\*]*/,,g;s,/[/\*]*$,,g;' | sed -E "s,(.*),$(dirname "$_git_ignore")/*/\\1,"; printf "\n"; } )";
-    done;
+    done < <(find . -mindepth "2" -maxdepth "$search_depth_for_nested_git_ignores" -name ".gitignore" -print0);
   }
   local gitignore_entries;
   gitignore_entries=($(echo "$git_ignore_content" | xargs));
@@ -223,7 +223,7 @@ function _find_items_rename_helper {
     if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
       echo "$_cmd"
     else
-      eval "$_cmd" | while read -d $'\0' item; do
+     while read -r -d $'\0' item; do
       unset new_name; new_name="$(echo "$item" | sed -E "$by")";
       [[ "$item" != "$new_name" ]] && {
         if [[ $preview == false ]]; then
@@ -232,7 +232,7 @@ function _find_items_rename_helper {
           echo "mv" "'$item'" "'$new_name'" ";";
         fi
       }
-      done;
+      done < <(eval "$_cmd");
     fi
   done;
 }
@@ -284,13 +284,13 @@ function _find_items_delete_helper {
     if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
       echo "$_cmd"
     else
-      eval "$_cmd" | while read -d $'\0' item; do
+      while read -r -d $'\0' item; do
         if [[ $preview == false ]]; then
           rm -rf "$item";
         else
           echo "rm -rf" "'$item'" ";";
         fi
-      done;
+      done < <(eval "$_cmd");
     fi
   done;
 }
@@ -459,7 +459,7 @@ function _find_files_rename_helper {
   if [[ "$FIND_SHOULD_SHOW_COMMAND" == "true" ]]; then
     echo "$_cmd";
   else
-    eval "$_cmd" | while read -d $'\0' file; do
+    while read -r -d $'\0' file; do
     should_rename=false;
     if [[ -z "$with_content" ]]; then
       should_rename=true;
@@ -479,7 +479,7 @@ function _find_files_rename_helper {
         fi
       }
     }
-    done;
+    done < <(eval "$_cmd");
   fi
 }
 
