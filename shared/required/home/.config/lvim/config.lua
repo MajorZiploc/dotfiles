@@ -302,8 +302,8 @@ lvim.builtin.which_key.mappings["g"] = {
 }
 lvim.lsp.buffer_mappings.normal_mode['<leader>wi'] = { vim.lsp.buf.hover, "Show hover" }
 lvim.lsp.buffer_mappings.normal_mode['<leader>gq'] = { vim.lsp.buf.hover, "Show hover" }
-lvim.lsp.buffer_mappings.normal_mode['<leader>gd'] = lvim.lsp.buffer_mappings.normal_mode['gd']
 lvim.lsp.buffer_mappings.normal_mode['<leader>gd'] = { "<CMD>Telescope lsp_definitions<CR>", "Go to definitions" }
+lvim.lsp.buffer_mappings.normal_mode['<leader>gi'] = { "<CMD>Telescope lsp_implementations<CR>", "Go to implementations" }
 -- basic single line quickfix list style view of references
 -- lvim.lsp.buffer_mappings.normal_mode['<leader>gr'] = lvim.lsp.buffer_mappings.normal_mode['gr']
 -- Uses telescope to show all references and the context/file they exist in
