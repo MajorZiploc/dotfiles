@@ -54,10 +54,6 @@ set path+=**
 " ignore patterns for various search commands
 set wildignore+=*.zip,*.png,*.jpg,*.gif,*.pdf,*DS_Store*,*/.git/*,*/node_modules/*,*/build/*,package-lock.json
 
-" refresh vim settings
-" command! Sorc so $MYVIMRC
-" command! Sorcvs so ~\_vsvimrc
-
 " appearance
 " if !has('nvim')
   " NOT A PERFECT SOLUTION. STILL LEADS TO PART WITH NON TRANSPARENT BG
