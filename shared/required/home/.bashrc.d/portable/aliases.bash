@@ -55,10 +55,10 @@ alias bsvm='perl -0777 -ple "BEGIN{print \"var_name=\`cat << EOF\n\";};END{print
 # bash_surround_var_singleline
 alias bsvs='trim | sed -E "s,(.+),var_name=\`\1\`;,"';
 # bash_line_join
-alias blj='tr -d "\n" | tr -d "\r"';
+alias btj='tr -d "\n" | tr -d "\r"';
 # Line break on ; or | if it is not followed by |
 # bash_line_split
-alias bls="perl -ne 's/(;|\|)(?:(?!;|\|))/\$1\\n/g; print;'";
+alias bts="perl -ne 's/(;|\|)(?:(?!;|\|))/\$1\\n/g; print;'";
 
 # Viewing directory information aliases
 # enable color support of ls and also add handy aliases
