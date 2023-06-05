@@ -17,8 +17,7 @@ export GIT_DESTINATION_BRANCH_CHOICES=(`echo "main master " | xargs`)
 export FIND_DEFAULT_IGNORE_DIRS=('bin' 'obj' '.git' '.svn' 'node_modules' '.ionide' '.venv' '__pycache__');
 
 export FIND_GIT_EXTRA_IGNORE_DIRS=('node_modules' '.venv');
-export FIND_GIT_DEFAULT_CHILD_GITIGNORE_SEARCH_DEPTH="0";
 
-export FIND_DEFAULT_MAX_DEPTH=9;
-
+export FIND_DEFAULT_MAX_DEPTH=16;
+export FIND_GIT_DEFAULT_CHILD_GITIGNORE_SEARCH_DEPTH=2;
 export FIND_SHOULD_SHOW_COMMAND="false";
