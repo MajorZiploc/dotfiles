@@ -6,6 +6,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
 Plug 'tpope/vim-surround' " manipulate surround chars
 Plug 'MajorZiploc/code_runner.vim' " run selected code chunks
+if (!has('nvim'))
+  Plug 'junegunn/seoul256.vim' " no contrast color scheme
+endif
 VIM_PLUGIN_INCLUDE_PLACEHOLDER
 
 " Plug 'airblade/vim-gitgutter' " git supporting plugin
@@ -31,5 +34,8 @@ let mapleader = " "
 
 so ~/.vim/plugin-settings/coc.vim
 so ~/.vim/plugin-settings/vim_code_runner.vim
+if (!has('nvim'))
+  so ~/.vim/plugin-settings/seoul256.vim
+endif
 VIM_PLUGIN_SETTINGS_PLACEHOLDER
 
