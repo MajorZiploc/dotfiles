@@ -60,7 +60,7 @@ nnoremap <leader>fm :Marks<CR>
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_tags_command = 'rg --files | ctags -R --links=no -L -'
 " Border color
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.92, 'height': 0.92, 'yoffset': 0.5, 'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline --bind ctrl-a:select-all'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden"
