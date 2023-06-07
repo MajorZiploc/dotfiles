@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
 Plug 'tpope/vim-surround' " manipulate surround chars
 Plug 'MajorZiploc/code_runner.vim' " run selected code chunks
+Plug 'stefandtw/quickfix-reflector.vim' " editable quickfix
 if (!has('nvim'))
   Plug 'junegunn/seoul256.vim' " no contrast color scheme
 endif
@@ -24,7 +25,6 @@ VIM_PLUGIN_INCLUDE_PLACEHOLDER
 " " Alt to fzf
 " Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder, doesnt work on mac
 " Plug 'jremmen/vim-ripgrep' " grepper, works in vim 8.1 and lower
-" Plug 'stefandtw/quickfix-reflector.vim' " editable quickfix list for ripgrep
 
 call plug#end()
 filetype plugin indent on
