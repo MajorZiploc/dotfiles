@@ -61,7 +61,13 @@ set wildignore+=*.zip,*.png,*.jpg,*.gif,*.pdf,*DS_Store*,*/.git/*,*/node_modules
   " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
   " For Vim<8, replace EndOfBuffer by NonText
   " autocmd vimenter * hi EndOfBuffer guibg=NONE ctermbg=NONE
-" endfi
+" endif
+"
+
+if has('nvim')
+  autocmd vimenter * hi NormalNC guibg=NONE ctermbg=NONE
+  autocmd vimenter * hi NormalSB guibg=NONE ctermbg=NONE
+endif
 
 colorscheme elflord
 " menu colors
