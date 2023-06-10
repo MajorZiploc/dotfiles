@@ -334,3 +334,33 @@ command! -nargs=+ LAFindInFiles call MyFinder('afind_in_files', 'local', <f-args
 command! -nargs=+ LAFindInFilesFuzz call MyFinder('afind_in_files_fuzz', 'local', <f-args>)
 command! -nargs=+ LFindInFiles call MyFinder('find_in_files, 'local', <f-args>)
 command! -nargs=+ LFindInFilesFuzz call MyFinder('find_in_files_fuzz, 'local', <f-args>)
+
+function! QuickFixFilenames()
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+endfunction
+
+command! -nargs=0 -bar Qargs execute 'args' QuickFixFilenames()
+
+function! LocationFixFilenames()
+  let buffer_numbers = {}
+  for locfix_item in getloclist(0)
+    let buffer_numbers[locfix_item['bufnr']] = bufname(locfix_item['bufnr'])
+  endfor
+  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+endfunction
+
+function! LoadArgsList(content)
+  let arg_list = split(a:content, '\n')
+  let args_content = ''
+  for arg in arg_list
+    let next_arg = substitute(arg, '\v(.*):\d+:', '\=submatch(1)', '')
+    let args_content = args_content . ' ' . next_arg
+  endfor
+  return args_content
+endfunction
+
+command! -nargs=1 -bar Largs execute 'args' LoadArgsList(<args>)
