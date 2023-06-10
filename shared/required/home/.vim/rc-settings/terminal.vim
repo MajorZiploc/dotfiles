@@ -131,6 +131,10 @@ let g:netrw_banner=0
 let g:netrw_list_hide='^\./$,^\.\./$'
 " let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\(^\|\s\s\)ntuser\.\S\+'
 autocmd FileType netrw set nolist
+" vertical preview split
+let g:netrw_preview=1
+" open split to the right
+let g:netrw_alto=00
 
 set more
 
