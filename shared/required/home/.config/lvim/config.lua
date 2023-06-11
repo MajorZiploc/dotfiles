@@ -191,7 +191,8 @@ lvim.keys.normal_mode['<bs>'] = "<CMD>noh<CR>"
 lvim.builtin.which_key.mappings['w'] = nil
 
 lvim.builtin.telescope.defaults = {
-  file_ignore_patterns = { ".git/", "node_modules" },
+  -- HACK: "notebooks" to ignore *.ipynb files in dap projects
+  file_ignore_patterns = { ".git/", "node_modules", "notebooks" },
   layout_config = {
     width = 0.9,
     height = 0.9,
