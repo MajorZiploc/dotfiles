@@ -50,6 +50,7 @@ set nocompatible " Don't try to be vi compatible
 
 " Search down into subfolders
 " Provides tab-completion for all file-related tasks
+" NOTE: the empty entry in the path means current working directory
 set path+=**
 " ignore patterns for various search commands
 set wildignore+=*.zip,*.png,*.jpg,*.gif,*.pdf,*DS_Store*,*/.git/*,*/node_modules/*,*/build/*,package-lock.json
