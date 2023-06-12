@@ -7,6 +7,7 @@ EOF
 
 lua << EOF
 local nvim_lsp = require('lspconfig')
+nvim_lsp.fsautocomplete.setup{}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
