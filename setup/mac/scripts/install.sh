@@ -50,9 +50,6 @@ rm composer.phar;
 # ruby deps
 sudo gem install solargraph;
 
-# dotnet core
-dotnet tool install -g fsautocomplete;
-
 # k8s: minikube for runnning clusters locally
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-arm64
 sudo install minikube-darwin-arm64 /usr/local/bin/minikube

@@ -6,6 +6,7 @@ function main {
   "$scriptpath/nodejs/install_global_tooling.sh" "update";
   "$scriptpath/python/packages.sh" "-U";
   "$scriptpath/rust/packages.sh" "update";
+  "$scriptpath/dotnet/packages.sh" "update";
 }
 
 main

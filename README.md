@@ -91,6 +91,10 @@ install rust
 Misc tooling; Adds color to fzf previews with bat!
 - ./shared/scripts/rust/packages.sh
 
+### dotnet
+install dotnet
+- ./shared/scripts/dotnet/packages.sh
+
 ### Install oh my zsh
 - ./shared/scripts/zsh/install_oh-my-zsh.sh
 
