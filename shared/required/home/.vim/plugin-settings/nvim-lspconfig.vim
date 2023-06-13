@@ -7,7 +7,18 @@ EOF
 
 lua << EOF
 local nvim_lsp = require('lspconfig')
-nvim_lsp.fsautocomplete.setup{}
+
+local no_virtual_text = {
+  ["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+      virtual_text = false
+    }
+  )
+}
+
+nvim_lsp.fsautocomplete.setup{
+  handlers = no_virtual_text
+}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
