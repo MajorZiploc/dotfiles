@@ -344,7 +344,7 @@ function! QuickFixFilenames()
   return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
 endfunction
 
-command! -nargs=0 -bar Qargs execute 'args' QuickFixFilenames()
+command! -nargs=0 -bar Cargs execute 'args' QuickFixFilenames()
 
 function! LocationFixFilenames()
   let buffer_numbers = {}
@@ -364,4 +364,4 @@ function! LoadArgsList(content)
   return args_content
 endfunction
 
-command! -nargs=1 -bar Largs execute 'args' LoadArgsList(<args>)
+command! -nargs=1 -bar Pargs execute 'args' LoadArgsList(<args>)
