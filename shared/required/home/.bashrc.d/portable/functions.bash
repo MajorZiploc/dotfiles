@@ -213,6 +213,14 @@ function docker_create_env_file {
   fi
 }
 
+function git_log_diff {
+  if [[ -z "$GIT_COLOR_WORDS" ]]; then
+    git log --stat -p --ignore-space-change;
+  else
+    git log --stat -p --ignore-space-change --color-words="$GIT_COLOR_WORDS";
+  fi
+}
+
 function git_deploy {
   local origin_branch_choices="$1";
   local destination_branch_choices="$2";
@@ -271,7 +279,11 @@ function git_log_follow {
   # search current branch git commits for commits that change a file
   local item_name="$1";
   [[ -z "$item_name" ]] && { echo "Must specify item_name\!" >&2; return 1; }
-  git log --date-order --ignore-space-change --follow -- "$item_name";
+  if [[ -z "$GIT_COLOR_WORDS" ]]; then
+    git log --date-order --ignore-space-change --follow -- "$item_name";
+  else
+    git log --color-words="$GIT_COLOR_WORDS" --date-order --ignore-space-change --follow -- "$item_name";
+  fi
 }
 
 function git_diff_range {
@@ -284,7 +296,11 @@ function git_diff_range {
   local commits; commits="$(git --no-pager log --oneline -n "$from" | col_n 1 | xargs)";
   local from_commit; from_commit="$(echo "$commits" | col_n "$from")";
   local to_commit; to_commit="$(echo "$commits" | col_n "$to")";
-  git diff --ignore-space-change "$from_commit" "$to_commit";
+  if [[ -z "$GIT_COLOR_WORDS" ]]; then
+    git diff --ignore-space-change "$from_commit" "$to_commit";
+  else
+    git diff --color-words="$GIT_COLOR_WORDS" --ignore-space-change "$from_commit" "$to_commit";
+  fi
 }
 
 function git_log_show_last_n_on_current_branch {
@@ -296,13 +312,21 @@ function git_log_show_last_n_on_current_branch {
 function git_diff_of_commit {
   local commit="$1";
   [[ -z "$commit" ]] && { echo "Must specify a commit\!" >&2; return 1; }
-  git diff --ignore-space-change "$commit"^! ;
+  if [[ -z "$GIT_COLOR_WORDS" ]]; then
+    git diff --ignore-space-change "$commit"^!;
+  else
+    git diff --color-words="$GIT_COLOR_WORDS" --ignore-space-change "$commit"^!;
+  fi
 }
 
 function git_diff_from_commit_to_current {
   local commit="$1";
   [[ -z "$commit" ]] && { echo "Must specify a commit\!" >&2; return 1; }
-  git diff --ignore-space-change "$commit"^;
+  if [[ -z "$GIT_COLOR_WORDS" ]]; then
+    git diff --ignore-space-change "$commit"^;
+  else
+    git diff --color-words="$GIT_COLOR_WORDS" --ignore-space-change "$commit"^;
+  fi
 }
 
 function git_rebase_i_head {

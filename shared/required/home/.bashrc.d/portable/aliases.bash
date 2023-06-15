@@ -98,7 +98,6 @@ alias ctags_make='rg --files | ctags -R --links=no -L -';
 alias git_merge_keep_theirs="git merge -X theirs";
 alias git_log_break_down="git log --stat --oneline --decorate";
 alias git_graph="git log --oneline --decorate --all --graph";
-alias git_log_diff="git log --stat -p --ignore-space-change";
 
 alias to_winpath='sed -E "s,^/(\w)/,\U\1:/,g" | sed s,/,\\\\,g';
 alias to_unixpath='sed -E "s,^(\w):,/\L\1,g" | sed s,\\\\,/,g';
