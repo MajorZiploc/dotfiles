@@ -76,9 +76,9 @@ nnoremap <silent> <leader>tt :%s/[ \t]\+$/<cr>
 nnoremap <silent> <leader>yw "+yiw
 
 " true delete
-vnoremap <leader>cd "_d
+vnoremap <leader>td "_d
 " true delete followed by a paste
-vnoremap <leader>cp "_dP
+vnoremap <leader>tp "_dP
 
 " enable backspace
 set backspace=indent,eol,start
