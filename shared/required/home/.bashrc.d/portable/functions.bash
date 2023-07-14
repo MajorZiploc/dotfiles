@@ -215,9 +215,9 @@ function docker_create_env_file {
 
 function git_log_diff {
   if [[ -z "$GIT_COLOR_WORDS" ]]; then
-    git log --stat -p --ignore-space-change;
+    git log --stat -p --ignore-space-change $@;
   else
-    git log --stat -p --ignore-space-change --color-words="$GIT_COLOR_WORDS";
+    git log --stat -p --ignore-space-change --color-words="$GIT_COLOR_WORDS" $@;
   fi
 }
 
