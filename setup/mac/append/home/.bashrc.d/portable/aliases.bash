@@ -4,6 +4,8 @@ alias explorer="open"
 alias clip="pbcopy"
 alias vim='nvim'
 alias sed='gsed'
-alias tac='tail -r'
+alias tac='perl -e "'"print reverse <>"'"';
+# NOTE: may be this if not using gnu polyfills
+# alias tac='tail -r'
 alias wine='wine64'
 
