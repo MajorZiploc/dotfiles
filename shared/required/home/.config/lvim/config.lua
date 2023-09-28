@@ -213,11 +213,13 @@ lvim.builtin.telescope.defaults = {
     'rg',
     '--color=never',
     '--no-heading',
+    '--hidden',
     '--with-filename',
     '--line-number',
     '--column',
     '--smart-case',
-  },
+    '--trim', -- add this value
+    },
 }
 
 -- Example of writing fn and using in a key binding
