@@ -97,6 +97,8 @@ brew 'telnet'
 brew 'swi-prolog'
 # help address issues in shell scripts
 brew 'shellcheck'
+# latex to pdf util (and more)
+brew 'texlive'
 
 # python deps
 brew 'openssl'
