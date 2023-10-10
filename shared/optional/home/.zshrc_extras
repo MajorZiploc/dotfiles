@@ -1,0 +1,37 @@
+# put in your ~/.zshrc_ext
+
+function set_prompt {
+  PROMPT='%(?.%F{cyan}.%F{red}[$?])%c';
+	local can_i_run_sudo=$(sudo -n uptime 2>&1 | grep "load" | wc -l);
+	if [ ${can_i_run_sudo} -gt 0 ]; then
+		PROMPT+='%{$fg_bold[red]%}!%{$reset_color%}';
+	fi
+  PROMPT+=' %F{magenta}${vcs_info_msg_0_}%F{cyan}> %F{reset}';
+}
+
+export COMPANY_NAME="<company_name_here>";
+
+export MY_WORKPLACE_PROJECT_DIRS=("$(find -E ~ -mindepth 1 -maxdepth 1 -iregex ".*projects-${COMPANY_NAME}.*" -type d -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' 2>/dev/null)");
+
+. ~/Tasks/workplace_bulk_ops.sh;
+
+function show_pgsql_env {
+  export | egrep "^PG";
+}
+
+
+# JAVA
+export MY_JAVA_VERSION="";
+
+# related to m1 mac arm64 issue
+# export DOCKER_DEFAULT_PLATFORM="linux/amd64";
+
+
+
+# IDK IF THESE ARE RIGHT! they pass `test -f "$file_path"`
+export GDAL_LIBRARY_PATH='/opt/homebrew/opt/gdal/lib/libgdal.dylib'
+export GEOS_LIBRARY_PATH='/opt/homebrew/opt/geos/lib/libgeos_c.dylib'
+
+
+export JAVA_HOME="/opt/homebrew/opt/openjdk@17";
+export JRE_HOME="/opt/homebrew/opt/openjdk@17";
