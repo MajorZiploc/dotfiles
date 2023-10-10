@@ -507,3 +507,21 @@ function zoxide_refresh_projects {
     }
   done;
 }
+
+function wezterm_background_off {
+  sed -Ei 's,^(\s*)(get_wallpaper.* -- background)$,\1-- \2,' ~/.wezterm.lua;
+  sed -Ei 's,^(\s*)-- (get_no_wallpaper.* -- no_background)$,\1\2,' ~/.wezterm.lua;
+}
+
+function wezterm_background_on {
+  sed -Ei 's,^(\s*)-- (get_wallpaper.* -- background)$,\1\2,' ~/.wezterm.lua;
+  sed -Ei 's,^(\s*)(get_no_wallpaper.* -- no_background)$,\1-- \2,' ~/.wezterm.lua;
+}
+
+function wezterm_transparency_off {
+  sed -Ei 's,^(\s*)(opacity.* -- wallpaper_opacity)$,\1-- \2,' ~/.wezterm.lua;
+}
+
+function wezterm_transparency_on {
+  sed -Ei 's,^(\s*)-- (opacity.* -- wallpaper_opacity)$,\1\2,' ~/.wezterm.lua;
+}

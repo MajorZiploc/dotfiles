@@ -164,5 +164,6 @@ cask 'keycastr'
 
 cask 'font-hack-nerd-font'
 
+cask 'wezterm'
 # Open-source version of the X.Org X Window System; good for gui in docker containers
 cask 'xquartz'
