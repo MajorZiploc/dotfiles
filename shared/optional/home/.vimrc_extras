@@ -1,0 +1,7 @@
+" put in your ~/.vimrc_ext
+
+let g:python_recommended_style = 1
+autocmd BufNewFile,BufRead *.ftl set filetype=html
+autocmd BufNewFile,BufRead *.jrxml set filetype=xml
+autocmd BufNewFile,BufRead *.env execute ":silent! :CocDisable"
+autocmd BufNewFile,BufRead *.env execute ":silent! :LspStop"
