@@ -96,10 +96,10 @@ local config = {
 	font_size = 14,
 
 	window_padding = {
-		left = 10,
-		right = 10,
-    top = 10,
-		bottom = 10,
+		left = 6,
+		right = 6,
+    top = 6,
+		bottom = 6,
 	},
 
 	keys = {
