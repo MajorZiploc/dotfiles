@@ -14,12 +14,12 @@ end
 local dimmer = { brightness = 0.05 }
 
 local function get_wallpaper()
-	local wallpapers = {}
-	local wallpapers_glob = os.getenv("HOME")
-		.. "~/Pictures/Wallpapers/**"
-	for _, v in ipairs(wezterm.glob(wallpapers_glob)) do
-		table.insert(wallpapers, v)
-	end
+	-- local wallpapers = {}
+	-- local wallpapers_glob = os.getenv("HOME")
+	-- 	.. "~/Pictures/Wallpapers/**"
+	-- for _, v in ipairs(wezterm.glob(wallpapers_glob)) do
+	-- 	table.insert(wallpapers, v)
+	-- end
 	return {
 		-- source = { File = { path = get_random_entry(wallpapers) } },
 		source = { File = os.getenv("HOME") .. "/Pictures/Wallpapers/church_flowers_girl_kneel_guy_stand_side_shot.jpg", },
