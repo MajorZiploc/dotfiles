@@ -97,6 +97,8 @@ brew 'telnet'
 brew 'swi-prolog'
 # help address issues in shell scripts
 brew 'shellcheck'
+# latex to pdf util (and more)
+brew 'texlive'
 
 # python deps
 brew 'openssl'
@@ -162,5 +164,6 @@ cask 'keycastr'
 
 cask 'font-hack-nerd-font'
 
+cask 'wezterm'
 # Open-source version of the X.Org X Window System; good for gui in docker containers
 cask 'xquartz'
