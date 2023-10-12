@@ -61,9 +61,9 @@ EOF
 function snip_sql_column_with_constraints_info {
   local snip; snip=`cat << EOF
 SELECT
-c.TABLE_NAME
+'column' as ENTRY_TYPE
+, c.TABLE_NAME
 , c.COLUMN_NAME as ENTRY_NAME
-, 'column' as ENTRY_TYPE
 , c.DATA_TYPE
 , c.IS_NULLABLE
 , c.CHARACTER_MAXIMUM_LENGTH
@@ -77,9 +77,10 @@ WHERE
   -- AND c.TABLE_NAME NOT ILIKE 'sql_%'
   -- AND c.TABLE_NAME NOT ILIKE 'routine_%'
 UNION
-SELECT tc.TABLE_NAME
+SELECT 
+'constraint' as ENTRY_TYPE
+, tc.TABLE_NAME
 , tc.CONSTRAINT_NAME as ENTRY_NAME
-, 'constraint' as ENTRY_TYPE
 , tc.CONSTRAINT_TYPE as DATA_TYPE
 , '' as IS_NULLABLE
 , 0 as CHARACTER_MAXIMUM_LENGTH
