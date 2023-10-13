@@ -101,37 +101,6 @@ EOF
   echo "$snip";
 }
 
-
-function snip_sql_column_with_constraints_info_wide {
-  local snip; snip=`cat << EOF
-  SELECT
-c.TABLE_NAME
-, c.COLUMN_NAME
-, c.DATA_TYPE
-, c.IS_NULLABLE
-, tc.CONSTRAINT_NAME
-, tc.CONSTRAINT_TYPE
-, c.CHARACTER_MAXIMUM_LENGTH
-, c.NUMERIC_PRECISION
-, c.DATETIME_PRECISION
-, c.COLUMN_DEFAULT
-FROM
-  INFORMATION_SCHEMA.COLUMNS AS c -- WITH(NOLOCK)
-  LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS kcu ON kcu.column_name = c.column_name
-  LEFT JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc ON tc.constraint_name = kcu.constraint_name AND tc.CONSTRAINT_TYPE ILIKE '%KEY%'
-WHERE
-  c.TABLE_NAME NOT ILIKE '_pg_%'
-  AND c.TABLE_NAME NOT ILIKE 'pg_%'
-  -- AND c.TABLE_NAME NOT ILIKE 'sql_%'
-  -- AND c.TABLE_NAME NOT ILIKE 'routine_%'
-ORDER BY
-  c.TABLE_NAME, c.column_name
-;
-EOF
-`;
-  echo "$snip";
-}
-
 function snip_sql_function_info {
   local snip; snip=`cat << EOF
 /* SQL get function information */
