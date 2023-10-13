@@ -1,66 +1,93 @@
 function snip_sql_column_view_fn_info {
-  
-  local warn="WARNING: ";
+  # choices: ["none", "low", "high"]
+  local constraint_details="$1";
+  local view_details="$2";
+  local fn_details="$3";
+  constraint_details="${constraint_details:-"high"}";
+  view_details="${view_details:-"low"}";
+  fn_details="${fn_details:-"none"}";
+  sql_comment="-- ";
 
-  local fn_def="-- , r.ROUTINE_DEFINITION AS DATA_TYPE -- use if you want to see the function definitions - chunky"
-  fn_def+="
-  , '' AS DATA_TYPE -- use if you want to minify this query - minify";
-  local function_sub_query="UNION
-  SELECT
-  lower(r.ROUTINE_TYPE) AS ENTRY_TYPE
-  , 'zzz' AS TABLE_NAME -- zzz to push function to the end of the sort
-  , r.SPECIFIC_NAME AS ENTRY_NAME
-  ${fn_def}
-  , '' as IS_NULLABLE
-  , 0 as CHARACTER_MAXIMUM_LENGTH
-  , 0 as NUMERIC_PRECISION
-  , 0 as DATETIME_PRECISION
-  , '' as COLUMN_DEFAULT
-  FROM INFORMATION_SCHEMA.ROUTINES AS r -- WITH(NOLOCK)
-  FULL OUTER JOIN INFORMATION_SCHEMA.PARAMETERS AS p -- WITH(NOLOCK)
-    ON p.SPECIFIC_NAME = r.SPECIFIC_NAME
-  WHERE
-    r.ROUTINE_TYPE IS NOT NULL";
+  local constraints_sub_query="";
+  if [[ "${constraint_details}" != "none" ]]; then
+    local constraints_sub_query="
+UNION
+    SELECT
+    'constraint' as ENTRY_TYPE
+    , tc.TABLE_NAME
+    , tc.CONSTRAINT_NAME as ENTRY_NAME
+    , tc.CONSTRAINT_TYPE as DATA_TYPE
+    , '' as IS_NULLABLE
+    , 0 as CHARACTER_MAXIMUM_LENGTH
+    , 0 as NUMERIC_PRECISION
+    , 0 as DATETIME_PRECISION
+    , kcu.COLUMN_NAME as COLUMN_DEFAULT
+    FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc -- WITH(NOLOCK)
+    LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS kcu ON tc.constraint_name = kcu.constraint_name
+    WHERE tc.CONSTRAINT_TYPE ILIKE '%KEY%'
+      AND tc.TABLE_NAME NOT ILIKE '_pg_%'
+      AND tc.TABLE_NAME NOT ILIKE 'pg_%'
+      -- AND tc.TABLE_NAME NOT ILIKE 'sql_%'
+      -- AND tc.TABLE_NAME NOT ILIKE 'routine_%'";
+  fi
 
-  local view_def="-- , v.VIEW_DEFINITION AS DATA_TYPE -- use if you want to see the view definitions - chunky"
-  view_def+="
-  , '' AS DATA_TYPE -- use if you want to minify this query - minify";
-  local view_sub_query="UNION
-  SELECT
-  'view' AS ENTRY_TYPE
-  , v.TABLE_NAME
-  , '' AS ENTRY_NAME
-  ${view_def}
-  , '' as IS_NULLABLE
-  , 0 as CHARACTER_MAXIMUM_LENGTH
-  , 0 as NUMERIC_PRECISION
-  , 0 as DATETIME_PRECISION
-  , '' as COLUMN_DEFAULT
-  FROM INFORMATION_SCHEMA.VIEWS AS v -- WITH(NOLOCK)
-  WHERE
-    v.TABLE_NAME NOT ILIKE '_pg_%'
-    AND v.TABLE_NAME NOT ILIKE 'pg_%'
-    -- AND v.TABLE_NAME NOT ILIKE 'sql_%'
-    -- AND v.TABLE_NAME NOT ILIKE 'routine_%'";
+  local view_sub_query="";
+  if [[ "${view_details}" != "none" ]]; then
+    local low_detail_prefix="";
+    [[ "${view_details}" != "low" ]] && { low_detail_prefix="${sql_comment}"; }
+    local high_detail_prefix="";
+    [[ "${view_details}" != "high" ]] && { high_detail_prefix="${sql_comment}"; }
+    local view_def="${high_detail_prefix}, v.VIEW_DEFINITION AS DATA_TYPE -- use if you want to see the view definitions - chunky";
+    view_def+="
+    ${low_detail_prefix}, '' AS DATA_TYPE -- use if you want to minify this query - minify";
+    local view_sub_query="
+UNION
+    SELECT
+    'view' AS ENTRY_TYPE
+    , v.TABLE_NAME
+    , '' AS ENTRY_NAME
+    ${view_def}
+    , '' as IS_NULLABLE
+    , 0 as CHARACTER_MAXIMUM_LENGTH
+    , 0 as NUMERIC_PRECISION
+    , 0 as DATETIME_PRECISION
+    , '' as COLUMN_DEFAULT
+    FROM INFORMATION_SCHEMA.VIEWS AS v -- WITH(NOLOCK)
+    WHERE
+      v.TABLE_NAME NOT ILIKE '_pg_%'
+      AND v.TABLE_NAME NOT ILIKE 'pg_%'
+      -- AND v.TABLE_NAME NOT ILIKE 'sql_%'
+      -- AND v.TABLE_NAME NOT ILIKE 'routine_%'";
+  fi
 
-  local constraints_sub_query="UNION
-  SELECT
-  'constraint' as ENTRY_TYPE
-  , tc.TABLE_NAME
-  , tc.CONSTRAINT_NAME as ENTRY_NAME
-  , tc.CONSTRAINT_TYPE as DATA_TYPE
-  , '' as IS_NULLABLE
-  , 0 as CHARACTER_MAXIMUM_LENGTH
-  , 0 as NUMERIC_PRECISION
-  , 0 as DATETIME_PRECISION
-  , kcu.COLUMN_NAME as COLUMN_DEFAULT
-  FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc -- WITH(NOLOCK)
-  LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS kcu ON tc.constraint_name = kcu.constraint_name
-  WHERE tc.CONSTRAINT_TYPE ILIKE '%KEY%'
-    AND tc.TABLE_NAME NOT ILIKE '_pg_%'
-    AND tc.TABLE_NAME NOT ILIKE 'pg_%'
-    -- AND tc.TABLE_NAME NOT ILIKE 'sql_%'
-    -- AND tc.TABLE_NAME NOT ILIKE 'routine_%'";
+  local function_sub_query="";
+  if [[ "${fn_details}" != "none" ]]; then
+    local low_detail_prefix="";
+    [[ "${fn_details}" != "low" ]] && { low_detail_prefix="${sql_comment}"; }
+    local high_detail_prefix="";
+    [[ "${fn_details}" != "high" ]] && { high_detail_prefix="${sql_comment}"; }
+    fn_def="${high_detail_prefix}, r.ROUTINE_DEFINITION AS DATA_TYPE -- use if you want to see the function definitions - chunky";
+    fn_def+="
+    ${low_detail_prefix}, '' AS DATA_TYPE -- use if you want to minify this query - minify";
+    function_sub_query="
+UNION
+    SELECT
+    lower(r.ROUTINE_TYPE) AS ENTRY_TYPE
+    , 'zzz' AS TABLE_NAME -- zzz to push function to the end of the sort
+    , r.SPECIFIC_NAME AS ENTRY_NAME
+    ${fn_def}
+    , '' as IS_NULLABLE
+    , 0 as CHARACTER_MAXIMUM_LENGTH
+    , 0 as NUMERIC_PRECISION
+    , 0 as DATETIME_PRECISION
+    , '' as COLUMN_DEFAULT
+    FROM INFORMATION_SCHEMA.ROUTINES AS r -- WITH(NOLOCK)
+    FULL OUTER JOIN INFORMATION_SCHEMA.PARAMETERS AS p -- WITH(NOLOCK)
+      ON p.SPECIFIC_NAME = r.SPECIFIC_NAME
+    WHERE
+      r.ROUTINE_TYPE IS NOT NULL";
+  fi
+
 
   local _command="
 SELECT
@@ -78,10 +105,7 @@ WHERE
   c.TABLE_NAME NOT ILIKE '_pg_%'
   AND c.TABLE_NAME NOT ILIKE 'pg_%'
   -- AND c.TABLE_NAME NOT ILIKE 'sql_%'
-  -- AND c.TABLE_NAME NOT ILIKE 'routine_%'
-${constraints_sub_query}
-${function_sub_query}
-${view_sub_query}
+  -- AND c.TABLE_NAME NOT ILIKE 'routine_%'${constraints_sub_query}${function_sub_query}${view_sub_query}
 ORDER BY TABLE_NAME, ENTRY_TYPE, ENTRY_NAME
 ;
 ";
