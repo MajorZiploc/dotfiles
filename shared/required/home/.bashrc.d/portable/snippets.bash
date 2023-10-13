@@ -1,23 +1,68 @@
-function snip_sql_search_general {
-  local snip; snip=`cat << EOF
-/* SQL general search, NOT FOR COLUMNS */
-SELECT
-name AS [Name],
-SCHEMA_NAME(schema_id) AS schema_name,
-type_desc,
-create_date,
-modify_date
-FROM sys.objects -- WITH(NOLOCK)
-WHERE name LIKE '%Pattern%'
-AND type ='u'
-;
-EOF
-`;
-  echo "$snip";
-}
+function snip_sql_column_view_fn_info {
+  
+  local warn="WARNING: ";
 
-function snip_sql_column_info {
-  local snip; snip=`cat << EOF
+  local fn_def="-- , r.ROUTINE_DEFINITION AS DATA_TYPE -- use if you want to see the function definitions - chunky"
+  fn_def+="
+  , '' AS DATA_TYPE -- use if you want to minify this query - minify";
+  local function_sub_query="UNION
+  SELECT
+  lower(r.ROUTINE_TYPE) AS ENTRY_TYPE
+  , 'zzz' AS TABLE_NAME -- zzz to push function to the end of the sort
+  , r.SPECIFIC_NAME AS ENTRY_NAME
+  ${fn_def}
+  , '' as IS_NULLABLE
+  , 0 as CHARACTER_MAXIMUM_LENGTH
+  , 0 as NUMERIC_PRECISION
+  , 0 as DATETIME_PRECISION
+  , '' as COLUMN_DEFAULT
+  FROM INFORMATION_SCHEMA.ROUTINES AS r -- WITH(NOLOCK)
+  FULL OUTER JOIN INFORMATION_SCHEMA.PARAMETERS AS p -- WITH(NOLOCK)
+    ON p.SPECIFIC_NAME = r.SPECIFIC_NAME
+  WHERE
+    r.ROUTINE_TYPE IS NOT NULL";
+
+  local view_def="-- , v.VIEW_DEFINITION AS DATA_TYPE -- use if you want to see the view definitions - chunky"
+  view_def+="
+  , '' AS DATA_TYPE -- use if you want to minify this query - minify";
+  local view_sub_query="UNION
+  SELECT
+  'view' AS ENTRY_TYPE
+  , v.TABLE_NAME
+  , '' AS ENTRY_NAME
+  ${view_def}
+  , '' as IS_NULLABLE
+  , 0 as CHARACTER_MAXIMUM_LENGTH
+  , 0 as NUMERIC_PRECISION
+  , 0 as DATETIME_PRECISION
+  , '' as COLUMN_DEFAULT
+  FROM INFORMATION_SCHEMA.VIEWS AS v -- WITH(NOLOCK)
+  WHERE
+    v.TABLE_NAME NOT ILIKE '_pg_%'
+    AND v.TABLE_NAME NOT ILIKE 'pg_%'
+    -- AND v.TABLE_NAME NOT ILIKE 'sql_%'
+    -- AND v.TABLE_NAME NOT ILIKE 'routine_%'";
+
+  local constraints_sub_query="UNION
+  SELECT
+  'constraint' as ENTRY_TYPE
+  , tc.TABLE_NAME
+  , tc.CONSTRAINT_NAME as ENTRY_NAME
+  , tc.CONSTRAINT_TYPE as DATA_TYPE
+  , '' as IS_NULLABLE
+  , 0 as CHARACTER_MAXIMUM_LENGTH
+  , 0 as NUMERIC_PRECISION
+  , 0 as DATETIME_PRECISION
+  , kcu.COLUMN_NAME as COLUMN_DEFAULT
+  FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc -- WITH(NOLOCK)
+  LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS kcu ON tc.constraint_name = kcu.constraint_name
+  WHERE tc.CONSTRAINT_TYPE ILIKE '%KEY%'
+    AND tc.TABLE_NAME NOT ILIKE '_pg_%'
+    AND tc.TABLE_NAME NOT ILIKE 'pg_%'
+    -- AND tc.TABLE_NAME NOT ILIKE 'sql_%'
+    -- AND tc.TABLE_NAME NOT ILIKE 'routine_%'";
+
+  local _command="
 SELECT
 'column' as ENTRY_TYPE
 , c.TABLE_NAME
@@ -34,74 +79,27 @@ WHERE
   AND c.TABLE_NAME NOT ILIKE 'pg_%'
   -- AND c.TABLE_NAME NOT ILIKE 'sql_%'
   -- AND c.TABLE_NAME NOT ILIKE 'routine_%'
-UNION
-SELECT
-'constraint' as ENTRY_TYPE
-, tc.TABLE_NAME
-, tc.CONSTRAINT_NAME as ENTRY_NAME
-, tc.CONSTRAINT_TYPE as DATA_TYPE
-, '' as IS_NULLABLE
-, 0 as CHARACTER_MAXIMUM_LENGTH
-, 0 as NUMERIC_PRECISION
-, 0 as DATETIME_PRECISION
-, kcu.COLUMN_NAME as COLUMN_DEFAULT
-FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc -- WITH(NOLOCK)
-LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS kcu ON tc.constraint_name = kcu.constraint_name
-WHERE tc.CONSTRAINT_TYPE ILIKE '%KEY%'
-  AND tc.TABLE_NAME NOT ILIKE '_pg_%'
-  AND tc.TABLE_NAME NOT ILIKE 'pg_%'
-  -- AND tc.TABLE_NAME NOT ILIKE 'sql_%'
-  -- AND tc.TABLE_NAME NOT ILIKE 'routine_%'
+${constraints_sub_query}
+${function_sub_query}
+${view_sub_query}
 ORDER BY TABLE_NAME, ENTRY_TYPE, ENTRY_NAME
 ;
-EOF
-`;
-  echo "$snip";
+";
+  echo "$_command";
 }
 
-function snip_sql_function_info {
+function snip_sql_search_general {
   local snip; snip=`cat << EOF
-/* SQL get function information */
-/* Includes functions, sprocs, and those with/without params */
+/* SQL general search, NOT FOR COLUMNS */
 SELECT
-r.SPECIFIC_NAME
-, r.ROUTINE_TYPE
-, p.PARAMETER_NAME
-, p.DATA_TYPE
-, p.CHARACTER_MAXIMUM_LENGTH
-, r.ROUTINE_CATALOG
-, r.SQL_DATA_ACCESS
-, r.CREATED
-, r.LAST_ALTERED
-, r.ROUTINE_DEFINITION
-FROM INFORMATION_SCHEMA.ROUTINES AS r -- WITH(NOLOCK)
-FULL OUTER JOIN INFORMATION_SCHEMA.PARAMETERS AS p -- WITH(NOLOCK)
-  ON p.SPECIFIC_NAME = r.SPECIFIC_NAME
--- WHERE r.SPECIFIC_NAME LIKE '%function_name%'
-ORDER BY r.SPECIFIC_NAME, p.PARAMETER_NAME, p.DATA_TYPE
-;
-EOF
-`;
-  echo "$snip";
-}
-
-function snip_sql_table_and_view_info {
-  local snip; snip=`cat << EOF
-/* SQL get table and view information */
-SELECT
-t.TABLE_CATALOG
-, t.TABLE_NAME
-, NULL AS VIEW_DEFINITION
-FROM INFORMATION_SCHEMA.TABLES AS t -- WITH(NOLOCK)
--- WHERE t.TABLE_NAME LIKE '%table_name%'
-UNION
-SELECT
-v.TABLE_CATALOG
-, v.TABLE_NAME
-, v.VIEW_DEFINITION
-FROM INFORMATION_SCHEMA.VIEWS AS v -- WITH(NOLOCK)
--- WHERE v.TABLE_NAME LIKE '%table_name%'
-ORDER BY TABLE_NAME
+name AS [Name],
+SCHEMA_NAME(schema_id) AS schema_name,
+type_desc,
+create_date,
+modify_date
+FROM sys.objects -- WITH(NOLOCK)
+WHERE name LIKE '%Pattern%'
+AND type ='u'
 ;
 EOF
 `;
