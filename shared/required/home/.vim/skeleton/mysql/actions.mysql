@@ -1,0 +1,56 @@
+-- TODO: this is a WIP generated from openai chatgpt 3.5 based on my psql actions.pgsql
+-- fix any parts that need it
+
+-- No need to create an extension in MySQL
+
+-- INSERT
+-- Insert into table1
+-- (
+--   name
+--   , value
+--   , table2_id
+--   , id
+-- )
+SELECT
+  CASE
+    WHEN (UPPER(t2.name) = 'ADMIN') OR REGEXP_REPLACE('We keep this stuff -delete everything after the first occurrence of "-"-also this stuff is deleted', '[|-][^|-]*$', '') = 'We keep this stuff -' THEN 'ADMIN'
+    WHEN INITCAP(t2.name) = 'Title Case' OR (LOWER(t2.name) = 'bob') THEN 'REGULAR'
+    ELSE 'DEFAULT_VALUE'
+  END AS name,
+  COALESCE(NULL, 'new_value', 'COALESCE selects the first non null value') AS value,
+  t2.id AS table2_id,
+  UUID() AS id
+FROM table2 AS t2
+WHERE
+  t2.id NOT IN (
+    SELECT DISTINCT
+      t1.id
+    FROM table1 AS t1
+    WHERE
+      t1.type = 'account'
+      AND JSON_UNQUOTE(JSON_EXTRACT(t1.json_data, '$.old_value')) != 'junk'
+      AND t1.created_date > '2023-12-01' - INTERVAL 7 DAY
+      AND t1.name IN ('Bob', 'Ross')
+      AND CAST(t1.int_string AS SIGNED INTEGER) > 100
+  );
+
+-- OR UPDATE
+-- UPDATE table1
+-- SET name = ar.name,
+--     value = ar.value,
+--     table2_id = ar.table2_id
+-- FROM (
+--   SELECT
+--     name,
+--     value,
+--     table2_id,
+--     id
+--   FROM actionable_rows
+-- ) AS ar
+-- WHERE table1.id = ar.id;
+
+-- OR DELETE
+-- DELETE FROM table1
+-- WHERE
+--   id IN (SELECT id FROM actionable_rows);
+
