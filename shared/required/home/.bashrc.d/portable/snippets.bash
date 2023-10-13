@@ -1,23 +1,3 @@
-function snip_sql_search_column {
-  local snip; snip=`cat << EOF
-/* SQL column search */
-SELECT
-c.name  AS 'ColumnName'
-,t.name AS 'TableName'
-,TYPE_NAME(c.user_type_id) AS 'ColumnType'
-,c.max_length AS 'ColumnTypeLength'
-,c.is_nullable AS 'ColumnIsNullable'
-FROM sys.columns c -- WITH(NOLOCK)
-JOIN sys.tables  t -- WITH(NOLOCK)
-  ON c.object_id = t.object_id
-WHERE c.name LIKE '%ColumnPattern%'
-ORDER BY TableName, ColumnName
-;
-EOF
-`;
-  echo "$snip";
-}
-
 function snip_sql_search_general {
   local snip; snip=`cat << EOF
 /* SQL general search, NOT FOR COLUMNS */
@@ -37,28 +17,6 @@ EOF
 }
 
 function snip_sql_column_info {
-  local snip; snip=`cat << EOF
-/* SQL get column information */
-SELECT
-c.TABLE_CATALOG
-, c.TABLE_NAME
-, c.COLUMN_NAME
-, c.IS_NULLABLE
-, c.DATA_TYPE
-, c.CHARACTER_MAXIMUM_LENGTH
-, c.NUMERIC_PRECISION
-, c.DATETIME_PRECISION
-, c.COLUMN_DEFAULT
-FROM INFORMATION_SCHEMA.COLUMNS AS c -- WITH(NOLOCK)
--- WHERE c.TABLE_NAME LIKE '%table_name%'
-ORDER BY c.TABLE_NAME
-;
-EOF
-`;
-  echo "$snip";
-}
-
-function snip_sql_column_with_constraints_info {
   local snip; snip=`cat << EOF
 SELECT
 'column' as ENTRY_TYPE
@@ -121,22 +79,6 @@ FULL OUTER JOIN INFORMATION_SCHEMA.PARAMETERS AS p -- WITH(NOLOCK)
   ON p.SPECIFIC_NAME = r.SPECIFIC_NAME
 -- WHERE r.SPECIFIC_NAME LIKE '%function_name%'
 ORDER BY r.SPECIFIC_NAME, p.PARAMETER_NAME, p.DATA_TYPE
-;
-EOF
-`;
-  echo "$snip";
-}
-
-function snip_sql_table_constraints {
-  local snip; snip=`cat << EOF
-/* SQL get table constraints information */
-SELECT tc.TABLE_NAME
-, tc.CONSTRAINT_NAME
-, tc.CONSTRAINT_TYPE
-, tc.TABLE_CATALOG
-FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc -- WITH(NOLOCK)
--- WHERE tc.TABLE_NAME LIKE '%table_name%'
-ORDER BY tc.TABLE_NAME, tc.CONSTRAINT_NAME
 ;
 EOF
 `;
