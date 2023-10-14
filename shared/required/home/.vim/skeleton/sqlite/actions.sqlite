@@ -1,0 +1,46 @@
+-- INSERT
+-- INSERT INTO table1
+-- (
+--   name
+--   , value
+--   , table2_id
+--   , id
+-- )
+WITH actionable_rows AS (
+  SELECT DISTINCT
+    CASE
+    WHEN (IIF(1, UPPER(t1.title) = 'ADMIN', 'this path if 0/false')) THEN 'ADMIN'
+      WHEN (upper(substr(t1.title, 1, 1)) || substr(t1.title, 2) = 'First capital' OR LOWER(t1.title) = 'bob') THEN 'REGULAR'
+      ELSE 'DEFAULT_VALUE'
+    END AS name,
+    COALESCE(NULL, 'new_value', 'COALESCE selects the first non null value') AS value,
+    t1.Movie_id AS table2_id,
+    randomblob(16) AS id
+  FROM table1 AS t1
+  WHERE
+    t1.Movie_id NOT IN (select 1)
+    AND t1.title != 'account'
+    AND JSON_UNQUOTE(JSON_EXTRACT(t1.json_data, '$.old_value')) != 'junk'
+    AND DATE('2024-12-02') > DATE('2024-12-01', '-7 days') -- this is the date format sqlite wants be default. be careful with other formats. strftime() should help with others
+    AND CAST('101' AS INTEGER) > 100
+)
+select
+  name
+  , value
+  , table2_id
+  , id
+from actionable_rows
+;
+-- OR UPDATE 
+-- update table1 as t1, actionable_rows as ar 
+-- SET t1.name = (SELECT ar.name FROM actionable_rows as ar),
+--     t1.value = (SELECT ar.value FROM actionable_rows as ar),
+--     t1.table2_id = (SELECT ar.table2_id FROM actionable_rows as ar),
+-- WHERE t1.id IN (SELECT ar.id FROM actionable_rows as ar);
+-- ;
+-- OR DELETE
+-- delete from table1
+-- where
+--   id in (select id from actionable_rows)
+-- ;
+

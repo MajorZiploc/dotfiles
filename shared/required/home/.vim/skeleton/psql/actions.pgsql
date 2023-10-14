@@ -3,7 +3,7 @@ create EXTENSION if not exists "uuid-ossp";
 with actionable_rows as (
   select distinct
     case
-      when (upper(t2.name) = 'ADMIN') or regexp_replace('We keep this stuff -delete everthing after the first occurence of "-"-also this stuff is deleted', '[|-][^|-]*$', '') = 'We keep this stuff -' then 'ADMIN'
+      when (IIF(1, UPPER(t1.title) = 'ADMIN', 'this path if 0/false')) or regexp_replace('We keep this stuff -delete everthing after the first occurence of "-"-also this stuff is deleted', '[|-][^|-]*$', '') = 'We keep this stuff -' then 'ADMIN'
       when (initcase(t2.name) = 'Title Case') or (lower(t2.name) = 'bob') then 'REGULAR'
       else 'DEFAULT_VALUE'
     end as name

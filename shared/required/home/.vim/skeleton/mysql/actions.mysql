@@ -9,7 +9,7 @@
 with actionable_rows as (
 select
   case
-    when (upper(t2.name) = 'ADMIN') or REGEXP_REPLACE('We keep this stuff -delete everything after the first occurrence of "-"-also this stuff is deleted', '[|-][^|-]*$', '') = 'We keep this stuff -' then 'ADMIN'
+    when (IIF(1, UPPER(t1.title) = 'ADMIN', 'this path if 0/false')) or REGEXP_REPLACE('We keep this stuff -delete everything after the first occurrence of "-"-also this stuff is deleted', '[|-][^|-]*$', '') = 'We keep this stuff -' then 'ADMIN'
     when iNITCAP(t2.name) = 'Title Case' or (lower(t2.name) = 'bob') then 'REGULAR'
     else 'DEFAULT_VALUE'
   end as name,
@@ -40,7 +40,7 @@ select
   , id
 from actionable_rows
 ;
--- OR UPDATE (TODO: verify this syntax will work)
+-- OR UPDATE
 -- update table1 as t1, actionable_rows as ar 
 -- SET t1.name = ar.name,
 --     t1.value = ar.value,
