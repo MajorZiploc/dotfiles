@@ -4,6 +4,13 @@ function snip_sql_column_view_fn_info {
   local constraint_details="$2";
   local view_details="$3";
   local fn_details="$4";
+  if [[ "${sql_flavor}" == "sqlite" ]]; then
+    echo "SELECT name, '\"' || sql || '\"' as sql
+FROM sqlite_master
+WHERE type = 'table'
+AND name NOT LIKE 'sqlite_%';";
+    return 0;
+  fi
   constraint_details="${constraint_details:-"high"}";
   view_details="${view_details:-"low"}";
   fn_details="${fn_details:-"none"}";
