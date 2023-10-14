@@ -2,3 +2,6 @@
 **/mock_content/**/obj
 **/mock_content/**/bin
 .ionide
+
+Session.vim
+tags
