@@ -77,8 +77,8 @@ UNION
 
   local function_sub_query="";
   if [[ "${fn_details}" != "none" ]]; then
-    if [[ "${sql_flavor}" == "mysql" ]]; then
-      echo "-- WARNING: mysql does not support function sub query! Will not be included in resulting query";
+    if [[ "${sql_flavor}" == "mysql" || "${sql_flavor}" == "mariadb" ]]; then
+      echo "-- WARNING: ${sql_flavor} does not support function sub query! Will not be included in resulting query";
     else
       local low_detail_prefix="";
       [[ "${fn_details}" != "low" ]] && { low_detail_prefix="${sql_comment}"; }
