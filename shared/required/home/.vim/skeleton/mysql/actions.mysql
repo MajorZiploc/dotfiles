@@ -1,56 +1,54 @@
--- TODO: this is a WIP generated from openai chatgpt 3.5 based on my psql actions.pgsql
--- fix any parts that need it
-
--- No need to create an extension in MySQL
-
+with actionable_rows as (
+select
+  case
+    when (upper(t2.name) = 'ADMIN') or REGEXP_REPLACE('We keep this stuff -delete everything after the first occurrence of "-"-also this stuff is deleted', '[|-][^|-]*$', '') = 'We keep this stuff -' then 'ADMIN'
+    when iNITCAP(t2.name) = 'Title Case' or (lower(t2.name) = 'bob') then 'REGULAR'
+    else 'DEFAULT_VALUE'
+  end as name,
+  coalesce(NULL, 'new_value', 'COALESCE selects the first non null value') as value,
+  t2.id as table2_id,
+  UUID() as id
+from table2 as t2
+where
+  t2.id not in (
+    select distinct
+      t1.id
+    from table1 as t1
+    where
+      t1.type = 'account'
+      -- The ->> operator can be used wherever JSON_UNQUOTE(JSON_EXTRACT())
+      and t1.json_data ->> '$.old_value' != 'junk'
+      -- same as above
+      -- AND JSON_UNQUOTE(JSON_EXTRACT(t1.json_data, '$.old_value')) != 'junk'
+      and t1.created_date > '2023-12-01' - INTERVAL 7 DAY
+      and t1.name in ('Bob', 'Ross')
+      and CAST(t1.int_string as SIGNED INTEGER) > 100
+  );
+)
 -- INSERT
--- Insert into table1
+-- INSERT INTO table1
 -- (
 --   name
 --   , value
 --   , table2_id
 --   , id
 -- )
-SELECT
-  CASE
-    WHEN (UPPER(t2.name) = 'ADMIN') OR REGEXP_REPLACE('We keep this stuff -delete everything after the first occurrence of "-"-also this stuff is deleted', '[|-][^|-]*$', '') = 'We keep this stuff -' THEN 'ADMIN'
-    WHEN INITCAP(t2.name) = 'Title Case' OR (LOWER(t2.name) = 'bob') THEN 'REGULAR'
-    ELSE 'DEFAULT_VALUE'
-  END AS name,
-  COALESCE(NULL, 'new_value', 'COALESCE selects the first non null value') AS value,
-  t2.id AS table2_id,
-  UUID() AS id
-FROM table2 AS t2
-WHERE
-  t2.id NOT IN (
-    SELECT DISTINCT
-      t1.id
-    FROM table1 AS t1
-    WHERE
-      t1.type = 'account'
-      AND JSON_UNQUOTE(JSON_EXTRACT(t1.json_data, '$.old_value')) != 'junk'
-      AND t1.created_date > '2023-12-01' - INTERVAL 7 DAY
-      AND t1.name IN ('Bob', 'Ross')
-      AND CAST(t1.int_string AS SIGNED INTEGER) > 100
-  );
-
--- OR UPDATE
--- UPDATE table1
--- SET name = ar.name,
---     value = ar.value,
---     table2_id = ar.table2_id
--- FROM (
---   SELECT
---     name,
---     value,
---     table2_id,
---     id
---   FROM actionable_rows
--- ) AS ar
--- WHERE table1.id = ar.id;
-
+select
+  name
+  , value
+  , table2_id
+  , id
+from actionable_rows
+;
+-- OR UPDATE (TODO: verify this syntax will work)
+-- update table1 as t1, actionable_rows as ar 
+-- SET t1.name = ar.name,
+--     t1.value = ar.value,
+--     t1.table2_id = ar.table2_id,
+-- where t1.id = ar.id
+-- ;
 -- OR DELETE
--- DELETE FROM table1
--- WHERE
---   id IN (SELECT id FROM actionable_rows);
-
+-- delete from table1
+-- where
+--   id in (select id from actionable_rows)
+-- ;
