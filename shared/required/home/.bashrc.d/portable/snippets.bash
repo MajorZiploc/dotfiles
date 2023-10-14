@@ -24,11 +24,11 @@ UNION
     , kcu.COLUMN_NAME as COLUMN_DEFAULT
     FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc -- WITH(NOLOCK)
     LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS kcu ON tc.constraint_name = kcu.constraint_name
-    WHERE tc.CONSTRAINT_TYPE ILIKE '%KEY%'
-      AND tc.TABLE_NAME NOT ILIKE '_pg_%'
-      AND tc.TABLE_NAME NOT ILIKE 'pg_%'
-      -- AND tc.TABLE_NAME NOT ILIKE 'sql_%'
-      -- AND tc.TABLE_NAME NOT ILIKE 'routine_%'";
+    WHERE tc.CONSTRAINT_TYPE LIKE '%KEY%'
+      AND tc.TABLE_NAME NOT LIKE '_pg_%'
+      AND tc.TABLE_NAME NOT LIKE 'pg_%'
+      -- AND tc.TABLE_NAME NOT LIKE 'sql_%'
+      -- AND tc.TABLE_NAME NOT LIKE 'routine_%'";
   fi
 
   local view_sub_query="";
@@ -54,10 +54,10 @@ UNION
     , '' as COLUMN_DEFAULT
     FROM INFORMATION_SCHEMA.VIEWS AS v -- WITH(NOLOCK)
     WHERE
-      v.TABLE_NAME NOT ILIKE '_pg_%'
-      AND v.TABLE_NAME NOT ILIKE 'pg_%'
-      -- AND v.TABLE_NAME NOT ILIKE 'sql_%'
-      -- AND v.TABLE_NAME NOT ILIKE 'routine_%'";
+      v.TABLE_NAME NOT LIKE '_pg_%'
+      AND v.TABLE_NAME NOT LIKE 'pg_%'
+      -- AND v.TABLE_NAME NOT LIKE 'sql_%'
+      -- AND v.TABLE_NAME NOT LIKE 'routine_%'";
   fi
 
   local function_sub_query="";
@@ -102,10 +102,10 @@ SELECT
 , c.COLUMN_DEFAULT
 FROM INFORMATION_SCHEMA.COLUMNS AS c -- WITH(NOLOCK)
 WHERE
-  c.TABLE_NAME NOT ILIKE '_pg_%'
-  AND c.TABLE_NAME NOT ILIKE 'pg_%'
-  -- AND c.TABLE_NAME NOT ILIKE 'sql_%'
-  -- AND c.TABLE_NAME NOT ILIKE 'routine_%'${constraints_sub_query}${function_sub_query}${view_sub_query}
+  c.TABLE_NAME NOT LIKE '_pg_%'
+  AND c.TABLE_NAME NOT LIKE 'pg_%'
+  -- AND c.TABLE_NAME NOT LIKE 'sql_%'
+  -- AND c.TABLE_NAME NOT LIKE 'routine_%'${constraints_sub_query}${function_sub_query}${view_sub_query}
 ORDER BY TABLE_NAME, ENTRY_TYPE, ENTRY_NAME
 ;
 ";
