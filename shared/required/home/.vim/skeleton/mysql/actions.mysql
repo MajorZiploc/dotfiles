@@ -1,3 +1,11 @@
+-- INSERT
+-- INSERT INTO table1
+-- (
+--   name
+--   , value
+--   , table2_id
+--   , id
+-- )
 with actionable_rows as (
 select
   case
@@ -25,14 +33,6 @@ where
       and CAST(t1.int_string as SIGNED INTEGER) > 100
   );
 )
--- INSERT
--- INSERT INTO table1
--- (
---   name
---   , value
---   , table2_id
---   , id
--- )
 select
   name
   , value
