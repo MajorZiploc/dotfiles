@@ -525,3 +525,51 @@ function wezterm_transparency_off {
 function wezterm_transparency_on {
   sed -Ei 's,^(\s*)-- (opacity.* -- wallpaper_opacity)$,\1\2,' ~/.wezterm.lua;
 }
+
+function _just_run {
+  if [[ -e ./just.bash ]]; then
+    . ./just.bash;
+    just_run;
+  elif [[ -e ./my.scripts.d/just.bash ]]; then
+    . ./my.scripts.d/just.bash;
+    just_run;
+  elif [[ -e ./package.json ]]; then
+    npm run start;
+  elif [[ -e ./Cargo.toml ]]; then
+    RUSTFLAGS="-Awarnings" cargo run
+  elif [[ -e ./composer.json ]]; then
+    composer run start;
+  fi
+}
+
+function _just_install {
+  if [[ -e ./just.bash ]]; then
+    . ./just.bash;
+    just_install;
+    just_build;
+  elif [[ -e ./my.scripts.d/just.bash ]]; then
+    . ./my.scripts.d/just.bash;
+    just_install;
+    just_build;
+  else
+    if [[ -e ./package.json ]]; then
+      npm i;
+    fi
+    if [[ -e ./requirements.txt || -e ./setup.py ]]; then
+      [[ ! -e "./.venv" ]] && { python3 -m venv "./.venv"; }
+      . "./.venv/bin/activate";
+      pip3 install wheel;
+      if [[ -e ./setup.py ]]; then
+        pip3 install -e ".";
+      elif [[ -e ./requirements.txt ]]; then
+        pip3 install -r ./requirements.txt;
+      fi
+    fi
+    if [[ -e ./Cargo.toml ]]; then
+      cargo build;
+    fi
+    if [[ -e ./composer.json ]]; then
+      composer install;
+    fi
+  fi
+}

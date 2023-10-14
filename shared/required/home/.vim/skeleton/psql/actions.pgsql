@@ -25,7 +25,7 @@ with actionable_rows as (
   )
 )
 -- INSERT
--- insert into table1
+-- INSERT INTO table1
 -- (
 --   name
 --   , value
