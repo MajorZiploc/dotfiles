@@ -170,6 +170,7 @@ autocmd BufNewFile,BufRead *.git set filetype=git
 
 " enforce 2 space indents for markdown files
 autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType mysql setlocal commentstring=--\ %s
 
 " Navigate to file:
 " Similar to the buildin gf but also allows open of non-existent files aswell
