@@ -1,12 +1,23 @@
 function snip_sql_column_view_fn_info {
   # choices: ["none", "low", "high"]
-  local constraint_details="$1";
-  local view_details="$2";
-  local fn_details="$3";
+  local sql_flavor="$1";
+  local constraint_details="$2";
+  local view_details="$3";
+  local fn_details="$4";
   constraint_details="${constraint_details:-"high"}";
   view_details="${view_details:-"low"}";
   fn_details="${fn_details:-"none"}";
+  local table_access_modifier="";
+  [[ "${sql_flavor}" == "mssql" ]] && { table_access_modifier=" WITH(NOLOCK)"; }
   sql_comment="-- ";
+  local table_name_filter="";
+  [[ "${sql_flavor}" == "pgsql" ]] && {
+    table_name_filter="t.TABLE_NAME NOT LIKE '_pg_%'
+      AND t.TABLE_NAME NOT LIKE 'pg_%'
+      -- AND t.TABLE_NAME NOT LIKE 'sql_%'
+      -- AND t.TABLE_NAME NOT LIKE 'routine_%'";
+  }
+  local constraint_filter="t.CONSTRAINT_TYPE LIKE '%KEY%'";
 
   local constraints_sub_query="";
   if [[ "${constraint_details}" != "none" ]]; then
@@ -14,22 +25,20 @@ function snip_sql_column_view_fn_info {
 UNION
     SELECT
     'constraint' as ENTRY_TYPE
-    , tc.TABLE_NAME
-    , tc.CONSTRAINT_NAME as ENTRY_NAME
-    , tc.CONSTRAINT_TYPE as DATA_TYPE
+    , t.TABLE_NAME
+    , t.CONSTRAINT_NAME as ENTRY_NAME
+    , t.CONSTRAINT_TYPE as DATA_TYPE
     , '' as IS_NULLABLE
     , 0 as CHARACTER_MAXIMUM_LENGTH
     , 0 as NUMERIC_PRECISION
     , 0 as DATETIME_PRECISION
     , kcu.COLUMN_NAME as COLUMN_DEFAULT
-    FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc -- WITH(NOLOCK) -- mssql
-    LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS kcu -- WITH(NOLOCK) -- mssql
-      ON tc.constraint_name = kcu.constraint_name
-    WHERE tc.CONSTRAINT_TYPE LIKE '%KEY%'
-      AND tc.TABLE_NAME NOT LIKE '_pg_%'
-      AND tc.TABLE_NAME NOT LIKE 'pg_%'
-      -- AND tc.TABLE_NAME NOT LIKE 'sql_%'
-      -- AND tc.TABLE_NAME NOT LIKE 'routine_%'";
+    FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS t${table_access_modifier}
+    LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS kcu${table_access_modifier}
+      ON t.constraint_name = kcu.constraint_name
+    WHERE
+      ${constraint_filter}${table_name_filter:+"
+      AND $table_name_filter"}";
   fi
 
   local view_sub_query="";
@@ -38,14 +47,14 @@ UNION
     [[ "${view_details}" != "low" ]] && { low_detail_prefix="${sql_comment}"; }
     local high_detail_prefix="";
     [[ "${view_details}" != "high" ]] && { high_detail_prefix="${sql_comment}"; }
-    local view_def="${high_detail_prefix}, v.VIEW_DEFINITION AS DATA_TYPE -- use if you want to see the view definitions - chunky";
+    local view_def="${high_detail_prefix}, t.VIEW_DEFINITION AS DATA_TYPE -- use if you want to see the view definitions - chunky";
     view_def+="
     ${low_detail_prefix}, '' AS DATA_TYPE -- use if you want to minify this query - minify";
     local view_sub_query="
 UNION
     SELECT
     'view' AS ENTRY_TYPE
-    , v.TABLE_NAME
+    , t.TABLE_NAME
     , '' AS ENTRY_NAME
     ${view_def}
     , '' as IS_NULLABLE
@@ -53,63 +62,65 @@ UNION
     , 0 as NUMERIC_PRECISION
     , 0 as DATETIME_PRECISION
     , '' as COLUMN_DEFAULT
-    FROM INFORMATION_SCHEMA.VIEWS AS v -- WITH(NOLOCK) -- mssql
+    FROM INFORMATION_SCHEMA.VIEWS AS t${table_access_modifier}${table_name_filter:+"
     WHERE
-      v.TABLE_NAME NOT LIKE '_pg_%'
-      AND v.TABLE_NAME NOT LIKE 'pg_%'
-      -- AND v.TABLE_NAME NOT LIKE 'sql_%'
-      -- AND v.TABLE_NAME NOT LIKE 'routine_%'";
+      $table_name_filter"}
+";
   fi
 
   local function_sub_query="";
   if [[ "${fn_details}" != "none" ]]; then
-    local low_detail_prefix="";
-    [[ "${fn_details}" != "low" ]] && { low_detail_prefix="${sql_comment}"; }
-    local high_detail_prefix="";
-    [[ "${fn_details}" != "high" ]] && { high_detail_prefix="${sql_comment}"; }
-    fn_def="${high_detail_prefix}, r.ROUTINE_DEFINITION AS DATA_TYPE -- use if you want to see the function definitions - chunky";
-    fn_def+="
-    ${low_detail_prefix}, '' AS DATA_TYPE -- use if you want to minify this query - minify";
-    function_sub_query="
-UNION
-    SELECT
-    lower(r.ROUTINE_TYPE) AS ENTRY_TYPE
-    , 'zzz' AS TABLE_NAME -- zzz to push function to the end of the sort
-    , r.SPECIFIC_NAME AS ENTRY_NAME
-    ${fn_def}
-    , '' as IS_NULLABLE
-    , 0 as CHARACTER_MAXIMUM_LENGTH
-    , 0 as NUMERIC_PRECISION
-    , 0 as DATETIME_PRECISION
-    , '' as COLUMN_DEFAULT
-    FROM INFORMATION_SCHEMA.ROUTINES AS r -- WITH(NOLOCK) -- mssql
-    FULL OUTER JOIN INFORMATION_SCHEMA.PARAMETERS AS p -- WITH(NOLOCK) -- mssql
-      ON p.SPECIFIC_NAME = r.SPECIFIC_NAME
-    WHERE
-      r.ROUTINE_TYPE IS NOT NULL";
+    if [[ "${sql_flavor}" == "mysql" ]]; then
+      echo "-- WARNING: mysql does not support function sub query! Will not be included in resulting query";
+    else
+      local low_detail_prefix="";
+      [[ "${fn_details}" != "low" ]] && { low_detail_prefix="${sql_comment}"; }
+      local high_detail_prefix="";
+      [[ "${fn_details}" != "high" ]] && { high_detail_prefix="${sql_comment}"; }
+      fn_def="${high_detail_prefix}, r.ROUTINE_DEFINITION AS DATA_TYPE -- use if you want to see the function definitions - chunky";
+      fn_def+="
+      ${low_detail_prefix}, '' AS DATA_TYPE -- use if you want to minify this query - minify";
+      function_sub_query="
+  UNION
+      SELECT
+      lower(r.ROUTINE_TYPE) AS ENTRY_TYPE
+      , 'zzz' AS TABLE_NAME -- zzz to push function to the end of the sort
+      , r.SPECIFIC_NAME AS ENTRY_NAME
+      ${fn_def}
+      , '' as IS_NULLABLE
+      , 0 as CHARACTER_MAXIMUM_LENGTH
+      , 0 as NUMERIC_PRECISION
+      , 0 as DATETIME_PRECISION
+      , '' as COLUMN_DEFAULT
+      FROM INFORMATION_SCHEMA.ROUTINES AS r${table_access_modifier}
+      FULL OUTER JOIN INFORMATION_SCHEMA.PARAMETERS AS p${table_access_modifier}
+        ON p.SPECIFIC_NAME = r.SPECIFIC_NAME
+      WHERE
+        r.ROUTINE_TYPE IS NOT NULL";
+    fi
   fi
 
-
+  local rest=${constraints_sub_query}${function_sub_query}${view_sub_query};
   local _command="
 SELECT
 'column' as ENTRY_TYPE
-, c.TABLE_NAME
-, c.COLUMN_NAME as ENTRY_NAME
-, c.DATA_TYPE
-, c.IS_NULLABLE
-, c.CHARACTER_MAXIMUM_LENGTH
-, c.NUMERIC_PRECISION
-, c.DATETIME_PRECISION
-, c.COLUMN_DEFAULT
-FROM INFORMATION_SCHEMA.COLUMNS AS c -- WITH(NOLOCK) -- mssql
-WHERE
-  c.TABLE_NAME NOT LIKE '_pg_%'
-  AND c.TABLE_NAME NOT LIKE 'pg_%'
-  -- AND c.TABLE_NAME NOT LIKE 'sql_%'
-  -- AND c.TABLE_NAME NOT LIKE 'routine_%'${constraints_sub_query}${function_sub_query}${view_sub_query}
-ORDER BY TABLE_NAME, ENTRY_TYPE, ENTRY_NAME
-;
+, t.TABLE_NAME
+, t.COLUMN_NAME as ENTRY_NAME
+, t.DATA_TYPE
+, t.IS_NULLABLE
+, t.CHARACTER_MAXIMUM_LENGTH
+, t.NUMERIC_PRECISION
+, t.DATETIME_PRECISION
+, t.COLUMN_DEFAULT
+FROM INFORMATION_SCHEMA.COLUMNS AS t${table_access_modifier}${table_name_filter:+"
+WHERE $table_name_filter"}${rest}";
+  local order_by="ORDER BY TABLE_NAME, ENTRY_TYPE, ENTRY_NAME";
+if [[ -z "$rest" ]]; then
+  _command+="
 ";
+fi
+  _command+="$order_by
+;";
   echo "$_command";
 }
 
