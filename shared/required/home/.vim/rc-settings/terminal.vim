@@ -161,6 +161,7 @@ autocmd BufNewFile,BufRead *.fsx set filetype=fsharp
 autocmd BufNewFile,BufRead *.pgsql set filetype=sql
 autocmd BufNewFile,BufRead *.psql set filetype=sql
 autocmd BufNewFile,BufRead *.mariadb set filetype=sql
+autocmd BufNewFile,BufRead *.cassandra set filetype=sql
 autocmd BufNewFile,BufRead *.mongodb set filetype=javascript
 autocmd BufNewFile,BufRead *.mongo set filetype=javascript
 autocmd BufNewFile,BufRead *.sqlite3 set filetype=sql
