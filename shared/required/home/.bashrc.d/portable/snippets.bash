@@ -90,7 +90,8 @@ UNION
       function_sub_query="
   UNION
       SELECT
-      lower(r.ROUTINE_TYPE) AS ENTRY_TYPE
+      --lower(r.ROUTINE_TYPE) AS ENTRY_TYPE
+      'function' AS ENTRY_TYPE
       , 'zzz' AS TABLE_NAME -- zzz to push function to the end of the sort
       , r.SPECIFIC_NAME AS ENTRY_NAME
       ${fn_def}
