@@ -173,6 +173,7 @@ autocmd BufNewFile,BufRead *.neo4j set filetype=cynpp
 
 " enforce 2 space indents for markdown files
 autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType sql setlocal commentstring=--\ %s
 autocmd FileType mysql setlocal commentstring=--\ %s
 
 " Navigate to file:
