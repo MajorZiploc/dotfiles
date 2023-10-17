@@ -16,9 +16,6 @@ home_dir="${home_dir:-"$HOME"}";
 "$script_path/../../../shared/scripts/copy.sh" "$setup_root" "$flags" "${home_dir:?}";
 
 [[ $(($all & $flags_as_int)) == $all ]] && {
-  home_wallpapers="${home_dir:?}/Pictures/Wallpapers"
-  mkdir -p "$home_wallpapers";
-  [[ ! -e "${home_wallpapers}/terminal_wallpaper.jpg" ]] && { cp "$script_path/../pictures/my-hero-toko-01.jpg" "$home_wallpapers/terminal_wallpaper.jpg"; }
   winterm_ubuntu_background_image_path_placeholder='"%USERPROFILE%\\\\Pictures\\\\Wallpapers\\\\my-hero-toko-01.jpg"';
   winterm_settings="$script_path/tmp_windows_terminal_settings.jsonc";
   cp "$script_path/../windows_terminal_settings.jsonc" "$winterm_settings";

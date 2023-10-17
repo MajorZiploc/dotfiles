@@ -16,6 +16,10 @@ temp_this="$temp/this";
 
 "$script_path/create_temps.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this";
 
+home_wallpapers="${home_dir:?}/Pictures/Wallpapers"
+mkdir -p "$home_wallpapers";
+[[ ! -e "${home_wallpapers}/terminal_wallpaper.jpg" ]] && { cp "$temp_shared/pictures/my-hero-toko-01.jpg" "$home_wallpapers/terminal_wallpaper.jpg"; }
+
 # call os specific substition flow script
 test -f "$setup_root/scripts/substition.sh" && { "$setup_root/scripts/substition.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this"; };
 
