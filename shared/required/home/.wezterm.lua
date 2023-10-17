@@ -22,7 +22,7 @@ local function get_wallpaper()
 	-- end
 	return {
 		-- source = { File = { path = get_random_entry(wallpapers) } },
-		source = { File = os.getenv("HOME") .. "/Pictures/Wallpapers/church_flowers_girl_01.jpg", },
+		source = { File = os.getenv("HOME") .. "/Pictures/Wallpapers/terminal_wallpaper.jpg", },
 		height = "Cover",
 		width = "Cover",
 		horizontal_align = "Center",
