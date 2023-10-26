@@ -536,7 +536,7 @@ function _just_run {
   elif [[ -e ./package.json ]]; then
     npm run start;
   elif [[ -e ./Cargo.toml ]]; then
-    RUSTFLAGS="-Awarnings" cargo run
+    RUSTFLAGS="-Awarnings" cargo run;
   elif [[ -e ./composer.json ]]; then
     composer run start;
   fi
