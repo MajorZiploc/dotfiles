@@ -28,7 +28,7 @@ local function get_wallpaper()
 		horizontal_align = "Center",
 		repeat_x = "Repeat",
 		repeat_y = "Repeat",
-		-- opacity = 0.5, -- wallpaper_opacity
+		-- opacity = 0.65, -- wallpaper_opacity
     hsb = dimmer,
 	}
 end
@@ -47,7 +47,7 @@ local function get_no_wallpaper()
     width = "100%",
     height = "100%",
     -- transparency
-    -- opacity = 0.5, -- wallpaper_opacity
+    -- opacity = 0.65, -- wallpaper_opacity
   }
 end
 
