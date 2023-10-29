@@ -83,6 +83,10 @@ local function cmd_tmux_key(key, tmux_key)
 	)
 end
 
+wezterm.on("update-environment", function(env)
+    env.PATH = os.getenv("HOME") .. "/bin" .. ":" .. env.PATH
+end)
+
 local config = {
 	window_close_confirmation = "NeverPrompt",
 	-- debug_key_events = true,
@@ -169,6 +173,10 @@ local config = {
 				act.SendKey({ key = "p" }),
 			}),
 		},
+
+    { key = "F1", mods = "CMD|SHIFT", action = act.SpawnCommandInNewWindow {args = {"/Users/manyu/bin/.wezterm_transparency_on.sh"}}},
+            
+
 
 		cmd_key(".", multiple_actions(":ZenMode")),
 		-- cmd_key("[", act.SendKey({ mods = "CTRL", key = "o" })),
