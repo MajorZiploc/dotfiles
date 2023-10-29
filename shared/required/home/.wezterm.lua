@@ -207,6 +207,8 @@ local config = {
 	adjust_window_size_when_changing_font_size = false,
 	enable_tab_bar = false,
 	native_macos_fullscreen_mode = false,
+  -- disable ligatures
+  harfbuzz_features = {"calt=0", "clig=0", "liga=0"},
   -- Removes top bar when not in fullscreen mode
 	-- window_decorations = "RESIZE",
 }
