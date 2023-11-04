@@ -12,7 +12,8 @@ with actionable_rows as (
     , uuid_generate_v4() as id
   from table2 as t2
   where
-  t2.id not in (
+  t2.thing ~ '^.*\yapple\Y.*$' -- \y is word boundary \Y is nonword boundary; ~ is match ~* is case insensitive match. put a '!' in front of either '~' for not match
+  and t2.id not in (
     select distinct
     t1.id
     from table1 as t1

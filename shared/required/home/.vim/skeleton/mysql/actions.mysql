@@ -18,7 +18,8 @@ select
   UUID() as id
 from table2 as t2
 where
-  t2.id not in (
+  t2.thing regexp '(?i).*\\bapple\\B.*' -- \b is word boundary \B  is nonword boundary; (?i) is case insensitive; not regexp is not match
+  and t2.id not in (
     select distinct
       t1.id
     from table1 as t1
