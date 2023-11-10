@@ -1,0 +1,17 @@
+{
+  "keywordCase": "lower",
+  "keywordCaseOptions": "lower | upper | preserve",
+  "language": "sql",
+  "languageOptions": "'sql' - (default) Standard SQL;'bigquery' - GCP BigQuery;'db2' - IBM DB2;'db2i' - IBM DB2i (experimental);'hive' - Apache Hive;'mariadb' - MariaDB;'mysql' - MySQL;'n1ql' - Couchbase N1QL;'plsql' - Oracle PL/SQL;'postgresql' - PostgreSQL;'redshift' - Amazon Redshift;'singlestoredb' - SingleStoreDB;'snowflake' - Snowflake;'spark' - Spark;'sqlite' - SQLite;'transactsql' or 'tsql' - SQL Server Transact-SQL;'trino' - Trino (should also work for Presto, which is very similar dialect, though technically different);",
+  "tabWidth": 2,
+  "useTabs": false,
+  "indentStyle": "standard",
+  "indentStyleOptions": "standard | tabularLeft | tabularRight",
+  "logicalOperatorNewline": "before",
+  "logicalOperatorNewlineOptions": "before | after",
+  "expressionWidth": 75,
+  "expressionWidthDefault": 50,
+  "linesBetweenQueries": 1,
+  "denseOperators": false,
+  "newlineBeforeSemicolon": true
+}
