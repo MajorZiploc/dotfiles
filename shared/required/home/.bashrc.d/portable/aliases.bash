@@ -112,3 +112,4 @@ alias sbw='snip_bash_while';
 alias sbws='snip_bash_while_stream';
 alias sbfl='snip_bash_for_loop';
 
+alias format_prefix_commas='perl -nle '"'"'BEGIN {$had_comma=false;};if (m~,\s*$~) {s/,\s*$//; s/(\s*)(.*)$/$1, $2/ if $had_comma eq true; $had_comma=true;} else {$had_comma=false;}print $_;'"'"'';
