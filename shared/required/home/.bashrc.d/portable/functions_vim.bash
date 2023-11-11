@@ -1,8 +1,7 @@
 function cmd_wrap {
   local cmd="$1";
-  # from std out redirect with pipe
-  input=$(cat)
-  eval "$cmd $input";
+  # $(cat) input from std out redirect with pipe
+  eval "$cmd" $(cat);
 }
 
 function col_n {
