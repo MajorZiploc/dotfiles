@@ -411,6 +411,7 @@ vim.cmd('let g:rbql_with_headers = 1')
 vim.cmd('let g:rbql_backend_language = "python"')
 vim.cmd('let g:rbql_use_system_python = 1')
 vim.cmd('autocmd BufNewFile,BufRead *.csv set filetype=rfc_csv')
+lvim.keys.normal_mode["<leader>ta"] = "<cmd>set filetype=csv<cr><cmd>:RainbowAlign<cr><cmd>set ft=rfc_csv<cr>"
 
 require 'colorizer'.setup()
 
