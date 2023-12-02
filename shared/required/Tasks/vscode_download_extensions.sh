@@ -51,6 +51,9 @@ code --install-extension ms-python.vscode-pylance
 # run on save/edit
 # code --install-extension almenon.arepl
 
+# godot
+# code --install-extension geequlim.godot-tools
+
 # Java
 # code --install-extension vscjava.vscode-java-pack
 
