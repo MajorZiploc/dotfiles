@@ -16,13 +16,3 @@ autocmd BufNewFile,BufRead *.csv set filetype=rfc_csv
 " You can define custom functions and/or import libraries in two special files:
 "   ~/.rbql_init_source.py - for Python
 "   ~/.rbql_init_source.js - for JavaScript
-
-function! CsvAlignment()
-  let og_filetype=&filetype
-  set filetype=csv
-  execute 'RainbowAlign'
-  let &filetype = og_filetype
-endfunction
-
-" Aligned csv (text align)
-nnoremap <leader>ta :call CsvAlignment()<cr>
