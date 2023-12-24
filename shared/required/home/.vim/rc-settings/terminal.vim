@@ -370,3 +370,20 @@ function! LoadArgsList(content)
 endfunction
 
 command! -nargs=1 -bar Pargs execute 'args' LoadArgsList(<args>)
+
+function! TextAlignment()
+  let og_filetype=&filetype
+  if (og_filetype =~ '.*csv.*')
+    set filetype=csv
+    " REQUIRES: "mechatroner/rainbow_csv" 
+    execute 'RainbowAlign'
+  else
+    echohl WarningMsg
+    echo "!No text alignment strategy found for filetype: " og_filetype
+    echohl None
+  endif
+  let &filetype = og_filetype
+endfunction
+
+" Aligned text (text align)
+nnoremap <leader>ta :call TextAlignment()<cr>
