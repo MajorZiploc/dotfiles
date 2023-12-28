@@ -41,6 +41,15 @@ alias bash_remove_comments="sed -E '/^\s*(\#)/d;'";
 alias remove_blank_lines="sed -E '/^\s*$/d;'";
 alias clean_cheat_sheet="bash_remove_colors | js_remove_comments | sql_remove_comments | bash_remove_comments | remove_blank_lines";
 
+alias url_encode='sed -E '"'"'s/%/%25/g; s/ /%20/g; s/!/%21/g; s/"/%22/g; s/#/%23/g; s/\$/%24/g; s/\(/%28/g; s/\)/%29/g; s/\*/%2A/g; s/\+/%2B/g; s/,/%2C/g; s/\//%2F/g; s/:/%3A/g; s/;/%3B/g; s/\?/%3F/g; s/@/%40/g; s/\[/%5B/g; s/\\/%5C/g; s/\]/%5D/g; s/\^/%5E/g; s/_/%5F/g; s/`/%60/g; s/\{/%7B/g; s/\|/%7C/g; s/\}/%7D/g; s/~/%7E/g'"'"';'
+# Removed patterns:
+# s/'"'"'/%27/g; # SHOULD READD THIS ONE
+alias url_decode='sed -E '"'"'s/%25/%/g; s/%20/ /g; s/%21/!/g; s/%22/"/g; s/%23/#/g; s/%24/\$/g; s/%28/\(/g; s/%29/\)/g; s/%2A/\*/g; s/%2B/\+/g; s/%2C/,/g; s/%2F/\//g; s/%3A/:/g; s/%3B/;/g; s/%3F/\?/g; s/%40/@/g; s/%5B/\[/g; s/%5C/\\/g; s/%5D/\]/g; s/%5E/\^/g; s/%5F/_/g; s/%60/`/g; s/%7B/\{/g; s/%7C/\|/g; s/%7D/\}/g; s/%7E/~/g'"'"';'
+# s/=/%3D/g; s/\&/%26/g;
+# Removed patterns:
+# s/%27/'"'"'/g; # SHOULD READD THIS ONE
+# s/%3D/=/g; s/%26/\&/g;
+
 # Converts a string to a fuzzy search pattern
 alias to_fuzz='sed -E "s/(\\w)/\\1\[^\[:blank:\]\]{0,3}/g" | sed "s/\[^\[:blank:\]\]{0,3}$//g"';
 
