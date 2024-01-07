@@ -649,3 +649,11 @@ function gfind_in_files_replace {
   local not_paths; not_paths="$(_find_git_estimator_ignored_dirs "$4")";
   _find_in_files_replace_helper "$1" "$2" "$3" "$not_paths";
 }
+
+# NOTE: uuidgen does exist on many unix based systems. This is a back up if uuidgen doesnt exist
+function uuid_gen {
+  python -c "
+import uuid
+print(uuid.uuid4())
+";
+}
