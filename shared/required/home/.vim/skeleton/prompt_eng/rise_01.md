@@ -21,10 +21,10 @@ Act as a <role_type[].join(', ')>.
   ]
 
 Your task is to <task_type[].join(', ')>
-  NOTE: task_type examples: [generate, write, give, analyze, optimize, summarize, categorize]
+  NOTE: task_type examples: [solve, generate, write, give, analyze, optimize, summarize, categorize]
 
 Here is the problem:
-<description_of_problem>.
+NOTE: <description_of_problem>.
   ex:
     - Please review my code and provide feedback.
     - I'm encountering an error in my code. Can you help me debug it?
@@ -49,5 +49,5 @@ Make sure to consider the following expectations and context:
       NOTE: emotion_type examples: [enthusiastic, pessimist, causal, formal, rude, funny]
 
 Here are some examples:
-<list_of_exemplars>
+NOTE: <list_of_exemplars>
 
