@@ -32,7 +32,6 @@ NOTE: <description_of_problem>.
     - How can I refactor my code to make it more maintainable?
 
 Make sure to consider the following expectations and context:
-<list_of_expectations_or_limits>
   - Provide the response in <format_type> format.
       NOTE: format_type examples: [csv, email, bullet points, code blocks, paragraphs, markdown]
   - I have a <experience_level> experience level in this topic
