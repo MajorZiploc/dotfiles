@@ -57,7 +57,7 @@ brew 'git'
 brew 'openssh'
 brew 'perl'
 # cpanm package manager for perl
-brew 'cpanminus'
+brew 'cpanminus' # full_install
 brew 'rsync'
 # brew 'svn'
 brew 'unzip'
@@ -94,11 +94,11 @@ brew 'yj'
 brew 'openssh'
 brew 'telnet'
 # prolog
-brew 'swi-prolog'
+brew 'swi-prolog' # full_install
 # help address issues in shell scripts
 brew 'shellcheck'
 # latex to pdf util (and more)
-brew 'texlive'
+brew 'texlive' # full_install
 
 # python deps
 brew 'openssl'
@@ -108,7 +108,7 @@ brew 'xz'
 brew 'zlib'
 
 # rust
-brew 'rust-analyzer'
+brew 'rust-analyzer' # full_install
 
 # java
 # if Brewfile can not handle pinning, then the java section may need to move into the shell script rather than Brewfile
@@ -124,34 +124,34 @@ brew 'maven', args: ['ignore-dependencies']
 # brew pin maven;
 
 # golang
-brew 'golang'
+brew 'golang' # full_install
 
 # php
-brew 'php'
+brew 'php' # full_install
 
 # ruby deps
-brew 'gnupg'
+brew 'gnupg' # full_install
 # is this needed still? it was needed when using rvm, does rbenv need it?
 # gpg --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-brew 'rbenv'
-brew 'ruby-build'
+brew 'rbenv' # full_install
+brew 'ruby-build' # full_install
 
 # install asdf and its deps
-brew 'gpg'
-brew 'asdf'
+brew 'gpg' # full_install
+brew 'asdf' # full_install
 
 # dotnet core
-brew 'mono-libgdiplus'
-cask 'dotnet-sdk'
-cask 'powershell'
+brew 'mono-libgdiplus' # full_install
+cask 'dotnet-sdk' # full_install
+cask 'powershell' # full_install
 
 # Dont forget to prepend this bash to the /etc/shell
 # /opt/homebrew/bin/bash
 brew 'bash'
 cask 'google-chrome'
-cask 'iterm2'
-cask 'discord'
-cask 'gimp'
+cask 'iterm2' # full_install
+cask 'discord' # full_install
+cask 'gimp' # full_install
 cask 'krita'
 cask 'visual-studio-code'
 cask 'slack'
@@ -166,4 +166,9 @@ cask 'font-hack-nerd-font'
 
 cask 'wezterm'
 # Open-source version of the X.Org X Window System; good for gui in docker containers
-cask 'xquartz'
+cask 'xquartz' # full_install
+
+cask 'macfuse'
+brew 'gromgit/fuse/sshfs-mac'
+brew "sshfs-mac", link: true, overwrite: true
+
