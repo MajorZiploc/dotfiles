@@ -22,6 +22,9 @@ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh;
   brew bundle;
 )
 
+# TODO: add this stuff to the Brewfile
+"${this_path}/brew.sh";
+
 # post brew
 export NVM_DIR=~/.nvm;
 source "$(brew --prefix nvm)/nvm.sh";
