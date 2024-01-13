@@ -24,22 +24,12 @@ mkdir ~/.nvm;
 
 if [[ $(($full_install & $flags_as_int)) == $full_install ]]; then
   # brew update;
-  (
-    cp "$this_path/Brewfile" "$HOME/";
-    cd "$HOME/" || return 1;
-    brew bundle;
-  )
+  cp "$this_path/Brewfile" "$HOME/";
 else
   # brew update;
-  (
-    echo "$(cat "$this_path/Brewfile" | sed -E "s,(.*\# full_install)$,# \\1,g")" | tee "$HOME/Brewfile";
-    cd "$HOME/" || return 1;
-    brew bundle;
-  )
+  echo "$(cat "$this_path/Brewfile" | sed -E "s,(.*\# full_install)$,# \\1,g")" | tee "$HOME/Brewfile";
 fi
-
-# TODO: add this stuff to the Brewfile
-"${this_path}/brew.sh";
+( cd "$HOME/" || return 1; brew bundle; )
 
 # post brew
 export NVM_DIR=~/.nvm;

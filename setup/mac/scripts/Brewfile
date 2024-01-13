@@ -167,3 +167,8 @@ cask 'font-hack-nerd-font'
 cask 'wezterm'
 # Open-source version of the X.Org X Window System; good for gui in docker containers
 cask 'xquartz' # full_install
+
+cask 'macfuse'
+brew 'gromgit/fuse/sshfs-mac'
+brew "sshfs-mac", link: true, overwrite: true
+
