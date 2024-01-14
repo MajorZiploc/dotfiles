@@ -118,6 +118,7 @@ nmap <leader>fb :vsc workbench.action.quickOpenPreviousRecentlyUsedEditor<cr>
 " -- like workbench.action.quickOpenPreviousRecentlyUsedEditor but with search and falls back to not used files
 " :vsc workbench.action.quickOpen
 
+# TODO: make kindbinds json fallback for this
 nmap <leader>fm :marks<cr>
 nmap <leader>e :vsc editor.action.marker.next<cr>
 nmap <leader>E :vsc editor.action.marker.prev<cr>
