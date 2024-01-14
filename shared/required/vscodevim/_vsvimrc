@@ -106,7 +106,18 @@ nmap <s-k> :vsc editor.action.showHover<cr>
 vmap gf :vsc editor.action.formatSelection<cr>
 vmap <leader>gf :vsc editor.action.formatSelection<cr>
 
-nmap <leader>fb :ls<cr>
+nmap <leader>fb :vsc workbench.action.quickOpenPreviousRecentlyUsedEditor<cr>
+
+# other file search types that may be useful (Look at keybindings in vscode for 'Recent' to find more)
+# -- very similar to workbench.action.quickOpen
+" :vsc workbench.action.showAllEditorsByMostRecentlyUsed
+" -- is :ls
+" :vsc workbench.action.quickOpenLeastRecentlyUsedEditor
+" -- is like <ctrl>+<tab> on mac but with jk motions
+" :vsc workbench.action.quickOpenPreviousRecentlyUsedEditor
+" -- like workbench.action.quickOpenPreviousRecentlyUsedEditor but with search and falls back to not used files
+" :vsc workbench.action.quickOpen
+
 nmap <leader>fm :marks<cr>
 nmap <leader>e :vsc editor.action.marker.next<cr>
 nmap <leader>E :vsc editor.action.marker.prev<cr>
