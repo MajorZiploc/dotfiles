@@ -97,8 +97,8 @@
     }
   },
   "terminal.integrated.defaultProfile.windows": "Git Bash",
-  "terminal.integrated.defaultProfile.linux": "bash",
-  "terminal.integrated.defaultProfile.osx": "bash",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.defaultProfile.osx": "zsh",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "editor.tabSize": 2,
   "powershell.powerShellDefaultVersion": "Windows PowerShell (x64)",
