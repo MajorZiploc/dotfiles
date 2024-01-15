@@ -508,6 +508,14 @@ function zoxide_refresh_projects {
   done;
 }
 
+function wezterm_tab_bar_off {
+  sed -Ei 's/^(\s*enable_tab_bar = )true(\, -- tab_bar)$/\1false\2/' ~/.wezterm.lua;
+}
+
+function wezterm_tab_bar_on {
+  sed -Ei 's/^(\s*enable_tab_bar = )false(\, -- tab_bar)$/\1true\2/' ~/.wezterm.lua;
+}
+
 function wezterm_background_off {
   sed -Ei 's,^(\s*)(get_wallpaper.* -- background)$,\1-- \2,' ~/.wezterm.lua;
   sed -Ei 's,^(\s*)-- (get_no_wallpaper.* -- no_background)$,\1\2,' ~/.wezterm.lua;
