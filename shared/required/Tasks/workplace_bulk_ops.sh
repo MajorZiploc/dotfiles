@@ -1,6 +1,16 @@
 # NOTE: Need to set MY_WORKPLACE_PROJECT_DIRS env var for these scripts
 # falls back to TMUXPS_PROJECT_DIRS
 # export MY_WORKPLACE_PROJECT_DIRS=export MY_WORKPLACE_PROJECT_DIRS=("$(find ~ -mindepth 1 -maxdepth 1 -iname "*projects-workplace-name*" -type d -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' 2>/dev/null)");
+#   my typical convention for this is:
+#     work project patterns: ~/projects-<company_name>-*
+#     personal project patterns: ~/projects and ~/projects_personal
+#       standard personal projects in my github
+#     play project patterns: ~/projects and ~/projects_play
+#       tmp like area
+#         for git cloning http style repos to quickly check something
+#         extra clone of a repo as a backup or to have another branch open in a diff repo
+#     library project patterns: ~/projects and ~/projects_libs
+#       commonly used libraries to get to source code quickly
 #
 # if you want to filter less files out of your search
 # export FIND_GIT_DEFAULT_CHILD_GITIGNORE_SEARCH_DEPTH="0";
