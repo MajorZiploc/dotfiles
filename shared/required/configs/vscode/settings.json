@@ -138,5 +138,8 @@
   "audioCues.lineHasWarning": "off",
   "audioCues.noInlayHints": "off",
   "audioCues.onDebugBreak": "off",
-  "audioCues.volume": 0
+  "audioCues.volume": 0,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  }
 }
