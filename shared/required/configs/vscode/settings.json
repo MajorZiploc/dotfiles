@@ -14,32 +14,32 @@
   "[typescript]": {
     "editor.tabSize": 2,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": false
   },
   "[typescriptreact]": {
     "editor.tabSize": 2,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": false
   },
   "[javascript]": {
     "editor.tabSize": 2,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": false
   },
   "[javascriptreact]": {
     "editor.tabSize": 2,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": false
   },
   "[json]": {
     "editor.tabSize": 2,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": false
   },
   "[jsonc]": {
     "editor.tabSize": 2,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": false
   },
   "terminal.integrated.profiles.windows": {
     "PowerShell": {
@@ -141,5 +141,25 @@
   "audioCues.volume": 0,
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
-  }
+  },
+  "background.editorBackgrounds": [
+    "HOME_DIR_PLACEHOLDER/Pictures/Wallpapers/vscode_editor*"
+  ],
+  "background.sidebarBackgrounds": [
+    "HOME_DIR_PLACEHOLDER/Pictures/Wallpapers/vscode_side-bar*"
+  ],
+  "background.panelBackgrounds": [
+    "HOME_DIR_PLACEHOLDER/Pictures/Wallpapers/vscode_panel*"
+  ],
+  "background.windowBackgrounds": [
+    "HOME_DIR_PLACEHOLDER/Pictures/Wallpapers/vscode_window*"
+  ],
+  "background.renderContentAboveBackground": true,
+  "background.useWindowOptionsForAllBackgrounds": true,
+  "background.backgroundOpacity": [
+    0.75,
+    0.75,
+    0.75,
+    0.75
+  ]
 }
