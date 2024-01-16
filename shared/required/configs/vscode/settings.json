@@ -1,6 +1,7 @@
 {
   "window.zoomLevel": 0,
   "workbench.colorTheme": "Monokai Dimmed",
+  "workbench.editor.showTabs": "none",
   "editor.fontSize": 14,
   "editor.rulers": [120],
   "explorer.confirmDragAndDrop": false,
