@@ -19,6 +19,8 @@ temp_this="$temp/this";
 home_wallpapers="${home_dir:?}/Pictures/Wallpapers"
 mkdir -p "$home_wallpapers";
 [[ ! -e "${home_wallpapers}/terminal_wallpaper.jpg" ]] && { cp "$temp_shared/pictures/terminal_wallpaper.jpg" "$home_wallpapers/terminal_wallpaper.jpg"; }
+[[ ! -e "${home_wallpapers}/vscode_window_01.png" ]] && { cp "$temp_shared/pictures/vscode_window_01.png" "$home_wallpapers/vscode_window_01.png"; }
+[[ ! -e "${home_wallpapers}/vscode_side-bar_01.png" ]] && { cp "$temp_shared/pictures/vscode_side-bar_01.png" "$home_wallpapers/vscode_side-bar_01.png"; }
 
 # call os specific substition flow script
 test -f "$setup_root/scripts/substition.sh" && { "$setup_root/scripts/substition.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this"; };

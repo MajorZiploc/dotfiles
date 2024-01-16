@@ -10,6 +10,8 @@
 code --install-extension vscodevim.vim
 # fall back vim emulation
 ### code --install-extension asvetliakov.vscode-neovim
+# background images
+code --install-extension katsute.code-background
 # checks spelling
 code --install-extension streetsidesoftware.code-spell-checker
 # color codes csv columns
