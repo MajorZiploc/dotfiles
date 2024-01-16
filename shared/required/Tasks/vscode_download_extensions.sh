@@ -3,10 +3,13 @@
 # KEY:
 # - a '#' means its part of my extended vscode flow
 # - a '##' means it is something i would like to look into
+# - a '###' means it is an alternative
 
 # Core plugings
 # vim emulation
 code --install-extension vscodevim.vim
+# fall back vim emulation
+### code --install-extension asvetliakov.vscode-neovim
 # checks spelling
 code --install-extension streetsidesoftware.code-spell-checker
 # color codes csv columns
