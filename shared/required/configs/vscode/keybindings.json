@@ -222,5 +222,10 @@
   {
     "key": "ctrl+k ctrl+b",
     "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "vscode-neovim.escape",
+    "when": "editorTextFocus && neovim.init && editorLangId not in 'neovim.editorLangIdExclusions'"
   }
 ]
