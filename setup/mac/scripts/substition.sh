@@ -11,8 +11,8 @@ temp_this="$4"
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find -E "$temp_shared" -iregex ".*\.json" -type f -exec gsed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" "{}" \;
 find -E "$temp_shared" -iregex ".*\.json" -type f -exec gsed -E -i'' "s,HOME_DIR_PLACEHOLDER,$HOME,g" "{}" \;
-# special mac case to make open buffers fallback more natural feeling
-find -E "$temp_shared" -iregex ".*\.json" -type f -exec gsed -E -i'' "s,(.key.: .ctrl\+)g( ctrl\+b),\\1f\\2,g" "{}" \;
+vscode_extra_keybindings_placeholder=',{ "key": "ctrl+f ctrl+b", "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor" }';
+find -E "$temp_shared" -iregex ".*\.json" -type f -exec gsed -E -i'' "s/VSCODE_EXTRA_KEYBINDINGS_PLACEHOLDER/${vscode_extra_keybindings_placeholder}/g" "{}" \;
 find -E "$temp_shared" -iregex ".*vim.*" -type f -exec gsed -i'' 's,VIM_SHELL_PLACEHOLDER,~/bin/bash,g' "{}" \;
 vim_plugin_include="Plug 'junegunn/fzf'\, \{ 'do': \{ -> fzf#install\(\) \} \} \" fuzzy finder\nPlug 'junegunn/fzf.vim'\nPlug 'airblade/vim-rooter' \" to help fzf determine project root"
 vim_plugin_include="${vim_plugin_include}\nPlug 'mechatroner/rainbow_csv' \" csv highlighter and query engine\nPlug 'frazrepo/vim-rainbow' \" color pairing brakets and such (:RainbowToggle to turn on)\nPlug 'bling/vim-airline' \" status bar\nPlug 'vim-airline/vim-airline-themes' \" colors for status bar"
@@ -46,6 +46,7 @@ find -E "$temp_shared" -iregex ".*sh" -type f -exec gsed -E -i'' "s,(export )(FC
 # find "$temp_shared" -iregex '.*\.bak$' -type f -exec rm "{}" \;
 
 unset vsvimpath
+unset vscode_extra_keybindings_placeholder
 unset vim_plugin_include
 unset vim_plugset_path
 unset vim_plugin_settings
