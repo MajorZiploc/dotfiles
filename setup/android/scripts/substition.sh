@@ -11,7 +11,7 @@ temp_this="$4";
 vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")";
 find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" "{}" \;
 find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,HOME_DIR_PLACEHOLDER,$HOME,g" "{}" \;
-vscode_extra_keybindings_placeholder=',{ "key": "ctrl+f ctrl+b", "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor" }';
+vscode_extra_keybindings_placeholder='';
 find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec gsed -E -i'' "s/VSCODE_EXTRA_KEYBINDINGS_PLACEHOLDER/${vscode_extra_keybindings_placeholder}/g" "{}" \;
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,~/bin/bash,g' "{}" \;
 vim_plugin_include="Plug 'ctrlpvim/ctrlp.vim' \" fuzzy file finder";
