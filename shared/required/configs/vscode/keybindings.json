@@ -200,11 +200,11 @@
     "when": "editorHasDocumentSelectionFormattingProvider && editorTextFocus && !editorReadonly"
   },
   {
-    "key": "ctrl+g ctrl+d",
+    "key": "ctrl+g ctrl+e",
     "command": "editor.action.marker.next"
   },
   {
-    "key": "shift+ctrl+g shift+ctr+d",
+    "key": "shift+ctrl+g shift+ctr+e",
     "command": "editor.action.marker.prev"
   },
   {
