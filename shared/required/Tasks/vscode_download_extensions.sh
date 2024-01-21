@@ -22,6 +22,8 @@ code --install-extension esbenp.prettier-vscode
 code --install-extension eamodio.gitlens
 # a graph for git
 code --install-extension mhutchie.git-graph
+# fzf and rg support
+code --install-extension tomrijndorp.find-it-faster
 
 # Core-Extended plugings
 # gives a table view for data, dont recommend using it to edit data
