@@ -91,23 +91,25 @@ set timeoutlen=300
 
 set shell=VIM_SHELL_PLACEHOLDER
 
-nmap <leader>gd :vsc editor.action.revealDefinition<cr>
-nmap gr :vsc editor.action.goToReferences<cr>
-nmap <leader>gr :vsc editor.action.goToReferences<cr>
-nmap gi :vsc editor.action.goToImplementation<cr>
-nmap <leader>gi :vsc editor.action.goToImplementation<cr>
-nmap gq :vsc editor.action.showHover<cr>
-vmap gq :vsc editor.action.showHover<cr>
-nmap <leader>gq :vsc editor.action.showHover<cr>
-vmap <leader>gq :vsc editor.action.showHover<cr>
-nmap <leader>wi :vsc editor.action.showHover<cr>
-vmap <leader>wi :vsc editor.action.showHover<cr>
-nmap <s-k> :vsc editor.action.showHover<cr>
-vmap gf :vsc editor.action.formatSelection<cr>
-vmap <leader>gf :vsc editor.action.formatSelection<cr>
+nmap <leader>gd :lua require('vscode-neovim').action('editor.action.revealDefinition')<cr>
+nmap gr :lua require('vscode-neovim').action('editor.action.goToReferences')<cr>
+nmap <leader>gr :lua require('vscode-neovim').action('editor.action.goToReferences')<cr>
+nmap gi :lua require('vscode-neovim').action('editor.action.goToImplementation')<cr>
+nmap <leader>gi :lua require('vscode-neovim').action('editor.action.goToImplementation')<cr>
+nmap gq :lua require('vscode-neovim').action('editor.action.showHover')<cr>
+vmap gq :lua require('vscode-neovim').action('editor.action.showHover')<cr>
+nmap <leader>gq :lua require('vscode-neovim').action('editor.action.showHover')<cr>
+vmap <leader>gq :lua require('vscode-neovim').action('editor.action.showHover')<cr>
+nmap <leader>wi :lua require('vscode-neovim').action('editor.action.showHover')<cr>
+vmap <leader>wi :lua require('vscode-neovim').action('editor.action.showHover')<cr>
+nmap <s-k> :lua require('vscode-neovim').action('editor.action.showHover')<cr>
+vmap gf :lua require('vscode-neovim').action('editor.action.formatSelection')<cr>
+vmap <leader>gf :lua require('vscode-neovim').action('editor.action.formatSelection')<cr>
+" doesnt seem to work
 nmap <leader>bw :bd!<cr>
 
-nmap <leader>fb :vsc workbench.action.quickOpenPreviousRecentlyUsedEditor<cr>
+nmap <leader>fb :lua require('vscode-neovim').action('workbench.action.quickOpenPreviousRecentlyUsedEditor')<cr>
+
 
 " other file search types that may be useful (Look at keybindings in vscode for 'Recent' to find more)
 " -- very similar to workbench.action.quickOpen
@@ -121,13 +123,13 @@ nmap <leader>fb :vsc workbench.action.quickOpenPreviousRecentlyUsedEditor<cr>
 
 " TODO: make kindbinds json fallback for this
 nmap <leader>fm :marks<cr>
-nmap <leader>e :vsc editor.action.marker.next<cr>
-nmap <leader>E :vsc editor.action.marker.prev<cr>
+nmap <leader>e :lua require('vscode-neovim').action('editor.action.marker.next')<cr>
+nmap <leader>E :lua require('vscode-neovim').action('editor.action.marker.prev')<cr>
 nmap [d :vsc editor.action.marker.prev<cr>
 nmap ]d :vsc editor.action.marker.next<cr>
 
-nmap [g :vsc workbench.action.editor.previousChange<cr>
-nmap ]g :vsc workbench.action.editor.nextChange<cr>
+nmap [g :lua require('vscode-neovim').action('workbench.action.editor.previousChange')<cr>
+nmap ]g :lua require('vscode-neovim').action('workbench.action.editor.nextChange')<cr>
 
 " backup mappings for <esc>
 " inoremap kj <esc>
