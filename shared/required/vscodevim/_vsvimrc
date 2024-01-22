@@ -105,9 +105,11 @@ vmap <leader>wi :vsc editor.action.showHover<cr>
 nmap <s-k> :vsc editor.action.showHover<cr>
 vmap gf :vsc editor.action.formatSelection<cr>
 vmap <leader>gf :vsc editor.action.formatSelection<cr>
+" NOTE: <c-w><c-q> has this effect
 nmap <leader>bw :bd!<cr>
 
 nmap <leader>fb :vsc workbench.action.quickOpenPreviousRecentlyUsedEditor<cr>
+nmap <leader>vi :vsc workbench.view.scm<cr>
 
 " other file search types that may be useful (Look at keybindings in vscode for 'Recent' to find more)
 " -- very similar to workbench.action.quickOpen

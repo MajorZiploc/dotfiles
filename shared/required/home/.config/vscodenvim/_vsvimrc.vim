@@ -105,11 +105,12 @@ vmap <leader>wi :lua require('vscode-neovim').action('editor.action.showHover')<
 nmap <s-k> :lua require('vscode-neovim').action('editor.action.showHover')<cr>
 vmap gf :lua require('vscode-neovim').action('editor.action.formatSelection')<cr>
 vmap <leader>gf :lua require('vscode-neovim').action('editor.action.formatSelection')<cr>
+" NOTE: <c-w><c-q> has this effect
 " doesnt seem to work
 nmap <leader>bw :bd!<cr>
 
 nmap <leader>fb :lua require('vscode-neovim').action('workbench.action.quickOpenPreviousRecentlyUsedEditor')<cr>
-
+nmap <leader>vi :lua require('vscode-neovim').action('workbench.view.scm')<cr>
 
 " other file search types that may be useful (Look at keybindings in vscode for 'Recent' to find more)
 " -- very similar to workbench.action.quickOpen
