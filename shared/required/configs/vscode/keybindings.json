@@ -229,7 +229,7 @@
     "when": "editorTextFocus && neovim.init && editorLangId not in 'neovim.editorLangIdExclusions'"
   },
   {
-    "key": "ctrl+b ctrl+t",
+    "key": "ctrl+b shift+t",
     "command": "workbench.action.quickOpenRecent"
   },
   {
