@@ -110,6 +110,9 @@ nmap <leader>bw :bd!<cr>
 
 nmap <leader>fb :vsc workbench.action.quickOpenPreviousRecentlyUsedEditor<cr>
 nmap <leader>vi :vsc workbench.view.scm<cr>
+vmap <leader>vr git.revertSelectedRanges<cr>
+vmap <leader>vu git.unstageSelectedRanges<cr>
+vmap <leader>vs git.stageSelectedRanges<cr>
 
 " other file search types that may be useful (Look at keybindings in vscode for 'Recent' to find more)
 " -- very similar to workbench.action.quickOpen
