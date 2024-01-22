@@ -105,6 +105,7 @@ vmap <leader>wi :vsc editor.action.showHover<cr>
 nmap <s-k> :vsc editor.action.showHover<cr>
 vmap gf :vsc editor.action.formatSelection<cr>
 vmap <leader>gf :vsc editor.action.formatSelection<cr>
+nmap <leader>bw :bd!<cr>
 
 nmap <leader>fb :vsc workbench.action.quickOpenPreviousRecentlyUsedEditor<cr>
 
