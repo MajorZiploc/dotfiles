@@ -109,8 +109,8 @@ nmap <leader>bw :bd!<cr>
 
 nmap <leader>fb :vsc workbench.action.quickOpenPreviousRecentlyUsedEditor<cr>
 
-# other file search types that may be useful (Look at keybindings in vscode for 'Recent' to find more)
-# -- very similar to workbench.action.quickOpen
+" other file search types that may be useful (Look at keybindings in vscode for 'Recent' to find more)
+" -- very similar to workbench.action.quickOpen
 " :vsc workbench.action.showAllEditorsByMostRecentlyUsed
 " -- is :ls
 " :vsc workbench.action.quickOpenLeastRecentlyUsedEditor
@@ -119,7 +119,7 @@ nmap <leader>fb :vsc workbench.action.quickOpenPreviousRecentlyUsedEditor<cr>
 " -- like workbench.action.quickOpenPreviousRecentlyUsedEditor but with search and falls back to not used files
 " :vsc workbench.action.quickOpen
 
-# TODO: make kindbinds json fallback for this
+" TODO: make kindbinds json fallback for this
 nmap <leader>fm :marks<cr>
 nmap <leader>e :vsc editor.action.marker.next<cr>
 nmap <leader>E :vsc editor.action.marker.prev<cr>
