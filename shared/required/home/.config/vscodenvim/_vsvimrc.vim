@@ -114,6 +114,7 @@ nmap <leader>vi :lua require('vscode-neovim').action('workbench.view.scm')<cr>
 vmap <leader>vr :lua require('vscode-neovim').action('git.revertSelectedRanges')<cr>
 vmap <leader>vu :lua require('vscode-neovim').action('git.unstageSelectedRanges')<cr>
 vmap <leader>vs :lua require('vscode-neovim').action('git.stageSelectedRanges')<cr>
+nmap <leader>vb :lua require('vscode-neovim').action('gitlens.toggleZenMode')<cr>
 
 " other file search types that may be useful (Look at keybindings in vscode for 'Recent' to find more)
 " -- very similar to workbench.action.quickOpen
