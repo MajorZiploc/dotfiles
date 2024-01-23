@@ -12,6 +12,7 @@ vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc")"
 find -E "$temp_shared" -iregex ".*\.json" -type f -exec gsed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" "{}" \;
 find -E "$temp_shared" -iregex ".*\.json" -type f -exec gsed -E -i'' "s,HOME_DIR_PLACEHOLDER,$HOME,g" "{}" \;
 vscode_extra_keybindings_placeholder=',{ "key": "ctrl+f ctrl+b", "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor" }, { "key": "shift+cmd+g", "command": "workbench.view.scm", "when": "workbench.scm.active" }, { "key": "ctrl+shift+g", "command": "-workbench.view.scm", "when": "workbench.scm.active" }';
+vscode_extra_keybindings_placeholder+=', { "key": "ctrl+f ctrl+p", "command": "find-it-faster.findFiles" }, { "key": "ctrl+f ctrl+a", "command": "find-it-faster.findWithinFiles" }';
 find -E "$temp_shared" -iregex ".*\.json" -type f -exec gsed -E -i'' "s/VSCODE_EXTRA_KEYBINDINGS_PLACEHOLDER/${vscode_extra_keybindings_placeholder}/g" "{}" \;
 find -E "$temp_shared" -iregex ".*vim.*" -type f -exec gsed -i'' 's,VIM_SHELL_PLACEHOLDER,~/bin/bash,g' "{}" \;
 vim_plugin_include="Plug 'junegunn/fzf'\, \{ 'do': \{ -> fzf#install\(\) \} \} \" fuzzy finder\nPlug 'junegunn/fzf.vim'\nPlug 'airblade/vim-rooter' \" to help fzf determine project root"
