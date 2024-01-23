@@ -235,6 +235,14 @@
   {
     "key": "ctrl+b ctrl+v",
     "command": "workbench.action.openView"
+  },
+  {
+    "key": "ctrl+g ctrl+p",
+    "command": "find-it-faster.findFiles"
+  },
+  {
+    "key": "ctrl+g ctrl+a",
+    "command": "find-it-faster.findWithinFiles"
   }
   VSCODE_EXTRA_KEYBINDINGS_PLACEHOLDER
 ]

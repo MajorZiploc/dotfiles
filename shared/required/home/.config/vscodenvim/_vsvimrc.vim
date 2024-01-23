@@ -110,6 +110,8 @@ vmap <leader>gf :lua require('vscode-neovim').action('editor.action.formatSelect
 nmap <leader>bw :bd!<cr>
 
 nmap <leader>fb :lua require('vscode-neovim').action('workbench.action.quickOpenPreviousRecentlyUsedEditor')<cr>
+nmap <leader>fp :lua require('vscode-neovim').action('find-it-faster.findFiles')<cr>
+nmap <leader>fa :lua require('vscode-neovim').action('find-it-faster.findWithinFiles')<cr>
 nmap <leader>vi :lua require('vscode-neovim').action('workbench.view.scm')<cr>
 vmap <leader>vr :lua require('vscode-neovim').action('git.revertSelectedRanges')<cr>
 vmap <leader>vu :lua require('vscode-neovim').action('git.unstageSelectedRanges')<cr>

@@ -109,6 +109,8 @@ vmap <leader>gf :vsc editor.action.formatSelection<cr>
 nmap <leader>bw :bd!<cr>
 
 nmap <leader>fb :vsc workbench.action.quickOpenPreviousRecentlyUsedEditor<cr>
+nmap <leader>fp :vsc find-it-faster.findFiles<cr>
+nmap <leader>fa :vsc find-it-faster.findWithinFiles<cr>
 nmap <leader>vi :vsc workbench.view.scm<cr>
 vmap <leader>vr git.revertSelectedRanges<cr>
 vmap <leader>vu git.unstageSelectedRanges<cr>
