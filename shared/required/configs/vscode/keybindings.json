@@ -216,8 +216,12 @@
     "command": "workbench.action.editor.previousChange"
   },
   {
-    "key": "ctrl+g ctrl+b",
+    "key": "ctrl+b ctrl+b",
     "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor"
+  },
+  {
+    "key": "ctrl+g ctrl+b",
+    "command": "gitlens.toggleZenMode"
   },
   {
     "key": "ctrl+k ctrl+b",
@@ -233,7 +237,7 @@
     "command": "workbench.action.quickOpenRecent"
   },
   {
-    "key": "ctrl+b ctrl+v",
+    "key": "shift+alt+v",
     "command": "workbench.action.openView"
   },
   {
