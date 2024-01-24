@@ -23,8 +23,8 @@ function prefix_file {
   # $2: file
   local text="$1";
   local file="$2";
-  [[ -z "$text" ]] && { echo "Must specify text\!" >&2; return 1; }
-  [[ -z "$file" ]] && { echo "Must specify file\!" >&2; return 1; }
+  [[ -z "$text" ]] && { echo "Must specify text" >&2; return 1; }
+  [[ -z "$file" ]] && { echo "Must specify file" >&2; return 1; }
   sed -i "1s/^/$text/" "$file";
 }
 
@@ -35,8 +35,8 @@ function sample {
   # $2: file/stdout
   local n="$1";
   local content="$2";
-  [[ -z "$n" ]] && { echo "Must specify n\!" >&2; return 1; }
-  [[ -z "$content" ]] && { echo "Must specify content\!" >&2; return 1; }
+  [[ -z "$n" ]] && { echo "Must specify n" >&2; return 1; }
+  [[ -z "$content" ]] && { echo "Must specify content" >&2; return 1; }
   shuf -n "$n" $content;
 }
 

@@ -141,7 +141,7 @@ function search_env_for_fuzz {
 
 function show_cmds_like_fuzz {
   local pattern="$1";
-  [[ -z "$pattern" ]] && { echo "Must specify a command pattern\!" >&2; return 1; }
+  [[ -z "$pattern" ]] && { echo "Must specify a command pattern" >&2; return 1; }
   pattern=$(echo "$pattern" | to_fuzz);
   show_cmds_like "$pattern";
 }
@@ -160,8 +160,8 @@ function cdfp {
     done;
     echo "$project_dir";
   )";
-  cd "$project_dir" || { echo "Unable to find project_dir\!" >&2; return 1; }
-  cd "$(dirname `FUZZY_FINDER_CDF_PLACEHOLDER`)"  || { echo "Unable to find selected files directory\!" >&2; return 1; };
+  cd "$project_dir" || { echo "Unable to find project_dir" >&2; return 1; }
+  cd "$(dirname `FUZZY_FINDER_CDF_PLACEHOLDER`)"  || { echo "Unable to find selected files directory" >&2; return 1; };
 }
 
 function cdp {
@@ -179,7 +179,7 @@ function cdp {
     done;
     local selected; selected=$(printf "%s" "$items" | FUZZY_FINDER_PLACEHOLDER);
   fi
-  cd "$selected" || { echo "Unable to find selected project\!" >&2; return 1; }
+  cd "$selected" || { echo "Unable to find selected project" >&2; return 1; }
 }
 
 function docker_create_env_file {
@@ -238,8 +238,8 @@ function git_deploy {
   done;
   echo "Origin Branch: $origin_branch";
   echo "Destination Branch: $destination_branch";
-  [[ -z "$origin_branch" ]] && { echo "No origin branch found from choices: ${origin_branch_choices[@]}!" >&2; return 1; }
-  [[ -z "$destination_branch" ]] && { echo "No destination branch found from choices: ${destination_branch_choices[@]}!" >&2; return 1; }
+  [[ -z "$origin_branch" ]] && { echo "No origin branch found from choices: ${origin_branch_choices[@]}" >&2; return 1; }
+  [[ -z "$destination_branch" ]] && { echo "No destination branch found from choices: ${destination_branch_choices[@]}" >&2; return 1; }
   git checkout "$origin_branch" && git pull && git push && git checkout "$destination_branch" && git pull && git merge "$origin_branch" --commit --no-edit && git push && git checkout "$origin_branch";
 }
 
@@ -254,7 +254,7 @@ function git_all_the_things {
 function git_checkout_branch_in_path {
   local branches="$1";
   local _path="$2";
-  [[ -z "$branches" ]] && { echo "Must specify a string of branches delimited by spaces\!" >&2; return 1; }
+  [[ -z "$branches" ]] && { echo "Must specify a string of branches delimited by spaces" >&2; return 1; }
   branches=($(echo "$branches" | xargs));
   _path="${_path:="."}";
   _dirs=($(find "$_path" -mindepth 1 -maxdepth 1 -type d | xargs));
@@ -278,7 +278,7 @@ function git_checkout_branch_in_path {
 function git_log_follow {
   # search current branch git commits for commits that change a file
   local item_name="$1";
-  [[ -z "$item_name" ]] && { echo "Must specify item_name\!" >&2; return 1; }
+  [[ -z "$item_name" ]] && { echo "Must specify item_name" >&2; return 1; }
   if [[ -z "$GIT_COLOR_WORDS" ]]; then
     git log --date-order --ignore-space-change --follow -- "$item_name";
   else
@@ -287,12 +287,12 @@ function git_log_follow {
 }
 
 function git_diff_range {
-  [[ -z "$1" ]] && { echo "Must specify from\!" >&2; return 1; }
-  [[ -z "$2" ]] && { echo "Must specify to\!" >&2; return 1; }
+  [[ -z "$1" ]] && { echo "Must specify from" >&2; return 1; }
+  [[ -z "$2" ]] && { echo "Must specify to" >&2; return 1; }
   local from=$(($1 + 1));
   local to=$(($2 + 1));
-  [[ $from -le 0 || $to -le 0 ]] && { echo "from and to must be greater than or equal to 0\!" >&2; return 1; }
-  [[ $from -le $to ]] && { echo "from must be greater than to\!" >&2; return 1; }
+  [[ $from -le 0 || $to -le 0 ]] && { echo "from and to must be greater than or equal to 0" >&2; return 1; }
+  [[ $from -le $to ]] && { echo "from must be greater than to" >&2; return 1; }
   local commits; commits="$(git --no-pager log --oneline -n "$from" | col_n 1 | xargs)";
   local from_commit; from_commit="$(echo "$commits" | col_n "$from")";
   local to_commit; to_commit="$(echo "$commits" | col_n "$to")";
@@ -305,13 +305,13 @@ function git_diff_range {
 
 function git_log_show_last_n_on_current_branch {
   local n="$1";
-  [[ -z "$n" ]] && { echo "Must specify n\!" >&2; return 1; }
+  [[ -z "$n" ]] && { echo "Must specify n" >&2; return 1; }
   git --no-pager log --oneline -n "$n" | perl -nle '$i=$.-1; print "$i $_"';
 }
 
 function git_diff_of_commit {
   local commit="$1";
-  [[ -z "$commit" ]] && { echo "Must specify a commit\!" >&2; return 1; }
+  [[ -z "$commit" ]] && { echo "Must specify a commit" >&2; return 1; }
   if [[ -z "$GIT_COLOR_WORDS" ]]; then
     git diff --ignore-space-change "$commit"^!;
   else
@@ -321,7 +321,7 @@ function git_diff_of_commit {
 
 function git_diff_from_commit_to_current {
   local commit="$1";
-  [[ -z "$commit" ]] && { echo "Must specify a commit\!" >&2; return 1; }
+  [[ -z "$commit" ]] && { echo "Must specify a commit" >&2; return 1; }
   if [[ -z "$GIT_COLOR_WORDS" ]]; then
     git diff --ignore-space-change "$commit"^;
   else
@@ -331,7 +331,7 @@ function git_diff_from_commit_to_current {
 
 function git_rebase_i_head {
   local n="$1";
-  [[ -z "$n" ]] && { echo "Must specify a n\!" >&2; return 1; }
+  [[ -z "$n" ]] && { echo "Must specify a n" >&2; return 1; }
   git rebase -i HEAD~"$n";
 }
 
@@ -360,7 +360,7 @@ function convert_csv_to_json {
 function csv_delimiter_check_single_line {
   local csv_like="$1";
   local delimiter="$2";
-  [[ -z "$csv_like" ]] && { echo "Must specify a csv_like file or string\!" >&2; return 1; }
+  [[ -z "$csv_like" ]] && { echo "Must specify a csv_like file or string" >&2; return 1; }
   echo "${delimiter:=","}" >/dev/null;
   [[ -e "$csv_like" ]] && { csv_like=$(cat "$csv_like"); }
   echo "$csv_like" | tr -d -c "${delimiter}\n" | awk '{ print length; }' | sort -n | uniq -c;
@@ -389,7 +389,7 @@ function _rest_format_and_print_response {
 
 function rest_encode_url {
   local url="$1";
-  [[ -z "$url" ]] && { echo "Must specify url\!" >&2; return 1; }
+  [[ -z "$url" ]] && { echo "Must specify url" >&2; return 1; }
   echo "$url" | sed 's, ,%20,g;s,\!,%21,g;s,",%22,g;s,#,%23,g;s,\$,%24,g;s,'"'"',%27,g;';
 }
 
@@ -402,7 +402,7 @@ function _rest_helper {
   local method="$5";
   local headers="$6";
   local trailing_command="$7";
-  [[ -z "$url" ]] && { echo "Must specify url\!" >&2; return 1; }
+  [[ -z "$url" ]] && { echo "Must specify url" >&2; return 1; }
   echo "${content_type:="application/json"}" >/dev/null;
   echo "${curl_flags:="Lk"}" >/dev/null;
   echo "${response_file_type:="json"}" >/dev/null;
@@ -474,7 +474,7 @@ function rest_delete {
 
 function rest_generic {
   method="$9";
-  [[ -z "$method" ]] && { echo "Must specify method\!" >&2; return 1; }
+  [[ -z "$method" ]] && { echo "Must specify method" >&2; return 1; }
   declare -a inputs; inputs=($@);
   inputs+=("$method");
   _rest_helper_preper $inputs[@];

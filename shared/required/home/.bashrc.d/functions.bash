@@ -7,7 +7,7 @@ function search_env_for {
 
 function show_cmds_like {
   local pattern="$1";
-  [[ -z "$pattern" ]] && { echo "Must specify a command pattern\!" >&2; return 1; }
+  [[ -z "$pattern" ]] && { echo "Must specify a command pattern" >&2; return 1; }
   local search_res=$(search_env_for "$pattern");
   local alias=`echo "$search_res" |  grep -Ei "\s*alias"`;
   [[ -z "$alias" ]] || { echo "$alias"; }

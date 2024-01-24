@@ -31,7 +31,7 @@ function workplace_find_files {
     local project_patterns=".*";
   fi
   if [[ "${args[*]}" == *"$project_patterns_arg"* ]]; then
-    echo "$project_patterns_arg must be the first argument in the list\!" >&2;
+    echo "$project_patterns_arg must be the first argument in the list" >&2;
     return 1;
   fi
   if [[ -n "$MY_WORKPLACE_PROJECT_DIRS" ]]; then
@@ -63,7 +63,7 @@ function workplace_find_in_files {
     local project_patterns=".*";
   fi
   if [[ "${args[*]}" == *"$project_patterns_arg"* ]]; then
-    echo "$project_patterns_arg must be the first argument in the list\!" >&2;
+    echo "$project_patterns_arg must be the first argument in the list" >&2;
     return 1;
   fi
   if [[ -n "$MY_WORKPLACE_PROJECT_DIRS" ]]; then
@@ -95,7 +95,7 @@ function workplace_find_items {
     local project_patterns=".*";
   fi
   if [[ "${args[*]}" == *"$project_patterns_arg"* ]]; then
-    echo "$project_patterns_arg must be the first argument in the list\!" >&2;
+    echo "$project_patterns_arg must be the first argument in the list" >&2;
     return 1;
   fi
   if [[ -n "$MY_WORKPLACE_PROJECT_DIRS" ]]; then
@@ -128,7 +128,7 @@ function workplace_repos_do_thing {
   fi
   local repo_operation="${args[@]}";
   if [[ "${args[*]}" == *"$project_patterns_arg"* ]]; then
-    echo "$project_patterns_arg must be the first argument in the list\!" >&2;
+    echo "$project_patterns_arg must be the first argument in the list" >&2;
     return 1;
   fi
   if [[ -n "$MY_WORKPLACE_PROJECT_DIRS" ]]; then
@@ -153,7 +153,7 @@ function workplace_repos_do_thing {
 
 function project_operation {
   local proj_op; proj_op="$1";
-  [[ -z "$proj_op" ]] && { echo "Must specify proj_op\!" >&2; return 1; }
+  [[ -z "$proj_op" ]] && { echo "Must specify proj_op" >&2; return 1; }
   local prompt_indicator='#######';
   local press_enter_to='press enter to';
   local og_git_branch; og_git_branch="$(git_current_branch)";
@@ -162,7 +162,7 @@ function project_operation {
   local should_pause; should_pause="$3";
   git status >/dev/null 2>&1
   local is_git_repo="$?";
-  [[ "$is_git_repo" != "0" ]] && { echo "$(pwd) is not a git repo\!" >&2; return $is_git_repo; }
+  [[ "$is_git_repo" != "0" ]] && { echo "$(pwd) is not a git repo" >&2; return $is_git_repo; }
   git stash push | grep -E 'No local changes to save';
   local wasStashed=$?;
   git_all_the_things 2>/dev/null;

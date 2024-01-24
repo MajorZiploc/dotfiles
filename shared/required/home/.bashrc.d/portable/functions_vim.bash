@@ -8,7 +8,7 @@ function col_n {
   # Extract the nths column from a tabular output
   # $1: pos num
   local n="$1";
-  [[ -z "$n" ]] && { echo "Must specify n\!" >&2; return 1; }
+  [[ -z "$n" ]] && { echo "Must specify n" >&2; return 1; }
   awk -v col=$n '{print $col}';
 }
 
@@ -16,7 +16,7 @@ function skip_n {
   # Skip first n words in line
   # $1: pos num
   local n=$(($1 + 1));
-  [[ -z "$n" ]] && { echo "Must specify n\!" >&2; return 1; }
+  [[ -z "$n" ]] && { echo "Must specify n" >&2; return 1; }
   cut -d' ' -f$n-;
 }
 
@@ -24,7 +24,7 @@ function take_n {
   # Keep first n words in line
   # $1: pos num
   local n="$1";
-  [[ -z "$n" ]] && { echo "Must specify n\!" >&2; return 1; }
+  [[ -z "$n" ]] && { echo "Must specify n" >&2; return 1; }
   cut -d' ' -f1-$n;
 }
 
@@ -75,7 +75,7 @@ function show_block_line_num_range {
 
 function show_line_nums {
   local content="$1";
-  [[ -z "$content" ]] && { echo "Must specify content\!" >&2; return 1; }
+  [[ -z "$content" ]] && { echo "Must specify content" >&2; return 1; }
   perl -nle 'print "$. $_"' "$content";
 }
 
@@ -118,10 +118,10 @@ function refactor_rename_symbols {
   local file_pattern=$2; file_pattern="${file_pattern:-".*"}"
   local symbol_declare_prefix="$3"; symbol_declare_prefix="${symbol_declare_prefix:-""}";
   local symbol_declare_postfix="$4"; symbol_declare_postfix="${symbol_declare_postfix:-""}";
-  [[ -z "$rename_pattern" ]] && { echo "Must specify rename_pattern\!" >&2; return 1; }
+  [[ -z "$rename_pattern" ]] && { echo "Must specify rename_pattern" >&2; return 1; }
   local search_results; search_results=$(gfind_in_files "^\s*$symbol_declare_prefix\b([a-zA-Z0-9_\-]+)\b$symbol_declare_postfix" "$file_pattern");
   local symbol_names; symbol_names=($(echo "$search_results" | sed -E "s,.*?[[:digit:]]+:.*?$symbol_declare_prefix\b([a-zA-Z0-9_\-]+)\b$symbol_declare_postfix(.*),\1,g" | sort -u | xargs));
-  [[ "$symbol_names" =~ "^[[:blank:]]*$" ]] && { echo "No symbol_names found to rename!" >&2; return 1; }
+  [[ "$symbol_names" =~ "^[[:blank:]]*$" ]] && { echo "No symbol_names found to rename" >&2; return 1; }
   local files; files=($(gfind_files "$file_pattern" | xargs));
   for symbol_name in ${symbol_names[@]}; do
    new_symbol_name=$(echo "$symbol_name" | sed -E "$rename_pattern");
@@ -207,11 +207,11 @@ function _find_git_estimator_ignored_dirs {
 
 function _find_items_rename_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern" >&2; return 1; }
   local by="$2";
-  [[ -z "$by" ]] && { echo "Must specify a by substitution\!" >&2; return 1; }
+  [[ -z "$by" ]] && { echo "Must specify a by substitution" >&2; return 1; }
   local preview=$3;
-  [[ -z "$preview" ]] && { echo "Must specify the preview flag\!" >&2; return 1; }
+  [[ -z "$preview" ]] && { echo "Must specify the preview flag" >&2; return 1; }
   local maxdepth="$4";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$5";
@@ -271,9 +271,9 @@ function gfind_items_rename {
 
 function _find_items_delete_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern" >&2; return 1; }
   local preview=$2;
-  [[ -z "$preview" ]] && { echo "Must specify the preview flag\!" >&2; return 1; }
+  [[ -z "$preview" ]] && { echo "Must specify the preview flag" >&2; return 1; }
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
@@ -333,7 +333,7 @@ function gfind_items_delete {
 
 function _find_items_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern" >&2; return 1; }
   local maxdepth="$2";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$3";
@@ -374,7 +374,7 @@ function gfind_items_fuzz {
 
 function _find_files_delete_preview_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern" >&2; return 1; }
   local with_content="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
@@ -394,7 +394,7 @@ function _find_files_delete_preview_helper {
 
 function _find_files_delete_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern" >&2; return 1; }
   local with_content="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
@@ -444,12 +444,12 @@ function gfind_files_delete {
 
 function _find_files_rename_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern" >&2; return 1; }
   local by="$2";
-  [[ -z "$by" ]] && { echo "Must specify a by substitution\!" >&2; return 1; }
+  [[ -z "$by" ]] && { echo "Must specify a by substitution" >&2; return 1; }
   local with_content="$3";
   local preview=$4
-  [[ -z "$preview" ]] && { echo "Must specify the preview flag\!" >&2; return 1; }
+  [[ -z "$preview" ]] && { echo "Must specify the preview flag" >&2; return 1; }
   local maxdepth="$5";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$6";
@@ -514,7 +514,7 @@ function gfind_files_rename {
 
 function _find_files_helper {
   local file_pattern="$1";
-  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern\!" >&2; return 1; }
+  [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern" >&2; return 1; }
   local with_content="$2";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
@@ -569,7 +569,7 @@ function gfind_files_fuzz {
 
 function _find_in_files_helper {
   local grep_pattern="$1";
-  [[ -z "$grep_pattern" ]] && { echo "Must specify a grep pattern\!" >&2; return 1; }
+  [[ -z "$grep_pattern" ]] && { echo "Must specify a grep pattern" >&2; return 1; }
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
   local maxdepth="$3";
@@ -621,7 +621,7 @@ function gfind_in_files_fuzz {
 
 function _find_in_files_replace_helper {
   local by="$1";
-  [[ -z "$by" ]] && { echo "Must specify a by substitution\!" >&2; return 1; }
+  [[ -z "$by" ]] && { echo "Must specify a by substitution" >&2; return 1; }
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
   local maxdepth="$3";
