@@ -12,7 +12,7 @@ vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc" | sed -E 's,^/(\w),\U\1:,g' | sed -
 find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" "{}" \;
 find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,HOME_DIR_PLACEHOLDER,$HOME,g" "{}" \;
 vscode_extra_keybindings_placeholder='';
-find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec gsed -E -i'' "s/VSCODE_EXTRA_KEYBINDINGS_PLACEHOLDER/${vscode_extra_keybindings_placeholder}/g" "{}" \;
+find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s/VSCODE_EXTRA_KEYBINDINGS_PLACEHOLDER/${vscode_extra_keybindings_placeholder}/g" "{}" \;
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,~/bin/bash.exe,g' "{}" \;
 remove_coc="\bcoc\b";
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i'' "/$remove_coc/d" "{}" \;
