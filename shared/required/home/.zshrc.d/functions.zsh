@@ -8,7 +8,7 @@ function search_env_for {
 
 function show_cmds_like {
 	local pattern="$1";
-	[[ -z "$pattern" ]] && { echo "Must specify a command pattern\!" >&2 return 1; }
+	[[ -z "$pattern" ]] && { echo "Must specify a command pattern" >&2 return 1; }
 	local alias=`alias 2> /dev/null|  grep -Ei "$pattern"`;
 	[[ -z "$alias" ]] || { echo "$alias" }
 	local fn_names=($(print -l ${(ok)functions} |  grep -Ei "$pattern" | sed -E "s/declare -f (.*)/\1/" | xargs));
