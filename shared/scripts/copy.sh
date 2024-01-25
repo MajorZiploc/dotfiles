@@ -34,6 +34,8 @@ mkdir -p "$home_wallpapers";
 [[ ! -e "${home_wallpapers}/vscode_window_01.png" ]] && { cp "$temp_shared/pictures/vscode_window_01.png" "$home_wallpapers/vscode_window_01.png"; }
 [[ ! -e "${home_wallpapers}/vscode_side-bar_01.png" ]] && { cp "$temp_shared/pictures/vscode_side-bar_01.png" "$home_wallpapers/vscode_side-bar_01.png"; }
 [[ ! -d "${ZSH_CUSTOM:-"$home_dir/.oh-my-zsh/custom"}/plugins/fzf-zsh-plugin" ]] && { git clone --depth 1 https://github.com/unixorn/fzf-zsh-plugin.git "${ZSH_CUSTOM:-"$home_dir/.oh-my-zsh/custom"}/plugins/fzf-zsh-plugin"; }
+[[ ! -d "${ZSH_CUSTOM:-"$home_dir/.oh-my-zsh/custom"}/plugins/zsh-autosuggestions" ]] && { git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions.git "${ZSH_CUSTOM:-"$home_dir/.oh-my-zsh/custom"}/plugins/zsh-autosuggestions"; }
+[[ ! -d "${ZSH_CUSTOM:-"$home_dir/.oh-my-zsh/custom"}/plugins/zsh-syntax-highlighting" ]] && { git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-"$home_dir/.oh-my-zsh/custom"}/plugins/zsh-syntax-highlighting"; }
 
 rm -rf "${temp:?}/";
 
