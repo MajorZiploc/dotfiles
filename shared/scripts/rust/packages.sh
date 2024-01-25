@@ -28,6 +28,8 @@
 function main {
   local method="$1"; method="${method:-"install"}";
   if [[ "$method" == "install" ]]; then
+    # ensure sccache is not set before sccache is installed, else it bricks any install
+    unset RUSTC_WRAPPER;
     cargo install cargo-update ripgrep du-dust exa bat sccache cargo-outdated zoxide;
   else
     # command from cargo-update package
