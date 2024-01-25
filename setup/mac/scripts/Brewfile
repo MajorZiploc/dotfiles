@@ -1,6 +1,8 @@
 # vim:ft=ruby
 
-tap 'homebrew/cask'
+# NOTE: seems to no longer be needed in general
+# tap 'homebrew/cask'
+
 tap 'buo/cask-upgrade'
 brew 'mas'
 
