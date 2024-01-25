@@ -17,10 +17,8 @@ xcode-select --install;
 # node
 mkdir ~/.nvm;
 
-[[ $(($full_install & $flags_as_int)) == $full_install ]] && {
-  # rust
-  curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh;
-}
+# rust
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh;
 
 if [[ $(($full_install & $flags_as_int)) == $full_install ]]; then
   # brew update;

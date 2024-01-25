@@ -16,13 +16,6 @@ temp_this="$temp/this";
 
 "$script_path/create_temps.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this";
 
-home_wallpapers="${home_dir:?}/Pictures/Wallpapers"
-mkdir -p "$home_wallpapers";
-[[ ! -e "${home_wallpapers}/terminal_wallpaper.jpg" ]] && { cp "$temp_shared/pictures/terminal_wallpaper.jpg" "$home_wallpapers/terminal_wallpaper.jpg"; }
-[[ ! -e "${home_wallpapers}/vscode_window_01.png" ]] && { cp "$temp_shared/pictures/vscode_window_01.png" "$home_wallpapers/vscode_window_01.png"; }
-[[ ! -e "${home_wallpapers}/vscode_side-bar_01.png" ]] && { cp "$temp_shared/pictures/vscode_side-bar_01.png" "$home_wallpapers/vscode_side-bar_01.png"; }
-[[ ! -d "${ZSH_CUSTOM:-"$home_dir/.oh-my-zsh/custom"}/plugins/fzf-zsh-plugin" ]] && { git clone --depth 1 https://github.com/unixorn/fzf-zsh-plugin.git "${ZSH_CUSTOM:-"$home_dir/.oh-my-zsh/custom"}/plugins/fzf-zsh-plugin"; }
-
 # call os specific substition flow script
 test -f "$setup_root/scripts/substition.sh" && { "$setup_root/scripts/substition.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this"; };
 
@@ -34,6 +27,15 @@ done;
 "$temp_shared/scripts/ensure_client_paths.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this" "$flags" "${home_dir:?}";
 
 "$temp_shared/scripts/copy_content_to_client.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this" "$flags" "${home_dir:?}";
+
+home_wallpapers="${home_dir:?}/Pictures/Wallpapers"
+mkdir -p "$home_wallpapers";
+[[ ! -e "${home_wallpapers}/terminal_wallpaper.jpg" ]] && { cp "$temp_shared/pictures/terminal_wallpaper.jpg" "$home_wallpapers/terminal_wallpaper.jpg"; }
+[[ ! -e "${home_wallpapers}/vscode_window_01.png" ]] && { cp "$temp_shared/pictures/vscode_window_01.png" "$home_wallpapers/vscode_window_01.png"; }
+[[ ! -e "${home_wallpapers}/vscode_side-bar_01.png" ]] && { cp "$temp_shared/pictures/vscode_side-bar_01.png" "$home_wallpapers/vscode_side-bar_01.png"; }
+[[ ! -d "${ZSH_CUSTOM:-"$home_dir/.oh-my-zsh/custom"}/plugins/fzf-zsh-plugin" ]] && { git clone --depth 1 https://github.com/unixorn/fzf-zsh-plugin.git "${ZSH_CUSTOM:-"$home_dir/.oh-my-zsh/custom"}/plugins/fzf-zsh-plugin"; }
+[[ ! -d "${ZSH_CUSTOM:-"$home_dir/.oh-my-zsh/custom"}/plugins/zsh-autosuggestions" ]] && { git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions.git "${ZSH_CUSTOM:-"$home_dir/.oh-my-zsh/custom"}/plugins/zsh-autosuggestions"; }
+[[ ! -d "${ZSH_CUSTOM:-"$home_dir/.oh-my-zsh/custom"}/plugins/zsh-syntax-highlighting" ]] && { git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-"$home_dir/.oh-my-zsh/custom"}/plugins/zsh-syntax-highlighting"; }
 
 rm -rf "${temp:?}/";
 

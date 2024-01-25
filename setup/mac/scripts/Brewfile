@@ -1,6 +1,8 @@
 # vim:ft=ruby
 
-tap 'homebrew/cask'
+# NOTE: seems to no longer be needed in general
+# tap 'homebrew/cask'
+
 tap 'buo/cask-upgrade'
 brew 'mas'
 
@@ -108,7 +110,7 @@ brew 'xz'
 brew 'zlib'
 
 # rust
-brew 'rust-analyzer' # full_install
+brew 'rust-analyzer'
 
 # java
 # if Brewfile can not handle pinning, then the java section may need to move into the shell script rather than Brewfile
@@ -124,7 +126,7 @@ brew 'maven', args: ['ignore-dependencies']
 # brew pin maven;
 
 # golang
-brew 'golang' # full_install
+brew 'golang'
 
 # php
 brew 'php' # full_install
