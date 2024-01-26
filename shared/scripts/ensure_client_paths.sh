@@ -21,6 +21,7 @@ mkdir -p "${home_dir:?}/.vim/rc-settings";
 mkdir -p "${home_dir:?}/.cache/vim/backup";
 mkdir -p "${home_dir:?}/.cache/vim/swap";
 mkdir -p "${home_dir:?}/.cache/vim/undo";
+mkdir -p "${home_dir:?}/.oh-my-zsh/custom/plugins";
 [[ $(($clipboard_flag_as_int & $flags_as_int)) == $clipboard_flag_as_int ]] && {
   mkdir -p "${home_dir:?}/clipboard";
 }
