@@ -387,3 +387,8 @@ endfunction
 
 " Aligned text (text align)
 nnoremap <leader>ta :call TextAlignment()<cr>
+
+" mainly for sshfs situation: store tmp like files locally rather than on the server to improve editor performance
+set backupdir=~/.cache/vim/backup//
+set directory=~/.cache/vim/swap//
+set undodir=~/.cache/vim/undo//

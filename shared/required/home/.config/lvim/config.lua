@@ -698,6 +698,11 @@ lvim.builtin.lualine.sections.lualine_c = {
   }
 }
 
+-- mainly for sshfs situation: store tmp like files locally rather than on the server to improve editor performance
+vim.cmd('set backupdir=~/.cache/vim/backup//')
+vim.cmd('set directory=~/.cache/vim/swap//')
+vim.cmd('set undodir=~/.cache/vim/undo//')
+
 vim.cmd('set wrap')
 vim.cmd('source ~/.slim_vimrc')
 vim.cmd('source ~/.vim/plugin-settings/vim_code_runner.vim')
