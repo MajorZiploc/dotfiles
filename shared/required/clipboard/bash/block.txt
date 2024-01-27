@@ -23,3 +23,20 @@ unset IFS;
 gfind_in_files "-exec bash -c 'source ~/.bashrc.d/portable/functions_vim.bash; show_block \"function\" \"function\" \"{}\" | head -n 3 | tr -d \"\n\"; echo \"\";' \;" | grep -Ev "^[^:]+:::$"
 # search for block and print filename
 gfind_files ".*" "-exec bash -c 'source ~/.bashrc.d/portable/functions_vim.bash; show_block \"function\" \"function\" \"{}\" | head -n 3 | tr -d \"\n\"; echo \"\";' \;" | grep -Ev "^[^:]+:::$" | sed -E 's,([^:]+).*,\1,g'
+<:>
+# merge 2 jsons
+json1='
+{
+  "x": [1],
+  "y": 2
+}
+';
+json2='
+{
+  "x": [2],
+  "y": 2
+}
+';
+echo "$json1" | sed -E 's,\\,\\\\,g' > /tmp/json1.json;
+echo "$json2" | sed -E 's,\\,\\\\,g' > /tmp/json2.json;
+jq -s '.[0] * .[1]' /tmp/json1.json /tmp/json2.json;
