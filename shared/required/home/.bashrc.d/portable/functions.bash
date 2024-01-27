@@ -52,7 +52,8 @@ function tmuxps {
     for _path in $(echo "${TMUXPS_PROJECT_DIRS[@]}" | tr " " "\n"); do
       [[ -d "$_path" ]] && {
         items+=$(find "$_path" -maxdepth 1 -mindepth 1 -type d);
-        items+="\n";
+        items+="
+";
       }
     done;
     selected=$(printf "%s" "$items" | FUZZY_FINDER_PLACEHOLDER);
