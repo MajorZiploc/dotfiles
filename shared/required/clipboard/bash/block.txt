@@ -25,6 +25,8 @@ gfind_in_files "-exec bash -c 'source ~/.bashrc.d/portable/functions_vim.bash; s
 gfind_files ".*" "-exec bash -c 'source ~/.bashrc.d/portable/functions_vim.bash; show_block \"function\" \"function\" \"{}\" | head -n 3 | tr -d \"\n\"; echo \"\";' \;" | grep -Ev "^[^:]+:::$" | sed -E 's,([^:]+).*,\1,g'
 <:>
 # merge 2 jsons
+# NOTE: if json values have a single quote in them, then you need to run this on the jsons before this: sed -E 's,'"(')"',\1"\1"\1,g'
+#  OR: make the json files manually
 json1='
 {
   "x": [1],
