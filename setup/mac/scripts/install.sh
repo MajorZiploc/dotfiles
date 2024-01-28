@@ -25,7 +25,7 @@ if [[ $(($full_install & $flags_as_int)) == $full_install ]]; then
   cp "$this_path/Brewfile" "$HOME/";
 else
   # brew update;
-  echo "$(cat "$this_path/Brewfile" | sed -E "s,(.*\# full_install)$,# \\1,g")" | tee "$HOME/Brewfile";
+  echo "$(cat "$this_path/Brewfile" | sed -E "s,(.*\# full_install)$,# \\1,g")" > "$HOME/Brewfile";
 fi
 ( cd "$HOME/" || return 1; brew bundle; )
 
