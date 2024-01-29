@@ -12,7 +12,7 @@ function main {
   if [[ $(($full_install & $flags_as_int)) == $full_install ]]; then
     cp "$scriptpath/Brewfile" "$HOME/";
   else
-    echo "$(cat "$scriptpath/Brewfile" | sed -E "s,(.*\# full_install)$,# \\1,g")" | tee "$HOME/Brewfile";
+    echo "$(cat "$scriptpath/Brewfile" | sed -E "s,(.*\# full_install)$,# \\1,g")" > "$HOME/Brewfile";
   fi
   ( cd "$HOME"; brew bundle; )
 }

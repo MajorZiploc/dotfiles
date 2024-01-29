@@ -25,7 +25,7 @@ if [[ $(($full_install & $flags_as_int)) == $full_install ]]; then
   cp "$this_path/Brewfile" "$HOME/";
 else
   # brew update;
-  echo "$(cat "$this_path/Brewfile" | sed -E "s,(.*\# full_install)$,# \\1,g")" | tee "$HOME/Brewfile";
+  echo "$(cat "$this_path/Brewfile" | sed -E "s,(.*\# full_install)$,# \\1,g")" > "$HOME/Brewfile";
 fi
 ( cd "$HOME/" || return 1; brew bundle; )
 
@@ -64,6 +64,13 @@ pyenv global 3.11.2;
   rm minikube-darwin-arm64;
 }
 
+# NOTE: to view all settings
+# defaults read <thing>
+#  ex: show all NSGlobalDomain settings
+#  defaults read NSGlobalDomain
+#  ex: show NSGlobalDomain KeyRepeat setting
+#  defaults read NSGlobalDomain KeyRepeat
+# TODO: should look at all these settings and update/add more sets to this file
 # Finder: set hidden files to show by default
 defaults write http://com.apple.Finder AppleShowAllFiles -bool true;
 # Finder: show file extensions
@@ -83,7 +90,7 @@ defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false;
 # Clock: dont let the date separators flash
 defaults write com.apple.menuextra.clock FlashDateSeparators -bool false;
 # Makes key held down actions the quickest possible, <cmd>-<space> Keyboard for all options
-defaults write NSGlobalDomain KeyRepeat -int 0;
+defaults write NSGlobalDomain KeyRepeat -int 2;
 # Finder: show path
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true;
 
