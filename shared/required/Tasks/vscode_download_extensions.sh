@@ -5,90 +5,101 @@
 # - a '##' means it is something i would like to look into
 # - a '###' means it is an alternative
 
-# Core plugings
-# vim emulation
-code --install-extension vscodevim.vim
-# fall back vim emulation
-### code --install-extension asvetliakov.vscode-neovim
-# background images
-code --install-extension katsute.code-background
-# checks spelling
-code --install-extension streetsidesoftware.code-spell-checker
-# color codes csv columns
-code --install-extension mechatroner.rainbow-csv
-# code formatter for js/ts/html/json
-code --install-extension esbenp.prettier-vscode
-# advanced git actions
-code --install-extension eamodio.gitlens
-# a graph for git
-code --install-extension mhutchie.git-graph
-# fzf and rg support
-code --install-extension tomrijndorp.find-it-faster
+vscodes=();
+if which code >/dev/null 2>&1; then
+  vscodes+=("code")
+fi
+if which code-insiders >/dev/null 2>&1; then
+  vscodes+=("code-insiders")
+fi
 
-# Core-Extended plugings
-# gives a table view for data, dont recommend using it to edit data
-# code --install-extension janisdd.vscode-edit-csv
-# See through glass feel 
-# code --install-extension s-nlf-fh.glassit
-# Simple tmux key binds for the vscode terminal
-# code --install-extension stephlin.vscode-tmux-keybinding
-# rest api client - postman like
-## code --install-extension humao.rest-client
+echo "vscodes to install plugins for: ${vscodes[*]}";
 
-# docker
-# run project inside the container
-code --install-extension ms-vscode-remote.remote-containers
-# code --enable-proposed-api ms-vscode-remote.remote-containers
-code --install-extension ms-azuretools.vscode-docker
+for vscode in ${vscodes[@]}; do
+  # Core plugings
+  # vim emulation
+  eval "$vscode --install-extension vscodevim.vim"
+  # fall back vim emulation
+  ### code --install-extension asvetliakov.vscode-neovim
+  # background images
+  eval "$vscode --install-extension katsute.code-background"
+  # checks spelling
+  eval "$vscode --install-extension streetsidesoftware.code-spell-checker"
+  # color codes csv columns
+  eval "$vscode --install-extension mechatroner.rainbow-csv"
+  # code formatter for js/ts/html/json
+  eval "$vscode --install-extension esbenp.prettier-vscode"
+  # advanced git actions
+  eval "$vscode --install-extension eamodio.gitlens"
+  # a graph for git
+  eval "$vscode --install-extension mhutchie.git-graph"
+  # fzf and rg support
+  eval "$vscode --install-extension tomrijndorp.find-it-faster"
 
-# dotnet
-# base language support
-code --install-extension Ionide.Ionide-fsharp
-# base language support
-code --install-extension ms-dotnettools.csharp
-# base language support
-code --install-extension ms-vscode.powershell
+  # Core-Extended plugings
+  # gives a table view for data, dont recommend using it to edit data
+  # eval "$vscode --install-extension janisdd.vscode-edit-csv"
+  # See through glass feel 
+  # eval "$vscode --install-extension s-nlf-fh.glassit"
+  # Simple tmux key binds for the vscode terminal
+  # eval "$vscode --install-extension stephlin.vscode-tmux-keybinding"
+  # rest api client - postman like
+  ## eval "$vscode --install-extension humao.rest-client"
 
-# Python
-# base language support
-code --install-extension ms-python.python
-# intellisense
-code --install-extension ms-python.vscode-pylance
-## code --install-extension ms-toolsai.jupyter
-# run on save/edit
-# code --install-extension almenon.arepl
+  # docker
+  # run project inside the container
+  eval "$vscode --install-extension ms-vscode-remote.remote-containers"
+  # eval "$vscode --enable-proposed-api ms-vscode-remote.remote-containers"
+  eval "$vscode --install-extension ms-azuretools.vscode-docker"
 
-# godot
-# code --install-extension geequlim.godot-tools
+  # dotnet
+  # base language support
+  eval "$vscode --install-extension Ionide.Ionide-fsharp"
+  # base language support
+  eval "$vscode --install-extension ms-dotnettools.csharp"
+  # base language support
+  eval "$vscode --install-extension ms-vscode.powershell"
 
-# Java
-# code --install-extension vscjava.vscode-java-pack
+  # Python
+  # base language support
+  eval "$vscode --install-extension ms-python.python"
+  # intellisense
+  eval "$vscode --install-extension ms-python.vscode-pylance"
+  ## eval "$vscode --install-extension ms-toolsai.jupyter"
+  # run on save/edit
+  # eval "$vscode --install-extension almenon.arepl"
 
-# javascript / typescript
-# run on save/edit
-## code --install-extension wallabyjs.quokka-vscode
-## prettier typescript error blocks
-# code --install-extension yoavbls.pretty-ts-errors
+  # godot
+  # eval "$vscode --install-extension geequlim.godot-tools"
 
-# bash wsl
-# run inside ubuntu wsl container
-# code --install-extension ms-vscode-remote.remote-wsl
-# debug bash code
-# code --install-extension rogalmic.bash-debug
+  # Java
+  # eval "$vscode --install-extension vscjava.vscode-java-pack"
 
-# sql formatter
-# code --install-extension adpyke.vscode-sql-formatter
+  # javascript / typescript
+  # run on save/edit
+  ## eval "$vscode --install-extension wallabyjs.quokka-vscode"
+  ## prettier typescript error blocks
+  # eval "$vscode --install-extension yoavbls.pretty-ts-errors"
 
-# mssql
-# code --install-extension ms-mssql.mssql
+  # bash wsl
+  # run inside ubuntu wsl container
+  # eval "$vscode --install-extension ms-vscode-remote.remote-wsl"
+  # debug bash code
+  # eval "$vscode --install-extension rogalmic.bash-debug"
 
-# postgres
-# code --install-extension ckolkman.vscode-postgres
+  # sql formatter
+  # eval "$vscode --install-extension adpyke.vscode-sql-formatter"
 
-# general non mssql database connection
-## code --install-extension bajdzis.vscode-database
+  # mssql
+  # eval "$vscode --install-extension ms-mssql.mssql"
 
-# prolog
-# base language support
-# code --install-extension arthurwang.vsc-prolog
+  # postgres
+  # eval "$vscode --install-extension ckolkman.vscode-postgres"
 
+  # general non mssql database connection
+  ## eval "$vscode --install-extension bajdzis.vscode-database"
+
+  # prolog
+  # base language support
+  # eval "$vscode --install-extension arthurwang.vsc-prolog"
+done;
