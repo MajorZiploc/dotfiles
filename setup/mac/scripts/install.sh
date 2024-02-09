@@ -87,6 +87,12 @@ defaults write NSGlobalDomain NSToolbarTitleViewRolloverDelay -float 0;
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1;
 # VSCode: allows key repeat if key is held down
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false;
+# VSCode Insiders: allows key repeat if key is held down
+defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false;
+# VSCodium: allows key repeat if key is held down
+defaults write com.visualstudio.code.oss ApplePressAndHoldEnabled -bool false;
+# To enable global key-repeat: this is helpful if you're using Vim in a PWA like code-server
+defaults write -g ApplePressAndHoldEnabled -bool false;
 # Clock: dont let the date separators flash
 defaults write com.apple.menuextra.clock FlashDateSeparators -bool false;
 # Makes key held down actions the quickest possible, <cmd>-<space> Keyboard for all options
