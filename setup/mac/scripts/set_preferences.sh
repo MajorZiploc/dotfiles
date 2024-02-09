@@ -1,8 +1,8 @@
 # NOTE: to view all settings
 # defaults read <thing>
-#  ex: show all NSGlobalDomain settings
+#  example: show all NSGlobalDomain settings
 #  defaults read NSGlobalDomain
-#  ex: show NSGlobalDomain KeyRepeat setting
+#  example: show NSGlobalDomain KeyRepeat setting
 #  defaults read NSGlobalDomain KeyRepeat
 # TODO: should look at all these settings and update/add more sets to this file
 # Finder: set hidden files to show by default
