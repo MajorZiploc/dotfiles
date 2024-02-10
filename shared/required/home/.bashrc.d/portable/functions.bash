@@ -582,3 +582,20 @@ function _just_install {
     fi
   fi
 }
+
+function read_parquet {
+  local file_name="$1";
+  [[ -z "$file_name" ]] && { echo "Must specify file_name" >&2; return 1; }
+  python -c "
+import pandas as pd
+df = pd.read_parquet('$file_name')
+with pd.option_context(
+    'display.max_rows', None, 
+    'display.max_columns', None,
+    'display.width', None,  # Adjust width based on your terminal size
+    'display.precision', 2,  # Set precision for floating point numbers
+    'display.colheader_justify', 'left',  # Justify column headers to the left
+    'display.expand_frame_repr', False):  # Don't wrap DataFrame across multiple lines
+    print(df)
+  ";
+}
