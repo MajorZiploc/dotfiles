@@ -583,7 +583,7 @@ function _just_install {
   fi
 }
 
-function read_parquet {
+function parquet_to_csv {
   local file_name="$1";
   [[ -z "$file_name" ]] && { echo "Must specify file_name" >&2; return 1; }
   local csv_file_name; csv_file_name="/tmp/$(basename "$file_name").csv";
@@ -592,5 +592,4 @@ import pandas as pd
 df = pd.read_parquet('$file_name')
 df.to_csv('$csv_file_name')
   ";
-  cat "$csv_file_name";
 }
