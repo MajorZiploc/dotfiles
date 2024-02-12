@@ -1,7 +1,7 @@
 {
   "window.zoomLevel": 0,
   "workbench.colorTheme": "Monokai Dimmed",
-  "workbench.editor.showTabs": "none",
+  "workbench.editor.showTabs": "single",
   "terminal.integrated.allowChords": false,
   "editor.fontSize": 14,
   "editor.rulers": [120],
