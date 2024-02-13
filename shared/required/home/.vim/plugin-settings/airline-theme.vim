@@ -5,3 +5,5 @@
 " calm and easy to read with different colors for various modes
 let g:airline_theme='base16'
 
+# truncate long branch names to a fixed length
+let g:airline#extensions#branch#displayed_head_limit = 10
