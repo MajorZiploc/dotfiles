@@ -430,15 +430,15 @@ function _rest_helper {
 }
 
 function _rest_helper_preper {
-  local url="$1";
-  local request_body="$2";
-  local curl_flags="$3";
-  local auth="$4";
-  local response_file_type="$5";
-  local content_type="$6";
-  local extra_headers="$7";
-  local trailing_command="$8";
-  local method="$9";
+  local method="$1";
+  local url="$2";
+  local request_body="$3";
+  local curl_flags="$4";
+  local auth="$5";
+  local response_file_type="$6";
+  local content_type="$7";
+  local extra_headers="$8";
+  local trailing_command="$9";
   # authorization is mainly for Bearer token style auth
   if [[ ! "$auth" == *":"* ]]; then
     auth="${auth:+"-H \"Authorization: Bearer $auth\""}";
@@ -451,35 +451,25 @@ function _rest_helper_preper {
 }
 
 function rest_get {
-  declare -a inputs; inputs=($@);
-  inputs+=("GET");
-  _rest_helper_preper $inputs[@];
+  _rest_helper_preper "GET" "$@";
 }
 
 function rest_post {
-  declare -a inputs; inputs=($@);
-  inputs+=("POST");
-  _rest_helper_preper $inputs[@];
+  _rest_helper_preper "POST" "$@";
 }
 
 function rest_patch {
-  declare -a inputs; inputs=($@);
-  inputs+=("PATCH");
-  _rest_helper_preper $inputs[@];
+  _rest_helper_preper "PATCH" "$@";
 }
 
 function rest_delete {
-  declare -a inputs; inputs=($@);
-  inputs+=("DELETE");
-  _rest_helper_preper $inputs[@];
+  _rest_helper_preper "DELETE" "$@";
 }
 
 function rest_generic {
-  method="$9";
+  method="$1";
   [[ -z "$method" ]] && { echo "Must specify method" >&2; return 1; }
-  declare -a inputs; inputs=($@);
-  inputs+=("$method");
-  _rest_helper_preper $inputs[@];
+  _rest_helper_preper "$@";
 }
 
 function zoxide_refresh_projects {
