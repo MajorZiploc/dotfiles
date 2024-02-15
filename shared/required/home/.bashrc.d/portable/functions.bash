@@ -462,6 +462,10 @@ function rest_patch {
   _rest_helper_preper "PATCH" "$@";
 }
 
+function rest_put {
+  _rest_helper_preper "PUT" "$@";
+}
+
 function rest_delete {
   _rest_helper_preper "DELETE" "$@";
 }
