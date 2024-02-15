@@ -384,8 +384,9 @@ function _rest_get_base_url_with_endpoint {
 
 function _rest_format_and_print_response {
   local _file="$1";
-  prettier --write "$_file";
-  cat "$_file";
+  local file_content; file_content="$(cat "$_file")";
+  echo "$file_content" | jq > "$_file";
+  echo "$file_content" | jq;
 }
 
 function rest_encode_url {
