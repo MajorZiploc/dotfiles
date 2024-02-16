@@ -290,8 +290,8 @@ nmap <leader>lp :call LoadLocationFixList(@+)<CR>
 vmap <leader>lp "td:call LoadLocationFixList(@t)<CR>
 
 " extended regex instead of basic thing it uses by default
-nnoremap / /\v
-vnoremap / /\v
+" nnoremap / /\v
+" vnoremap / /\v
 
 " wrapper around [ag]?find_files(_fuzz)? bash command for tight integration with vim
 function MyFinder(find_command, quick_fix_list_style, ...)
