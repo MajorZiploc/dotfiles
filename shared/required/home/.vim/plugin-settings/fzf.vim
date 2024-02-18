@@ -25,9 +25,9 @@ nmap <leader>fi :BLines<CR>
 " search lines in buffers
 nmap <leader>ffi :Lines<CR>
 " searches all lines of files in git repo
-nmap <leader>fa :GGrep<CR>
+nmap <leader>fdsa :GGrep<CR>
 " searches all lines of a more limited space of files in git repo, generally is to narrow
-nmap <leader>fdsa :Rg<CR>
+nmap <leader>fa :Rg<CR>
 " searches all lines of all files in git repo, generally is to broad
 nmap <leader>fda :Ag<CR>
 
@@ -109,8 +109,8 @@ command! -bang -nargs=* GGrep
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 " only search file content, not file name -- the {'options': '--delimiter : --nth 4..'} part
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'dir': trim(execute('pwd')), 'options': '--delimiter : --nth 4..'}), <bang>0)
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'dir': trim(execute('pwd')), 'options': '--delimiter : --nth 4..'}), <bang>0)
 " command! -bang -nargs=* GGrep
 "   \ call fzf#vim#grep(
 "   \   'git grep --line-number '.shellescape(<q-args>), 0,
