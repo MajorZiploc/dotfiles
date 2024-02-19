@@ -13,10 +13,17 @@ let g:fzf_action = {
 
 " NOTE: For literal string searches, prefix your search string with a single quote (')
 
+" TODO: after a search, these commands will cd you back to the root of the project
+"   WORKAROUND: you have to re `:cd` to where you were after ever search
+
+" searches files by runing `$FZF_DEFAULT_COMMAND` if defined using in :pwd
 " searches files like vscode
-nmap <C-p> :GFiles<CR>
-" searches all files in repo, generally is to broad
-nmap <C-f> :Files<CR>
+" should respect .gitignore
+" CAN search only subdirectories
+nmap <C-p> :OurFiles<CR>
+" searches all files in project respecting .gitignore
+" CANT search only subdirectories
+nmap <C-f> :GFiles<CR>
 " searches open buffers
 nmap <leader>fb :Buffers<CR>
 
@@ -63,7 +70,7 @@ let g:fzf_tags_command = 'rg --files | ctags -R --links=no -L -'
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.92, 'height': 0.92, 'yoffset': 0.5, 'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline --bind ctrl-a:select-all'
-let $FZF_DEFAULT_COMMAND="rg --files --hidden"
+let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!**/.git/**'"
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -115,3 +122,5 @@ command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-hea
 "   \ call fzf#vim#grep(
 "   \   'git grep --line-number '.shellescape(<q-args>), 0,
 "   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0], 'options': '--delimiter : --nth 3..'}), <bang>0)
+
+command! -bang -nargs=* OurFiles call fzf#vim#files(<q-args>, fzf#vim#with_preview({'dir': trim(execute('pwd'))}), <bang>0)
