@@ -424,7 +424,7 @@ function _rest_helper {
   [[ ! "$headers" == " "* ]] && { headers="${headers:+" $headers"}"; }
   url=" \"${base_url_with_endpoint}${query_params}\"";
   bash -c "
-    curl $curl_flags$method$request_body$url$headers$trailing_command
+    curl $curl_flags$method$request_body$url$headers$trailing_command --compressed
   " > "$_file";
   _rest_format_and_print_response "$_file";
 }
