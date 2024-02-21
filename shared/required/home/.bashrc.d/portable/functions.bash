@@ -384,7 +384,7 @@ function _rest_get_base_url_with_endpoint {
 
 function _rest_format_and_print_response {
   local _file="$1";
-  local file_content; file_content="$(cat "$_file")";
+  local file_content; file_content="$(cat "$_file" | sed -E 's,\\n,\\\\n,g')";
   echo "$file_content" | jq > "$_file";
   echo "$file_content" | jq;
 }
