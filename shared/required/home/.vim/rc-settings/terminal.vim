@@ -176,6 +176,7 @@ autocmd BufNewFile,BufRead *.gdshader set filetype=glsl
 autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType sql setlocal commentstring=--\ %s
 autocmd FileType glsl setlocal commentstring=//\ %s
+autocmd FileType gdscript setlocal commentstring=#\ %s
 autocmd FileType mysql setlocal commentstring=--\ %s
 
 " Navigate to file:
