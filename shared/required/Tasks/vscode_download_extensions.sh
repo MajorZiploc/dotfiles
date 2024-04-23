@@ -35,6 +35,8 @@ for vscode in ${vscodes[@]}; do
   eval "$vscode --install-extension mhutchie.git-graph"
   # fzf and rg support
   eval "$vscode --install-extension tomrijndorp.find-it-faster"
+  # markdown mermaid support
+  eval "$vscode --install-extension bierner.markdown-mermaid"
 
   # Core-Extended plugings
   # gives a table view for data, dont recommend using it to edit data
