@@ -620,7 +620,7 @@ function gfind_in_files_fuzz {
 }
 
 function _find_in_files_replace_helper {
-  local by="$1";
+  local by; by="$(echo "$1" | sed "s,','\"'\"',g")";
   [[ -z "$by" ]] && { echo "Must specify a by substitution" >&2; return 1; }
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
