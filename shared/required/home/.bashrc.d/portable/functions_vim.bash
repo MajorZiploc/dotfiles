@@ -568,7 +568,7 @@ function gfind_files_fuzz {
 }
 
 function _find_in_files_helper {
-  local grep_pattern; grep_pattern="$(echo "$1" | sed "s,','\"'\"',g")";
+  local grep_pattern; grep_pattern="$(echo -E "$1" | sed "s,','\"'\"',g")";
   [[ -z "$grep_pattern" ]] && { echo "Must specify a grep pattern" >&2; return 1; }
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
@@ -620,7 +620,7 @@ function gfind_in_files_fuzz {
 }
 
 function _find_in_files_replace_helper {
-  local by; by="$(echo "$1" | sed "s,','\"'\"',g")";
+  local by; by="$(echo -E "$1" | sed "s,','\"'\"',g")";
   [[ -z "$by" ]] && { echo "Must specify a by substitution" >&2; return 1; }
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
