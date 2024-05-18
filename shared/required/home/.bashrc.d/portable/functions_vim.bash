@@ -515,7 +515,7 @@ function gfind_files_rename {
 function _find_files_helper {
   local file_pattern="$1";
   [[ -z "$file_pattern" ]] && { echo "Must specify a file pattern" >&2; return 1; }
-  local with_content="$2";
+  local with_content; with_content="$(echo "$2" | sed "s,','\"'\"',g")";
   local maxdepth="$3";
   [[ -z "$maxdepth" ]] && { maxdepth=$FIND_DEFAULT_MAX_DEPTH; }
   local not_paths="$4";
@@ -568,7 +568,7 @@ function gfind_files_fuzz {
 }
 
 function _find_in_files_helper {
-  local grep_pattern="$1";
+  local grep_pattern; grep_pattern="$(echo "$1" | sed "s,','\"'\"',g")";
   [[ -z "$grep_pattern" ]] && { echo "Must specify a grep pattern" >&2; return 1; }
   local file_pattern="$2";
   [[ -z "$file_pattern" ]] && { file_pattern=".*"; }
