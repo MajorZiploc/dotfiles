@@ -395,3 +395,5 @@ nnoremap <leader>ta :call TextAlignment()<cr>
 set backupdir=~/.cache/vim/backup//
 set directory=~/.cache/vim/swap//
 set undodir=~/.cache/vim/undo//
+
+command! E Explore
