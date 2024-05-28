@@ -174,3 +174,4 @@ cask 'macfuse'
 brew 'gromgit/fuse/sshfs-mac'
 brew "sshfs-mac", link: true, overwrite: true
 
+cask 'steamcmd' # full_install
