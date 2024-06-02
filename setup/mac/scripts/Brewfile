@@ -153,7 +153,7 @@ brew 'bash'
 cask 'google-chrome'
 cask 'iterm2' # full_install
 cask 'discord' # full_install
-cask 'gimp' # full_install
+# cask 'gimp' # full_install
 cask 'krita'
 cask 'visual-studio-code'
 cask 'slack'
@@ -174,3 +174,5 @@ cask 'macfuse'
 brew 'gromgit/fuse/sshfs-mac'
 brew "sshfs-mac", link: true, overwrite: true
 
+cask 'steamcmd' # full_install
+cask 'playonmac' # full_install

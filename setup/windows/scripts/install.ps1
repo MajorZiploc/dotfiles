@@ -70,7 +70,7 @@ if (($optionsAsInt -band $CreativeAsInt) -eq $CreativeAsInt) {
     # Creative Packages
     cinst -y krita
     # photo editing tool
-    cinst -y gimp
+    # cinst -y gimp
     # compact image viewer and converter
     # cinst -y irfanview
     # photo editing tool - easier than gimp
