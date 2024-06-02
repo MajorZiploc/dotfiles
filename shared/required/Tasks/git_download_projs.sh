@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+. ~/.bashrc;
+
 # projects_path="./projs/bitbucket_clone.csv";
 projects_path="./projs/github_repos_clone.csv";
 projects_path_dirty="$HOME/Downloads/github_repos_clone.csv";
