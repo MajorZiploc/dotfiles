@@ -362,7 +362,7 @@ lvim.plugins = {
       })
     end,
   },
-  { "nvim-treesitter/nvim-treesitter-context" }, -- pin the function/class/interface/enum name to top line if inside that thing
+  -- { "nvim-treesitter/nvim-treesitter-context" }, -- pin the function/class/interface/enum name to top line if inside that thing
   -- ui for vim cmd mode that moves the up and infront; can do other stuff too
   -- LazyVim uses this plugin, could be a good reference for setting it up
   {
@@ -394,18 +394,18 @@ lvim.plugins = {
     }
   },
   -- { 'esensar/nvim-dev-container' } -- Use vscode devcontainers - the nvim integration on the containers doesnt seem to work well. Look into using this more
-  {
-    "ThePrimeagen/refactoring.nvim",
-    dependencies = {
-      {"nvim-lua/plenary.nvim"},
-      {"nvim-treesitter/nvim-treesitter"},
-    }
-  }
+  -- {
+  --   "ThePrimeagen/refactoring.nvim",
+  --   dependencies = {
+  --     {"nvim-lua/plenary.nvim"},
+  --     {"nvim-treesitter/nvim-treesitter"},
+  --   }
+  -- }
 }
 
 -- require("devcontainer").setup{} -- related to esensar/nvim-dev-container
-require('refactoring').setup({})
-lvim.keys.visual_mode["<leader>rr"] = ":lua require('refactoring').select_refactor()<CR>"
+-- require('refactoring').setup({})
+-- lvim.keys.visual_mode["<leader>rr"] = ":lua require('refactoring').select_refactor()<CR>"
 
 vim.cmd('let g:rbql_with_headers = 1')
 vim.cmd('let g:rbql_backend_language = "python"')

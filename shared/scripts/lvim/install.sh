@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
+# LV_BRANCH='release-1.4/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.4/neovim-0.9/utils/installer/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 
 # echo "PUT THIS IN YOUR PATH via ~/.zshrc_ext and ~/.bashrc_ext:"
 # echo 'export PATH="/Users/<user_name>/.local/bin:$PATH"'
