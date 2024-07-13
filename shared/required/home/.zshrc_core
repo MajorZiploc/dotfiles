@@ -129,3 +129,4 @@ test which zoxide && eval "$(zoxide init zsh)"
 
 # _ext zsh files are for user specific edits to the zsh environment
 test -e ~/.zshrc_ext && . ~/.zshrc_ext
+

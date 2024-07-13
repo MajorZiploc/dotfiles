@@ -53,6 +53,7 @@ export PATH="$PATH:$HOME/.cargo/bin"
 # golang
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+export ANDROID_HOME="$HOME/Library/Android/sdk";
 
 # python
 export PYENV_ROOT="$HOME/.pyenv"
