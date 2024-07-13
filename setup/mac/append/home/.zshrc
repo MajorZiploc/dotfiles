@@ -17,6 +17,7 @@ export PATH="/opt/homebrew/opt/openjdk${MY_JAVA_VERSION}/bin:$PATH"
 # export CPPFLAGS="-I/opt/homebrew/opt/openjdk${MY_JAVA_VERSION}/include"
 export JAVA_HOME="/opt/homebrew/opt/openjdk${MY_JAVA_VERSION}";
 export JRE_HOME="/opt/homebrew/opt/openjdk${MY_JAVA_VERSION}";
+export ANDROID_HOME="$HOME/Library/Android/sdk";
 
 # Rust
 export PATH="$PATH:$HOME/.cargo/bin"
