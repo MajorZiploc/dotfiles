@@ -83,6 +83,9 @@ vnoremap <leader>tp "_dP
 " enable backspace
 set backspace=indent,eol,start
 
+" break text wrapped lines on spaces rather than inbetween words
+set linebreak
+
 " indentation settings
 set expandtab
 set tabstop=2
