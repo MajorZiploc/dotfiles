@@ -35,7 +35,7 @@ fuzzy_finder_cdf_placeholder="{ git ls-files 2>/dev/null || gfind_files \".*\" }
 find -E "$temp_shared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,FUZZY_FINDER_CDF_PLACEHOLDER,$fuzzy_finder_cdf_placeholder,g" "{}" \;
 fuzzy_finder_placeholder="fzf";
 find -E "$temp_shared" -iregex ".*bash.*" -type f -exec gsed -E -i'' "s,FUZZY_FINDER_PLACEHOLDER,$fuzzy_finder_placeholder,g" "{}" \;
-coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright', 'coc-sql', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-sh', 'coc-rust-analyzer', 'coc-omnisharp', 'coc-solargraph', 'coc-phpls', 'coc-java', 'coc-go', 'coc-vimlsp', 'coc-explorer']";
+coc_plugins_placeholder="let g:coc_global_extensions=['coc-json', 'coc-pyright', 'coc-sql', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-sh', 'coc-rust-analyzer', 'coc-omnisharp', 'coc-solargraph', 'coc-phpls', 'coc-java', 'coc-go', 'coc-vimlsp', 'coc-powershell', 'coc-explorer']";
 find -E "$temp_shared" -iregex ".*coc.*" -type f -exec gsed -E -i'' "s/COC_PLUGINS_PLACEHOLDER/$coc_plugins_placeholder/g" "{}" \;
 vim_bash_env_placeholder='"~/.vim/bash_env.bash"';
 find -E "$temp_shared" -iregex ".*vim.*" -type f -exec gsed -E -i'' "s,VIM_BASH_ENV_PLACEHOLDER,$vim_bash_env_placeholder,g" "{}" \;
