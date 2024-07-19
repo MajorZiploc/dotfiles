@@ -21,6 +21,9 @@ sudo apt-get -y install yq;
 # view directories in tree format
 sudo apt-get -y install tree;
 
+# ctags
+sudo apt-get -y install universal-ctags
+
 # creates a 'python' and makes it point to python3 that is installed
 sudo apt-get -y install python-is-python3;
 # for gui support for matplotlib
