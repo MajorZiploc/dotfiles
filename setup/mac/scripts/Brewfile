@@ -36,7 +36,14 @@ brew 'screen'
 brew 'watch'
 brew 'wdiff'
 brew 'wget'
+
 brew 'ctags'
+tap "universal-ctags/universal-ctags"
+# NOTE: equal to: brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+brew "universal-ctags", args: ["head"]
+
+# On macOS using Homebrew
+# brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 
 # cpp
 brew 'llvm'
