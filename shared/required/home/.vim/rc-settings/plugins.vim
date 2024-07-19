@@ -8,6 +8,9 @@ Plug 'tpope/vim-surround' " manipulate surround chars
 Plug 'MajorZiploc/code_runner.vim' " run selected code chunks
 Plug 'stefandtw/quickfix-reflector.vim' " editable quickfix
 Plug 'sheerun/vim-polyglot' " collection of language packs
+Plug 'tpope/vim-fugitive' " git plugin
+Plug 'tpope/vim-obsession' " self managing n?vim sessions (Session.vim w/ :Obsession <file_name.vim>?/:Obsession! (start/discard current session respectively))
+Plug 'tpope/vim-commentary' " comment/uncomment code (gcc, etc)
 if (!has('nvim'))
   Plug 'junegunn/seoul256.vim' " no contrast color scheme
 endif
@@ -35,6 +38,7 @@ let mapleader = " "
 
 so ~/.vim/plugin-settings/coc.vim
 so ~/.vim/plugin-settings/vim_code_runner.vim
+so ~/.vim/plugin-settings/fugitive.vim
 if (!has('nvim'))
   so ~/.vim/plugin-settings/seoul256.vim
 endif
