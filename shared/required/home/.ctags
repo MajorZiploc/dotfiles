@@ -1,0 +1,5 @@
+--langdef=fsharp
+--langmap=fsharp:.fs
+--regex-fsharp=/^[ \t]*let[ \t]+(rec[ \t]+)?([a-zA-Z][a-zA-Z0-9_]+)/\2/b,binding/
+--regex-fsharp=/^[ \t]*let[ \t]+inline[ \t]+([a-zA-Z][a-zA-Z0-9_]+)/\1/i,inline/
+--regex-fsharp=/^[ \t]*type[ \t]+([a-z]+[ \t]+)?([a-zA-Z][a-zA-Z0-9_]+)/\2/t,type/
