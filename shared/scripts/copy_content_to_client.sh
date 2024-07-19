@@ -14,7 +14,6 @@ vscode_flag_as_int="$((2#01))";
 clipboard_flag_as_int="$((2#10))";
 tasks_flag_as_int="$((2#100))";
 
-test -f "$temp_this/.ahk" && { cp -a "$temp_this/.ahk" "${home_dir:?}/"; }
 cp -a "$temp_shared/required/home/." "${home_dir:?}/";
 cp -a "$temp_shared/required/home_bin/." "${home_dir:?}/bin/";
 [[ $(($clipboard_flag_as_int & $flags_as_int)) == $clipboard_flag_as_int ]] && {
