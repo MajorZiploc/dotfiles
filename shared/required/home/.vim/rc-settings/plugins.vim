@@ -7,6 +7,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
 Plug 'tpope/vim-surround' " manipulate surround chars
 Plug 'MajorZiploc/code_runner.vim' " run selected code chunks
 Plug 'stefandtw/quickfix-reflector.vim' " editable quickfix
+Plug 'sheerun/vim-polyglot' " collection of language packs
 if (!has('nvim'))
   Plug 'junegunn/seoul256.vim' " no contrast color scheme
 endif
