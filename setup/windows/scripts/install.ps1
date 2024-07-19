@@ -50,12 +50,14 @@ if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
     # cinst -y keypose
     # display keystrokes on screen, shows multiple keys at a time
     cinst -y keycastow
-    # for vim grep plugin
-    # cinst -y ripgrep
+    # searching tool
+    cinst -y ripgrep
     # for searching pdfs, ebooks, zips, etc...
     # cinst -y ripgrep-all
     # for fuzzy file finder
     # cinst -y fzf
+    # vim tags
+    cinst -y universal-ctags
 }
 
 if (($optionsAsInt -band $GamingAsInt) -eq $GamingAsInt) {
