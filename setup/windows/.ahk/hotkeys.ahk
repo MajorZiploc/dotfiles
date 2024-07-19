@@ -5,10 +5,6 @@ SendMode Input
 EnvGet, HomeDir, USERPROFILE
 SetWorkingDir %A_ScriptDir%
 
-^t::
-Send, This stuff
-return
-
 ; TODO: somehow filter this hook more
 ; #IfWinActive ahk_class ConsoleWindowClass
 ~^!u::
