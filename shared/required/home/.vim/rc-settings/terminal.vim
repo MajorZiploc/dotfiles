@@ -179,6 +179,7 @@ autocmd FileType glsl setlocal commentstring=//\ %s
 autocmd FileType gdscript setlocal commentstring=#\ %s
 autocmd FileType mysql setlocal commentstring=--\ %s
 autocmd FileType ps1 setlocal commentstring=#\ %s
+autocmd FileType autohotkey setlocal commentstring=;\ %s
 
 " Navigate to file:
 " Similar to the buildin gf but also allows open of non-existent files aswell
