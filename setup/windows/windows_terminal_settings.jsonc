@@ -33,6 +33,12 @@
     "copyOnSelect": false,
     "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
     "launchMode": "maximized",
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
     "profiles": 
     {
         "defaults": 
@@ -40,7 +46,7 @@
             "closeOnExit": "graceful",
             "font": 
             {
-                "face": "CaskaydiaCove Nerd Font"
+                "face": "Cascadia Mono"
             }
         },
         "list": 
