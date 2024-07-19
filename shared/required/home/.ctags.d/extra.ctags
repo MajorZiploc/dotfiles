@@ -6,13 +6,11 @@
 
 --langdef=vb
 --langmap=vb:.vb
---regex-vb=/^[ \t]*public[ \t]+sub[ \t]+([a-zA-Z0-9_]+)/\1/s,subroutine/i,subroutine/i
---regex-vb=/^[ \t]*public[ \t]+function[ \t]+([a-zA-Z0-9_]+)/\1/f,function/i,function/i
---regex-vb=/^[ \t]*public[ \t]+property[ \t]+([a-zA-Z0-9_]+)/\1/p,property/i,property/i
---regex-vb=/^[ \t]*public[ \t]+([a-zA-Z0-9_]+)[ \t]+as/\1/v,variable/i,variable/i
---regex-vb=/^[ \t]*class[ \t]+([a-zA-Z0-9_]+)/\1/c,class/i,class/i
---regex-vb=/^[ \t]*interface[ \t]+([a-zA-Z0-9_]+)/\1/i,interface/i,interface/i
---regex-vb=/^[ \t]*enum[ \t]+([a-zA-Z0-9_]+)/\1/e,enum/i,enum/i
---regex-vb=/^[ \t]*module[ \t]+([a-zA-Z0-9_]+)/\1/m,module/i,module/i
---regex-vb=/^[ \t]*type[ \t]+([a-zA-Z0-9_]+)/\1/t,type/i,type/i
---regex-vb=/^[ \t]*structure[ \t]+([a-zA-Z0-9_]+)/\1/s,structure/i,structure/i
+--regex-vb=/^[ \t]*(Public|Private)?[ \t]*Sub[ \t]+([a-zA-Z0-9_]+)/\2/s,subroutine/i
+--regex-vb=/^[ \t]*(Public|Private)?[ \t]*Function[ \t]+([a-zA-Z0-9_]+)/\2/f,function/i
+--regex-vb=/^[ \t]*(Public|Private)[ \t]+([a-zA-Z0-9_]+)[ \t]+As[ \t]+/\2/v,variable/i
+--regex-vb=/^[ \t]*(Public|Private)?[ \t]*Const[ \t]+([a-zA-Z0-9_]+)[ \t]+(As|=)[ \t]+/\2/c,const/i
+--regex-vb=/^[ \t]*(Public)?[ \t]*Property[ \t]*(Get|Let|Set)[ \t]+([a-zA-Z0-9_]+)/\3/n,name/i
+--regex-vb=/^[ \t]*(Public|Private)?[ \t]*Enum[ \t]+([a-zA-Z0-9_]+)/\2/e,enum/i
+# --regex-vb=/^[ \t]*([a-zA-Z_]+):/\1/l,label/i
+--vb-kinds=cn
