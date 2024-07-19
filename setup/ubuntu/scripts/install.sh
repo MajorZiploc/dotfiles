@@ -51,6 +51,8 @@ sudo apt-get install -y vim;
 # neovim
 sudo add-apt-repository ppa:neovim-ppa/unstable -y;
 sudo apt-get install -y neovim;
+# ctags
+sudo apt-get -y install universal-ctags
 # ssh
 sudo apt-get remove -y openssh-client;
 sudo apt-get install -y openssh-client;
