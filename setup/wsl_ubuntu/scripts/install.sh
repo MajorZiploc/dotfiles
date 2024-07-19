@@ -118,8 +118,9 @@ sudo rm packages-microsoft-prod.deb;
 # dotnet cli and deps
 sudo apt-get install -y apt-transport-https;
 sudo apt-get -y update;
-sudo apt-get install -y dotnet-sdk-3.1;
-sudo apt-get install -y dotnet-sdk-6.0;
+# sudo apt-get install -y dotnet-sdk-3.1;
+# sudo apt-get install -y dotnet-sdk-6.0;
+sudo apt-get install -y dotnet-sdk-8.0;
 
 # snapd
 sudo apt-get -y install snapd;
