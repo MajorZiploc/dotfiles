@@ -24,6 +24,8 @@ home_dir="${home_dir:-"$HOME"}";
   rm "$winterm_settings";
 }
 
+test -d "$script_path/../.ahk" && { echo "cp ahk"; cp -a "$script_path/../.ahk" "${home_dir:?}/"; }
+
 mkdir -p "$home_dir/OneDrive/Documents/WindowsPowerShell";
 cp "$home_dir/.config/powershell/Microsoft.PowerShell_profile.ps1" "$home_dir/OneDrive/Documents/WindowsPowerShell";
 
