@@ -7,8 +7,9 @@ setup_root="$1";
 temp="$2";
 temp_shared="$3";
 temp_this="$4";
+home_dir="$5";
 
-vsvimpath="$(echo "$HOME/vscodevim/_vsvimrc" | sed -E 's,^/(\w),\U\1:,g' | sed -E 's,/,\\\\\\\\,g')";
+vsvimpath="$(echo "$home_dir/vscodevim/_vsvimrc" | sed -E 's,^/mnt,,g;s,^/(\w),\U\1:,g' | sed -E 's,/,\\\\\\\\,g')";
 find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" "{}" \;
 find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,HOME_DIR_PLACEHOLDER,$HOME,g" "{}" \;
 vscode_extra_keybindings_placeholder='';
@@ -25,7 +26,7 @@ vim_plugin_settings="${vim_plugset_path}ctrlp.vim";
 vim_plugin_settings="$vim_plugin_settings\nif has\('nvim'\)\n  ${vim_plugset_path}gruvbox_flat.vim\n  ${vim_plugset_path}firenvim.lua\n  ${vim_plugset_path}coc.vim\nendif";
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_SETTINGS_PLACEHOLDER,$vim_plugin_settings,g" "{}" \;
 find "$temp_shared" -regextype egrep -iregex ".*" -type f -exec sed -E -i'' "s,OS_PLACEHOLDER,windows,g" "{}" \;
-vsc_settings_destination_placeholder="\$HOME/AppData/Roaming/Code/User/";
+vsc_settings_destination_placeholder="\$home_dir/AppData/Roaming/Code/User/";
 find "$temp_shared" -regextype egrep -iregex ".*\.sh" -type f -exec sed -E -i'' "s,VSC_SETTINGS_DESTINATION_PLACEHOLDER,$vsc_settings_destination_placeholder,g" "{}" \;
 tmuxps_paths_array_placeholder="(\"\$(find ~ -mindepth 1 -maxdepth 1 -regextype egrep -iregex \".*(project|workspace).*\" -type d -not -path '*/__pycache__/*' -not -path '*/bin/*' -not -path '*/obj/*' -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/node_modules/*' -not -path '*/.ionide/*' -not -path '*/.venv/*' 2>/dev/null)\")";
 find "$temp_shared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,TMUXPS_PATHS_ARRAY_PLACEHOLDER,$tmuxps_paths_array_placeholder,g" "{}" \;
@@ -54,4 +55,5 @@ unset setup_root;
 unset temp_shared;
 unset temp_this;
 unset temp;
+unset home_dir;
 

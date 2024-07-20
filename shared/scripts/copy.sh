@@ -17,7 +17,7 @@ temp_this="$temp/this";
 "$script_path/create_temps.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this";
 
 # call os specific substition flow script
-test -f "$setup_root/scripts/substition.sh" && { "$setup_root/scripts/substition.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this"; };
+test -f "$setup_root/scripts/substition.sh" && { "$setup_root/scripts/substition.sh" "$setup_root" "$temp" "$temp_shared" "$temp_this" "$home_dir"; };
 
 content_modifiers=("append" "prepend" "override" "new" "delete");
 for content_modifier in ${content_modifiers[@]}; do
