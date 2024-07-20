@@ -10,8 +10,9 @@ temp_this="$4";
 home_dir="$5";
 
 vsvimpath="$(echo "$home_dir/vscodevim/_vsvimrc" | sed -E 's,^/mnt,,g;s,^/(\w),\U\1:,g' | sed -E 's,/,\\\\\\\\,g')";
+vs_home_path="$(echo "$home_dir" | sed -E 's,^/mnt,,g;s,^/(\w),\U\1:,g' | sed -E 's,/,\\\\\\\\,g')";
 find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,VSVIM_DIR_PLACEHOLDER,$vsvimpath,g" "{}" \;
-find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,HOME_DIR_PLACEHOLDER,$HOME,g" "{}" \;
+find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,HOME_DIR_PLACEHOLDER,$vs_home_path,g" "{}" \;
 vscode_extra_keybindings_placeholder='';
 find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s/VSCODE_EXTRA_KEYBINDINGS_PLACEHOLDER/${vscode_extra_keybindings_placeholder}/g" "{}" \;
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,~/bin/bash.exe,g' "{}" \;
