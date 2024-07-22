@@ -1,12 +1,12 @@
 so ~/.vim/rc-settings/common.vim
 
 " inoremap kj <esc>
-" imap kj <esc>
-" imap <tab> <esc>
-imap <c-l> <esc>
-imap <c-[> <esc>
-" imap 1` <esc>
-" imap `1 <esc>
+" inoremap kj <esc>
+" inoremap <tab> <esc>
+inoremap <c-l> <esc>
+inoremap <c-[> <esc>
+" inoremap 1` <esc>
+" inoremap `1 <esc>
 
 " control-keys for select all, undo, save, cut, copy, paste, quit
 nnoremap <c-a> ggVG
@@ -40,24 +40,24 @@ set incsearch
 " clear search highlight with Backspace
 nnoremap <silent> <bs> :noh<cr>
 
-nmap <leader><leader>s :vsc Tools.InvokeAceJumpCommand<cr>
+nnoremap <leader><leader>s :vsc Tools.InvokeAceJumpCommand<cr>
 
-nmap gi :vsc Edit.GoToImplementation<cr>
-nmap gr :vsc Edit.FindAllReferences<cr>
-nmap gq :vsc Edit.QuickInfo<cr>
-nmap <c-w><c-i> :vsc Edit.QuickInfo<cr>
-vmap gf :vsc Edit.FormatSelection<cr>
-nmap gf :vsc Edit.FormatDocument<cr>
+nnoremap gi :vsc Edit.GoToImplementation<cr>
+nnoremap gr :vsc Edit.FindAllReferences<cr>
+nnoremap gq :vsc Edit.QuickInfo<cr>
+nnoremap <c-w><c-i> :vsc Edit.QuickInfo<cr>
+vnoremap gf :vsc Edit.FormatSelection<cr>
+nnoremap gf :vsc Edit.FormatDocument<cr>
 
-nmap <leader>gd :vsc Edit.GoToDefinition<cr>
-nmap <leader>gi :vsc Edit.GoToImplementation<cr>
-nmap <leader>gr :vsc Edit.FindAllReferences<cr>
-nmap <leader>wi :vsc Edit.QuickInfo<cr>
-nmap <leader>gq :vsc Edit.QuickInfo<cr>
-vmap <leader>gf :vsc Edit.FormatSelection<cr>
-nmap <leader>gf :vsc Edit.FormatDocument<cr>
+nnoremap <leader>gd :vsc Edit.GoToDefinition<cr>
+nnoremap <leader>gi :vsc Edit.GoToImplementation<cr>
+nnoremap <leader>gr :vsc Edit.FindAllReferences<cr>
+nnoremap <leader>wi :vsc Edit.QuickInfo<cr>
+nnoremap <leader>gq :vsc Edit.QuickInfo<cr>
+vnoremap <leader>gf :vsc Edit.FormatSelection<cr>
+nnoremap <leader>gf :vsc Edit.FormatDocument<cr>
 
-nmap <leader>ws :vsc Window.NewVerticalTabGroup<cr>
+nnoremap <leader>ws :vsc Window.NewVerticalTabGroup<cr>
 " switching between tab groups
 nnoremap <c-w><c-h> <c-w>h
 nnoremap <c-w><c-l> <c-w>l
@@ -65,27 +65,27 @@ nnoremap <c-w><c-j> <c-w>j
 " nnoremap <c-w><c-k> <c-w>k "has problem with <c-k> when using vscode preset
 nnoremap <c-w><c-s> :split<cr>
 nnoremap <c-w><c-v> :vsplit<cr>
-nmap <c-w><c-q> :vsc Window.CloseDocumentWindow<cr>
-nmap <leader>wH :vsc Window.MovetoPreviousTabGroup<cr>
-nmap <leader>wL :vsc Window.MovetoNextTabGroup<cr>
-nmap <leader>h :vsc View.NavigateBackward<cr>
-nmap <leader>l :vsc View.NavigateForward<cr>
-nmap <leader>q :vsc Edit.QuickInfo<cr>
-nmap <leader>e :vsc View.NextError<cr>
-nmap <leader>E :vsc View.PreviousError<cr>
-nmap <leader>d :vsc ReSharper.ReSharper_GoToDeclaration<cr>
-nmap <leader>i :vsc ReSharper.ReSharper_GotoImplementations<cr>
-nmap <leader>u :vsc ReSharper.ReSharper_FindUsages<cr>
-nmap <leader>r :vsc EditorContextMenus.CodeWindow.Refactor.RefactorRename
+nnoremap <c-w><c-q> :vsc Window.CloseDocumentWindow<cr>
+nnoremap <leader>wH :vsc Window.MovetoPreviousTabGroup<cr>
+nnoremap <leader>wL :vsc Window.MovetoNextTabGroup<cr>
+nnoremap <leader>h :vsc View.NavigateBackward<cr>
+nnoremap <leader>l :vsc View.NavigateForward<cr>
+nnoremap <leader>q :vsc Edit.QuickInfo<cr>
+nnoremap <leader>e :vsc View.NextError<cr>
+nnoremap <leader>E :vsc View.PreviousError<cr>
+nnoremap <leader>d :vsc ReSharper.ReSharper_GoToDeclaration<cr>
+nnoremap <leader>i :vsc ReSharper.ReSharper_GotoImplementations<cr>
+nnoremap <leader>u :vsc ReSharper.ReSharper_FindUsages<cr>
+nnoremap <leader>r :vsc EditorContextMenus.CodeWindow.Refactor.RefactorRename
 
 " backup mappings for <esc>
 " inoremap kj <esc>
-" imap kj <esc>
-" imap <tab> <esc>
-imap <c-l> <esc>
-imap <c-[> <esc>
-" imap 1` <esc>
-" imap `1 <esc>
+" inoremap kj <esc>
+" inoremap <tab> <esc>
+inoremap <c-l> <esc>
+inoremap <c-[> <esc>
+" inoremap 1` <esc>
+" inoremap `1 <esc>
 
 " Reselect visual selection after indenting
 vnoremap < <gv
@@ -102,7 +102,7 @@ endfunction
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 " save all dirty buffers
-nmap <c-s> :wa<cr>
+nnoremap <c-s> :wa<cr>
 
 " copy to system clipboard
 vnoremap <leader>cc "+y
