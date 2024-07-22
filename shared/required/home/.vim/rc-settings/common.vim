@@ -83,9 +83,6 @@ vnoremap <leader>tp "_dP
 " enable backspace
 set backspace=indent,eol,start
 
-" break text wrapped lines on spaces rather than inbetween words
-set linebreak
-
 " indentation settings
 set expandtab
 set tabstop=2
@@ -122,13 +119,6 @@ vnoremap > >gv
 
 " repeat dot command on a visual selection
 xmap <silent> . :normal .<cr>
-
-" repeat macro command on a visual selection
-function! ExecuteMacroOverVisualRange()
-  echo "@".getcmdline()
-  execute ":'<,'>normal @" . nr2char(getchar())
-endfunction
-xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 " save all dirty buffers
 nmap <c-s> :wa<cr>

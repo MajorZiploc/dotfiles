@@ -2,6 +2,16 @@
 " set spelllang=en_us
 " set spell
 
+" repeat macro command on a visual selection
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @" . nr2char(getchar())
+endfunction
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+" break text wrapped lines on spaces rather than inbetween words
+set linebreak
+
 set mouse=a " allow mouse interactions
 set hidden " allow opening of other files without saving current file
 
