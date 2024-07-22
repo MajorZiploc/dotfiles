@@ -6,6 +6,7 @@ function main {
   "$scriptpath/../../../shared/scripts/routine_update.sh";
   sudo apt-get update -y;
   sudo apt-get upgrade -y;
+  sudo -k;
 }
 
 main
