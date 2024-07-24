@@ -20,6 +20,8 @@ sudo apt-get -y update;
 sudo apt-get -y install yq;
 # view directories in tree format
 sudo apt-get -y install tree;
+# for clipboard support in vim
+sudo apt-get -y install xclip;
 
 # ctags
 sudo apt-get -y install universal-ctags
