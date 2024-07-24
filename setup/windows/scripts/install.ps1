@@ -24,8 +24,8 @@ if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
     Write-Host("Installing Minimal packages")
     # Minimal packages
     choco install -y cascadia-code-nerd-font
-    # web browser
-    choco install -y googlechrome
+    # web browser -- NOTE: DOESNT SEEM TO WORK
+    # choco install -y googlechrome
     # clipboard tool
     choco install -y ditto
     # version control and git bash
@@ -99,8 +99,9 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     # windows linux subsystem -- NOTE: requires download of a linux distro aswell
     # choco install -y wsl
     # choco install -y wsl2
-    # docker containerization platform
-    choco install -y docker-desktop
+    wsl --install
+    # docker containerization platform -- NOTE: DOESNT SEEM TO WORK
+    # choco install -y docker-desktop
     # installs cross platform powershel 7
     choco install -y powershell-core
     # java development kit 12
