@@ -82,17 +82,19 @@ Make sure to set shells in the /usr/local/bin: (NOTE: for git bash, launch as ad
 ### Nodejs (nvm)
 Required for coc vim installs
 - ./shared/scripts/nodejs/nvm_install_lts.sh
+
 Misc tooling
-- ./shared/scripts/nodejs/install_global_tooling.sh.sh
+- ./shared/scripts/nodejs/install_global_tooling.sh
 
 ### Rust (cargo)
 install rust
 - ./shared/scripts/rust/install.sh
+
 Misc tooling; Adds color to fzf previews with bat!
 - ./shared/scripts/rust/packages.sh
 
 ### dotnet
-install dotnet
+Misc tooling: install dotnet packages
 - ./shared/scripts/dotnet/packages.sh
 
 ### Install oh my zsh
