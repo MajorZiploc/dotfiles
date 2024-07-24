@@ -23,60 +23,60 @@ $TechAsInt = [convert]::ToInt32($Tech, $base)
 if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
     Write-Host("Installing Minimal packages")
     # Minimal packages
-    cinst -y cascadia-code-nerd-font
+    choco install -y cascadia-code-nerd-font
     # web browser
-    cinst -y googlechrome
+    choco install -y googlechrome
     # clipboard tool
-    cinst -y ditto
+    choco install -y ditto
     # version control and git bash
-    cinst -y git
+    choco install -y git
     # upzipping tool
-    cinst -y 7zip
+    choco install -y 7zip
     # scroll wheels works on window mouse is over
-    cinst -y wizmouse
+    choco install -y wizmouse
     # scroll wheels works on window mouse is over
-    # cinst -y katmouse # doesnt work at work, it doesnt follow proper choco package protocol
+    # choco install -y katmouse # doesnt work at work, it doesnt follow proper choco package protocol
     # code editor
-    cinst -y vscode
+    choco install -y vscode
     # screenshot tool
-    cinst -y lightshot
+    choco install -y lightshot
     # create gifs from screen
-    cinst -y screentogif
+    choco install -y screentogif
     # scripting language for workflow automations
-    cinst -y autohotkey
+    choco install -y autohotkey
     # for calling urls from cli
-    cinst -y curl
+    choco install -y curl
     # display keystrokes on screen, one key at a time
-    # cinst -y keypose
+    # choco install -y keypose
     # display keystrokes on screen, shows multiple keys at a time
-    cinst -y keycastow
+    choco install -y keycastow
     # searching tool
-    cinst -y ripgrep
+    choco install -y ripgrep
     # for searching pdfs, ebooks, zips, etc...
-    # cinst -y ripgrep-all
+    # choco install -y ripgrep-all
     # for fuzzy file finder
-    # cinst -y fzf
+    # choco install -y fzf
     # vim tags
-    cinst -y universal-ctags
+    choco install -y universal-ctags
 }
 
 if (($optionsAsInt -band $GamingAsInt) -eq $GamingAsInt) {
     Write-Host("Installing Gaming packages")
     # Gaming Packages
     # java runtime 8
-    cinst -y jre8
+    choco install -y jre8
 }
 
 if (($optionsAsInt -band $CreativeAsInt) -eq $CreativeAsInt) {
     Write-Host("Installing Creative packages")
     # Creative Packages
-    cinst -y krita
+    choco install -y krita
     # photo editing tool
-    # cinst -y gimp
+    # choco install -y gimp
     # compact image viewer and converter
-    # cinst -y irfanview
+    # choco install -y irfanview
     # photo editing tool - easier than gimp
-    # cinst -y paint.net
+    # choco install -y paint.net
 }
 
 if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
@@ -85,56 +85,56 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     # a windows bash with package manager pacman
     # can use to download linux packages and reference in git bash
     # or just use this bash instead of git bash
-    cinst -y msys2
+    choco install -y msys2
     # prolog language
-    # cinst -y swi-prolog
+    # choco install -y swi-prolog
     # javascript runtime
-    cinst -y nodejs
+    choco install -y nodejs
     # javascript package manager
-    # cinst -y yarn
+    # choco install -y yarn
     # python language
-    cinst -y python3
+    choco install -y python3
     # local testing of sending emails
-    cinst -y smtp4dev
+    choco install -y smtp4dev
     # windows linux subsystem -- NOTE: requires download of a linux distro aswell
-    # cinst -y wsl
-    # cinst -y wsl2
+    # choco install -y wsl
+    # choco install -y wsl2
     # docker containerization platform
-    cinst -y docker-desktop
+    choco install -y docker-desktop
     # installs cross platform powershel 7
-    cinst -y powershell-core
+    choco install -y powershell-core
     # java development kit 12
-    cinst -y openjdk.portable
+    choco install -y openjdk.portable
     # vim gui
-    # cinst -y vim-tux
+    # choco install -y vim-tux
     # api manual testing
-    # cinst -y postman
+    # choco install -y postman
     # neovim
-    cinst -y neovim
+    choco install -y neovim
 }
 
 if (($optionsAsInt -band $WorkAsInt) -eq $WorkAsInt) {
     Write-Host("Installing Work packages")
     # Work Packages
     # communcations app
-    cinst -y slack
+    choco install -y slack
     # runtime and cli tools for creating .NET core applications
-    cinst -y dotnet-sdk
-    cinst -y dotnet-runtime
+    choco install -y dotnet-sdk
+    choco install -y dotnet-runtime
 }
 
 # example of installing something (atom) for all users
 # choco install atom -y --force --params "'ALLUSERS=1"
 # jre + jdk 12
-# cinst -y openjdk12
+# choco install -y openjdk12
 
 # look into these
-# cinst -y nircmd
-# cinst -y vlc
+# choco install -y nircmd
+# choco install -y vlc
 
 # install dev tools
-# cinst -y gitkraken
-# cinst -y linqpad5
+# choco install -y gitkraken
+# choco install -y linqpad5
 
 # generate shims
 # & "$env:ChocolateyInstall\tools\shimgen.exe" -p "$env:ChocolateyInstall\tools\shimgen.exe" -o "$env:ChocolateyInstall\bin\shimgen.exe"

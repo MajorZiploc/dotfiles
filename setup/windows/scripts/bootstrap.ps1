@@ -6,7 +6,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 # choco feature enable -n allowGlobalConfirmation
 
 # install git and refresh path
-cinst -y git
+choco install -y git
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
 # clone this repo
