@@ -15,7 +15,7 @@ find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'
 find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s,HOME_DIR_PLACEHOLDER,$vs_home_path,g" "{}" \;
 vscode_extra_keybindings_placeholder='';
 find "$temp_shared" -regextype egrep -iregex ".*\.json" -type f -exec sed -E -i'' "s/VSCODE_EXTRA_KEYBINDINGS_PLACEHOLDER/${vscode_extra_keybindings_placeholder}/g" "{}" \;
-find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,~/bin/bash.exe,g' "{}" \;
+find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's,VIM_SHELL_PLACEHOLDER,~/bin/bash,g' "{}" \;
 remove_coc="\bcoc\b";
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i'' "/$remove_coc/d" "{}" \;
 vim_plugin_include="Plug 'ctrlpvim/ctrlp.vim' \" fuzzy file finder";
