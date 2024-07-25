@@ -33,8 +33,8 @@ sudo apt-get install python3-tk;
 # OR you can use this pip library in your project
 # pip install pyqt5
 # pyenv: python version manager
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv;
-
+# git clone https://github.com/pyenv/pyenv.git ~/.pyenv;
+curl https://pyenv.run | bash;
 # ripgrep for vundle use or use on its own
 sudo apt-get -y install ripgrep;
 # fuzzy finder
