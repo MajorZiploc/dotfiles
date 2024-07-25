@@ -167,9 +167,9 @@ nmap <c-s> :wa<cr>
 " copy to system clipboard
 vnoremap <leader>cc "+y
 
-" Patch H and L to have 8 padding from top
-nnoremap <s-h> Hjjjjjjjj
-nnoremap <s-l> Lkkkkkkkk<c-y>
+" Patch H and L to have 3 padding from top
+nnoremap <s-h> H3j
+nnoremap <s-l> L3k<c-y>
 
 " command mode polyfills for emacs terminal navigation
 cnoremap <C-A> <Home>
