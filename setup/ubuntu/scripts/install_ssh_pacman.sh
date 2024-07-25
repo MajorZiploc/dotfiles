@@ -24,7 +24,8 @@ sudo pacman -S --noconfirm python;
 # for creating python virtual environments
 sudo pacman -S --noconfirm python-virtualenv;
 # pyenv: python version manager
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv;
+# git clone https://github.com/pyenv/pyenv.git ~/.pyenv;
+curl https://pyenv.run | bash;
 # ripgrep for vundle use or use on its own
 sudo pacman -S --noconfirm ripgrep;
 # fuzzy finder

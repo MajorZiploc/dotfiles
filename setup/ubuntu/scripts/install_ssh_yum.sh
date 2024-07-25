@@ -24,7 +24,8 @@ sudo yum install -y python3;
 # for creating python virtual environments
 sudo yum install -y python3-virtualenv;
 # pyenv: python version manager
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv;
+# git clone https://github.com/pyenv/pyenv.git ~/.pyenv;
+curl https://pyenv.run | bash;
 # ripgrep for vundle use or use on its own
 sudo yum install -y ripgrep;
 # fuzzy finder

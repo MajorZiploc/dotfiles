@@ -24,7 +24,8 @@ sudo apt-get -y install python-is-python3;
 # for creating python virtual environments
 sudo apt-get -y install python3-venv;
 # pyenv: python version manager
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv;
+# git clone https://github.com/pyenv/pyenv.git ~/.pyenv;
+curl https://pyenv.run | bash;
 # ripgrep for vundle use or use on its own
 sudo add-apt-repository ppa:x4121/ripgrep -y;
 sudo apt-get -y update;
