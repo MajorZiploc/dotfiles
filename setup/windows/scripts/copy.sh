@@ -29,6 +29,7 @@ test -d "$script_path/../.ahk" && { cp -a "$script_path/../.ahk" "${home_dir:?}/
 mkdir -p "$home_dir/OneDrive/Documents/WindowsPowerShell";
 cp "$home_dir/.config/powershell/Microsoft.PowerShell_profile.ps1" "$home_dir/OneDrive/Documents/WindowsPowerShell";
 
+mkdir "$home_dir/AppData/Local/nvim/";
 cp "$home_dir/.config/nvim/init.vim" "$home_dir/AppData/Local/nvim/init.vim";
 
 unset winterm_ubuntu_background_image_path_placeholder;
