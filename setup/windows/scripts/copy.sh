@@ -19,7 +19,7 @@ home_dir="${home_dir:-"$HOME"}";
   winterm_ubuntu_background_image_path_placeholder='"%USERPROFILE%\\\\Pictures\\\\Wallpapers\\\\terminal_wallpaper.jpg"';
   winterm_settings="$script_path/tmp_windows_terminal_settings.jsonc";
   source_winterm_settings="$script_path/../windows_terminal_settings.jsonc";
-  override_source_winterm_settings="$HOME/windows_terminal_settings.jsonc";
+  override_source_winterm_settings="$home_dir/windows_terminal_settings.jsonc";
   [[ -f  "$override_source_winterm_settings" ]] && { source_winterm_settings="$override_source_winterm_settings"; }
   cp "$source_winterm_settings" "$winterm_settings";
   sed -E -i'' "s/WINTERM_UBUNTU_BACKGROUND_IMAGE_PATH_PLACEHOLDER/$winterm_ubuntu_background_image_path_placeholder/g" "$winterm_settings";
