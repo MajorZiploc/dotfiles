@@ -81,6 +81,9 @@ if (($optionsAsInt -band $CreativeAsInt) -eq $CreativeAsInt) {
 
 if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     Write-Host("Installing Tech packages")
+    # for handle.exe: a way to find out what program is using a folder/file so you can kill it
+    # https://learn.microsoft.com/en-us/sysinternals/downloads/handle
+    choco install -y sysinternals
     # node package manager
     choco install -y nvm
     # Tech Packages
