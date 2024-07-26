@@ -81,6 +81,8 @@ if (($optionsAsInt -band $CreativeAsInt) -eq $CreativeAsInt) {
 
 if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     Write-Host("Installing Tech packages")
+    # node package manager
+    choco install -y nvm
     # Tech Packages
     # a windows bash with package manager pacman
     # can use to download linux packages and reference in git bash
