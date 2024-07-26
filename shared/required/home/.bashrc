@@ -54,6 +54,8 @@ export PATH="$HOME/.local/bin:$PATH"
 export FZF_DEFAULT_OPTS='--layout=reverse --info=inline --bind ctrl-a:select-all';
 export FZF_DEFAULT_COMMAND="rg --files --hidden";
 
+export ANDROID_HOME="$HOME/Library/Android/sdk";
+
 # Codespaces bash prompt theme based off of a docker container bash prompt
 __bash_prompt() {
   local gitbranch='`\
