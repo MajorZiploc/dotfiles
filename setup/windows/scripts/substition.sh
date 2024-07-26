@@ -40,6 +40,7 @@ find "$temp_shared" -regextype egrep -iregex ".*coc.*" -type f -exec sed -E -i''
 vim_bash_env_placeholder='"~/.vim/bash_env.bash"';
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i'' "s,VIM_BASH_ENV_PLACEHOLDER,$vim_bash_env_placeholder,g" "{}" \;
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i'' "s,(so ~/.slim_vimrc),silent\! \1,g" "{}" \;
+find "$temp_shared" -regextype egrep -iregex ".*bash.*" -type f -exec sed -E -i'' "s,(export ANDROID_HOME=).*,\1$home_dir/AppData/Local/Android/Sdk,g" "{}" \;
 
 unset vsvimpath;
 unset vim_plugin_include;
