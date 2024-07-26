@@ -119,6 +119,8 @@ zstyle :compinstall ~/.zsh_completion.d/ "$HOME/.zshrc"
 export FZF_DEFAULT_OPTS='--layout=reverse --info=inline --bind ctrl-a:select-all';
 export FZF_DEFAULT_COMMAND="rg --files --hidden";
 
+export ANDROID_HOME="$HOME/Library/Android/sdk";
+
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
