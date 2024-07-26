@@ -16,3 +16,8 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";"
 # git reset origin/master
 # git branch --set-upstream-to=origin/master
 # git checkout HEAD -- .
+
+Set-ExecutionPolicy Unrestricted -Scope LocalMachine
+
+# show execution policies
+Get-ExecutionPolicy -List
