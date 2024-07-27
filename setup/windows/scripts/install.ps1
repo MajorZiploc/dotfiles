@@ -81,9 +81,13 @@ if (($optionsAsInt -band $CreativeAsInt) -eq $CreativeAsInt) {
 
 if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     Write-Host("Installing Tech packages")
+    # Tech Packages
+    # for handle.exe: a way to find out what program is using a folder/file so you can kill it
+    # https://learn.microsoft.com/en-us/sysinternals/downloads/handle
+    choco install -y sysinternals
+    choco install jq
     # node package manager
     choco install -y nvm
-    # Tech Packages
     # a windows bash with package manager pacman
     # can use to download linux packages and reference in git bash
     # or just use this bash instead of git bash

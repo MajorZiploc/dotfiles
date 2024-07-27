@@ -97,8 +97,6 @@ brew 'dos2unix'
 brew 'jq'
 # yaml query for cli
 brew 'yq'
-# Convert between YAML, TOML, JSON, and HCL
-brew 'yj'
 # ssh
 brew 'openssh'
 brew 'telnet'
