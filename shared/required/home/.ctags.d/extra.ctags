@@ -14,3 +14,11 @@
 --regex-vb=/^[ \t]*(Public|Private)?[ \t]*Enum[ \t]+([a-zA-Z0-9_]+)/\2/e,enum/i
 # --regex-vb=/^[ \t]*([a-zA-Z_]+):/\1/l,label/i
 --vb-kinds=cn
+
+--langdef=GDScript
+--langmap=GDScript:.gd
+--regex-GDScript=/^[ \t]*func[ \t]+([a-zA-Z0-9_]+)/\1/f,function/
+--regex-GDScript=/^[ \t]*class[ \t]+([a-zA-Z0-9_]+)/\1/c,class/
+--regex-GDScript=/^[ \t]*var[ \t]+([a-zA-Z0-9_]+)/\1/v,variable/
+--regex-GDScript=/^[ \t]*const[ \t]+([a-zA-Z0-9_]+)/\1/C,constant/
+--regex-GDScript=/^[ \t]*signal[ \t]+([a-zA-Z0-9_]+)/\1/s,signal/
