@@ -43,6 +43,7 @@ find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i''
 find "$temp_shared" -regextype egrep -iregex ".*sh" -type f -exec sed -E -i'' "s,(export )(FCEDIT|EDITOR|VISUAL).*?,\1\2='nvim'," "{}" \;
 lvim_treesitter_and_mason_removals='"(gopls|gitignore)",';
 find "$temp_shared" -regextype egrep -iregex ".*lvim.*" -type f -exec sed -E -i'' "/$lvim_treesitter_and_mason_removals/d" "{}" \;
+find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i'' "s,(nmap <leader>vs :Gitsigns stage_hunk<CR>),\1<CMD>Gitsigns detach_all<CR><CMD>Gitsigns attach<CR>,g" "{}" \;
 
 unset lvim_treesitter_and_mason_removals;
 unset vsvimpath;
