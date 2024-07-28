@@ -605,6 +605,15 @@ function copy_to_backup {
       cp "$file" "$new_dir_path/$file_name";
     fi
   done
+  local files_to_delete; files_to_delete=$(git status | grep -Ev "Session.vim" | grep -E '\s*(deleted:)' | sed -E 's,(deleted):\s+(.*),\2,');
+  echo "$files_to_delete" | while IFS=$'\t' read -r file; do
+    if [[ -f "$file" ]]; then
+      rel_dir_path=$(dirname "$file" | sed -E "s,^\./,,g");
+      file_name=$(basename "$file");
+      new_dir_path="$target_repo/$rel_dir_path";
+      rm "${new_dir_path:?}/${file_name:?}";
+    fi
+  done
 }
 
 function copy_from_backup {
