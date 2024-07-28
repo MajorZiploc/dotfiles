@@ -588,3 +588,37 @@ df = pd.read_parquet('$file_name')
 df.to_csv('$csv_file_name')
   ";
 }
+
+function copy_to_backup {
+  local target_repo="$1";
+  [[ -z "$target_repo" ]] && { echo "Must specify target_repo" >&2; return 1; }
+  local files_to_copy; files_to_copy=$(git status | grep -Ev "Session.vim" | grep -E '\s*(\.|modified:|new file:)' | sed -E 's,(\.|modified|new file:):\s+(.*),\2,');
+  local rel_dir_path;
+  local new_dir_path;
+  mkdir -p "$target_repo";
+  echo "$files_to_copy" | while IFS=$'\t' read -r file; do
+    if [[ -f "$file" ]]; then
+      rel_dir_path=$(dirname "$file" | sed -E "s,^\./,,g");
+      file_name=$(basename "$file");
+      new_dir_path="$target_repo/$rel_dir_path";
+      mkdir -p "$new_dir_path";
+      cp "$file" "$new_dir_path/$file_name";
+    fi
+  done
+}
+
+function copy_from_backup {
+  local target_repo="$1";
+  [[ -z "$target_repo" ]] && { echo "Must specify target_repo" >&2; return 1; }
+  local files_to_copy; files_to_copy=$(gfind_files ".*" | grep -Ev "Session.vim");
+  local rel_dir_path;
+  local new_dir_path;
+  mkdir -p "$target_repo";
+  echo "$files_to_copy" | while IFS=$'\t' read -r file; do
+    rel_dir_path=$(dirname "$file" | sed -E "s,^\./,,g");
+    file_name=$(basename "$file");
+    new_dir_path="$target_repo/$rel_dir_path";
+    mkdir -p "$new_dir_path";
+    cp "$file" "$new_dir_path/$file_name";
+  done
+}
