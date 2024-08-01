@@ -6,7 +6,7 @@
 #  defaults read NSGlobalDomain KeyRepeat
 # TODO: should look at all these settings and update/add more sets to this file
 # Finder: set hidden files to show by default
-defaults write http://com.apple.Finder AppleShowAllFiles -bool true;
+defaults write com.apple.Finder AppleShowAllFiles -bool true;
 # Finder: show file extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true;
 # Finder: disables .DS_Store creation
