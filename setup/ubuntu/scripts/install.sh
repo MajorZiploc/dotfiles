@@ -62,6 +62,8 @@ sudo apt-get install -y openssh-server;
 sudo ufw allow ssh;
 sudo ufw status verbose;
 sudo apt-get install -y net-tools;
+# latex
+sudo apt install texlive-latex-extra
 
 # prolog
 sudo add-apt-repository ppa:swi-prolog/stable -y;
