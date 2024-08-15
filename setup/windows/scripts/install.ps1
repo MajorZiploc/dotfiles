@@ -71,6 +71,8 @@ if (($optionsAsInt -band $CreativeAsInt) -eq $CreativeAsInt) {
     Write-Host("Installing Creative packages")
     # Creative Packages
     choco install -y krita
+    # SVG editor
+    choco install -y inkscape
     # photo editing tool
     # choco install -y gimp
     # compact image viewer and converter
