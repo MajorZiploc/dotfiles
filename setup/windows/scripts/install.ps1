@@ -43,7 +43,7 @@ if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
     # create gifs from screen
     choco install -y screentogif
     # scripting language for workflow automations
-    choco install -y autohotkey
+    # choco install -y autohotkey
     # for calling urls from cli
     choco install -y curl
     # display keystrokes on screen, one key at a time
