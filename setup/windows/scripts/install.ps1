@@ -2,7 +2,7 @@
 param (
     [Parameter()]
     [string]
-    $options="0001"
+    $options="00001"
 )
 $base = 2
 $optionsAsBinaryString = $options
@@ -87,7 +87,7 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     # for handle.exe: a way to find out what program is using a folder/file so you can kill it
     # https://learn.microsoft.com/en-us/sysinternals/downloads/handle
     choco install -y sysinternals
-    choco install jq
+    choco install -y jq
     # node package manager
     choco install -y nvm
     # a windows bash with package manager pacman
