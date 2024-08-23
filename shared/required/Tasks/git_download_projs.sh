@@ -12,6 +12,7 @@ cat "$projects_path_dirty" | rbql --with-header --query "Select a.* where '${ori
 
 projects=$(rbql --with-header --query "Select distinct a.clone" --delim ',' --policy quoted_rfc --input "$projects_path" | tail -n +2);
 root_path="$HOME/projects";
+mkdir -p "$root_path";
 cd "$root_path";
 
 for project in ${projects}; do
