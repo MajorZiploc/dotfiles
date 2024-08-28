@@ -58,6 +58,8 @@ if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
     # choco install -y fzf
     # vim tags
     choco install -y universal-ctags
+    # pyenv for windows
+    Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
 }
 
 if (($optionsAsInt -band $GamingAsInt) -eq $GamingAsInt) {

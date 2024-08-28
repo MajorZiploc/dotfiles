@@ -5,6 +5,9 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 # the -y on all cinst should remove the need for this global confirmation
 # choco feature enable -n allowGlobalConfirmation
 
+# install scoop
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+
 # install git and refresh path
 choco install -y git
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
