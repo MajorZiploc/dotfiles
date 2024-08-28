@@ -7,10 +7,10 @@
 	excludesfile =
 	mergeoptions = --no-edit
 	longpaths = true
-	# if windows
-	# editor = 'C:/Program Files/Git/usr/bin/vim.exe'
-	# else
-	# editor = nvim --noplugin
+; if windows
+;   editor = 'C:/Program Files/Git/usr/bin/vim.exe'
+; else
+;   editor = nvim --noplugin
   symlinks = true
 	hooksPath = /dev/null
 [merge]
@@ -36,7 +36,7 @@
 	defaultBranch = master
 [color]
 	ui = true
-# USE IF YARN/NPM GIVES YOU THIS ERROR:
-#   fatal: unable to connect to github.com:
-# [url "https://"]
-  # insteadOf = git://
+; USE IF YARN/NPM GIVES YOU THIS ERROR:
+;   fatal: unable to connect to github.com:
+; [url "https://"]
+;   insteadOf = git://
