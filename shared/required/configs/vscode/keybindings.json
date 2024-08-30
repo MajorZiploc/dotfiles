@@ -247,6 +247,16 @@
   {
     "key": "ctrl+g ctrl+a",
     "command": "find-it-faster.findWithinFiles"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "-vim.remap",
+    "when": "editorTextFocus && vim.mode != 'Insert'"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpen",
+    "when": "editorTextFocus"
   }
   VSCODE_EXTRA_KEYBINDINGS_PLACEHOLDER
 ]
