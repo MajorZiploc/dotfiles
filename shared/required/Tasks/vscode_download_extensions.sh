@@ -22,7 +22,7 @@ for vscode in ${vscodes[@]}; do
   # fall back vim emulation
   ### code --install-extension asvetliakov.vscode-neovim
   # background images
-  eval "$vscode --install-extension katsute.code-background"
+  # eval "$vscode --install-extension katsute.code-background"
   # checks spelling
   eval "$vscode --install-extension streetsidesoftware.code-spell-checker"
   # color codes csv columns
