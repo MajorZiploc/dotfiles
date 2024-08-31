@@ -7,8 +7,8 @@ sudo apt-get install -y software-properties-common;
 # ensure basic system dependencies: from pyenv install steps: https://www.liquidweb.com/kb/how-to-install-pyenv-on-ubuntu-18-04/
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
   libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
-  libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl \
-  git;
+  libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev git;
+# add this to above if needed python-openssl
 # session manager
 sudo apt-get -y install tmux;
 # for cr formatting between dos and unix. gives dos2unix and unix2dos
