@@ -181,6 +181,7 @@ autocmd BufNewFile,BufRead *.log set filetype=log
 autocmd BufNewFile,BufRead *.git set filetype=git
 autocmd BufNewFile,BufRead *.neo4j set filetype=cynpp
 autocmd BufNewFile,BufRead *.gdshader set filetype=glsl
+autocmd BufNewFile,BufRead *.ctags set filetype=ctags
 
 " enforce 2 space indents for markdown files
 autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
@@ -191,6 +192,7 @@ autocmd FileType mysql setlocal commentstring=--\ %s
 autocmd FileType ps1 setlocal commentstring=#\ %s
 autocmd FileType autohotkey setlocal commentstring=;\ %s
 autocmd FileType fsharp setlocal commentstring=//\ %s
+autocmd FileType ctags setlocal commentstring=#\ %s
 
 " Navigate to file:
 " Similar to the buildin gf but also allows open of non-existent files aswell
