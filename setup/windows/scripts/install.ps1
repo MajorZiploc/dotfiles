@@ -30,6 +30,8 @@ if (($optionsAsInt -band $MinimalAsInt) -eq $MinimalAsInt) {
     choco install -y ditto
     # version control and git bash
     choco install -y git
+    # oldschool version control SVN
+    # choco install -y tortoisesvn
     # upzipping tool
     choco install -y 7zip
     # scroll wheels works on window mouse is over
