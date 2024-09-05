@@ -152,14 +152,14 @@ vnoremap < <gv
 vnoremap > >gv
 
 " repeat dot command on a visual selection
-xmap <silent> . :normal .<cr>
+" xmap <silent> . :normal .<cr>
 
 " repeat macro command on a visual selection
-function! ExecuteMacroOverVisualRange()
-  echo "@".getcmdline()
-  execute ":'<,'>normal @" . nr2char(getchar())
-endfunction
-xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+" function! ExecuteMacroOverVisualRange()
+"   echo "@".getcmdline()
+"   execute ":'<,'>normal @" . nr2char(getchar())
+" endfunction
+" xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 " save all dirty buffers
 nmap <c-s> :wa<cr>
