@@ -19,6 +19,13 @@
 # export MY_WORKPLACE_PROJECT_PATTERNS_ARG_NAME="project_patterns";
 #
 # best to set these env vars in your shell's rc file
+#
+# EXAMPLES:
+#
+# project_patterns="--project_patterns=.*"; # all projects
+# project_operation="project_operation 'ctags_make' '' 'n'";
+# # project_operation="ctags_make";
+# workplace_repos_do_thing "$project_patterns" "$project_operation";
 
 function workplace_find_files {
   local project_patterns_arg="--${MY_WORKPLACE_PROJECT_PATTERNS_ARG_NAME:-project_patterns}=";
