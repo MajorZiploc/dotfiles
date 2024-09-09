@@ -48,6 +48,8 @@ nnoremap gq :vsc Edit.QuickInfo<cr>
 nnoremap <c-w><c-i> :vsc Edit.QuickInfo<cr>
 vnoremap gf :vsc Edit.FormatSelection<cr>
 nnoremap gf :vsc Edit.FormatDocument<cr>
+nmap gc :vsc Edit.ToggleLineComment<cr><esc>
+vmap gc :vsc Edit.ToggleLineComment<cr><esc>k
 
 nnoremap <leader>gd :vsc Edit.GoToDefinition<cr>
 nnoremap <leader>gi :vsc Edit.GoToImplementation<cr>
