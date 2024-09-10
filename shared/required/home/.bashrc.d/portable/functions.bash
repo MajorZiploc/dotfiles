@@ -629,3 +629,9 @@ function copy_from_backup {
     cp "$file" "$new_dir_path/$file_name";
   done
 }
+
+function jwt_decode {
+  local jwt_token="$1";
+  [[ -z "$jwt_token" ]] && { echo "Must specify jwt_token" >&2; return 1; }
+  python ~/.config/python/scripts/jwt_decode.py "$jwt_token";
+}
