@@ -129,6 +129,9 @@ sudo apt-get install -y dotnet-sdk-8.0;
 # snapd
 sudo apt-get -y install snapd;
 
+# just command runner
+sudo snap install just --edge --classic;
+
 # powershell
 # Install pre-requisite packages.
 sudo apt-get install -y wget apt-transport-https software-properties-common;
