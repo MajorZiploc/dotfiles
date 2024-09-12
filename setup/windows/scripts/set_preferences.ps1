@@ -1,3 +1,5 @@
+# NOTE: the HKCU things here are registry files. if you view the registry gui you can see all the paths of values and such
+
 # Set the shortest keyboard repeat delay (0 is the shortest)
 Set-ItemProperty -Path "HKCU:\Control Panel\Keyboard" -Name "KeyboardDelay" -Value 0
 # Set the fastest keyboard repeat rate (31 is the fastest i guess)
