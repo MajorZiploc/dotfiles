@@ -9,7 +9,7 @@ Set-ItemProperty -Path "HKCU:\Control Panel\Keyboard" -Name "KeyboardSpeed" -Val
 #
 Set-Location "HKCU:\Control Panel\Accessibility\Keyboard Response"
 
-Set-ItemProperty -Path . -Name AutoRepeatDelay       -Value 200
+Set-ItemProperty -Path . -Name AutoRepeatDelay       -Value 300
 Set-ItemProperty -Path . -Name AutoRepeatRate        -Value 30
 Set-ItemProperty -Path . -Name DelayBeforeAcceptance -Value 0
 Set-ItemProperty -Path . -Name BounceTime            -Value 0
