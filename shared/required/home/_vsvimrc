@@ -34,6 +34,8 @@ inoremap <c-v> <esc>"+pa
 " inoremap <tab> <c-t>
 " inoremap <s-tab> <c-d>
 
+nnoremap <silent> <leader>yw "+yiw
+
 set scrolloff=8
 set incsearch
 
