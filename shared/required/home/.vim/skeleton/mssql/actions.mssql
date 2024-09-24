@@ -7,7 +7,7 @@ with actionable_rows as (
     end as name
     , coalesce (null, 'new_value', 'COALESCE selects the first non null value') as value
     , t2.id as table2_id
-    , uuid_generate_v4() as id
+    , newid() as id
   from table2 as t2
   where
   t2.id not in (
@@ -16,10 +16,10 @@ with actionable_rows as (
     from table1 as t1
     where
     t1.type = 'account'
-    and t1.json_data ->> 'old_value' != 'junk'
-    and t1.created_date > '12/01/23'::date - interval '7' day
+    and json_value(t1.json_data, '$.old_value') != 'junk'
+    and t1.created_date > dateadd(day, -7, try_convert(date, '12/01/23', 1))
     and t1.name in ('Bob', 'Ross')
-    and t1.int_string::integer > 100,
+    and try_convert(int, t1.int_string) > 100,
   )
 )
 -- INSERT
