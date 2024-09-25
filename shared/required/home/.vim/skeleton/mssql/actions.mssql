@@ -1,13 +1,14 @@
 with actionable_rows as (
   select distinct
     case
-      when (IIF(1, UPPER(t1.title) = 'ADMIN', 'this path if 0/false')) or regexp_replace('We keep this stuff -delete everthing after the first occurence of "-"-also this stuff is deleted', '[|-][^|-]*$', '') = 'We keep this stuff -' then 'ADMIN'
+      when (IIF(1, UPPER(t1.title) = 'ADMIN', 'this path if 0/false')) or replace('We keep this stuff -not this stuff', 'not this stuff', '') = 'We keep this stuff -' then 'ADMIN'
       when (initcase(t2.name) = 'Title Case') or (lower(t2.name) = 'bob') then 'REGULAR'
       else 'DEFAULT_VALUE'
     end as name
     , coalesce (null, 'new_value', 'COALESCE selects the first non null value') as value
     , t2.id as table2_id
     , newid() as id
+    , json_query(t1.json_data, '$.list') -- use json_query for complex types and json_value for simple types
   from table2 as t2
   where
   t2.id not in (
