@@ -39,6 +39,7 @@ brew 'wget'
 
 brew 'ctags'
 tap "universal-ctags/universal-ctags"
+brew 'cscope'
 # NOTE: equal to: brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 brew "universal-ctags", args: ["head"]
 
