@@ -24,7 +24,9 @@ sudo apt-get -y install tree;
 sudo apt-get -y install xclip;
 
 # ctags
-sudo apt-get -y install universal-ctags
+sudo apt-get -y install universal-ctags;
+# references for ctags
+sudo apt-get -y install cscope;
 
 # creates a 'python' and makes it point to python3 that is installed
 sudo apt-get -y install python-is-python3;

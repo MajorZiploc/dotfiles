@@ -13,6 +13,8 @@ Plug 'tpope/vim-obsession' " self managing n?vim sessions (Session.vim w/ :Obses
 Plug 'tpope/vim-commentary' " comment/uncomment code (gcc, etc)
 if (!has('nvim'))
   Plug 'junegunn/seoul256.vim' " no contrast color scheme
+else
+  Plug 'dhananjaylatkar/cscope_maps.nvim' " cscopes for nvim under ':Cs'
 endif
 VIM_PLUGIN_INCLUDE_PLACEHOLDER
 
@@ -41,6 +43,9 @@ so ~/.vim/plugin-settings/vim_code_runner.vim
 so ~/.vim/plugin-settings/fugitive.vim
 if (!has('nvim'))
   so ~/.vim/plugin-settings/seoul256.vim
+  so ~/.vim/plugin-settings/cscopes_vim.vim
+else
+  so ~/.vim/plugin-settings/cscopes_nvim.vim
 endif
 VIM_PLUGIN_SETTINGS_PLACEHOLDER
 
