@@ -39,11 +39,9 @@ let mapleader = " "
 so ~/.vim/plugin-settings/coc.vim
 so ~/.vim/plugin-settings/vim_code_runner.vim
 so ~/.vim/plugin-settings/fugitive.vim
+so ~/.vim/plugin-settings/cscopes_vim.vim
 if (!has('nvim'))
   so ~/.vim/plugin-settings/seoul256.vim
-  so ~/.vim/plugin-settings/cscopes_vim.vim
-else
-  so ~/.vim/plugin-settings/cscopes_nvim.vim
 endif
 VIM_PLUGIN_SETTINGS_PLACEHOLDER
 
