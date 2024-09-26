@@ -1,10 +1,1 @@
-nmap <leader>cs :cs find s <cword><cr>
-nmap <leader>cs :cs find g <cword><cr>
-nmap <leader>cs :cs find c <cword><cr>
-nmap <leader>cs :cs find t <cword><cr>
-nmap <leader>cs :cs find e <cword><cr>
-nmap <leader>cs :cs find f <cword><cr>
-nmap <leader>cs :cs find i <cword><cr>
-nmap <leader>cs :cs find d <cword><cr>
-nmap <leader>cs :cs find a <cword><cr>
-nmap <leader>cs :cs find b <cword><cr>
+nmap <leader>cs :call LoadQuickFixList(system('cscope -dL0 ' . expand('<cword>') . ' \| sed -E "s,(.*?) (GetType\|.global.) ([[:digit:]]+) (.*),\1:\3:1: \4,g"'))<CR>
