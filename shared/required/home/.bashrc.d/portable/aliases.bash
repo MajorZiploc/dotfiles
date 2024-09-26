@@ -103,6 +103,7 @@ alias v='vim . -S Session.vim';
 alias gv='vim . -S Session.vim "+:horizontal topleft Git"';
 
 alias ctags_make='rg --files | ctags -R --links=no -L -';
+alias cscope_make='cscope -b `rg --files`';
 
 alias git_merge_keep_theirs="git merge -X theirs";
 alias git_log_break_down="git log --stat --oneline --decorate";
