@@ -20,6 +20,8 @@ pkg install -y shellcheck;
 pkg install -y xclip;
 pkg install -y ripgrep;
 pkg install -y fzf;
+pkg install -y ctags;
+pkg install -y cscope;
 
 # for Ag in vim
 pkg install -y silversearcher-ag;
