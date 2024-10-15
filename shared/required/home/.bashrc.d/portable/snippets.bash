@@ -1,9 +1,10 @@
 function snip_sql_column_view_fn_info {
   # choices: ["none", "low", "high"]
-  local sql_flavor="$1";
-  local constraint_details="$2";
-  local view_details="$3";
-  local fn_details="$4";
+  local sql_flavor="$1"; sql_flavor="${sql_flavor:-"pgsql"}";
+  local constraint_details="$2"; constraint_details="${constraint_details:-"low"}";
+  local view_details="$3"; view_details="${view_details:-"low"}";
+  local fn_details="$4"; fn_details="${fn_details:-"low"}";
+  local trigger_details="$5"; trigger_details="${trigger_details:-"low"}";
   if [[ "${sql_flavor}" == "sqlite" ]]; then
     echo "SELECT name, '\"' || sql || '\"' as sql
 FROM sqlite_master
@@ -11,9 +12,6 @@ WHERE type = 'table'
 AND name NOT LIKE 'sqlite_%';";
     return 0;
   fi
-  constraint_details="${constraint_details:-"high"}";
-  view_details="${view_details:-"low"}";
-  fn_details="${fn_details:-"none"}";
   local table_access_modifier="";
   [[ "${sql_flavor}" == "mssql" ]] && { table_access_modifier=" WITH(NOLOCK)"; }
   sql_comment="-- ";
@@ -71,8 +69,7 @@ UNION
     , '' as COLUMN_DEFAULT
     FROM INFORMATION_SCHEMA.VIEWS AS t${table_access_modifier}${table_name_filter:+"
     WHERE
-      $table_name_filter"}
-";
+      $table_name_filter"}";
   fi
 
   local function_sub_query="";
@@ -108,7 +105,70 @@ UNION
     fi
   fi
 
-  local rest=${constraints_sub_query}${function_sub_query}${view_sub_query};
+  local trigger_sub_query="";
+  if [[ "${trigger_details}" != "none" ]]; then
+    if [[ "${sql_flavor}" == "mysql" || "${sql_flavor}" == "mariadb" ]]; then
+      echo "-- WARNING: ${sql_flavor} does not support trigger sub query! Will not be included in resulting query. TODO: look into adding this";
+    else
+      if [[ "${sql_flavor}" == "pgsql" ]]; then
+        local low_detail_prefix="";
+        [[ "${trigger_details}" != "low" ]] && { low_detail_prefix="${sql_comment}"; }
+        local high_detail_prefix="";
+        [[ "${trigger_details}" != "high" ]] && { high_detail_prefix="${sql_comment}"; }
+        trigger_def="${high_detail_prefix}, trg.tgfoid::regprocedure::text AS COLUMN_DEFAULT -- AS FUNCTION_NAME -- use if you want to see the trigger definitions - chunky";
+        trigger_def+="
+        ${low_detail_prefix}, '' AS COLUMN_DEFAULT -- use if you want to minify this query - minify";
+      trigger_sub_query="
+  UNION
+      SELECT 
+      'trigger' AS ENTRY_TYPE
+      , trg.tgrelid::regclass::text AS TABLE_NAME
+      , trg.tgname AS ENTRY_NAME
+      , trg.tgtype::text AS DATA_TYPE
+      , CASE
+          WHEN trg.tgenabled = 'O' THEN 'ENABLED'
+          ELSE 'DISABLED'
+        END AS IS_NULLABLE -- AS TRIGGER_ENABLED,
+      , 0 AS CHARACTER_MAXIMUM_LENGTH
+      , 0 AS NUMERIC_PRECISION
+      , 0 AS DATETIME_PRECISION
+      ${trigger_def}
+      FROM pg_trigger as trg ${table_access_modifier}
+      WHERE
+          trg.tgisinternal = FALSE";
+      elif [[ "${sql_flavor}" == "mssql" ]]; then
+        local low_detail_prefix="";
+        [[ "${trigger_details}" != "low" ]] && { low_detail_prefix="${sql_comment}"; }
+        local high_detail_prefix="";
+        [[ "${trigger_details}" != "high" ]] && { high_detail_prefix="${sql_comment}"; }
+        trigger_def="${high_detail_prefix}, m.definition AS COLUMN_DEFAULT -- AS FUNCTION_NAME -- use if you want to see the trigger definitions - chunky";
+        trigger_def+="
+        ${low_detail_prefix}, '' AS COLUMN_DEFAULT -- use if you want to minify this query - minify";
+      trigger_sub_query="
+  UNION
+      SELECT
+      'trigger' AS ENTRY_TYPE
+      , o.name AS TABLE_NAME
+      , t.name AS ENTRY_NAME
+      , CONCAT('is_instead_of_trigger:', t.is_instead_of_trigger) AS DATA_TYPE
+      , CASE
+          WHEN t.is_disabled = 0 THEN 'ENABLED'
+          ELSE 'DISABLED'
+        END AS IS_NULLABLE -- AS TRIGGER_ENABLED,
+      , 0 AS CHARACTER_MAXIMUM_LENGTH
+      , 0 AS NUMERIC_PRECISION
+      , 0 AS DATETIME_PRECISION
+      ${trigger_def}
+      FROM sys.triggers AS t ${table_access_modifier}
+      JOIN sys.objects AS o ${table_access_modifier} ON t.parent_id = o.object_id
+      JOIN sys.sql_modules AS m ${table_access_modifier} ON t.object_id = m.object_id
+      WHERE
+          o.type = 'U';  -- Only user tables";
+      fi
+    fi
+  fi
+
+  local rest=${constraints_sub_query}${function_sub_query}${view_sub_query}${trigger_sub_query};
   local _command="
 SELECT
 'column' as ENTRY_TYPE
@@ -121,7 +181,7 @@ SELECT
 , t.DATETIME_PRECISION
 , t.COLUMN_DEFAULT
 FROM INFORMATION_SCHEMA.COLUMNS AS t${table_access_modifier}${table_name_filter:+"
-WHERE $table_name_filter"}${rest}";
+WHERE $table_name_filter"}${rest} ";
   local order_by="ORDER BY TABLE_NAME, ENTRY_TYPE, ENTRY_NAME";
 if [[ -z "$rest" ]]; then
   _command+="
