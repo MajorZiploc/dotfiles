@@ -14,7 +14,7 @@ AND name NOT LIKE 'sqlite_%';";
   fi
   local table_access_modifier="";
   [[ "${sql_flavor}" == "mssql" ]] && { table_access_modifier=" WITH(NOLOCK)"; }
-  sql_comment="-- ";
+  local sql_comment="-- ";
   local table_name_filter="";
   [[ "${sql_flavor}" == "pgsql" ]] && {
     table_name_filter="t.TABLE_NAME NOT LIKE '_pg_%'
