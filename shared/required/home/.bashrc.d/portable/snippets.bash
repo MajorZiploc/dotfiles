@@ -110,7 +110,7 @@ UNION
 
   local trigger_sub_query="";
   if [[ "${trigger_details}" != "none" ]]; then
-    if [[ "${sql_flavor}" == "mysql" || "${sql_flavor}" == "mariadb" || "${sql_flavor}" == "mssql" ]]; then
+    if [[ "${sql_flavor}" == "mysql" || "${sql_flavor}" == "mariadb" ]]; then
       echo "-- WARNING: ${sql_flavor} does not support trigger sub query! Will not be included in resulting query. TODO: look into adding this";
     else
       if [[ "${sql_flavor}" == "pgsql" ]]; then
@@ -118,7 +118,7 @@ UNION
         [[ "${trigger_details}" != "low" ]] && { low_detail_prefix="${sql_comment}"; }
         local high_detail_prefix="";
         [[ "${trigger_details}" != "high" ]] && { high_detail_prefix="${sql_comment}"; }
-        trigger_def="${high_detail_prefix}, , trg.tgfoid::regprocedure::text AS COLUMN_DEFAULT -- AS FUNCTION_NAME -- use if you want to see the trigger definitions - chunky";
+        trigger_def="${high_detail_prefix}, trg.tgfoid::regprocedure::text AS COLUMN_DEFAULT -- AS FUNCTION_NAME -- use if you want to see the trigger definitions - chunky";
         trigger_def+="
         ${low_detail_prefix}, '' AS COLUMN_DEFAULT -- use if you want to minify this query - minify";
       trigger_sub_query="
@@ -139,6 +139,34 @@ UNION
       FROM pg_trigger as trg ${table_access_modifier}
       WHERE
           trg.tgisinternal = FALSE";
+      elif [[ "${sql_flavor}" == "mssql" ]]; then
+        local low_detail_prefix="";
+        [[ "${trigger_details}" != "low" ]] && { low_detail_prefix="${sql_comment}"; }
+        local high_detail_prefix="";
+        [[ "${trigger_details}" != "high" ]] && { high_detail_prefix="${sql_comment}"; }
+        trigger_def="${high_detail_prefix}, m.definition AS COLUMN_DEFAULT -- AS FUNCTION_NAME -- use if you want to see the trigger definitions - chunky";
+        trigger_def+="
+        ${low_detail_prefix}, '' AS COLUMN_DEFAULT -- use if you want to minify this query - minify";
+      trigger_sub_query="
+  UNION
+      SELECT
+      'trigger' AS ENTRY_TYPE
+      , o.name AS TABLE_NAME
+      , t.name AS ENTRY_NAME
+      , CONCAT('is_instead_of_trigger:', t.is_instead_of_trigger) AS DATA_TYPE
+      , CASE
+          WHEN t.is_disabled = 0 THEN 'ENABLED'
+          ELSE 'DISABLED'
+        END AS IS_NULLABLE -- AS TRIGGER_ENABLED,
+      , 0 AS CHARACTER_MAXIMUM_LENGTH
+      , 0 AS NUMERIC_PRECISION
+      , 0 AS DATETIME_PRECISION
+      ${trigger_def}
+      FROM sys.triggers AS t ${table_access_modifier}
+      JOIN sys.objects AS o ${table_access_modifier} ON t.parent_id = o.object_id
+      JOIN sys.sql_modules AS m ${table_access_modifier} ON t.object_id = m.object_id
+      WHERE
+          o.type = 'U';  -- Only user tables";
       fi
     fi
   fi
