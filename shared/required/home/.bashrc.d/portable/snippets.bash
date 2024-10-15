@@ -12,9 +12,6 @@ WHERE type = 'table'
 AND name NOT LIKE 'sqlite_%';";
     return 0;
   fi
-  constraint_details="${constraint_details:-"high"}";
-  view_details="${view_details:-"low"}";
-  fn_details="${fn_details:-"none"}";
   local table_access_modifier="";
   [[ "${sql_flavor}" == "mssql" ]] && { table_access_modifier=" WITH(NOLOCK)"; }
   sql_comment="-- ";
