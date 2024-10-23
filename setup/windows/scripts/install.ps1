@@ -124,6 +124,7 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     # choco install -y postman
     # neovim
     choco install -y neovim
+    choco install -y PowerToys
 }
 
 if (($optionsAsInt -band $WorkAsInt) -eq $WorkAsInt) {
