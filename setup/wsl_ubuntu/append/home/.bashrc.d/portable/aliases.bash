@@ -3,7 +3,6 @@ alias gsed='sed'
 alias explorer="explorer.exe"
 # copy to clipboard
 alias clip="clip.exe"
-alias vim='nvim'
 alias pwd_wsl='echo "//wsl.localhost/Ubuntu`pwd`" | to_winpath'
 
 alias to_winpath_wsl='sed -E "s,^/home,//wsl.localhost/Ubuntu/home,;s,^/mnt,,;s,^/(\w)/,\U\1:/,g" | sed s,/,\\\\,g';

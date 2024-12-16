@@ -99,7 +99,6 @@ alias find_files_trim_block_search='find_in_files_trim_block_search | sed -E "s,
 # reexecutes last command that beings with a pattern. ex: fc -s grep -E
 alias reexe='fc -s';
 
-alias v='vim . -S Session.vim';
 alias gv='vim . -S Session.vim "+:horizontal topleft Git"';
 
 alias ctags_make='rg --files | ctags -R --links=no -L -';

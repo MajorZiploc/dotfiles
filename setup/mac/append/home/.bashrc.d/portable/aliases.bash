@@ -2,7 +2,6 @@
 alias explorer="open"
 # copy to clipboard
 alias clip="pbcopy"
-alias vim='nvim'
 alias sed='gsed'
 alias tac='perl -e "'"print reverse <>"'"';
 # NOTE: may be this if not using gnu polyfills
