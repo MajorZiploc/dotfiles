@@ -44,6 +44,26 @@ UNION
     WHERE
       ${constraint_filter}${table_name_filter:+"
       AND $table_name_filter"}";
+    local indexes_sub_query="";
+    if [[ "${sql_flavor}" == "mssql" ]]; then
+    local indexes_sub_query="
+UNION
+    SELECT 
+    'index' as ENTRY_TYPE
+    , i.name AS TABLE_NAME -- IndexName
+    , c.name AS ENTRY_NAME -- ColumnName
+    , cast(i.type_desc as varchar) COLLATE SQL_Latin1_General_CP1_CI_AS AS DATA_TYPE -- IndexType
+    , '' as IS_NULLABLE
+    , 0 as CHARACTER_MAXIMUM_LENGTH
+    , 0 as NUMERIC_PRECISION
+    , 0 as DATETIME_PRECISION
+    , concat('i.is_unique:', cast(i.is_unique as varchar), ' ', 'i.is_primary_key:', cast(i.is_primary_key as varchar), ' ', 'ic.key_ordinal:', cast(ic.key_ordinal as varchar)) as COLUMN_DEFAULT
+    FROM sys.indexes as i${table_access_modifier}
+    INNER JOIN sys.index_columns as ic${table_access_modifier} ON i.object_id = ic.object_id AND i.index_id = ic.index_id
+    INNER JOIN sys.columns as c${table_access_modifier} ON ic.object_id = c.object_id AND ic.column_id = c.column_id
+    -- WHERE 
+    --     i.object_id = OBJECT_ID('SchemaName.TableName')";
+    fi
   fi
 
   local view_sub_query="";
@@ -168,7 +188,7 @@ UNION
     fi
   fi
 
-  local rest=${constraints_sub_query}${function_sub_query}${view_sub_query}${trigger_sub_query};
+  local rest=${constraints_sub_query}${indexes_sub_query}${function_sub_query}${view_sub_query}${trigger_sub_query};
   local _command="
 SELECT
 'column' as ENTRY_TYPE
