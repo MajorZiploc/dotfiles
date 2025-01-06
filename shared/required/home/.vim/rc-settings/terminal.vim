@@ -182,6 +182,7 @@ autocmd BufNewFile,BufRead *.git set filetype=git
 autocmd BufNewFile,BufRead *.neo4j set filetype=cynpp
 autocmd BufNewFile,BufRead *.gdshader set filetype=glsl
 autocmd BufNewFile,BufRead *.ctags set filetype=ctags
+autocmd BufNewFile,BufRead *.aspx set filetype=html
 
 " enforce 2 space indents for markdown files
 autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
