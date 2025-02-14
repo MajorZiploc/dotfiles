@@ -115,14 +115,15 @@ function show_cheat_sheet {
 
 function refactor_rename_symbols {
   local rename_pattern="$1";
-  local file_pattern=$2; file_pattern="${file_pattern:-".*"}"
-  local symbol_declare_prefix="$3"; symbol_declare_prefix="${symbol_declare_prefix:-""}";
-  local symbol_declare_postfix="$4"; symbol_declare_postfix="${symbol_declare_postfix:-""}";
+  local symbol_declare_prefix="$2"; symbol_declare_prefix="${symbol_declare_prefix:-""}";
+  local symbol_declare_postfix="$3"; symbol_declare_postfix="${symbol_declare_postfix:-""}";
+  local search_file_pattern="$4"; search_file_pattern="${search_file_pattern:-".*"}"
+  local replace_file_pattern="$4"; replace_file_pattern="${replace_file_pattern:-".*"}"
   [[ -z "$rename_pattern" ]] && { echo "Must specify rename_pattern" >&2; return 1; }
-  local search_results; search_results=$(gfind_in_files "^\s*$symbol_declare_prefix\b([a-zA-Z0-9_\-]+)\b$symbol_declare_postfix" "$file_pattern");
+  local search_results; search_results=$(gfind_in_files "^\s*$symbol_declare_prefix\b([a-zA-Z0-9_\-]+)\b$symbol_declare_postfix" "$search_file_pattern");
   local symbol_names; symbol_names=($(echo "$search_results" | sed -E "s,.*?[[:digit:]]+:.*?$symbol_declare_prefix\b([a-zA-Z0-9_\-]+)\b$symbol_declare_postfix(.*),\1,g" | sort -u | xargs));
   [[ "$symbol_names" =~ "^[[:blank:]]*$" ]] && { echo "No symbol_names found to rename" >&2; return 1; }
-  local files; files=($(gfind_files "$file_pattern" | xargs));
+  local files; files=($(gfind_files "$replace_file_pattern" | xargs));
   for symbol_name in ${symbol_names[@]}; do
    new_symbol_name=$(echo "$symbol_name" | sed -E "$rename_pattern");
    echo "$symbol_name -> $new_symbol_name";
