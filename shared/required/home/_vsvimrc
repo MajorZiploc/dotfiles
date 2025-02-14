@@ -1,5 +1,7 @@
 so ~/.vim/rc-settings/common.vim
 
+set number
+
 " inoremap kj <esc>
 " inoremap kj <esc>
 " inoremap <tab> <esc>

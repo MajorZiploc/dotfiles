@@ -128,6 +128,9 @@ sudo apt-get -y update;
 # sudo apt-get install -y dotnet-sdk-6.0;
 sudo apt-get install -y dotnet-sdk-8.0;
 
+# english dictionary
+sudo apt-get install -y wamerican;
+
 # snapd
 sudo apt-get -y install snapd;
 
