@@ -9,7 +9,7 @@ export EDITOR='vim'
 export RUSTC_WRAPPER="$HOME/.cargo/bin/sccache"
 
 export NODE_ENV='development'
-export NODE_TLS_REJECT_UNAUTHORIZED=0
+# export NODE_TLS_REJECT_UNAUTHORIZED=0
 
 export GIT_ORIGIN_BRANCH_CHOICES=(`echo "develop dev staging" | xargs`)
 export GIT_DESTINATION_BRANCH_CHOICES=(`echo "main master " | xargs`)
