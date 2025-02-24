@@ -9,7 +9,22 @@ export EDITOR='vim'
 export RUSTC_WRAPPER="$HOME/.cargo/bin/sccache"
 
 export NODE_ENV='development'
+
+export NODE_TLS_REJECT_UNAUTHORIZED=1
+# IF SSL issues like local ssl cert issues
 # export NODE_TLS_REJECT_UNAUTHORIZED=0
+# if its a per project thing. better to just do this rather than the above for the whole env:
+# NODE_TLS_REJECT_UNAUTHORIZED=0 npm install
+# or potentially this:
+# NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt npm install
+# or potentially this in .npmrc file
+# use-system-ca=true
+# or potentially this on cli
+# npm install --use-system-ca
+# or potentially this in .npmrc file
+# use-openssl-ca=true
+# or potentially this on cli
+# npm install --use-openssl-ca
 
 export GIT_ORIGIN_BRANCH_CHOICES=(`echo "develop dev staging" | xargs`)
 export GIT_DESTINATION_BRANCH_CHOICES=(`echo "main master " | xargs`)
