@@ -1,5 +1,5 @@
 {
-  "http.proxyStrictSSL": false,
+  "http.proxyStrictSSL": true,
   "semanticTokens.enable": false,
   "java.enabled": true,
   "languageserver": {
