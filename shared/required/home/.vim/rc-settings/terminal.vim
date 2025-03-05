@@ -186,6 +186,8 @@ autocmd BufNewFile,BufRead *.aspx set filetype=html
 
 " enforce 2 space indents for markdown files
 autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
+" enforce 2 space indents for godot (gdscript) files
+autocmd FileType gdscript setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType sql setlocal commentstring=--\ %s
 autocmd FileType glsl setlocal commentstring=//\ %s
 autocmd FileType gdscript setlocal commentstring=#\ %s
