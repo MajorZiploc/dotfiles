@@ -118,6 +118,7 @@ if (($optionsAsInt -band $TechAsInt) -eq $TechAsInt) {
     choco install -y powershell-core
     # java development kit 12
     choco install -y openjdk.portable
+    choco install -y openjdk --version=17.0.2
     # vim gui
     # choco install -y vim-tux
     # api manual testing
