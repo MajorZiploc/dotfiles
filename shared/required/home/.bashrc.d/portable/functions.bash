@@ -635,3 +635,8 @@ function jwt_decode {
   [[ -z "$jwt_token" ]] && { echo "Must specify jwt_token" >&2; return 1; }
   python ~/.config/python/scripts/jwt_decode.py "$jwt_token";
 }
+
+function godot_run_scene {
+  [[ -z "$godot_scene" ]] && { echo "Must specify a command godot_scene" >&2; return 1; }
+  $GODOT_CLI "$godot_scene";
+}
