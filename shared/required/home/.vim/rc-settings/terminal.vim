@@ -178,6 +178,7 @@ autocmd BufNewFile,BufRead *.sqlite3 set filetype=sql
 autocmd BufNewFile,BufRead *.sqlite set filetype=sql
 autocmd BufNewFile,BufRead *.mssql set filetype=sql
 autocmd BufNewFile,BufRead *.log set filetype=log
+autocmd BufNewFile,BufRead *.godot set filetype=log
 autocmd BufNewFile,BufRead *.git set filetype=git
 autocmd BufNewFile,BufRead *.neo4j set filetype=cynpp
 autocmd BufNewFile,BufRead *.gdshader set filetype=glsl
@@ -191,6 +192,7 @@ autocmd FileType gdscript setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType sql setlocal commentstring=--\ %s
 autocmd FileType glsl setlocal commentstring=//\ %s
 autocmd FileType gdscript setlocal commentstring=#\ %s
+autocmd FileType log setlocal commentstring=;\ %s
 autocmd FileType mysql setlocal commentstring=--\ %s
 autocmd FileType ps1 setlocal commentstring=#\ %s
 autocmd FileType autohotkey setlocal commentstring=;\ %s
