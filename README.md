@@ -343,3 +343,30 @@ View the Justfile for more commands and details on each command or use (at the r
 
 - Cleanup ubuntu-slim-container
   - was rushed and has alot of things around that it does not need
+
+TODO:
+get a way to access the ordered buffer list:
+fzf-vim accesses ordered buffer list
+currently testing how to get access to the list
+```vim
+" NOTE: under function! fzf#vim#buffers(...) in autoload/fzf/vim.vim of fzf-vim plugin
+" [query (string)], [bufnrs (list)], [spec (dict)], [fullscreen (bool)]
+function! Foo(...)
+  let [query, args] = (a:0 && type(a:1) == type('')) ?
+        \ [a:1, a:000[1:]] : ['', a:000]
+  if len(args) && type(args[0]) == s:TYPE.list
+    let [buffers; args] = args
+  else
+    let buffers = s:buflisted()
+  endif
+  let sorted = sort(buffers, 's:sort_buffers')
+  let header_lines = '--header-lines=' . (bufnr('') == get(sorted, 0, 0) ? 1 : 0)
+  let tabstop = len(max(sorted)) >= 4 ? 9 : 8
+  return s:fzf('buffers', {
+  \ 'source':  map(sorted, 'fzf#vim#_format_buffer(v:val)'),
+  \ 'sink*':   s:function('s:bufopen'),
+  \ 'options': ['+m', '-x', '--tiebreak=index', header_lines, '--ansi', '-d', '\t', '--with-nth', '3..', '-n', '2,1..2', '--prompt', 'Buf> ', '--query', query, '--preview-window', '+{2}/2', '--tabstop', tabstop]
+  \}, args)
+endfunction
+```
+
