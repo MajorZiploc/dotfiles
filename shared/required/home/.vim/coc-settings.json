@@ -1,5 +1,4 @@
 {
-  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "http.proxyStrictSSL": false,
   "semanticTokens.enable": false,
   "java.enabled": true,

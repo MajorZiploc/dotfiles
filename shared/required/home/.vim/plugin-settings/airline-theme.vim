@@ -12,4 +12,6 @@ let g:airline#extensions#branch#displayed_head_limit = 10
 let g:airline#extensions#whitespace#enabled = 0
 
 " Allows current function to be shown in bar
-let g:airline#extensions#coc#enabled = 1
+" requires this in your coc-settings.json:
+"   coc.preferences.currentFunctionSymbolAutoUpdate": true,
+" let g:airline#extensions#coc#enabled = 1
