@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " intellisense
 Plug 'tpope/vim-surround' " manipulate surround chars
 Plug 'MajorZiploc/code_runner.vim' " run selected code chunks
+Plug 'MajorZiploc/sticky_header.vim' " basic context finder (ex. what function am I currently in?)
 Plug 'stefandtw/quickfix-reflector.vim' " editable quickfix
 Plug 'sheerun/vim-polyglot' " collection of language packs
 Plug 'tpope/vim-fugitive' " git plugin
@@ -38,6 +39,7 @@ let mapleader = " "
 
 so ~/.vim/plugin-settings/coc.vim
 so ~/.vim/plugin-settings/vim_code_runner.vim
+so ~/.vim/plugin-settings/sticky_header.vim
 so ~/.vim/plugin-settings/fugitive.vim
 so ~/.vim/plugin-settings/cscopes_vim.vim
 if (!has('nvim'))

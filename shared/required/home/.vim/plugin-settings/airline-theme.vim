@@ -10,3 +10,8 @@ let g:airline#extensions#branch#displayed_head_limit = 10
 
 " removes potentially large right most yellow bar about whitespace and mix indent info
 let g:airline#extensions#whitespace#enabled = 0
+
+" Allows current function to be shown in bar
+" requires this in your coc-settings.json:
+"   coc.preferences.currentFunctionSymbolAutoUpdate": true,
+" let g:airline#extensions#coc#enabled = 1
