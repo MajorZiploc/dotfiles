@@ -1,1 +1,1 @@
-choco upgrade all --except="'openjdk'"
+choco upgrade all --except="'openjdk'" -y
