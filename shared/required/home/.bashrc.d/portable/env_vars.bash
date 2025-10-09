@@ -40,4 +40,4 @@ export FIND_SHOULD_SHOW_COMMAND="false";
 export GIT_COLOR_WORDS='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+';
 
 # NOTE: godot path must be in your PATH
-export GODOT_CLI="Godot_v4.4-stable_win64_console.exe";
+export GODOT_CLI="Godot_v4.5-stable_win64_console.exe";
