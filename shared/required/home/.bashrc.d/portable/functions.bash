@@ -602,7 +602,7 @@ print(df[differing_cols].reset_index())
 ";
 }
 
-function xml_diff {
+function xml_struct_diff {
   local xml_file_1="$1";
   local xml_file_2="$2";
   [[ -z "$xml_file_1" ]] && { echo "Must specify xml_file_1" >&2; return 1; }
