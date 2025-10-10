@@ -608,6 +608,19 @@ function xml_diff {
   [[ -z "$xml_file_1" ]] && { echo "Must specify xml_file_1" >&2; return 1; }
   [[ -z "$xml_file_2" ]] && { echo "Must specify xml_file_2" >&2; return 1; }
   python -c "
+from xmldiff import main
+diffs = main.diff_files('$xml_file_1', '$xml_file_2')
+for d in diffs:
+    print(d)
+";
+}
+
+function xml_struct_diff {
+  local xml_file_1="$1";
+  local xml_file_2="$2";
+  [[ -z "$xml_file_1" ]] && { echo "Must specify xml_file_1" >&2; return 1; }
+  [[ -z "$xml_file_2" ]] && { echo "Must specify xml_file_2" >&2; return 1; }
+  python -c "
 import xml.etree.ElementTree as ET
 def structure_paths(elem, base=''):
     paths = set()
