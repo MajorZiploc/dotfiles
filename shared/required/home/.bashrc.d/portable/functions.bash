@@ -589,6 +589,19 @@ df.to_csv('$csv_file_name')
   ";
 }
 
+function csv_diff {
+  local file_name="$1";
+  [[ -z "$file_name" ]] && { echo "Must specify file_name" >&2; return 1; }
+  python -c "
+import pandas as pd
+df = pd.read_csv('$file_name')
+# NOTE: compare every col value to the first col value
+differing_cols = [col for col in df.columns if not df[col].eq(df[col].iloc[0]).all()]
+print('Columns that differ:', differing_cols)
+print(df[differing_cols].reset_index())
+";
+}
+
 function copy_to_backup {
   local target_repo="$1";
   [[ -z "$target_repo" ]] && { echo "Must specify target_repo" >&2; return 1; }
