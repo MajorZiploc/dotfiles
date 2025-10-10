@@ -602,6 +602,27 @@ print(df[differing_cols].reset_index())
 ";
 }
 
+function xml_diff {
+  local xml_content_1="$1";
+  local xml_content_2="$2";
+  [[ -z "$xml_content_1" ]] && { echo "Must specify xml_content_1" >&2; return 1; }
+  [[ -z "$xml_content_2" ]] && { echo "Must specify xml_content_2" >&2; return 1; }
+  python -c "
+import xml.etree.ElementTree as ET
+def structure_paths(elem, base=''):
+    paths = set()
+    path = f'{base}/{elem.tag}'
+    paths.add(path)
+    for child in elem:
+        paths |= structure_paths(child, path)
+    return paths
+paths1 = structure_paths(ET.fromstring('$xml_content_1'))
+paths2 = structure_paths(ET.fromstring('$xml_content_2'))
+print('Second XML Added:', paths2 - paths1)
+print('Second XML Removed:', paths1 - paths2)
+";
+}
+
 function copy_to_backup {
   local target_repo="$1";
   [[ -z "$target_repo" ]] && { echo "Must specify target_repo" >&2; return 1; }
