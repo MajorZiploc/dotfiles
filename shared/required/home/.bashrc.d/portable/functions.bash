@@ -642,6 +642,26 @@ print('Second XML Removed:', paths1 - paths2)
 ";
 }
 
+function xml_struct {
+  local xml_file_1="$1";
+  [[ -z "$xml_file_1" ]] && { echo "Must specify xml_file_1" >&2; return 1; }
+  python -c "
+import xml.etree.ElementTree as ET
+def structure_paths(elem, base=''):
+    paths = set()
+    path = f'{base}/{elem.tag}'
+    paths.add(path)
+    for child in elem:
+        paths |= structure_paths(child, path)
+    return paths
+file_path_1 = '$xml_file_1'
+with open(file_path_1, 'r') as file:
+    file_content_1 = file.read()
+paths1 = structure_paths(ET.fromstring(file_content_1))
+print('XML Structure:', paths1)
+";
+}
+
 function copy_to_backup {
   local target_repo="$1";
   [[ -z "$target_repo" ]] && { echo "Must specify target_repo" >&2; return 1; }
