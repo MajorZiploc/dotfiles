@@ -602,6 +602,28 @@ print(df[differing_cols].reset_index())
 ";
 }
 
+function csv_merge {
+  local file_name_01="$1";
+  [[ -z "$file_name_01" ]] && { echo "Must specify file_name_01" >&2; return 1; }
+  local file_name_02="$2";
+  [[ -z "$file_name_02" ]] && { echo "Must specify file_name_02" >&2; return 1; }
+  local merge_on_column="$3";
+  [[ -z "$merge_on_column" ]] && { echo "Must specify merge_on_column" >&2; return 1; }
+  python -c "
+import pandas as pd
+csv1 = pd.read_csv('$file_name_01')
+csv2 = pd.read_csv('$file_name_02')
+merged = csv1.merge(csv2, on='$merge_on_column', how='left', suffixes=('', '_csv2'))
+# For overlapping columns, prefer csv2 values if they exist
+for col in csv2.columns:
+    if col != '$merge_on_column':
+        merged[col] = merged[f'{col}_csv2'].combine_first(merged[col])
+        merged.drop(columns=f'{col}_csv2', inplace=True)
+# Save result
+merged.to_csv('merged.csv', index=False)
+";
+}
+
 function xml_diff {
   local xml_file_1="$1";
   local xml_file_2="$2";
