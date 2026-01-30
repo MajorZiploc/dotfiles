@@ -11,7 +11,7 @@ function main {
   # sql-formatter: formats sql code
   #   > sql-formatter -c ~/.config/sql-formatter.json
   # ts-node: runs typescript files the same as node runs javascript files
-  local packages="trash-cli prettier concurrently gnomon sql-formatter ts-node;";
+  local packages="trash-cli prettier concurrently gnomon sql-formatter ts-node opencode-ai;";
   eval "npm $method --global $packages";
 }
 
