@@ -184,6 +184,8 @@ autocmd BufNewFile,BufRead *.neo4j set filetype=cynpp
 autocmd BufNewFile,BufRead *.gdshader set filetype=glsl
 autocmd BufNewFile,BufRead *.ctags set filetype=ctags
 autocmd BufNewFile,BufRead *.aspx set filetype=html
+autocmd BufNewFile,BufRead *.fx set filetype=cpp
+autocmd BufNewFile,BufRead *.fxh set filetype=cpp
 
 " enforce 2 space indents for markdown files
 autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
