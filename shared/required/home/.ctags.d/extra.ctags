@@ -20,6 +20,6 @@
 --langmap=GDScript:.gd
 --regex-GDScript=/^[ \t]*(static )?func[ \t]+([a-zA-Z0-9_]+)/\2/f,function/
 --regex-GDScript=/^[ \t]*class[ \t]+([a-zA-Z0-9_]+)/\1/c,class/
---regex-GDScript=/^[ \t]*var[ \t]+([a-zA-Z0-9_]+)/\1/v,variable/
+--regex-GDScript=/^[ \t]*(static )?var[ \t]+([a-zA-Z0-9_]+)/\2/v,variable/
 --regex-GDScript=/^[ \t]*const[ \t]+([a-zA-Z0-9_]+)/\1/C,constant/
 --regex-GDScript=/^[ \t]*signal[ \t]+([a-zA-Z0-9_]+)/\1/s,signal/
