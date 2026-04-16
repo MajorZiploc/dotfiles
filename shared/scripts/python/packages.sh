@@ -8,7 +8,7 @@ function main {
   # rbql: rainbow query language; USE FLAG: --policy rfc
   # debugpy: debug adapter
   # eval "pip install $pip_flags rbql debugpy pandas pyarrow PyJWT xmldiff";
-  eval "pip install $pip_flags -r ${script_path}/requirements.txt";
+  eval "pip install -r ${script_path}/requirements.txt";
 }
 
 main $@;

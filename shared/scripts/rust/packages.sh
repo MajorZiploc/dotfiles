@@ -30,7 +30,22 @@ function main {
   if [[ "$method" == "install" ]]; then
     # ensure sccache is not set before sccache is installed, else it bricks any install
     unset RUSTC_WRAPPER;
-    cargo install cargo-update ripgrep du-dust exa bat sccache cargo-outdated zoxide;
+    # cargo install cargo-update ripgrep du-dust exa bat sccache cargo-outdated zoxide;
+    packages=(
+      "cargo-update@16.0.0"
+      "ripgrep@14.1.0"
+      "du-dust@1.0.0"
+      "exa@0.10.1"
+      "bat@0.24.0"
+      "sccache@0.7.7"
+      "cargo-outdated@0.13.1"
+      "zoxide@0.9.4"
+    );
+    for pkg in "${packages[@]}"; do
+      name="${pkg%@*}";
+      version="${pkg#*@}";
+      cargo install "$name" --version "$version";
+    done
   else
     # command from cargo-update package
     cargo install-update -a;
