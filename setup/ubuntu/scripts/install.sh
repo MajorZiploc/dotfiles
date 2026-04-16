@@ -16,22 +16,22 @@ sudo apt-get -y install dos2unix;
 # json query for cli
 sudo apt-get -y install jq;
 # yaml query for cli
-sudo add-apt-repository ppa:rmescandon/yq -y;
-sudo apt-get -y update;
-sudo apt-get -y install yq;
+# sudo add-apt-repository ppa:rmescandon/yq -y;
+# sudo apt-get -y update;
+# sudo apt-get -y install yq;
 # view directories in tree format
-sudo apt-get -y install tree;
+# sudo apt-get -y install tree;
 # creates a 'python' and makes it point to python3 that is installed
-sudo apt-get -y install python-is-python3;
+# sudo apt-get -y install python-is-python3;
 # for creating python virtual environments
 sudo apt-get -y install python3-venv;
 # pyenv: python version manager
 # git clone https://github.com/pyenv/pyenv.git ~/.pyenv;
 curl https://pyenv.run | bash;
 # ripgrep for vundle use or use on its own
-sudo add-apt-repository ppa:x4121/ripgrep -y;
-sudo apt-get -y update;
-sudo apt-get -y install ripgrep;
+# sudo add-apt-repository ppa:x4121/ripgrep -y;
+# sudo apt-get -y update;
+# sudo apt-get -y install ripgrep;
 # fuzzy finder
 # make sure this isnt around (its to old for the vim plugin)
 sudo apt-get -y remove fzf;
@@ -46,9 +46,9 @@ sudo apt-get -y install silversearcher-ag;
 # zsh
 sudo apt-get install -y zsh;
 # vim 8.2
-sudo add-apt-repository ppa:jonathonf/vim -y;
-sudo apt-get -y update;
-sudo apt-get install -y vim;
+# sudo add-apt-repository ppa:jonathonf/vim -y;
+# sudo apt-get -y update;
+# sudo apt-get install -y vim;
 # neovim
 sudo add-apt-repository ppa:neovim-ppa/unstable -y;
 sudo apt-get install -y neovim;
@@ -65,14 +65,14 @@ sudo ufw allow ssh;
 sudo ufw status verbose;
 sudo apt-get install -y net-tools;
 # latex
-sudo apt-get install -y texlive-latex-extra
+# sudo apt-get install -y texlive-latex-extra
 
 # prolog
-sudo add-apt-repository ppa:swi-prolog/stable -y;
-sudo apt-get update -y;
-sudo apt-get install -y swi-prolog;
+# sudo add-apt-repository ppa:swi-prolog/stable -y;
+# sudo apt-get update -y;
+# sudo apt-get install -y swi-prolog;
 # for vim coc prolog language server support
-swipl -q -l "$this_path/../../../shared/scripts/prolog/install_language_server.pl";
+# swipl -q -l "$this_path/../../../shared/scripts/prolog/install_language_server.pl";
 
 # help address issues in shell scripts
 sudo apt-get install -y shellcheck;
@@ -91,14 +91,14 @@ echo 'export PATH=/opt/gradle/latest/bin:${PATH}' | sudo tee -a /etc/profile.d/g
 sudo chmod +x /etc/profile.d/gradle.sh;
 
 # php
-sudo add-apt-repository ppa:ondrej/php -y;
-sudo apt install -y php8.0;
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');";
-php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php;
-php -r "unlink('composer-setup.php');";
-sudo mv composer.phar /usr/local/bin/composer;
-rm composer.phar;
+# sudo add-apt-repository ppa:ondrej/php -y;
+# sudo apt install -y php8.0;
+# php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');";
+# php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+# php composer-setup.php;
+# php -r "unlink('composer-setup.php');";
+# sudo mv composer.phar /usr/local/bin/composer;
+# rm composer.phar;
 
 # nodejs nvm deps
 sudo apt-get install -y build-essential checkinstall libssl-dev;
@@ -113,7 +113,8 @@ sudo rm packages-microsoft-prod.deb;
 sudo apt-get -y install apt-transport-https;
 sudo apt-get -y update;
 # sudo apt-get -y install dotnet-sdk-6.0;
-sudo apt-get -y install dotnet-sdk-8.0;
+# sudo apt-get -y install dotnet-sdk-8.0;
+sudo apt-get install -y dotnet-sdk-10.0;
 
 # snapd for install packages
 sudo apt-get -y install snapd;
@@ -122,17 +123,17 @@ sudo apt-get -y install snapd;
 python -m pip install --upgrade pip;
 
 # vim with clipboard support
-sudo apt-get -y remove vim-common vim-runtime vim;
-sudo apt-get -y install --upgrade vim-common vim-runtime vim;
-sudo apt-get -y install vim-gtk;
+# sudo apt-get -y remove vim-common vim-runtime vim;
+# sudo apt-get -y install --upgrade vim-common vim-runtime vim;
+# sudo apt-get -y install vim-gtk;
 # clipboard tool
 sudo apt-get -y install xclip;
 # clipboard manager, open its configs and make ctrl-` the Shortcuts -> Global -> Show the tray menu key
 sudo apt-get -y install copyq;
 # sound eq
-sudo add-apt-repository ppa:mikhailnov/pulseeffects -y;
-sudo apt-get -y update;
-sudo apt-get -y install pulseeffects pulseaudio --install-recommends;
+# sudo add-apt-repository ppa:mikhailnov/pulseeffects -y;
+# sudo apt-get -y update;
+# sudo apt-get -y install pulseeffects pulseaudio --install-recommends;
 
 # docker
 # from: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
@@ -145,21 +146,21 @@ sudo apt-get -y update;
 apt-cache policy docker-ce;
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io;
 
-# powershell
-# Install pre-requisite packages.
-sudo apt-get install -y wget apt-transport-https software-properties-common;
-# Download the Microsoft repository GPG keys
-wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb;
-# Register the Microsoft repository GPG keys
-sudo dpkg -i packages-microsoft-prod.deb;
-# Update the list of products
-sudo apt-get -y update;
-# Enable the "universe" repositories
-sudo add-apt-repository universe -y;
-# Install PowerShell
-sudo apt-get install -y powershell;
-# Cleanup
-sudo rm packages-microsoft-prod.deb;
+# # powershell
+# # Install pre-requisite packages.
+# sudo apt-get install -y wget apt-transport-https software-properties-common;
+# # Download the Microsoft repository GPG keys
+# wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb;
+# # Register the Microsoft repository GPG keys
+# sudo dpkg -i packages-microsoft-prod.deb;
+# # Update the list of products
+# sudo apt-get -y update;
+# # Enable the "universe" repositories
+# sudo add-apt-repository universe -y;
+# # Install PowerShell
+# sudo apt-get install -y powershell;
+# # Cleanup
+# sudo rm packages-microsoft-prod.deb;
 
 # another way to install docker
 # sudo apt-get -y install \
@@ -177,22 +178,22 @@ sudo rm packages-microsoft-prod.deb;
 # sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 
 # docker terminal auto completion
-sudo curl \
-      -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose \
-          -o /etc/bash_completion.d/docker-compose;
+# sudo curl \
+#       -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose \
+#           -o /etc/bash_completion.d/docker-compose;
 
 sudo apt-get -y upgrade;
 
-# k8s: docker compose to k8s resources helper
-curl -L https://github.com/kubernetes/kompose/releases/download/v1.26.0/kompose-linux-amd64 -o kompose
-chmod +x kompose
-sudo mv ./kompose /usr/local/bin/kompose
+# # k8s: docker compose to k8s resources helper
+# curl -L https://github.com/kubernetes/kompose/releases/download/v1.26.0/kompose-linux-amd64 -o kompose
+# chmod +x kompose
+# sudo mv ./kompose /usr/local/bin/kompose
 
-# k8s: minikube for runnning clusters locally
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
+# # k8s: minikube for runnning clusters locally
+# curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+# sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
-# ruby
-sudo apt-get install -y ruby-full;
-sudo gem install solargraph;
+# # ruby
+# sudo apt-get install -y ruby-full;
+# sudo gem install solargraph;
 
