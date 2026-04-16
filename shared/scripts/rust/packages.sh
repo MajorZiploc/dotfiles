@@ -32,14 +32,14 @@ function main {
     unset RUSTC_WRAPPER;
     # cargo install cargo-update ripgrep du-dust exa bat sccache cargo-outdated zoxide;
     packages=(
-      "cargo-update@16.0.0"
-      "ripgrep@14.1.0"
-      "du-dust@1.0.0"
-      "exa@0.10.1"
-      "bat@0.24.0"
-      "sccache@0.7.7"
-      "cargo-outdated@0.13.1"
-      "zoxide@0.9.4"
+      # "cargo-update@20.0.0"
+      "ripgrep@15.1.0"
+      # "du-dust@1.2.4"
+      # "exa@0.10.1"
+      "bat@0.26.1"
+      # "sccache@0.14.0"
+      # "cargo-outdated@0.19.0"
+      "zoxide@0.9.9"
     );
     for pkg in "${packages[@]}"; do
       name="${pkg%@*}";
