@@ -96,7 +96,7 @@ brew 'vim'
 brew 'dos2unix'
 # json query for cli
 brew 'jq'
-# yaml query for cli
+# yaml query for cli # full_install
 brew 'yq'
 # ssh
 brew 'openssh'
@@ -144,9 +144,9 @@ brew 'gnupg' # full_install
 brew 'rbenv' # full_install
 brew 'ruby-build' # full_install
 
-# install asdf and its deps
-brew 'gpg' # full_install
-brew 'asdf' # full_install
+# # install asdf and its deps
+# brew 'gpg' # full_install # ignored due to leading '#'
+# brew 'asdf' # full_install # ignored due to leading '#'
 
 # dotnet core
 brew 'mono-libgdiplus' # full_install
@@ -161,7 +161,7 @@ cask 'iterm2' # full_install
 cask 'discord' # full_install
 # cask 'gimp' # full_install
 cask 'krita'
-cask 'visual-studio-code'
+# cask 'visual-studio-code' # full_install # ignored due to leading '#'
 cask 'slack'
 cask 'docker'
 # k8s: docker compose to k8s resources helper
@@ -174,11 +174,11 @@ cask 'font-hack-nerd-font'
 
 cask 'wezterm'
 # Open-source version of the X.Org X Window System; good for gui in docker containers
-cask 'xquartz' # full_install
+# cask 'xquartz' # full_install # ignored due to leading '#'
 
 cask 'macfuse'
 brew 'gromgit/fuse/sshfs-mac'
 brew "sshfs-mac", link: true, overwrite: true
 
-cask 'steamcmd' # full_install
-cask 'playonmac' # full_install
+# cask 'steamcmd' # full_install # ignored due to leading '#'
+# cask 'playonmac' # full_install # ignored due to leading '#'

@@ -15,9 +15,9 @@ sudo apt-get -y install dos2unix;
 # json query for cli
 sudo apt-get -y install jq;
 # yaml query for cli
-sudo add-apt-repository ppa:rmescandon/yq -y;
-sudo apt-get -y update;
-sudo apt-get -y install yq;
+# sudo add-apt-repository ppa:rmescandon/yq -y;
+# sudo apt-get -y update;
+# sudo apt-get -y install yq;
 # view directories in tree format
 sudo apt-get -y install tree;
 # for clipboard support in vim
@@ -29,16 +29,16 @@ sudo apt-get -y install universal-ctags;
 sudo apt-get -y install cscope;
 
 # creates a 'python' and makes it point to python3 that is installed
-sudo apt-get -y install python-is-python3;
+# sudo apt-get -y install python-is-python3;
 # for gui support for matplotlib
-sudo apt-get install python3-tk;
+# sudo apt-get install python3-tk;
 # OR you can use this pip library in your project
 # pip install pyqt5
 # pyenv: python version manager
 # git clone https://github.com/pyenv/pyenv.git ~/.pyenv;
 curl https://pyenv.run | bash;
 # ripgrep for vundle use or use on its own
-sudo apt-get -y install ripgrep;
+# sudo apt-get -y install ripgrep;
 # fuzzy finder
 # make sure this isnt around (its to old for the vim plugin)
 sudo apt-get -y remove fzf;
@@ -61,10 +61,10 @@ sudo chmod +x /usr/bin/chromedriver;
 sudo rm -rf chromedriver_linux64.zip;
 # zsh
 sudo apt-get install -y zsh;
-# vim 8.2
-sudo add-apt-repository ppa:jonathonf/vim -y;
-sudo apt-get -y update;
-sudo apt-get install -y vim;
+# # vim 8.2
+# sudo add-apt-repository ppa:jonathonf/vim -y;
+# sudo apt-get -y update;
+# sudo apt-get install -y vim;
 # neovim
 sudo add-apt-repository ppa:neovim-ppa/unstable -y;
 sudo apt-get install -y neovim;
@@ -77,14 +77,14 @@ sudo ufw allow ssh;
 sudo ufw status verbose;
 sudo apt-get install -y net-tools;
 # latex
-sudo apt-get install -y texlive-latex-extra
+# sudo apt-get install -y texlive-latex-extra
 
-# prolog
-sudo add-apt-repository ppa:swi-prolog/stable -y;
-sudo apt-get update -y;
-sudo apt-get install -y swi-prolog;
-# for vim coc prolog language server support
-swipl -q -l "$this_path/../../../shared/scripts/prolog/install_language_server.pl";
+# # prolog
+# sudo add-apt-repository ppa:swi-prolog/stable -y;
+# sudo apt-get update -y;
+# sudo apt-get install -y swi-prolog;
+# # for vim coc prolog language server support
+# swipl -q -l "$this_path/../../../shared/scripts/prolog/install_language_server.pl";
 
 # help address issues in shell scripts
 sudo apt-get install -y shellcheck;
@@ -102,15 +102,15 @@ sudo sed -E -i'' '/export PATH=\/opt\/gradle\/latest\/bin:\$\{PATH\}/d' /etc/pro
 echo 'export PATH=/opt/gradle/latest/bin:${PATH}' | sudo tee -a /etc/profile.d/gradle.sh;
 sudo chmod +x /etc/profile.d/gradle.sh;
 
-# php
-sudo add-apt-repository ppa:ondrej/php -y;
-sudo apt-get install -y php8.0;
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');";
-php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php;
-php -r "unlink('composer-setup.php');";
-sudo mv composer.phar /usr/local/bin/composer;
-rm composer.phar;
+# # php
+# sudo add-apt-repository ppa:ondrej/php -y;
+# sudo apt-get install -y php8.0;
+# php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');";
+# php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+# php composer-setup.php;
+# php -r "unlink('composer-setup.php');";
+# sudo mv composer.phar /usr/local/bin/composer;
+# rm composer.phar;
 
 # install nvm for nodejs
 sudo apt-get install -y build-essential checkinstall libssl-dev;
@@ -126,7 +126,8 @@ sudo apt-get install -y apt-transport-https;
 sudo apt-get -y update;
 # sudo apt-get install -y dotnet-sdk-3.1;
 # sudo apt-get install -y dotnet-sdk-6.0;
-sudo apt-get install -y dotnet-sdk-8.0;
+# sudo apt-get install -y dotnet-sdk-8.0;
+sudo apt-get install -y dotnet-sdk-10.0;
 
 # english dictionary
 sudo apt-get install -y wamerican;
@@ -137,21 +138,21 @@ sudo apt-get -y install snapd;
 # just command runner
 sudo snap install just --edge --classic;
 
-# powershell
-# Install pre-requisite packages.
-sudo apt-get install -y wget apt-transport-https software-properties-common;
-# Download the Microsoft repository GPG keys
-wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb;
-# Register the Microsoft repository GPG keys
-sudo dpkg -i packages-microsoft-prod.deb;
-# Update the list of products
-sudo apt-get -y update;
-# Enable the "universe" repositories
-sudo add-apt-repository universe -y;
-# Install PowerShell
-sudo apt-get install -y powershell;
-# Cleanup
-sudo rm packages-microsoft-prod.deb;
+# # powershell
+# # Install pre-requisite packages.
+# sudo apt-get install -y wget apt-transport-https software-properties-common;
+# # Download the Microsoft repository GPG keys
+# wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb;
+# # Register the Microsoft repository GPG keys
+# sudo dpkg -i packages-microsoft-prod.deb;
+# # Update the list of products
+# sudo apt-get -y update;
+# # Enable the "universe" repositories
+# sudo add-apt-repository universe -y;
+# # Install PowerShell
+# sudo apt-get install -y powershell;
+# # Cleanup
+# sudo rm packages-microsoft-prod.deb;
 
 # update pip
 python -m pip install --upgrade pip;
@@ -169,15 +170,15 @@ sudo apt-get -y update \
 
 sudo apt-get -y upgrade;
 
-# k8s: docker compose to k8s resources helper
-curl -L https://github.com/kubernetes/kompose/releases/download/v1.26.0/kompose-linux-amd64 -o kompose
-chmod +x kompose
-sudo mv ./kompose /usr/local/bin/kompose
+# # k8s: docker compose to k8s resources helper
+# curl -L https://github.com/kubernetes/kompose/releases/download/v1.26.0/kompose-linux-amd64 -o kompose
+# chmod +x kompose
+# sudo mv ./kompose /usr/local/bin/kompose
 
-# k8s: minikube for runnning clusters locally
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
+# # k8s: minikube for runnning clusters locally
+# curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+# sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
-# ruby
-sudo apt-get install -y ruby-full;
-sudo gem install solargraph;
+# # ruby
+# sudo apt-get install -y ruby-full;
+# sudo gem install solargraph;
