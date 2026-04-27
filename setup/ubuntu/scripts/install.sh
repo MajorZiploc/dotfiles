@@ -66,6 +66,8 @@ sudo ufw status verbose;
 sudo apt-get install -y net-tools;
 # latex
 # sudo apt-get install -y texlive-latex-extra
+# automate annoying image edit tasks
+# sudo apt install -y imagemagick
 
 # prolog
 # sudo add-apt-repository ppa:swi-prolog/stable -y;
