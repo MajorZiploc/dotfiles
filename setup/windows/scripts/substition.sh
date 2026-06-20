@@ -19,7 +19,9 @@ find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' 's
 remove_coc="\bcoc\b";
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -E -i'' "/$remove_coc/d" "{}" \;
 vim_plugin_include="Plug 'ctrlpvim/ctrlp.vim' \" fuzzy file finder";
-vim_plugin_include="${vim_plugin_include}\nif has\('nvim'\)\n  Plug 'eddyekofo94/gruvbox-flat.nvim' \" color theme\n  Plug 'glacambre/firenvim'\, \{ 'do': 'call firenvim#install\(0\)' \} \" use nvim in your browser for any text box\n  Plug 'neoclide/coc.nvim'\, \{'branch': 'release'\} \" intellisense\nendif";
+vim_plugin_include="${vim_plugin_include}\nif has\('nvim'\)\n  Plug 'eddyekofo94/gruvbox-flat.nvim' \" color theme\n  Plug 'neoclide/coc.nvim'\, \{'branch': 'release'\} \" intellisense\nendif";
+# NOTE: add this to the above
+# \n  Plug 'glacambre/firenvim'\, \{ 'do': 'call firenvim#install\(0\)' \} \" use nvim in your browser for any text box
 find "$temp_shared" -regextype egrep -iregex ".*vim.*" -type f -exec sed -i'' "s,VIM_PLUGIN_INCLUDE_PLACEHOLDER,$vim_plugin_include,g" "{}" \;
 vim_plugset_path="so ~/.vim/plugin-settings/";
 vim_plugin_settings="${vim_plugset_path}ctrlp.vim";
