@@ -139,6 +139,9 @@ function _find_generate_not_paths {
   local not_paths="";
   for gitignore_entry in $@; do
     not_paths="$not_paths -not -path '*/$gitignore_entry/*'";
+    [[ $gitignore_entry == \** ]] || gitignore_entry="*$gitignore_entry";
+    [[ $gitignore_entry == *\* ]] || gitignore_entry="$gitignore_entry*";
+    not_paths="$not_paths -not -path '$gitignore_entry'";
   done;
   echo "$not_paths";
 }
