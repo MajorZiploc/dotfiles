@@ -38,3 +38,5 @@ export PATH="$(pyenv root)/shims:$PATH";
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH";
 
 export PATH="$(brew --prefix ctags):$PATH";
+
+test -e ~/.zshrc_ext_end && . ~/.zshrc_ext_end >/dev/null 2>&1;
