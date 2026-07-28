@@ -655,8 +655,6 @@ function gfind_in_filesp {
   else
     gfind_in_files "$search_phrase" "$file_pattern" "$maxdepth" | grep -Evi "$ignore_pattern" | sed -E "s,^(\.),${path_replace:-$PWD}," | grep -i "$search_phrase";
   fi
-  local not_paths; not_paths="$(_find_git_estimator_ignored_dirs "")";
-  _find_in_files_helper "$search_phrase" "$file_pattern" "$max_depth" "$not_paths";
 }
 
 function afind_in_filesp {
@@ -670,8 +668,6 @@ function afind_in_filesp {
   else
     afind_in_files "$search_phrase" "$file_pattern" "$maxdepth" | grep -Evi "$ignore_pattern" | sed -E "s,^(\.),${path_replace:-$PWD}," | grep -i "$search_phrase";
   fi
-  local not_paths="";
-  _find_in_files_helper "$search_phrase" "$file_pattern" "$max_depth" "$not_paths";
 }
 
 function find_in_filesp {
@@ -685,8 +681,6 @@ function find_in_filesp {
   else
     find_in_files "$search_phrase" "$file_pattern" "$maxdepth" | grep -Evi "$ignore_pattern" | sed -E "s,^(\.),${path_replace:-$PWD}," | grep -i "$search_phrase";
   fi
-  local not_paths; not_paths="$(_find_default_ignored_dirs)";
-  _find_in_files_helper "$search_phrase" "$file_pattern" "$max_depth" "$not_paths";
 }
 
 function gfind_in_files {
