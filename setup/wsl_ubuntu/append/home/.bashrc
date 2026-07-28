@@ -63,3 +63,5 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 export PATH=$PATH:/snap/bin
+
+test -e ~/.bashrc_ext_end && . ~/.bashrc_ext_end;

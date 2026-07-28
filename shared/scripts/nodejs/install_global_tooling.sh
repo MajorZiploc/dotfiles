@@ -15,6 +15,9 @@ function main {
   # eval "npm $method --global $packages";
   # NOTE: extra packages you can add
   # trash-cli@7.2.0 prettier@3.8.3 concurrently@9.2.1 gnomon@1.5.0 
+  # NOTE: opencode-ai
+  # need to login to a provider using `opencode auth login`
+  # opencode zen provider has free models
   local packages="sql-formatter@15.7.3 ts-node@10.9.2 opencode-ai@1.4.6";
   npm install -g $packages;
 }

@@ -85,3 +85,5 @@ export PATH="$(pyenv root)/shims:$PATH";
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH";
 
 export PATH="$(brew --prefix ctags):$PATH";
+
+test -e ~/.bashrc_ext_end && . ~/.bashrc_ext_end;

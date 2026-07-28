@@ -49,3 +49,5 @@ fi
 # Rust
 export PATH="$PATH:$HOME/.cargo/bin"
 [[ -d $HOME/.cargo ]] && . $HOME/.cargo/env
+
+test -e ~/.bashrc_ext_end && . ~/.bashrc_ext_end;

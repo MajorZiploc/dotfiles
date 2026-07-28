@@ -238,7 +238,7 @@ For more bash aliases and functions, use search_env_for(_fuzz)?, or look at ~/.b
 ### workplace_* bash functions
 ./shared/required/Tasks/workplace_bulk_ops.sh contains maybe great utilities for performing tasks on a batch of projects at once
 
-If you wish to have them sourced in your bash or zsh environment, then place this line in your ~/.bashrc_ext or ~/.zshrc_ext file
+If you wish to have them sourced in your bash or zsh environment, then place this line in your ~/.bashrc_ext and ~/.bashrc_ext_end or ~/.zshrc_ext and ~/.zshrc_ext_end file
 > . ~/Tasks/workplace_bulk_ops.sh
 
 ### Even slimmer prompt by removing the whoami info from the beginning:
@@ -284,7 +284,7 @@ This means that if you edit the files in the destination and then call copy, it 
 
 Example: you edit ~/.bashrc.d/portable/aliases.bash to add an alias, then call refresh_settings. This will replace ~/.bashrc.d/portable/aliases.bash and you will lose your local edits
 
-### Extending
+### Extending (~/.bashrc_ext or ~/.bashrc_ext_end)
 The ~/.bashrc from this repo sources a file ~/.bashrc_ext if it exists
 
 The copy script does not have a .bashrc_ext that it copies down, so the ~/.bashrc_ext file is a safe place to add your own customizations of these bash settings.
@@ -302,6 +302,8 @@ This will turn that feature off!
 This way you can have all the other great features you love from this repo, keep up to date with the repo, and make any changes that make these settings more you!
 
 Use ~/.zshrc_ext for zsh
+
+Use ~/.zshrc_ext_end for zsh for after all append info in ~/.zshrc_core
 
 Use ~/.vimrc_ext for vim
 

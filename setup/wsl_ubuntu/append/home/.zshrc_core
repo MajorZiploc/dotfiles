@@ -23,4 +23,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-export PATH=$PATH:/snap/bin
+export PATH=$PATH:/snap/bin;
+
+test -e ~/.zshrc_ext_end && . ~/.zshrc_ext_end >/dev/null 2>&1;
