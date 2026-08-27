@@ -25,6 +25,7 @@ function! s:build_quickfix_list(lines)
   cc
 endfunction
 
+" NOTE: may have to do the shortcut then press enter to go to first entry before it actually fills in the quickfix list
 let g:fzf_action = {
   \ 'ctrl-y': function('s:build_quickfix_list'),
   \ 'ctrl-t': 'tab split',
