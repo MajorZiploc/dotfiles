@@ -39,6 +39,18 @@ mkdir -p "$home_wallpapers";
 
 rm -rf "${temp:?}/";
 
+function copy_agent_files_around {
+  local agents_file="${home_dir:?}/.config/agents/AGENTS.md";
+  mkdir -p "${home_dir:?}/.config/opencode";
+  mkdir -p "${home_dir:?}/.config/claude";
+  mkdir -p "${home_dir:?}/.config/codex";
+  mkdir -p "${home_dir:?}/.gitlab/duo";
+  cp "${agents_file}" "${home_dir:?}/.config/opencode";
+  cp "${agents_file}" "${home_dir:?}/.config/claude/CLAUDE.md";
+  cp "${agents_file}" "${home_dir:?}/.config/codex";
+  cp "${agents_file}" "${home_dir:?}/.gitlab/duo";
+}
+
 function make_vim_sh_envs {
   local zshenv="${home_dir:?}/.vim/bash_env.bash";
   local bashenv="${home_dir:?}/.vim/bash_env.zsh";
@@ -97,6 +109,7 @@ function make_all_in_one_shell_files {
 make_vim_sh_envs;
 make_slim_vimrc;
 make_all_in_one_shell_files;
+copy_agent_files_around;
 
 microsoft_dev_tools="${home_dir:?}/dev/microsoft";
 chrome_debugger_dir="${microsoft_dev_tools}/vscode-chrome-debug";
