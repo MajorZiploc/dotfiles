@@ -42,12 +42,12 @@ rm -rf "${temp:?}/";
 function copy_agent_files_around {
   local agents_file="${home_dir:?}/.config/agents/AGENTS.md";
   mkdir -p "${home_dir:?}/.config/opencode";
-  mkdir -p "${home_dir:?}/.config/claude";
-  mkdir -p "${home_dir:?}/.config/codex";
+  mkdir -p "${home_dir:?}/.claude";
+  mkdir -p "${home_dir:?}/.codex";
   mkdir -p "${home_dir:?}/.gitlab/duo";
   cp "${agents_file}" "${home_dir:?}/.config/opencode";
-  cp "${agents_file}" "${home_dir:?}/.config/claude/CLAUDE.md";
-  cp "${agents_file}" "${home_dir:?}/.config/codex";
+  cp "${agents_file}" "${home_dir:?}/.claude/CLAUDE.md";
+  cp "${agents_file}" "${home_dir:?}/.codex";
   cp "${agents_file}" "${home_dir:?}/.gitlab/duo";
 }
 
