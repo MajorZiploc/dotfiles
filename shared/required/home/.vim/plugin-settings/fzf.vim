@@ -1,10 +1,31 @@
 " ctrl-a ctrl-y to select all and build quickfix list
 function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  let l:qf = []
+  for l:line in a:lines
+    " Handle grep/Rg style:
+    " filename:line:column:text
+    " let l:match = matchlist(l:line, '^\(.\{-}\):\(\d\+\):\(\d\+\):\(.*\)$')
+    let l:match = matchlist(l:line, '\(.+\):\(\d\+\):\(\d\+\):\(.*\)')
+    if !empty(l:match)
+      call add(l:qf, {
+        \ 'filename': l:match[1],
+        \ 'lnum': str2nr(l:match[2]),
+        \ 'col': str2nr(l:match[3]),
+        \ 'text': l:match[4]
+        \ })
+    else
+      " Normal file-based FZF result
+      call add(l:qf, {
+        \ 'filename': l:line
+        \ })
+    endif
+  endfor
+  call setqflist(l:qf)
   copen
   cc
 endfunction
 
+" NOTE: may have to do the shortcut then press enter to go to first entry before it actually fills in the quickfix list
 let g:fzf_action = {
   \ 'ctrl-y': function('s:build_quickfix_list'),
   \ 'ctrl-t': 'tab split',

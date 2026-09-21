@@ -201,6 +201,7 @@ autocmd FileType autohotkey setlocal commentstring=;\ %s
 autocmd FileType fsharp setlocal commentstring=//\ %s
 autocmd FileType ctags setlocal commentstring=#\ %s
 autocmd FileType text setlocal commentstring=#\ %s
+autocmd FileType vbnet setlocal commentstring='\ %s
 
 " Navigate to file:
 " Similar to the buildin gf but also allows open of non-existent files aswell
