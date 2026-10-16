@@ -2,6 +2,10 @@
 
 These rules apply to all projects.
 
+## Data Retention
+
+Never store code/data from projects unto any other server
+
 ## Filesystem access
 
 - Only read, search, modify, or execute files inside the directory where Claude Code was started.
