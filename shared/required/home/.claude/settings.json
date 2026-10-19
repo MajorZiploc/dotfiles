@@ -1,0 +1,64 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet build *)",
+      "Bash(dotnet test *)"
+    ],
+    "deny": [
+      "Read(//**/*.env*)",
+      "Read(**/*.lic)",
+      "Read(//**/appsettings*.json*)",
+      "Read(//**/*config*.json*)",
+      "Read(//**/*config*.y*ml*)",
+      "Read(//**/*config*.toml*)",
+      "Read(//**/*config*.ini*)",
+      "Read(//**/*web.*.config*)",
+      "Read(//**/*web.config*)",
+      "Read(//**/*app.config*)",
+      "Read(//**/*secrets*)",
+      "Read(//**/*credentials*)"
+    ],
+    "ask": [
+      "WebSearch",
+      "Bash(psql *)",
+      "Bash(mysql *)",
+      "Bash(mongosh *)",
+      "Bash(redis-cli *)",
+      "Bash(snowsql *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(http *)",
+      "Bash(aws *)",
+      "Bash(gcloud *)",
+      "Bash(az *)",
+      "Bash(kubectl *)",
+      "Bash(terraform *)",
+      "Bash(pulumi *)",
+      "Bash(ssh *)",
+      "Bash(scp *)",
+      "Bash(sftp *)",
+      "Bash(rsync *)",
+      "Bash(telnet *)",
+      "Bash(nc *)",
+      "Bash(netcat *)",
+      "Bash(gam *)",
+      "WebFetch(*)",
+      "Read(//**/*.bak*)",
+      "Read(//**/*.old*)",
+      "Read(//**/*.OLD*)"
+    ],
+    "defaultMode": "default",
+    "blockReadsOutsideWorkingDirectories": true
+  },
+  "useAutoModeDuringPlan": false,
+  "autoMode": {
+    "soft_deny": [
+      "$defaults",
+      "Any tool call, script, or command that initiates a network connection to a remote server, cloud environment, or external database. This includes:\n- Database CLI clients and connection strings (e.g., `psql`, `mysql`, `mongosh`, `redis-cli`, Snowflake, or ORM/driver scripts targeting external databases).\n- Remote access and file transfer protocols (e.g., `ssh`, `scp`, `sftp`, `telnet`, `nc`, or remote port forwarding).\n- Cloud and cluster management CLIs targeting remote environments (e.g., `aws`, `gcloud`, `az`, `kubectl`, `terraform`).\n- Outbound network requests via commands or scripts (e.g., `curl`, `wget`, HTTP clients, or raw socket connections to external IP addresses/domains).\nExcludes connections strictly restricted to `localhost` / `127.0.0.1` and operations on local file-based databases (e.g., local SQLite files)."
+    ],
+    "hard_deny": [
+      "$defaults",
+      "Reading or modifying runtime configuration files. Any tool call or command that reads, writes, deletes, or inspects runtime configuration or secret files (including `appsettings*.json`, `web.config`, `app.config`, `.env*`, `config.{json,yaml,yml,toml,ini}`, `settings.json`, `credentials.json`, and `secrets.*`). This does not include source code files that define configuration schemas, models, classes, or types (such as `Config.cs`, `*Options.cs`, or `config.ts`)."
+    ]
+  }
+}
