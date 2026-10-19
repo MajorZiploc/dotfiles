@@ -20,6 +20,7 @@
     ],
     "ask": [
       "WebSearch",
+      "Bash(sqlcmd *)",
       "Bash(psql *)",
       "Bash(mysql *)",
       "Bash(mongosh *)",
