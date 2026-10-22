@@ -245,12 +245,36 @@ function git_deploy {
 }
 
 function git_all_the_things {
-  git branch -r | grep -v '\->' | while read -r remote; do
-    git branch --track "${remote#origin/}" "$remote";
-  done;
-  git fetch --all --prune;
-  git pull --all --prune;
+  git fetch origin --prune || return 1;
+  local current_branch; current_branch=$(git symbolic-ref --quiet --short HEAD);
+  # Create missing local branches
+  git branch -r | grep '^  origin/' | grep -v 'origin/HEAD' | while read -r remote; do
+    local_branch="${remote#origin/}";
+    if ! git show-ref --verify --quiet "refs/heads/$local_branch"; then
+      git branch --track "$local_branch" "$remote";
+    fi
+  done
+  # Update all local branches
+  while read -r branch; do
+    remote="origin/$branch";
+    if git show-ref --verify --quiet "refs/remotes/$remote"; then
+      echo "Updating $branch from $remote";
+      if [ "$branch" = "$current_branch" ]; then
+        git merge --ff-only "$remote" || return 1;
+      else
+        git branch -f "$branch" "$remote" || return 1;
+      fi
+    fi
+  done < <(git branch --format='%(refname:short)')
 }
+
+# function git_all_the_things {
+#   git branch -r | grep -v '\->' | while read -r remote; do
+#     git branch --track "${remote#origin/}" "$remote";
+#   done;
+#   git fetch --all --prune;
+#   git pull --all --prune;
+# }
 
 function git_checkout_branch_in_path {
   local branches="$1";
