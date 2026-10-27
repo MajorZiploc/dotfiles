@@ -1,0 +1,248 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "bash": {
+      "*": "ask",
+      "dotnet build *": "allow",
+      "dotnet test *": "allow",
+      "sqlcmd *": "ask",
+      "psql *": "ask",
+      "mysql *": "ask",
+      "mongosh *": "ask",
+      "redis-cli *": "ask",
+      "snowsql *": "ask",
+      "curl *": "ask",
+      "wget *": "ask",
+      "http *": "ask",
+      "aws *": "ask",
+      "gcloud *": "ask",
+      "az *": "ask",
+      "kubectl *": "ask",
+      "terraform *": "ask",
+      "pulumi *": "ask",
+      "ssh *": "ask",
+      "scp *": "ask",
+      "sftp *": "ask",
+      "rsync *": "ask",
+      "telnet *": "ask",
+      "nc *": "ask",
+      "netcat *": "ask",
+      "gam *": "ask"
+    },
+    "websearch": "ask",
+    "webfetch": "ask",
+    "read": {
+      "*": "allow",
+      "**/*.bak*": "ask",
+      "**/*.old*": "ask",
+      "**/*.OLD*": "ask",
+      "**/*.env*": "deny",
+      "**/*.lic": "deny",
+      "**/appsettings*.json*": "deny",
+      "**/*config*.json*": "deny",
+      "**/*config*.yaml*": "deny",
+      "**/*config*.yml*": "deny",
+      "**/*config*.toml*": "deny",
+      "**/*config*.ini*": "deny",
+      "**/*web.*.config*": "deny",
+      "**/*web.config*": "deny",
+      "**/*app.config*": "deny",
+      "**/*secrets*": "deny",
+      "**/*credentials*": "deny",
+      "**/settings.json": "deny"
+    },
+    "external_directory": "ask"
+  },
+  "permissions": [
+    {
+      "action": "shell",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "dotnet build *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "dotnet test *",
+      "effect": "allow"
+    },
+    {
+      "action": "websearch",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "webfetch",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "read",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "read",
+      "resource": "*.bak*",
+      "effect": "ask"
+    },
+    {
+      "action": "read",
+      "resource": "*.old*",
+      "effect": "ask"
+    },
+    {
+      "action": "read",
+      "resource": "*.OLD*",
+      "effect": "ask"
+    },
+    {
+      "action": "read",
+      "resource": "*.env*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*.lic",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*appsettings*.json*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*config*.json*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*config*.yaml*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*config*.yml*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*config*.toml*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*config*.ini*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*web.*.config*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*web.config*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*app.config*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*secrets*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*credentials*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*settings.json",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*.env*",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*.lic",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*appsettings*.json*",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*config*.json*",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*config*.yaml*",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*config*.yml*",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*config*.toml*",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*config*.ini*",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*web.*.config*",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*web.config*",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*app.config*",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*secrets*",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*credentials*",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*settings.json",
+      "effect": "deny"
+    },
+    {
+      "action": "external_directory",
+      "resource": "*",
+      "effect": "ask"
+    }
+  ]
+}
