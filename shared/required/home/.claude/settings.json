@@ -1,24 +1,52 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(dotnet build *)",
-      "Bash(dotnet test *)"
-    ],
+    "allow": [],
     "deny": [
+      "Bash(git push *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean *)",
       "Read(//**/*.env*)",
       "Read(**/*.lic)",
       "Read(//**/appsettings*.json*)",
       "Read(//**/*config*.json*)",
-      "Read(//**/*config*.y*ml*)",
+      "Read(//**/*config*.yaml*)",
+      "Read(//**/*config*.yml*)",
       "Read(//**/*config*.toml*)",
       "Read(//**/*config*.ini*)",
       "Read(//**/*web.*.config*)",
       "Read(//**/*web.config*)",
       "Read(//**/*app.config*)",
       "Read(//**/*secrets*)",
-      "Read(//**/*credentials*)"
+      "Read(//**/*credentials*)",
+      "Read(//**/settings.json)",
+      "Read(//**/*.pem)",
+      "Read(//**/*.key)",
+      "Read(//**/id_rsa*)",
+      "Read(//**/id_ed25519*)",
+      "Read(//**/.ssh/**)",
+      "Edit(//**/*.env*)",
+      "Edit(**/*.lic)",
+      "Edit(//**/appsettings*.json*)",
+      "Edit(//**/*config*.json*)",
+      "Edit(//**/*config*.yaml*)",
+      "Edit(//**/*config*.yml*)",
+      "Edit(//**/*config*.toml*)",
+      "Edit(//**/*config*.ini*)",
+      "Edit(//**/*web.*.config*)",
+      "Edit(//**/*web.config*)",
+      "Edit(//**/*app.config*)",
+      "Edit(//**/*secrets*)",
+      "Edit(//**/*credentials*)",
+      "Edit(//**/settings.json)",
+      "Edit(//**/*.pem)",
+      "Edit(//**/*.key)",
+      "Edit(//**/id_rsa*)",
+      "Edit(//**/id_ed25519*)",
+      "Edit(//**/.ssh/**)"
     ],
     "ask": [
+      "Bash(dotnet build *)",
+      "Bash(dotnet test *)",
       "WebSearch",
       "Bash(sqlcmd *)",
       "Bash(psql *)",
@@ -59,7 +87,8 @@
     ],
     "hard_deny": [
       "$defaults",
-      "Reading or modifying runtime configuration files. Any tool call or command that reads, writes, deletes, or inspects runtime configuration or secret files (including `appsettings*.json`, `web.config`, `app.config`, `.env*`, `config.{json,yaml,yml,toml,ini}`, `settings.json`, `credentials.json`, and `secrets.*`). This does not include source code files that define configuration schemas, models, classes, or types (such as `Config.cs`, `*Options.cs`, or `config.ts`)."
+      "Reading or modifying runtime configuration files. Any tool call or command that reads, writes, deletes, or inspects runtime configuration or secret files (including `appsettings*.json`, `web.config`, `app.config`, `.env*`, `config.{json,yaml,yml,toml,ini}`, `settings.json`, `credentials.json`, and `secrets.*`). This does not include source code files that define configuration schemas, models, classes, or types (such as `Config.cs`, `*Options.cs`, or `config.ts`).",
+      "Reading or modifying private keys, SSH credentials, or private key files such as *.pem, *.key, id_rsa*, id_ed25519*, and files under .ssh/."
     ]
   }
 }

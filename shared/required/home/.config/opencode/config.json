@@ -3,8 +3,11 @@
   "permission": {
     "bash": {
       "*": "ask",
-      "dotnet build *": "allow",
-      "dotnet test *": "allow",
+      "dotnet build *": "ask",
+      "dotnet test *": "ask",
+      "git push *": "deny",
+      "git reset --hard *": "deny",
+      "git clean *": "deny",
       "sqlcmd *": "ask",
       "psql *": "ask",
       "mysql *": "ask",
@@ -49,7 +52,34 @@
       "**/*app.config*": "deny",
       "**/*secrets*": "deny",
       "**/*credentials*": "deny",
-      "**/settings.json": "deny"
+      "**/settings.json": "deny",
+      "**/*.pem": "deny",
+      "**/*.key": "deny",
+      "**/id_rsa*": "deny",
+      "**/id_ed25519*": "deny",
+      "**/.ssh/**": "deny"
+    },
+    "edit": {
+      "*": "allow",
+      "**/*.env*": "deny",
+      "**/*.lic": "deny",
+      "**/appsettings*.json*": "deny",
+      "**/*config*.json*": "deny",
+      "**/*config*.yaml*": "deny",
+      "**/*config*.yml*": "deny",
+      "**/*config*.toml*": "deny",
+      "**/*config*.ini*": "deny",
+      "**/*web.*.config*": "deny",
+      "**/*web.config*": "deny",
+      "**/*app.config*": "deny",
+      "**/*secrets*": "deny",
+      "**/*credentials*": "deny",
+      "**/settings.json": "deny",
+      "**/*.pem": "deny",
+      "**/*.key": "deny",
+      "**/id_rsa*": "deny",
+      "**/id_ed25519*": "deny",
+      "**/.ssh/**": "deny"
     },
     "external_directory": "ask"
   },
@@ -62,12 +92,12 @@
     {
       "action": "shell",
       "resource": "dotnet build *",
-      "effect": "allow"
+      "effect": "ask"
     },
     {
       "action": "shell",
       "resource": "dotnet test *",
-      "effect": "allow"
+      "effect": "ask"
     },
     {
       "action": "websearch",
@@ -100,149 +130,221 @@
       "effect": "ask"
     },
     {
-      "action": "read",
-      "resource": "*.env*",
-      "effect": "deny"
-    },
-    {
-      "action": "read",
-      "resource": "*.lic",
-      "effect": "deny"
-    },
-    {
-      "action": "read",
-      "resource": "*appsettings*.json*",
-      "effect": "deny"
-    },
-    {
-      "action": "read",
-      "resource": "*config*.json*",
-      "effect": "deny"
-    },
-    {
-      "action": "read",
-      "resource": "*config*.yaml*",
-      "effect": "deny"
-    },
-    {
-      "action": "read",
-      "resource": "*config*.yml*",
-      "effect": "deny"
-    },
-    {
-      "action": "read",
-      "resource": "*config*.toml*",
-      "effect": "deny"
-    },
-    {
-      "action": "read",
-      "resource": "*config*.ini*",
-      "effect": "deny"
-    },
-    {
-      "action": "read",
-      "resource": "*web.*.config*",
-      "effect": "deny"
-    },
-    {
-      "action": "read",
-      "resource": "*web.config*",
-      "effect": "deny"
-    },
-    {
-      "action": "read",
-      "resource": "*app.config*",
-      "effect": "deny"
-    },
-    {
-      "action": "read",
-      "resource": "*secrets*",
-      "effect": "deny"
-    },
-    {
-      "action": "read",
-      "resource": "*credentials*",
-      "effect": "deny"
-    },
-    {
-      "action": "read",
-      "resource": "*settings.json",
-      "effect": "deny"
-    },
-    {
       "action": "edit",
-      "resource": "*.env*",
-      "effect": "deny"
-    },
-    {
-      "action": "edit",
-      "resource": "*.lic",
-      "effect": "deny"
-    },
-    {
-      "action": "edit",
-      "resource": "*appsettings*.json*",
-      "effect": "deny"
-    },
-    {
-      "action": "edit",
-      "resource": "*config*.json*",
-      "effect": "deny"
-    },
-    {
-      "action": "edit",
-      "resource": "*config*.yaml*",
-      "effect": "deny"
-    },
-    {
-      "action": "edit",
-      "resource": "*config*.yml*",
-      "effect": "deny"
-    },
-    {
-      "action": "edit",
-      "resource": "*config*.toml*",
-      "effect": "deny"
-    },
-    {
-      "action": "edit",
-      "resource": "*config*.ini*",
-      "effect": "deny"
-    },
-    {
-      "action": "edit",
-      "resource": "*web.*.config*",
-      "effect": "deny"
-    },
-    {
-      "action": "edit",
-      "resource": "*web.config*",
-      "effect": "deny"
-    },
-    {
-      "action": "edit",
-      "resource": "*app.config*",
-      "effect": "deny"
-    },
-    {
-      "action": "edit",
-      "resource": "*secrets*",
-      "effect": "deny"
-    },
-    {
-      "action": "edit",
-      "resource": "*credentials*",
-      "effect": "deny"
-    },
-    {
-      "action": "edit",
-      "resource": "*settings.json",
-      "effect": "deny"
+      "resource": "*",
+      "effect": "allow"
     },
     {
       "action": "external_directory",
       "resource": "*",
       "effect": "ask"
+    }
+  ],
+  "policies": [
+    {
+      "action": "tool.use",
+      "resource": "read:*.env*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*.lic",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*appsettings*.json*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*config*.json*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*config*.yaml*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*config*.yml*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*config*.toml*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*config*.ini*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*web.*.config*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*web.config*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*app.config*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*secrets*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*credentials*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*settings.json",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*.pem",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*.key",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*id_rsa*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*id_ed25519*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "read:*/.ssh/*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*.env*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*.lic",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*appsettings*.json*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*config*.json*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*config*.yaml*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*config*.yml*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*config*.toml*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*config*.ini*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*web.*.config*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*web.config*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*app.config*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*secrets*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*credentials*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*settings.json",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*.pem",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*.key",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*id_rsa*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*id_ed25519*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "edit:*/.ssh/*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "shell:git push *",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "shell:git reset --hard *",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "shell:git clean *",
+      "effect": "deny"
     }
   ]
 }
