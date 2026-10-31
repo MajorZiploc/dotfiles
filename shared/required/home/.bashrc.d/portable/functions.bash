@@ -222,6 +222,14 @@ function git_log_diff {
   fi
 }
 
+function git_log_from_source_to_target {
+  local source_branch="${1:-"develop"}";
+  local target_branch="${1:-"master"}";
+  [[ -z "$source_branch" ]] && { echo "Must specify source_branch" >&2; return 1; }
+  [[ -z "$target_branch" ]] && { echo "Must specify target_branch" >&2; return 1; }
+  git log "$target_branch..$source_branch" --oneline
+}
+
 function git_deploy {
   local origin_branch_choices="$1";
   local destination_branch_choices="$2";
