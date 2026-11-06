@@ -1,5 +1,6 @@
 {
   "http.proxyStrictSSL": true,
+  "typescript.autoClosingTags": false,
   "semanticTokens.enable": false,
   "java.enabled": true,
   "languageserver": {
