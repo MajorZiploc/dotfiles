@@ -72,6 +72,9 @@ alias btj='tr -d "\n" | tr -d "\r"';
 # bash_line_split
 alias bts="perl -ne 's/(;|\|)(?:(?!;|\|))/\$1\\n/g; print;'";
 
+alias encode_base64="base64";
+alias decode_base64="base64 -d";
+
 # Viewing directory information aliases
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
