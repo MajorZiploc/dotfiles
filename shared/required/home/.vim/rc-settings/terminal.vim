@@ -1,3 +1,6 @@
+" prevents vim/nvim from reading '# vim: <command_here>' commands
+set nomodeline
+
 " spellchecking
 " set spelllang=en_us
 " set spell
